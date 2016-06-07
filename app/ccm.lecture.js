@@ -44,7 +44,10 @@ ccm.component( {
 
     feedback_store: [ ccm.store ],
 
-    forms:          [ ccm.component, './app/ccm.input.js', { store: [ ccm.store,     './demoData/we_inputs.json' ] } ],
+    forms:          [ ccm.component, './form/ccm.input.js', {
+      style:        [ ccm.load,      './form/input.css'],
+      store:        [ ccm.store,     './demoData/we_inputs.json' ]
+    } ],
 
     forum:          [ ccm.component, './forum/ccm.forum.js', {
       style:        [ ccm.load,      './forum/lecture_forum.css' ],
@@ -151,8 +154,10 @@ ccm.component( {
         element.html( ccm.helper.html( { class: 'view' } ) );
 
         ccm.helper.find( self, '.view' ).html( ccm.helper.html( self.html.main, {
-          fclick: renderFeedback
+          fclick: animateFeedback
         } ) );
+
+        renderFeedback();
 
         renderHeader();
         renderContent();
@@ -256,40 +261,41 @@ ccm.component( {
 
         }
 
+        function animateFeedback() {
+
+          renderFeedback();
+          var feedback = element.find( ' > .view > .feedback' );
+          element.append( '<div class="overlay"></div>' );
+          element.find( '> .view' ).addClass( 'disabled' );
+
+          feedback.animate( { right: "0px" }, "slow");
+
+          ccm.helper.find( self, feedback, '.button' ).unbind().add( ccm.helper.find( self, '.overlay' ) ).click( function () {
+            feedback.animate( { right: "-333px" }, "slow", function () {
+              ccm.helper.find( self, '.overlay').remove();
+            });
+            ccm.helper.find( self, feedback, '.button').unbind().click( animateFeedback );
+          } );
+
+        }
+
         function renderFeedback() {
-/*
-          function () {
-            ccm.helper.find( content, '.feedback').click( function() { ccm.helper.find( self, '.form').toggle( "slow" )});
-          }*/
-
-          renderHeader( dataset.feedback.label, renderFeedback );
-
-          var content = element.find( '> .view > .content' );
-
-          /*ccm.helper.find(self, '.feedback').hide();
-
-          content.html( ccm.helper.html( { class: 'form' } ) );*/
-
-          ccm.helper.find(self, '.feedback').append( '.form' );
 
           self.forms.render( {
 
-            element: content.find( '> .form' ),
+            element: ccm.helper.find( self, '.form' ),
             key:     'feedback',
             submit:  saveFeedback,
             parent:  self
 
-          });
+          } );
 
           function saveFeedback( feedback ) {
-
-            ccm.helper.loading( content );
+            var feedback = element.find( ' > .view > .feedback > .form' );
 
             self.feedback_store.set( feedback, function () {
-
-              renderMessage( 'Feedback gespeichert. Vielen Dank!' );
-
-            } );
+                feedback.append('Feedback gespeichert. Vielen Dank!');
+            });
 
             return false;
 

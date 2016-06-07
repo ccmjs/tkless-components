@@ -12,6 +12,17 @@
     flex-direction: column;
 }
 
+.ccm-lecture > .overlay {
+    background-color: lightgray;
+    height: 100%;
+    opacity: 0.5;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top:0;
+    z-index: 10;
+}
+
 .ccm-lecture > .view,
 .ccm-lecture > .view > .content,
 .ccm-lecture > .view > .content > .icon,
@@ -72,18 +83,21 @@
 }
 
 .ccm-lecture > .view > .feedback {
-    text-align: center;
+    right: -333px;
     position: fixed;
-    top: 32%;
-    left: 100%;
-    transform: rotate(-90deg);
+    top: 13%;
     z-index: 999;
-    width: 135px;
-    height: 198px;
-    cursor: pointer;
 }
 
-.ccm-lecture > .view > .feedback > p {
+.ccm-lecture > .view > .feedback > .button {
+    cursor: pointer;
+    left: -19%;
+    position: absolute;
+    top: 22%;
+    transform: rotate(-90deg);
+}
+
+.ccm-lecture > .view > .feedback > .button > p {
     background: #626c6e none repeat scroll 0 0;
     border-radius: 6px 6px 0 0;
     color: #fff;
@@ -98,8 +112,16 @@
     width: 85px;
 }
 
-.ccm-lecture > .view > .feedback > p:hover {
+.ccm-lecture > .view > .feedback > .button > p:hover {
     color: #84a266;
+}
+
+.ccm-lecture > .view > .feedback > .form {
+    position: relative;
+    display: block;
+    border: 1px solid #999;
+    padding: 1em;
+    background-color: white;
 }
 
 .ccm-lecture > .view {
