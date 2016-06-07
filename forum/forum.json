@@ -1,0 +1,162 @@
+{
+  "demo": {
+    "key": "demo",
+    "questions": [
+      {
+        "date": "03 Apr. 2016 00:36",
+        "user": "mmuel42s",
+        "title": "Wettbewerb 1",
+        "content": "Hallo,<br><br>dürfen wir für den ersten Wettbewerb auch Bootstrap CSS oder Ähnliches verwendet?<br><br>Danke und viele Grüße",
+        "rating": 2,
+        "voted_users": {
+          "mkaul2m": true,
+          "fmirza2s": true
+        },
+        "answers": [
+          {
+            "date": "07 Apr. 2016 18:21",
+            "user": "mkaul2m",
+            "content": "Ja, wer sich mit Bootstrap auskennt, darf Bootstrap verwenden, muss es allerdings bei Nachfrage auch erklären können. Und das ist nicht so einfach. Was ist Bootstrap? Wie funktioniert Bootstrap? Wie funktioniert die Homepage mit Bootstrap? Kopieren ohne die Recherche, wie das Kopierte funktioniert, reicht eben nicht, wie es in den Kriterien für den Wettbewerb steht.<br>",
+            "rating": 1,
+            "voted_users": {
+              "fmirza2s": true
+            }
+          }
+        ]
+      },
+      {
+        "date": "04 Apr. 2016 10:04",
+        "user": "tcoutu2s",
+        "title": "Home Verzeichnis Error 403",
+        "content": "Ich habe keine Zugriffsberechtigung auf meinen Homeordner.<br><br>http://www2.inf.fh-bonn-rhein-sieg.de/~tcoutu2s/index.html<br><br><h1>Forbidden</h1>\n<p>You don't have permission to access /~tcoutu2s/index.html\non this server.<br>\n</p>\n<hr>\n<address>Apache/2.4.10 (Debian) Server at www2.inf.fh-bonn-rhein-sieg.de Port 80</address><br>",
+        "rating": 2,
+        "voted_users": {
+          "jmeier2s": true,
+          "mkaul2m": true
+        },
+        "answers": [
+          {
+            "date": "07 Apr. 2016 18:29",
+            "user": "mkaul2m",
+            "content": "\"You don't have permission\" ist ein Rechteproblem.<br>Bitte die technische Anleitung genau lesen.<br>Dort steht:<br><ul><li>cd</li><li>chmod a+x .</li><li>mkdir public_html</li><li>chmod a+rx public_html</li></ul>Eine Anleitung finden Sie auch <a href=\"http://ux-2s18.inf.fh-bonn-rhein-sieg.de/faq/dienste-des-fachbereiches/www-eigene-homepage\" target=\"_blank\">im FB02-FAQ</a>. Beachten Sie darin auch chmod a+x $HOME und chmod a+rx $HOME/public_html.",
+            "rating": 0,
+            "voted_users": {}
+          },
+          {
+            "date": "04 Apr. 2016 19:06",
+            "user": "mflies2s",
+            "content": "Hall zusammen,<div><br></div><div>ich habe leider genau das selbe Problem.</div><div><br></div><div>Der Ordner public_html ist im Homeverzeichnis erstellt und die index.html befüllt. Leider ist es nicht möglich die Webseite aufzurufen.</div><div><br></div><div>Gruß Marco</div>",
+            "rating": 0,
+            "voted_users": {}
+          }
+        ]
+      },
+      {
+        "date": "04 Apr. 2016 10:13",
+        "user": "tcoutu2s",
+        "title": "SE I noch nicht korrigiert",
+        "content": "SE I wurde erst in der zweiten Prüfungsphase geschrieben und ist bei mir und vermutlich vielen weiteren Studenten in Regelzeit noch nicht korrigiert. Gehe ich recht in der Annahme, dass ich es auch nicht in der Umfrage der WebApp als bestanden ankreuzen darf und somit auch formal nicht alle Zulassungsvoraussetzungen erreicht habe?",
+        "rating": 2,
+        "voted_users": {
+          "mschm72s": true,
+          "aherzo2s": true
+        },
+        "answers": [
+          {
+            "date": "07 Apr. 2016 18:23",
+            "user": "mkaul2m",
+            "content": "Ob Sie bestanden haben, wissen Sie erst später. Daher bitte auch erst ankreuzen, wenn Sie die Ergebnisse bekommen. <br>",
+            "rating": 0,
+            "voted_users": {}
+          }
+        ]
+      },
+      {
+        "date": "08 Apr. 2016 14:48",
+        "user": "fmirza2s",
+        "title": "GitHub",
+        "content": "Hi,&nbsp;<div>leider habe ich in der Vorlesung nicht aufgepasst.</div><p>Müssen wir selber ein&nbsp;<span style=\"color: rgb(0, 0, 0); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: medium;\">GitHub-Account/E-Mail&nbsp;</span>erstellen?&nbsp;</p><p>Wenn ja wo, weil ich nirgendwo einen Link gefunden habe?&nbsp;</p><p>Danke und Gruß</p>",
+        "rating": 0,
+        "voted_users": {},
+        "answers": [
+          {
+            "date": "08 Apr. 2016 18:02",
+            "user": "mkaul2m",
+            "content": "Die Nutzung von GitHub kommt erst später. Also keine Panik. Die ersten Übungen funktionieren ohne GitHub mit der hauseigene Infrastruktur, insbesondere www2. <br>Eine E-Mail haben Sie sicher schon. Ein GitHub-Account zu besitzen, ist für jeden Informatiker sicher von Vorteil. Wenn Sie Ihren GitHub-Account und die E-Mail, die Sie bei GitHub hinterlegt haben, angeben, könnten Sie z.B. als Contributor eingetragen werden. Sonst geht das schlecht. <br>",
+            "rating": 0,
+            "voted_users": {}
+          }
+        ]
+      },
+      {
+        "date": "09 Apr. 2016 11:56",
+        "user": "tcoutu2s",
+        "title": "Chrome will ccm app beenden",
+        "content": "Chrome will bei mir regelmäßig die \"unresponsive site\" beenden.",
+        "rating": 0,
+        "voted_users": {},
+        "answers": [
+          {
+            "date": "10 Apr. 2016 08:29",
+            "user": "mkaul2m",
+            "content": "In solchen Fällen bitte generell folgende Informationen an die Dozenten (manfred.kaul@h-brs.de, andre.kless@h-brs.de) senden:<br><ul><li>Screenshot des Fehlers / des Problems<br></li><li>Fehlermeldung in der Konsole des Browsers (unter Developer Tools)<br></li><li>Welcher Browser in welcher Version wurde eingesetzt? (z.B. Chrome Version 50.0.2661.66 beta-m)</li><li>Auf welcher Plattform ist der Fehler reproduzierbar? (z.B. Windows 10 Pro Version 1511)</li><li>Bei welcher Internetanbindung kommt der Fehler reproduzierbar zustande? (z.B. WIPS oder eduroam)<br></li><li>Tritt der Fehler auch dann auf, wenn eine stabile Version von Betriebssystem und Browser eingesetzt werden? (z.B. Chrome&nbsp; Version 49.0.2623.112 (64-bit))</li></ul><p>Vielen Dank für Ihre Mithilfe! <br></p>",
+            "rating": 0,
+            "voted_users": {}
+          }
+        ]
+      },
+      {
+        "date": "17 Apr. 2016 13:45",
+        "user": "tcoutu2s",
+        "title": "Übung unterbrochen führt dazu sie komplett neu machen zu müssen",
+        "content": "Ich habe gerade 2 Stunden lang an der Übung 3 verbracht um nach einem Klick auf Feedback, weil ich die Aufgabenstellung nicht verstanden habe, auf den Anfang der Übung geworfen zu werden. Gibt es keine Möglichkeit, dort einzusteigen, wo ich aufgehört habe? Ich möchte eigentlich nicht alle 20 Fragen noch einmal abarbeiten..",
+        "rating": 1,
+        "voted_users": {
+          "mschm72s": true,
+          "mmuel42s": true,
+          "thoeff2s": false
+        },
+        "answers": [
+          {
+            "date": "18 Apr. 2016 01:07",
+            "user": "agrigo2s",
+            "content": "Ok, da habe ich mich wohl geirrt. Vergiss meinen Kommentar.<br>",
+            "rating": 1,
+            "voted_users": {
+              "thoeff2s": true
+            }
+          },
+          {
+            "date": "17 Apr. 2016 23:52",
+            "user": "agrigo2s",
+            "content": "Drück doch einfach auf Next bis die gewünschte Übung erscheint. Soweit ich das verstanden habe wird das sowieso nicht abgeschickt.<br>",
+            "rating": 1,
+            "voted_users": {
+              "thoeff2s": true
+            }
+          }
+        ]
+      },
+      {
+        "date": "18 Apr. 2016 20:25",
+        "user": "mmuel42s",
+        "title": "Anmeldung Wettbewerb 1",
+        "content": "Hallo,<br><h3 class=\"title\">Anmeldung zum Wettbewerb Phase 1</h3>Bitte ausfüllen und abschicken bis 21.4.2016<br><br>Iinklusive oder exklusive 21.4.?<br><br>VG<br>",
+        "rating": 0,
+        "voted_users": {
+          "lkohlg2s": true,
+          "fmirza2s": false
+        },
+        "answers": [
+          {
+            "date": "20 Apr. 2016 21:35",
+            "user": "mkaul2m",
+            "content": "inklusive",
+            "rating": 0,
+            "voted_users": {}
+          }
+        ]
+      }
+    ]
+  }
+}

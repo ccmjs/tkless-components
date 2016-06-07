@@ -1,0 +1,613 @@
+{
+  "demo": {
+    "key": "demo",
+    "tutor": { "akless2m": true, "mkaul2m": true, "tmeskh2s": true},
+    "news": {
+      "icon": "feed",
+      "label": "News"
+    },
+    "chat": {
+      "icon": "wechat",
+      "label": "Chat"
+    },
+    "forum": {
+      "icon": "commenting-o",
+      "label": "Forum"
+    },
+    "dashboard": {
+      "icon": "dashboard",
+      "label": "Dashboard",
+      "news": {
+        "role": true,
+        "icon": "feed",
+        "label": "News"
+      },
+      "feedbacks": {
+        "role": true,
+        "icon": "whatsapp",
+        "label": "Feedbacks"
+      },
+      "tasks": {
+        "role": true,
+        "icon": "calendar-check-o",
+        "label": "Aufgaben"
+      }
+    },
+    "feedback": {
+      "icon": "pencil",
+      "label": "Feedback"
+    },
+    "content": {
+      "introduction": {
+        "icon": "map-signs",
+        "label": "Einführung",
+        "units": [
+
+          {
+            "label": "Einleitung",
+            "parts": [
+              {
+                "label": "Begrüßung und Einführung in den Kurs",
+                "video": "BvdRsrur-_A"
+              }
+            ]
+          },
+          {
+            "label": "Organisatorisches",
+            "parts": [
+              {
+                "icon": "file-text-o",
+                "label": "Modulbeschreibung",
+                "link": "https://eva.inf.h-brs.de/zope/lv/va/anzeigen/5111"
+              },
+              {
+                "icon": "external-link",
+                "label": "Lea",
+                "link": "https://lea.hochschule-bonn-rhein-sieg.de/goto.php?target=crs_245731&client_id=db_040811"
+              },
+              {
+                "icon": "file-powerpoint-o",
+                "label": "Organisatorisches",
+                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1j8CM89aoiTormeIUPfteQiSUA5U2sx-RuAsBKR_UGuo/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"560\" height=\"315\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
+              },
+
+              {
+                "icon": "user",
+                "label": "Profil",
+                "form": "bcs_profil",
+                "deadline": [
+                  2016,
+                  4,
+                  21
+                ],
+                "points": 1
+              },
+              {
+                "icon": "street-view",
+                "label": "Vorkenntnisse",
+                "form": "bcs_vorkenntnisse",
+                "deadline": [
+                  2016,
+                  4,
+                  21
+                ],
+                "points": 1
+              },
+              {
+                "icon": "legal",
+                "label": "Nutzungsvereinbarung",
+                "content": "nutzungsvereinbarung"
+              },
+              {
+                "icon": "warning",
+                "label": "Plagiatserklärung",
+                "content": "plagiatserklaerung"
+              }
+            ]
+          },
+          {
+            "label": "Vorlesung",
+            "parts": [
+              {
+                "icon": "file-powerpoint-o",
+                "label": "Einführung",
+                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1bNT6WXvJffoGq20YXdWW_9N-Wen02ME746TmeORts2w/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"560\" height=\"315\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
+              },
+              {
+                "icon": "file-powerpoint-o",
+                "label": "Das neue Lernen",
+                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1ebQcI52hHJJOc-YMQ8kRNI-8-kcoOIM07VAbntdmL1E/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"960\" height=\"569\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
+              }
+            ]
+          },
+          {
+            "label": "Geschichte des Internets",
+            "parts": [
+              {
+                "label": "Geschichte des Internets (8:50)",
+                "video": "rkW7x_7ZzWI",
+                "rating": "video_rkW7x_7ZzWI"
+              },
+              {
+                "label": "Geschichte des WWW (29:16)",
+                "video": "0XQOLzkuqvw",
+                "rating": "video_0XQOLzkuqvw"
+              },
+              {
+                "label": "Wer hat das Internet erfunden? Und warum? (6:32)",
+                "video": "LHFAKkDMbnk",
+                "rating": "video_LHFAKkDMbnk"
+              },
+              {
+                "label": "Technische Grundlagen des Internets für Nichttechniker (44:24)",
+                "video": "S61O5dOmQIU",
+                "rating": "video_S61O5dOmQIU"
+              },
+              {
+                "label": "Quiz: Geschichte des WWW",
+                "quizz": "geschichte_des_www_quiz"
+              }
+            ]
+          },
+          {
+            "label": "Phasenabschluss",
+            "parts": [
+              {
+                "icon": "bug",
+                "label": "Feedback Einführung",
+                "form": "eval_einführung",
+                "deadline": [
+                  2016,
+                  4,
+                  22
+                ],
+                "points": 1
+              }
+            ]
+          }
+        ]
+      },
+      "phase1": {
+        "icon": "list",
+        "label": "Phase 1",
+        "units": [
+          {
+            "label": "Homepage erstellen",
+            "parts": [
+              {
+                "icon": "file-text-o",
+                "label": "Aufgabenstellung",
+                "content": "aufgabenstellung"
+              },
+              {
+                "icon": "file-text-o",
+                "label": "Technische Anleitung",
+                "content": "technische_anleitung"
+              }
+            ]
+          },
+          {
+            "label": "Einstieg HTML und CSS",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "HTML und CSS – Der schnelle Einstieg (0:45:00)",
+                "link": "https://www.video2brain.com/de/videotraining/html-und-css-der-schnelle-einstieg",
+                "rating": "video2brain_html-und-css-der-schnelle-einstieg"
+              },
+              {
+                "icon": "cubes",
+                "label": "Übungen zum Einstieg in HTML und CSS",
+                "html_tutor": "html_css_einstieg"
+              }
+            ]
+          },
+
+          {
+            "label": "Grundlagen HTML",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "Little Boxes – der HTML-Crashkurs (3:03:00)",
+                "link": "https://www.video2brain.com/de/videotraining/little-boxes-der-html-crashkurs",
+                "rating": "video2brain_little-boxes-der-html-crashkurs"
+              },
+              {
+                "icon": "cubes",
+                "label": "Übungen zu Little Boxes – der HTML-Crashkurs",
+                "html_tutor": "little_boxes_html"
+              }
+            ]
+          },
+
+          {
+            "label": "Grundlagen CSS",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "Little Boxes – die CSS-Grundlagen (3:58:00)",
+                "link": "https://www.video2brain.com/de/videotraining/little-boxes-die-css-grundlagen",
+                "rating": "video2brain_little-boxes-die-css-grundlagen"
+              },
+              {
+                "icon": "cubes",
+                "label": "Übungen zu Little Boxes – die CSS-Grundlagen",
+                "css_tutor": "little_boxes_css"
+              },
+              {
+                "label": "Quiz zu Little Boxes – die CSS-Grundlagen",
+                "quizz": "css_grundlagen"
+              }
+            ]
+          },
+
+          {
+            "label": "Mehrspaltige Layouts",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "Little Boxes – CSS-Positionierung und mehrspaltige Layouts (3:55:00)",
+                "link": "https://www.video2brain.com/de/videotraining/little-boxes-css-positionierung-und-mehrspaltige-layouts",
+                "rating": "video2brain_little-boxes-css-positionierung-und-mehrspaltige-layouts"
+              },
+              {
+                "icon": "cubes",
+                "label": "Übungen zu Little Boxes – CSS-Positionierung und mehrspaltige Layouts",
+                "css_tutor": "little_boxes_css_pos"
+              },
+              {
+                "label": "Quiz zu Little Boxes – CSS-Positionierung und mehrspaltige Layouts",
+                "quizz": "css_positionierung"
+              },
+              {
+                "icon": "file-text-o",
+                "label": "Übungen mit W3School",
+                "content": "css_uebungen_w3school"
+              }
+            ]
+          },
+
+          {
+            "label": "CSS für Fortgeschrittene",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "Little Boxes - CSS3-Selektoren für Fortgeschrittene (2:06:00)",
+                "link": "https://www.video2brain.com/de/videotraining/little-boxes-css3-selektoren-fuer-fortgeschrittene",
+                "rating": "video2brain_little-boxes-css3-selektoren-fuer-fortgeschrittene"
+              },
+              {
+                "icon": "file-video-o",
+                "label": "CSS3 für Webdesigner (2:58:00)",
+                "link": "https://www.video2brain.com/de/videotraining/css-layouts",
+                "rating": "video2brain_css-layouts_für_webdeseigner"
+              },
+              {
+                "icon": "file-video-o",
+                "label": "CSS Layouts (2:46:00)",
+                "link": "https://www.video2brain.com/de/videotraining/css-layouts",
+                "rating": "video2brain_css-layouts"
+              },
+              {
+                "icon": "file-video-o",
+                "label": "CSS debuggen (1:32:00)",
+                "link": "https://www.video2brain.com/de/videotraining/css-debuggen",
+                "rating": "video2brain_css-debuggen"
+              },
+              {
+                "icon": "file-video-o",
+                "label": "Responsive Design (5:43:00)",
+                "link": "https://www.video2brain.com/de/videotraining/responsive-webdesign-das-grosse-training",
+                "rating": "video2brain_responsive-webdesign-das-grosse-training"
+              }
+            ]
+          },
+
+          {
+            "label": "Literatur und Free Online Courses",
+            "parts": [
+
+              {
+                "icon": "institution",
+                "label": "Nachschlagewerke",
+                "content": "nachschlagewerke"
+              },
+              {
+                "icon": "external-link",
+                "label": "W3Schools CSS",
+                "link": "http://www.w3schools.com/css"
+              },
+              {
+                "icon": "external-link",
+                "label": "Codecademy",
+                "link": "https://www.codecademy.com/learn/make-a-website"
+              },
+              {
+                "icon": "external-link",
+                "label": "Udacity-MOOC Intro to HTML and CSS",
+                "link": "https://www.udacity.com/course/intro-to-html-and-css--ud304"
+              },
+              {
+                "icon": "external-link",
+                "label": "Khan Academy",
+                "link": "https://www.khanacademy.org/computing/computer-programming/html-css"
+              },
+              {
+                "icon": "external-link",
+                "label": "Teach Mozilla",
+                "link": "https://thimble.mozilla.org/de/"
+              }
+            ]
+          },
+          {
+            "label": "Wettbewerb",
+            "parts": [
+              {
+                "icon": "bell-o",
+                "form": "anmeldung_wettbewerb_phase_1",
+                "label": "Anmeldung zum Wettbewerb Phase 1",
+                "deadline": [
+                  2016,
+                  4,
+                  22
+                ],
+                "points": 1
+              },
+              {
+                "icon": "trophy",
+                "locked": false,
+                "contest": 1,
+                "label": "Homepage-Katalog Phase 1",
+                "bcs_or_mcs": "bcs",
+                "group_id": "we_course_group",
+                "group": null
+              }
+            ]
+          },
+          {
+            "label": "Phasenabschluss",
+            "parts": [
+              {
+                "icon": "bookmark-o",
+                "label": "Empfohlene Quellen",
+                "form": "empfohlene_quellen_phase_1"
+              },
+              {
+                "icon": "balance-scale",
+                "label": "PEP Phase 1",
+                "form": "pep_phase_1"
+              },
+              {
+                "icon": "bug",
+                "label": "Feedback Phase 1",
+                "form": "eval_phase_1",
+                "deadline": [
+                  2016,
+                  4,
+                  22
+                ],
+                "points": 1
+              }
+            ]
+          }
+        ]
+      },
+      "phase2": {
+        "locked": false,
+        "icon": "list",
+        "label": "Phase 2",
+        "units": [
+          {
+            "label": "Aufgabe: Interaktiver Online-Tutor für das Lernen von HTML, CSS, JavaScript und jQuery",
+            "parts": [
+              {
+                "icon": "file-text-o",
+                "label": "Aufgabenstellung",
+                "content": "aufgabenstellung_javascript"
+              },
+              {
+                "icon": "file-text-o",
+                "label": "Technische Anleitung",
+                "content": "technische_anleitung_javascript"
+              }
+            ]
+          },
+          {
+            "label": "Einstieg JavaScript",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "JavaScript – Crashkurs (3:06:00)",
+                "link": "https://www.video2brain.com/de/videotraining/javascript-crashkurs-2012",
+                "rating": "video2brain_javascript-crashkurs-2012"
+              },
+              {
+                "label": "Quiz zu JavaScript – Crashkurs",
+                "quizz": "quiz_javascript_crashkurs"
+              },
+              {
+                "label": "Quiz zu JavaScript",
+                "quizz": "quiz_javascript"
+              },
+              {
+                "icon": "cubes",
+                "label": "Übungen zu JavaScript",
+                "form": "uebungen_javascript",
+                "deadline": [ 2016, 5, 20 ],
+                "points": 0,
+                "upload_size": 1,
+                "upload_time": 60
+              }
+            ]
+          },
+          {
+            "label": "Einstieg jQuery",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "jQuery (8:13:00)",
+                "link": "https://www.video2brain.com/de/videotraining/jquery",
+                "rating": "video2brain_jquery"
+              },
+              {
+                "icon": "file-video-o",
+                "label": "Ajax Grundlagen-Crashkurs (2:51:00)",
+                "link": "https://www.video2brain.com/de/videotraining/ajax-grundlagen-crashkurs",
+                "rating": "video2brain_ajax-grundlagen-crashkurs"
+              },
+              {
+                "label": "Quiz zu jQuery und Ajax",
+                "quizz": "quiz_jquery"
+              },
+              {
+                "icon": "cubes",
+                "label": "Übungen zu jQuery und Ajax",
+                "form": "uebungen_jquery_ajax",
+                "deadline": [ 2016, 5, 20 ],
+                "points": 0
+              }
+            ]
+          },
+          {
+            "label": "Responsive Webdesign, Usability, Performance-Tuning",
+            "parts": [
+              {
+                "icon": "file-video-o",
+                "label": "Responsive Webdesign – Performance-Tuning (1:41:00)",
+                "link": "https://www.video2brain.com/de/videotraining/responsive-webdesign-performance-tuning",
+                "rating": "video2brain_responsive-webdesign-performance-tuning"
+              },
+              {
+                "icon": "file-video-o",
+                "label": "WebPerformance: Autobahn oder Fussgängerzone? (0:45:00)",
+                "link": "https://media.ccc.de/v/froscon2015-1536-webperformance_autobahn_oder_fussgangerzone",
+                "rating": "video2brain_froscon2015-1536-webperformance_autobahn_oder_fussgangerzone"
+              },
+              {
+                "label": "Quiz zu Responsive Webdesign, Usability, Performance",
+                "quizz": "quiz_responsive_performance"
+              }
+            ]
+          },
+          {
+            "label": "Literatur und Free Online Courses",
+            "parts": [
+              {
+                "icon": "institution",
+                "label": "Nachschlagewerke",
+                "content": "nachschlagewerke_javascript"
+              },
+              {
+                "icon": "external-link",
+                "label": "W3Schools JavaScript",
+                "link": "http://www.w3schools.com/js/"
+              },
+              {
+                "icon": "external-link",
+                "label": "Codecademy JavaScript",
+                "link": "https://www.codecademy.com/learn/javascript"
+              },
+              {
+                "icon": "file-text-o",
+                "label": "JavaScript Programming MOOCs",
+                "content": "codecademy_javascript"
+              },
+              {
+                "icon": "external-link",
+                "label": "Learn jQuery",
+                "link": "http://learn.jquery.com"
+              },
+              {
+                "icon": "external-link",
+                "label": "Udacity-MOOC JavaScript Basics",
+                "link": "https://www.udacity.com/course/javascript-basics--ud804"
+              },
+              {
+                "icon": "external-link",
+                "label": "Udacity-MOOC Object-Oriented JavaScript",
+                "link": "https://www.udacity.com/course/object-oriented-javascript--ud015"
+              },
+              {
+                "icon": "external-link",
+                "label": "Khan Academy",
+                "link": "https://www.khanacademy.org/computing/computer-programming"
+              },
+              {
+                "icon": "external-link",
+                "label": "Teach Mozilla",
+                "link": "https://thimble.mozilla.org/de/"
+              }
+            ]
+          },
+          {
+            "label": "Wettbewerb",
+            "parts": [
+              {
+                "icon": "bell-o",
+                "form": "anmeldung_wettbewerb_phase_2",
+                "label": "Anmeldung zum Wettbewerb Phase 2",
+                "deadline": [
+                  2016, 5, 13
+                ],
+                "points": 0
+              },
+              {
+                "icon": "trophy",
+                "contest": 2,
+                "locked": false,
+                "label": "Homepage-Katalog Phase 2",
+                "bcs_or_mcs": "bcs",
+                "group_id": "we_course_group",
+                "group": null
+              }
+            ]
+          },
+          {
+            "label": "Phasenabschluss",
+            "parts": [
+              {
+                "icon": "bookmark-o",
+                "label": "Empfohlene Quellen",
+                "form": "empfohlene_quellen_phase_2"
+              },
+              {
+                "icon": "balance-scale",
+                "label": "PEP Phase 2",
+                "form": "pep_phase_2"
+              },
+              {
+                "icon": "bug",
+                "label": "Feedback Phase 2",
+                "form": "eval_phase_2",
+                "deadline": [ 2016, 5, 13 ],
+                "points": 0
+              }
+            ]
+          }
+        ]
+      },
+      "phase3": {
+        "locked": true,
+        "icon": "list",
+        "label": "Phase 3",
+        "units": [ ]
+      },
+      "phase4": {
+        "locked": true,
+        "icon": "list",
+        "label": "Phase 4",
+        "units": [ ]
+      },
+      "final": {
+        "locked": true,
+        "icon": "graduation-cap",
+        "label": "Abschluss",
+        "units": [ ]
+      }
+    },
+
+    "quizz": "check-square-o",
+    "video": "youtube-play",
+    "google_slides": "file-powerpoint-o"
+  }
+}

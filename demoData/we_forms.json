@@ -1,0 +1,270 @@
+{
+  "bcs_profil": [
+    { "key": "title", "tag": "h3", "label": "Mein WE Profil" },
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "gruppenwechsel", "tag": "checkbox", "label": "Falls ein Gruppenwechsel erforderlich ist: In welche andere Gruppe wollen/müssen Sie wechseln?", "values": ["a", "b", "c", "d", "e", "kein Wechsel"] },
+    { "key": "wechsel_grund", "tag": "textarea", "label": "Was ist der Grund für den Wechsel?", "placeholder": "Kein Wechsel erforderlich" },
+    { "key": "GitHub-Account", "tag": "input", "label": "Mein GitHub-Account lautet:" },
+    { "key": "GitHub-Email", "tag": "input", "label": "Meine GitHub-Email lautet:" }
+  ],
+
+  "bcs_vorkenntnisse": [
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "title", "tag": "h3", "label": "Vorkenntnisse" },
+    { "key": "ankuendigung_gelesen", "tag": "radio", "label": "Haben Sie die Ankündigung gelesen und sind bei Ihnen ALLE Voraussetzungen erfüllt?", "values": ["Ja", "Nein"] },
+    { "key": "voraussetzungen", "tag": "checkbox", "label": "Welche Voraussetzungen sind erfüllt?", "values": ["bestandene Prüfung Einführung in die Programmierung", "bestandene Prüfung Software Engineering I",  "bestandene Prüfung Datenstrukturen und Algorithmen" ] },
+    { "key": "HTML", "tag": "radio", "label": "Welche Erfahrungen mit HTML haben Sie? Wie viele Zeilen HTML haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "CSS", "tag": "radio", "label": "Welche Erfahrungen mit CSS haben Sie? Wie viele Zeilen CSS haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "JavaScript", "tag": "radio", "label": "Welche Erfahrungen mit JavaScript haben Sie? Wie viele Zeilen JavaScript haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "Server-Programmierung", "tag": "radio", "label": "Welche Erfahrungen mit Server-Programmierung haben Sie? Wie viele Zeilen Server-Code haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "programmiersprachen", "tag": "checkbox", "label": "Welche Programmiersprachen kennen Sie?", "values": ["Java", "JavaScript", "C", "C++", "Python", "Ruby", "Scala", "Erlang", "Go", "Clojure", "*"] },
+    { "key": "flüssig_programmieren", "tag": "checkbox", "label": "In welchen Programmiersprachen können Sie programmieren?", "values": ["Java", "JavaScript", "C", "C++", "Python", "Ruby", "Scala", "Erlang", "Go", "Clojure", "*"] },
+
+    { "key": "wann_lernen", "tag": "checkbox", "label": "Wann lernen Sie am besten? (Lernen im Sinne von tiefgründig verstehen, nicht auswendig lernen oder flachkopieren.) Wann sind Sie am produktivsten?", "values": ["morgens" , "tagsüber" , "abends" , "nachts"] },
+    { "key": "wie_lernen", "tag": "checkbox", "label": "Wie lernen Sie am besten? Wann sind Sie am produktivsten?", "values": ["alleine", "zuhause", "in Stillarbeitsräumen", "in der Bibliothek", "mit Freunden", "im kleinen Team", "in großen Gruppen", "im großen Hörsaal", "in Wettbewerben"] },
+    { "key": "womit_lernen", "tag": "checkbox", "label": "Womit lernen Sie am besten?", "values": ["präsent in der Hochschule", "zuhause", "online", "anhand von Praxisbeispielen", "streng formal aus einer Theorie abgeleitet", "im Projekt", "im Hörsaal" ] },
+
+    { "key": "we_verstehen", "tag": "textarea", "label": "Was verstehen Sie unter Web Engineering?", "placeholder": "Unter Web Engineering verstehe ich ..." },
+    { "key": "we_fragen", "tag": "textarea", "label": "Was sind für Sie die interessantesten Fragen des Web Engineerings?", "placeholder": "Die interessantesten Fragen des Web Engineerings für mich sind ..." },
+    { "key": "we_themen_lernen", "tag": "textarea", "label": "Was wollen Sie in diesem Kurs unbedingt lernen?", "placeholder": "In Web Engineering möchte ich unbedingt lernen ..." }
+  ],
+
+  "datenschutz": [
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "title", "tag": "h3", "label": "Lizenzvereinbarung und Einverständniserklärung" },
+    { "key": "Lizenz", "tag": "p", "label": "Hiermit bestätige ich, dass ich die hier heruntergeladenen Informationen, Daten und Dateien nur zu eigenen Studienzwecken in diesem Semester ausschließlich persönlich zum eigenen Gebrauch verwenden, daraus keine Rechtsansprüche herleiten, nicht kopieren, ins Internet stellen oder auf irgendeinem Wege in elektronischer oder in Papierform verbreiten werde. Am Ende dieses Semesters werde ich jede Kopie dieser Datei (auch in Papierform) vernichten. Falls es sich dabei um \"Musterlösungen\" handeln sollte, so akzeptiere ich diese als Lösungsvorschläge, die Fehler enthalten können und werde daraus keine Rechtsansprüche herleiten. Falls ich Fehler finde, werde ich diese sofort an den Dozenten melden." },
+    { "key": "Einverständniserklärung", "tag": "radio", "label": "Hiermit erkläre ich mich einverstanden mit <ul> <li>Speicherung meines GitHub-Accounts und -Email.</li> <li>Speicherung personenbezogener Punkte, die zu max. 40% in die Prüfung eingehen können.</li> <li>Speicherung personenbezogener Nutzungsdaten zum Zwecke wissenschaftlicher Auswertung in Forschungsprojekten.</li> </ul>", "values": ["Ja"] },
+    { "key": "signature", "tag": "signature" }
+  ],
+
+  "eval_einführung": [
+    { "key": "eval_einführung", "tag": "eval", "label": "Einführung" }
+  ],
+
+  "eval_phase_1": [
+    { "key": "eval_phase_1", "tag": "eval", "label": "Phase 1" }
+  ],
+
+  "eval_phase_2": [
+    { "key": "eval_phase_2", "tag": "eval", "label": "Phase 2" }
+  ],
+
+  "eval_phase_3": [
+    { "key": "eval_phase_3", "tag": "eval", "label": "Phase 3" }
+  ],
+
+  "eval_phase_4": [
+    { "key": "eval_phase_4", "tag": "eval", "label": "Phase 4" }
+  ],
+
+  "empfohlene_quellen_phase_1": [
+    { "key": "empfohlene_quellen_phase_1", "tag": "recommend_links", "label": "Phase 1" }
+  ],
+
+  "empfohlene_quellen_phase_2": [
+    { "key": "empfohlene_quellen_phase_2", "tag": "recommend_links", "label": "Phase 2" }
+  ],
+
+  "empfohlene_quellen_phase_3": [
+    { "key": "empfohlene_quellen_phase_3", "tag": "recommend_links", "label": "Phase 3" }
+  ],
+
+  "empfohlene_quellen_phase_4": [
+    { "key": "empfohlene_quellen_phase_4", "tag": "recommend_links", "label": "Phase 4" }
+  ],
+
+  "feedback": [
+    { "key": "title", "tag": "h2", "label": "Mein Hinweis (Bug-Meldung, Fehler in Folien, Verbesserungsidee, Meldung unlauterer Beiträge, Probleme, etc.)", "points": "0" },
+    { "key": "Hinweis_Titel", "tag": "input", "size": "30", "type": "text", "label": "Titel meines Hinweises", "placeholder": "Mein Anliegen ist" },
+    { "key": "type", "tag": "radio", "label": "Art des Hinweises", "values": ["Fehler in Folien", "Fehler in Aufgaben", "Software-Bug", "Verbesserungsvorschlag", "Unlauterer Beitrag eines Studierenden", "Lob", "Konstruktive Kritik", "Problem", "Innovationsidee", "Sonstiges" ] },
+    { "key": "Beschreibung", "tag": "textarea", "cols": "30", "label": "Mein Hinweis", "placeholder": "Mein Hinweis ist konkret folgender: ... Ich möchte Folgendes melden: ..." }
+  ],
+
+  "mcs_profil": [
+    { "key": "title", "tag": "h3", "label": "Mein WE Profil" },
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "GitHub-Account", "tag": "input", "label": "Mein GitHub-Account lautet:" },
+    { "key": "GitHub-Email", "tag": "input", "label": "Meine GitHub-Email lautet:" }
+  ],
+
+  "mcs_vorkenntnisse": [
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "title", "tag": "h3", "label": "Vorkenntnisse" },
+    { "key": "ankuendigung_gelesen", "tag": "radio", "label": "Haben Sie die Ankündigung gelesen und sind bei Ihnen ALLE Voraussetzungen erfüllt?", "values": ["Ja", "Nein"] },
+    { "key": "voraussetzungen", "tag": "checkbox", "label": "Welche Voraussetzungen sind erfüllt?", "values": ["grundlegende Kenntnisse in Programmierung", "Software Engineering", "Internet-Technologien und Datenbanken" ] },
+    { "key": "HTML", "tag": "radio", "label": "Welche Erfahrungen mit HTML haben Sie? Wie viele Zeilen HTML haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "CSS", "tag": "radio", "label": "Welche Erfahrungen mit CSS haben Sie? Wie viele Zeilen CSS haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "JavaScript", "tag": "radio", "label": "Welche Erfahrungen mit JavaScript haben Sie? Wie viele Zeilen JavaScript haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "Server-Programmierung", "tag": "radio", "label": "Welche Erfahrungen mit Server-Programmierung haben Sie? Wie viele Zeilen Server-Code haben Sie bereits selber geschrieben?", "values": ["keine", "10", "100", "1000", "mehr als 1000"] },
+    { "key": "programmiersprachen", "tag": "checkbox", "label": "Welche Programmiersprachen kennen Sie?", "values": ["Java", "JavaScript", "C", "C++", "Python", "Ruby", "Scala", "Erlang", "Go", "Clojure", "*"] },
+    { "key": "flüssig_programmieren", "tag": "checkbox", "label": "In welchen Programmiersprachen können Sie programmieren?", "values": ["Java", "JavaScript", "C", "C++", "Python", "Ruby", "Scala", "Erlang", "Go", "Clojure", "*"] },
+
+    { "key": "wann_lernen", "tag": "checkbox", "label": "Wann lernen Sie am besten? (Lernen im Sinne von tiefgründig verstehen, nicht auswendig lernen oder flachkopieren.) Wann sind Sie am produktivsten?", "values": ["morgens" , "tagsüber" , "abends" , "nachts"] },
+    { "key": "wie_lernen", "tag": "checkbox", "label": "Wie lernen Sie am besten? Wann sind Sie am produktivsten?", "values": ["alleine", "zuhause", "in Stillarbeitsräumen", "in der Bibliothek", "mit Freunden", "im kleinen Team", "in großen Gruppen", "im großen Hörsaal", "in Wettbewerben"] },
+    { "key": "womit_lernen", "tag": "checkbox", "label": "Womit lernen Sie am besten?", "values": ["präsent in der Hochschule", "zuhause", "online", "anhand von Praxisbeispielen", "streng formal aus einer Theorie abgeleitet", "im Projekt", "im Hörsaal" ] },
+
+    { "key": "we_verstehen", "tag": "textarea", "label": "Was verstehen Sie unter Web Engineering?", "placeholder": "Unter Web Engineering verstehe ich ..." },
+    { "key": "we_fragen", "tag": "textarea", "label": "Was sind für Sie die interessantesten Fragen des Web Engineerings?", "placeholder": "Die interessantesten Fragen des Web Engineerings für mich sind ..." },
+    { "key": "we_themen_lernen", "tag": "textarea", "label": "Was wollen Sie in diesem Kurs unbedingt lernen?", "placeholder": "In Web Engineering möchte ich unbedingt lernen ..." }
+  ],
+
+  "pep_phase_1": [
+    { "key": "pep_phase_1", "tag": "pep", "label": "Phase 1" }
+  ],
+
+  "pep_phase_2": [
+    { "key": "pep_phase_2", "tag": "pep", "label": "Phase 2" }
+  ],
+
+  "pep_phase_3": [
+    { "key": "pep_phase_3", "tag": "pep", "label": "Phase 3" }
+  ],
+
+  "pep_phase_4": [
+    { "key": "pep_phase_4", "tag": "pep", "label": "Phase 4" }
+  ],
+
+  "plagiate": [
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "title", "tag": "h3", "label": "Erklärung zu Plagiaten" },
+    { "key": "plagiate", "tag": "radio", "label": "Ich habe die <a target=\"_blank\" href=\"https://www.h-brs.de/de/plagiatsresolution-und-massnahmen\">Plagiatsresolution und -maßnahmen</a> der Hochschule Bonn-Rhein-Sieg gelesen und stimme der dort enthaltenen 'Selbstverpflichtungserklärung der Studierenden' zu: 'Ich erkläre hiermit, dass ich den akademischen Ehrencodex kenne und über die Folgen einer Missachtung oder Verletzung aufgeklärt worden bin.' ", "values": ["Ja: Ich erkläre hiermit, dass ich den akademischen Ehrencodex kenne und über die Folgen einer Missachtung oder Verletzung aufgeklärt worden bin."] }
+  ],
+
+  "anmeldung_wettbewerb_phase_1": [
+    { "key": "phase_1", "tag": "anmeldung_wettbewerb", "nr": 1 }
+  ],
+
+  "anmeldung_wettbewerb_phase_2": [
+    { "key": "phase_2", "tag": "anmeldung_wettbewerb", "nr": 2 }
+  ],
+
+  "anmeldung_wettbewerb_phase_3": [
+    { "key": "phase_3", "tag": "anmeldung_wettbewerb", "nr": 3 }
+  ],
+
+  "anmeldung_wettbewerb_phase_4": [
+    { "key": "phase_4", "tag": "anmeldung_wettbewerb", "nr": 4 }
+  ],
+
+  "uebungen_javascript": [
+    { "key": "title", "tag": "h2", "label": "Übungen zu JavaScript" },
+
+    { "key": "aufgaben_titel_01", "tag": "h3", "label": "Addierer in JavaScript" },
+    { "key": "aufgabe_01", "tag": "p", "label": "Schreiben Sie einen Addierer in JavaScript wie folgt: Über Eingabefelder kann man die Summanden eingeben, über einen Button kann man die Summe berechnen lassen." },
+    { "key": "upload_01", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_02", "tag": "h3", "label": "Listengenerator in JavaScript" },
+    { "key": "aufgabe_02", "tag": "p", "label": "Schreiben Sie einen Listengenerator in JavaScript wie folgt: Über ein Eingabefeld kann man die Anzahl der Listenelemente eingeben. Eine Liste mit der eingegebenen Anzahl an Elementen wird auf der gleichen Webseite generiert. Lassen Sie Ihr JavaScript-Programm in jedes Listenelement die jeweilige Zahl fettgedruckt schreiben." },
+    { "key": "upload_02", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_03", "tag": "h3", "label": "Farbenwechsel in JavaScript" },
+    { "key": "aufgabe_03", "tag": "p", "label": "Schreiben Sie einen Click-Handler in JavaScript, mit dem Sie die Farbe des Hintergrundes der Webseite von weiß auf grau auf rot und dann wieder auf weiß ändern können." },
+    { "key": "upload_03", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_04", "tag": "h3", "label": "Aktuelles Instagram-Katzenbild in JavaScript" },
+    { "key": "aufgabe_04", "tag": "p", "label": "Fügen Sie in Ihre Webseite automatisert ein aktuelles Instagram-Katzenbild mittels http://instafeedjs.com ein." },
+    { "key": "upload_04", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "abschicken", "tag": "p", "label": "Nachdem Sie alle Lösungen hochgeladen haben, drücken Sie bitte noch diesen Abschicken-Button, um die Namen aller Ihrer Lösungen in der Datenbank zu speichern und Ihre Punkte zu verbuchen. Vielen Dank für Ihre sorgfältige Arbeit!" }
+
+  ],
+
+  "uebungen_jquery_ajax": [
+    { "key": "title", "tag": "h2", "label": "Übungen zu jQuery und Ajax" },
+
+    { "key": "aufgaben_titel_01", "tag": "h3", "label": "Ziehung der Lottozahlen in jQuery" },
+    { "key": "aufgabe_01", "tag": "p", "label": "Schreiben Sie eine Ziehung der Lottozahlen ohne Zurücklegen in jQuery und JavaScript als eingebettetes Skript in einer HTML-Seite." },
+    { "key": "upload_01", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem jQuery und JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_02", "tag": "h3", "label": "Funktionen in jQuery" },
+    { "key": "aufgabe_02", "tag": "p", "label": "Schreiben Sie eine HTML-Seite mit einem Button und einer Tabelle, so dass mit dem Klick auf den Button die Tabelle sortiert wird und jede zweite Zeile einen grauen Hintergrund bekommt. Schreiben Sie alles in jQuery und JavaScript als eingebettetes Skript in einer einzigen HTML-Seite." },
+    { "key": "upload_02", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem jQuery und JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_03", "tag": "h3", "label": "Animationen in jQuery" },
+    { "key": "aufgabe_03", "tag": "p", "label": "Schreiben Sie eine HTML-Seite mit einem Button und dem <a href=http://kaul.inf.h-brs.de/home/img/fhlogo.gif>Logo der Hochschule Bonn-Rhein-Sieg</a>, so dass mit jedem Klick auf den Button ein neues Exemplar des Logos langsam erscheint und sich rechts neben den schon eingeblendeten Logos positioniert. Schreiben Sie alles in jQuery und JavaScript als eingebettetes Skript in einer einzigen HTML-Seite und laden Sie diese hoch." },
+    { "key": "upload_03", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem jQuery und JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] }
+    ],
+
+  "muster_uebungen": [
+    { "key": "deadline ???", "tag": "deadline ???" },
+    { "key": "title", "tag": "h2", "label": "Übungen zu XXX" },
+
+    { "key": "aufgaben_titel_01", "tag": "h3", "label": "Ziehung der Lottozahlen in jQuery" },
+    { "key": "aufgabe_01", "tag": "p", "label": "Schreiben Sie eine Ziehung der Lottozahlen ohne Zurücklegen in jQuery und JavaScript als eingebettetes Skript in einer HTML-Seite." },
+    { "key": "upload_01", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem jQuery und JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_02", "tag": "h3", "label": "Funktionen in jQuery" },
+    { "key": "aufgabe_02", "tag": "p", "label": "Schreiben Sie eine HTML-Seite mit einem Button und einer Tabelle, so dass mit dem Klick auf den Button die Tabelle sortiert wird und jede zweite Zeile einen grauen Hintergrund bekommt. Schreiben Sie alles in jQuery und JavaScript als eingebettetes Skript in einer einzigen HTML-Seite." },
+    { "key": "upload_02", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem jQuery und JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] },
+
+    { "key": "aufgaben_titel_03", "tag": "h3", "label": "Animationen in jQuery" },
+    { "key": "aufgabe_03", "tag": "p", "label": "Schreiben Sie eine HTML-Seite mit einem Button und dem <a href=>Logo der Hochschule Bonn-Rhein-Sieg</a>, so dass mit dem Klick auf den Button das Logo wie folgt animiert wird: . Schreiben Sie alles in jQuery und JavaScript als eingebettetes Skript in einer einzigen HTML-Seite." },
+    { "key": "upload_03", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem jQuery und JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] }
+  ],
+
+  "einverstaendnis_muendliche_pruefung": [
+    { "key": "title", "tag": "h2", "label": "Einverständniserklärung für eine mündliche Prüfung" },
+    { "key": "einverstaendnis", "tag": "radio", "label": "Mit einer mündlichen Prüfungsform bin ich auch einverstanden:", "values": ["Ja", "Nein"] }
+  ],
+
+  "aufgabenstellung_ccm_phase_3": [
+    { "key": "title", "tag": "h2", "label": "Aufgabenstellung in Phase 3" },
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "aufgabe_01", "tag": "p", "label": "Arbeiten Sie sich in dieser Phase in das Client-side Component Model (ccm) und git mit den angebotenen Tutorials ein und erstellen Sie eine eigene sichere ccm-Komponente in Ihrem eigenen GitHub-Repository. (Bitte implementieren Sie keine Login-Funktionalität in Ihren Komponenten. Es würde dem Komponentenansatz widersprechen, wenn man mehrere Themen vermischt. Stattdessen können Sie eine Login-Komponente voraussetzen oder die Login-Komponente user.js wie im Tutorial verwenden.) " },
+    { "key": "github_repository", "tag": "input", "size": 80, "label": "Geben Sie die URL zu Ihrem eigenen GitHub-Repository hier ein:<br>", "placeholder": "https://github.com/mmuster2s/ccm-components" },
+    { "key": "aufgabe_02", "tag": "p", "label": "(In der nächsten Phase (4) werden wir dann zu Teamarbeit übergehen. In dieser Phase (3) wird noch Einzelarbeit geleistet.)" },
+    { "key": "aufgabe_03", "tag": "p", "label": "Erstellen Sie eine HTML-Seite, auf der Sie die Funktionsweise Ihrer ccm-Komponente demonstrieren können. " },
+    { "key": "demo_site", "tag": "input", "size": 80, "label": "Geben Sie die URL zu Ihrer Demo-Webseite hier ein:<br>", "placeholder": "https://www2.inf.h-brs.de/~mmuster2s/phase3" },
+    { "key": "aufgabe_05", "tag": "p", "label": "Wählen Sie für Ihre Komponente ein Thema aus der folgenden \"Auswahl\" aus. <br>(Ausnahme: Falls Sie jedoch lieber eine eigene Idee verfolgen wollen, so sprechen Sie bitte vorher mit den Dozenten.)" },
+    { "key": "eigene_idee", "tag": "input", "size": 80, "label": "Titel der eigenen Idee" },
+    { "key": "eigene_idee_beschreibung", "tag": "textarea", "label": "Beschreibung der eigenen Idee", "placeholder": "" }
+  ],
+
+  "aufgabenstellung_ccm_phase_3_bcs": [
+    { "key": "title", "tag": "h2", "label": "Aufgabenstellung in Phase 3" },
+    { "key": "deadline", "tag": "deadline" },
+    { "key": "aufgabe_01", "tag": "p", "label": "Arbeiten Sie sich in dieser Phase in das Client-side Component Model (ccm) und git mit den angebotenen Tutorials ein und erstellen Sie eine eigene ccm-Komponente in Ihrem eigenen GitHub-Repository. (Bitte implementieren Sie keine Login-Funktionalität in Ihren Komponenten. Es würde dem Komponentenansatz widersprechen, wenn man mehrere Themen vermischt. Stattdessen können Sie eine Login-Komponente voraussetzen oder die Login-Komponente user.js wie im Tutorial verwenden.) " },
+    { "key": "github_repository", "tag": "input", "size": 80, "label": "Geben Sie die URL zu Ihrem eigenen GitHub-Repository hier ein:<br>", "placeholder": "https://github.com/mmuster2s/ccm-components" },
+    { "key": "aufgabe_02", "tag": "p", "label": "(In der nächsten Phase (4) werden wir dann zu Teamarbeit übergehen. In dieser Phase (3) wird noch Einzelarbeit geleistet.)" },
+    { "key": "aufgabe_03", "tag": "p", "label": "Erstellen Sie eine HTML-Seite, auf der Sie die Funktionsweise Ihrer ccm-Komponente demonstrieren können. " },
+    { "key": "demo_site", "tag": "input", "size": 80, "label": "Geben Sie die URL zu Ihrer Demo-Webseite hier ein:<br>", "placeholder": "https://www2.inf.h-brs.de/~mmuster2s/phase3" },
+    { "key": "aufgabe_05", "tag": "p", "label": "Wählen Sie für Ihre Komponente ein Thema aus der folgenden \"Auswahl\" aus. <br>(Ausnahme: Falls Sie jedoch lieber eine eigene Idee verfolgen wollen, so sprechen Sie bitte vorher mit den Dozenten.)" },
+    { "key": "eigene_idee", "tag": "input", "size": 80, "label": "Titel der eigenen Idee" },
+    { "key": "eigene_idee_beschreibung", "tag": "textarea", "label": "Beschreibung der eigenen Idee", "placeholder": "" }
+  ],
+
+  "uebungen_jsonp_ajax": [
+    { "key": "title", "tag": "h2", "label": "Übungen zu JSONP und Ajax" },
+
+    { "key": "aufgaben_titel_01", "tag": "h3", "label": "Cross Domain Zeitvergleich mittels JSONP und Ajax" },
+    { "key": "aufgabe_01", "tag": "p", "label": "Schreiben Sie einen Cross Domain Zeitvergleich mittels JSONP und Ajax als eingebettetes Skript in einer HTML-Seite. Die HTML-Seite soll lokal und auf jedem Server funktionieren. Als Referenzserver steht Ihnen <a href=https://kaul.inf.h-brs.de/json_date.php target=_blank>https://kaul.inf.h-brs.de/json_date.php</a> zur Verfügung. Die aktuelle Zeit können Sie im Browser mittels <tt>new Date()</tt> in JavaScript abfragen. Vergleichen Sie Serverzeit und Browserzeit cross Domain mittels JSONP und Ajax." },
+    { "key": "upload_01", "tag": "upload",
+      "label": "Laden Sie das ablauffähige Ergebnis als einzelne HTML-Datei mit eingebettetem JavaScript hoch!",
+      "types": [ "text/html", "application/xhtml+xml" ], "suffices": [ "html", "htm" ] }
+    ],
+
+  "todo": [
+    { "key": "title", "tag": "h2", "label": "ToDo" }
+  ]
+
+}

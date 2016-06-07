@@ -1,0 +1,486 @@
+{
+  "feedback": {
+    "key": "feedback",
+    "form": {
+      "button": true,
+      "onsubmit": "%%"
+    },
+    "inputs": [
+      {
+        "label": "Titel:",
+        "name": "title",
+        "input": "text",
+        "placeholder": "Titel meines Feedbacks",
+        "required": true
+      },
+      {
+        "label": "Art:",
+        "name": "kind",
+        "input": "select",
+        "title": "Art des Feedbacks",
+        "options": [
+          {
+            "value":   "slide",
+            "caption": "Fehler in Folien"
+          },
+          {
+            "value":   "exercise",
+            "caption": "Fehler in Aufgabe"
+          },
+          {
+            "value":   "quizz",
+            "caption": "Fehler in Quizz"
+          },
+          {
+            "value":   "video",
+            "caption": "Fehler in Video"
+          },
+          {
+            "value":   "bug",
+            "caption": "Software-Bug"
+          },
+          {
+            "value":   "suggestion",
+            "caption": "Verbesserungsvorschlag",
+            "selected": true
+          },
+          {
+            "value":   "spam",
+            "caption": "Spam melden",
+            "title":   "Zum Beispiel ein unlauterer Beitrag eines Studierenden."
+          },
+          {
+            "value":   "praise",
+            "caption": "Lob"
+          },
+          {
+            "value":   "criticism",
+            "caption": "Konstruktive Kritik"
+          },
+          {
+            "value":   "problem",
+            "caption": "Problem"
+          },
+          {
+            "value":   "innovation",
+            "caption": "Innovationsidee"
+          },
+          {
+            "value":   "other",
+            "caption": "Sonstiges"
+          }
+        ]
+      },
+      {
+        "label": "Feedback:",
+        "name": "text",
+        "input": "textarea",
+        "placeholder": "Hier Feedback eingeben...",
+        "required": true
+      }
+    ]
+  },
+  "we_vorkenntnisse": {
+    "key": "we_vorkentnisse",
+    "form": {
+      "button": true,
+      "onsubmit": "%%"
+    },
+    "fieldset": "Vorkentnisse",
+    "inputs": [
+      {
+        "label": "Haben Sie die Ankündigung gelesen und sind bei Ihnen ALLE Voraussetzungen erfüllt?",
+        "name": "janein",
+        "input": "radio",
+        "values": [
+          {
+            "value": "ja",
+            "caption": "ja"
+          },
+          {
+            "value": "nein",
+            "caption": "nein",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "label": "Welche Voraussetzungen sind erfüllt?",
+        "name": "exists",
+        "input": "checkbox",
+        "values": [
+          {
+            "name": "ep",
+            "caption": "bestandene Prüfung Einführung in die Programmierung",
+            "checked": true
+          },
+          {
+            "name": "se",
+            "caption": "bestandene Prüfung Software Engineering I",
+            "checked": true
+          },
+          {
+            "name": "algo_dat",
+            "caption": "bestandene Prüfung Datenstrukturen und Algorithmen"
+          }
+        ]
+      },
+      {
+        "label": "Welche Erfahrungen mit HTML haben Sie? Wie viele Zeilen HTML haben Sie bereits selber geschrieben?",
+        "name": "html",
+        "input": "radio",
+        "values": [
+          {
+            "value": "keine",
+            "caption": "keine"
+          },
+          {
+            "value": "zen",
+            "caption": "10"
+          },
+          {
+            "value": "hundert",
+            "caption": "100"
+          },
+          {
+            "value": "tausend",
+            "caption": "1000",
+            "checked": true
+          },
+          {
+            "value": "mehr",
+            "caption": "mehr als 1000"
+          }
+        ]
+      },
+      {
+        "label": "Welche Erfahrungen mit CSS haben Sie? Wie viele Zeilen CSS haben Sie bereits selber geschrieben?",
+        "name": "css",
+        "input": "radio",
+        "values": [
+          {
+            "value": "keine",
+            "caption": "keine"
+          },
+          {
+            "value": "zen",
+            "caption": "10"
+          },
+          {
+            "value": "hundert",
+            "caption": "100"
+          },
+          {
+            "value": "tausend",
+            "caption": "1000",
+            "checked": true
+          },
+          {
+            "value": "mehr",
+            "caption": "mehr als 1000"
+          }
+        ]
+      },
+      {
+        "label": "Welche Erfahrungen mit JavaScript haben Sie? Wie viele Zeilen JavaScript haben Sie bereits selber geschrieben?",
+        "name": "java_script",
+        "input": "radio",
+        "values": [
+          {
+            "value": "keine",
+            "caption": "keine"
+          },
+          {
+            "value": "zen",
+            "caption": "10"
+          },
+          {
+            "value": "hundert",
+            "caption": "100"
+          },
+          {
+            "value": "tausend",
+            "caption": "1000",
+            "checked": true
+          },
+          {
+            "value": "mehr",
+            "caption": "mehr als 1000"
+          }
+        ]
+      },
+      {
+        "label": "Welche Erfahrungen mit Server-Programmierung haben Sie? Wie viele Zeilen Server-Code haben Sie bereits selber geschrieben?",
+        "name": "java_script",
+        "input": "radio",
+        "values": [
+          {
+            "value": "keine",
+            "caption": "keine"
+          },
+          {
+            "value": "zen",
+            "caption": "10"
+          },
+          {
+            "value": "hundert",
+            "caption": "100"
+          },
+          {
+            "value": "tausend",
+            "caption": "1000",
+            "checked": true
+          },
+          {
+            "value": "mehr",
+            "caption": "mehr als 1000"
+          }
+        ]
+      },
+      {
+        "label": "Welche Programmiersprachen kennen Sie?",
+        "name": "knows",
+        "input": "checkbox",
+        "values": [
+          {
+            "name": "java",
+            "caption": "Java",
+            "checked": true
+          },
+          {
+            "name": "java_script",
+            "caption": "Java Script",
+            "checked": true
+          },
+          {
+            "name": "c",
+            "caption": "C",
+            "checked": true
+          },
+          {
+            "name": "c_plus",
+            "caption": "C++",
+            "checked": true
+          },
+          {
+            "name": "python",
+            "caption": "Python"
+          },
+          {
+            "name": "ruby",
+            "caption": "ruby",
+            "checked": true
+          },
+          {
+            "name": "scala",
+            "caption": "Scala"
+          },
+          {
+            "name": "erlang",
+            "caption": "Erlang"
+          },
+          {
+            "name": "go",
+            "caption": "go"
+          },
+          {
+            "name": "clojure",
+            "caption": "Clojure"
+          },
+          {
+            "name": "etc",
+            "caption": "*"
+          }
+        ]
+      },
+      {
+        "label": "In welchen Programmiersprachen können Sie programmieren?",
+        "name": "knows",
+        "input": "checkbox",
+        "values": [
+          {
+            "name": "java",
+            "caption": "Java",
+            "checked": true
+          },
+          {
+            "name": "java_script",
+            "caption": "Java Script",
+            "checked": true
+          },
+          {
+            "name": "c",
+            "caption": "C",
+            "checked": true
+          },
+          {
+            "name": "c_plus",
+            "caption": "C++",
+            "checked": true
+          },
+          {
+            "name": "python",
+            "caption": "Python"
+          },
+          {
+            "name": "ruby",
+            "caption": "ruby",
+            "checked": true
+          },
+          {
+            "name": "scala",
+            "caption": "Scala"
+          },
+          {
+            "name": "erlang",
+            "caption": "Erlang"
+          },
+          {
+            "name": "go",
+            "caption": "go"
+          },
+          {
+            "name": "clojure",
+            "caption": "Clojure"
+          },
+          {
+            "name": "etc",
+            "caption": "*"
+          }
+        ]
+      },
+      {
+        "label": "Wann lernen Sie am besten? (Lernen im Sinne von tiefgründig verstehen, nicht auswendig lernen oder flachkopieren.) Wann sind Sie am produktivsten?",
+        "name": "knows",
+        "input": "checkbox",
+        "values": [
+          {
+            "name": "morgens",
+            "caption": "Morgens",
+            "checked": true
+          },
+          {
+            "name": "tagsüber",
+            "caption": "Tagsüber",
+            "checked": true
+          },
+          {
+            "name": "abends",
+            "caption": "Abends",
+            "checked": true
+          },
+          {
+            "name": "nachts",
+            "caption": "Nachts",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "label": "Wie lernen Sie am besten? Wann sind Sie am produktivsten?",
+        "name": "learn",
+        "input": "checkbox",
+        "values": [
+          {
+            "name": "morgens",
+            "caption": "alleine",
+            "checked": true
+          },
+          {
+            "name": "tagsüber",
+            "caption": "zuhause",
+            "checked": true
+          },
+          {
+            "name": "stillarbeitsräumen",
+            "caption": "in Stillarbeitsräumen",
+            "checked": true
+          },
+          {
+            "name": "bibliothek",
+            "caption": "in der Bibliothek",
+            "checked": true
+          },
+          {
+            "name": "freunden",
+            "caption": "mit Freunden",
+            "checked": true
+          },
+          {
+            "name": "team",
+            "caption": "im kleinen Team",
+            "checked": true
+          },
+          {
+            "name": "gruppen",
+            "caption": "in großen Gruppen",
+            "checked": true
+          },
+          {
+            "name": "Hörsaal",
+            "caption": "im großen Hörsaal",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "label": "Womit lernen Sie am besten?",
+        "name": "learn",
+        "input": "checkbox",
+        "values": [
+          {
+            "name": "morgens",
+            "caption": "präsent in der Hochschule",
+            "checked": true
+          },
+          {
+            "name": "zuhause",
+            "caption": "zuhause",
+            "checked": true
+          },
+          {
+            "name": "online",
+            "caption": "online",
+            "checked": true
+          },
+          {
+            "name": "Praxisbeispielen",
+            "caption": "anhand von Praxisbeispielen",
+            "checked": true
+          },
+          {
+            "name": "theorie",
+            "caption": "streng formal aus einer Theorie abgeleitet",
+            "checked": true
+          },
+          {
+            "name": "projekt",
+            "caption": "im Projekt",
+            "checked": true
+          },
+          {
+            "name": "Hörsaal",
+            "caption": "im Hörsaal",
+            "checked": true
+          }
+        ]
+      },
+      {
+        "label": "Was verstehen Sie unter Web Engineering?",
+        "name": "know_we",
+        "placeholder": "Unter Wen Engeneering verstehe ich...",
+        "input": "textarea",
+        "rows": "6",
+        "cols": "50"
+      },
+      {
+        "label": "Was sind für Sie die interessantesten Fragen des Web Engineerings?",
+        "name": "know_we",
+        "placeholder": "Die interessantesten Frage des Web Engineerings für mich sind ...",
+        "input": "textarea",
+        "rows": "6",
+        "cols": "50"
+      }
+    ]
+  }
+}
