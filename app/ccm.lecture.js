@@ -22,9 +22,9 @@ ccm.component( {
    */
   config: {
 
-    chat:           [ ccm.component, './chat/ccm.chat.js', {
-      html:         [ ccm.load,      './chat/chat_hbrs_html.json' ],
-      style:        [ ccm.load,      './chat/lecture_chat.css' ],
+    chat:           [ ccm.component, 'http://tkless.github.io/ccm-components/chat/ccm.chat.js', {
+      html:         [ ccm.load,      'http://tkless.github.io/ccm-components/chat/chat_hbrs_html.json' ],
+      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/chat/lecture_chat.css' ],
       store:        [ ccm.store,     './demoData/chat.json'],
       lang:         null,
       user:         null
@@ -44,8 +44,8 @@ ccm.component( {
 
     feedback_store: [ ccm.store ],
 
-    forms:          [ ccm.component, './form/ccm.input.js', {
-      style:        [ ccm.load,      './form/input.css'],
+    forms:          [ ccm.component, 'http://tkless.github.io/ccm-components/form/ccm.input.js', {
+      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/form/input.css'],
       store:        [ ccm.store,     './demoData/we_inputs.json' ]
     } ],
 
@@ -69,10 +69,10 @@ ccm.component( {
 
     layouts:        [ 'footer', 'bars', 'content_icons', 'posts_lecture', 'lecture_forum', 'lecture_chat' ],
 
-    menu:           [ ccm.component, './menu/ccm.menu.js', {
-      style:        [ ccm.load,      './menu/menu_footer.css' ],
-      style2:       [ ccm.load,      './menu/menu_bars.css' ],
-      style3:       [ ccm.load,      './menu/menu_content_icons.css' ]
+    menu:           [ ccm.component, 'http://tkless.github.io/ccm-components/menu/ccm.menu.js', {
+      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/menu/menu_footer.css' ],
+      style2:       [ ccm.load,      'http://tkless.github.io/ccm-components/menu/menu_bars.css' ],
+      style3:       [ ccm.load,      'http://tkless.github.io/ccm-components/menu/menu_content_icons.css' ]
     } ],
 
     news:           [ ccm.component, './news/ccm.posts.js', {
@@ -82,11 +82,11 @@ ccm.component( {
       user:         null
     } ],
 
-    quizz:          [ ccm.component, './quizz/ccm.quizz.js', {
-      html:         [ ccm.load,     './quizz/quizz_html.json' ],
-      store:        [ ccm.store,     './demoData/we_quizzes.json' ],
-      style:        [ ccm.load,      './quizz/quizz.css' ],
-      style_swap:   [ ccm.load,      './quizz/quizz_swap.css' ],
+    quizz:          [ ccm.component, 'http://tkless.github.io/ccm-components/quizz/ccm.quizz.js', {
+      html:         [ ccm.load,     'http://tkless.github.io/ccm-components/quizz/quizz_html.json' ],
+      store:        [ ccm.store,     'http://tkless.github.io/ccm-components/demoData/we_quizzes.json' ],
+      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/quizz/quizz.css' ],
+      style_swap:   [ ccm.load,      'http://tkless.github.io/ccm-components/quizz/quizz_swap.css' ],
       lang:         null
     } ],
 
@@ -100,16 +100,16 @@ ccm.component( {
 
     style:          [ ccm.load,      './app/lecture.css' ],
 
-    tasks:          [ ccm.component, './kanbanBoard/ccm.kanban.js', {
-      store:        [ ccm.store, { store: [ ccm.store, './kanbanBoard/kanban.json' ] } ],
-      style:        [ ccm.load,      './kanbanBoard/kanban.css' ] }, ],
+    tasks:          [ ccm.component, 'http://tkless.github.io/ccm-components/kanbanBoard/ccm.kanban.js', {
+      store:        [ ccm.store, { store: [ ccm.store, 'http://tkless.github.io/ccm-components/kanbanBoard/kanban.json' ] } ],
+      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/kanbanBoard/kanban.css' ] }, ],
 
     user:           null,
 
-    video:          [ ccm.component, './youtube/ccm.youtube.js', {
-      html:         [ ccm.load,      './youtube/youtube_html.json'],
-      store:        [ ccm.store,     './demoData/we_videos.json' ],
-      style:        [ ccm.load,      './youtube/youtube.css'],
+    video:          [ ccm.component, 'http://tkless.github.io/ccm-components/youtube/ccm.youtube.js', {
+      html:         [ ccm.load,      'http://tkless.github.io/ccm-components/youtube/youtube_html.json'],
+      store:        [ ccm.store,     'http://tkless.github.io/ccm-components/demoData/we_videos.json' ],
+      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/youtube/youtube.css'],
       user:         null } ]
 
   },
