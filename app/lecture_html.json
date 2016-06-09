@@ -1,5 +1,5 @@
 {
-  "main":[
+  "main": [
     {
       "tag": "div",
       "class": "feedback",
@@ -21,15 +21,21 @@
     },
     {
       "tag": "div",
-      "class": "header"
-    },
-    {
-      "tag": "div",
-      "class": "content"
-    },
-    {
-      "tag": "div",
-      "class": "footer"
+      "class": "view",
+      "inner": [
+        {
+          "tag": "div",
+          "class": "header"
+        },
+        {
+          "tag": "div",
+          "class": "content"
+        },
+        {
+          "tag": "div",
+          "class": "footer"
+        }
+      ]
     }
   ],
 

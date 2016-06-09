@@ -151,16 +151,13 @@ ccm.component( {
       ccm.helper.dataset( self, function ( dataset ) {
 
         // render main html structure
-        element.html( ccm.helper.html( { class: 'view' } ) );
-
-        ccm.helper.find( self, '.view' ).html( ccm.helper.html( self.html.main, {
+        element.html( ccm.helper.html( self.html.main, {
           fclick: animateFeedback
         } ) );
 
-        renderFeedback();
-
         renderHeader();
         renderContent();
+        renderFeedback();
         renderFooter();
 
         // perform callback
@@ -264,14 +261,13 @@ ccm.component( {
         function animateFeedback() {
 
           renderFeedback();
-          var feedback = element.find( ' > .view > .feedback' );
-          element.append( '<div class="overlay"></div>' );
-          element.find( '> .view' ).addClass( 'disabled' );
+          var feedback = ccm.helper.find( self, '.feedback' );
+          element.prepend( '<div class="overlay"></div>' );
 
           feedback.animate( { right: "0px" }, "slow");
 
           ccm.helper.find( self, feedback, '.button' ).unbind().add( ccm.helper.find( self, '.overlay' ) ).click( function () {
-            feedback.animate( { right: "-333px" }, "slow", function () {
+            feedback.animate( { right: "-290px" }, "slow", function () {
               ccm.helper.find( self, '.overlay').remove();
             });
             ccm.helper.find( self, feedback, '.button').unbind().click( animateFeedback );
@@ -291,7 +287,7 @@ ccm.component( {
           } );
 
           function saveFeedback( feedback ) {
-            var feedback = element.find( ' > .view > .feedback > .form' );
+            var feedback = ccm.helper.find( self, '.form' );
 
             self.feedback_store.set( feedback, function () {
                 feedback.append('Feedback gespeichert. Vielen Dank!');
