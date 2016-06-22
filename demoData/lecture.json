@@ -111,12 +111,12 @@
               {
                 "icon": "file-powerpoint-o",
                 "label": "Einführung",
-                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1bNT6WXvJffoGq20YXdWW_9N-Wen02ME746TmeORts2w/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"560\" height=\"315\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
+                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1bNT6WXvJffoGq20YXdWW_9N-Wen02ME746TmeORts2w/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
               },
               {
                 "icon": "file-powerpoint-o",
                 "label": "Das neue Lernen",
-                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1ebQcI52hHJJOc-YMQ8kRNI-8-kcoOIM07VAbntdmL1E/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" width=\"960\" height=\"569\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
+                "google_slides": "<iframe src=\"https://docs.google.com/presentation/d/1ebQcI52hHJJOc-YMQ8kRNI-8-kcoOIM07VAbntdmL1E/embed?start=false&loop=false&delayms=3000\" frameborder=\"0\" allowfullscreen=\"true\" mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\"></iframe>"
               }
             ]
           },

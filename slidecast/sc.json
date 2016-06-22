@@ -1,0 +1,86 @@
+{
+  "game_design": {
+    "slides": [
+      {
+        "image": "slides/gamemaker/slide.001.jpg"
+      },
+      {
+        "image": "slides/gamemaker/slide.002.jpg",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      },
+      {
+        "image": "slides/gamemaker/slide.003.jpg",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet cita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      },
+      {
+        "image": "slides/gamemaker/slide.004.jpg",
+        "audio": "slides/gamemaker//audio.004.mp3",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      },
+      {
+        "image": "slides/gamemaker/slide.005.jpg",
+        "audio": "slides/gamemaker/audio.010.ogg"
+      },
+      {
+        "image": "slides/gamemaker//slide.006.jpg"
+      },
+      {
+        "image": "slides/gamemaker/slide.007.jpg",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      },
+      {
+        "image": "slides/gamemaker/slide.008.jpg"
+      },
+      {
+        "image": "slides/gamemaker/slide.009.jpg",
+        "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+      },
+      {
+        "image": "slides/gamemaker/slide.010.jpg"
+      }
+    ]
+  },
+
+  "kolloquium": {
+    "slides": [
+      {
+        "image": "slides/kolloquium/Folie01.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie02.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie03.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie04.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie05.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie06.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie07.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie08.jpg",
+        "audio": "slides/kolloquium/audio.004.mp3"
+      },
+      {
+        "image": "slides/kolloquium/Folie09.jpg",
+        "description": "Hier kann der Dozierende weitere Erläuterungen zu einer Folie hinterlegen."
+      },
+      {
+        "image": "slides/kolloquium/Folie10.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie11.jpg"
+      },
+      {
+        "image": "slides/kolloquium/Folie12.jpg"
+      }
+    ]
+  }
+}

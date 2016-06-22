@@ -22,10 +22,10 @@ ccm.component( {
    */
   config: {
 
-    html:  [ ccm.load, './json/posts_html.json' ],
+    html:  [ ccm.load, '../news/posts_html.json' ],
     key:   'demo',
-    store: [ ccm.store, { local: './json/posts.json' } ],
-    style: [ ccm.load, './css/posts.css' ],
+    store: [ ccm.store, { local: '../news/posts.json' } ],
+    style: [ ccm.load, '../news/posts_lecture.css' ],
     icons: [ ccm.load, 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'  ],
     user:  [ ccm.instance, './components/user.js' ],
     editable: false//[true, false, "user"]

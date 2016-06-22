@@ -1,5 +1,5 @@
 .ccm-code_trainer {
-    font-family: Verdana, Arial, Helvetica, sans-serif;;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -8,7 +8,7 @@
 }
 
 /* ------------------------------- Fullscreen ------------------------------ */
-.ccm-code_trainer > .content > .header {
+.ccm-code_trainer > .header {
     text-align: center;
     background-color: #00BDFF;
     color: white;
@@ -40,7 +40,7 @@
     overflow-x: auto;
 }
 
-.ccm-code_trainer > .content > .footer {
+.ccm-code_trainer > .footer {
     font-family: "Apple Chancery";
     font-size: 1.3em;
     background-color: #00BDFF;
@@ -112,7 +112,7 @@
     flex-direction: column;
 }
 
-.ccm-code_trainer .content > .preview > .result {;
+.ccm-code_trainer .content > .preview > .result {
     flex: 1;
     padding: 1em;
     border: 2px solid #dddddd;

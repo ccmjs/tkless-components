@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="DE">
 <meta charset="utf-8">
-<title>Demo</title>
+<title>Slidecast</title>
 
 <!-- Make the app title different than the page title. -->
-<meta name="apple-mobile-web-app-title" content="Demo">
+<meta name="apple-mobile-web-app-title" content="SC">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -15,14 +15,15 @@
 <!-- Disable automatic phone number detection. -->
 <meta name="format-detection" content="telephone=no">
 
-<!-- retina iPad iOS 7 für iPhone 6 Plus -->
-<link rel="apple-touch-icon" href="img/hbrs_logo180.png" sizes="180x180">
-
 <style>
     html { height: 100%; -webkit-text-size-adjust: none; -webkit-overflow-scrolling: touch; }
     body { margin: 0; height: 100%; width: 100%; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
 </style>
 <script src="http://akless.github.io/ccm-developer/libs/ccm.min.js"></script>
 <script>
-    ccm.render( './app/ccm.lecture.js' );
+    ccm.render( 'ccm.sc.js', {
+        opt_content: [ ccm.component, '../forum/ccm.forum.js', { store:   [ ccm.store, '../slidecast/qa.json' ] } ],
+        user:    null,
+        lang:    null
+    } );
 </script>

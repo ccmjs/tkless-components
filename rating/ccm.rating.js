@@ -21,11 +21,11 @@ ccm.component( {
    * @type {ccm.components.rating.config}
    */
   config: {
-    icons: [ ccm.load,      'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ],
+    icons: [ ccm.load, 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ],
     key:   'demo',
     mode:  'thumbs', //stars or thumbs
-    store: [ ccm.store, './json/rating.json' ],
-    style: [ ccm.load, './css/rating.css' ],
+    store: [ ccm.store, '../rating/rating.json' ],
+    style: [ ccm.load, '../rating/rating.css' ],
     user:  [ ccm.instance, './components/user.js' ]
   },
 

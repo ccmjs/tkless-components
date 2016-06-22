@@ -1,27 +1,27 @@
-.ccm-lecture_forum {
+.ccm-forum {
     width: 100%;
     clear:both;
     line-height: normal;
 }
 
-.ccm-lecture_forum,
-.ccm-lecture_forum input,
-.ccm-lecture_forum button {
+.ccm-forum,
+.ccm-forum input,
+.ccm-forum button {
     font-family: Verdana, Arial, sans-serif
 }
 
-.ccm-lecture_forum div hr {
+.ccm-forum div hr {
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
     margin: 2%;
 }
 
-.ccm-lecture_forum button:hover {
+.ccm-forum button:hover {
     background: none repeat scroll 0 0 #556740;
 }
 
-.ccm-lecture_forum button {
+.ccm-forum button {
     background: none repeat scroll 0 0 #85a366;
     border: 1px solid #556740;
     border-radius: 3px;
@@ -36,13 +36,13 @@
 
 /*---------------------------------------------------- navigation ----------------------------------------------------*/
 
-.ccm-lecture_forum .qa_user,
-.ccm-lecture_forum .qa_langmenu {
+.ccm-forum .qa_user,
+.ccm-forum .qa_langmenu {
     float: left;
     margin: 0.5%;
 }
 
-.ccm-lecture_forum .qa_navigation {
+.ccm-forum .qa_navigation {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
@@ -51,19 +51,19 @@
 
 /*-------------------------------------------------- questions view --------------------------------------------------*/
 
-.ccm-lecture_forum .qa_questions_view {
+.ccm-forum .qa_questions_view {
     margin: 2%;
 }
 
-.ccm-lecture_forum .qa_questions_view_entry {
+.ccm-forum .qa_questions_view_entry {
     display: flex;
 }
 
-.ccm-lecture_forum .qa_questions_view_entry {
+.ccm-forum .qa_questions_view_entry {
     margin-top: 2%;
 }
 
-.ccm-lecture_forum .qa_questions_view_left {
+.ccm-forum .qa_questions_view_left {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -72,7 +72,7 @@
     font-family: "Courier New", Courier, monospace;
 }
 
-.ccm-lecture_forum .qa_questions_view_right {
+.ccm-forum .qa_questions_view_right {
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -82,17 +82,17 @@
     padding-left: 2%;
 }
 
-.ccm-lecture_forum .qa_questions_view_answers {
+.ccm-forum .qa_questions_view_answers {
     background-color: rgba(155, 189, 120, 0.52);
     border: 1px solid #85a366;
 }
 
-.ccm-lecture_forum .qa_questions_view_title {
+.ccm-forum .qa_questions_view_title {
     font-size: 120%;
     color: #758d57;
 }
 
-.ccm-lecture_forum .qa_questions_view_content {
+.ccm-forum .qa_questions_view_content {
     width: 90%;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -101,7 +101,7 @@
 
 /*--------------------------------------------------- answers view ---------------------------------------------------*/
 
-.ccm-lecture_forum .qa_answers_view {
+.ccm-forum .qa_answers_view {
     display: flex;
     flex-direction: column;
     margin: 2%;
@@ -109,21 +109,21 @@
 
 /*------------ question entry ------------*/
 
-.ccm-lecture_forum .qa_answers_view_question_entry {
+.ccm-forum .qa_answers_view_question_entry {
     display: flex;
     flex-direction: column;
 }
-.ccm-lecture_forum .qa_answers_view_question_entry_content {
+.ccm-forum .qa_answers_view_question_entry_content {
     display: flex;
 }
 
-.ccm-lecture_forum .qa_answers_view_question {
+.ccm-forum .qa_answers_view_question {
     display: flex;
     flex-direction: column;
     padding-left: 1.5%;
 }
 
-.ccm-lecture_forum .qa_answers_view_question_title {
+.ccm-forum .qa_answers_view_question_title {
     border-bottom: 1px solid #85a366;
     color: #758d57;
     font-size: 110%;
@@ -132,18 +132,18 @@
 
 /*------------ answer entries ------------*/
 
-.ccm-lecture_forum .qa_answers_view_answer_entry {
+.ccm-forum .qa_answers_view_answer_entry {
     display: flex;
     flex-direction: column;
     margin-bottom: 2%;
 }
 
-.ccm-lecture_forum .qa_answers_view_answer_entry_content {
+.ccm-forum .qa_answers_view_answer_entry_content {
     display: flex;
     align-items: baseline;
 }
 
-.ccm-lecture_forum .qa_answers_view_answer {
+.ccm-forum .qa_answers_view_answer {
     display: flex;
     flex-direction: column;
     padding-left: 2%;
@@ -153,13 +153,13 @@
 
 }
 
-.ccm-lecture_forum .qa_answers_view_answer_content {
+.ccm-forum .qa_answers_view_answer_content {
     word-wrap: break-word;
 }
 
 /*------------ voting ------------*/
 
-.ccm-lecture_forum .qa_voting {
+.ccm-forum .qa_voting {
     display: flex;
     flex-direction: column;
     font-family: "Courier New", Courier, monospace;
@@ -168,32 +168,32 @@
     text-align: center;
 }
 
-.ccm-lecture_forum .qa_vote_up,
-.ccm-lecture_forum .qa_vote_down {
+.ccm-forum .qa_vote_up,
+.ccm-forum .qa_vote_down {
     border-bottom: 14px solid #85a366;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     cursor: pointer;
 }
 
-.ccm-lecture_forum .qa_vote_down {
+.ccm-forum .qa_vote_down {
     transform: rotate(180deg);
 }
 
-.ccm-lecture_forum .qa_vote_hidden {
+.ccm-forum .qa_vote_hidden {
     border-bottom-color: transparent;
     cursor: default;
 }
 
-.ccm-lecture_forum .qa_check_mark {
+.ccm-forum .qa_check_mark {
     color: #85a366;
     font-size: 30pt;
     opacity: 0.33;
     cursor: pointer;
 }
 
-.ccm-lecture_forum .qa_check_mark_selected,
-.ccm-lecture_forum .qa_check_mark:hover {
+.ccm-forum .qa_check_mark_selected,
+.ccm-forum .qa_check_mark:hover {
     opacity: 1;
 }
 
@@ -201,7 +201,7 @@
 
 /*---------- signature ----------*/
 
-.ccm-lecture_forum .qa_signature {
+.ccm-forum .qa_signature {
     display: flex;
     color: #a6a6a6;
     font-size: 70%;
@@ -210,29 +210,29 @@
 
 /*---------- website area for creating a new question or answer ----------*/
 
-.ccm-lecture_forum .qa_new {
+.ccm-forum .qa_new {
     display: flex;
     flex-direction: column;
 }
 
-.ccm-lecture_forum .qa_new > div button,
-.ccm-lecture_forum .qa_new_question {
+.ccm-forum .qa_new > div button,
+.ccm-forum .qa_new_question {
     display: flex;
     align-items: center;
     margin: 2%;
 }
 
-.ccm-lecture_forum .qa_new_question {
+.ccm-forum .qa_new_question {
     display: flex;
     justify-items: baseline;
     font-size: large;
 }
 
-.ccm-lecture_forum .qa_new_question_title {
+.ccm-forum .qa_new_question_title {
     width: 30%;
 }
 
-.ccm-lecture_forum .qa_new_question_title > * > input {
+.ccm-forum .qa_new_question_title > * > input {
     border: 1px solid lightgrey;
     border-radius: 2px;
     padding: 1em;
@@ -241,7 +241,7 @@
 
 /*---------- text editor ----------*/
 
-.ccm-lecture_forum .jqte {
+.ccm-forum .jqte {
     margin: 30px 2% 0;
     border: 1px solid #626c6e;
     border-radius: 5px;
@@ -250,46 +250,46 @@
     box-shadow: 0 0 3px black;
 }
 
-.ccm-lecture_forum .jqte_focused {
+.ccm-forum .jqte_focused {
     border-color: #626c6e;
     box-shadow: 0 0 10px #000000;
 }
 
 /* toolbar */
-.ccm-lecture_forum .jqte_toolbar {
+.ccm-forum .jqte_toolbar {
     padding: 7px 10px;
     background: rgba(169, 194, 145, 0.56);
 }
-.ccm-lecture_forum .jqte_focused .jqte_toolbar {
+.ccm-forum .jqte_focused .jqte_toolbar {
     background: #8aa37a;
     border-bottom: #626c6e 1px solid;
     box-shadow: inset 0 10px 20px #8aa37a;
 }
 
-.ccm-lecture_forum .jqte_tool {
+.ccm-forum .jqte_tool {
     margin: 0 0.2em 0 0;
     padding: 0.4em;
     cursor: pointer;
 }
 
-.ccm-lecture_forum .jqte_tool,
-.ccm-lecture_forum .jqte_tool_label,
-.ccm-lecture_forum .jqte_tool_icon,
-.ccm-lecture_forum .jqte_tool:hover {
+.ccm-forum .jqte_tool,
+.ccm-forum .jqte_tool_label,
+.ccm-forum .jqte_tool_icon,
+.ccm-forum .jqte_tool:hover {
     border: 1px solid transparent !important;
 }
 
-.ccm-lecture_forum .jqte_tool, .jqte_tool_icon, .jqte_tool_label {
+.ccm-forum .jqte_tool, .jqte_tool_icon, .jqte_tool_label {
     border-radius: 3px;
 }
 
-.ccm-lecture_forum .jqte_tool_icon {
+.ccm-forum .jqte_tool_icon {
     display: block;
     width: 22px;
     height: 22px;
 }
 
-.ccm-lecture_forum .jqte_tool .jqte_tool_1 .jqte_tool_label {
+.ccm-forum .jqte_tool .jqte_tool_1 .jqte_tool_label {
     position:relative;
     display:block;
     padding:3px;

@@ -23,12 +23,10 @@ ccm.component( {
   config: {
 
     key:      'demo',
-    lang:     [ ccm.instance, './components/lang.js', { store: [ ccm.store, './json/lang_qa.json' ] } ],
     store:    [ ccm.store ],
-    style:    [ ccm.load, './css/forum.css' ],
+    style:    [ ccm.load, '../forum/forum.css' ],
     tejs:     [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.js' ],
-    tecss:    [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.css' ],
-    user:     [ ccm.instance, './components/user.js' ]
+    tecss:    [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.css' ]
 
   },
 
@@ -141,9 +139,6 @@ ccm.component( {
 
           // render user login
           //if ( self.user ) { self.element.prepend( '<div class="qa_user"></div>' ); self.user.render(); }
-
-          // log event
-          if ( self.bigdata ) self.bigdata.log( 'render', self.key );
 
           // perform callback
           if ( callback ) callback();

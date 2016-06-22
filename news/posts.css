@@ -1,28 +1,28 @@
-.ccm-posts_lecture {
+.ccm-posts {
     font-family: Verdana, Helvetica, Sans-Serif;
     font-size: 90%;
     margin: 0;
     padding: 0.6em;
 }
 
-.ccm-posts_lecture > .posts > .post > .close {
+.ccm-posts > .posts > .post > .close {
     font-size: 1.2em;
     cursor: pointer;
     color: #84a266;
 }
 
-.ccm-posts_lecture > .posts,
-.ccm-posts_lecture > .posts > .post {
+.ccm-posts > .posts,
+.ccm-posts > .posts > .post {
     display: flex;
     flex-direction: column;
 }
 
-.ccm-posts_lecture > .posts > .post > .head {
+.ccm-posts > .posts > .post > .head {
     display: flex;
     margin-bottom: 0.5em;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .title {
+.ccm-posts > .posts > .post > .head > .title {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,35 +31,35 @@
     font-family: "Arial", sans-serif;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .title {
+.ccm-posts > .posts > .post > .head > .title {
     order: 1;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .user > .name,
-.ccm-posts_lecture > .posts > .post > .head > .title > .date{
+.ccm-posts > .posts > .post > .head > .user > .name,
+.ccm-posts > .posts > .post > .head > .title > .date{
     order: 2;
     font-size: 70%;
     color: #909090;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .user {
+.ccm-posts > .posts > .post > .head > .user {
     display: flex;
     flex-direction: column;
     margin-right: 0.5em;
     align-content: center;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .title > div,
-.ccm-posts_lecture > .posts > .post > .content > div {
+.ccm-posts > .posts > .post > .head > .title > div,
+.ccm-posts > .posts > .post > .content > div {
     display: inline-block;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .title > .empty:after,
-.ccm-posts_lecture > .posts > .post > .content > .empty:after {
+.ccm-posts > .posts > .post > .head > .title > .empty:after,
+.ccm-posts > .posts > .post > .content > .empty:after {
     content: 'edit';
     color: silver;
 }
-.ccm-posts_lecture > .posts > .post {
+.ccm-posts > .posts > .post {
     margin: 0.5em 0 0.5em;
     padding: 0.7em;
     background-color: white;
@@ -68,17 +68,17 @@
     box-shadow: 0 0 3px #84a266;
 }
 
-.ccm-posts_lecture > .posts > .post > .head > .user > .fa {
+.ccm-posts > .posts > .post > .head > .user > .fa {
     font-size: 2.5em;
     padding: 0.1em 0 0.1em 0;
     color: #84a266;
 }
 
-.ccm-posts_lecture button:hover {
+.ccm-posts button:hover {
     background: none repeat scroll 0 0 #556740;
 }
 
-.ccm-posts_lecture button {
+.ccm-posts button {
     background: none repeat scroll 0 0 #85a366;
     border: 1px solid #556740;
     border-radius: 3px;

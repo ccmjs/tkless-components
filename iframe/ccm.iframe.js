@@ -22,9 +22,9 @@ ccm.component( {
    */
   config: {
 
-    title: 'Animation Big Bunny',
+    title:      'Animation Big Bunny',
     embed_code: '<iframe width="560" height="315" src="https://www.youtube.com/embed/YE7VzlLtp-4" frameborder="0" allowfullscreen></iframe>',
-    style: [ ccm.load, 'css/iframe.css' ]
+    style:      [ ccm.load, '../iframe/iframe.css' ]
 
   },
 

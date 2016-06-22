@@ -1,0 +1,103 @@
+{
+  "main":
+  [
+    {
+      "tag": "div",
+      "class": "header",
+      "inner": "%title%"
+    },
+
+    {
+      "tag": "div",
+      "class": "content"
+    },
+
+    {
+      "tag": "div",
+      "class": "footer",
+      "inner": "code Trainer"
+    }
+
+  ],
+
+  "task":
+  [
+    {
+      "tag": "div",
+      "class": "task",
+      "inner":
+      [
+        {
+          "tag": "div",
+          "class": "title",
+          "inner": "%title%"
+        },
+
+        {
+
+          "tag": "div",
+          "class": "text",
+          "inner": "%text%"
+        },
+
+        {
+
+          "tag": "div",
+          "class": "next",
+          "inner":
+
+          {
+            "tag": "button",
+            "onclick": "%click%",
+            "inner": "nächste"
+          }
+        }
+      ]
+    },
+
+    {
+      "tag": "div",
+      "class": "editor",
+      "inner":
+      [
+
+        {
+          "tag": "div",
+          "class": "code",
+          "inner":
+            {
+              "tag": "div",
+              "class": "editable",
+              "contenteditable": true,
+              "oninput": "%input%"
+
+            }
+        },
+
+        {
+
+          "tag": "div",
+          "class": "submit",
+          "inner":
+          {
+            "tag": "button",
+            "onclick": "%click%",
+            "inner": "speichern und abschicken"
+          }
+        }
+      ]
+    },
+
+    {
+      "tag": "div",
+      "class": "preview",
+      "inner":
+      {
+        "tag": "div",
+        "class": "result"
+      }
+    }
+
+  ]
+
+}

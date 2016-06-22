@@ -23,11 +23,11 @@ ccm.component( {
    */
   config: {
 
-    html:   [ ccm.load, './json/code_trainer_html.json' ],
+    html:   [ ccm.load, '../codeTrainer/code_trainer_html.json' ],
     key:    'demo',
-    store:  [ ccm.store, './json/code_trainer.json' ],
-    style:  [ ccm.load, './css/code_trainer.css' ],
-    editor: [ ccm.instance, './components/editor.js'],
+    store:  [ ccm.store, '../codeTrainer/code_trainer.json' ],
+    style:  [ ccm.load, '../codeTrainer/code_trainer.css' ],
+    editor: [ ccm.instance, '../codeEditor/ccm.editor.js'],
     onFinish: function ( code_trainer ) { code_trainer.render(); },
     standalone: true
 
@@ -80,6 +80,9 @@ ccm.component( {
        */
       var element = ccm.helper.element( self );
 
+
+      console.log( self.editor );
+
       // get dataset for rendering
       ccm.helper.dataset( self, function ( dataset ) {
 
@@ -112,6 +115,15 @@ ccm.component( {
               }
             },
             input: function () {
+
+              var preview = ccm.helper.find ( self, '.result');
+
+              console.log(preview);
+              preview.html( self.editor.getValue() );
+              self.editor.getSession().on('change', function() {
+                preview.html( self.editor.getValue() );
+              });
+
 
               ccm.helper.find( self, '.result' ).html( jQuery( this ).text() );
 

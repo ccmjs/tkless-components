@@ -8,7 +8,7 @@
 .ccm-iframe {
   overflow: hidden;
   max-width: 640px;
-  max-height: 390px;
+  max-height: 480px;
 }
 
 .ccm-iframe > .video_iframe {
