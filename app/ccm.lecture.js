@@ -100,11 +100,6 @@ ccm.component( {
 
     style:          [ ccm.load,      '../app/lecture.css' ],
 
-    tasks:          [ ccm.component, 'http://tkless.github.io/ccm-components/resources/kanbanBoard/ccm.kanban.js', {
-      store:        [ ccm.store, { store: [ ccm.store, 'http://tkless.github.io/ccm-components/resources/kanbanBoard/kanban.json' ] } ],
-      style:        [ ccm.load,      'http://tkless.github.io/ccm-components/resources/kanbanBoard/kanban.css' ]
-    } ],
-
     user:           null,
 
     video:          [ ccm.component, 'http://tkless.github.io/ccm-components/resources/youtube/ccm.youtube.js', {
