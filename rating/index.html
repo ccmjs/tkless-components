@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="http://akless.github.io/ccm-developer/resources/ccm/ccm.min.js"></script>
+<script src="ccm.rating.js"></script>
+<script src="https://kaul.inf.h-brs.de/ccm/components/user.js"></script>
+<script src="http://akless.github.io/ccm-components/resources/bigdata/ccm.bigdata.js"></script>
+
+<ccm-rating>
+  <ccm-user></ccm-user>
+  <ccm-bigdata></ccm-bigdata>
+</ccm-rating>
+
+<div id="comp"></div>
+<script>
+  ccm.render( 'rating', {
+    element: jQuery( '#comp' ),
+    user: [ ccm.instance, 'user' ]
+  } );
+</script>

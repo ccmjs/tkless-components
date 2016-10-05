@@ -4,36 +4,31 @@
  * @license The MIT License (MIT)
  */
 
-ccm.component( {
+ccm.component( /** @lends ccm.components.rating */ {
 
   /*-------------------------------------------- public component members --------------------------------------------*/
 
   /**
-   * @summary component name
-   * @memberOf ccm.components.rating
-   * @type {ccm.name}
+   * @summary component index
+   * @type {ccm.types.index}
    */
-  name: 'rating',
+  index: 'rating',
 
   /**
    * @summary default instance configuration
-   * @memberOf ccm.components.rating
-   * @type {ccm.components.rating.config}
+   * @type {ccm.components.rating.types.config}
    */
   config: {
-    icons: [ ccm.load, 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ],
-    key:   'demo',
-    mode:  'thumbs', //stars or thumbs
-    store: [ ccm.store, '../rating/rating.json' ],
     style: [ ccm.load, '../rating/rating.css' ],
-    user:  [ ccm.instance, './components/user.js' ]
+    data:  { key: 'demo', store: [ ccm.store, '../rating/rating.json' ] },
+    icons: [ ccm.load, 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ],
+    mode:  'thumbs' //stars or thumbs
   },
 
   /*-------------------------------------------- public component classes --------------------------------------------*/
 
   /**
    * @summary constructor for creating <i>ccm</i> instances out of this component
-   * @alias ccm.components.rating.Rating
    * @class
    */
   Instance: function () {
@@ -46,21 +41,49 @@ ccm.component( {
      */
     var self = this;
 
+    /**
+     * @summary contains privatized config members
+     * @type {ccm.components.rating.types.config}
+     * @private
+     */
+    var my;
+
     /*------------------------------------------- public instance methods --------------------------------------------*/
 
+    /**
+     * @summary initialize <i>ccm</i> instance
+     * @description
+     * Called one-time when this <i>ccm</i> instance is created, all dependencies are solved and before dependent <i>ccm</i> components, instances and datastores are initialized.
+     * This method will be removed by <i>ccm</i> after the one-time call.
+     * @param {function} callback - callback when this instance is initialized
+     */
     this.init = function ( callback ) {
 
-      // listen to change event of ccm realtime datastore => update own content
-      self.store.onChange = function () { self.render(); };
+      // listen to change event of ccm realtime datastore => (re)render own content
+      self.data.store.onChange = function () { self.render(); };
 
       // perform callback
       callback();
 
     };
 
+    /**
+     * @summary when <i>ccm</i> instance is ready
+     * @description
+     * Called one-time when this <i>ccm</i> instance and dependent <i>ccm</i> components, instances and datastores are initialized and ready.
+     * This method will be removed by <i>ccm</i> after the one-time call.
+     * @param {function} callback - callback when this instance is ready
+     * @ignore
+     */
     this.ready = function ( callback ) {
 
+      // privatize security relevant config members
+      my = ccm.helper.privatize( self, 'data', 'user', 'bigdata' );
+
+      // listen to login/logout event => (re)render own content
       if ( self.user ) self.user.addObserver( function () { self.render(); } );
+
+      // perform callback
       callback();
 
     };
@@ -73,19 +96,22 @@ ccm.component( {
 
       /**
        * website area for own content
-       * @type {ccm.element}
+       * @type {ccm.types.element}
        */
-      var element = ccm.helper.element( self );
-
-      // render main html structure
-      element.html( ccm.helper.html( { class: 'rating' } ) );
+      var $element = ccm.helper.element( self );
 
       // get dataset for rendering
-      ccm.helper.dataset( self, function ( dataset ) {
+      ccm.helper.dataset( my.data, function ( dataset ) {
+
+        // render main html structure
+        $element.html( ccm.helper.html( { class: 'rating' } ) );
 
         if ( self.mode === 'thumbs' ) renderThumbs();
 
         if ( self.mode === 'stars') renderStars();
+
+        // log render event
+        if ( my.bigdata ) my.bigdata.log( 'render', ccm.helper.dataSource( my.data ) );
 
         // perform callback
         if ( callback ) callback();
@@ -96,47 +122,48 @@ ccm.component( {
           if ( !dataset.likes    ) dataset.likes    = {};
           if ( !dataset.dislikes ) dataset.dislikes = {};
 
-          ccm.helper.find( self, '.rating' ).html(
-              '<div class="likes fa fa-lg fa-thumbs-up">' +
-              '<div>' + ( dataset.likes ? Object.keys( dataset.likes ).length : 0 ) + '</div>' +
-              '</div>&nbsp;' +
-              '<div class="dislikes fa fa-lg fa-thumbs-down">' +
-              ' <div>' + ( dataset.dislikes ? Object.keys( dataset.dislikes ).length : 0 ) + '</div>' +
-              '</div>' );
+          var $rating = ccm.helper.find( self, '.rating' );
 
-          var rating_div = ccm.helper.find( self, '.rating' );
+          $rating.html(
+            '<div class="likes fa fa-lg fa-thumbs-up">' +
+              '<div>' + Object.keys( dataset.likes ).length + '</div>' +
+            '</div>' +
+            '<div class="dislikes fa fa-lg fa-thumbs-down">' +
+              '<div>' + Object.keys( dataset.dislikes ).length + '</div>' +
+            '</div>'
+          );
 
           // ccm instance for user authentication not exists? => abort
-          if ( !self.user ) return;
+          if ( !my.user ) return;
 
           /**
            * website area for likes and dislikes
-           * @type {{likes: ccm.element, dislikes: ccm.element}}
+           * @type {{likes: ccm.types.element, dislikes: ccm.types.element}}
            */
           var div = {
 
-            likes:    ccm.helper.find( self, rating_div, '.likes'    ),
-            dislikes: ccm.helper.find( self, rating_div, '.dislikes' )
+            likes:    ccm.helper.find( self, $rating, '.likes'    ),
+            dislikes: ccm.helper.find( self, $rating, '.dislikes' )
 
           };
 
           // add class for user specific interactions
-          rating_div.addClass( 'user' );
+          $rating.addClass( 'user' );
 
           // user is logged in?
-          if ( self.user.isLoggedIn() ) {
+          if ( my.user.isLoggedIn() ) {
 
             /**
              * username
              * @type {string}
              */
-            var user = self.user.data().key;
+            var user = my.user.data().key;
 
             // highlight button if already voted
             if ( dataset.likes   [ user ] ) div[ 'likes'    ].addClass( 'selected' );
             if ( dataset.dislikes[ user ] ) div[ 'dislikes' ].addClass( 'selected' );
-          }
 
+          }
 
           // set click events for like and dislike buttons
           click( 'likes', 'dislikes' );
@@ -153,13 +180,13 @@ ccm.component( {
             div[ index ].click( function() {
 
               // login user if not logged in
-              self.user.login( function () {
+              my.user.login( function () {
 
                 /**
                  * username
                  * @type {string}
                  */
-                var user = self.user.data().key;
+                var user = my.user.data().key;
 
                 // has already voted?
                 if ( dataset[ index ][ user ] ) {
@@ -179,8 +206,11 @@ ccm.component( {
 
                 }
 
-                // update dataset for rendering
-                self.store.set( dataset, function () { self.render(); } );
+                // log render event
+                if ( my.bigdata ) my.bigdata.log( 'click', ccm.helper.dataSource( my.data ) );
+
+                // update dataset for rendering => (re)render own content
+                my.data.store.set( dataset, function () { self.render(); } );
 
               } );
 
@@ -189,6 +219,7 @@ ccm.component( {
           }
         }
 
+        //toDo
         function renderStars() {
 
           // set default like and dislike property
@@ -263,23 +294,32 @@ ccm.component( {
    */
 
   /**
+   * @namespace ccm.components.rating.types
+   */
+
+  /**
    * @summary <i>ccm</i> instance configuration
-   * @typedef {ccm.config} ccm.components.rating.config
+   * @typedef {ccm.types.config} ccm.components.rating.types.config
    * @property {string} classes - css classes for own website area
-   * @property {ccm.element} element - own website area
-   * @property {Object.<ccm.key, ccm.html>} html - <i>ccm</i> html data templates for own content
-   * @property {ccm.key} key - key of [rating dataset]{@link ccm.components.rating.dataset} for rendering
-   * @property {ccm.instance} lang - <i>ccm</i> instance for multilingualism
-   * @property {ccm.store} store - <i>ccm</i> datastore that contains the [rating dataset]{@link ccm.components.rating.dataset} for rendering
-   * @property {ccm.style} style - css for own content
-   * @property {ccm.instance} user - <i>ccm</i> instance for user authentication
+   * @property {ccm.types.element} element - own website area
+   * @property {Object.<ccm.types.key, ccm.types.html>} html - <i>ccm</i> html data templates for own content
+   * @property {ccm.types.key} key - key of [rating dataset]{@link ccm.components.rating.types.dataset} for rendering
+   * @property {ccm.types.instance} lang - <i>ccm</i> instance for multilingualism
+   * @property {ccm.types.store} store - <i>ccm</i> datastore that contains the [rating dataset]{@link ccm.components.rating.types.dataset} for rendering
+   * @property {ccm.types.dependency} style - css for own content
+   * @property {ccm.types.instance} user - <i>ccm</i> instance for user authentication
    */
 
   /**
    * @summary rating dataset for rendering
-   * @typedef {ccm.dataset} ccm.components.rating.dataset
-   * @property {ccm.key} key - dataset key
+   * @typedef {ccm.types.dataset} ccm.components.rating.dataset
+   * @property {ccm.types.key} key - dataset key
    * ...
+   */
+
+  /**
+   * @external ccm.types
+   * @see {@link http://akless.github.io/ccm-developer/api/ccm/ccm.types.html}
    */
 
 } );
