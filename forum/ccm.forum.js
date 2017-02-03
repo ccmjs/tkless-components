@@ -23,7 +23,7 @@ ccm.component( {
   config: {
 
     key:      'demo',
-    store:    [ ccm.store ],
+    store:    [ ccm.store, '../forum/datastore.json' ],
     style:    [ ccm.load, '../forum/forum.css' ],
     tejs:     [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.js' ],
     tecss:    [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jquery-te/1.4.0/jquery-te.min.css' ]
@@ -90,7 +90,7 @@ ccm.component( {
       self.store.onChange = update;
 
       // set website area for user login
-      //if ( self.user ) self.user.element = self.element.find( 'div.qa_user' );
+      if ( self.user ) self.user.element = self.element.find( 'div.qa_user' );
 
       // perform callback
       if ( callback ) callback();
@@ -138,7 +138,7 @@ ccm.component( {
           renderQuestionsView();
 
           // render user login
-          //if ( self.user ) { self.element.prepend( '<div class="qa_user"></div>' ); self.user.render(); }
+          if ( self.user ) { self.element.prepend( '<div class="qa_user"></div>' ); self.user.render(); }
 
           // perform callback
           if ( callback ) callback();
