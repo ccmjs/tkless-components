@@ -1,0 +1,43 @@
+{
+  "main": {
+    "key": "main",
+    "class": "main",
+    "inner": [
+      { "class": "comments" },
+      { "class": "editor" },
+      {
+        "class": "button",
+        "inner": {
+          "tag": "button",
+          "onclick": "%click%",
+          "inner": "%label%"
+        }
+      }
+    ]
+  },
+  "comment": {
+    "key": "comment",
+    "class": "comment",
+    "inner": [
+      {
+        "class": "head",
+        "inner": [
+          {
+            "class": "user",
+            "inner": [
+              { "class": "avatar" },
+              { "class": "name" }
+            ]
+          },
+          { "class": "date" }
+        ]
+      },
+      {
+        "class": "body",
+        "inner": [
+          { "class": "content" }
+        ]
+      }
+    ]
+  }
+}

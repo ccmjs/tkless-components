@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for slidecast
- * @author Tea Kless <tmeskh2s@smail.inf.h-brs.de>, 2015
+ * @author Tea Kless <tea.klesss@smail.inf.h-brs.de>, 2015
  * @license The MIT License (MIT)
  */
 
@@ -22,13 +22,13 @@ ccm.component( {
    */
   config: {
 
-    store:       [ ccm.store, '../slidecast/sc.json' ],
+    store:       [ ccm.store, '../sc/datastore.json' ],
     opt_content: [ ccm.component, '../forum/ccm.forum.js' ],
     uijs:        [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js' ],
     uicss:       [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css' ],
     caruselCss:  [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.css' ],
     caruselJs:   [ ccm.load, 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.min.js' ],
-    style:       [ ccm.load, '../slidecast/sc.css' ],
+    style:       [ ccm.load, '../sc/sc.css' ],
     key:         'kolloquium'
 
   },
@@ -71,7 +71,7 @@ ccm.component( {
        */
       var element = ccm.helper.element( self );
 
-      // get slidecast dataset
+      // get sc dataset
       self.store.get( self.key, function ( sc ) {
 
         // create inner website areas of website area for own content
@@ -220,7 +220,7 @@ ccm.component( {
          */
         function renderOptionalContent ( index ) {
 
-          // slidecast without optional content? => abort
+          // sc without optional content? => abort
           if ( !self.opt_content ) return;
 
           // slide specific instance for optional content exists? => render slide specific optional content
@@ -268,7 +268,7 @@ ccm.component( {
    * @property {string} classes - CSS classes for website area
    * @property {ccm.style} style - CSS for website area
    * @property {ccm.store} store - ccm datastore for slidecasts
-   * @property {ccm.key} key - slidecast dataset key
+   * @property {ccm.key} key - sc dataset key
    * @property {string} uijs - path to jQuery UI javascript file
    * @property {string} uicss - path to jQuery UI css file
    * @property {string} caruselJs - path to javascript file of jQuery UI plugIn for slide carusel
@@ -277,7 +277,7 @@ ccm.component( {
    */
 
   /**
-   * @summary slidecast dataset
+   * @summary sc dataset
    * @typedef {ccm.dataset} ccm.components.sc.dataset
    * @property {ccm.key} key - dataset key
    * @property {ccm.components.sc.slide[]} slides - slide datasets

@@ -1,40 +1,41 @@
 /**
- * Created by teakless on 02.02.17.
+ * @overview ccm component for commentating
+ * @author Tea Kless <tea.kless@web.de>, 2017
+ * @license The MIT License (MIT)
  */
 ccm.component ( {
   name: 'comment',
+
   config: {
-    editor: [ ccm.load, '//cdn.quilljs.com/1.2.0/quill.min.js' ],
-    editor_css: [ ccm.load, '//cdn.quilljs.com/1.2.0/quill.snow.css' ]
+    data: {
+      store: [ ccm.store, '../comment/datastore.json' ],
+      key: 'test'
+    },
+    editor: [ ccm.intance, '../editor/ccm.editor.js' ],
+    templates: [ ccm.store, '../comment/templates.json']
   },
+
   Instance: function () {
     var self = this;
+
     this.render = function ( callback ) {
 
-      var editor_div = ccm.helper.html( {} );
-      self.element.innerHTML = '';
-      self.element.appendChild( editor_div );
-      var quill = new Quill( editor_div, {
-        modules: {
-          toolbar: [
-            [{ header: [1, 2, false] }],
-            ['bold', 'italic', 'underline'],
-            ['image', 'code-block']
-          ]
-        },
-        placeholder: 'Compose an epic...',
-        theme: 'snow'  // or 'bubble'
+      ccm.helper.dataset( self.data, function ( dataset ) {
+        if ( !dataset.comments ) dataset.comments = [];
+
+        self.element.innerHTML = '';
+        self.element.appendChild( ccm.helper.html( self.templates.get( 'main' ), {
+          click: function () {
+            console.log( 'click!', self.editor.get().getContents() );
+          },
+          label: 'send'
+        } ) );
+
+        self.editor.render( function () {
+          self.element.querySelector( '.editor' ).appendChild( self.editor.element );
+          if ( callback ) callback( self );
+        } );
       } );
-
-      var editor_submit = ccm.helper.html( { tag: 'button', inner: "Save", onclick: function () {
-        var editor_content = quill.getContents();
-        console.log ( editor_content);
-
-      } } );
-      self.element.appendChild( editor_submit);
-
-
-      if ( callback ) callback();
-    }
+    };
   }
 } );
