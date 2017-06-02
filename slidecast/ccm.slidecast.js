@@ -14,6 +14,7 @@
     name: component_name,
 
     config: {
+      img_width:    720,
       "slides":     [ 'ccm.get',   '../slidecast/datastore.json', 'demo_offline.slides'],
       style_global: [ 'ccm.load',  '../slidecast/style.css' ],
       templates:    [ 'ccm.store', '../slidecast/templates.json' ],
@@ -58,19 +59,12 @@
               self.element.querySelector('.main').style.display = 'none';
               self.element.querySelector('.overlay').style.display = 'block';
               self.element.querySelector( '.container img').setAttribute( 'src', self.slides[ currentSlide ].image );
+
             },
 
             prev: function () {
               if ( currentSlide === 0 ) return;
               currentSlide--;
-              if ( currentSlide > 0 ) {
-                self.element.querySelector( '.next' ).classList.remove( 'disabled' );
-                self.element.querySelector( '.last' ).classList.remove( 'disabled' );
-              }
-              if ( currentSlide == 0 ) {
-                self.element.querySelector('.prev').classList.add('disabled' );
-                self.element.querySelector('.first').classList.add('disabled' );
-              }
               renderSlide( currentSlide );
             },
 
@@ -78,38 +72,20 @@
               if ( currentSlide === 0 ) return;
               currentSlide = 0;
               renderSlide( 0 );
-              self.element.querySelector('.first').classList.add( 'disabled');
-              self.element.querySelector('.prev').classList.add( 'disabled');
-              self.element.querySelector( '.last' ).classList.remove( 'disabled' );
-              self.element.querySelector( '.next' ).classList.remove( 'disabled' );
             },
 
             last: function () {
               if ( currentSlide === self.slides.length - 1 ) return;
               currentSlide = self.slides.length - 1;
               renderSlide( self.slides.length -1 );
-              self.element.querySelector( '.last' ).classList.add( 'disabled' );
-              self.element.querySelector( '.next' ).classList.add( 'disabled' );
-              self.element.querySelector( '.prev' ).classList.remove('disabled' );
-              self.element.querySelector( '.first' ).classList.remove( 'disabled' );
             },
+
             next: function () {
               if ( currentSlide === self.slides.length - 1 ) return;
-
               currentSlide++;
-
-              if ( currentSlide < self.slides.length - 1 ) {
-                self.element.querySelector( '.prev' ).classList.remove( 'disabled' );
-                self.element.querySelector( '.first' ).classList.remove( 'disabled' );
-              }
-              else {
-                self.element.querySelector('.next' ).classList.add( 'disabled' );
-                self.element.querySelector( '.last' ).classList.add( 'disabled' );
-              }
-              if ( self.slides[ currentSlide].description)
-                self.element.querySelector( '.descr' ).classList.remove( 'disabled' );
               renderSlide( currentSlide );
             },
+
             description: function () {
               if ( self.slides[ currentSlide].description )
                 renderDescription();
@@ -122,12 +98,11 @@
           renderSlides();
 
           //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
-          var width = self.element.querySelector('img').offsetWidth;
-          self.element.querySelector('.inner').style.width = width + 'px';
+          var width = self.width + 'px' || self.element.querySelector('img').offsetWidth;
+          self.element.querySelector('.inner').style.width = width;
 
 
           function renderSlide( slide ) {
-            console.log(slide);
             var element = self.element.querySelector( '.slide_img' );
             element.innerHTML = '';
 
@@ -150,6 +125,33 @@
             element.querySelector( '.slide_number' ).style.display = 'none';
 
             renderAudio( currentSlide );
+            updateNavigation();
+            
+            function updateNavigation() {
+
+                if ( currentSlide == 0 ) {
+                  self.element.querySelector('.first').classList.add( 'disabled' );
+                  self.element.querySelector('.prev').classList.add( 'disabled' );
+                  self.element.querySelector( '.last' ).classList.remove( 'disabled' );
+                  self.element.querySelector( '.next' ).classList.remove( 'disabled' );
+                }
+
+                if ( currentSlide === self.slides.length - 1 ) {
+                  self.element.querySelector( '.last' ).classList.add( 'disabled' );
+                  self.element.querySelector( '.next' ).classList.add( 'disabled' );
+                  self.element.querySelector( '.prev' ).classList.remove('disabled' );
+                  self.element.querySelector( '.first' ).classList.remove( 'disabled' );
+                }
+
+                else {
+                  self.element.querySelector( '.last' ).classList.remove( 'disabled' );
+                  self.element.querySelector( '.next' ).classList.remove( 'disabled' );
+                  self.element.querySelector( '.prev' ).classList.remove( 'disabled' );
+                  self.element.querySelector( '.first' ).classList.remove( 'disabled' );
+                }
+
+
+            }
           }
 
           function renderAudio( index ) {
