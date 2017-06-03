@@ -15,7 +15,7 @@
 
     config: {
       img_width:    720,
-      "slides":     [ 'ccm.get',   '../slidecast/datastore.json', 'demo_offline.slides'],
+      slides:       [ 'ccm.get',   '../slidecast/datastore.json', 'demo_offline.slides'],
       style_global: [ 'ccm.load',  '../slidecast/style.css' ],
       templates:    [ 'ccm.store', '../slidecast/templates.json' ],
       icons:        [ 'ccm.load',  '../libs/font-awesome/css/font-awesome.min.css' ],
@@ -30,7 +30,6 @@
         if ( !self.slides ) return;
 
         // collect all URL's of resources that have to be preloaded
-
         var urls = [];
         self.slides.map( function ( slide ) {
           if ( slide.image ) urls.push( slide.image );
@@ -59,7 +58,6 @@
               self.element.querySelector('.main').style.display = 'none';
               self.element.querySelector('.overlay').style.display = 'block';
               self.element.querySelector( '.container img').setAttribute( 'src', self.slides[ currentSlide ].image );
-
             },
 
             prev: function () {
@@ -131,8 +129,8 @@
 
                 if ( currentSlide === 0 ) {
                   console.log(currentSlide);
-                  self.element.querySelector('.first').classList.add( 'disabled' );
-                  self.element.querySelector('.prev').classList.add( 'disabled' );
+                  self.element.querySelector( '.first' ).classList.add( 'disabled' );
+                  self.element.querySelector( '.prev' ).classList.add( 'disabled' );
                   self.element.querySelector( '.last' ).classList.remove( 'disabled' );
                   self.element.querySelector( '.next' ).classList.remove( 'disabled' );
                 }
