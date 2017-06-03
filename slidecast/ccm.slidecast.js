@@ -128,7 +128,6 @@
             function updateNavigation() {
 
                 if ( currentSlide === 0 ) {
-                  console.log(currentSlide);
                   self.element.querySelector( '.first' ).classList.add( 'disabled' );
                   self.element.querySelector( '.prev' ).classList.add( 'disabled' );
                   self.element.querySelector( '.last' ).classList.remove( 'disabled' );
