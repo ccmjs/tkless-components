@@ -129,14 +129,15 @@
             
             function updateNavigation() {
 
-                if ( currentSlide == 0 ) {
+                if ( currentSlide === 0 ) {
+                  console.log(currentSlide);
                   self.element.querySelector('.first').classList.add( 'disabled' );
                   self.element.querySelector('.prev').classList.add( 'disabled' );
                   self.element.querySelector( '.last' ).classList.remove( 'disabled' );
                   self.element.querySelector( '.next' ).classList.remove( 'disabled' );
                 }
 
-                if ( currentSlide === self.slides.length - 1 ) {
+                else if ( currentSlide === self.slides.length - 1 ) {
                   self.element.querySelector( '.last' ).classList.add( 'disabled' );
                   self.element.querySelector( '.next' ).classList.add( 'disabled' );
                   self.element.querySelector( '.prev' ).classList.remove('disabled' );
@@ -187,7 +188,7 @@
                 slide_number: i + 1,
                 click: function () {
                   currentSlide = i;
-                  renderSlide( i );
+                  renderSlide( currentSlide );
                 }
               } );
               element.appendChild( slide_elem );
