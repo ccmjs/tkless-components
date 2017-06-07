@@ -801,7 +801,7 @@ ccm.component( {
    * @property {ccm.components.qa.user.key} user - creator user key
    * @property {string} title - question title
    * @property {string} content - question content
-   * @property {number} rating - question rating
+   * @property {number} thumb_rating - question thumb_rating
    * @property {Object.<ccm.components.qa.user.key,boolean>} voted_users - question voted users
    * @property {ccm.components.qa.answer[]} answers - question answer datasets
    */
@@ -813,7 +813,7 @@ ccm.component( {
    * @property {ccm.components.qa.user.key} user - creator user key
    * @property {string} content - question answer content
    * @property {boolean} bounty - best answer for question creator
-   * @property {number} rating - question answer rating
+   * @property {number} thumb_rating - question answer thumb_rating
    * @property {Object.<ccm.components.qa.user.key,boolean>} voted_users - question answer voted users
    */
 

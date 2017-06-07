@@ -52,7 +52,7 @@
           self.element.innerHTML = '';
           self.element.appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.get( 'main' ), {
             all: function () {
-              if ( self.slides[ currentSlide].audio )
+              if ( self.slides[ currentSlide ].audio )
                 self.element.querySelector( 'audio' ).pause();
 
               self.element.querySelector('.main').style.display = 'none';
