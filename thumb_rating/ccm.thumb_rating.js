@@ -15,24 +15,18 @@
     index: component_name,
 
     config: {
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
-      data:  {
-        store: [ 'ccm.store', '../thumb_rating/datastore.json' ],
-        key: 'demo'
-      },
-      style: [ 'ccm.load', '../thumb_rating/style.css' ],
+      data: { store: [ 'ccm.store' ] },
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/thumb_rating/style.css' ],
       icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
 
     Instance: function () {
 
-
-
       var self = this;
-
       var my;
 
       this.init = function ( callback ) {
+        console.log( self, my );
 
         // listen to change event of ccm realtime datastore => (re)render own content
         self.data.store.onChange = function () { self.start(); };
