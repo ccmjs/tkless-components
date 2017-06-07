@@ -1,4 +1,4 @@
-# ccm-components
+# _ccm_ Components made by Tea Kless
 web components based on ccm
 
-For more information see origin master to ccm under https://github.com/akless/ccm-developer
+For more information see origin master to _ccm_ under https://github.com/akless/ccm.
