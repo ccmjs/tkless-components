@@ -90,9 +90,9 @@ ccm.component( {
       lang:         null
     } ],
 
-    rating:         [ ccm.component,  '../rating/ccm.rating.js', {
-      store:        [ ccm.store, { store: [ ccm.store, './rating/rating.json' ] } ],
-      style:        [ ccm.load,      '../rating/rating.css' ],
+    rating:         [ ccm.component,  '../thumb_rating/ccm.thumb_rating.js', {
+      store:        [ ccm.store, { store: [ ccm.store, './thumb_rating/datastore.json' ] } ],
+      style:        [ ccm.load,      '../thumb_rating/style.css' ],
       user:         null
     } ],
 
@@ -640,7 +640,7 @@ ccm.component( {
               size:   size,
               label:  label,
               lock:   locked ? ' <span class="fa fa-' + ( locked === true ? 'lock' : 'unlock-alt' ) + '"></span>' : '',
-              rating: rating_key ? '<div class="rating noclick">' + rating_key + '</div>' : ''
+              rating: rating_key ? '<div class="thumb_rating noclick">' + rating_key + '</div>' : ''
             } )
           };
         }
