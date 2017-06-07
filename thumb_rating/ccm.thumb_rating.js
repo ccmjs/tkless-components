@@ -12,18 +12,8 @@
   var component_name = 'thumb_rating';
   var component_obj  = {
 
-    /*-------------------------------------------- public component members --------------------------------------------*/
-
-    /**
-     * @summary component index
-     * @type {ccm.types.index}
-     */
     index: component_name,
 
-    /**
-     * @summary default instance configuration
-     * @type {ccm.components.rating.types.config}
-     */
     config: {
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
       data:  {
@@ -34,56 +24,22 @@
       icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
 
-    /*-------------------------------------------- public component classes --------------------------------------------*/
-
-    /**
-     * @summary constructor for creating <i>ccm</i> instances out of this component
-     * @class
-     */
     Instance: function () {
 
-      /*------------------------------------- private and public instance members --------------------------------------*/
 
-      /**
-       * @summary own context
-       * @private
-       */
+
       var self = this;
 
-      /**
-       * @summary contains privatized config members
-       * @type {ccm.components.rating.types.config}
-       * @private
-       */
       var my;
 
-      /*------------------------------------------- public instance methods --------------------------------------------*/
-
-      /**
-       * @summary initialize <i>ccm</i> instance
-       * @description
-       * Called one-time when this <i>ccm</i> instance is created, all dependencies are solved and before dependent <i>ccm</i> components, instances and datastores are initialized.
-       * This method will be removed by <i>ccm</i> after the one-time call.
-       * @param {function} callback - callback when this instance is initialized
-       */
       this.init = function ( callback ) {
 
         // listen to change event of ccm realtime datastore => (re)render own content
         self.data.store.onChange = function () { self.start(); };
 
-        // perform callback
         callback();
-
       };
 
-      /**
-       * @summary when <i>ccm</i> instance is ready
-       * @description
-       * Called one-time when this <i>ccm</i> instance and dependent <i>ccm</i> components, instances and datastores are initialized and ready.
-       * This method will be removed by <i>ccm</i> after the one-time call.
-       * @param {function} callback - callback when this instance is ready
-       * @ignore
-       */
       this.ready = function ( callback ) {
 
         // privatize security relevant config members
@@ -92,16 +48,12 @@
         // listen to login/logout event => (re)render own content
         if ( self.user ) self.user.addObserver( function () { self.start(); } );
 
-        // perform callback
         callback();
-
       };
 
-      /**
-       * @summary render content in own website area
-       * @param {function} [callback] - callback when content is rendered
-       */
+
       this.start = function ( callback ) {
+
         document.head.appendChild( self.ccm.helper.html( {
           tag:   'style',
           inner: "@font-face { font-family: 'FontAwesome'; src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0'); src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../libs/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../libs/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg'); font-weight: normal; font-style: normal; }"
@@ -156,10 +108,6 @@
             // user is logged in?
             if ( self.user.isLoggedIn() ) {
 
-              /**
-               * username
-               * @type {string}
-               */
               var user = self.user.data().key;
 
               // highlight button if already voted
@@ -185,10 +133,7 @@
 
                   // login user if not logged in
                   self.user.login( function () {
-                    /**
-                     * username
-                     * @type {string}
-                     */
+
                     var user = self.user.data().key;
 
                     // has already voted?
@@ -210,7 +155,7 @@
                     }
 
                     // update dataset for rendering => (re)render own content
-                    my.data.store.set( dataset, function () { self.start(); console.log(dataset); } );
+                    my.data.store.set( dataset, function () { self.start(); } );
 
                   } );
 
