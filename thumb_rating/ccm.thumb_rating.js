@@ -26,7 +26,6 @@
       var my;
 
       this.init = function ( callback ) {
-        console.log( self, my );
 
         // listen to change event of ccm realtime datastore => (re)render own content
         self.data.store.onChange = function () { self.start(); };
@@ -44,7 +43,6 @@
 
         callback();
       };
-
 
       this.start = function ( callback ) {
 
