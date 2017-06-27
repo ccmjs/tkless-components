@@ -91,10 +91,9 @@
           var sum = 0;
           var count = 0;
 
-          var keys= ["1", "2", "3", "4", "5"];
-          for ( var key in keys ) {
+          for ( var key in dataset ) {
             sum += key  * Object.keys( dataset[ key ] ).length;
-            count += Object.keys(dataset[ key ] ).length;
+            count += Object.keys( dataset[ key ] ).length;
           }
           total = sum / count;
 
