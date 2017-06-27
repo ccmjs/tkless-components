@@ -67,6 +67,7 @@
           store: [ 'ccm.store', '../star_rating_result/datastore.json' ],
           key:   'demo'
       },
+      bootstrap: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" ],
       style: [ 'ccm.load', '../star_rating_result/style.css' ],
       icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css']
     },
@@ -91,9 +92,10 @@
           var sum = 0;
           var count = 0;
 
-          for ( var key in dataset ) {
-            sum += key  * Object.keys( dataset[ key ] ).length;
-            count += Object.keys( dataset[ key ] ).length;
+          for ( var i = 1; i <= 5; i++ ) {
+            if ( !dataset[ i ] ) continue;
+            sum += i * Object.keys( dataset[ i ] ).length;
+            count += Object.keys( dataset[ i ] ).length;
           }
           total = sum / count;
 
@@ -106,12 +108,12 @@
             for ( var i = 5; i >= 0.5; i -= 0.5 ) {
               self.element.querySelector( '.rating' ).appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.input, {
                 id: i,
-                star: i,
+                star: i
               } ) ) );
 
               self.element.querySelector( '.rating' ).appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.label, {
                 class: ( ( i * 2 ) % 2 === 0) ? "full" : "half",
-                for: i,
+                for: i
               } ) ) );
             }
 
