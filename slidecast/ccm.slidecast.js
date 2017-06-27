@@ -96,8 +96,8 @@
           renderSlides();
 
           //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
-          var width = self.width + 'px' || self.element.querySelector('img').offsetWidth;
-          self.element.querySelector('.inner').style.width = width;
+          var width = self.width || self.element.querySelector('img').offsetWidth;
+          self.element.querySelector('.inner').style.width = width + 'px';
 
 
           function renderSlide( slide ) {

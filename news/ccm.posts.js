@@ -129,9 +129,7 @@
 
           // render main html structure
           self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
-            click: function () {
-              updatePost();
-            }
+            click: function () { updatePost(); }
           } ) ) );
 
           for ( var i = 0; i < dataset.posts.length; i++ ) {
