@@ -1,4 +1,4 @@
-{
+ccm.files[ "star_rating_datastore.js" ] = {
   "demo": {
     "key": "demo",
     "5": {
@@ -16,4 +16,4 @@
       "ndemo2m": true
     }
   }
-}
+};

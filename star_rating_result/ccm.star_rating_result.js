@@ -4,8 +4,10 @@
  * @license The MIT License (MIT)
  */
 ( function () {
-  var ccm_version = '8.0.0';
-  var ccm_url     = '../libs/ccm.js';
+
+  var ccm_version = '9.0.0';
+  var ccm_url     = 'https://akless.github.io/ccm/ccm.js';
+
   var component_name = 'star_rating_result';
   var component_obj  = {
 
@@ -64,11 +66,12 @@
       },
 
       data:  {
-          store: [ 'ccm.store', '../star_rating_result/datastore.json' ],
+          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/star_rating_result/star_rating_datastore.js' ],
           key:   'demo'
       },
-      style: [ 'ccm.load', '../star_rating_result/style.css' ],
-      icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css']
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/star_rating_result/style.css' ],
+      icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head } ]
+
     },
 
     Instance: function () {
@@ -76,11 +79,6 @@
       var total = 0;
 
       this.start = function ( callback ) {
-
-        document.head.appendChild( self.ccm.helper.html( {
-           tag:   'style',
-           inner: "@font-face { font-family: 'FontAwesome'; src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0'); src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../libs/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../libs/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg'); font-weight: normal; font-style: normal; }"
-        } ) );
 
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
           if ( !dataset ) dataset = {};
