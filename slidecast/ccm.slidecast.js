@@ -134,7 +134,7 @@
 
 
         self.element.innerHTML = '';
-        self.element.appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.get( 'main' ), {
+        self.element.appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
           all: function () {
             if ( self.slides[ currentSlide ].audio )
               self.element.querySelector( 'audio' ).pause();
@@ -174,7 +174,7 @@
           }
         } ) ) );
 
-        self.element.appendChild( self.ccm.helper.html( self.templates.get( 'overlay' ) ) );
+        self.element.appendChild( self.ccm.helper.html( self.templates.overlay ) );
 
         renderSlide( currentSlide );
         renderSlides();
@@ -191,7 +191,7 @@
           self.element.querySelector( '.overlay' ).style.display = 'none';
           self.element.querySelector( '.main' ).style.display = 'block';
 
-          element.appendChild( self.ccm.helper.html( self.templates.get( 'slide' ), {
+          element.appendChild( self.ccm.helper.html( self.templates.slide, {
             size: 'wrapper big',
             src: self.slides[ slide ].image,
             click: ''
