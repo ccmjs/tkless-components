@@ -1,4 +1,4 @@
-{
+ccm.files[ "thumb_rating_configs.js" ] = {
   "demo": {
     "user":  [ "ccm.instance", "https://akless.github.io/ccm-components/user/ccm.user.min.js"],
     "data":  {
@@ -6,4 +6,4 @@
       "key": "demo"
     }
   }
-}
+};
