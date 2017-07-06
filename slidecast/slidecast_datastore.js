@@ -1,4 +1,4 @@
-{
+ccm.files[ "slidecast_datastore.js" ] = {
   "demo_offline": {
     "slides": [
       {
@@ -44,4 +44,4 @@
       }
     ]
   }
-}
+};

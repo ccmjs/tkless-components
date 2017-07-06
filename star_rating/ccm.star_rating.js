@@ -4,8 +4,10 @@
  * @license The MIT License (MIT)
  */
 ( function () {
-  var ccm_version = '8.0.0';
-  var ccm_url     = '../libs/ccm.js';
+
+  var ccm_version = '9.0.0';
+  var ccm_url     = 'https://akless.github.io/ccm/ccm.js';
+
   var component_name = 'star_rating';
   var component_obj  = {
 
@@ -34,14 +36,15 @@
       },
 
       data:  {
-          store: [ 'ccm.store', '../star_rating/datastore.json' ],
+          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/star_rating/star_rating_datastore.js' ],
           key:   'demo'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js', { logged_in: true }],
-      style: [ 'ccm.load', '../star_rating/style.css' ],
-      icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'],
       star_title: [ "Gefällt mir gar nicht", "Gefällt mir nicht",
-                    "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ]
+        "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ],
+      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/star_rating/style.css' ],
+      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
 
     Instance: function () {

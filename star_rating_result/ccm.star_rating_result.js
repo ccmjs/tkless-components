@@ -66,12 +66,12 @@
       },
 
       data:  {
-          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/star_rating_result/star_rating_datastore.js' ],
+          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/star_rating_result/star_rating_result_datastore.js' ],
           key:   'demo'
       },
       style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/star_rating_result/style.css' ],
-      icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head } ]
-
+      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
 
     Instance: function () {
