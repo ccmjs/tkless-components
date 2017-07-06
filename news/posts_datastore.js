@@ -1,4 +1,4 @@
-{
+ccm.files[ "posts_datastore.js" ] = {
   "demo" : {
     "key": "demo",
     "posts": [
@@ -60,4 +60,4 @@
       }
     ]
   }
-}
+};

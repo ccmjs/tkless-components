@@ -6,8 +6,8 @@
 
 ( function () {
 
-  var ccm_version = '8.0.0';
-  var ccm_url     = '../libs/ccm.js';
+  var ccm_version = '9.0.0';
+  var ccm_url     = 'https://akless.github.io/ccm/ccm.js';
 
   var component_name = 'posts';
   var component_obj  = {
@@ -98,14 +98,15 @@
         }
 
       },
+      editable: true, //[true, false]
       data:  {
-        store: [ 'ccm.store', '../news/datastore.json' ],
+        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/news/datastore.json' ],
         key: 'demo'
       },
-      style: [ 'ccm.load', '../news/style.css' ],
-      icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'  ],
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      editable: true//[true, false, "user"]
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/news/style.css' ],
+      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
 
     Instance: function () {
