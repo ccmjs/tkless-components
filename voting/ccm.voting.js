@@ -4,8 +4,9 @@
  * @license The MIT License (MIT)
  */
 ( function () {
-    var ccm_version = '8.0.0';
-    var ccm_url     = '../libs/ccm.js';
+  var ccm_version = '9.0.0';
+  var ccm_url     = 'https://akless.github.io/ccm/ccm.js';
+
     var component_name = 'voting';
     var component_obj  = {
 
@@ -37,11 +38,11 @@
         },
 
         data:  {
-            store: [ 'ccm.store', '../voting/datastore.json' ],
+            store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ],
             key:   'demo'
         },
         user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
-        style: [ 'ccm.load', '../voting/style.css' ],
+        style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/voting/style.css' ],
         icons: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css']
       },
 

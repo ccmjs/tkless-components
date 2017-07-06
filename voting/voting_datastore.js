@@ -1,4 +1,4 @@
-{
+ccm.files[ "voting_datastore.js" ] = {
   "demo": {
     "key": "demo",
     "likes": {
@@ -11,4 +11,4 @@
       "mkaul2s": true
     }
   }
-}
+};
