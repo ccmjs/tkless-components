@@ -100,7 +100,7 @@
       },
       editable: true, //[true, false]
       data:  {
-        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/news/datastore.json' ],
+        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/news/posts_datastore.js' ],
         key: 'demo'
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],

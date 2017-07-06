@@ -263,7 +263,7 @@
           }
 
           function addSlide( i ) {
-            var slide_elem = self.ccm.helper.html( self.templates.get( 'slide' ), {
+            var slide_elem = self.ccm.helper.html( self.templates.slide, {
               size: 'wrapper small',
               src: self.slides[ i ].image,
               slide_number: i + 1,
