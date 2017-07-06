@@ -104,7 +104,7 @@
         }
       },
       img_width:    720,
-      slides:       [ 'ccm.get',   'https://tkless.github.io/ccm-components/slidecast/slidecast_datastore.json', 'demo_offline.slides'],
+      slides:       [ 'ccm.get',   'https://tkless.github.io/ccm-components/slidecast/slidecast_datastore.js', 'demo_offline.slides'],
       style_global: [ 'ccm.load',  'https://tkless.github.io/ccm-components/slidecast/style.css' ],
       icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
