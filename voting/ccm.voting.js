@@ -70,10 +70,10 @@
         this.start = function ( callback ) {
 
           self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
-            if ( !dataset ) {
-              dataset.likes = {};
-              dataset.dislikes = {};
-            }
+
+            // set default like and dislike property
+            if ( !dataset.likes    ) dataset.likes    = {};
+            if ( !dataset.dislikes ) dataset.dislikes = {};
 
             total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
 
