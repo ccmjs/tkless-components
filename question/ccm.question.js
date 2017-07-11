@@ -293,7 +293,7 @@
 
           var user = self.user.data().user;
 
-            self.editor.start({element: self.element.querySelector('#editor')}, function (instance) {
+            self.editor.start( { root: self.element.querySelector( '#editor' ) }, function (instance) {
               if (user !== dataset.user) {
                 editor = instance;
               }
@@ -301,18 +301,17 @@
                 editor = instance;
                 editor.get().enable( false );
               }
-            });
+            } );
         }
 
         function renderVoting( element, voting ) {
           if ( !self.user ) return;
+          self.voting.start( voting, function ( voting_inst ) {
+            element.appendChild( voting_inst.root );
+          } );
 
-          voting = self.ccm.helper.clone( voting );
-          voting.element = element;
-          self.voting.start( voting );
         }
 
-        //ToDO
         function newAnswer() {
 
           self.user.login( function () {
