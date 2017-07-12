@@ -16,10 +16,10 @@
     config: {
       templates: {
         "main": {
+          "class": "container",
           "inner": [
             {
-              "id": "questions_view",
-              "class": "container",
+              "id": "questions-view",
               "inner":
                 [
                   {
@@ -31,38 +31,87 @@
                   {
                     "tag": "form",
                     "onsubmit": "%submit%",
+                    "class": "form-horizontal",
                     "inner": [
                       {
-                        "id": "new-question-title"
+                        "class": "form-group",
+                        "id": "new-title",
+                        "inner":
+                          [
+                            {
+                              "tag": "label",
+                              "class": "control-label col-sm-1",
+                              "for": "%for%",
+                              "inner": "%inner%"
+                            },
+                            {
+                              "class": "col-sm-11",
+                              "inner": {
+                                "tag": "input",
+                                "type": "%type%",
+                                "class": "form-control",
+                                "id":"%id%",
+                                "placeholder": "%value%"
+                              }
+                            }
+                          ]
                       },
                       {
-                        "id": "editor-container",
+                        "id": "editor",
+                        "class": "form-group",
                         "inner": [
                           {
-                            "id": "form"
+                            "tag":  "input",
+                            "name": "new",
+                            "type": "hidden"
                           },
                           {
-                            "id": "editor"
+                            "id": "editor-container"
                           }
                         ]
                       },
                       {
-                        "class": "button row",
+                        "id": "button",
+                        "class": "form-group",
                         "inner": {
-                          "tag": "button",
-                          "class": "btn btn-primary",
-                          "type": "submit",
-                          "inner": "Post Question"
+                          "class": "row",
+                          "inner": {
+                            "tag": "button",
+                            "type": "submit",
+                            "class": "btn btn-primary",
+                            "inner": "Post new Question"
+                          }
                         }
                       }
                     ]
+
                   }
                 ]
             },
             {
-              "id": "answers_view",
-              "class": "container"
+              "id": "answers-view"
             }
+          ]
+        },
+
+        "answers": {
+          "inner": [
+            {
+              "tag": "ul",
+              "class": "nav nav-tabs",
+              "inner": [
+                {
+                  "tag": "li",
+                  "class": "active",
+                  "onclick": "%render_questions%",
+                  "inner": { "tag": "a", "inner": "Questions" }
+                }
+              ]
+            },
+            {
+              "id": "answers"
+            }
+
           ]
         },
 
@@ -70,7 +119,7 @@
           "class": "question row",
           "inner": [
             {
-              "class": "question-overview col-md-2 text-center",
+              "class": "voting-overview col-md-2 text-center",
               "inner":
                 [
                   {
@@ -103,6 +152,7 @@
             },
             {
               "class": "question-summery col-md-10",
+              "onclick": "%render_answers%",
               "inner": {
                 "tag": "blockquote",
                 "inner":[
@@ -120,34 +170,7 @@
               }
             }
           ]
-        },
-
-        "form": {
-          "class": "form-horizontal",
-          "inner": {
-            "class": "form-group",
-            "inner":
-              [
-                {
-                  "tag": "label",
-                  "class": "control-label col-sm-1",
-                  "for": "%for%",
-                  "inner": "%inner%"
-                },
-                {
-                  "class": "col-sm-11",
-                  "inner": {
-                    "tag": "input",
-                    "type": "%type%",
-                    "class": "form-control",
-                    "id":"%id%",
-                    "placeholder": "%value%"
-                  }
-                }
-              ]
-          }
         }
-
       },
 
       data: {
@@ -171,21 +194,26 @@
             [{ 'align': [] }]
         ] }
       ],
-      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/ccm.voting.js", { data:
-        { store: 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' } } ],
+      question: [ "ccm.component", "../question/ccm.question.js" ],
       bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' ]
     },
 
     Instance: function () {
       var self = this;
       var editor;
+      var question;
 
       this.start = function (callback) {
 
         self.ccm.helper.dataset(self.data.store, self.data.key, function ( dataset ) {
 
           self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
-            submit: function ( event ) { event.preventDefault(); newPost(); }
+            for:   "title",
+            inner: "Title",
+            id:    "title",
+            type:  "text",
+            value: "What is your Question ?",
+            submit: function ( event ) { console.log( "huhu" ); event.preventDefault(); newQuestion(); }
           } ) ) );
 
           renderQuestions();
@@ -193,36 +221,48 @@
 
           function renderQuestions() {
 
-            var voting;
-            for ( var i = 0; i < dataset.questions.length; i++ ) {
-              //voting = self.voting.instance( { data: dataset.questions[ i ] } );
-              console.log(self.voting);
-              self.element.querySelector( '#questions-list' ).appendChild( self.ccm.helper.html( self.templates.question, {
-                title: dataset.questions[i].title,
-                votes: i,
-                answers: dataset.questions[i].answers.length
-              } ) );
+            dataset.questions.map( renderQuestion );
+
+            function renderQuestion( question_conf ) {
+
+              // start question instance
+              self.question.start( question_conf , function ( question_instance ) {
+
+                // get question data of lunched question instance
+                question_instance.data.store.get( question_instance.data.key, function ( question_data ) {
+
+                  // get voting instance of question instance
+                  question_instance.voting.instance( question_data.voting, function ( voting_instance ) {
+                    question = question_data;
+                    self.element.querySelector( '#questions-list' ).appendChild( self.ccm.helper.html( self.templates.question, {
+                      title:    question_data.title,
+                      signatur: question_data.date,
+                      votes:    voting_instance.getVoting(),
+                      answers:  question_data.answers.length,
+                      render_answers: function () {
+                        self.element.querySelector( '#questions-view' ).style.display = 'none';
+
+                        self.ccm.helper.setContent( self.element.querySelector( '#answers-view' ), self.ccm.helper.html( self.templates.answers, {
+                          render_questions: function () {
+                            self.element.querySelector( '#answers-view' ).innerHTML = '';
+                            self.element.querySelector( '#questions-view' ).style.display = 'block';
+                          }
+                        } ) );
+
+                        self.element.querySelector( '#answers' ).appendChild( question_instance.root );
+                      }
+                    } ) );
+
+                  } );
+
+                } );
+              } )
             }
           }
 
+
           function renderEditor() {
-            self.element.querySelector( '#new-question-title' ).appendChild( self.ccm.helper.html( self.templates.form, {
-              for:   "title",
-              inner: "Title",
-              id:    "title",
-              type:  "text",
-              value: "What is your Question ?"
-            } ));
-
-            self.element.querySelector( '#form' ).appendChild( self.ccm.helper.html( self.templates.form, {
-              for:   "question",
-              inner: "",
-              id:    "question",
-              type:  "hidden",
-              value: ""
-            } ));
-
-            self.editor.start( { element: self.element.querySelector( '#editor' ) }, function ( instance ) {
+            self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
               editor = instance;
             } );
           }
@@ -230,12 +270,45 @@
           function newQuestion() {
             if ( !self.user ) return;
 
-            self.user.login ( function () {
-              console.log( editor.get() );
-              var question_title = self.element.querySelector( 'input[id = title ]' ).value;
+            self.user.login( function () {
+              var user = self.user.data().user;
 
-              console.log( editor.get().getContents() );
+              var question_title = self.element.querySelector( 'input[ id = title ]' ).value;
+
+              question.push( {
+                  "date": getDateTime(),
+                  "user": user,
+                  "title": question_title,
+                  "content": editor.get().root.innerHTML,
+                  "voting": { },
+                  "answers": [ ]
+                } );
+
+              // update dataset for rendering => (re)render accepted answer
+              //self.data.store.set( dataset, function () { renderQuestions(); } );
+
             } );
+
+          }
+
+          function getDateTime() {
+
+            var today = new Date();
+            var dd    = today.getDate();
+            var mm    = today.getMonth();
+            var yyyy  = today.getFullYear();
+            var hour  = today.getHours();
+            var min   = today.getMinutes();
+
+            var monat = ["Januar", "Februar", "März", "April", "Mai", "Juni","Juli", "August", "September", "Oktober", "November", "Dezember"];
+
+            if ( dd < 10 ) dd = '0' + dd;
+
+            if ( hour < 10 ) hour = '0' + hour;
+            if ( min  < 10 ) min  = '0' + min;
+
+            return dd + ' ' + monat[ mm].substring(0, 3) + '. '  + yyyy + ' ' + hour + ':' + min;
+
           }
 
           if ( callback ) callback();

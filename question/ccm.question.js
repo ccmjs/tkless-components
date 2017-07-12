@@ -136,7 +136,7 @@
                       }
                     }
                   ]
-                },
+                }
               ]
             },
             {
@@ -273,13 +273,12 @@
           // generate on-the-fly element
           var answer_elem = self.ccm.helper.html( self.templates.answer, {
             answer: answer.content,
-            signatur: answer.date,
+            signatur: answer.user + ' ' + answer.date,
             accepted: function () { answerAccepted( answer ); }
           } );
 
-          // append element to DOM
+          // prepend element to DOM
           self.ccm.helper.prepend( self.element.querySelector( '#answers' ), answer_elem );
-          //self.element.querySelector( '#answers' ).appendChild( answer_elem );
 
           // render accepted answer green
           if ( answer.accepted === true )
@@ -293,15 +292,15 @@
 
           var user = self.user.data().user;
 
-            self.editor.start( { root: self.element.querySelector( '#editor' ) }, function (instance) {
-              if (user !== dataset.user) {
-                editor = instance;
-              }
-              else {
-                editor = instance;
-                editor.get().enable( false );
-              }
-            } );
+          self.editor.start( { root: self.element.querySelector( '#editor' ) }, function (instance) {
+            if (user !== dataset.user) {
+              editor = instance;
+            }
+            else {
+              editor = instance;
+              editor.get().enable( false );
+            }
+          } );
         }
 
         function renderVoting( element, voting ) {
