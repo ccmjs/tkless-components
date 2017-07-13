@@ -245,7 +245,7 @@
           [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
           [{ 'align': [] }]
         ],
-          'settings.placeholder': ''
+          'settings.placeholder': 'Type here...'
         }
       ],
       style: [ 'ccm.load', '../fill_in_the_blank_text_builder/style.css' ],
