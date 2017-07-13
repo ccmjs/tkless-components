@@ -194,8 +194,9 @@
             [{ 'align': [] }]
         ] }
       ],
-      question: [ "ccm.component", "../question/ccm.question.js" ],
-      bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' ]
+      question: [ 'ccm.component', '../question/ccm.question.js' ],
+      new_question_conf: { data: { store: [ 'ccm.store' ] } },
+      bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
 
     Instance: function () {
@@ -275,17 +276,25 @@
 
               var question_title = self.element.querySelector( 'input[ id = title ]' ).value;
 
-              question.push( {
-                  "date": getDateTime(),
-                  "user": user,
-                  "title": question_title,
-                  "content": editor.get().root.innerHTML,
-                  "voting": { },
-                  "answers": [ ]
-                } );
+              var new_question_data = {
+                "date": getDateTime(),
+                "user": user,
+                "title": question_title,
+                "content": editor.get().root.innerHTML,
+                "voting": { },
+                "answers": [ ]
+              } ;
 
-              // update dataset for rendering => (re)render accepted answer
-              //self.data.store.set( dataset, function () { renderQuestions(); } );
+              var new_question_conf = self.ccm.helper.clone( self.new_question_conf );
+
+              self.question.instance( new_question_conf, function ( new_question_inst ) {
+
+                new_question_inst.data.store.set( new_question_data, function ( created_qustion_data ) {
+                  new_question_conf.data.key = created_qustion_data.key;
+                  dataset.questions.push( new_question_conf );
+                  self.data.store.set( dataset, function () { self.start(); } );
+                } );
+              } );
 
             } );
 
