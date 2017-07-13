@@ -261,7 +261,6 @@
             }
           }
 
-
           function renderEditor() {
             self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
               editor = instance;
