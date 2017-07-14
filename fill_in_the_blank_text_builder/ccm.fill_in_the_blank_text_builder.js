@@ -31,6 +31,7 @@
             {
               "tag": "form",
               "class": "form-horizontal",
+              "onsubmit": "%submit%",
               "inner": [
                 {
                   "class": "layout form-group",
@@ -45,6 +46,7 @@
                       "inner": {
                         "tag": "select",
                         "class": "form-control",
+                        "name": "css_layout",
                         "inner": [
                           {
                             "tag":"option",
@@ -120,6 +122,7 @@
                           "inner": {
                             "tag": "input",
                             "type": "checkbox",
+                            "name": "blank",
                             "value": "%checked%"
                           }
                         }
@@ -145,6 +148,7 @@
                           "inner": {
                             "tag": "input",
                             "type": "checkbox",
+                            "name": "ignore_case",
                             "value": "%checked%"
                           }
                         }
@@ -167,6 +171,7 @@
                         "tag": "input",
                         "type":"number",
                         "class": "form-control",
+                        "name": "points",
                         "placeholder": "points in number"
                       }
                     }
@@ -186,6 +191,7 @@
                         "tag": "input",
                         "type":"number",
                         "class": "form-control",
+                        "name": "time",
                         "placeholder": "time in seconds"
                       }
                     }
@@ -256,10 +262,19 @@
 
     Instance: function () {
       var self = this;
+      var editor;
 
       this.start = function (callback) {
 
-        self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main ) ) );
+        var $ = self.ccm.helper;
+        $.setContent( self.element, self.ccm.helper.html( self.templates.main, {
+          submit: function ( event ) {
+            event.preventDefault();
+            var config_data = $.formData( this );
+            config_data[ "gap_text" ] = editor.get().root.innerHTML;
+            console.log( config_data );
+          }
+        } ) );
 
         self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
           editor = instance;
