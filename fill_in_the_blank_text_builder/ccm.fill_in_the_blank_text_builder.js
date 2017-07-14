@@ -34,6 +34,45 @@
               "onsubmit": "%submit%",
               "inner": [
                 {
+                  "class": "sign-on form-group",
+                  "inner": [
+                    {
+                      "tag": "label",
+                      "class": "control-label col-md-2",
+                      "inner": "Sign-on:"
+                    },
+                    {
+                      "class": "col-md-10",
+                      "inner": {
+                        "tag": "select",
+                        "class": "form-control",
+                        "name": "user_sign_on",
+                        "inner": [
+                          {
+                            "tag":"option",
+                            "inner": "None"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "Guest Mode",
+                            "value": "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "Demo Mode",
+                            "value": "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'demo'}]"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "H-BRS FB02",
+                            "value": "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'hbrsinfkaul'}]"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
                   "class": "layout form-group",
                   "inner": [
                     {
@@ -50,11 +89,13 @@
                         "inner": [
                           {
                             "tag":"option",
-                            "inner": "HBRS Style"
+                            "inner": "Default",
+                            "value": "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/default.css']"
                           },
                           {
                             "tag":"option",
-                            "inner": "LEA Style"
+                            "inner": "LEA-like",
+                            "value": "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']"
                           }
                         ]
                       }
@@ -67,27 +108,38 @@
                     {
                       "tag": "label",
                       "class": "control-label col-md-2",
-                      "inner": "Provided answers:"
+                      "inner": "Provided answers"
                     },
                     {
                       "class": "col-md-10",
                       "inner": {
-                        "class": "checkbox",
-                        "inner": {
-                          "tag": "label",
-                          "inner": {
-                            "tag": "input",
-                            "type": "checkbox",
-                            "value": "%checked%"
+                        "tag": "select",
+                        "class": "select-solution form-control",
+                        "onchange": "%select%",
+                        "inner": [
+                          {
+                            "tag":"option",
+                            "inner": "None",
+                            "value": "none"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "Auto generated",
+                            "value": "auto"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "Manually",
+                            "value": "manually"
                           }
-                        }
+                        ]
                       }
                     }
-
                   ]
                 },
                 {
                   "class": "manually form-group",
+                  "style": "display: none",
                   "inner": [
                     {
                       "tag": "label",
@@ -97,9 +149,12 @@
                     {
                       "class": "col-md-10",
                       "inner": {
-                        "tag": "textarea",
+                        "id": "tokenfield",
+                        "tag": "input",
+                        "type": "text",
                         "class": "form-control",
-                        "rows": "3"
+                        "autocomplete": "false",
+                        "placeholder": "type something and hit enter"
                       }
                     }
 
@@ -122,8 +177,7 @@
                           "inner": {
                             "tag": "input",
                             "type": "checkbox",
-                            "name": "blank",
-                            "value": "%checked%"
+                            "name": "blank"
                           }
                         }
                       }
@@ -148,8 +202,7 @@
                           "inner": {
                             "tag": "input",
                             "type": "checkbox",
-                            "name": "ignore_case",
-                            "value": "%checked%"
+                            "name": "ignore_case"
                           }
                         }
                       }
@@ -255,9 +308,7 @@
         }
       ],
       style: [ 'ccm.load', '../fill_in_the_blank_text_builder/style.css' ],
-      bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' ],
-      bootstrap_js: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' ],
-      jQuery: [ 'ccm.load', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js']
+      bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ]
     },
 
     Instance: function () {
@@ -273,6 +324,12 @@
             var config_data = $.formData( this );
             config_data[ "gap_text" ] = editor.get().root.innerHTML;
             console.log( config_data );
+          },
+          select: function () {
+            if ( self.element.querySelector( '.select-solution' ).value === 'manually' )
+              self.element.querySelector( '.manually' ).style.display = 'block';
+            else
+              self.element.querySelector( '.manually' ).style.display = 'none';
           }
         } ) );
 
