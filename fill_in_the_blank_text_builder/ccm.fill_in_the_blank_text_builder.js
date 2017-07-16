@@ -320,7 +320,7 @@
           'settings.placeholder': 'Type here...'
         }
       ],
-      style: [ 'ccm.load', '../fill_in_the_blank_text_builder/style.css' ],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/style.css' ],
       bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
       tockenfield: ['ccm.load', 'http://kanecohen.github.io/tokenfield/js/tokenfield.min.js', 'http://kanecohen.github.io/tokenfield/css/tokenfield.css'],
       preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/ccm.cloze.min.js' ],
