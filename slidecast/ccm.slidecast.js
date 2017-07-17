@@ -251,7 +251,7 @@
 
           addSlide( currentSlide );
           element.firstElementChild.classList.add( 'container' );
-          element.firstElementChild.appendChild(self.ccm.helper.html( self.templates.get( 'back' ) , {
+          element.firstElementChild.appendChild(self.ccm.helper.html( self.templates.back , {
             back: function () {
               renderSlide( currentSlide );
             }
