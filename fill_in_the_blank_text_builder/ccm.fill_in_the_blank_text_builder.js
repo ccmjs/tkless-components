@@ -118,7 +118,7 @@
                       "inner": {
                         "tag": "select",
                         "class": "select-solution form-control",
-                        "onchange": "%keywords%",
+                        //"onchange": "%keywords%",
                         "inner": [
                           {
                             "tag":"option",
@@ -148,7 +148,7 @@
                       "tag": "label",
                       "class": "control-label col-md-2",
                       "inner": "Manually:"
-                    },
+                    }/*,
                     {
                       "class": "col-md-10",
                       "inner": {
@@ -160,7 +160,7 @@
                         "name": "keywords",
                         "placeholder": "type something and hit enter"
                       }
-                    }
+                    }*/
 
                   ]
                 },
@@ -295,8 +295,17 @@
               ]
             },
             {
-              "id": "preview",
-              "inner": {}
+              "tag": "fieldset",
+              "inner": [
+                {
+                  "tag": "legend",
+                  "inner": "Preview"
+                },
+                {
+                  "id": "preview",
+                  "inner": {}
+                }
+              ]
             }
           ]
         }
@@ -324,7 +333,12 @@
       bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
       tockenfield: ['ccm.load', 'http://kanecohen.github.io/tokenfield/js/tokenfield.min.js', 'http://kanecohen.github.io/tokenfield/css/tokenfield.css'],
       preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/ccm.cloze.min.js' ],
-      onfinish: { log: true }
+      onfinish: {
+        log: true,
+        store_settings: { store: "clozes", url: "wss://ccm.inf.h-brs.de" },
+        key: "demo",
+        embed_code: "cloze"
+      }
     },
 
     Instance: function () {
@@ -379,14 +393,13 @@
         } );
 
 
-        var tf = new Tokenfield({
-          el: self.element.querySelector('.keywords-manually')
-        });
+
 
         function prepareResultData() {
           var config_data = $.formData( self.element.querySelector( 'form' ) );
-          config_data[ "text" ] = editor.get().root.innerHTML;
 
+          config_data[ "text" ] = editor.get().root.innerHTML;
+/*
           if ( config_data[ "keywords" ] !== "") {
             var keywords = (config_data[ "keywords" ]).split( " " );
             config_data[ "keywords" ] = keywords;
@@ -395,10 +408,11 @@
             config_data[ "keywords" ] = true;
           else
             delete config_data[ "keywords" ];
+ */
           $.decodeDependencies( config_data );
           return config_data;
         }
-        
+
         function renderPreview() {
           self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
           var config_data = prepareResultData();
