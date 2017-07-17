@@ -118,7 +118,8 @@
                       "inner": {
                         "tag": "select",
                         "class": "select-solution form-control",
-                        //"onchange": "%keywords%",
+                        "name": "provided",
+                        "onchange": "%provided%",
                         "inner": [
                           {
                             "tag":"option",
@@ -141,26 +142,24 @@
                   ]
                 },
                 {
-                  "class": "manually form-group",
+                  "class": "keywords form-group",
                   "style": "display: none",
                   "inner": [
                     {
                       "tag": "label",
                       "class": "control-label col-md-2",
                       "inner": "Manually:"
-                    }/*,
+                    },
                     {
                       "class": "col-md-10",
                       "inner": {
                         "tag": "input",
-                        "onchange": "%manually%",
                         "type": "text",
-                        "required": "true",
-                        "class": "keywords-manually form-control",
                         "name": "keywords",
+                        "class": "manually form-control",
                         "placeholder": "type something and hit enter"
                       }
-                    }*/
+                    }
 
                   ]
                 },
@@ -268,8 +267,7 @@
                     },
                     {
                       "class": "col-md-10",
-                      "id": "editor-container",
-                      "onchange": "%editor%"
+                      "id": "editor-container"
                     }
                   ]
                 },
@@ -331,7 +329,6 @@
       ],
       style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/style.css' ],
       bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
-      tockenfield: ['ccm.load', 'http://kanecohen.github.io/tokenfield/js/tokenfield.min.js', 'http://kanecohen.github.io/tokenfield/css/tokenfield.css'],
       preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/ccm.cloze.min.js' ],
       onfinish: {
         log: true,
@@ -346,7 +343,6 @@
       var editor;
 
       this.start = function (callback) {
-        var selection;
 
         var $ = self.ccm.helper;
         $.setContent( self.element, self.ccm.helper.html( self.templates.main, {
@@ -359,17 +355,12 @@
 
           change_layout: renderPreview,
 
-          keywords: function () {
-            if ( self.element.querySelector( '.select-solution' ).value === 'manually' ) {
-              self.element.querySelector('.manually').style.display = 'block';
-            }
+          provided: function () {
+            if ( this.value === 'manually' )
+              self.element.querySelector('.keywords').style.display = 'block';
             else
-              self.element.querySelector( '.manually' ).style.display = 'none';
-
-            renderPreview();
+              self.element.querySelector( '.keywords' ).style.display = 'none';
           },
-
-          manually: renderPreview,
 
           change_blank: renderPreview,
 
@@ -377,38 +368,31 @@
 
           points: renderPreview,
 
-          time: renderPreview,
-
-          editor: function () {
-            editor.on('text-change', function() {
-              console.log('Text change!');
-            });
-          }
+          time: renderPreview
 
         } ) );
 
         self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
           editor = instance;
-          renderPreview();
+
+          editor.get().on('text-change', function() {
+            renderPreview();
+          });
         } );
-
-
-
 
         function prepareResultData() {
           var config_data = $.formData( self.element.querySelector( 'form' ) );
 
           config_data[ "text" ] = editor.get().root.innerHTML;
-/*
-          if ( config_data[ "keywords" ] !== "") {
-            var keywords = (config_data[ "keywords" ]).split( " " );
-            config_data[ "keywords" ] = keywords;
-          }
-          else if ( selection === "auto" )
-            config_data[ "keywords" ] = true;
+
+          if ( config_data.provided === 'auto' )
+            config_data.keywords = true;
+          else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
+            config_data.keywords = config_data.keywords.trim().split( ' ' );
           else
-            delete config_data[ "keywords" ];
- */
+            delete config_data.keywords;
+          delete config_data.provided;
+
           $.decodeDependencies( config_data );
           return config_data;
         }
@@ -417,7 +401,6 @@
           self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
           var config_data = prepareResultData();
           config_data.root = self.element.querySelector( '#preview div' );
-          console.log( config_data );
           self.preview.start( config_data );
         }
 
