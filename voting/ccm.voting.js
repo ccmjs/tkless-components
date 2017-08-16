@@ -5,9 +5,9 @@
  */
 ( function () {
   var ccm_version = '9.0.0';
-  var ccm_url     = 'https://akless.github.io/ccm/ccm.js';
+  var ccm_url     = 'https://akless.github.io/ccm/version/ccm-9.0.0.min.js';
 
-    var component_name = 'voting';
+  var component_name = 'voting';
     var component_obj  = {
 
       name: component_name,
