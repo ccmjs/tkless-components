@@ -1,4 +1,4 @@
-{
+ccm.files[ "forum_datastore.js" ] = {
   "demo":
   {
     "key": "demo",

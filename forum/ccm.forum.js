@@ -176,11 +176,11 @@
       },
 
       data: {
-        store: [ 'ccm.store', '../forum/datastore.json' ],
+        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/forum/forum_datastore.js' ],
         key: "demo"
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      style: [ 'ccm.load', '../forum/style.css' ],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/forum/style.css' ],
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
@@ -196,7 +196,7 @@
             [{ 'align': [] }]
         ] }
       ],
-      question: [ 'ccm.component', '../question/ccm.question.js' ],
+      question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/ccm.question.js' ],
       new_question_conf: { data: { store: [ 'ccm.store' ] } },
       bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },

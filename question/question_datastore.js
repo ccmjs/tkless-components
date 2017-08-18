@@ -1,4 +1,4 @@
-ccm.files[ "voting_datastore.js" ] = {
+ccm.files[ "question_datastore.js" ] = {
   "1": {
     "key": "1",
     "date": "11.07.2015 - 10:30",
