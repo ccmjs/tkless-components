@@ -164,11 +164,11 @@
       },
 
       data: {
-        store: [ 'ccm.store', '../question/datastore.json' ],
+        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/question/question_datastore.js' ],
         key: "1"
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js', { logged_in: true, 'guest.user': 'tmeskh2s' } ],
-      style: [ 'ccm.load', '../question/style.css' ],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/question/style.css' ],
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
