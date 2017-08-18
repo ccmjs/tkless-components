@@ -8,8 +8,8 @@
 
   var filename = "ccm.fill_in_the_blank_text_builder.js";
 
-  var ccm_version = '9.0.0';
-  var ccm_url     = 'https://akless.github.io/ccm/version/ccm-9.0.0.min.js';
+  var ccm_version = '9.2.0';
+  var ccm_url     = 'https://akless.github.io/ccm/version/ccm-9.2.0.min.js';
 
   var component_name = 'fill_in_the_blank_text_builder';
   var component_obj  = {
