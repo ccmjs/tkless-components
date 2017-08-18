@@ -4,144 +4,148 @@
  * @license The MIT License (MIT)
  */
 ( function () {
-  var ccm_version = '9.0.0';
-  var ccm_url     = 'https://akless.github.io/ccm/version/ccm-9.0.0.min.js';
+
+  var filename = "ccm.voting.js";
+
+  var ccm_version = '9.2.0';
+  var ccm_url     = 'https://akless.github.io/ccm/version/ccm-9.2.0.min.js';
 
   var component_name = 'voting';
-    var component_obj  = {
+  var component_obj  = {
 
-      name: component_name,
-      config: {
-        templates: {
-          "main": {
-            "tag": "div",
-            "id": "main",
-            "inner": [
-              {
-                "tag": "div",
-                "id": "likes",
-                "class": "fa fa-chevron-circle-up fa-2x",
-                "onclick": "%up_vote%"
-              },
-              {
-                "tag": "div",
-                "id": "total"
-              },
-              {
-                "tag": "div",
-                "id": "dislikes",
-                "class": "fa fa-chevron-circle-down fa-2x",
-                "onclick": "%down_vote%"
-              }
-            ]
-          }
-        },
-
-        data:  {
-            store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ],
-            key:   'demo'
-        },
-        user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
-        style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/voting/style.css' ],
-        icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-          'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+    name: component_name,
+    config: {
+      templates: {
+        "main": {
+          "tag": "div",
+          "id": "main",
+          "inner": [
+            {
+              "tag": "div",
+              "id": "likes",
+              "class": "fa fa-chevron-circle-up fa-2x",
+              "onclick": "%up_vote%"
+            },
+            {
+              "tag": "div",
+              "id": "total"
+            },
+            {
+              "tag": "div",
+              "id": "dislikes",
+              "class": "fa fa-chevron-circle-down fa-2x",
+              "onclick": "%down_vote%"
+            }
+          ]
+        }
       },
 
-      Instance: function () {
-        var self = this;
-        var total = 0;
+      data:  {
+          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ],
+          key:   'demo'
+      },
+      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/voting/style.css' ],
+      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+    },
 
-        this.init = function ( callback ) {
+    Instance: function () {
+      var self = this;
+      var total = 0;
 
-          // listen to change event of ccm realtime datastore => (re)render own content
-          self.data.store.onChange = function () { self.start(); };
+      this.init = function ( callback ) {
 
-          callback();
-        };
+        // listen to change event of ccm realtime datastore => (re)render own content
+        self.data.store.onChange = function () { self.start(); };
 
-        this.ready = function ( callback ) {
+        callback();
+      };
 
-          // listen to login/logout event => (re)render own content
-          if ( self.user ) self.user.addObserver( function () { self.start(); } );
+      this.ready = function ( callback ) {
 
-          callback();
-        };
+        // listen to login/logout event => (re)render own content
+        if ( self.user ) self.user.addObserver( function () { self.start(); } );
 
-        this.start = function ( callback ) {
+        callback();
+      };
 
-          self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
+      this.start = function ( callback ) {
 
-            // set default like and dislike property
-            if ( !dataset.likes    ) dataset.likes    = {};
-            if ( !dataset.dislikes ) dataset.dislikes = {};
+        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
 
-            total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
+          // set default like and dislike property
+          if ( !dataset.likes    ) dataset.likes    = {};
+          if ( !dataset.dislikes ) dataset.dislikes = {};
 
-            self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
-              up_vote:   function () {
-                  doVoting( 'likes' );
-                  total++;
-              },
-              down_vote: function () {
-                  doVoting( 'dislikes' );
-                  total--;
-              }
-            } ) ) );
+          total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
 
-            self.element.querySelector( '#total' ).innerHTML = total;
-
-            //no voting possible without user instance
-            if ( !self.user || !self.user.isLoggedIn() ) {
-                self.element.querySelector('#likes').classList.add('disabled');
-                self.element.querySelector('#dislikes').classList.add('disabled');
+          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
+            up_vote:   function () {
+                doVoting( 'likes' );
+                total++;
+            },
+            down_vote: function () {
+                doVoting( 'dislikes' );
+                total--;
             }
+          } ) ) );
 
-            if ( callback )callback();
+          self.element.querySelector( '#total' ).innerHTML = total;
 
-            function doVoting( vote ) {
-              if ( !self.user ) return;
+          //no voting possible without user instance
+          if ( !self.user || !self.user.isLoggedIn() ) {
+              self.element.querySelector('#likes').classList.add('disabled');
+              self.element.querySelector('#dislikes').classList.add('disabled');
+          }
 
-              self.user.login( function () {
+          if ( callback )callback();
 
-                var user = self.user.data().key;
-                var not_vote;
+          function doVoting( vote ) {
+            if ( !self.user ) return;
 
-                if ( vote === 'likes' ) not_vote = 'dislikes';
-                else not_vote = 'likes';
+            self.user.login( function () {
 
-                  // has already voted?
-                  if ( dataset[ vote ][ user ] ) {
-                      // revert vote
-                      delete dataset[ vote ][ user ];
-                  }
-                  // not voted
-                  else {
+              var user = self.user.data().key;
+              var not_vote;
 
-                      // proceed voting
-                      dataset[ vote ][ user ] = true;
+              if ( vote === 'likes' ) not_vote = 'dislikes';
+              else not_vote = 'likes';
 
-                      // revert voting of opposite category
-                      delete dataset[ not_vote ][ user ];
-                  }
+                // has already voted?
+                if ( dataset[ vote ][ user ] ) {
+                    // revert vote
+                    delete dataset[ vote ][ user ];
+                }
+                // not voted
+                else {
 
-                  // update dataset for rendering => (re)render own content
-                  self.data.store.set( dataset, function () { self.start(); } );
-              } );
-            }
+                    // proceed voting
+                    dataset[ vote ][ user ] = true;
+
+                    // revert voting of opposite category
+                    delete dataset[ not_vote ][ user ];
+                }
+
+                // update dataset for rendering => (re)render own content
+                self.data.store.set( dataset, function () { self.start(); } );
+            } );
+          }
 
 
-          } );
+        } );
 
-        };
+      };
 
-        this.getVoting = function () {
-         return total;
-        }
-
+      this.getVoting = function () {
+       return total;
       }
-    };
 
-    var namespace = window.ccm && ccm.components[ component_name ]; if ( namespace ) { if ( namespace.ccm_version ) ccm_version = namespace.ccm_version; if ( namespace.ccm_url ) ccm_url = namespace.ccm_url; }
-    if ( !window.ccm || !ccm[ ccm_version ] ) { var tag = document.createElement( 'script' ); document.head.appendChild( tag ); tag.onload = register; tag.src = ccm_url; } else register();
-    function register() { ccm[ ccm_version ].component( component_obj ); }
+    }
+  };
+
+  if ( window.ccm && window.ccm.files ) window.ccm.files[ filename ] = component_obj;
+  var namespace = window.ccm && ccm.components[ component_name ]; if ( namespace ) { if ( namespace.ccm_version ) ccm_version = namespace.ccm_version; if ( namespace.ccm_url ) ccm_url = namespace.ccm_url; }
+  if ( !window.ccm || !ccm[ ccm_version ] ) { var tag = document.createElement( 'script' ); document.head.appendChild( tag ); tag.onload = register; tag.src = ccm_url; } else register();
+  function register() { ccm[ ccm_version ].component( component_obj ); }
 }() );
