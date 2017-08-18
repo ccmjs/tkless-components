@@ -3,8 +3,8 @@ ccm.files[ "forum_datastore.js" ] = {
   {
     "key": "demo",
     "questions": [
-      [ "ccm.get", "../question/configs.json", "1"  ],
-      [ "ccm.get", "../question/configs.json", "2"  ]
+      [ "ccm.get", "https://tkless.github.io/ccm-components/question/question_configs.js", "1"  ],
+      [ "ccm.get", "https://tkless.github.io/ccm-components/question/question_configs.js", "2"  ]
     ]
   }
 }
