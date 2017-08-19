@@ -7,9 +7,12 @@ body {
     justify-content: center;
 }
 
-
 .slide_img img {
     width: 100%;
+}
+
+.inner {
+    max-width: 100%;
 }
 
 .all_slides {
