@@ -37,7 +37,7 @@ ccm.files[ "slidecast_datastore.js" ] = {
         "image": "https://tkless.github.io/ccm-components/slidecast/slides/kolloquium/Folie10.jpg"
       },
       {
-        "image": "shttps://tkless.github.io/ccm-components/slidecast/lides/kolloquium/Folie11.jpg"
+        "image": "https://tkless.github.io/ccm-components/slidecast/slides/kolloquium/Folie11.jpg"
       },
       {
         "image": "https://tkless.github.io/ccm-components/slidecast/slides/kolloquium/Folie12.jpg"
