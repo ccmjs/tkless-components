@@ -18,7 +18,7 @@
     config: {
       templates: {
         "main": {
-          "class": "container",
+          "class": "container-fluid",
           "inner": [
             {
               "class": "page-header",

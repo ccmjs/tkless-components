@@ -18,7 +18,7 @@
     config: {
       templates: {
         "main": {
-          "class": "container",
+          "class": "container-fluid",
           "inner": [
             {
               "id": "answers_view",
