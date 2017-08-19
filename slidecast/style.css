@@ -12,7 +12,7 @@ body {
 }
 
 .inner {
-    max-width: 100%;
+    width: 544px;
 }
 
 .all_slides {
