@@ -7,6 +7,7 @@
 ( function () {
 
   var component  = {
+
     name: 'question',
     version:[ 1,0,0 ],
 
@@ -163,7 +164,6 @@
           ]
         }
       },
-
       data: {
         store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/question/question_datastore.js' ],
         key: "1"
@@ -185,7 +185,7 @@
             [{ 'align': [] }]
         ] }
       ],
-      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/ccm.voting.js", {
+      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js", {
         data: {
           store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ]
         }

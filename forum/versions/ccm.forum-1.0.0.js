@@ -183,7 +183,7 @@
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
       style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/forum/style.css' ],
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
             ['bold', 'italic', 'underline'],        // toggled buttons
@@ -198,9 +198,10 @@
             [{ 'align': [] }]
         ] }
       ],
-      question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/ccm.question.js' ],
+      question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/versions/ccm.question-1.0.0.js' ],
       new_question_conf: { data: { store: [ 'ccm.store' ] } },
-      bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
+      bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
 
     Instance: function () {
