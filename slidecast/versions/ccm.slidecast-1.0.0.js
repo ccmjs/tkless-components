@@ -7,11 +7,13 @@
 ( function () {
 
   var component = {
-
     name: 'slidecast',
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
-
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       templates: {
@@ -104,8 +106,105 @@
         }
       },
       img_width:    720,
-      slides:       [ 'ccm.get',   '../slidecast/slidecast_datastore.js', 'demo_offline.slides'],
-      style_global: [ 'ccm.load',  '../slidecast/style.css' ],
+      slides:       [ 'ccm.get',   'https://akless.github.io/ccm-components/slidecast/slidecast_datastore.js', 'demo_online.slides'],
+      style_global: [ 'ccm.load',  'https://akless.github.io/ccm-components/slidecast/style.css' ],
+      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+    },
+
+    config: {
+      templates: {
+        "main":    {
+          "class": "main",
+          "inner": [
+            { "class": "slide",
+              "inner": [
+                {
+                  "class": "inner",
+                  "inner": [
+                    {
+                      "class": "slide_img"
+                    },
+                    {
+                      "class": "nav",
+                      "inner": [
+                        {
+                          "class": "all fa fa-th-list fa-lg",
+                          "onclick": "%all%"
+                        },
+                        {
+                          "class": "prev disabled fa fa-chevron-left fa-lg",
+                          "onclick": "%prev%"
+                        },
+                        {
+                          "class": "first disabled fa fa-step-backward fa-lg",
+                          "onclick": "%first%"
+                        },
+                        {
+                          "class": "audio"
+                        },
+                        {
+                          "class": "last fa fa-step-forward fa-lg",
+                          "onclick": "%last%"
+                        },
+                        {
+                          "class": "next fa fa-chevron-right fa-lg",
+                          "onclick": "%next%"
+                        },
+                        {
+                          "class": "descr fa fa-file-text-o fa-lg",
+                          "onclick": "%description%"
+                        }
+                      ]
+                    },
+                    { "class": "description",
+                      "inner" : {
+                        "inner": "%p%"
+                      }
+                    }
+                  ]
+                }
+
+              ]
+            },
+            {"class": "opt_content" }
+          ]
+        },
+        "overlay": {
+          "class": "overlay",
+          "inner": [
+            {
+              "class": "all_slides"
+            }
+          ]
+        },
+        "slide":   {
+          "class": "%size%",
+          "inner": [
+            {
+              "inner": [
+                {
+                  "tag": "img",
+                  "src": "%src%",
+                  "onclick": "%click%"
+                }
+              ]
+            },
+            {
+              "class": "slide_number",
+              "inner": "%slide_number%"
+            }
+          ]
+
+        },
+        "back":    {
+          "class": " back_to_current fa fa-arrow-circle-o-left fa-5x",
+          "onclick": "%back%"
+        }
+      },
+      img_width:    720,
+      slides:       [ 'ccm.get',   'https://tkless.github.io/ccm-components/slidecast/slidecast_datastore.js', 'demo_offline.slides'],
+      style_global: [ 'ccm.load',  'https://tkless.github.io/ccm-components/slidecast/style.css' ],
       icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
@@ -180,8 +279,8 @@
         renderSlides();
 
         //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
-        var width = self.width || self.element.querySelector('img').offsetWidth;
-        self.element.querySelector('.inner').style.width = width + 'px';
+        //var width = self.width || self.element.querySelector('img').offsetWidth;
+        //self.element.querySelector('.inner').style.width = width + 'px';
 
 
         function renderSlide( slide ) {

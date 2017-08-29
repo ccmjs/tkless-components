@@ -12,7 +12,7 @@ body {
 }
 
 .inner {
-    width: 544px;
+    min-width: 544px;
 }
 
 .all_slides {
