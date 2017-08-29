@@ -7,6 +7,7 @@
 ( function () {
 
   var component = {
+
     name: 'slidecast',
     version:[ 1,0,0 ],
 

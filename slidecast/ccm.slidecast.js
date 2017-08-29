@@ -12,7 +12,6 @@
 
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
-
     config: {
       templates: {
         "main":    {
