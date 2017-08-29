@@ -9,12 +9,17 @@
   var component  = {
 
     index: 'thumb_rating',
+    version:[ 1,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       data: { store: [ 'ccm.store' ] },
-      style: [ 'ccm.load', '../thumb_rating/style.css' ],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/thumb_rating/style.css' ],
       icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
     },
