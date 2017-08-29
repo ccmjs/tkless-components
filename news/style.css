@@ -1,5 +1,4 @@
 .ccm-posts {
-  font-family: Verdana, Helvetica, Sans-Serif;
   font-size: 90%;
   margin: 0;
   padding: 0.6em;
@@ -15,6 +14,7 @@
 .post {
   display: flex;
   flex-direction: column;
+  font-family: sans-Serif;
 }
 
 .head {
@@ -28,7 +28,6 @@
   justify-content: center;
   font-weight: bold;
   font-size: 110%;
-  font-family: "Arial", sans-serif;
   order: 1;
 }
 
