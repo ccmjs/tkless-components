@@ -9,8 +9,13 @@
   var component = {
 
     name: 'forum',
+    version:[ 1,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       templates: {
@@ -33,7 +38,7 @@
                     "class": "form-horizontal",
                     "inner": [
                       {
-                        "class": "form-group col-sm-12",
+                        "class": "form-group",
                         "id": "new-title",
                         "inner":
                           [
@@ -57,7 +62,7 @@
                       },
                       {
                         "id": "editor",
-                        "class": "form-group col-sm-12",
+                        "class": "form-group",
                         "inner": [
                           {
                             "tag":  "input",
@@ -71,7 +76,7 @@
                       },
                       {
                         "id": "button",
-                        "class": "form-group col-sm-12",
+                        "class": "form-group",
                         "inner": {
                           "class": "row",
                           "inner": {
@@ -177,23 +182,23 @@
         key: "demo"
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      style: [ 'ccm.load', '../forum/style.css' ],
-      editor: [ 'ccm.component', '../editor/ccm.editor.js',
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/forum/style.css' ],
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
-          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-          ['bold', 'italic', 'underline'],        // toggled buttons
-          ['blockquote', 'code-block'],
+            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            ['bold', 'italic', 'underline'],        // toggled buttons
+            ['blockquote', 'code-block'],
 
-          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+            [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
 
-          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-          [{ 'align': [] }]
+            [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+            [{ 'align': [] }]
         ] }
       ],
-      question: [ 'ccm.component', '../question/ccm.question.js' ],
+      question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/ccm.question.js' ],
       new_question_conf: { data: { store: [ 'ccm.store' ] } },
       bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },

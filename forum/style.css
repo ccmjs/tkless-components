@@ -1,7 +1,8 @@
-.container {
+.container-fluid {
     font-family:sans-serif;
     -webkit-text-size-adjust:100%;
-    -ms-text-size-adjust:100%
+    -ms-text-size-adjust:100%;
+    margin-top: 15px;
 }
 hr {
     margin-bottom: 40px !important;
