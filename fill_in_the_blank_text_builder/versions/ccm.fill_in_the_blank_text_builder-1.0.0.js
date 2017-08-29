@@ -2,7 +2,7 @@
  * @overview ccm component for building a fill-in-the-blank text
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
- * @version latest (1.0.0)
+ * @version 1.0.0
  */
 
 ( function () {
@@ -10,8 +10,13 @@
   var component = {
 
     name: 'fill_in_the_blank_text_builder',
+    version:[ 1,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       templates: {
@@ -289,7 +294,7 @@
 
       },
 
-      editor: [ 'ccm.component', '../editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
           ['bold', 'italic', 'underline'],        // toggled buttons
@@ -306,9 +311,9 @@
           'settings.placeholder': 'Type here...'
         }
       ],
-      style: [ 'ccm.load', '../fill_in_the_blank_text_builder/style.css' ],
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/style.css' ],
       bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
-      preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/versions/ccm.cloze-2.0.0.js' ],
+      preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/ccm.cloze.min.js' ],
       onfinish: {
         log: true,
         store_settings: { store: "clozes", url: "wss://ccm.inf.h-brs.de" },
