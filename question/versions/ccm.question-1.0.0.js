@@ -7,10 +7,14 @@
 ( function () {
 
   var component  = {
-
     name: 'question',
+    version:[ 1,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       templates: {
@@ -165,8 +169,8 @@
         key: "1"
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js', { logged_in: true, 'guest.user': 'tmeskh2s' } ],
-      style: [ 'ccm.load', '../question/style.css' ],
-      editor: [ 'ccm.component', '../editor/ccm.editor.js',
+      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/question/style.css' ],
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
             ['bold', 'italic', 'underline'],        // toggled buttons
@@ -181,9 +185,9 @@
             [{ 'align': [] }]
         ] }
       ],
-      voting: [ "ccm.component", "../voting/ccm.voting.js", {
+      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/ccm.voting.js", {
         data: {
-          store: [ 'ccm.store', '../voting/voting_datastore.js' ]
+          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ]
         }
       } ],
       bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
