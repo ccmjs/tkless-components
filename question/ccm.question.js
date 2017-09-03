@@ -186,6 +186,7 @@
           store: [ 'ccm.store', '../voting/voting_datastore.js' ]
         }
       } ],
+      dateTime: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ],
       bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
@@ -219,12 +220,12 @@
 
         function renderQuestion() {
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
+          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
             title: dataset.title,
             signatur: "posted " + dataset.date,
             question: dataset.content,
             new_answer: function () { newAnswer(); }
-          })));
+          }));
 
           if ( !self.user || !self.user.isLoggedIn() )
             return;

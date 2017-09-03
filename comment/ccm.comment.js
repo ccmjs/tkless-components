@@ -15,53 +15,67 @@
     config: {
       templates: {
         "main": {
-          "key": "main",
-          "class": "main",
+          "class": "container",
           "inner": [
-            { "class": "comments" },
-            { "class": "editor" },
+            { "id": "comment-list" },
             {
-              "class": "button",
-              "inner": {
-                "tag": "button",
-                "onclick": "%click%",
-                "inner": "%label%"
-              }
+              "id": "new-comment",
+              "inner": [
+                {
+                  "tag": "span",
+                  "class": "glyphicon glyphicon-plus-sign",
+                  "aria-hidden": "true"
+                },
+                "&nbsp;add comment"
+              ]
             }
           ]
         },
-        "comment": {
-          "key": "comment",
-          "class": "comment",
+        "simple_comment": {
           "inner": [
             {
-              "class": "head",
+              "tag": "comment-item",
               "inner": [
+                "%comment_content% - ",
                 {
-                  "class": "user",
+                  "tag": "span",
+                  "class": "sub-text",
                   "inner": [
-                    { "class": "avatar" },
-                    { "class": "name" }
+                    {
+                      "tag": "span",
+                      "class": "glyphicon glyphicon-user",
+                      "aria-hidden": "true"
+                    },
+                    "&nbsp;%user%&nbsp;",
+                    {
+                      "tag": "span",
+                      "class": "glyphicon glyphicon-time",
+                      "aria-hidden": "true"
+                    },
+                    "&nbsp;%date%&nbsp;"
                   ]
-                },
-                { "class": "date" }
+                }
               ]
             },
             {
-              "class": "body",
-              "inner": [
-                { "class": "content" }
-              ]
+              "tag": "hr"
             }
           ]
-        }
+        },
+        "expand_comment": {}
       },
+
+      comment_template: 'simple', // or expand
       data: {
         store: [ 'ccm.store', '../comment/datastore.json' ],
         key: 'test'
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js', { logged_in: true, 'guest.user': 'tmeskh2s' } ],
-      editor: [ 'ccm.component', '../editor/ccm.editor.js' ]
+      editor: [ 'ccm.component', '../editor/ccm.editor.js' ],
+      dateTime: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ],
+      css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        '../comment/style.css',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
 
     Instance: function () {
@@ -72,16 +86,40 @@
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
           if ( !dataset.comments ) dataset.comments = [];
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
-            click: function () {
-              console.log( 'click!', self.editor.get().getContents() );
-            },
-            label: 'send'
-          } ) ) );
+          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main ) );
 
+          renderComments();
           renderEditor();
+          
+          function renderComments() {
+            self.element.querySelector( '#comment-list').innerHTML = '';
+
+            dataset.comments.map( renderComment );
+          }
+
+          function renderComment( comment ) {
+
+            var comment_elem;
+
+            if( self.comment_template === 'simple' ) {
+              // generate on-the-fly element
+              comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
+                comment_content: comment.content,
+                user: comment.owner,
+                date: comment.date
+              });
+            }
+
+            console.log(comment_elem);
+
+            // append element to DOM
+            self.element.querySelector('#comment-list').appendChild( comment_elem );
+
+          }
 
           function renderEditor() {
+            return;
+
             if (!self.user || !self.user.isLoggedIn()) return;
 
             var user = self.user.data().user;

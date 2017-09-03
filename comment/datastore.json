@@ -4,15 +4,13 @@
     "comments": [
       {
         "owner": "mmuster2s",
-        "created_at": "2017-02-01 12:00",
-        "updated_at": "2017-02-01 12:05",
-        "content": "Hallo Welt!"
+        "date": "min ago",
+        "content": "Überall dieselbe alte Leier. Das Layout ist fertig, der Text lässt auf sich warten. Damit das Layout nun nicht nackt im Raume steht und sich klein und leer vorkommt, springe ich ein: der Blindtext. Genau"
       },
       {
-        "owner": "mmuster2s",
-        "created_at": "2017-02-01 12:10",
-        "updated_at": "2017-02-01 12:10",
-        "content": "Die ist ein Kommentar, indem auch Textformatierungen wie 'fett', 'kursiv' und Hyperlinks möglich sein sollen."
+        "owner": "kschuster2s",
+        "date": "year ago",
+        "content": "Zwei flinke Boxer jagen die quirlige Eva und ihren Mops durch Sylt. Franz jagt im komplett verwahrlosten Taxi quer durch Bayern. Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich. Vogel Quax zwickt Johnys"
       }
     ]
   }
