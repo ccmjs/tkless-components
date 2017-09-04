@@ -179,7 +179,8 @@
 
             [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
             [{ 'align': [] }]
-        ] }
+          ]
+        }
       ],
       voting: [ "ccm.component", "../voting/ccm.voting.js", {
         data: {

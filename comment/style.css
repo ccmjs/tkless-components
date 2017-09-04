@@ -1,5 +1,5 @@
-.ccm-comment {
-    font-size: 13px;
+#element {
+    margin-top: 10px;
 }
 
 .sub-text {
@@ -9,6 +9,34 @@
 }
 
 hr {
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.comment-item {
+    display: flex;
+}
+
+.voting-area {
+    margin-right: 10px;
+}
+
+.fade-comment {
+    width:  100%;
+    height: 100%;
+    -webkit-animation: fadeinout 2s ease-in forwards;
+    animation: fadeinout 2s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
+    100% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+    100% { opacity: 1; }
+}
+
+button {
+    margin-left: 14px;
 }

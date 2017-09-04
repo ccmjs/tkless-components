@@ -20,7 +20,7 @@
             {
               "tag": "div",
               "id": "likes",
-              "class": "fa fa-chevron-circle-up fa-2x",
+              "class": "fa fa-chevron-circle-up fa-lg",
               "onclick": "%up_vote%"
             },
             {
@@ -30,7 +30,7 @@
             {
               "tag": "div",
               "id": "dislikes",
-              "class": "fa fa-chevron-circle-down fa-2x",
+              "class": "fa fa-chevron-circle-down fa-lg",
               "onclick": "%down_vote%"
             }
           ]

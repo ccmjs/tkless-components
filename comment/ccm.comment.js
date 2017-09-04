@@ -19,14 +19,28 @@
           "inner": [
             { "id": "comment-list" },
             {
-              "id": "new-comment",
+              "tag": "form",
               "inner": [
                 {
-                  "tag": "span",
-                  "class": "glyphicon glyphicon-plus-sign",
-                  "aria-hidden": "true"
-                },
-                "&nbsp;add comment"
+                  "class": "row",
+                  "id": "new-comment",
+                  "inner": [
+                    {
+                      "tag": "button",
+                      "type": "button",
+                      "class": "btn btn-default btn-xs",
+                      "onclick": "%render_editor%",
+                      "inner": [
+                        {
+                          "tag": "span",
+                          "class": "glyphicon glyphicon-plus-sign",
+                          "aria-hidden": "true"
+                        },
+                        "&nbsp;add comment"
+                      ]
+                    }
+                  ]
+                }
               ]
             }
           ]
@@ -34,27 +48,36 @@
         "simple_comment": {
           "inner": [
             {
-              "tag": "comment-item",
+              "class": "comment-item",
               "inner": [
-                "%comment_content% - ",
                 {
-                  "tag": "span",
-                  "class": "sub-text",
+                  "class": "voting-area"
+                },
+                {
+                  "class": "comment-overview",
                   "inner": [
+                    "%comment_content% - ",
                     {
                       "tag": "span",
-                      "class": "glyphicon glyphicon-user",
-                      "aria-hidden": "true"
-                    },
-                    "&nbsp;%user%&nbsp;",
-                    {
-                      "tag": "span",
-                      "class": "glyphicon glyphicon-time",
-                      "aria-hidden": "true"
-                    },
-                    "&nbsp;%date%&nbsp;"
+                      "class": "sub-text",
+                      "inner": [
+                        {
+                          "tag": "span",
+                          "class": "glyphicon glyphicon-user",
+                          "aria-hidden": "true"
+                        },
+                        "&nbsp;%user%&nbsp;",
+                        {
+                          "tag": "span",
+                          "class": "glyphicon glyphicon-time",
+                          "aria-hidden": "true"
+                        },
+                        "&nbsp;%date%&nbsp;"
+                      ]
+                    }
                   ]
                 }
+
               ]
             },
             {
@@ -62,7 +85,32 @@
             }
           ]
         },
-        "expand_comment": {}
+        "expand_comment": {},
+        "editor":{
+          "inner": [
+            {
+              "class": "row form-group",
+              "inner":
+                {
+                  "class": "container-fluid",
+                  "id": "editor"
+                }
+            },
+            {
+              "class": "row",
+              "id": "add-comment",
+              "inner": [
+                {
+                  "tag": "button",
+                  "type": "button",
+                  "class": "btn btn-default btn-xs",
+                  "onclick": "%add_comment%",
+                  "inner": "&nbsp;add comment"
+                }
+              ]
+            }
+          ]
+        }
       },
 
       comment_template: 'simple', // or expand
@@ -70,8 +118,17 @@
         store: [ 'ccm.store', '../comment/datastore.json' ],
         key: 'test'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js', { logged_in: true, 'guest.user': 'tmeskh2s' } ],
-      editor: [ 'ccm.component', '../editor/ccm.editor.js' ],
+      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
+      editor: [ 'ccm.component', '../editor/ccm.editor.js',
+        { 'settings.modules.toolbar': false },
+        { 'settings.placeholder': 'Write your comment here ...' }
+
+      ],
+      voting: [ "ccm.component", "../voting/ccm.voting.js", {
+        data: {
+          store: [ 'ccm.store', '../voting/voting_datastore.js' ]
+        }
+      } ],
       dateTime: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ],
       css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
         '../comment/style.css',
@@ -86,10 +143,14 @@
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
           if ( !dataset.comments ) dataset.comments = [];
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main ) );
+          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
+            render_editor: function () {
+              self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
+              renderEditor();
+            }
+          } ) );
 
           renderComments();
-          renderEditor();
           
           function renderComments() {
             self.element.querySelector( '#comment-list').innerHTML = '';
@@ -110,30 +171,37 @@
               });
             }
 
-            console.log(comment_elem);
-
             // append element to DOM
             self.element.querySelector('#comment-list').appendChild( comment_elem );
+
+            renderVoting( comment_elem.querySelector( '.voting-area' ) );
+
+          }
+
+          function renderVoting( element, voting ) {
+            if ( !self.user ) return;
+            self.voting.start( voting, function ( voting_inst ) {
+              element.appendChild( voting_inst.root );
+            } );
 
           }
 
           function renderEditor() {
-            return;
+            if ( !self.user ) return;
 
-            if (!self.user || !self.user.isLoggedIn()) return;
+            self.element.querySelector( '#new-comment' ).innerHTML = '';
 
-            var user = self.user.data().user;
+            var editor_elem = self.ccm.helper.html( self.templates.editor );
 
-            self.editor.start( { root: self.element.querySelector( '.editor' ) }, function (instance) {
-              if (user !== dataset.user) {
-                editor = instance;
-              }
-              else {
-                editor = instance;
-                editor.get().enable( false );
-              }
-            } );
+            self.user.login( function () {
+              self.editor.start( function (instance) {
+                editor_elem.querySelector( '#editor' ).appendChild( instance.root );
+              } );
+            });
+
+            self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
+
 
         } );
       };
