@@ -17,12 +17,15 @@
         "main": {
           "class": "container",
           "inner": [
-            { "id": "comment-list" },
+            {
+              "id": "comment-list",
+              "class": "row"
+            },
             {
               "tag": "form",
+              "class": "row",
               "inner": [
                 {
-                  "class": "row",
                   "id": "new-comment",
                   "inner": [
                     {
@@ -48,13 +51,13 @@
         "simple_comment": {
           "inner": [
             {
-              "class": "comment-item",
+              "class": "row comment-item",
               "inner": [
                 {
-                  "class": "voting-area"
+                  "class": "col-md-1 col-xs-1 voting-area"
                 },
                 {
-                  "class": "comment-overview",
+                  "class": "col-md-11 col-xs-11 comment-overview",
                   "inner": [
                     "%comment_content% - ",
                     {
@@ -81,7 +84,8 @@
               ]
             },
             {
-              "tag": "hr"
+              "tag": "hr",
+              "class": "row"
             }
           ]
         },
