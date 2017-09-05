@@ -14,9 +14,12 @@
 
     config: {
       data: { store: [ 'ccm.store' ] },
-      style: [ 'ccm.load', '../thumb_rating/style.css' ],
-      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+
+      libs: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: 'head' },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        '../thumb_rating/style.css'
+      ]
     },
 
     Instance: function () {
