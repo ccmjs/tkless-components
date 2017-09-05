@@ -108,7 +108,7 @@
 
             self.user.login( function () {
 
-              var user = self.user.data().key;
+              var user = self.user.data().user;
               var not_vote;
 
               if ( vote === 'likes' ) not_vote = 'dislikes';

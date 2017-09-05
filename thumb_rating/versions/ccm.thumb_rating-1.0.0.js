@@ -99,7 +99,7 @@
             // user is logged in?
             if ( self.user.isLoggedIn() ) {
 
-              var user = self.user.data().key;
+              var user = self.user.data().user;
 
               // highlight button if already voted
               if ( dataset.likes   [ user ] ) div[ 'likes'    ].classList.add( 'selected' );
@@ -125,7 +125,7 @@
                   // login user if not logged in
                   self.user.login( function () {
 
-                    var user = self.user.data().key;
+                    var user = self.user.data().user;
 
                     // has already voted?
                     if ( dataset[ index ][ user ] ) {

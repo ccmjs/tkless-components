@@ -141,6 +141,19 @@
 
     Instance: function () {
       var self = this;
+      var editor;
+      var dataset;
+
+      this.init = function ( callback ) {
+
+        // listen to change event of ccm realtime datastore => (re)render own content
+        self.data.store.onChange = function ( question ) {
+          dataset = question;
+          self.start();
+        };
+
+        callback();
+      };
 
       this.start = function ( callback ) {
 
@@ -170,13 +183,13 @@
               // generate on-the-fly element
               comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
                 comment_content: comment.content,
-                user: comment.owner,
-                date: comment.date
+                user: comment.user,
+                date: moment( comment.date ).fromNow()
               });
             }
 
-            // append element to DOM
-            self.element.querySelector('#comment-list').appendChild( comment_elem );
+            // prepend element to DOM
+            self.ccm.helper.prepend( self.element.querySelector( '#comment-list' ), comment_elem );
 
             renderVoting( comment_elem.querySelector( '.voting-area' ) );
 
@@ -195,19 +208,43 @@
 
             self.element.querySelector( '#new-comment' ).innerHTML = '';
 
-            var editor_elem = self.ccm.helper.html( self.templates.editor );
+            var editor_elem = self.ccm.helper.html( self.templates.editor, {
+              add_comment: function () {
+                newComment();
+              }
+            } );
 
             self.user.login( function () {
+              console.log( self.user.data().user, self.user.isLoggedIn() );
               self.editor.start( function (instance) {
                 editor_elem.querySelector( '#editor' ).appendChild( instance.root );
+                editor = instance
               } );
             });
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
+          
+          function newComment() {
+
+            console.log( editor.get().root.innerHTML,  moment().format()  );
+
+            dataset.comments.push(
+              {
+                "date": moment().format(),
+                "user": self.user.data().user,
+                "content": editor.get().root.innerHTML.trim(),
+                "voting": { }
+              } );
+
+            // update dataset for rendering => (re)render accepted answer
+            self.data.store.set( dataset, function () { renderComments(); } );
+          }
 
 
         } );
+
+        if ( callback ) callback();
       };
     }
   };

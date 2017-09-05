@@ -81,7 +81,7 @@
                 click: function () { if ( self.user ) doVoting(); }
               } );
 
-              if ( self.user && self.user.isLoggedIn() && dataset[ i ] && dataset[ i ][ self.user.data().key ] ) input_elem.checked = true;
+              if ( self.user && self.user.isLoggedIn() && dataset[ i ] && dataset[ i ][ self.user.data().user ] ) input_elem.checked = true;
               main_elem.appendChild( input_elem );
 
               main_elem.appendChild( self.ccm.helper.html( self.templates.label, {

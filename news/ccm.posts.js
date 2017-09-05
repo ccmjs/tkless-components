@@ -228,7 +228,7 @@
           function newPost() {
             return {
               date: getDateTime(),
-              user: self.user.data().key,
+              user: self.user.data().user,
               avatar: self.user.data().avatar || ''
             }
           }

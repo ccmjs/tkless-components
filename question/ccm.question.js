@@ -214,7 +214,6 @@
           dataset = question;
         } );
 
-
         renderQuestion();
         renderAnswers();
         renderEditor();
