@@ -120,12 +120,6 @@
             dislikes_elem.parentNode.removeChild( dislikes_elem );
           }
 
-          //disabled icons if user is not logged in
-          if ( !self.user.isLoggedIn() ) {
-              self.element.querySelector('#likes').classList.add('disabled');
-              self.element.querySelector('#dislikes').classList.add('disabled');
-          }
-
           if ( callback )callback();
 
           function doVoting( vote ) {
