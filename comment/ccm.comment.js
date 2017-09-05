@@ -120,7 +120,7 @@
       comment_template: 'simple', // or expand
       data: {
         store: [ 'ccm.store', '../comment/datastore.json' ],
-        key: 'test'
+        key: 'demo'
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
@@ -129,13 +129,16 @@
 
       ],
       voting: [ "ccm.component", "../voting/ccm.voting.js", {
+        icon_likes: 'glyphicon glyphicon-chevron-up',
+        icon_dislikes: 'glyphicon glyphicon-chevron-down',
         data: {
           store: [ 'ccm.store', '../voting/voting_datastore.js' ]
         }
       } ],
-      dateTime: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ],
-      css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+
+      libs: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
         '../comment/style.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
 
@@ -176,7 +179,6 @@
           }
 
           function renderComment( comment ) {
-
             var comment_elem;
 
             if( self.comment_template === 'simple' ) {
@@ -197,6 +199,7 @@
 
           function renderVoting( element, voting ) {
             if ( !self.user ) return;
+
             self.voting.start( voting, function ( voting_inst ) {
               element.appendChild( voting_inst.root );
             } );
@@ -209,13 +212,10 @@
             self.element.querySelector( '#new-comment' ).innerHTML = '';
 
             var editor_elem = self.ccm.helper.html( self.templates.editor, {
-              add_comment: function () {
-                newComment();
-              }
+              add_comment: function () { newComment() }
             } );
 
             self.user.login( function () {
-              console.log( self.user.data().user, self.user.isLoggedIn() );
               self.editor.start( function (instance) {
                 editor_elem.querySelector( '#editor' ).appendChild( instance.root );
                 editor = instance
@@ -227,13 +227,11 @@
           
           function newComment() {
 
-            console.log( editor.get().root.innerHTML,  moment().format()  );
-
             dataset.comments.push(
               {
                 "date": moment().format(),
                 "user": self.user.data().user,
-                "content": editor.get().root.innerHTML.trim(),
+                "content": editor.get().getText(),
                 "voting": { }
               } );
 

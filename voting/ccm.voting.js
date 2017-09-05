@@ -20,7 +20,7 @@
             {
               "tag": "div",
               "id": "likes",
-              "class": "fa fa-chevron-circle-up fa-lg",
+              "class": "%likes%",
               "onclick": "%up_vote%"
             },
             {
@@ -30,20 +30,26 @@
             {
               "tag": "div",
               "id": "dislikes",
-              "class": "fa fa-chevron-circle-down fa-lg",
+              "class": "%dislikes%",
               "onclick": "%down_vote%"
             }
           ]
         }
       },
+
+      icon_dislikes: 'fa fa-lg fa-chevron-circle-down',
+      icon_likes: 'fa fa-lg fa-chevron-circle-up',
       data:  {
           store: [ 'ccm.store', '../voting/voting_datastore.js' ],
           key:   'demo'
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
-      style: [ 'ccm.load', '../voting/style.css' ],
-      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+      libs: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        '../voting/style.css'
+      ]
     },
 
     Instance: function () {
@@ -77,10 +83,12 @@
           total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
 
           self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
+            likes: self.icon_likes,
             up_vote:   function () {
                 doVoting( 'likes' );
                 total++;
             },
+            dislikes: self.icon_dislikes,
             down_vote: function () {
                 doVoting( 'dislikes' );
                 total--;
