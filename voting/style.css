@@ -1,5 +1,5 @@
-.fa-chevron-circle-up,
-.fa-chevron-circle-down {
+#likes,
+#dislikes {
     cursor: pointer;
 }
 

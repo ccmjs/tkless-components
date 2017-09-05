@@ -48,6 +48,44 @@
             }
           ]
         },
+        "editor":{
+          "inner": [
+            {
+              "class": "row form-group",
+              "inner":
+                {
+                  "class": "container-fluid",
+                  "id": "editor"
+                }
+            },
+            {
+              "class": "row",
+              "id": "add-comment",
+              "inner": [
+                {
+                  "tag": "button",
+                  "type": "button",
+                  "class": "btn btn-default btn-xs",
+                  "onclick": "%add_comment%",
+                  "inner": "&nbsp;add comment"
+                }
+              ]
+            }
+          ]
+        },
+        "voting_overview": {
+          "class": "voting_overview row",
+          "inner": [
+            {
+              "class": "col-md-12",
+              "inner": "%get_voting%"
+            },
+            {
+              "class": "col-md-12",
+              "inner": "votes"
+            }
+          ]
+        },
         "simple_comment": {
           "inner": [
             {
@@ -89,32 +127,7 @@
             }
           ]
         },
-        "expand_comment": {},
-        "editor":{
-          "inner": [
-            {
-              "class": "row form-group",
-              "inner":
-                {
-                  "class": "container-fluid",
-                  "id": "editor"
-                }
-            },
-            {
-              "class": "row",
-              "id": "add-comment",
-              "inner": [
-                {
-                  "tag": "button",
-                  "type": "button",
-                  "class": "btn btn-default btn-xs",
-                  "onclick": "%add_comment%",
-                  "inner": "&nbsp;add comment"
-                }
-              ]
-            }
-          ]
-        }
+        "expand_comment": {}
       },
 
       comment_template: 'simple', // or expand
@@ -129,10 +142,11 @@
 
       ],
       voting: [ "ccm.component", "../voting/ccm.voting.js", {
-        icon_likes: 'glyphicon glyphicon-chevron-up',
-        icon_dislikes: 'glyphicon glyphicon-chevron-down',
+        icon_likes: 'fa fa-lg fa-chevron-up',
+        icon_dislikes: 'fa fa-lg fa-chevron-down',
         data: {
-          store: [ 'ccm.store', '../voting/voting_datastore.js' ]
+          store: [ 'ccm.store', '../comment/datastore.json' ],
+          key: 'demo'
         }
       } ],
 
@@ -193,7 +207,10 @@
             // prepend element to DOM
             self.ccm.helper.prepend( self.element.querySelector( '#comment-list' ), comment_elem );
 
-            renderVoting( comment_elem.querySelector( '.voting-area' ) );
+
+            //if voting is set then render voting-component
+            if ( self.voting )
+              renderVoting( self.element.querySelector( '.voting-area' ), dataset.voting );
 
           }
 
@@ -236,7 +253,7 @@
               } );
 
             // update dataset for rendering => (re)render accepted answer
-            self.data.store.set( dataset, function () { renderComments(); } );
+            self.data.store.set( dataset, function () { renderComments() } );
           }
 
 

@@ -84,7 +84,7 @@
 
           total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
+          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
             likes: self.icon_likes,
             up_vote:   function () {
                 doVoting( 'likes' );
@@ -95,12 +95,33 @@
                 doVoting( 'dislikes' );
                 total--;
             }
-          } ) ) );
+          } ) );
+
+          setIconAvailability();
 
           self.element.querySelector( '#total' ).innerHTML = total;
 
-          //no voting possible without user instance
-          if ( !self.user || !self.user.isLoggedIn() ) {
+          function setIconAvailability() {
+            if ( !self.user || !self.user.isLoggedIn() ) return;
+            var user = self.user.data().user;
+
+            if ( dataset.likes[ user ] )
+              self.element.querySelector('#likes').classList.add('disabled');
+
+            else self.element.querySelector('#dislikes').classList.add('disabled');
+
+          }
+
+          if ( !self.user ){
+            var likes_elem = self.element.querySelector('#likes');
+            likes_elem.parentNode.removeChild( likes_elem );
+
+            var dislikes_elem = self.element.querySelector('#dislikes');
+            dislikes_elem.parentNode.removeChild( dislikes_elem );
+          }
+
+          //disabled icons if user is not logged in
+          if ( !self.user.isLoggedIn() ) {
               self.element.querySelector('#likes').classList.add('disabled');
               self.element.querySelector('#dislikes').classList.add('disabled');
           }
