@@ -120,8 +120,6 @@
             dislikes_elem.parentNode.removeChild( dislikes_elem );
           }
 
-          if ( callback )callback();
-
           function doVoting( vote ) {
             if ( !self.user ) return;
 
@@ -133,26 +131,27 @@
               if ( vote === 'likes' ) not_vote = 'dislikes';
               else not_vote = 'likes';
 
-                // has already voted?
-                if ( dataset[ vote ][ user ] ) {
-                    // revert vote
-                    delete dataset[ vote ][ user ];
-                }
-                // not voted
-                else {
+              // has already voted?
+              if ( dataset[ vote ][ user ] ) {
+                // revert vote
+                delete dataset[ vote ][ user ];
+              }
+              // not voted
+              else {
 
-                    // proceed voting
-                    dataset[ vote ][ user ] = true;
+                // proceed voting
+                dataset[ vote ][ user ] = true;
 
-                    // revert voting of opposite category
-                    delete dataset[ not_vote ][ user ];
-                }
+                // revert voting of opposite category
+                delete dataset[ not_vote ][ user ];
+              }
 
-                // update dataset for rendering => (re)render own content
-                self.data.store.set( dataset, function () { self.start(); } );
+              // update dataset for rendering => (re)render own content
+              self.data.store.set( dataset, function () { self.start(); } );
             } );
           }
 
+          if ( callback )callback();
 
         } );
 

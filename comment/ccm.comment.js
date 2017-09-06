@@ -130,6 +130,7 @@
         "expand_comment": {}
       },
 
+      sorting_by_voting: true,
       comment_template: 'simple', // or expand
       data: {
         store: [ 'ccm.store', '../comment/datastore.json' ],
@@ -184,40 +185,67 @@
           } ) );
 
           renderComments();
-          
+
           function renderComments() {
+            var unsorted_comments = [];
+
             self.element.querySelector( '#comment-list').innerHTML = '';
 
+            var counter = 1;
+            //asynchronous problem
             dataset.comments.map( renderComment );
-          }
+            check();
 
-          function renderComment( comment ) {
-            var comment_elem;
+            // waiting: all comments and their voting ist put in on-the-fly object
+            function check() {
+              counter--;
+              if( counter > 0 ) return;
 
-            if( self.comment_template === 'simple' ) {
-              // generate on-the-fly element
-              comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
-                comment_content: comment.content,
-                user: comment.user,
-                date: moment( comment.date ).fromNow()
+              if ( self.sorting_by_voting )
+                unsorted_comments.sort( compare );
+
+              unsorted_comments.map( function ( entry ) {
+                // prepend element to DOM
+                self.ccm.helper.prepend( self.element.querySelector( '#comment-list' ), entry.comment );
               });
+
+              function compare( a, b ) {
+                if ( a.voting < b.voting )
+                  return -1;
+                if ( a.voting > b.voting )
+                  return 1;
+                return 0;
+              }
+
             }
 
-            // prepend element to DOM
-            self.ccm.helper.prepend( self.element.querySelector( '#comment-list' ), comment_elem );
+            function renderComment( comment ) {
+              var comment_elem;
 
-            //if voting is set then render voting-component
-            if ( self.voting )
-              renderVoting( self.element.querySelector( '.voting-area' ), comment.voting );
+              if( self.comment_template === 'simple' ) {
+                // generate on-the-fly element
+                comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
+                  comment_content: comment.content,
+                  user: comment.user,
+                  date: moment( comment.date ).fromNow()
+                });
+              }
 
-          }
+              //if voting is set then render voting-component
+              if ( self.voting )
+                renderVoting( comment.voting );
 
-          function renderVoting( element, voting ) {
+              function renderVoting( voting ) {
 
-            self.voting.start( voting, function ( voting_inst ) {
-              element.appendChild( voting_inst.root );
-            } );
+                counter++;
+                self.voting.start( voting, function ( voting_inst ) {
+                  unsorted_comments.push( { "voting": voting_inst.getVoting(), "comment": comment_elem } );
+                  comment_elem.querySelector( '.voting-area' ).appendChild( voting_inst.root );
+                  check();
+                } );
+              }
 
+            }
           }
 
           function renderEditor() {
@@ -246,13 +274,12 @@
                 "user": self.user.data().user,
                 "date": moment().format(),
                 "content": editor.get().getText(),
-                "voting": { 'data.key': dataset.key + '-' + comments.length + 1 }
+                "voting": { 'data.key': dataset.key + '-' + dataset.comments.length + 1 }
               } );
 
             // update dataset for rendering => (re)render accepted answer
             self.data.store.set( dataset, function () { renderComments() } );
           }
-
 
         } );
 

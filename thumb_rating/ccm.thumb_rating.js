@@ -23,9 +23,8 @@
     },
 
     Instance: function () {
-
       var self = this;
-      var my;
+      var total = 0;
 
       this.init = function ( callback ) {
 
@@ -37,9 +36,6 @@
 
       this.ready = function ( callback ) {
 
-        // privatize security relevant config members
-        my = self.ccm.helper.privatize( self );
-
         // listen to login/logout event => (re)render own content
         if ( self.user ) self.user.addObserver( function () { self.start(); } );
 
@@ -49,7 +45,7 @@
       this.start = function ( callback ) {
 
         // get dataset for rendering
-        self.ccm.helper.dataset( my.data.store, my.data.key, function ( dataset ) {
+        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
 
           // render main html structure
           self.ccm.helper.setContent( self.element, self.ccm.helper.html( { class: 'rating' } ) );
@@ -64,6 +60,8 @@
             // set default like and dislike property
             if ( !dataset.likes    ) dataset.likes    = {};
             if ( !dataset.dislikes ) dataset.dislikes = {};
+
+            total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
 
             var rating = self.element.querySelector( '.rating' );
 
@@ -144,7 +142,7 @@
                     }
 
                     // update dataset for rendering => (re)render own content
-                    my.data.store.set( dataset, function () { self.start(); } );
+                    self.data.store.set( dataset, function () { self.start(); } );
 
                   } );
 
@@ -155,6 +153,10 @@
         } );
 
       };
+
+      this.getVoting = function () {
+        return total;
+      }
 
     }
   };
