@@ -214,7 +214,8 @@
                   return -1;
                 if ( a.voting > b.voting )
                   return 1;
-                return 0;
+                return a.date.localeCompare( b.date );
+                //return 0;
               }
 
             }
@@ -244,12 +245,11 @@
 
                 self.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
-                  unsorted_comments.push( { "voting": voting_inst.getVoting(), "comment": comment_elem } );
+                  unsorted_comments.push( { "voting": voting_inst.getVoting(), "comment": comment_elem, "date": comment.date } );
                   comment_elem.querySelector( '.voting-area' ).appendChild( voting_inst.root );
                   check();
                 } );
               }
-
             }
           }
 
@@ -283,7 +283,7 @@
               } );
 
             // update dataset for rendering => (re)render accepted answer
-            self.data.store.set( dataset, function () { renderComments() } );
+            self.data.store.set( dataset, function () { self.start() } );
           }
 
         } );
