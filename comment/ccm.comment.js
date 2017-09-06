@@ -177,19 +177,19 @@
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
           if ( !dataset.comments ) dataset.comments = [];
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
+           var main_elem = self.ccm.helper.html( self.templates.main, {
             render_editor: function () {
               self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
               renderEditor();
             }
-          } ) );
+          } );
 
           renderComments();
 
           function renderComments() {
             var unsorted_comments = [];
 
-            self.element.querySelector( '#comment-list').innerHTML = '';
+            main_elem.querySelector( '#comment-list').innerHTML = '';
 
             var counter = 1;
             //asynchronous problem
@@ -206,8 +206,11 @@
 
               unsorted_comments.map( function ( entry ) {
                 // prepend element to DOM
-                self.ccm.helper.prepend( self.element.querySelector( '#comment-list' ), entry.comment );
+                self.ccm.helper.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
               });
+
+              self.ccm.helper.setContent( self.element, main_elem );
+              if ( callback ) callback();
 
               function compare( a, b ) {
                 if ( a.voting < b.voting )
@@ -215,7 +218,6 @@
                 if ( a.voting > b.voting )
                   return 1;
                 return a.date.localeCompare( b.date );
-                //return 0;
               }
 
             }
@@ -287,8 +289,6 @@
           }
 
         } );
-
-        if ( callback ) callback();
       };
     }
   };

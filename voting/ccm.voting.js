@@ -143,7 +143,7 @@
               }
 
               // update dataset for rendering => (re)render own content
-              self.data.store.set( dataset, function (x) { console.log(x, dataset); self.start(); } );
+              self.data.store.set( dataset, function () { self.start(); } );
             } );
           }
 
