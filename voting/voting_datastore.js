@@ -12,8 +12,8 @@ ccm.files[ "voting_datastore.js" ] = {
     }
   },
 
-  "demo-1": {
-    "key": "demo",
+  "demo_1": {
+    "key": "demo_1",
     "likes": {
       "mmuster2s": true,
       "kschus2m": true
@@ -24,8 +24,8 @@ ccm.files[ "voting_datastore.js" ] = {
     }
   },
 
-  "demo-2": {
-    "key": "demo",
+  "demo_2": {
+    "key": "demo_2",
     "likes": {
       "mmuster2s": true,
       "fsache2s": true,
@@ -39,8 +39,8 @@ ccm.files[ "voting_datastore.js" ] = {
   },
 
 
-  "demo-3": {
-    "key": "demo",
+  "demo_3": {
+    "key": "demo_3",
     "likes": {
       "mmuster2s": true,
       "fsache2s": true,

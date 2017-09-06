@@ -12,6 +12,13 @@
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
+      libs: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: 'head' },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', context: 'head' },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        '../voting/style.css'
+      ],
       templates: {
         "main": {
           "tag": "div",
@@ -43,15 +50,7 @@
           store: [ 'ccm.store', '../voting/voting_datastore.js' ],
           key:   'demo'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js'],
-
-      libs: [ 'ccm.load',
-        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: 'head' },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', context: 'head' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../voting/style.css'
-      ]
+      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js']
     },
 
     Instance: function () {
@@ -88,12 +87,10 @@
             likes: self.icon_likes,
             up_vote:   function () {
                 doVoting( 'likes' );
-                total++;
             },
             dislikes: self.icon_dislikes,
             down_vote: function () {
                 doVoting( 'dislikes' );
-                total--;
             }
           } ) );
 
@@ -105,10 +102,9 @@
             if ( !self.user || !self.user.isLoggedIn() ) return;
             var user = self.user.data().user;
 
-            if ( dataset.likes[ user ] )
-              self.element.querySelector('#likes').classList.add('disabled');
+            if ( dataset.likes[ user ] ) self.element.querySelector('#likes').classList.add('disabled');
 
-            else self.element.querySelector('#dislikes').classList.add('disabled');
+            if ( dataset.dislikes[ user ] )self.element.querySelector('#dislikes').classList.add('disabled');
 
           }
 
@@ -147,11 +143,11 @@
               }
 
               // update dataset for rendering => (re)render own content
-              self.data.store.set( dataset, function () { self.start(); } );
+              self.data.store.set( dataset, function (x) { console.log(x, dataset); self.start(); } );
             } );
           }
 
-          if ( callback )callback();
+          if ( callback ) callback();
 
         } );
 
