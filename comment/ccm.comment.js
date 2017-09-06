@@ -145,8 +145,7 @@
         icon_likes: 'fa fa-lg fa-chevron-up',
         icon_dislikes: 'fa fa-lg fa-chevron-down',
         data: {
-          store: [ 'ccm.store', '../comment/datastore.json' ],
-          key: 'demo'
+          store: [ 'ccm.store', '../voting/voting_datastore.js' ]
         }
       } ],
 
@@ -207,15 +206,13 @@
             // prepend element to DOM
             self.ccm.helper.prepend( self.element.querySelector( '#comment-list' ), comment_elem );
 
-
             //if voting is set then render voting-component
             if ( self.voting )
-              renderVoting( self.element.querySelector( '.voting-area' ), dataset.voting );
+              renderVoting( self.element.querySelector( '.voting-area' ), comment.voting );
 
           }
 
           function renderVoting( element, voting ) {
-            if ( !self.user ) return;
 
             self.voting.start( voting, function ( voting_inst ) {
               element.appendChild( voting_inst.root );
@@ -246,10 +243,10 @@
 
             dataset.comments.push(
               {
-                "date": moment().format(),
                 "user": self.user.data().user,
+                "date": moment().format(),
                 "content": editor.get().getText(),
-                "voting": { }
+                "voting": { 'data.key': dataset.key + '-' + comments.length + 1 }
               } );
 
             // update dataset for rendering => (re)render accepted answer
