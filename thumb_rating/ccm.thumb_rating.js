@@ -8,7 +8,7 @@
 
   var component  = {
 
-    index: 'thumb_rating',
+    name: 'thumb_rating',
 
     ccm: 'https://akless.github.io/ccm/ccm.js',
 

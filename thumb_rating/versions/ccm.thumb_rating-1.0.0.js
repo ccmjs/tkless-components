@@ -8,7 +8,7 @@
 
   var component  = {
 
-    index: 'thumb_rating',
+    name: 'thumb_rating',
     version:[ 1,0,0 ],
 
     ccm: {
