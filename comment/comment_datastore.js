@@ -1,4 +1,4 @@
-{
+ccm.files[ "comment_datastore.js" ] = {
   "demo": {
     "key": "demo",
     "comments": [

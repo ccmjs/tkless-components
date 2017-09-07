@@ -133,7 +133,7 @@
       sorting_by_voting: true,
       comment_template: 'simple', // or expand
       data: {
-        store: [ 'ccm.store', '../comment/datastore.json' ],
+        store: [ 'ccm.store', '../comment/comment_datastore.js' ],
         key: 'demo'
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
