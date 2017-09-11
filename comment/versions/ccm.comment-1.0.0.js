@@ -11,12 +11,6 @@
     name: 'comment',
     version: '1.0.0',
 
-    ccm: {
-      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
-      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
-      crossorigin: 'anonymous'
-    },
-
     config: {
       templates: {
         "main": {
@@ -136,29 +130,29 @@
       },
 
       sorting_by_voting: true,
-      comment_template: 'simple', // or expand -> in progress
+      comment_template: 'simple', // or expand
       data: {
-        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/comment_datastore.js' ],
+        store: [ 'ccm.store', '../comment/comment_datastore.js' ],
         key: 'demo'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
+      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
+      editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
+
       ],
-      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/ccm.voting.js", {
+      voting: [ "ccm.component", "../voting/ccm.voting.js", {
         icon_likes: 'fa fa-lg fa-chevron-up',
         icon_dislikes: 'fa fa-lg fa-chevron-down',
         data: {
-          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ]
+          store: [ 'ccm.store', '../voting/voting_datastore.js' ]
         }
       } ],
 
       libs: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
-        'https://tkless.github.io/ccm-components/comment/style.css',
+        '../comment/style.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
-      ]
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
 
     Instance: function () {
@@ -182,7 +176,7 @@
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
           if ( !dataset.comments ) dataset.comments = [];
 
-           var main_elem = self.ccm.helper.html( self.templates.main, {
+          var main_elem = self.ccm.helper.html( self.templates.main, {
             render_editor: function () {
               self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
               renderEditor();
@@ -278,7 +272,7 @@
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
-          
+
           function newComment() {
 
             dataset.comments.push(
