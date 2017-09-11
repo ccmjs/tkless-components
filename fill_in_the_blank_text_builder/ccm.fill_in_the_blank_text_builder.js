@@ -29,6 +29,19 @@
               }
             },
             {
+              "tag": "fieldset",
+              "inner": [
+                {
+                  "tag": "legend",
+                  "inner": "Preview"
+                },
+                {
+                  "id": "preview",
+                  "inner": {}
+                }
+              ]
+            },
+            {
               "tag": "form",
               "class": "form-horizontal",
               "onsubmit": "%submit%",
@@ -268,19 +281,6 @@
                     }
                   ]
 
-                }
-              ]
-            },
-            {
-              "tag": "fieldset",
-              "inner": [
-                {
-                  "tag": "legend",
-                  "inner": "Preview"
-                },
-                {
-                  "id": "preview",
-                  "inner": {}
                 }
               ]
             }
