@@ -11,6 +11,12 @@
     name: 'comment',
     version: '1.0.0',
 
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
+
     config: {
       templates: {
         "main": {
