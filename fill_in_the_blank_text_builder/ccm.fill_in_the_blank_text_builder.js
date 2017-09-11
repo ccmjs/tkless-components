@@ -21,7 +21,7 @@
             {
               "class": "page-header",
               "inner": {
-                "tag": "h1",
+                "tag": "h2",
                 "class": "text-primary",
                 "inner": [
                   "Build your fill in the blank-text "
@@ -289,6 +289,15 @@
 
       },
 
+      start_state: {
+        blank: 'true',
+        css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
+        feedback: 'true',
+        key : '1505038949159X2007155418531874',
+        text: '<p>In order to serve you well, Karma needs to know about your project in order to test it and this is done via a configuration file. The easiest way to generate an initial configuration file is by using the karma init command. This page lists all of the available configuration options.</p>',
+        time: '123',
+        user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]"
+      },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
@@ -355,6 +364,35 @@
           editor.get().on('text-change', function() {
             renderPreview();
           });
+
+          if ( self.start_state ) {
+            //self.ccm.helper.encodeDependencies( self.start_state );
+            for ( var property in self.start_state ) {
+              if ( self.start_state[ property ] ) {
+                switch ( property ) {
+                  case 'key':
+                    self.start_state[ property ];
+                    break;
+                  case 'user':
+                  case 'css_layout':
+                    self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[property] + '"]').selected = true;
+                    break;
+                  case 'blank':
+                    self.element.querySelector('input[type="checkbox"][name="blank"]').checked = true;
+                    break;
+                  case 'feedback':
+                    self.element.querySelector('input[type="checkbox"][name="feedback"]').checked = true;
+                    break;
+                  case 'time':
+                    self.element.querySelector('input[type="number"][name="time"]').value =  self.start_state[ property ];
+                    break;
+                  case 'text':
+                    editor.get().root.innerHTML = self.start_state[ property ];
+                    break;
+                }
+              }
+            }
+          }
         } );
 
         function prepareResultData() {
