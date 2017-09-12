@@ -29,19 +29,6 @@
               }
             },
             {
-              "tag": "fieldset",
-              "inner": [
-                {
-                  "tag": "legend",
-                  "inner": "Preview"
-                },
-                {
-                  "id": "preview",
-                  "inner": {}
-                }
-              ]
-            },
-            {
               "tag": "form",
               "class": "form-horizontal",
               "onsubmit": "%submit%",
@@ -51,7 +38,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Sign-on:"
                     },
                     {
@@ -92,7 +79,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Layout:"
                     },
                     {
@@ -123,7 +110,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Provided answers"
                     },
                     {
@@ -160,7 +147,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Manually:"
                     },
                     {
@@ -181,7 +168,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Blank gaps:"
                     },
                     {
@@ -207,7 +194,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Feedback:"
                     },
                     {
@@ -233,7 +220,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Time Limit:"
                     },
                     {
@@ -254,7 +241,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-2",
+                      "class": "control-label col-md-1",
                       "inner": "Your Text:"
                     },
                     {
@@ -264,14 +251,23 @@
                   ]
                 },
                 {
-                  "class": "submit-button form-group",
+                  "tag": "fieldset",
                   "inner": [
                     {
-                      "tag": "label",
-                      "class": "control-label col-md-2"
+                      "tag": "legend",
+                      "inner": "Preview"
                     },
                     {
-                      "class": "col-md-10",
+                      "id": "preview"
+                    }
+                  ]
+                },
+                {
+                  "class": "submit-button form-group",
+                  "inner": [
+
+                    {
+                      "class": "col-md-11 text-right",
                       "inner": {
                         "tag": "button",
                         "type": "submit",
