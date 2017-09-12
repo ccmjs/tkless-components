@@ -372,24 +372,19 @@
             for ( var property in self.start_state ) {
               if ( self.start_state[ property ] ) {
                 switch ( property ) {
-                  case 'key':
-                    self.start_state[ property ];
-                    break;
                   case 'user':
                   case 'css_layout':
                     self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[property] + '"]').selected = true;
                     break;
                   case 'blank':
-                    self.element.querySelector('input[type="checkbox"][name="blank"]').checked = true;
-                    break;
                   case 'feedback':
-                    self.element.querySelector('input[type="checkbox"][name="feedback"]').checked = true;
+                    self.element.querySelector('input[type="checkbox"][name="' + property + '"]').checked = true;
                     break;
                   case 'time':
                     self.element.querySelector('input[type="number"][name="time"]').value =  self.start_state[ property ];
                     break;
                   case 'text':
-                    editor.get().root.innerHTML = self.start_state[ property ];
+                    editor.get().root.innerHTML = self.ccm.helper.protect( self.start_state[ property ] );
                     break;
                 }
               }
