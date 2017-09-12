@@ -43,11 +43,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1 col-sx-12",
+                      "class": "control-label col-md-1 col-sm-12",
                       "inner": "Sign-on:"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-11 col-cm-12",
                       "inner": {
                         "tag": "select",
                         "onchange": "%user%",
