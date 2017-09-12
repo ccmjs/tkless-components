@@ -43,11 +43,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1 col-sm-12",
+                      "class": "control-label col-md-2",
                       "inner": "Sign-on:"
                     },
                     {
-                      "class": "col-md-11 col-cm-12",
+                      "class": "col-md-10",
                       "inner": {
                         "tag": "select",
                         "onchange": "%user%",
@@ -84,11 +84,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Layout:"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-10",
                       "inner": {
                         "tag": "select",
                         "onchange": "%change_layout%",
@@ -115,11 +115,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Provided answers"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-10",
                       "inner": {
                         "tag": "select",
                         "class": "select-solution form-control",
@@ -152,7 +152,7 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Manually:"
                     },
                     {
@@ -173,11 +173,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Blank gaps:"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-10",
                       "inner": {
                         "class": "checkbox",
                         "onchange": "%change_blank%",
@@ -199,11 +199,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Feedback:"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-10",
                       "inner": {
                         "class": "checkbox",
                         "onchange": "%change_feedback%",
@@ -225,11 +225,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Time Limit:"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-10",
                       "inner": {
                         "tag": "input",
                         "type":"number",
@@ -246,11 +246,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-2",
                       "inner": "Your Text:"
                     },
                     {
-                      "class": "col-md-11",
+                      "class": "col-md-10",
                       "id": "editor-container"
                     }
                   ]
