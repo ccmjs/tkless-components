@@ -43,11 +43,11 @@
                   "inner": [
                     {
                       "tag": "label",
-                      "class": "control-label col-md-1",
+                      "class": "control-label col-md-1 col-sx-12",
                       "inner": "Sign-on:"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "inner": {
                         "tag": "select",
                         "onchange": "%user%",
@@ -88,7 +88,7 @@
                       "inner": "Layout:"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "inner": {
                         "tag": "select",
                         "onchange": "%change_layout%",
@@ -119,7 +119,7 @@
                       "inner": "Provided answers"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "inner": {
                         "tag": "select",
                         "class": "select-solution form-control",
@@ -177,7 +177,7 @@
                       "inner": "Blank gaps:"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "inner": {
                         "class": "checkbox",
                         "onchange": "%change_blank%",
@@ -203,7 +203,7 @@
                       "inner": "Feedback:"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "inner": {
                         "class": "checkbox",
                         "onchange": "%change_feedback%",
@@ -229,7 +229,7 @@
                       "inner": "Time Limit:"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "inner": {
                         "tag": "input",
                         "type":"number",
@@ -250,7 +250,7 @@
                       "inner": "Your Text:"
                     },
                     {
-                      "class": "col-md-10",
+                      "class": "col-md-11",
                       "id": "editor-container"
                     }
                   ]
@@ -289,6 +289,7 @@
         }
 
       },
+
       /**start_state: {
         blank: 'true',
         css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
