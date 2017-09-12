@@ -272,7 +272,7 @@
                   "inner": [
 
                     {
-                      "class": "col-md-11 text-right",
+                      "class": "col-md-12 text-right",
                       "inner": {
                         "tag": "button",
                         "type": "submit",
