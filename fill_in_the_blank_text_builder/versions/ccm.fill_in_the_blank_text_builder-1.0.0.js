@@ -367,6 +367,7 @@
           });
 
           if ( self.start_state ) {
+            console.log(self.start_state);
             //self.ccm.helper.encodeDependencies( self.start_state );
             for ( var property in self.start_state ) {
               if ( self.start_state[ property ] ) {
