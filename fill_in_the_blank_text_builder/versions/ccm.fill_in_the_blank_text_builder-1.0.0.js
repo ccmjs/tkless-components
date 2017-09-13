@@ -266,26 +266,26 @@
                       "id": "preview"
                     }
                   ]
-                },
-                {
-                  "class": "submit-button form-group",
-                  "inner": [
-
-                    {
-                      "class": "col-md-12 text-right",
-                      "inner": {
-                        "tag": "button",
-                        "type": "submit",
-                        "class": "btn btn-primary",
-                        "inner": "Submit"
-                      }
-                    }
-                  ]
-
                 }
               ]
             }
           ]
+        },
+        "submit-button": {
+          "class": "submit-button form-group",
+          "inner": [
+
+            {
+              "class": "col-md-12 text-right",
+              "inner": {
+                "tag": "button",
+                "type": "submit",
+                "class": "btn btn-primary",
+                "inner": "Save App"
+              }
+            }
+          ]
+
         }
 
       },
@@ -362,6 +362,11 @@
           time: renderPreview
 
         } ) );
+
+        if ( self.submit_button ) {
+          var button_elem = $.html(self.templates.submit_button);
+          self.element.querySelector( '.form-horizontal' ).appendChild( button_elem );
+        }
 
         self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
           editor = instance;
