@@ -142,12 +142,12 @@
         key: 'demo'
       },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
 
       ],
-      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/ccm.voting.js", {
+      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js", {
         icon_likes: 'fa fa-lg fa-chevron-up',
         icon_dislikes: 'fa fa-lg fa-chevron-down',
         data: {
