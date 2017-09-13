@@ -156,7 +156,7 @@
       } ],
 
       libs: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../comment/style.css',
+        'https://tkless.github.io/ccm-components/comment/style.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
     },
