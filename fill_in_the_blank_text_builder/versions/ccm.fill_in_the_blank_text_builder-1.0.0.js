@@ -331,13 +331,17 @@
       var self = this;
       var editor;
 
+      this.submit = function () {
+        if ( self.onfinish ) $.onFinish( self, prepareResultData() );
+      };
+
       this.start = function (callback) {
 
         var $ = self.ccm.helper;
         $.setContent( self.element, self.ccm.helper.html( self.templates.main, {
           submit: function ( event ) {
             event.preventDefault();
-            if ( self.onfinish ) $.onFinish( self, prepareResultData() );
+            self.submit();
           },
 
           user: renderPreview,
@@ -367,13 +371,12 @@
           });
 
           if ( self.start_state ) {
-            console.log(self.start_state);
-            //self.ccm.helper.encodeDependencies( self.start_state );
             for ( var property in self.start_state ) {
               if ( self.start_state[ property ] ) {
                 switch ( property ) {
                   case 'user':
                   case 'css_layout':
+                  case 'keywords':
                     self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[property] + '"]').selected = true;
                     break;
                   case 'blank':

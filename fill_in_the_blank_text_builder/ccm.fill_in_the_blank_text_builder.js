@@ -262,28 +262,30 @@
                     }
                   ]
                 },
-                {
-                  "class": "submit-button form-group",
-                  "inner": [
-
-                    {
-                      "class": "col-md-12 text-right",
-                      "inner": {
-                        "tag": "button",
-                        "type": "submit",
-                        "class": "btn btn-primary",
-                        "inner": "Submit"
-                      }
-                    }
-                  ]
-
-                }
               ]
             }
           ]
-        }
+        },
 
+        "submit-button": {
+          "class": "submit-button form-group",
+          "inner": [
+
+            {
+              "class": "col-md-12 text-right",
+              "inner": {
+                "tag": "button",
+                "type": "submit",
+                "class": "btn btn-primary",
+                "inner": "Save App"
+              }
+            }
+          ]
+
+        }
       },
+
+      submit_button: true,
 
       start_state: {
         blank: 'true',
@@ -326,13 +328,18 @@
       var self = this;
       var editor;
 
+      this.submit = function () {
+        if ( self.onfinish ) $.onFinish( self, prepareResultData() );
+      };
+
       this.start = function (callback) {
 
         var $ = self.ccm.helper;
+
         $.setContent( self.element, self.ccm.helper.html( self.templates.main, {
           submit: function ( event ) {
             event.preventDefault();
-            if ( self.onfinish ) $.onFinish( self, prepareResultData() );
+            self.submit();
           },
 
           user: renderPreview,
@@ -354,6 +361,12 @@
 
         } ) );
 
+
+        if ( self.submit_button ) {
+          var button_elem = $.html(self.templates.submit_button);
+          self.element.querySelector( '.form-horizontal' ).appendChild( button_elem );
+        }
+
         self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
           editor = instance;
 
@@ -362,28 +375,23 @@
           });
 
           if ( self.start_state ) {
-            //self.ccm.helper.encodeDependencies( self.start_state );
             for ( var property in self.start_state ) {
               if ( self.start_state[ property ] ) {
                 switch ( property ) {
-                  case 'key':
-                    self.start_state[ property ];
-                    break;
                   case 'user':
                   case 'css_layout':
+                  case 'keywords':
                     self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[property] + '"]').selected = true;
                     break;
                   case 'blank':
-                    self.element.querySelector('input[type="checkbox"][name="blank"]').checked = true;
-                    break;
                   case 'feedback':
-                    self.element.querySelector('input[type="checkbox"][name="feedback"]').checked = true;
+                    self.element.querySelector('input[type="checkbox"][name="' + property + '"]').checked = true;
                     break;
                   case 'time':
                     self.element.querySelector('input[type="number"][name="time"]').value =  self.start_state[ property ];
                     break;
                   case 'text':
-                    editor.get().root.innerHTML = self.start_state[ property ];
+                    editor.get().root.innerHTML = self.ccm.helper.protect( self.start_state[ property ] );
                     break;
                 }
               }
