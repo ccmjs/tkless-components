@@ -9,7 +9,7 @@
   var component = {
 
     name: 'comment',
-    version: '1.0.0',
+    version: [ 1,0,0 ],
 
     ccm: {
       url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
