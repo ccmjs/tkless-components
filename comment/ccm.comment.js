@@ -15,7 +15,7 @@
     config: {
       templates: {
         "main": {
-          "class": "container",
+          "class": "container-fluid",
           "inner": [
             {
               "id": "comment-list",
