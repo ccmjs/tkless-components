@@ -21,17 +21,11 @@
     config: {
       templates: {
         "main": {
-          "class": "container-fluid",
           "inner": [
             {
-              "class": "page-header",
-              "inner": {
-                "tag": "h2",
-                "class": "text-primary",
-                "inner": [
-                  "Build your fill in the blank-text "
-                ]
-              }
+              "tag": "legend",
+              "class": "text-primary",
+              "inner": "Build your fill-in-the-blank text "
             },
             {
               "tag": "form",
@@ -256,38 +250,37 @@
                   ]
                 },
                 {
-                  "tag": "fieldset",
                   "inner": [
                     {
                       "tag": "legend",
-                      "inner": "Preview"
+                      "class": "legend text-primary",
+                      "inner": "As it already looks like..."
                     },
                     {
                       "id": "preview"
                     }
                   ]
+                },
+                {
+                  "class": "submit-button form-group",
+                  "inner": [
+
+                    {
+                      "class": "col-md-12 text-right",
+                      "inner": {
+                        "tag": "button",
+                        "type": "submit",
+                        "class": "btn btn-primary",
+                        "inner": "Save App"
+                      }
+                    }
+                  ]
+
                 }
               ]
             }
           ]
-        },
-        "submit-button": {
-          "class": "submit-button form-group",
-          "inner": [
-
-            {
-              "class": "col-md-12 text-right",
-              "inner": {
-                "tag": "button",
-                "type": "submit",
-                "class": "btn btn-primary",
-                "inner": "Save App"
-              }
-            }
-          ]
-
         }
-
       },
 
       /**start_state: {
@@ -332,13 +325,31 @@
       var editor;
 
       this.submit = function () {
-        if ( self.onfinish ) $.onFinish( self, prepareResultData() );
+        if ( self.onfinish ) self.ccm.helper.onFinish( self, prepareResultData() );
       };
+
+      function prepareResultData() {
+        var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
+
+        config_data[ "text" ] = editor.get().root.innerHTML;
+
+        if ( config_data.provided === 'auto' )
+          config_data.keywords = true;
+        else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
+          config_data.keywords = config_data.keywords.trim().split( ' ' );
+        else
+          delete config_data.keywords;
+        delete config_data.provided;
+
+        self.ccm.helper.decodeDependencies( config_data );
+        return config_data;
+      }
 
       this.start = function (callback) {
 
         var $ = self.ccm.helper;
-        $.setContent( self.element, self.ccm.helper.html( self.templates.main, {
+
+        $.setContent( self.element, $.html( self.templates.main, {
           submit: function ( event ) {
             event.preventDefault();
             self.submit();
@@ -363,9 +374,9 @@
 
         } ) );
 
-        if ( self.submit_button ) {
-          var button_elem = $.html(self.templates.submit_button);
-          self.element.querySelector( '.form-horizontal' ).appendChild( button_elem );
+
+        if ( !self.submit_button ) {
+          self.element.querySelector( '.form-horizontal' ).removeChild( self.element.querySelector( '.submit-button' ) );
         }
 
         self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
@@ -399,23 +410,6 @@
             }
           }
         } );
-
-        function prepareResultData() {
-          var config_data = $.formData( self.element.querySelector( 'form' ) );
-
-          config_data[ "text" ] = editor.get().root.innerHTML;
-
-          if ( config_data.provided === 'auto' )
-            config_data.keywords = true;
-          else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
-            config_data.keywords = config_data.keywords.trim().split( ' ' );
-          else
-            delete config_data.keywords;
-          delete config_data.provided;
-
-          $.decodeDependencies( config_data );
-          return config_data;
-        }
 
         function renderPreview() {
           self.element.querySelector( '#preview' ).innerHTML = '<div></div>';

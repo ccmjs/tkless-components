@@ -1,6 +1,6 @@
 form, .editor {
     margin-top: 40px;
 }
-.tokenfield-input {
-    width: 300px !important;
+.legend {
+    padding-top: 10px;
 }
