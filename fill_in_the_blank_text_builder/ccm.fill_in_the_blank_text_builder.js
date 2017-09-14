@@ -283,6 +283,7 @@
         css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
         feedback: 'true',
         key : '1505038949159X2007155418531874',
+        keywords: true,
         text: '<p>In order to serve you well, Karma needs to know about your project in order to test it and this is done via a configuration file. The easiest way to generate an initial configuration file is by using the karma init command. This page lists all of the available configuration options.</p>',
         time: '123',
         user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]"
@@ -370,7 +371,7 @@
         } ) );
 
 
-        if ( !self.submit_button ) {
+        if( !self.submit_button ) {
           self.element.querySelector( '.form-horizontal' ).removeChild( self.element.querySelector( '.submit-button' ) );
         }
 
@@ -381,15 +382,29 @@
             renderPreview();
           });
 
-          if ( self.start_state ) {
-            for ( var property in self.start_state ) {
-              if ( self.start_state[ property ] ) {
-                switch ( property ) {
+          if( self.start_state ) {
+            for( var property in self.start_state ) {
+              if( self.start_state[ property ] ) {
+                switch( property ) {
                   case 'user':
                   case 'css_layout':
-                  case 'keywords':
-                    self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[property] + '"]').selected = true;
+                    self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[ property ] + '"]').selected = true;
                     break;
+                  case 'keywords':
+                    if( !self.start_state[ property ]) {
+                      self.element.querySelector('select[name="provided"] option[value="none"]').selected = true;
+                      break;
+                    }
+
+                   if( self.start_state[ property ] === true ) {
+                    self.element.querySelector('select[name="provided"] option[value="auto"]').selected = true;
+                    break;
+                   }
+
+                   self.element.querySelector('select[name="provided"] option[value="manually"]').selected = true;
+                   self.element.querySelector('input[name="keywords"]').value = self.start_state[ property ].join( ' ' );
+                   self.element.querySelector('.keywords').style.display = 'block';
+                   break;
                   case 'blank':
                   case 'feedback':
                     self.element.querySelector('input[type="checkbox"][name="' + property + '"]').checked = true;
