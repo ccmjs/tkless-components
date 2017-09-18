@@ -97,11 +97,16 @@
                 {
                   "class": "col-md-11 col-xs-11 comment-overview",
                   "inner": [
-                    "%comment_content% - ",
+                    "%comment_content%&nbsp;",
                     {
                       "tag": "span",
                       "class": "sub-text",
                       "inner": [
+                        {
+                          "tag": "span",
+                          "class": "glyphicon glyphicon-minus",
+                          "aria-hidden": "true"
+                        },
                         {
                           "tag": "span",
                           "class": "glyphicon glyphicon-user",
@@ -127,16 +132,28 @@
             }
           ]
         },
-        "expand_comment": {}
+        "expand_comment": {},
+
+        "edit": {
+          "tag": "span",
+          "onclick": "%edit%",
+          "inner": [
+            {
+              "class": "glyphicon glyphicon-pencil"
+            },
+            "&nbsp;Edit&nbsp;",
+          ]
+        }
       },
 
+      editable: true,
       sorting_by_voting: true,
       comment_template: 'simple', // or expand
       data: {
         store: [ 'ccm.store', '../comment/comment_datastore.js' ],
         key: 'demo'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
+      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
@@ -164,11 +181,20 @@
       this.init = function ( callback ) {
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange = function ( question ) {
-          dataset = question;
+        self.data.store.onChange = function ( comment ) {
+          dataset = comment;
           self.start();
         };
 
+        callback();
+      };
+
+      this.ready = function ( callback ) {
+        self.user.addObserver( self.index, function ( event ) {
+          console.log( self.index, event );
+
+          if ( event) self.start();
+        });
         callback();
       };
 
@@ -234,6 +260,25 @@
                 });
               }
 
+              if ( self.editable ) {
+                var edit_elem;
+
+                edit_elem = self.ccm.helper.html( self.templates.edit, {
+                  edit: function () {
+
+                   var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
+                    self.editor.start( function (instance) {
+                      self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
+                      instance.get().setText( content );
+                    } );
+                  }
+                } );
+
+                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                  comment_elem.querySelector('.comment-overview').appendChild(edit_elem);
+                }
+              }
+
               //if voting is set then render voting-component
               if ( self.voting )
                 renderVoting( comment.voting );
@@ -242,7 +287,7 @@
 
                 counter++;
 
-                if ( self.user.isLoggedIn() && (comment.user === self.user.data().user) )
+                if ( self.user.isLoggedIn() && (comment.user !== self.user.data().user) )
                   voting.user = '';
 
                 self.voting.start( voting, function ( voting_inst ) {
