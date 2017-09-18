@@ -191,8 +191,6 @@
 
       this.ready = function ( callback ) {
         self.user.addObserver( self.index, function ( event ) {
-          console.log( self.index, event );
-
           if ( event) self.start();
         });
         callback();
@@ -274,7 +272,7 @@
                   }
                 } );
 
-                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                if ( self.user && self.user.isLoggedIn() ) {
                   comment_elem.querySelector('.comment-overview').appendChild(edit_elem);
                 }
               }
@@ -287,8 +285,11 @@
 
                 counter++;
 
-                if ( self.user.isLoggedIn() && (comment.user !== self.user.data().user) )
+                if ( self.user.isLoggedIn() && (comment.user === self.user.data().user) )
                   voting.user = '';
+                voting.onvote = function ( event ) {
+                  return event.user !== comment.user;
+                };
 
                 self.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
@@ -306,15 +307,15 @@
             self.element.querySelector( '#new-comment' ).innerHTML = '';
 
             var editor_elem = self.ccm.helper.html( self.templates.editor, {
-              add_comment: function () { newComment() }
-            } );
-
-            self.user.login( function () {
-              self.editor.start( function (instance) {
-                editor_elem.querySelector( '#editor' ).appendChild( instance.root );
-                editor = instance
-              } );
+              add_comment: function () {
+                self.user.login( function () { newComment(); } );
+              }
             });
+
+            self.editor.start( function ( instance ) {
+              editor_elem.querySelector( '#editor' ).appendChild( instance.root );
+              editor = instance
+            } );
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }

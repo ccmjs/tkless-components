@@ -44,6 +44,7 @@
         }
       },
 
+
       icon_dislikes: 'fa fa-lg fa-chevron-circle-down',
       icon_likes: 'fa fa-lg fa-chevron-circle-up',
       data:  {
@@ -123,6 +124,8 @@
 
               var user = self.user.data().user;
               var not_vote;
+
+              if( self.onvote && !self.onvote( { user: user } ) ) return;
 
               if ( vote === 'likes' ) not_vote = 'dislikes';
               else not_vote = 'likes';
