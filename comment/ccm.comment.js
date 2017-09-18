@@ -107,6 +107,7 @@
                           "class": "glyphicon glyphicon-minus",
                           "aria-hidden": "true"
                         },
+                        "&nbsp;",
                         {
                           "tag": "span",
                           "class": "glyphicon glyphicon-user",
@@ -268,12 +269,26 @@
                     self.editor.start( function (instance) {
                       self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
                       instance.get().setText( content );
+                      instance.get().focus();
+                      instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', function () {
+                        comment.content = instance.get().getText().trim();
+                        dataset.comments[comment] =
+                          {
+                            "user": comment.user,
+                            "date": comment.date,
+                            "content": instance.get().root.innerHTML,
+                            "voting": comment.voting
+                          };
+
+                        // update dataset for rendering => (re)render accepted answer
+                        self.data.store.set( dataset, function () { self.start() } );
+                      } );
                     } );
                   }
                 } );
 
-                if ( self.user && self.user.isLoggedIn() ) {
-                  comment_elem.querySelector('.comment-overview').appendChild(edit_elem);
+                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                  comment_elem.querySelector( '.comment-overview' ).appendChild( edit_elem );
                 }
               }
 
@@ -326,7 +341,7 @@
               {
                 "user": self.user.data().user,
                 "date": moment().format(),
-                "content": editor.get().getText(),
+                "content": editor.get().root.innerHTML,
                 "voting": { 'data.key': dataset.key + '-' + dataset.comments.length + 1 }
               } );
 
