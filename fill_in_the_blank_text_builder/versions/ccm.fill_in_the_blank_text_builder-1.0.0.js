@@ -292,7 +292,7 @@
         time: '123',
         user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]"
       },*/
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
           ['bold', 'italic', 'underline'],        // toggled buttons
