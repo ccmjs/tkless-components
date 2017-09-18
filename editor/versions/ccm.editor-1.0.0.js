@@ -19,7 +19,7 @@
     },
 
     config: {
-      editor: [ 'ccm.load', '//cdn.quilljs.com/1.2.0/quill.min.js' ],
+      editor: [ 'ccm.load', 'https://tkless.github.io/ccm-components/editor/quill.js' ],
       editor_css: [ 'ccm.load', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
       settings: {
         modules: {

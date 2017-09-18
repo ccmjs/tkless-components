@@ -14,7 +14,7 @@
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
-      editor: [ 'ccm.load', '//cdn.quilljs.com/1.2.0/quill.min.js' ],
+      editor: [ 'ccm.load', '../editor/quill.js' ],
       editor_css: [ 'ccm.load', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
       settings: {
         modules: {
