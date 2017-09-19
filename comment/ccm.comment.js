@@ -124,7 +124,6 @@
                     }
                   ]
                 }
-
               ]
             },
             {
@@ -154,11 +153,10 @@
         store: [ 'ccm.store', '../comment/comment_datastore.js' ],
         key: 'demo'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
+      //user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
-
       ],
       voting: [ "ccm.component", "../voting/ccm.voting.js", {
         icon_likes: 'fa fa-lg fa-chevron-up',
@@ -182,7 +180,7 @@
       this.init = function ( callback ) {
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange = function ( comment ) {
+        if ( self.data.store ) self.data.store.onChange = function ( comment ) {
           dataset = comment;
           self.start();
         };
@@ -191,6 +189,7 @@
       };
 
       this.ready = function ( callback ) {
+        if ( self.user )
         self.user.addObserver( self.index, function ( event ) {
           if ( event) self.start();
         });
@@ -214,7 +213,7 @@
           function renderComments() {
             var unsorted_comments = [];
 
-            main_elem.querySelector( '#comment-list').innerHTML = '';
+            main_elem.querySelector( '#comment-list' ).innerHTML = '';
 
             var counter = 1;
             //asynchronous problem
@@ -295,12 +294,19 @@
               //if voting is set then render voting-component
               if ( self.voting )
                 renderVoting( comment.voting );
+              else {
+                unsorted_comments.push( { "comment": comment_elem, "date": comment.date } );
+                comment_elem.querySelector( '.voting-area' ).remove();
+                comment_elem.querySelector( '.comment-overview' ).classList.remove( 'col-md-11' );
+                comment_elem.querySelector( '.comment-overview' ).classList.add( 'col-md-12' );
+              }
+
 
               function renderVoting( voting ) {
 
                 counter++;
 
-                if ( self.user.isLoggedIn() && (comment.user === self.user.data().user) )
+                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
                   voting.user = '';
                 voting.onvote = function ( event ) {
                   return event.user !== comment.user;

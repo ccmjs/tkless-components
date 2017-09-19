@@ -278,6 +278,7 @@
         }
       },
 
+      submit_button: true,
       start_state: {
         blank: 'true',
         css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
@@ -323,23 +324,6 @@
       this.submit = function () {
         if ( self.onfinish ) self.ccm.helper.onFinish( self, prepareResultData() );
       };
-
-      function prepareResultData() {
-        var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
-
-        config_data[ "text" ] = editor.get().root.innerHTML;
-
-        if ( config_data.provided === 'auto' )
-          config_data.keywords = true;
-        else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
-          config_data.keywords = config_data.keywords.trim().split( ' ' );
-        else
-          delete config_data.keywords;
-        delete config_data.provided;
-
-        self.ccm.helper.decodeDependencies( config_data );
-        return config_data;
-      }
 
       this.start = function (callback) {
 
@@ -430,6 +414,23 @@
 
         if ( callback ) callback();
       };
+
+      function prepareResultData() {
+        var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
+
+        config_data[ "text" ] = editor.get().root.innerHTML;
+
+        if ( config_data.provided === 'auto' )
+          config_data.keywords = true;
+        else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
+          config_data.keywords = config_data.keywords.trim().split( ' ' );
+        else
+          delete config_data.keywords;
+        delete config_data.provided;
+
+        self.ccm.helper.decodeDependencies( config_data );
+        return config_data;
+      }
     }
   };
 
