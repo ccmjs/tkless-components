@@ -37,7 +37,7 @@
       this.ready = function ( callback ) {
 
         // listen to login/logout event => (re)render own content
-        if ( self.user ) self.user.addObserver( function () { self.start(); } );
+        if ( self.user ) self.user.addObserver( self.index, function () { self.start(); } );
 
         callback();
       };

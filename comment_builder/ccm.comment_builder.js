@@ -118,13 +118,18 @@
                       "inner": [
                         {
                           "tag":"option",
+                          "inner": "None",
+                          "value": ""
+                        },
+                        {
+                          "tag":"option",
                           "inner": "Voting",
                           "value": "[ 'ccm.component', '../voting/ccm.voting.js', {'icon_likes': 'fa fa-lg fa-chevron-up', 'icon_dislikes': 'fa fa-lg fa-chevron-down', 'data': {'store': [ 'ccm.store', '../voting/voting_datastore.js' ]}} ]"
                         },
                         {
                           "tag":"option",
                           "inner": "Thumb up/down",
-                          "value": "[ 'ccm.component', '../voting/ccm.voting.js', {'icon_likes': 'fa fa-lg fa-chevron-up', 'icon_dislikes': 'fa fa-lg fa-chevron-down', 'data': {'store': [ 'ccm.store', '../voting/voting_datastore.js' ]}} ]"
+                          "value": "[ 'ccm.component', '../thumb_rating/ccm.thumb_rating.js', { 'key': [ 'ccm.get', '../thumb_rating/thumb_rating_configs.js', 'demo' ] } ]"
                         }
                       ]
                     }
