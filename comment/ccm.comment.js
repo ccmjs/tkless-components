@@ -158,7 +158,7 @@
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
-      voting: [ "ccm.component", "../voting/ccm.voting.js", {
+      voting: [ 'ccm.component', '../voting/ccm.voting.js', {
         icon_likes: 'fa fa-lg fa-chevron-up',
         icon_dislikes: 'fa fa-lg fa-chevron-down',
         data: {
@@ -347,7 +347,7 @@
               {
                 "user": self.user.data().user,
                 "date": moment().format(),
-                "content": editor.get().root.innerHTML,
+                "content": editor.get().getText(),
                 "voting": { 'data.key': dataset.key + '-' + dataset.comments.length + 1 }
               } );
 

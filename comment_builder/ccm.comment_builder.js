@@ -83,17 +83,17 @@
                       "tag": "select",
                       "onchange": "%comment_template%",
                       "class": "user form-control",
-                      "name": "comment-template",
+                      "name": "comment_template",
                       "inner": [
                         {
                           "tag":"option",
                           "inner": "Simple",
-                          "value": ""
+                          "value": "simple"
                         },
                         {
                           "tag":"option",
                           "inner": "Expand",
-                          "value": ""
+                          "value": "expand"
                         }
                       ]
                     }
@@ -106,24 +106,29 @@
                   {
                     "tag": "label",
                     "class": "control-label col-md-2",
-                    "inner": "Voting:"
+                    "inner": "Used Voting Component:"
                   },
                   {
                     "class": "col-md-10",
                     "inner": {
-                      "class": "checkbox",
+                      "tag": "select",
                       "onchange": "%change_voting%",
-                      "inner": {
-                        "tag": "label",
-                        "inner": {
-                          "tag": "input",
-                          "type": "checkbox",
-                          "name": "voting"
+                      "class": "user form-control",
+                      "name": "voting",
+                      "inner": [
+                        {
+                          "tag":"option",
+                          "inner": "Voting",
+                          "value": "[ 'ccm.component', '../voting/ccm.voting.js', {'icon_likes': 'fa fa-lg fa-chevron-up', 'icon_dislikes': 'fa fa-lg fa-chevron-down', 'data': {'store': [ 'ccm.store', '../voting/voting_datastore.js' ]}} ]"
+                        },
+                        {
+                          "tag":"option",
+                          "inner": "Thumb up/down",
+                          "value": "[ 'ccm.component', '../voting/ccm.voting.js', {'icon_likes': 'fa fa-lg fa-chevron-up', 'icon_dislikes': 'fa fa-lg fa-chevron-down', 'data': {'store': [ 'ccm.store', '../voting/voting_datastore.js' ]}} ]"
                         }
-                      }
+                      ]
                     }
                   }
-
                 ]
               },
               {
@@ -244,11 +249,6 @@
 
         function prepareResultData() {
           var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
-
-
-
-          if ( config_data.comment_template === 'simple' )
-            config_data.comment_template = true;
 
           self.ccm.helper.decodeDependencies( config_data );
           return config_data;
