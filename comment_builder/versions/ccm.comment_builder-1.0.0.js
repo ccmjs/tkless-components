@@ -228,7 +228,7 @@
     },
 
     bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
-    preview: [ 'ccm.component', 'https://tkless.github.io/ccm-components/comment/versions/ccm.comment.js' ]
+    preview: [ 'ccm.component', 'https://tkless.github.io/ccm-components/comment/versions/ccm.comment-1.0.0.js' ]
   },
 
   Instance: function () {
