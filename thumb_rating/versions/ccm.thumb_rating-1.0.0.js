@@ -25,9 +25,8 @@
     },
 
     Instance: function () {
-
       var self = this;
-      var my;
+      var total = 0;
 
       this.init = function ( callback ) {
 
@@ -39,9 +38,6 @@
 
       this.ready = function ( callback ) {
 
-        // privatize security relevant config members
-        my = self.ccm.helper.privatize( self );
-
         // listen to login/logout event => (re)render own content
         if ( self.user ) self.user.addObserver( self.index, function () { self.start(); } );
 
@@ -51,7 +47,7 @@
       this.start = function ( callback ) {
 
         // get dataset for rendering
-        self.ccm.helper.dataset( my.data.store, my.data.key, function ( dataset ) {
+        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
 
           // render main html structure
           self.ccm.helper.setContent( self.element, self.ccm.helper.html( { class: 'rating' } ) );
@@ -66,6 +62,8 @@
             // set default like and dislike property
             if ( !dataset.likes    ) dataset.likes    = {};
             if ( !dataset.dislikes ) dataset.dislikes = {};
+
+            total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
 
             var rating = self.element.querySelector( '.rating' );
 
@@ -119,44 +117,48 @@
              */
             function click( index, other ) {
 
-                // set click event
-                div[ index ].addEventListener( 'click',  function () {
+              // set click event
+              div[ index ].addEventListener( 'click',  function () {
 
-                  // login user if not logged in
-                  self.user.login( function () {
+                // login user if not logged in
+                self.user.login( function () {
 
-                    var user = self.user.data().user;
+                  var user = self.user.data().user;
 
-                    // has already voted?
-                    if ( dataset[ index ][ user ] ) {
+                  // has already voted?
+                  if ( dataset[ index ][ user ] ) {
 
-                      // revert vote
-                      delete dataset[ index ][ user ];
+                    // revert vote
+                    delete dataset[ index ][ user ];
 
-                    }
-                    // not voted
-                    else {
+                  }
+                  // not voted
+                  else {
 
-                      // proceed voting
-                      dataset[ index ][ user ] = true;
+                    // proceed voting
+                    dataset[ index ][ user ] = true;
 
-                      // revert voting of opposite category
-                      delete dataset[ other ][ user ];
+                    // revert voting of opposite category
+                    delete dataset[ other ][ user ];
 
-                    }
+                  }
 
-                    // update dataset for rendering => (re)render own content
-                    my.data.store.set( dataset, function () { self.start(); } );
-
-                  } );
+                  // update dataset for rendering => (re)render own content
+                  self.data.store.set( dataset, function () { self.start(); } );
 
                 } );
+
+              } );
             }
           }
 
         } );
 
       };
+
+      this.getVoting = function () {
+        return total;
+      }
 
     }
   };
