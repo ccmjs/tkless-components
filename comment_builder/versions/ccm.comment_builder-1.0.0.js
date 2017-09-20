@@ -10,8 +10,13 @@
   var component = {
 
   name: 'comment_builder',
+  version: [ 1,0,0 ],
 
-  ccm: 'https://akless.github.io/ccm/ccm.js',
+  ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+      integrity: 'sha384-bCcBv9yCHVcXtsHxkfPcFeT+j77G112ZADZ1DkxcYdxjflPG4lTiiFiB3Jp+c2NG',
+      crossorigin: 'anonymous'
+    },
 
   config: {
     templates: {
@@ -124,12 +129,12 @@
                         {
                           "tag":"option",
                           "inner": "Voting",
-                          "value": "[ 'ccm.component', '../voting/ccm.voting.js', {'icon_likes': 'fa fa-lg fa-chevron-up', 'icon_dislikes': 'fa fa-lg fa-chevron-down', 'data': {'store': [ 'ccm.store', '../voting/voting_datastore.js' ]}} ]"
+                          "value": "[ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js', {'icon_likes': 'fa fa-lg fa-chevron-up', 'icon_dislikes': 'fa fa-lg fa-chevron-down', 'data': {'store': [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ]}} ]"
                         },
                         {
                           "tag":"option",
                           "inner": "Thumb up/down",
-                          "value": "[ 'ccm.component', '../thumb_rating/ccm.thumb_rating.js', { 'key': [ 'ccm.get', '../thumb_rating/thumb_rating_configs.js', 'demo' ] } ]"
+                          "value": "[ 'ccm.component', 'https://tkless.github.io/ccm-components/thumb_rating/versions/ccm.thumb_rating-1.0.0.js', { 'key': [ 'ccm.get', 'https://tkless.github.io/ccm-components/thumb_rating/thumb_rating_configs.js', 'demo' ] } ]"
                         }
                       ]
                     }
@@ -223,7 +228,7 @@
     },
 
     bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
-    preview: [ 'ccm.component', '../comment/ccm.comment.js' ]
+    preview: [ 'ccm.component', 'https://tkless.github.io/ccm-components/comment/versions/ccm.comment.js' ]
   },
 
   Instance: function () {
@@ -244,10 +249,9 @@
         var config_data = prepareResultData();
 
         config_data.data = {
-          store: [ 'ccm.store', '../comment/comment_datastore.js' ],
+          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/comment_datastore.js' ],
             key: 'demo'
         };
-        console.log(config_data);
 
         config_data.root = self.element.querySelector( '#preview div' );
         self.preview.start( config_data );
