@@ -169,11 +169,19 @@
       this.init = function ( callback ) {
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange = function ( question ) {
-          dataset = question;
+        if ( self.data.store ) self.data.store.onChange = function ( comment ) {
+          dataset = comment;
           self.start();
         };
 
+        callback();
+      };
+
+      this.ready = function ( callback ) {
+        if ( self.user )
+          self.user.addObserver( self.index, function ( event ) {
+            if ( event) self.start();
+          });
         callback();
       };
 
@@ -194,7 +202,7 @@
           function renderComments() {
             var unsorted_comments = [];
 
-            main_elem.querySelector( '#comment-list').innerHTML = '';
+            main_elem.querySelector( '#comment-list' ).innerHTML = '';
 
             var counter = 1;
             //asynchronous problem
@@ -239,16 +247,59 @@
                 });
               }
 
+              if ( self.editable ) {
+                var edit_elem;
+
+                edit_elem = self.ccm.helper.html( self.templates.edit, {
+                  edit: function () {
+
+                    var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
+                    self.editor.start( function (instance) {
+                      self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
+                      instance.get().setText( content );
+                      instance.get().focus();
+                      instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', function () {
+                        comment.content = instance.get().getText().trim();
+                        dataset.comments[comment] =
+                          {
+                            "user": comment.user,
+                            "date": comment.date,
+                            "content": instance.get().root.innerHTML,
+                            "voting": comment.voting
+                          };
+
+                        // update dataset for rendering => (re)render accepted answer
+                        self.data.store.set( dataset, function () { self.start() } );
+                      } );
+                    } );
+                  }
+                } );
+
+                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                  comment_elem.querySelector( '.comment-overview' ).appendChild( edit_elem );
+                }
+              }
+
               //if voting is set then render voting-component
               if ( self.voting )
                 renderVoting( comment.voting );
+              else {
+                unsorted_comments.push( { "comment": comment_elem, "date": comment.date } );
+                comment_elem.querySelector( '.voting-area' ).remove();
+                comment_elem.querySelector( '.comment-overview' ).classList.remove( 'col-md-11' );
+                comment_elem.querySelector( '.comment-overview' ).classList.add( 'col-md-12' );
+              }
+
 
               function renderVoting( voting ) {
 
                 counter++;
 
-                if ( self.user.isLoggedIn() && (comment.user === self.user.data().user) )
+                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
                   voting.user = '';
+                voting.onvote = function ( event ) {
+                  return event.user !== comment.user;
+                };
 
                 self.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
@@ -266,15 +317,15 @@
             self.element.querySelector( '#new-comment' ).innerHTML = '';
 
             var editor_elem = self.ccm.helper.html( self.templates.editor, {
-              add_comment: function () { newComment() }
-            } );
-
-            self.user.login( function () {
-              self.editor.start( function (instance) {
-                editor_elem.querySelector( '#editor' ).appendChild( instance.root );
-                editor = instance
-              } );
+              add_comment: function () {
+                self.user.login( function () { newComment(); } );
+              }
             });
+
+            self.editor.start( function ( instance ) {
+              editor_elem.querySelector( '#editor' ).appendChild( instance.root );
+              editor = instance
+            } );
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
