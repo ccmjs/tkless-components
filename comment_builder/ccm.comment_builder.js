@@ -226,44 +226,52 @@
     preview: [ 'ccm.component', '../comment/ccm.comment.js' ]
   },
 
-  Instance: function () {
-    var self = this;
+    Instance: function () {
+      var self = this;
 
-    this.start = function (callback) {
-      self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
-        submit: renderPreview,
-        user: renderPreview,
-        comment_template: renderPreview,
-        change_voting: renderPreview,
-        change_sorting: renderPreview,
-        change_editable: renderPreview
-      } ));
+      this.submit = function () {
+        if ( self.onfinish ) self.ccm.helper.onFinish( self, prepareResultData() );
+      };
 
-      function renderPreview() {
-        self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
-        var config_data = prepareResultData();
+      this.start = function (callback) {
+        self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
+          submit: renderPreview,
+          user: renderPreview,
+          comment_template: renderPreview,
+          change_voting: renderPreview,
+          change_sorting: renderPreview,
+          change_editable: renderPreview
+        } ));
 
-        config_data.data = {
-          store: [ 'ccm.store', '../comment/comment_datastore.js' ],
-            key: 'demo'
-        };
-        console.log(config_data);
-
-        config_data.root = self.element.querySelector( '#preview div' );
-        self.preview.start( config_data );
-
-        function prepareResultData() {
-          var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
-
-          self.ccm.helper.decodeDependencies( config_data );
-          return config_data;
+        if( !self.submit_button ) {
+          self.element.querySelector( '.form-horizontal' ).removeChild( self.element.querySelector( '.submit-button' ) );
         }
 
-      }
+        function renderPreview() {
+          self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
+          var config_data = prepareResultData();
 
-      if ( callback ) callback();
-    };
-  }
+          config_data.data = {
+            store: [ 'ccm.store', '../comment/comment_datastore.js' ],
+              key: 'demo'
+          };
+          console.log(config_data);
+
+          config_data.root = self.element.querySelector( '#preview div' );
+          self.preview.start( config_data );
+
+        }
+
+        if ( callback ) callback();
+      };
+
+      function prepareResultData() {
+        var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
+
+        self.ccm.helper.decodeDependencies( config_data );
+        return config_data;
+      }
+    }
   };
 
   function p(){window.ccm[v].component(component)}var f="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[f])window.ccm.files[f]=component;else{var n=window.ccm&&window.ccm.components[component.name];n&&n.ccm&&(component.ccm=n.ccm),"string"==typeof component.ccm&&(component.ccm={url:component.ccm});var v=component.ccm.url.split("/").pop().split("-");if(v.length>1?(v=v[1].split("."),v.pop(),"min"===v[v.length-1]&&v.pop(),v=v.join(".")):v="latest",window.ccm&&window.ccm[v])p();else{var e=document.createElement("script");document.head.appendChild(e),component.ccm.integrity&&e.setAttribute("integrity",component.ccm.integrity),component.ccm.crossorigin&&e.setAttribute("crossorigin",component.ccm.crossorigin),e.onload=function(){p(),document.head.removeChild(e)},e.src=component.ccm.url}}
