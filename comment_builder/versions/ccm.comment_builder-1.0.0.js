@@ -21,7 +21,6 @@
   config: {
     templates: {
       "main": {
-        "class": "container",
         "inner": [
           {
             "tag": "legend",
