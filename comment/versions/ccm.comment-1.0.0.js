@@ -1,6 +1,7 @@
 /**
  * @overview ccm component for commenting
  * @author Tea Kless <tea.kless@web.de>, 2017
+ * @version 1.0.0
  * @license The MIT License (MIT)
  */
 
@@ -102,11 +103,17 @@
                 {
                   "class": "col-md-11 col-xs-11 comment-overview",
                   "inner": [
-                    "%comment_content% - ",
+                    "%comment_content%&nbsp;",
                     {
                       "tag": "span",
                       "class": "sub-text",
                       "inner": [
+                        {
+                          "tag": "span",
+                          "class": "glyphicon glyphicon-minus",
+                          "aria-hidden": "true"
+                        },
+                        "&nbsp;",
                         {
                           "tag": "span",
                           "class": "glyphicon glyphicon-user",
@@ -123,7 +130,6 @@
                     }
                   ]
                 }
-
               ]
             },
             {
@@ -132,33 +138,32 @@
             }
           ]
         },
-        "expand_comment": {}
-      },
+        "expand_comment": {},
 
-      sorting_by_voting: true,
-      comment_template: 'simple', // or expand
-      data: {
-        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/comment_datastore.js' ],
-        key: 'demo'
+        "edit": {
+          "tag": "span",
+          "onclick": "%edit%",
+          "inner": [
+            {
+              "class": "glyphicon glyphicon-pencil"
+            },
+            "&nbsp;Edit&nbsp;",
+          ]
+        }
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
+      comment_template: 'simple', // or expand
+      data: { store: [ 'ccm.store' ], key: 'demo' },
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
-
       ],
-      voting: [ "ccm.component", "https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js", {
-        icon_likes: 'fa fa-lg fa-chevron-up',
-        icon_dislikes: 'fa fa-lg fa-chevron-down',
-        data: {
-          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/voting_datastore.js' ]
-        }
-      } ],
 
-      libs: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        'https://tkless.github.io/ccm-components/comment/style.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
+      libs: [ 'ccm.load',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        'https://tkless.github.io/ccm-components/comment/resources/default.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'
+      ]
     },
 
     Instance: function () {
@@ -179,9 +184,9 @@
 
       this.ready = function ( callback ) {
         if ( self.user )
-          self.user.addObserver( self.index, function ( event ) {
-            if ( event) self.start();
-          });
+        self.user.addObserver( self.index, function ( event ) {
+          if ( event) self.start();
+        });
         callback();
       };
 
@@ -190,7 +195,7 @@
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
           if ( !dataset.comments ) dataset.comments = [];
 
-          var main_elem = self.ccm.helper.html( self.templates.main, {
+           var main_elem = self.ccm.helper.html( self.templates.main, {
             render_editor: function () {
               self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
               renderEditor();
@@ -253,7 +258,7 @@
                 edit_elem = self.ccm.helper.html( self.templates.edit, {
                   edit: function () {
 
-                    var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
+                   var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
                     self.editor.start( function (instance) {
                       self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
                       instance.get().setText( content );
@@ -275,7 +280,7 @@
                   }
                 } );
 
-                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                if ( self.user && self.user.isLoggedIn() && ( self.user.data().name === comment.user ) ) {
                   comment_elem.querySelector( '.comment-overview' ).appendChild( edit_elem );
                 }
               }
@@ -295,11 +300,13 @@
 
                 counter++;
 
-                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
-                  voting.user = '';
-                voting.onvote = function ( event ) {
-                  return event.user !== comment.user;
+                voting = {
+                  'data.key': voting,
+                  onvote: function ( event ) { return event.user !== comment.user; }
                 };
+
+                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().name ) )
+                  voting.user = '';
 
                 self.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
@@ -329,15 +336,15 @@
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
-
+          
           function newComment() {
 
             dataset.comments.push(
               {
-                "user": self.user.data().user,
+                "user": self.user.data().name,
                 "date": moment().format(),
                 "content": editor.get().getText(),
-                "voting": { 'data.key': dataset.key + '-' + dataset.comments.length + 1 }
+                "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
               } );
 
             // update dataset for rendering => (re)render accepted answer

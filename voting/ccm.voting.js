@@ -12,13 +12,6 @@
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
-      libs: [ 'ccm.load',
-        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: 'head' },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', context: 'head' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../voting/style.css'
-      ],
       templates: {
         "main": {
           "tag": "div",
@@ -43,15 +36,14 @@
           ]
         }
       },
-
-
       icon_dislikes: 'fa fa-lg fa-chevron-circle-down',
       icon_likes: 'fa fa-lg fa-chevron-circle-up',
-      data:  {
-          store: [ 'ccm.store', '../voting/voting_datastore.js' ],
-          key:   'demo'
-      },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js']
+      data: { store: [ 'ccm.store'], key: 'demo' },
+      libs: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: 'head' },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        '../voting/resources/default.css'
+      ],
     },
 
     Instance: function () {
@@ -101,7 +93,7 @@
 
           function setIconAvailability() {
             if ( !self.user || !self.user.isLoggedIn() ) return;
-            var user = self.user.data().user;
+            var user = self.user.data().name;
 
             if ( dataset.likes[ user ] ) self.element.querySelector('#likes').classList.add('disabled');
 
@@ -121,8 +113,7 @@
             if ( !self.user ) return;
 
             self.user.login( function () {
-
-              var user = self.user.data().user;
+              var user = self.user.data().name;
               var not_vote;
 
               if( self.onvote && !self.onvote( { user: user } ) ) return;
@@ -146,7 +137,7 @@
               }
 
               // update dataset for rendering => (re)render own content
-              self.data.store.set( dataset, function () { self.start(); } );
+              self.data.store.set( dataset, function (x) { console.log(x); self.start(); } );
             } );
           }
 

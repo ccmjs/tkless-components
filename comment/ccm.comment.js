@@ -145,31 +145,18 @@
           ]
         }
       },
-
-      editable: true,
-      sorting_by_voting: true,
       comment_template: 'simple', // or expand
-      data: {
-        store: [ 'ccm.store', '../comment/comment_datastore.js' ],
-        key: 'demo'
-      },
-      //user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
+      data: { store: [ 'ccm.store' ], key: 'demo' },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
-      voting: [ 'ccm.component', '../voting/ccm.voting.js', {
-        icon_likes: 'fa fa-lg fa-chevron-up',
-        icon_dislikes: 'fa fa-lg fa-chevron-down',
-        data: {
-          store: [ 'ccm.store', '../voting/voting_datastore.js' ]
-        }
-      } ],
-
-      libs: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../comment/style.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
+      libs: [ 'ccm.load',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        '../comment/resources/default.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'
+      ]
     },
 
     Instance: function () {
@@ -286,7 +273,7 @@
                   }
                 } );
 
-                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                if ( self.user && self.user.isLoggedIn() && ( self.user.data().name === comment.user ) ) {
                   comment_elem.querySelector( '.comment-overview' ).appendChild( edit_elem );
                 }
               }
@@ -306,11 +293,13 @@
 
                 counter++;
 
-                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
-                  voting.user = '';
-                voting.onvote = function ( event ) {
-                  return event.user !== comment.user;
+                voting = {
+                  'data.key': voting,
+                  onvote: function ( event ) { return event.user !== comment.user; }
                 };
+
+                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().name ) )
+                  voting.user = '';
 
                 self.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
@@ -345,10 +334,10 @@
 
             dataset.comments.push(
               {
-                "user": self.user.data().user,
+                "user": self.user.data().name,
                 "date": moment().format(),
                 "content": editor.get().getText(),
-                "voting": { 'data.key': dataset.key + '-' + dataset.comments.length + 1 }
+                "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
               } );
 
             // update dataset for rendering => (re)render accepted answer

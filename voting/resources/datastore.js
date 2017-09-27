@@ -1,4 +1,4 @@
-ccm.files[ "voting_datastore.js" ] = {
+ccm.files[ "datastore.js" ] = {
   "demo": {
     "key": "demo",
     "likes": {
@@ -15,7 +15,6 @@ ccm.files[ "voting_datastore.js" ] = {
   "demo_1": {
     "key": "demo_1",
     "likes": {
-      "mmuster2s": true,
       "kschus2m": true
     },
     "dislikes": {
@@ -37,7 +36,6 @@ ccm.files[ "voting_datastore.js" ] = {
       "akless2s": true
     }
   },
-
 
   "demo_3": {
     "key": "demo_3",
