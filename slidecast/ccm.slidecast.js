@@ -14,29 +14,33 @@
 
     config: {
       templates: {
-        "main":    {
+        "main":      {
           "class": "main",
           "inner": [
-            { "class": "slide",
+            {
+              "id": "slide",
               "inner": [
                 {
                   "class": "inner",
                   "inner": [
                     {
-                      "class": "slide_img"
+                      "id": "slide-img"
                     },
                     {
-                      "class": "nav",
+                      "id": "nav",
                       "inner": [
                         {
+                          "title": "Overview",
                           "class": "all fa fa-th-list fa-lg",
                           "onclick": "%all%"
                         },
                         {
+                          "title": "Previous Slide",
                           "class": "prev disabled fa fa-chevron-left fa-lg",
                           "onclick": "%prev%"
                         },
                         {
+                          "title": "First Slide",
                           "class": "first disabled fa fa-step-backward fa-lg",
                           "onclick": "%first%"
                         },
@@ -44,20 +48,23 @@
                           "class": "audio"
                         },
                         {
+                          "title": "Last Slide",
                           "class": "last fa fa-step-forward fa-lg",
                           "onclick": "%last%"
                         },
                         {
+                          "title": "Next Slide",
                           "class": "next fa fa-chevron-right fa-lg",
                           "onclick": "%next%"
                         },
                         {
+                          "title": "Description",
                           "class": "descr fa fa-file-text-o fa-lg",
                           "onclick": "%description%"
                         }
                       ]
                     },
-                    { "class": "description",
+                    { "id": "description",
                       "inner" : {
                         "inner": "%p%"
                       }
@@ -67,18 +74,14 @@
 
               ]
             },
-            {"class": "opt_content" }
+            {"id": "opt-content" }
           ]
         },
         "overlay": {
-          "class": "overlay",
-          "inner": [
-            {
-              "class": "all_slides"
-            }
-          ]
+          "id": "all-slides",
+          "inner": { "id": "all" }
         },
-        "slide":   {
+        "slide_img": {
           "class": "%size%",
           "inner": [
             {
@@ -91,27 +94,44 @@
               ]
             },
             {
-              "class": "slide_number",
+              "class": "slide-number",
               "inner": "%slide_number%"
             }
           ]
-
         },
-        "back":    {
-          "class": " back_to_current fa fa-arrow-circle-o-left fa-5x",
+        "back":      {
+          "class": " back-to-current fa fa-arrow-circle-o-left fa-5x",
           "onclick": "%back%"
         }
       },
-      img_width:    720,
-      slides:       [ 'ccm.get',   '../slidecast/slidecast_datastore.js', 'demo_offline.slides'],
-      style_global: [ 'ccm.load',  '../slidecast/style.css' ],
-      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+      img_width: 720,
+      icons: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        '../slidecast/resources/default.css' ]
     },
 
     Instance: function () {
 
       var self = this;
+
+      this.init = function ( callback ) {
+
+        var counter = 1;
+        self.slides.map( function ( slide ) {
+          if ( slide.optional_content && self.ccm.helper.isDependency( slide.optional_content ) ) {
+            counter++;
+            self.ccm.helper.solveDependency( slide, 'optional_content', check );
+          }
+        } );
+        check();
+
+        function check() {
+          counter--;
+          if ( counter > 0 ) return;
+          callback();
+        }
+      };
 
       this.ready = function ( callback ) {
         if ( !self.slides ) return;
@@ -139,7 +159,7 @@
               self.element.querySelector( 'audio' ).pause();
 
             self.element.querySelector('.main').style.display = 'none';
-            self.element.querySelector('.overlay').style.display = 'block';
+            self.element.querySelector('#all-slides').style.display = 'block';
             self.element.querySelector( '.container img').setAttribute( 'src', self.slides[ currentSlide ].image );
           },
 
@@ -184,29 +204,32 @@
 
 
         function renderSlide( slide ) {
-          var element = self.element.querySelector( '.slide_img' );
+          var element = self.element.querySelector( '#slide-img' );
           element.innerHTML = '';
 
-          self.element.querySelector( '.overlay' ).style.display = 'none';
+          self.element.querySelector( '#all-slides' ).style.display = 'none';
           self.element.querySelector( '.main' ).style.display = 'block';
 
-          element.appendChild( self.ccm.helper.html( self.templates.slide, {
+          element.appendChild( self.ccm.helper.html( self.templates.slide_img, {
             size: 'wrapper big',
             src: self.slides[ slide ].image,
             click: ''
           } ) );
 
-          self.element.querySelector('.description div').innerHTML = '';
+          self.element.querySelector('#description div').innerHTML = '';
           if ( self.slides[ currentSlide ].description)
             self.element.querySelector( '.descr' ).classList.remove( 'disabled' );
           else
             self.element.querySelector( '.descr' ).classList.add( 'disabled' );
 
 
-          element.querySelector( '.slide_number' ).style.display = 'none';
+          element.querySelector( '.slide-number' ).style.display = 'none';
 
           renderAudio( currentSlide );
           updateNavigation();
+
+          self.element.querySelector( '#opt-content' ).innerHTML = '';
+          if ( self.slides[slide].optional_content ) renderOptionalContent();
 
           function updateNavigation() {
 
@@ -233,6 +256,13 @@
 
 
           }
+
+          function renderOptionalContent() {
+            var instance = self.slides[slide].optional_content;
+            instance.start( function () {
+              self.element.querySelector( '#opt-content' ).appendChild( instance.root );
+            } );
+          }
         }
 
         function renderAudio( index ) {
@@ -246,7 +276,7 @@
 
         function renderSlides() {
 
-          var element = self.element.querySelector( '.all_slides' );
+          var element = self.element.querySelector( '#all' );
 
           addSlide( currentSlide );
           element.firstElementChild.classList.add( 'container' );
@@ -255,14 +285,14 @@
               renderSlide( currentSlide );
             }
           } ) );
-          element.firstElementChild.removeChild( element.querySelector( '.slide_number' ) );
+          element.firstElementChild.removeChild( element.querySelector( '.slide-number' ) );
 
           for (var i = 0; i < self.slides.length; i++) {
             addSlide( i );
           }
 
           function addSlide( i ) {
-            var slide_elem = self.ccm.helper.html( self.templates.slide, {
+            var slide_elem = self.ccm.helper.html( self.templates.slide_img, {
               size: 'wrapper small',
               src: self.slides[ i ].image,
               slide_number: i + 1,
@@ -277,7 +307,7 @@
         }
 
         function renderDescription() {
-          var element = self.element.querySelector('.description div');
+          var element = self.element.querySelector('#description div');
 
           element.innerHTML = '';
 
