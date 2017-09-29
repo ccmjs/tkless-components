@@ -246,9 +246,8 @@
               }
 
               if ( self.editable ) {
-                var edit_elem;
 
-                edit_elem = self.ccm.helper.html( self.templates.edit, {
+                var edit_elem = self.ccm.helper.html( self.templates.edit, {
                   edit: function () {
 
                    var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
@@ -287,7 +286,6 @@
                 comment_elem.querySelector( '.comment-overview' ).classList.remove( 'col-md-11' );
                 comment_elem.querySelector( '.comment-overview' ).classList.add( 'col-md-12' );
               }
-
 
               function renderVoting( voting ) {
 
@@ -336,7 +334,7 @@
               {
                 "user": self.user.data().name,
                 "date": moment().format(),
-                "content": editor.get().getText(),
+                "content": editor.get().getText().trim(),
                 "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
               } );
 

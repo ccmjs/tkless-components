@@ -1,7 +1,6 @@
 /**
  * @overview ccm component for commenting
  * @author Tea Kless <tea.kless@web.de>, 2017
- * @version 1.0.0
  * @license The MIT License (MIT)
  */
 
@@ -153,15 +152,14 @@
       },
       comment_template: 'simple', // or expand
       data: { store: [ 'ccm.store' ], key: 'demo' },
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
+      editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
-
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        'https://tkless.github.io/ccm-components/comment/resources/default.css',
+        '../comment/resources/default.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'
       ]
     },
@@ -253,9 +251,8 @@
               }
 
               if ( self.editable ) {
-                var edit_elem;
 
-                edit_elem = self.ccm.helper.html( self.templates.edit, {
+                var edit_elem = self.ccm.helper.html( self.templates.edit, {
                   edit: function () {
 
                    var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
@@ -294,7 +291,6 @@
                 comment_elem.querySelector( '.comment-overview' ).classList.remove( 'col-md-11' );
                 comment_elem.querySelector( '.comment-overview' ).classList.add( 'col-md-12' );
               }
-
 
               function renderVoting( voting ) {
 
@@ -343,7 +339,7 @@
               {
                 "user": self.user.data().name,
                 "date": moment().format(),
-                "content": editor.get().getText(),
+                "content": editor.get().getText().trim(),
                 "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
               } );
 

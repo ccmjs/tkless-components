@@ -1,7 +1,7 @@
 ccm.files[ "configs.js" ] = {
   demo: {
     data: { store: [ 'ccm.store', { store: 'voting', url: 'wss://ccm.inf.h-brs.de' } ], key: 'demo' },
-    user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-1.2.0.min.js' ]
+    user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js', { sign_on: 'demo' } ]
   },
 
   local: {
