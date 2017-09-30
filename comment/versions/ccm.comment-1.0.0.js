@@ -152,14 +152,14 @@
       },
       comment_template: 'simple', // or expand
       data: { store: [ 'ccm.store' ], key: 'demo' },
-      editor: [ 'ccm.component', '../editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../comment/resources/default.css',
+        'https://tkless.github.io/ccm-components/comment/resources/default.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'
       ]
     },
