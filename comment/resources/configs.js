@@ -8,7 +8,7 @@ ccm.files[ "configs.js" ] = {
       icon_likes: 'fa fa-lg fa-chevron-up',
       icon_dislikes: 'fa fa-lg fa-chevron-down',
       data: { store: [ 'ccm.store', { 'store': 'voting', 'url': 'https://ccm.inf.h-brs.de' } ] },
-      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-1.2.0.min.js' ]
+      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js' ]
     } ]
   },
 
@@ -23,5 +23,19 @@ ccm.files[ "configs.js" ] = {
       data: { store: [ 'ccm.store', '../voting/resources/datastore.js' ] },
       user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ]
     } ]
+  },
+
+  "localhost": {
+    editable: true,
+    sorting_by_voting: true,
+    data: { store: [ 'ccm.store', { 'store': 'comment', 'url': 'http://localhost:8080' } ], key: 'demo' },
+    user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js', { "sign_on": "demo" } ],
+    voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js', {
+      icon_likes: 'fa fa-lg fa-chevron-up',
+      icon_dislikes: 'fa fa-lg fa-chevron-down',
+      data: { store: [ 'ccm.store', { 'store': 'voting', 'url': 'ws://localhost:8080' } ] },
+      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js' ]
+    } ]
   }
+
 };
