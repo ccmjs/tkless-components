@@ -235,18 +235,23 @@
 
       this.ready = function ( callback ) {
         if ( self.user )
-        self.user.addObserver( self.index, function ( event ) {
-          if ( event) self.start();
-        });
+          self.user.addObserver( self.index, function ( event ) {
+            if ( event) self.start();
+          });
+        //if ( self.logger )
+        //self.logger.log( 'ready', self.ccm.helper.privatize( self.ccm.helper.clone( self ) ) );
         callback();
       };
 
       this.start = function ( callback ) {
 
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
+          if ( self.logger )
+            self.logger.log( 'start', dataset );
+
           if ( !dataset.comments ) dataset.comments = [];
 
-           var main_elem = self.ccm.helper.html( self.templates.main, {
+          var main_elem = self.ccm.helper.html( self.templates.main, {
             render_editor: function () {
               self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
               renderEditor();
@@ -292,6 +297,7 @@
             }
 
             function renderComment( comment ) {
+              var old_comment = comment.content;
               var comment_elem;
 
               if( self.comment_template === 'simple' ) {
@@ -317,7 +323,7 @@
                 var edit_elem = self.ccm.helper.html( self.templates.edit, {
                   edit: function () {
 
-                   var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
+                    var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
                     self.editor.start( function (instance) {
                       self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
                       instance.get().setText( content );
@@ -333,7 +339,10 @@
                           };
 
                         // update dataset for rendering => (re)render accepted answer
-                        self.data.store.set( dataset, function () { self.start() } );
+                        self.data.store.set( dataset, function () {
+                          self.start();
+                          if( self.logger ) self.logger.log( 'edit', { 'old': old_comment, 'new': comment.content });
+                        } );
                       } );
                     } );
                   }
@@ -394,19 +403,25 @@
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
-          
+
           function newComment() {
+            var data = {
+              "user": self.user.data().name,
+              "date": moment().format(),
+              "content": editor.get().getText().trim(),
+              "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
+            };
 
-            dataset.comments.push(
-              {
-                "user": self.user.data().name,
-                "date": moment().format(),
-                "content": editor.get().getText().trim(),
-                "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
-              } );
-
+            dataset.comments.push( data );
             // update dataset for rendering => (re)render accepted answer
-            self.data.store.set( dataset, function () { self.start() } );
+            self.data.store.set( dataset, function () {
+              self.start();
+              if ( self.logger ) {
+                data = self.ccm.helper.clone( data );
+                delete dataset.user;
+                self.logger.log( 'create', data );
+              }
+            } );
           }
 
         } );
