@@ -23,6 +23,11 @@
           "class": "container-fluid",
           "inner": [
             {
+              "tag": "h3",
+              "class": "row text-success",
+              "inner": "Comments"
+            },
+            {
               "id": "comment-list",
               "class": "row"
             },
@@ -139,51 +144,51 @@
         },
         "expanded_comment": {
           "inner": {
-            "class": "panel panel-white post panel-shadow",
-            "inner": [
-              {
-                "class": "post-heading",
-                "inner":[
-                  {
-                    "class": "pull-left image",
-                    "inner": {
-                      "tag": "img",
-                      "src": "https://tkless.github.io/ccm-components/comment/resources/user.jpg",
-                      "class": "img-circle avatar",
-                      "alt": "user profile image"
-                    }
-                  },
-                  {
-                    "class": "pull-left meta",
-                    "inner": [
-                      {
-                        "class": "title h5",
-                        "inner": "<b>%user%</b>&nbsp;made a post."
-                      },
-                      {
-                        "tag": "h6",
-                        "class": "text-muted time",
-                        "inner": "%date%"
+              "class": "panel panel-white post panel-shadow",
+              "inner": [
+                {
+                  "class": "post-heading",
+                  "inner":[
+                    {
+                      "class": "pull-left image",
+                      "inner": {
+                        "tag": "img",
+                        "src": "../../ccm-components/comment/resources/user.jpg",
+                        "class": "img-circle avatar",
+                        "alt": "user profile image"
                       }
-                    ]
-                  }
-                ]
-              },
-              {
-                "class": "post-description",
-                "inner": [
-                  {
-                    "tag": "p",
-                    "class": "comment-overview",
-                    "inner": "%comment_content%&nbsp;"
-                  },
-                  {
-                    "class": "stats voting-area"
-                  }
-                ]
-              }
-            ]
-          }
+                    },
+                    {
+                      "class": "pull-left meta",
+                      "inner": [
+                        {
+                          "class": "title h5",
+                          "inner": "<b>%user%</b>&nbsp;made a post."
+                        },
+                        {
+                          "tag": "h6",
+                          "class": "text-muted time",
+                          "inner": "%date%"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "post-description",
+                  "inner": [
+                    {
+                      "tag": "p",
+                      "class": "comment-overview",
+                      "inner": "%comment_content%&nbsp;"
+                    },
+                    {
+                      "class": "stats voting-area"
+                    }
+                  ]
+                }
+              ]
+            }
         },
         "edit": {
           "tag": "span",
@@ -230,10 +235,10 @@
       this.ready = function ( callback ) {
         if ( self.user )
           self.user.addObserver( self.index, function ( event ) {
-            if ( event) self.start();
-          });
+          if ( event) self.start();
+        });
         //if ( self.logger )
-        //self.logger.log( 'ready', self.ccm.helper.privatize( self.ccm.helper.clone( self ) ) );
+          //self.logger.log( 'ready', self.ccm.helper.privatize( self.ccm.helper.clone( self ) ) );
         callback();
       };
 
@@ -245,7 +250,7 @@
 
           if ( !dataset.comments ) dataset.comments = [];
 
-          var main_elem = self.ccm.helper.html( self.templates.main, {
+           var main_elem = self.ccm.helper.html( self.templates.main, {
             render_editor: function () {
               self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
               renderEditor();
@@ -294,15 +299,6 @@
               var old_comment = comment.content;
               var comment_elem;
 
-              if( self.comment_template === 'simple' ) {
-                // generate on-the-fly element
-                comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
-                  comment_content: comment.content,
-                  user: comment.user,
-                  date: moment( comment.date ).fromNow()
-                });
-              }
-
               if( self.comment_template === 'expanded' ) {
                 // generate on-the-fly element
                 comment_elem = self.ccm.helper.html( self.templates.expanded_comment, {
@@ -311,24 +307,30 @@
                   date: moment( comment.date ).fromNow()
                 });
               }
+              else
+                comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
+                  comment_content: comment.content,
+                  user: comment.user,
+                  date: moment( comment.date ).fromNow()
+                });
 
               if ( self.editable ) {
 
                 var edit_elem = self.ccm.helper.html( self.templates.edit, {
                   edit: function () {
 
-                    var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
+                   var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
                     self.editor.start( function (instance) {
                       self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
                       instance.get().setText( content );
                       instance.get().focus();
                       instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', function () {
                         comment.content = instance.get().getText().trim();
-                        dataset.comments[comment] =
+                        dataset.comments[ comment ] =
                           {
                             "user": comment.user,
                             "date": comment.date,
-                            "content": instance.get().root.innerHTML,
+                            "content": comment.content,
                             "voting": comment.voting
                           };
 
@@ -397,7 +399,7 @@
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
-
+          
           function newComment() {
             var data = {
               "user": self.user.data().name,

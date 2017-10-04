@@ -18,6 +18,11 @@
           "class": "container-fluid",
           "inner": [
             {
+              "tag": "h3",
+              "class": "row text-success",
+              "inner": "Comments"
+            },
+            {
               "id": "comment-list",
               "class": "row"
             },
@@ -316,11 +321,11 @@
                       instance.get().focus();
                       instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', function () {
                         comment.content = instance.get().getText().trim();
-                        dataset.comments[comment] =
+                        dataset.comments[ comment ] =
                           {
                             "user": comment.user,
                             "date": comment.date,
-                            "content": instance.get().root.innerHTML,
+                            "content": comment.content,
                             "voting": comment.voting
                           };
 
