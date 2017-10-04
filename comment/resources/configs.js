@@ -15,11 +15,11 @@ ccm.files[ "configs.js" ] = {
   "local": {
     editable: true,
     sorting_by_voting: true,
+    comment_template: 'simple',
     data: { store: [ 'ccm.store', '../comment/resources/datastore.js' ], key: 'demo' },
     user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ], //{ logged_in: true, 'guest.user': 'tmeskh2s' } ],
-    voting: [ 'ccm.component', '../voting/ccm.voting.js', {
-      icon_likes: 'fa fa-lg fa-chevron-up',
-      icon_dislikes: 'fa fa-lg fa-chevron-down',
+    voting: [ 'ccm.component', '../thumb_rating/ccm.thumb_rating.js', {
+      buttons: true,
       data: { store: [ 'ccm.store', '../voting/resources/datastore.js' ] },
       user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ]
     } ]
@@ -37,5 +37,4 @@ ccm.files[ "configs.js" ] = {
       user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js' ]
     } ]
   }
-
 };

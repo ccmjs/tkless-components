@@ -49,9 +49,10 @@
           ]
         },
         "editor":{
+          "class": "row",
           "inner": [
             {
-              "class": "row form-group",
+              "class": "form-group",
               "inner":
                 {
                   "class": "container-fluid",
@@ -59,7 +60,6 @@
                 }
             },
             {
-              "class": "row",
               "id": "add-comment",
               "inner": [
                 {
@@ -132,10 +132,63 @@
             }
           ]
         },
-        "expand_comment": {},
+        "expanded_comment": {
+          "class": "row",
+          "inner": {
+            "class": "col-sm-8",
+            "inner": {
+              "class": "panel panel-white post panel-shadow",
+              "inner": [
+                {
+                  "class": "post-heading",
+                  "inner":[
+                    {
+                      "class": "pull-left image",
+                      "inner": {
+                        "tag": "img",
+                        "src": "resources/user.jpg",
+                        "class": "img-circle avatar",
+                        "alt": "user profile image"
+                      }
+                    },
+                    {
+                      "class": "pull-left meta",
+                      "inner": [
+                        {
+                          "class": "title h5",
+                          "inner": "<b>%user%</b>&nbsp;made a post."
+                        },
+                        {
+                          "tag": "h6",
+                          "class": "text-muted time",
+                          "inner": "%date%"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "class": "post-description",
+                  "inner": [
+                    {
+                      "tag": "p",
+                      "class": "comment-overview",
+                      "inner": "%comment_content%&nbsp;"
+                    },
+                    {
+                      "class": "stats voting-area"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
 
         "edit": {
           "tag": "span",
+          "type": "btn",
+          "class": "btn",
           "onclick": "%edit%",
           "inner": [
             {
@@ -145,7 +198,7 @@
           ]
         }
       },
-      comment_template: 'simple', // or expand
+      comment_template: 'expanded', // or expanded
       data: { store: [ 'ccm.store' ], key: 'demo' },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
@@ -239,6 +292,15 @@
               if( self.comment_template === 'simple' ) {
                 // generate on-the-fly element
                 comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
+                  comment_content: comment.content,
+                  user: comment.user,
+                  date: moment( comment.date ).fromNow()
+                });
+              }
+
+              if( self.comment_template === 'expanded' ) {
+                // generate on-the-fly element
+                comment_elem = self.ccm.helper.html( self.templates.expanded_comment, {
                   comment_content: comment.content,
                   user: comment.user,
                   date: moment( comment.date ).fromNow()

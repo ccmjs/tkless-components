@@ -25,6 +25,13 @@ hr {
     opacity: 0;
 }
 
+.comment-overview > span {
+    color: #999;
+}
+#add-comment {
+    margin-left: 13px;
+}
+
 @-webkit-keyframes fadeinout {
     100% { opacity: 1; }
 }
@@ -33,6 +40,41 @@ hr {
     100% { opacity: 1; }
 }
 
-button {
-    margin-left: 1.2em;
+
+.panel-shadow {
+    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+}
+
+.panel-white {
+    border: 1px solid #dddddd;
+}
+
+.post .post-heading {
+    height: 95px;
+    padding: 20px 15px;
+}
+.post .post-heading .avatar {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-right: 15px;
+}
+.post .post-heading .meta .title {
+    margin-bottom: 0;
+}
+
+.post .post-heading .meta .time {
+    margin-top: 8px;
+    color: #999;
+}
+.post .post-image .image {
+    width: 100%;
+    height: auto;
+}
+.post .post-description {
+    padding: 15px;
+}
+
+.post .post-description .stats {
+    margin-top: 20px;
 }
