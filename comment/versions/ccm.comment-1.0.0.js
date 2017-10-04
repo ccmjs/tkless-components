@@ -138,58 +138,53 @@
           ]
         },
         "expanded_comment": {
-          "class": "row",
           "inner": {
-            "class": "col-sm-8",
-            "inner": {
-              "class": "panel panel-white post panel-shadow",
-              "inner": [
-                {
-                  "class": "post-heading",
-                  "inner":[
-                    {
-                      "class": "pull-left image",
-                      "inner": {
-                        "tag": "img",
-                        "src": "https://tkless.github.io/ccm-components/comment/resources/user.jpg",
-                        "class": "img-circle avatar",
-                        "alt": "user profile image"
+            "class": "panel panel-white post panel-shadow",
+            "inner": [
+              {
+                "class": "post-heading",
+                "inner":[
+                  {
+                    "class": "pull-left image",
+                    "inner": {
+                      "tag": "img",
+                      "src": "https://tkless.github.io/ccm-components/comment/resources/user.jpg",
+                      "class": "img-circle avatar",
+                      "alt": "user profile image"
+                    }
+                  },
+                  {
+                    "class": "pull-left meta",
+                    "inner": [
+                      {
+                        "class": "title h5",
+                        "inner": "<b>%user%</b>&nbsp;made a post."
+                      },
+                      {
+                        "tag": "h6",
+                        "class": "text-muted time",
+                        "inner": "%date%"
                       }
-                    },
-                    {
-                      "class": "pull-left meta",
-                      "inner": [
-                        {
-                          "class": "title h5",
-                          "inner": "<b>%user%</b>&nbsp;made a post."
-                        },
-                        {
-                          "tag": "h6",
-                          "class": "text-muted time",
-                          "inner": "%date%"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "class": "post-description",
-                  "inner": [
-                    {
-                      "tag": "p",
-                      "class": "comment-overview",
-                      "inner": "%comment_content%&nbsp;"
-                    },
-                    {
-                      "class": "stats voting-area"
-                    }
-                  ]
-                }
-              ]
-            }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "post-description",
+                "inner": [
+                  {
+                    "tag": "p",
+                    "class": "comment-overview",
+                    "inner": "%comment_content%&nbsp;"
+                  },
+                  {
+                    "class": "stats voting-area"
+                  }
+                ]
+              }
+            ]
           }
         },
-
         "edit": {
           "tag": "span",
           "type": "btn",
@@ -203,7 +198,6 @@
           ]
         }
       },
-      comment_template: 'expanded', // or expanded
       data: { store: [ 'ccm.store' ], key: 'demo' },
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': false },

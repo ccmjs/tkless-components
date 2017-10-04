@@ -1,4 +1,4 @@
-ccm.files[ "thumb_rating_datastore.js" ] = {
+ccm.files[ "datastore.js" ] = {
   "demo": {
     "key": "demo",
     "likes": {

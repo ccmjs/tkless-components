@@ -1,5 +1,5 @@
 #element {
-    margin: 1em;
+    margin: 0.7em;
 }
 
 .sub-text {
@@ -40,7 +40,6 @@ hr {
     100% { opacity: 1; }
 }
 
-
 .panel-shadow {
     box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
 }
@@ -73,6 +72,7 @@ hr {
 }
 .post .post-description {
     padding: 15px;
+    padding-bottom: 30px;
 }
 
 .post .post-description .stats {

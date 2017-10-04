@@ -102,14 +102,9 @@ img {
 }
 
 #description div {
-    background-color: #eff0f1;
     border-radius: 3px;
     padding: 0 0.7em;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out;
-}
-
-#opt-content {
-    margin: 30px;
 }

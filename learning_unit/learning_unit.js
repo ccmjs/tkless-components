@@ -6,7 +6,7 @@
 
   var component = {
 
-    name: 'comment_builder',
+    name: 'learning_unit',
 
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
@@ -25,10 +25,10 @@
         }
       },
 
-      kea: "hbrs_se17_bcs_le01",
-      content: "<h1>Einleitung</h1>",
-      exercise: [ "ccm.component", "path/to...",
-        { data: { store: [ "ccm.store", { "store": "", "url": "" } ] } }
+      kea: 'hbrs_se17_bcs_le01',
+      content: '<h1>Einleitung</h1>',
+      exercise: [ 'ccm.component', '../exercise/exercise.js',
+        { data: { store: [ 'ccm.store', { 'store': "../learning_unit/learning_unit_datastore.json" } ] } }
       ],
       css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ]
     },

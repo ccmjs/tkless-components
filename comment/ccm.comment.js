@@ -133,10 +133,7 @@
           ]
         },
         "expanded_comment": {
-          "class": "row",
           "inner": {
-            "class": "col-sm-8",
-            "inner": {
               "class": "panel panel-white post panel-shadow",
               "inner": [
                 {
@@ -146,7 +143,7 @@
                       "class": "pull-left image",
                       "inner": {
                         "tag": "img",
-                        "src": "resources/user.jpg",
+                        "src": "../../ccm-components/comment/resources/user.jpg",
                         "class": "img-circle avatar",
                         "alt": "user profile image"
                       }
@@ -182,9 +179,7 @@
                 }
               ]
             }
-          }
         },
-
         "edit": {
           "tag": "span",
           "type": "btn",
@@ -198,7 +193,6 @@
           ]
         }
       },
-      comment_template: 'expanded', // or expanded
       data: { store: [ 'ccm.store' ], key: 'demo' },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
@@ -295,15 +289,6 @@
               var old_comment = comment.content;
               var comment_elem;
 
-              if( self.comment_template === 'simple' ) {
-                // generate on-the-fly element
-                comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
-                  comment_content: comment.content,
-                  user: comment.user,
-                  date: moment( comment.date ).fromNow()
-                });
-              }
-
               if( self.comment_template === 'expanded' ) {
                 // generate on-the-fly element
                 comment_elem = self.ccm.helper.html( self.templates.expanded_comment, {
@@ -312,6 +297,12 @@
                   date: moment( comment.date ).fromNow()
                 });
               }
+              else
+                comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
+                  comment_content: comment.content,
+                  user: comment.user,
+                  date: moment( comment.date ).fromNow()
+                });
 
               if ( self.editable ) {
 

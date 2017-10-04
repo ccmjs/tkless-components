@@ -19,8 +19,7 @@
           "inner": [
             {
               "id": "slide",
-              "inner": [
-                {
+              "inner": {
                   "class": "inner",
                   "inner": [
                     {
@@ -68,13 +67,11 @@
                       "inner" : {
                         "inner": "%p%"
                       }
-                    }
+                    },
+                    {"id": "opt-content" }
                   ]
                 }
-
-              ]
-            },
-            {"id": "opt-content" }
+            }
           ]
         },
         "overlay": {
@@ -108,7 +105,7 @@
       icons: [ 'ccm.load',
         { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        '../slidecast/resources/default.css' ]
+        '../../../ccm-components/slidecast/resources/default.css' ]
     },
 
     Instance: function () {

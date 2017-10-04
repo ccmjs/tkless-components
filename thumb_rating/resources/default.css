@@ -8,20 +8,16 @@
     color: #879496;
 }
 
-.rating,
-.likes,
-.dislikes {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.likes div,
-.dislikes div {
-    padding: 0.1em;
-    font-size: 85%;
-}
-
 .selected {
     color: #009ee0;
+}
+.likes,
+.dislikes {
+    display: inline-block;
+    margin-right: 15px;
+}
+.likes,
+.dislikes,
+.icon {
+    margin-right: 8px;
 }
