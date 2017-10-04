@@ -24,8 +24,7 @@
           "inner": [
             {
               "id": "slide",
-              "inner": [
-                {
+              "inner": {
                   "class": "inner",
                   "inner": [
                     {
@@ -73,13 +72,11 @@
                       "inner" : {
                         "inner": "%p%"
                       }
-                    }
+                    },
+                    {"id": "opt-content" }
                   ]
                 }
-
-              ]
-            },
-            {"id": "opt-content" }
+            }
           ]
         },
         "overlay": {

@@ -4,6 +4,7 @@ ccm.files[ "datastore.js" ] = {
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie01.jpg",
         "optional_content": [ "ccm.instance", "../comment/ccm.comment.js", {
+          "comment_template": "expanded",
           "data": {
             "store": [ "ccm.store", { "store": "slidecast_comments", "url": "http://localhost:8080" } ],
             "key": "demo_offline_slide01"
