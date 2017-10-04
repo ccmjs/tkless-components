@@ -14,7 +14,6 @@
 
     config: {
       data: { store: [ 'ccm.store' ] },
-
       templates: {
         "simple": {
           "class": "rating container",

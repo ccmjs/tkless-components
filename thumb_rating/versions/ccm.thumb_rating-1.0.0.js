@@ -19,9 +19,64 @@
 
     config: {
       data: { store: [ 'ccm.store' ] },
-      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/thumb_rating/style.css' ],
-      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+      templates: {
+        "simple": {
+          "class": "rating container",
+          "inner": {
+            "class": "row",
+            "inner": [
+              {
+                "class": "likes fa fa-lg fa-thumbs-up",
+                "inner": "%likes%"
+              },
+              {
+                "class": "dislikes fa fa-lg fa-thumbs-down",
+                "inner": "%dislikes%"
+              }
+            ]
+          }
+        },
+
+        "buttons": {
+          "class": "rating container",
+          "inner": {
+            "class": "row",
+            "inner": [
+              {
+                "tag": "a",
+                "href": "#",
+                "class": "likes btn btn-default",
+                "inner": [
+                  {
+                    "tag": "i",
+                    "class": "fa fa-thumbs-up icon",
+                  },
+                  "%likes%"
+                ]
+              },
+              {
+                "tag": "a",
+                "href": "#",
+                "class": "dislikes btn btn-default",
+                "inner": [
+                  {
+                    "tag": "i",
+                    "class": "fa fa-thumbs-down icon",
+                  },
+                  "%dislikes%"
+                ]
+              },
+            ]
+          }
+        }
+      },
+      libs: [ 'ccm.load',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'},
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        'https://tkless.github.io/ccm-components/thumb_rating/resources/default.css'
+      ]
     },
 
     Instance: function () {
@@ -49,13 +104,7 @@
         // get dataset for rendering
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
 
-          // render main html structure
-          self.ccm.helper.setContent( self.element, self.ccm.helper.html( { class: 'rating' } ) );
-
           renderThumbs();
-
-          // perform callback
-          if ( callback ) callback();
 
           function renderThumbs() {
 
@@ -63,17 +112,19 @@
             if ( !dataset.likes    ) dataset.likes    = {};
             if ( !dataset.dislikes ) dataset.dislikes = {};
 
-            total = (Object.keys(dataset.likes).length)- (Object.keys(dataset.dislikes).length);
+            total = ( Object.keys(dataset.likes).length) - (Object.keys(dataset.dislikes).length);
 
-            var rating = self.element.querySelector( '.rating' );
-
-            rating.innerHTML =
-              '<div class="likes fa fa-lg fa-thumbs-up">' +
-              '<div>' + Object.keys( dataset.likes ).length + '</div>' +
-              '</div>' +
-              '<div class="dislikes fa fa-lg fa-thumbs-down">' +
-              '<div>' + Object.keys( dataset.dislikes ).length + '</div>' +
-              '</div>';
+            if ( self.buttons )
+              self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.buttons, {
+                likes: Object.keys( dataset.likes ).length,
+                dislikes: Object.keys( dataset.dislikes ).length
+              }));
+            else
+            // render main html structure
+              self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.simple, {
+                likes: Object.keys( dataset.likes ).length,
+                dislikes: Object.keys( dataset.dislikes ).length
+              } ) );
 
             // ccm instance for user authentication not exists? => abort
             if ( !self.user ) return;
@@ -83,14 +134,12 @@
              * @type {{likes: ccm.types.element, dislikes: ccm.types.element}}
              */
             var div = {
-
               likes:    self.element.querySelector( '.likes' ),
               dislikes: self.element.querySelector( '.dislikes' )
-
             };
 
             // add class for user specific interactions
-            rating.classList.add( 'user' );
+            self.element.querySelector( '.rating' ).classList.add( 'user' );
 
 
 
@@ -151,6 +200,9 @@
               } );
             }
           }
+
+          // perform callback
+          if ( callback ) callback();
 
         } );
 
