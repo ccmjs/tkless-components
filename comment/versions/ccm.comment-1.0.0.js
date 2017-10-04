@@ -153,7 +153,7 @@
                       "class": "pull-left image",
                       "inner": {
                         "tag": "img",
-                        "src": "../../ccm-components/comment/resources/user.jpg",
+                        "src": "https://tkless.github.io/ccm-components/comment/resources/user.jpg",
                         "class": "img-circle avatar",
                         "alt": "user profile image"
                       }
