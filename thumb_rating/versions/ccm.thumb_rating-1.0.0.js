@@ -21,9 +21,8 @@
       data: { store: [ 'ccm.store' ] },
       templates: {
         "simple": {
-          "class": "rating container",
+          "class": "rating",
           "inner": {
-            "class": "row",
             "inner": [
               {
                 "class": "likes fa fa-lg fa-thumbs-up",
@@ -38,9 +37,8 @@
         },
 
         "buttons": {
-          "class": "rating container",
+          "class": "rating",
           "inner": {
-            "class": "row",
             "inner": [
               {
                 "tag": "a",

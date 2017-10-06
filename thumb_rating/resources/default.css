@@ -6,6 +6,7 @@
 
 .rating {
     color: #879496;
+    display: flex;
 }
 
 .selected {
