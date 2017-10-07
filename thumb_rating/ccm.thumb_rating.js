@@ -89,6 +89,11 @@
         // listen to login/logout event => (re)render own content
         if ( self.user ) self.user.addObserver( self.index, function () { self.start(); } );
 
+        if ( self.logger ) self.logger.log( 'ready', {
+          key: self.data.key,
+          store: self.data.store.source()
+        } );
+
         callback();
       };
 
@@ -96,6 +101,7 @@
 
         // get dataset for rendering
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
+          if( self.logger ) self.logger.log( 'start', dataset );
 
           renderThumbs();
 
@@ -186,7 +192,10 @@
                   }
 
                   // update dataset for rendering => (re)render own content
-                  self.data.store.set( dataset, function () { self.start(); } );
+                  self.data.store.set( dataset, function () {
+                    self.logger.log( 'click', index );
+                    self.start();
+                  } );
 
                 } );
 
