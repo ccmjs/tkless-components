@@ -4,12 +4,11 @@ ccm.files[ "configs.js" ] = {
     sorting_by_voting: true,
     comment_template: 'expanded',
     data: { store: [ 'ccm.store', { 'store': 'comment', 'url': 'https://ccm.inf.h-brs.de' } ], key: 'demo' },
-    user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js' ],
+    user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js', { sign_on: 'demo' } ],
     voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js', {
-      icon_likes: 'fa fa-lg fa-chevron-up',
-      icon_dislikes: 'fa fa-lg fa-chevron-down',
+      buttons: true,
       data: { store: [ 'ccm.store', { 'store': 'voting', 'url': 'https://ccm.inf.h-brs.de' } ] },
-      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js' ]
+      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js', { sign_on: 'demo' } ]
     } ]
   },
 
