@@ -232,8 +232,11 @@
           self.user.addObserver( self.index, function ( event ) {
           if ( event) self.start();
         });
-        //if ( self.logger )
-          //self.logger.log( 'ready', self.ccm.helper.privatize( self.ccm.helper.clone( self ) ) );
+
+        if ( self.logger ) self.logger.log( 'ready', {
+          key: self.data.key,
+          store: self.data.store.source()
+        } );
         callback();
       };
 

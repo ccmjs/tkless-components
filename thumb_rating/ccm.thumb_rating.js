@@ -193,7 +193,7 @@
 
                   // update dataset for rendering => (re)render own content
                   self.data.store.set( dataset, function () {
-                    self.logger.log( 'click', index );
+                    if ( self.logger ) self.logger.log( 'click', index );
                     self.start();
                   } );
 

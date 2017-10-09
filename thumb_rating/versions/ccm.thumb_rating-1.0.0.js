@@ -73,7 +73,7 @@
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        'https://tkless.github.io/ccm-components/thumb_rating/resources/default.css'
+        '../../../ccm-components/thumb_rating/resources/default.css'
       ]
     },
 
@@ -94,6 +94,11 @@
         // listen to login/logout event => (re)render own content
         if ( self.user ) self.user.addObserver( self.index, function () { self.start(); } );
 
+        if ( self.logger ) self.logger.log( 'ready', {
+          key: self.data.key,
+          store: self.data.store.source()
+        } );
+
         callback();
       };
 
@@ -101,6 +106,7 @@
 
         // get dataset for rendering
         self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
+          if( self.logger ) self.logger.log( 'start', dataset );
 
           renderThumbs();
 
@@ -191,7 +197,10 @@
                   }
 
                   // update dataset for rendering => (re)render own content
-                  self.data.store.set( dataset, function () { self.start(); } );
+                  self.data.store.set( dataset, function () {
+                    if( self.logger ) self.logger.log( 'click', index );
+                    self.start();
+                  } );
 
                 } );
 
