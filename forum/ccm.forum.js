@@ -10,7 +10,7 @@
 
     name: 'forum',
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
 
     config: {
       templates: {
@@ -172,16 +172,11 @@
         }
       },
 
-      data: {
-        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/forum/forum_datastore.js' ],
-        key: "demo"
-      },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      style: [ 'ccm.load', '../forum/style.css' ],
+      data: { store: [ 'ccm.store' ] },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-          ['bold', 'italic', 'underline'],        // toggled buttons
+          ['bold', 'italic', 'underline'],                  // toggled buttons
           ['blockquote', 'code-block'],
 
           [{ 'header': 1 }, { 'header': 2 }],               // custom button values
@@ -194,8 +189,12 @@
         ] }
       ],
       question: [ 'ccm.component', '../question/ccm.question.js' ],
-      new_question_conf: { data: { store: [ 'ccm.store' ] } },
-      bootstrap: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' } ]
+      css: [ 'ccm.load',
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
+        '../forum/resources/default.css'
+      ]
     },
 
     Instance: function () {
@@ -207,14 +206,14 @@
 
         self.ccm.helper.dataset(self.data.store, self.data.key, function ( dataset ) {
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
+          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
             for:   "title",
             inner: "Title",
             id:    "title",
             type:  "text",
             value: "What is your Question ?",
-            submit: function ( event ) { console.log( "huhu" ); event.preventDefault(); newQuestion(); }
-          } ) ) );
+            submit: function ( event ) { event.preventDefault(); newQuestion(); }
+          } ) );
 
           renderQuestions();
           renderEditor();
@@ -223,11 +222,10 @@
 
             dataset.questions.map( renderQuestion );
 
-            function renderQuestion( question_conf ) {
+            function renderQuestion( question_key ) {
 
               // start question instance
-              self.question.start( question_conf , function ( question_instance ) {
-
+              self.question.start( { 'data.key': question_key }, function ( question_instance ) {
                 // get question data of lunched question instance
                 question_instance.data.store.get( question_instance.data.key, function ( question_data ) {
 
@@ -267,54 +265,31 @@
           }
 
           function newQuestion() {
+
             if ( !self.user ) return;
 
             self.user.login( function () {
-              var user = self.user.data().user;
 
-              var question_title = self.element.querySelector( 'input[ id = title ]' ).value;
-
+              var question_key = "forum_" + dataset.key + "_" + ( dataset.questions.length + 1 );
+              
               var new_question_data = {
-                "date": getDateTime(),
-                "user": user,
-                "title": question_title,
+                "key": question_key,
+                "date": moment().format(),
+                "user": self.user.data().name,
+                "title": self.element.querySelector( 'input[ id = title ]' ).value,
                 "content": editor.get().root.innerHTML,
-                "voting": { },
-                "answers": [ ]
-              } ;
+                "voting": "question_" + dataset.key + "_" + ( dataset.questions.length + 1 ),
+                "answers": []
+              };
 
-              var new_question_conf = self.ccm.helper.clone( self.new_question_conf );
-
-              self.question.instance( new_question_conf, function ( new_question_inst ) {
-
-                new_question_inst.data.store.set( new_question_data, function ( created_qustion_data ) {
-                  new_question_conf.data.key = created_qustion_data.key;
-                  dataset.questions.push( new_question_conf );
+              self.question.instance( function ( new_question_inst ) {
+                new_question_inst.data.store.set( new_question_data, function () {
+                  dataset.questions.push( question_key );
                   self.data.store.set( dataset, function () { self.start(); } );
                 } );
               } );
 
             } );
-
-          }
-
-          function getDateTime() {
-
-            var today = new Date();
-            var dd    = today.getDate();
-            var mm    = today.getMonth();
-            var yyyy  = today.getFullYear();
-            var hour  = today.getHours();
-            var min   = today.getMinutes();
-
-            var monat = ["Januar", "Februar", "März", "April", "Mai", "Juni","Juli", "August", "September", "Oktober", "November", "Dezember"];
-
-            if ( dd < 10 ) dd = '0' + dd;
-
-            if ( hour < 10 ) hour = '0' + hour;
-            if ( min  < 10 ) min  = '0' + min;
-
-            return dd + ' ' + monat[ mm].substring(0, 3) + '. '  + yyyy + ' ' + hour + ':' + min;
 
           }
 
