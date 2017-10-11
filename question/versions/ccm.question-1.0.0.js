@@ -76,27 +76,6 @@
 
                 {
                   "id": "new-answer",
-                  "inner": [
-                    {
-                      "tag": "h4",
-                      "inner": "Your Answer"
-                    },
-                    {
-                      "id": "editor"
-                    },
-                    {
-                      "id": "new",
-                      "class": "row",
-                      "inner": {
-                        "tag": "button",
-                        "class": "btn btn-primary",
-                        "type": "submit",
-                        "inner": "Post Answer",
-                        "onclick": "%new_answer%"
-                      }
-                    }
-                  ]
-
                 }
               ]
             }
@@ -144,11 +123,33 @@
               "tag": "hr"
             }
           ]
+        },
 
+        "new_answer": {
+          "inner": [
+            {
+              "tag": "h4",
+              "inner": "Your Answer"
+            },
+            {
+              "id": "editor"
+            },
+            {
+              "id": "new",
+              "class": "row",
+              "inner": {
+                "tag": "button",
+                "class": "btn btn-primary",
+                "type": "submit",
+                "inner": "Post Answer",
+                "onclick": "%new_answer%"
+              }
+            }
+          ]
         }
       },
       data: { store: [ 'ccm.store' ] },
-      editor: [ 'ccm.component', '../editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
             ['bold', 'italic', 'underline'],        // toggled buttons
@@ -164,12 +165,12 @@
           ]
         }
       ],
-      voting: [ 'ccm.component', '../voting/ccm.voting.js' ],
+      voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js' ],
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
-        '../question/resources/default.css'
+        'https://tkless.github.io/ccm-components/question/resources/default.css'
       ]
     },
 
@@ -182,6 +183,7 @@
 
         // listen to change event of ccm realtime datastore => (re)render own content
         self.data.store.onChange = function ( question ) {
+
           dataset = question;
           self.start();
         };
@@ -192,7 +194,8 @@
       this.ready = function ( callback ) {
         if ( self.user )
           self.user.addObserver( self.index, function ( event ) {
-            if ( event) self.start();
+            console.log('!');
+            if ( event ) self.start();
           });
         callback();
       };
@@ -213,8 +216,7 @@
             self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
               title: dataset.title,
               signatur: dataset.user + '&nbsp;'+ moment( dataset.date ).fromNow(),
-              question: dataset.content,
-              new_answer: function () { if ( !self.user ) return; newAnswer(); }
+              question: dataset.content
             }));
 
             renderVoting( self.element.querySelector( '.voting' ), dataset.voting || 'question_' + dataset.key, false );
@@ -251,8 +253,12 @@
           function renderEditor() {
             if ( !self.user ) return;
 
+            var editor_elem = self.ccm.helper.html( self.templates.new_answer, {
+              new_answer: function () { if ( !self.user ) return; newAnswer(); }
+            } );
+
             self.user.login( function () {
-              self.editor.start( { root: self.element.querySelector( '#editor' ) }, function (instance) {
+              self.editor.start( { root: editor_elem.querySelector( '#editor' ) }, function (instance) {
                 if ( self.user.data().name !== dataset.user) {
                   editor = instance;
                 }
@@ -260,6 +266,8 @@
                   self.element.querySelector('#answers-view').removeChild(self.element.querySelector('#new-answer'));
                 }
               } );
+
+              self.element.querySelector( '#new-answer' ).appendChild( editor_elem );
             } );
 
           }
