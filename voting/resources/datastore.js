@@ -12,13 +12,25 @@ ccm.files[ "datastore.js" ] = {
     }
   },
 
-  "question_demo": {
+  "question_demo_1": {
     "key": "question_demo",
     "likes": {
       "mmuster2s": true,
       "fsache2s": true,
       "kschus2m": true,
       "mkaul2s": true
+    },
+    "dislikes": {
+      "akless2s": true
+    }
+  },
+
+  "question_demo_2": {
+    "key": "question_demo",
+    "likes": {
+      "mmuster2s": true,
+      "fsache2s": true,
+      "kschus2m": true
     },
     "dislikes": {
       "akless2s": true
