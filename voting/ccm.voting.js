@@ -147,7 +147,7 @@
 
       };
 
-      this.getVoting = function () {
+      this.getValue = function () {
        return total;
       }
 

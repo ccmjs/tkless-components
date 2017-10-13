@@ -371,7 +371,7 @@
 
                 self.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
-                  unsorted_comments.push( { "voting": voting_inst.getVoting(), "comment": comment_elem, "date": comment.date } );
+                  unsorted_comments.push( { "voting": voting_inst.getValue(), "comment": comment_elem, "date": comment.date } );
                   comment_elem.querySelector( '.voting-area' ).appendChild( voting_inst.root );
                   check();
                 } );
