@@ -214,7 +214,7 @@
         previewNode.parentNode.removeChild(previewNode);
 
         var myDropzone = new Dropzone(self.element.querySelector('.main'), { // Make the whole body a dropzone
-          url: "../../server/upload.js", // Set the url
+          url: "http://localhost:8080/upload", // Set the url
           thumbnailWidth: 80,
           thumbnailHeight: 80,
           parallelUploads: 20,
