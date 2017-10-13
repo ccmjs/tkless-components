@@ -26,12 +26,10 @@
               "id": "answers-view",
               "inner": [
                 {
-                  "class": "question",
+                  "class": "question row",
                   "inner": [
                     {
-                      "class": "row",
-                      "inner": {
-                        "class": "question-title col-md-12",
+                      "class": "question-title col-md-12",
                         "inner": {
                           "tag": "h3",
                           "inner": [
@@ -42,10 +40,9 @@
                             }
                           ]
                         }
-                      }
                     },
                     {
-                      "class": "row",
+                      "class": "col-md-12",
                       "inner": [
                         {
                           "class": "voting col-md-1"
@@ -57,11 +54,7 @@
                             "inner": {
                               "tag": "p",
                               "inner": [
-                                "%question%",
-                                {
-                                  "tag": "footer",
-                                  "inner": "footer"
-                                }
+                                "%question%"
                               ]
                             }
                           }
@@ -73,7 +66,6 @@
                 {
                   "id": "answers"
                 },
-
                 {
                   "id": "new-answer",
                 }
@@ -123,6 +115,7 @@
               "tag": "hr"
             }
           ]
+
         },
 
         "new_answer": {
@@ -194,7 +187,6 @@
       this.ready = function ( callback ) {
         if ( self.user )
           self.user.addObserver( self.index, function ( event ) {
-            console.log('!');
             if ( event ) self.start();
           });
         callback();
@@ -207,21 +199,17 @@
           dataset = question;
           if ( !dataset.answers ) dataset.answers = [];
 
-          renderQuestion();
+          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
+            title: dataset.title,
+            signatur: dataset.user + '&nbsp;'+ moment( dataset.date ).fromNow(),
+            question: dataset.content
+          }));
+
+          renderVoting( self.element.querySelector( '.voting' ), dataset.voting || 'question_' + dataset.key, false );
+
           renderAnswers();
+
           renderEditor();
-
-          function renderQuestion() {
-
-            self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
-              title: dataset.title,
-              signatur: dataset.user + '&nbsp;'+ moment( dataset.date ).fromNow(),
-              question: dataset.content
-            }));
-
-            renderVoting( self.element.querySelector( '.voting' ), dataset.voting || 'question_' + dataset.key, false );
-
-          }
 
           function renderAnswers() {
             self.element.querySelector( '#answers').innerHTML = '';
@@ -251,23 +239,24 @@
           }
 
           function renderEditor() {
+
             if ( !self.user ) return;
 
             var editor_elem = self.ccm.helper.html( self.templates.new_answer, {
-              new_answer: function () { if ( !self.user ) return; newAnswer(); }
+              new_answer: function () { newAnswer(); }
             } );
 
             self.user.login( function () {
-              self.editor.start( { root: editor_elem.querySelector( '#editor' ) }, function (instance) {
-                if ( self.user.data().name !== dataset.user) {
-                  editor = instance;
-                }
-                else {
-                  self.element.querySelector('#answers-view').removeChild(self.element.querySelector('#new-answer'));
-                }
-              } );
+              if ( self.user.data().name === dataset.user ) return;
 
-              self.element.querySelector( '#new-answer' ).appendChild( editor_elem );
+              self.editor.start( function ( instance ) {
+
+                console.log( '!!! editor');
+
+                editor_elem.querySelector( '#editor' ).appendChild( instance.root );
+                editor = instance;
+                self.element.querySelector( '#new-answer' ).appendChild( editor_elem );
+              } );
             } );
 
           }

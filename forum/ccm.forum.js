@@ -10,7 +10,7 @@
 
     name: 'forum',
 
-    ccm: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
+    ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
       templates: {
@@ -198,13 +198,16 @@
     },
 
     Instance: function () {
+
       var self = this;
-      var editor;
-      var question;
 
       this.start = function (callback) {
 
         self.ccm.helper.dataset(self.data.store, self.data.key, function ( dataset ) {
+
+          var editor;
+
+          if( !dataset.questions ) dataset.questions = [];
 
           self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
             for:   "title",
@@ -226,23 +229,25 @@
 
               // start question instance
               self.question.start( { 'data.key': question_key }, function ( question_instance ) {
-                // get question data of lunched question instance
+
+                // get question data of launched question instance
                 question_instance.data.store.get( question_instance.data.key, function ( question_data ) {
 
                   // get voting instance of question instance
                   question_instance.voting.instance( question_data.voting, function ( voting_instance ) {
-                    question = question_data;
+
                     self.element.querySelector( '#questions-list' ).appendChild( self.ccm.helper.html( self.templates.question, {
                       title:    question_data.title,
-                      signatur: question_data.date,
-                      votes:    voting_instance.getVoting(),
+                      signatur: question_data.user + ' &nbsp; ' + moment( question_data.date ).fromNow(),
+                      votes:    voting_instance.getValue(),
                       answers:  question_data.answers.length,
                       render_answers: function () {
+
                         self.element.querySelector( '#questions-view' ).style.display = 'none';
+                        self.element.querySelector( '#answers-view' ).innerHTML = '';
 
                         self.ccm.helper.setContent( self.element.querySelector( '#answers-view' ), self.ccm.helper.html( self.templates.answers, {
                           render_questions: function () {
-                            self.element.querySelector( '#answers-view' ).innerHTML = '';
                             self.element.querySelector( '#questions-view' ).style.display = 'block';
                           }
                         } ) );
@@ -259,7 +264,8 @@
           }
 
           function renderEditor() {
-            self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
+            self.editor.start( function ( instance ) {
+              self.element.querySelector( '#editor-container' ).appendChild( instance.root );
               editor = instance;
             } );
           }

@@ -19,10 +19,10 @@ ccm.files[ 'configs.js' ] = {
   },
 
   'localhost': {
-    data: { store: [ 'ccm.store', { 'store': 'question', 'url': 'ws://localhost:8080' } ], key: 'demo' },
+    data: { store: [ 'ccm.store', { 'store': 'question', 'url': 'ws://localhost:8080' } ], key: 'forum_demo_1' },
     user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js', { logged_in: true } ],
-    voting: [ 'ccm.component', '../voting/ccm.voting.js', {
-      data: { store: [ 'ccm.store', '../voting/resources/datastore.js' ] },
+    voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js', {
+      data: { store: [ 'ccm.store', { 'store': 'voting', 'url': 'ws://localhost:8080' } ] },
       user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ]
       }
     ]
