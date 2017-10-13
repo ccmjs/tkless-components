@@ -244,10 +244,10 @@
                       render_answers: function () {
 
                         self.element.querySelector( '#questions-view' ).style.display = 'none';
-                        self.element.querySelector( '#answers-view' ).innerHTML = '';
 
                         self.ccm.helper.setContent( self.element.querySelector( '#answers-view' ), self.ccm.helper.html( self.templates.answers, {
                           render_questions: function () {
+                            self.element.querySelector( '#answers-view' ).innerHTML = '';
                             self.element.querySelector( '#questions-view' ).style.display = 'block';
                           }
                         } ) );

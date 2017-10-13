@@ -249,10 +249,10 @@
                       render_answers: function () {
 
                         self.element.querySelector( '#questions-view' ).style.display = 'none';
-                        self.element.querySelector( '#answers-view' ).innerHTML = '';
 
                         self.ccm.helper.setContent( self.element.querySelector( '#answers-view' ), self.ccm.helper.html( self.templates.answers, {
                           render_questions: function () {
+                            self.element.querySelector( '#answers-view' ).innerHTML = '';
                             self.element.querySelector( '#questions-view' ).style.display = 'block';
                           }
                         } ) );
@@ -282,7 +282,7 @@
             self.user.login( function () {
 
               var question_key = "forum_" + dataset.key + "_" + ( dataset.questions.length + 1 );
-              
+
               var new_question_data = {
                 "key": question_key,
                 "date": moment().format(),
