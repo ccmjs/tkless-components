@@ -87,7 +87,9 @@
       this.ready = function ( callback ) {
 
         // listen to login/logout event => (re)render own content
-        if ( self.user ) self.user.addObserver( self.index, function () { self.start(); } );
+        if ( self.user ) self.user.addObserver( self.index, function ( event ) {
+          if ( event ) self.start();
+        });
 
         if ( self.logger ) self.logger.log( 'ready', {
           key: self.data.key,

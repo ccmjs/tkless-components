@@ -73,7 +73,7 @@
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../../../ccm-components/thumb_rating/resources/default.css'
+        'https://akless.github.io/ccm-components/thumb_rating/resources/default.css'
       ]
     },
 
@@ -92,7 +92,9 @@
       this.ready = function ( callback ) {
 
         // listen to login/logout event => (re)render own content
-        if ( self.user ) self.user.addObserver( self.index, function () { self.start(); } );
+        if ( self.user ) self.user.addObserver( self.index, function ( event ) {
+          if ( event ) self.start();
+        });
 
         if ( self.logger ) self.logger.log( 'ready', {
           key: self.data.key,
