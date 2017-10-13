@@ -73,7 +73,7 @@
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        'https://akless.github.io/ccm-components/thumb_rating/resources/default.css'
+        'https://tkless.github.io/ccm-components/thumb_rating/resources/default.css'
       ]
     },
 
