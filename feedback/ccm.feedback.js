@@ -22,7 +22,7 @@
               "alt": "feedback"
             },
             {
-              "id": "slideout_inner",
+              "id": "slideout-inner",
               "inner":[
                 {
                   "class": "row panel panel-success",
@@ -82,7 +82,7 @@
         }
       },
 
-      "from_above": "20%",
+      "from_above": "70%",
 
       css: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
@@ -130,8 +130,11 @@
           } ));
 
           // change feedback position from above
-          if ( this.from_above )
-            this.element.querySelector( '#slideout' ).style.top = this.from_above ;
+          if ( this.from_above ) {
+            this.element.querySelector( '#slideout' ).style.top = this.from_above;
+            this.element.querySelector( '#slideout-inner' ).style.top = this.from_above;
+          }
+
 
           if ( callback ) callback();
       } );

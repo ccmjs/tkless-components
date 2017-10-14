@@ -27,7 +27,7 @@
               "alt": "feedback"
             },
             {
-              "id": "slideout_inner",
+              "id": "slideout-inner",
               "inner":[
                 {
                   "class": "row panel panel-success",
@@ -134,8 +134,11 @@
             }
           } ));
 
-          if ( this.from_above )
-            this.element.querySelector( '#slideout' ).style.top = this.from_above ;
+          // change feedback position from above
+          if ( this.from_above ) {
+            this.element.querySelector( '#slideout' ).style.top = this.from_above;
+            this.element.querySelector( '#slideout-inner' ).style.top = this.from_above;
+          }
 
           if ( callback ) callback();
       } );

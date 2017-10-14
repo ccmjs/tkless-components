@@ -1,7 +1,7 @@
 #slideout {
     position: fixed;
     top: 40px;
-    left: -5px;
+    left: 0px;
     width: 35px;
     padding: 12px 0;
     text-align: center;
@@ -9,7 +9,7 @@
     transition-duration: 0.3s;
     border-radius: 0 5px 5px 0;
 }
-#slideout_inner {
+#slideout-inner {
     position: fixed;
     top: 40px;
     left: -250px;
@@ -26,6 +26,6 @@
 #slideout:hover {
     left: 250px;
 }
-#slideout:hover #slideout_inner {
+#slideout:hover #slideout-inner {
     left: 0;
 }
