@@ -109,7 +109,6 @@
 
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
             submit: () => {
-              console.log(this.element.querySelector( 'input[type=text]' ).value);
 
               let data = {
                 "title": this.element.querySelector( 'input[type=text]' ).value,
