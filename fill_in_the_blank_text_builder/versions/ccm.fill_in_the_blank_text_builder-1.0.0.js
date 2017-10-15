@@ -2,7 +2,7 @@
  * @overview ccm component for building a fill-in-the-blank text
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
- * @version 1.0.0
+ * @version latest (1.0.0)
  */
 
 ( function () {
@@ -141,6 +141,42 @@
                   ]
                 },
                 {
+                  "class": "feedback form-group",
+                  "inner": [
+                    {
+                      "tag": "label",
+                      "class": "control-label col-md-2",
+                      "inner": "Feedback"
+                    },
+                    {
+                      "class": "col-md-10",
+                      "inner": {
+                        "tag": "select",
+                        "class": "select-solution form-control",
+                        "name": "feedback",
+                        "onchange": "%change_feedback%",
+                        "inner": [
+                          {
+                            "tag":"option",
+                            "inner": "None",
+                            "value": "none"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "Show only correctness",
+                            "value": "correctness"
+                          },
+                          {
+                            "tag":"option",
+                            "inner": "Show correctness and solutions",
+                            "value": "solutions"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
                   "class": "keywords form-group",
                   "style": "display: none",
                   "inner": [
@@ -189,24 +225,24 @@
                   ]
                 },
                 {
-                  "class": "feedback form-group",
+                  "class": "restart form-group",
                   "inner": [
                     {
                       "tag": "label",
                       "class": "control-label col-md-2",
-                      "inner": "Feedback:"
+                      "inner": "Restart after finish:"
                     },
                     {
                       "class": "col-md-10",
                       "inner": {
                         "class": "checkbox",
-                        "onchange": "%change_feedback%",
+                        "onchange": "%change_button%",
                         "inner": {
                           "tag": "label",
                           "inner": {
                             "tag": "input",
                             "type": "checkbox",
-                            "name": "feedback "
+                            "name": "restart"
                           }
                         }
                       }
@@ -283,16 +319,21 @@
         }
       },
 
-      /**start_state: {
-        blank: 'true',
+      submit_button: true,
+      start_state: {
+        blank: true,
         css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
-        feedback: 'true',
+        feedback: true,
+        solutions: true,
         key : '1505038949159X2007155418531874',
-        text: '<p>In order to serve you well, Karma needs to know about your project in order to test it and this is done via a configuration file. The easiest way to generate an initial configuration file is by using the karma init command. This page lists all of the available configuration options.</p>',
-        time: '123',
-        user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]"
-      },*/
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
+        keywords: true,
+        text: '<p>In order to [[serve]] you well, Karma needs to know about your project in order to test it and this is done via a configuration file. The easiest way to generate an initial configuration file is by using the karma init command. This page lists all of the available configuration options.</p>',
+        time: 123,
+        user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]",
+        'captions.finish': 'Restart',
+        onfinish: { restart: true }
+      },
+      editor: [ 'ccm.component', '/ccm-components/editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
           ['bold', 'italic', 'underline'],        // toggled buttons
@@ -309,15 +350,19 @@
           'settings.placeholder': 'Type here...'
         }
       ],
-      style: [ 'ccm.load', 'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/style.css' ],
-      bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
-      preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/versions/ccm.cloze-2.0.0.js' ],
+      preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/versions/ccm.cloze-2.1.0.min.js' ],
       onfinish: {
         log: true,
         store_settings: { store: "clozes", url: "wss://ccm.inf.h-brs.de" },
         key: "demo",
         embed_code: "cloze"
-      }
+      },
+
+      css: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' },
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+        '/ccm-components/fill_in_the_blank_text_builder/resources/default.css' ],
+
     },
 
     Instance: function () {
@@ -327,23 +372,6 @@
       this.submit = function () {
         if ( self.onfinish ) self.ccm.helper.onFinish( self, prepareResultData() );
       };
-
-      function prepareResultData() {
-        var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
-
-        config_data[ "text" ] = editor.get().root.innerHTML;
-
-        if ( config_data.provided === 'auto' )
-          config_data.keywords = true;
-        else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
-          config_data.keywords = config_data.keywords.trim().split( ' ' );
-        else
-          delete config_data.keywords;
-        delete config_data.provided;
-
-        self.ccm.helper.decodeDependencies( config_data );
-        return config_data;
-      }
 
       this.start = function (callback) {
 
@@ -367,6 +395,8 @@
           },
 
           change_blank: renderPreview,
+
+          change_button: renderPreview,
 
           change_feedback: renderPreview,
 
@@ -400,18 +430,31 @@
                       break;
                     }
 
-                    if( self.start_state[ property ] === true ) {
-                      self.element.querySelector('select[name="provided"] option[value="auto"]').selected = true;
+                   if( self.start_state[ property ] === true ) {
+                    self.element.querySelector('select[name="provided"] option[value="auto"]').selected = true;
+                    break;
+                   }
+
+                   self.element.querySelector('select[name="provided"] option[value="manually"]').selected = true;
+                   self.element.querySelector('input[name="keywords"]').value = self.start_state[ property ].join( ' ' );
+                   self.element.querySelector('.keywords').style.display = 'block';
+                   break;
+                  case 'blank':
+                    self.element.querySelector( 'input[type="checkbox"][name="' + property + '"]' ).checked = true;
+                    break;
+                  case 'onfinish':
+                    self.element.querySelector( 'input[type="checkbox"][name="restart"]' ).checked = true;
+                    break;
+                  case 'feedback':
+                    if( !self.start_state[ property ] ) {
+                      self.element.querySelector( 'select[name="feedback"] option[value="none"]' ).selected = true;
                       break;
                     }
-
-                    self.element.querySelector('select[name="provided"] option[value="manually"]').selected = true;
-                    self.element.querySelector('input[name="keywords"]').value = self.start_state[ property ].join( ' ' );
-                    self.element.querySelector('.keywords').style.display = 'block';
+                    self.element.querySelector( 'select[name="feedback"] option[value="correctness"]' ).selected = true;
                     break;
-                  case 'blank':
-                  case 'feedback':
-                    self.element.querySelector('input[type="checkbox"][name="' + property + '"]').checked = true;
+                  case 'solutions':
+                    if( self.start_state[ 'feedback' ] && self.start_state[ property ] )
+                      self.element.querySelector( 'select[name="feedback"] option[value="solutions"]' ).selected = true;
                     break;
                   case 'time':
                     self.element.querySelector('input[type="number"][name="time"]').value =  self.start_state[ property ];
@@ -434,6 +477,36 @@
 
         if ( callback ) callback();
       };
+
+      function prepareResultData() {
+        var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
+
+        config_data[ "text" ] = editor.get().root.innerHTML;
+
+        if ( config_data.provided === 'auto' )
+          config_data.keywords = true;
+        else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
+          config_data.keywords = config_data.keywords.trim().split( ' ' );
+        else
+          delete config_data.keywords;
+        delete config_data.provided;
+
+        if ( config_data.feedback === 'solutions' )
+          { config_data.feedback = true; config_data.solutions = true; }
+        else if ( config_data.feedback === 'correctness' )
+          config_data.feedback = true;
+        else
+          delete config_data.feedback;
+
+        if ( config_data.restart ) {
+          config_data.onfinish = { restart: true };
+          config_data[ 'captions.finish' ] = 'Restart';
+        }
+        delete config_data.restart;
+
+        self.ccm.helper.decodeDependencies( config_data );
+        return config_data;
+      }
     }
   };
 
