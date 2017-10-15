@@ -48,6 +48,7 @@
                               "inner": {
                                 "tag": "input",
                                 "type": "%type%",
+                                "required": true,
                                 "class": "form-control",
                                 "id":"%id%",
                                 "placeholder": "%value%"
@@ -275,6 +276,10 @@
             if ( !self.user ) return;
 
             self.user.login( function () {
+              // is there the user input in editor?
+              if ( editor.get().getLength() <= 1 )
+                alert( 'Give Title and Text in the fields!!!' );
+                return;
 
               var question_key = "forum_" + dataset.key + "_" + ( dataset.questions.length + 1 );
               
