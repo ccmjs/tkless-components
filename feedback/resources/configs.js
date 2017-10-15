@@ -4,6 +4,7 @@ ccm.files[ "configs.js" ] = {
   },
 
   "localhost": {
+    "from_above": "30%",
     data: { store: [ 'ccm.store', { 'store': 'comment', 'url': 'http://localhost:8080' } ], key: 'demo' }
   }
 };
