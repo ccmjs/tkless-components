@@ -319,7 +319,7 @@
         }
       },
 
-      submit_button: true,
+      //submit_button: true,
       /*start_state: {
         blank: true,
         css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
@@ -330,7 +330,7 @@
         text: '<p>In order to [[serve]] you well, Karma needs to know about your project in order to test it and this is done via a configuration file. The easiest way to generate an initial configuration file is by using the karma init command. This page lists all of the available configuration options.</p>',
         time: 123,
         user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]",
-        'captions.finish': 'Restart',
+        captions: { submit: 'Submit', finish: 'Restart' },
         onfinish: { restart: true }
       },*/
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.min.js',
@@ -481,27 +481,26 @@
       function prepareResultData() {
         var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
 
-        config_data[ "text" ] = editor.get().root.innerHTML;
+        config_data.text = editor.get().root.innerHTML;
+        config_data.caption = { submit: 'Submit', finish: 'Restart' };
 
         if ( config_data.provided === 'auto' )
           config_data.keywords = true;
         else if ( config_data.provided === 'manually' && config_data.keywords.trim() )
-          config_data.keywords = config_data.keywords.trim().split( ' ' );
+          config_data.keywords = config_data.keywords.trim().split( ',' );
         else
           delete config_data.keywords;
         delete config_data.provided;
 
         if ( config_data.feedback === 'solutions' )
-          { config_data.feedback = true; config_data.solutions = true; }
+        { config_data.feedback = true; config_data.solutions = true; }
         else if ( config_data.feedback === 'correctness' )
           config_data.feedback = true;
         else
           delete config_data.feedback;
 
-        if ( config_data.restart ) {
+        if ( config_data.restart )
           config_data.onfinish = { restart: true };
-          config_data[ 'captions.finish' ] = 'Restart';
-        }
         delete config_data.restart;
 
         self.ccm.helper.decodeDependencies( config_data );
