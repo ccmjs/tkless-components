@@ -5,7 +5,7 @@
  */
 
 {
-  const component = {
+  var component = {
 
     name: 'feedback',
 
