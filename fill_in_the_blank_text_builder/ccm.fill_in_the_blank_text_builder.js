@@ -477,7 +477,7 @@
         var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
 
         config_data.text = editor.get().root.innerHTML;
-        config_data.caption = { submit: 'Submit', finish: 'Restart' };
+        config_data.captions = { submit: 'Submit', finish: 'Restart' };
 
         if ( config_data.provided === 'auto' )
           config_data.keywords = true;
