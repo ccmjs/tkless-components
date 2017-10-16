@@ -320,7 +320,7 @@
       },
 
       submit_button: true,
-      start_state: {
+      /*start_state: {
         blank: true,
         css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
         feedback: true,
@@ -332,7 +332,7 @@
         user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]",
         'captions.finish': 'Restart',
         onfinish: { restart: true }
-      },
+      },*/
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.min.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
