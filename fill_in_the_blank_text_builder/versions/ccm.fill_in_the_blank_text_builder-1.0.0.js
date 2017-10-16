@@ -333,7 +333,7 @@
         'captions.finish': 'Restart',
         onfinish: { restart: true }
       },
-      editor: [ 'ccm.component', '/ccm-components/editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.min.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
           ['bold', 'italic', 'underline'],        // toggled buttons
@@ -361,7 +361,7 @@
       css: [ 'ccm.load',
         { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-        '/ccm-components/fill_in_the_blank_text_builder/resources/default.css' ],
+        'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/resources/default.css' ],
 
     },
 
