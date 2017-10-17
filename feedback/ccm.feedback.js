@@ -82,6 +82,8 @@
         }
       },
 
+      data: { store: [ 'ccm.store' ] },
+
       css: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
