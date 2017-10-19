@@ -71,8 +71,8 @@
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'},
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css',
         'https://tkless.github.io/ccm-components/thumb_rating/resources/default.css'
       ]
     },
