@@ -87,17 +87,25 @@
         }
       },
 
-      //"from_above": "20%",  //for change of from above position of feedback-button
+      //"from_above": "20%",  // for change of from above position of feedback-button
+      //"position": "right",  // or left position
 
       css: [ 'ccm.load',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        'https://tkless.github.io/ccm-components/feedback/resources/default.css'
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'
       ]
     },
 
     Instance: function () {
       let $;
+
+      this.init = callback => {
+        if ( this.position === 'left')
+          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/left.css' } );
+        else
+          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/right.css' } );
+        callback();
+      };
 
       this.ready = callback => {
         $ = this.ccm.helper;

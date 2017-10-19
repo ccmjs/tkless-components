@@ -85,14 +85,21 @@
       data: { store: [ 'ccm.store' ] },
 
       css: [ 'ccm.load',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        '../feedback/resources/default.css'
+        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
+        '../../ccm-components/lib/bootstrap/css/bootstrap.css'
       ]
     },
 
     Instance: function () {
       let $;
+
+      this.init = callback => {
+        if ( this.position === 'left')
+          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/left.css' } );
+        else
+          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/right.css' } );
+        callback();
+      };
 
       this.ready = callback => {
         $ = this.ccm.helper;
