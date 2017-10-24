@@ -7,23 +7,18 @@
 
 ( function () {
 
-
   var component  = {
 
     name: 'editor',
     version:[ 1,0,0 ],
 
-    ccm: {
-      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
-      integrity: 'sha384-AND32Wbfnmb3f2vRMHkXSJpi81oFmy3eO1FbMHb5i2XOzwg0z+T1de180FUH1Tjt',
-      crossorigin: 'anonymous'
-    },
+    ccm: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
+
 
     config: {
       // add this line for highlighting the code within editor
       //code_highlighting: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'],
-      editor: [ 'ccm.load', 'https://tkless.github.io/ccm-components/editor/resources/quill.js' ],
-      editor_css: [ 'ccm.load', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
+      editor: [ 'ccm.load', 'https://tkless.github.io/ccm-components/editor/resources/quill.js', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
       settings: {
         modules: {
           //syntax: true,    // needed for syntax highlighting
@@ -40,10 +35,13 @@
       }
     },
 
+
     Instance: function () {
+      console.log(this);
       var editor;
 
       this.start = function ( callback ) {
+
         if( this.code_highlighting ) hljs.initHighlightingOnLoad();
 
         var div = this.ccm.helper.html( {} );
