@@ -37,7 +37,6 @@
 
 
     Instance: function () {
-      console.log(this);
       var editor;
 
       this.start = function ( callback ) {
