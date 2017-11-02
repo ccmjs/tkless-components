@@ -226,7 +226,8 @@
       }
     },
 
-    bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
+    css: [{ context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+      'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css' ],
     preview: [ 'ccm.component', 'https://tkless.github.io/ccm-components/comment/versions/ccm.comment-1.0.0.js' ]
   },
 
@@ -256,7 +257,7 @@
           var config_data = prepareResultData();
 
           config_data.data = {
-            store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/comment_datastore.js' ],
+            store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/recources/datastore.js' ],
             key: 'demo'
           };
           console.log(config_data);

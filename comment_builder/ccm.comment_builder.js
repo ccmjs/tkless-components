@@ -222,7 +222,8 @@
       }
     },
 
-    bootstrap_css: [ 'ccm.load', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' } ],
+    css: [ 'ccm.load',  { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
+        '../../ccm-components/lib/bootstrap/css/bootstrap.css' ],
     preview: [ 'ccm.component', '../comment/ccm.comment.js' ]
   },
 
@@ -252,7 +253,7 @@
           var config_data = prepareResultData();
 
           config_data.data = {
-            store: [ 'ccm.store', '../comment/comment_datastore.js' ],
+            store: [ 'ccm.store', '../comment/resources/datastore.js' ],
               key: 'demo'
           };
           console.log(config_data);
