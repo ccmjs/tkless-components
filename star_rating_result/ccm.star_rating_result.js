@@ -68,8 +68,11 @@
           key:   'demo'
       },
       style: [ 'ccm.load', '../star_rating_result/style.css' ],
-      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+      icons: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        '../star_rating_result/style.css'
+      ]
     },
 
     Instance: function () {

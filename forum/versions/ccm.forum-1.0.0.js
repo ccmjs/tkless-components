@@ -196,8 +196,8 @@
       ],
       question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/versions/ccm.question-1.0.0.js' ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         'https://tkless.github.io/ccm-components/forum/resources/default.css'
       ]

@@ -156,8 +156,8 @@
       ],
       voting: [ 'ccm.component', '../voting/ccm.voting.js' ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
+        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
+        '../../ccm-components/lib/bootstrap/css/bootstrap.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         '../question/resources/default.css'
       ]

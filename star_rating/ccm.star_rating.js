@@ -41,10 +41,13 @@
       star_title: [ "Gefällt mir gar nicht", "Gefällt mir nicht",
         "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ],
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      style: [ 'ccm.load', '../star_rating/style.css' ],
-      icons: [ 'ccm.load', { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
-        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' ]
+      css: [ 'ccm.load',
+        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        '../star_rating/style.css'
+      ]
     },
+
 
     Instance: function () {
       var self = this;

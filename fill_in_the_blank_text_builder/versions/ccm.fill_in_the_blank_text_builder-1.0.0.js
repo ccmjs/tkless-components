@@ -359,8 +359,8 @@
       },
 
       css: [ 'ccm.load',
-        { url: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', context:'head' },
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css',
         'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/resources/default.css' ],
 
     },

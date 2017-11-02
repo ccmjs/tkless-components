@@ -14,7 +14,6 @@
 
     ccm: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
 
-
     config: {
       // add this line for highlighting the code within editor
       //code_highlighting: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'],
@@ -34,7 +33,6 @@
         theme: 'snow'
       }
     },
-
 
     Instance: function () {
       var editor;
