@@ -226,7 +226,8 @@
       }
     },
 
-    css: [{ context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+    css: [ 'ccm.load',
+      { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
       'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css' ],
     preview: [ 'ccm.component', 'https://tkless.github.io/ccm-components/comment/versions/ccm.comment-1.0.0.js' ]
   },
