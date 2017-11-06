@@ -29,3 +29,19 @@
 #slideout:hover #slideout-inner {
     right: 0;
 }
+
+.saved {
+    animation-name: fadeOut;
+    animation-duration: 4s;
+    opacity: 0;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

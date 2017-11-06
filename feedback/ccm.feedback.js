@@ -28,6 +28,7 @@
                   "class": "row panel panel-success",
                   "inner": {
                     "tag": "form",
+                    "onsubmit": "%submit%",
                     "inner": [
                       {
                         "class": "panel-body",
@@ -59,18 +60,15 @@
                               "placeholder": "Write here..."
                             }
                           },
-
                           {
                             "class": "form-group",
                             "inner": {
                               "tag": "button",
                               "class": "btn btn-info btn-sm pull-right",
                               "typ": "submit",
-                              "inner": "Submit",
-                              "onclick": "%submit%"
+                              "inner": "Submit"
                             }
                           }
-
                         ]
                       }
                     ]
@@ -82,8 +80,8 @@
         }
       },
 
+      //onfinish: { log: true },
       data: { store: [ 'ccm.store' ] },
-
       css: [ 'ccm.load',
         { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
         '../../ccm-components/lib/bootstrap/css/bootstrap.css'
@@ -115,7 +113,11 @@
           if ( !dataset.feedbacks ) dataset.feedbacks =[];
 
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
-            submit: () => {
+            submit: event => {
+
+              if ( event ) {
+                event.preventDefault();
+              }
 
               let data = {
                 "title": this.element.querySelector( 'input[type=text]' ).value,
@@ -131,6 +133,19 @@
                   delete dataset.user;
                   this.logger.log( 'create', data );
                 }
+
+                // visual effect, that the feedback was saved successfully
+                if ( this.element.querySelector( '.saved' ) ) $.removeElement( this.element.querySelector( '.saved' ) );
+                this.element.querySelector( '.panel-body' ).appendChild( $.html( {
+                  "tag": "strong",
+                  "class": "text-success saved",
+                  "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
+                } ) );
+                this.element.querySelector( 'form' ).reset();
+
+
+                if ( this.onfinish ) $.onFinish( this, data );
+
               } );
             }
           } ));
@@ -140,7 +155,6 @@
             this.element.querySelector( '#slideout' ).style.top = this.from_above;
             this.element.querySelector( '#slideout-inner' ).style.top = this.from_above;
           }
-
 
           if ( callback ) callback();
       } );

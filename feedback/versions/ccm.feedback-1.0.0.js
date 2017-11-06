@@ -23,7 +23,7 @@
           "inner": [
             {
               "tag": "img",
-              "src": "https://tkless.github.io/ccm-components/feedback/resources/feedback.png",
+              "src": "../feedback/resources/feedback.png",
               "alt": "feedback"
             },
             {
@@ -33,6 +33,7 @@
                   "class": "row panel panel-success",
                   "inner": {
                     "tag": "form",
+                    "onsubmit": "%submit%",
                     "inner": [
                       {
                         "class": "panel-body",
@@ -64,18 +65,15 @@
                               "placeholder": "Write here..."
                             }
                           },
-
                           {
                             "class": "form-group",
                             "inner": {
                               "tag": "button",
                               "class": "btn btn-info btn-sm pull-right",
                               "typ": "submit",
-                              "inner": "Submit",
-                              "onclick": "%submit%"
+                              "inner": "Submit"
                             }
                           }
-
                         ]
                       }
                     ]
@@ -87,9 +85,8 @@
         }
       },
 
-      //"from_above": "20%",  // for change of from above position of feedback-button
-      //"position": "right",  // or left position
-
+      //onfinish: { log: true },
+      data: { store: [ 'ccm.store' ] },
       css: [ 'ccm.load',
         { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
         'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'
@@ -101,9 +98,9 @@
 
       this.init = callback => {
         if ( this.position === 'left')
-          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/left.css' } );
+          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/left.css' } );
         else
-          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/right.css' } );
+          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/right.css' } );
         callback();
       };
 
@@ -121,7 +118,11 @@
           if ( !dataset.feedbacks ) dataset.feedbacks =[];
 
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
-            submit: () => {
+            submit: event => {
+
+              if ( event ) {
+                event.preventDefault();
+              }
 
               let data = {
                 "title": this.element.querySelector( 'input[type=text]' ).value,
@@ -137,6 +138,19 @@
                   delete dataset.user;
                   this.logger.log( 'create', data );
                 }
+
+                // visual effect, that the feedback was saved successfully
+                if ( this.element.querySelector( '.saved' ) ) $.removeElement( this.element.querySelector( '.saved' ) );
+                this.element.querySelector( '.panel-body' ).appendChild( $.html( {
+                  "tag": "strong",
+                  "class": "text-success saved",
+                  "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
+                } ) );
+                this.element.querySelector( 'form' ).reset();
+
+
+                if ( this.onfinish ) $.onFinish( this, data );
+
               } );
             }
           } ));
