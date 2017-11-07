@@ -229,6 +229,7 @@
     css: [ 'ccm.load',
       { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
       'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css' ],
+    //onchange: function() {}
     preview: [ 'ccm.component', 'https://tkless.github.io/ccm-components/comment/versions/ccm.comment-1.0.0.js' ]
   },
 
@@ -264,7 +265,9 @@
           console.log(config_data);
 
           config_data.root = self.element.querySelector( '#preview div' );
-          self.preview.start( config_data );
+          self.preview.start( config_data, function ( ) {
+            if ( self.onchange ) self.onchange();
+          } );
 
         }
 

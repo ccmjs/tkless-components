@@ -260,7 +260,9 @@
           console.log(config_data);
 
           config_data.root = self.element.querySelector( '#preview div' );
-          self.preview.start( config_data );
+          self.preview.start( config_data, function ( ) {
+            if ( self.onchange ) self.onchange();
+          } );
 
         }
 
