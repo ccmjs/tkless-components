@@ -258,7 +258,7 @@
           var config_data = prepareResultData();
 
           config_data.data = {
-            store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/recources/datastore.js' ],
+            store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/comment/resources/datastore.js' ],
             key: 'demo'
           };
           console.log(config_data);
