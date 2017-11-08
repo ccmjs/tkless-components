@@ -21,7 +21,7 @@
   config: {
     templates: {
       "main": {
-        "class": "container",
+        "class": "container-fluid",
         "inner": [
           {
             "tag": "legend",
@@ -231,7 +231,7 @@
       this.start = function (callback) {
         self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
           submit: self.submit,
-          onchange: function () {
+          change: function () {
             self.onchange && self.onchange( self, getResultData() );
           }
         } ));
