@@ -40,7 +40,7 @@
                     "class": "col-md-10",
                     "inner": {
                       "tag": "select",
-                      "onchange": "%user%",
+                      "onchange": "%change%",
                       "class": "user form-control",
                       "name": "user",
                       "inner": [
@@ -81,7 +81,7 @@
                     "class": "col-md-10",
                     "inner": {
                       "tag": "select",
-                      "onchange": "%comment_template%",
+                      "onchange": "%change%",
                       "class": "user form-control",
                       "name": "comment_template",
                       "inner": [
@@ -112,7 +112,7 @@
                     "class": "col-md-10",
                     "inner": {
                       "tag": "select",
-                      "onchange": "%change_voting%",
+                      "onchange": "%change%",
                       "class": "user form-control",
                       "name": "voting",
                       "inner": [
@@ -148,7 +148,7 @@
                     "class": "col-md-10",
                     "inner": {
                       "class": "checkbox",
-                      "onchange": "%change_sorting%",
+                      "onchange": "%change%",
                       "inner": {
                         "tag": "label",
                         "inner": {
@@ -174,7 +174,7 @@
                     "class": "col-md-10",
                     "inner": {
                       "class": "checkbox",
-                      "onchange": "%change_editable%",
+                      "onchange": "%change%",
                       "inner": {
                         "tag": "label",
                         "inner": {
@@ -186,18 +186,6 @@
                     }
                   }
 
-                ]
-              },
-              {
-                "inner": [
-                  {
-                    "tag": "legend",
-                    "class": "legend text-primary",
-                    "inner": "As it already looks like..."
-                  },
-                  {
-                    "id": "preview"
-                  }
                 ]
               },
               {
@@ -225,51 +213,32 @@
     css: [ 'ccm.load',
       { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
         '../../ccm-components/lib/bootstrap/css/bootstrap.css' ],
-    preview: [ 'ccm.component', '../comment/ccm.comment.js' ]
+    //preview: [ 'ccm.component', '../comment/ccm.comment.js' ]
   },
 
     Instance: function () {
       var self = this;
 
       this.submit = function () {
-        if ( self.onfinish ) self.ccm.helper.onFinish( self, prepareResultData() );
+        if ( self.onfinish ) self.ccm.helper.onFinish( self, getResultData() );
       };
 
       this.start = function (callback) {
         self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
-          submit: renderPreview,
-          user: renderPreview,
-          comment_template: renderPreview,
-          change_voting: renderPreview,
-          change_sorting: renderPreview,
-          change_editable: renderPreview
+          submit: self.submit,
+          onchange: function () {
+            self.onchange && self.onchange( self, getResultData() );
+          }
         } ));
 
         if( !self.submit_button ) {
           self.element.querySelector( '.form-horizontal' ).removeChild( self.element.querySelector( '.submit-button' ) );
         }
 
-        function renderPreview() {
-          self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
-          var config_data = prepareResultData();
-
-          config_data.data = {
-            store: [ 'ccm.store', '../comment/resources/datastore.js' ],
-              key: 'demo'
-          };
-          console.log(config_data);
-
-          config_data.root = self.element.querySelector( '#preview div' );
-          self.preview.start( config_data, function ( ) {
-            if ( self.onchange ) self.onchange();
-          } );
-
-        }
-
         if ( callback ) callback();
       };
 
-      function prepareResultData() {
+      function getResultData() {
         var config_data = self.ccm.helper.formData( self.element.querySelector( 'form' ) );
 
         self.ccm.helper.decodeDependencies( config_data );
