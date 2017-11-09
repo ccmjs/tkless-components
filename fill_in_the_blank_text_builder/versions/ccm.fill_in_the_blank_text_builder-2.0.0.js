@@ -286,6 +286,7 @@
                   ]
                 },
                 {
+                  "class": "prev",
                   "inner": [
                     {
                       "tag": "legend",
@@ -358,7 +359,7 @@
       var editor;
 
       this.submit = function () {
-        if ( self.onfinish ) self.ccm.helper.onFinish( self, prepareResultData() );
+        if ( self.onfinish ) self.ccm.helper.onFinish( self, getResultData() );
       };
 
       this.getValue = getResultData;
@@ -391,34 +392,37 @@
           self.element.querySelector( '.form-horizontal' ).removeChild( self.element.querySelector( '.submit-button' ) );
         }
 
-        self.editor.start( { root: self.element.querySelector( '#editor-container' ) }, function ( instance ) {
+        self.editor.start( function ( instance ) {
+
+          self.ccm.helper.setContent( self.element.querySelector( '#editor-container' ), instance.root );
+
           editor = instance;
 
           editor.get().on('text-change', function() {
             renderPreview();
           });
 
-          if( self.start_state ) {
-            for( var property in self.start_state ) {
-              if( self.start_state[ property ] ) {
+          if( self.start_values ) {
+            for( var property in self.start_values ) {
+              if( self.start_values[ property ] ) {
                 switch( property ) {
                   case 'user':
                   case 'css_layout':
-                    self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_state[ property ] + '"]').selected = true;
+                    self.element.querySelector('select[name="' + property + '"] option[value="' + self.start_values[ property ] + '"]').selected = true;
                     break;
                   case 'keywords':
-                    if( !self.start_state[ property ]) {
+                    if( !self.start_values[ property ]) {
                       self.element.querySelector('select[name="provided"] option[value="none"]').selected = true;
                       break;
                     }
 
-                   if( self.start_state[ property ] === true ) {
+                   if( self.start_values[ property ] === true ) {
                     self.element.querySelector('select[name="provided"] option[value="auto"]').selected = true;
                     break;
                    }
 
                    self.element.querySelector('select[name="provided"] option[value="manually"]').selected = true;
-                   self.element.querySelector('input[name="keywords"]').value = self.start_state[ property ].join( ' ' );
+                   self.element.querySelector('input[name="keywords"]').value = self.start_values[ property ].join( ' ' );
                    self.element.querySelector('.keywords').style.display = 'block';
                    break;
                   case 'blank':
@@ -428,37 +432,43 @@
                     self.element.querySelector( 'input[type="checkbox"][name="restart"]' ).checked = true;
                     break;
                   case 'feedback':
-                    if( !self.start_state[ property ] ) {
+                    if( !self.start_values[ property ] ) {
                       self.element.querySelector( 'select[name="feedback"] option[value="none"]' ).selected = true;
                       break;
                     }
                     self.element.querySelector( 'select[name="feedback"] option[value="correctness"]' ).selected = true;
                     break;
                   case 'solutions':
-                    if( self.start_state[ 'feedback' ] && self.start_state[ property ] )
+                    if( self.start_values[ 'feedback' ] && self.start_values[ property ] )
                       self.element.querySelector( 'select[name="feedback"] option[value="solutions"]' ).selected = true;
                     break;
                   case 'time':
-                    self.element.querySelector('input[type="number"][name="time"]').value =  self.start_state[ property ];
+                    self.element.querySelector('input[type="number"][name="time"]').value =  self.start_values[ property ];
                     break;
                   case 'text':
-                    editor.get().root.innerHTML = self.ccm.helper.protect( self.start_state[ property ] );
+                    editor.get().root.innerHTML = self.ccm.helper.protect( self.start_values[ property ] );
                     break;
                 }
               }
             }
           }
+          renderPreview();
+          if ( callback ) callback();
         } );
 
         function renderPreview() {
-          if ( !self.preview ) return;
+
+          if ( !self.preview ) {
+            if ( self.element.querySelector( '.prev' ) )
+              self.element.querySelector( '.form-horizontal' ).removeChild( self.element.querySelector( '.prev' ) );
+            return;
+          }
           self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
           var config_data = getResultData();
           config_data.root = self.element.querySelector( '#preview div' );
           self.preview.start( config_data );
         }
 
-        if ( callback ) callback();
       };
 
       function getResultData() {
