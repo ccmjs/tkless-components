@@ -10,7 +10,7 @@
   var component = {
 
     name: 'fill_in_the_blank_text_builder',
-    version:[ 1,0,0 ],
+    version:[ 2,0,0 ],
 
     ccm: {
       url: 'https://akless.github.io/ccm/version/ccm-12.3.0.min.js',
