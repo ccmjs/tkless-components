@@ -373,13 +373,13 @@
             self.submit();
           },
           change: function ( ) {
-            if ( self.preview ) renderPreview();
+            renderPreview();
             if ( self.onchange ) self.onchange( self );
           },
 
           provided: function () {
             if ( this.value === 'manually' )
-              self.element.querySelector('.keywords').style.display = 'block';
+              self.element.querySelector( '.keywords' ).style.display = 'block';
             else
               self.element.querySelector( '.keywords' ).style.display = 'none';
           }
@@ -451,6 +451,7 @@
         } );
 
         function renderPreview() {
+          if ( !self.preview ) return;
           self.element.querySelector( '#preview' ).innerHTML = '<div></div>';
           var config_data = getResultData();
           config_data.root = self.element.querySelector( '#preview div' );
