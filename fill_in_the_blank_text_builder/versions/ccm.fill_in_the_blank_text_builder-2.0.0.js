@@ -10,8 +10,13 @@
   var component = {
 
     name: 'fill_in_the_blank_text_builder',
+    version:[ 1,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-12.3.0.min.js',
+      integrity: 'sha384-QDTsj+8+DFAUnDU9pBA3NPuJAolurZFVCt3MAZF2a8upsHCKxA9uEKMvIQh6j7Xe',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       templates: {
@@ -315,20 +320,7 @@
       },
 
       submit_button: true,
-      start_values: {
-        blank: true,
-        css_layout: "['ccm.load','https://akless.github.io/ccm-components/cloze/resources/lea.css']",
-        feedback: true,
-        solutions: true,
-        key : '1505038949159X2007155418531874',
-        keywords: true,
-        text: '<p>In order to [[serve]] you well, Karma needs to know about your project in order to test it and this is done via a configuration file. The easiest way to generate an initial configuration file is by using the karma init command. This page lists all of the available configuration options.</p>',
-        time: 123,
-        user: "['ccm.instance','https://akless.github.io/ccm-components/user/ccm.user.js',{'sign_on':'guest'}]",
-        captions: { submit: 'Submit', finish: 'Restart' },
-        onfinish: { restart: true }
-      },
-      editor: [ 'ccm.component', '/ccm-components/editor/ccm.editor.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.min.js',
         { 'settings.modules.toolbar': [
           [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
           ['bold', 'italic', 'underline'],        // toggled buttons
@@ -345,7 +337,7 @@
           'settings.placeholder': 'Type here...'
         }
       ],
-      preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/versions/ccm.cloze-2.1.0.js' ],
+      preview: [ 'ccm.component', 'https://akless.github.io/ccm-components/cloze/versions/ccm.cloze-2.2.0.min.js' ],
       onfinish: {
         log: true,
         store_settings: { store: "clozes", url: "wss://ccm.inf.h-brs.de" },
@@ -354,9 +346,10 @@
       },
 
       css: [ 'ccm.load',
-        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
-        '../../ccm-components/lib/bootstrap/css/bootstrap.css',
-        '/ccm-components/fill_in_the_blank_text_builder/resources/default.css' ],
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css',
+        'https://tkless.github.io/ccm-components/fill_in_the_blank_text_builder/resources/default.css'
+      ]
 
     },
 
