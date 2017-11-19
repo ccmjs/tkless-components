@@ -85,7 +85,8 @@
       css: [ 'ccm.load',
         { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
         '../../ccm-components/lib/bootstrap/css/bootstrap.css'
-      ]
+      ],
+      lib: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ]
     },
 
     Instance: function () {
@@ -115,11 +116,10 @@
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
             submit: event => {
 
-              if ( event ) {
-                event.preventDefault();
-              }
+              if ( event ) event.preventDefault();
 
               let data = {
+                "date":  moment().format(),
                 "title": this.element.querySelector( 'input[type=text]' ).value,
                 "content": this.element.querySelector( 'textarea' ).value
               };

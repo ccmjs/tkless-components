@@ -39,7 +39,7 @@
                         "class": "panel-body",
                         "inner": [
                           {
-                          "class": "form-group",
+                            "class": "form-group",
                             "inner": [
                               {
                                 "tag": "label",
@@ -79,7 +79,7 @@
                     ]
                   }
                 }
-             ]
+              ]
             }
           ]
         }
@@ -90,7 +90,8 @@
       css: [ 'ccm.load',
         { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
         'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'
-      ]
+      ],
+      lib: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ]
     },
 
     Instance: function () {
@@ -120,14 +121,13 @@
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
             submit: event => {
 
-              if ( event ) {
-                event.preventDefault();
-              }
+              if ( event ) event.preventDefault();
 
               let data = {
+                "date":  moment().format(),
                 "title": this.element.querySelector( 'input[type=text]' ).value,
                 "content": this.element.querySelector( 'textarea' ).value
-              };
+            };
 
               dataset.feedbacks.push( data );
               // update dataset
@@ -162,7 +162,7 @@
           }
 
           if ( callback ) callback();
-      } );
+        } );
 
       };
 
