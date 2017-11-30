@@ -99,9 +99,9 @@
 
       this.init = callback => {
         if ( this.position === 'left')
-          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/left.css' } );
+          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/left.css' } );
         else
-          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/right.css' } );
+          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/right.css' } );
         callback();
       };
 
