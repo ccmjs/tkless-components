@@ -8,7 +8,7 @@
   var component = {
 
     name: 'feedback',
-    version:[ 1,0,0 ],
+    version:[ 2,0,0 ],
 
     ccm: {
       url: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
@@ -39,7 +39,7 @@
                         "class": "panel-body",
                         "inner": [
                           {
-                            "class": "form-group",
+                          "class": "form-group",
                             "inner": [
                               {
                                 "tag": "label",
@@ -79,7 +79,7 @@
                     ]
                   }
                 }
-              ]
+             ]
             }
           ]
         }
@@ -87,22 +87,19 @@
 
       //onfinish: { log: true },
       data: { store: [ 'ccm.store' ] },
+      left_css: 'https://tkless.github.io/ccm-components/feedback/resources/left.css',
+      right_css: 'https://tkless.github.io/ccm-components/feedback/resources/right.css',
       css: [ 'ccm.load',
         { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
         'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'
       ],
-      lib: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ]
     },
 
     Instance: function () {
       let $;
 
       this.init = callback => {
-        if ( this.position === 'left')
-          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/left.css' } );
-        else
-          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/right.css' } );
-        callback();
+        ccm.load( { context: this.element.parentNode, url: this.position === 'left' ? this.left_css : this.right_css }, callback );
       };
 
       this.ready = callback => {
@@ -112,11 +109,7 @@
 
       this.start = callback => {
 
-        $.dataset( this.data, dataset => {
-
-          if ( this.logger ) self.logger.log( 'start', dataset );
-
-          if ( !dataset.feedbacks ) dataset.feedbacks =[];
+          if ( this.logger ) self.logger.log( 'start' );
 
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
             submit: event => {
@@ -124,18 +117,14 @@
               if ( event ) event.preventDefault();
 
               let data = {
-                "date":  moment().format(),
                 "title": this.element.querySelector( 'input[type=text]' ).value,
                 "content": this.element.querySelector( 'textarea' ).value
               };
 
-              dataset.feedbacks.push( data );
-              // update dataset
-              this.data.store.set( dataset, () => {
+              this.data.store.set( data, () => {
 
                 if ( this.logger ) {
                   data = $.clone( data );
-                  delete dataset.user;
                   this.logger.log( 'create', data );
                 }
 
@@ -147,7 +136,6 @@
                   "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
                 } ) );
                 this.element.querySelector( 'form' ).reset();
-
 
                 if ( this.onfinish ) $.onFinish( this, data );
 
@@ -162,8 +150,6 @@
           }
 
           if ( callback ) callback();
-        } );
-
       };
 
     }

@@ -82,22 +82,19 @@
 
       //onfinish: { log: true },
       data: { store: [ 'ccm.store' ] },
+      left_css: '../feedback/resources/left.css',
+      right_css: '../feedback/resources/right.css',
       css: [ 'ccm.load',
         { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
         '../../ccm-components/lib/bootstrap/css/bootstrap.css'
       ],
-      lib: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ]
     },
 
     Instance: function () {
       let $;
 
       this.init = callback => {
-        if ( this.position === 'left')
-          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/left.css' } );
-        else
-          ccm.load( { context: this.element.parentNode, url: '../feedback/resources/right.css' } );
-        callback();
+        ccm.load( { context: this.element.parentNode, url: this.position === 'left' ? this.left_css : this.right_css }, callback );
       };
 
       this.ready = callback => {
@@ -107,8 +104,6 @@
 
       this.start = callback => {
 
-
-
           if ( this.logger ) self.logger.log( 'start' );
 
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
@@ -117,11 +112,9 @@
               if ( event ) event.preventDefault();
 
               let data = {
-                "date":  moment().format(),
                 "title": this.element.querySelector( 'input[type=text]' ).value,
                 "content": this.element.querySelector( 'textarea' ).value
               };
-
 
               // update dataset
               this.data.store.set( data, () => {
@@ -139,7 +132,6 @@
                   "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
                 } ) );
                 this.element.querySelector( 'form' ).reset();
-
 
                 if ( this.onfinish ) $.onFinish( this, data );
 
