@@ -39,7 +39,7 @@
                         "class": "panel-body",
                         "inner": [
                           {
-                            "class": "form-group",
+                          "class": "form-group",
                             "inner": [
                               {
                                 "tag": "label",
@@ -79,7 +79,7 @@
                     ]
                   }
                 }
-              ]
+             ]
             }
           ]
         }
@@ -112,11 +112,7 @@
 
       this.start = callback => {
 
-        $.dataset( this.data, dataset => {
-
-          if ( this.logger ) self.logger.log( 'start', dataset );
-
-          if ( !dataset.feedbacks ) dataset.feedbacks =[];
+          if ( this.logger ) self.logger.log( 'start' );
 
           $.setContent( this.element, this.ccm.helper.html( this.templates.feedback, {
             submit: event => {
@@ -127,15 +123,12 @@
                 "date":  moment().format(),
                 "title": this.element.querySelector( 'input[type=text]' ).value,
                 "content": this.element.querySelector( 'textarea' ).value
-            };
+              };
 
-              dataset.feedbacks.push( data );
-              // update dataset
-              this.data.store.set( dataset, () => {
+              this.data.store.set( data, () => {
 
                 if ( this.logger ) {
                   data = $.clone( data );
-                  delete dataset.user;
                   this.logger.log( 'create', data );
                 }
 
@@ -147,7 +140,6 @@
                   "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
                 } ) );
                 this.element.querySelector( 'form' ).reset();
-
 
                 if ( this.onfinish ) $.onFinish( this, data );
 
@@ -162,8 +154,6 @@
           }
 
           if ( callback ) callback();
-        } );
-
       };
 
     }

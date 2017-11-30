@@ -12,7 +12,8 @@ ccm.files[ "configs.js" ] = {
 
   "local": {
     "from_above": "30%",
-    "position": "right"
+    "position": "right",
+    data: { store: [ 'ccm.store', { 'store': 'feedback', 'url': 'http://localhost:8080' } ] },
   }
 
 };
