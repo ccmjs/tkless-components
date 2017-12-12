@@ -1,8 +1,26 @@
+label {
+    font-weight: normal;
+}
+
 #element {
     font-family: Roboto, sans-serif;
     color: #0f3c4b;
     padding: 5rem 1.25rem;
     text-align: center;
+}
+
+.glyphicon-cloud-upload {
+    margin-bottom: 0.2em;
+    font-size: 5em;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.09);
+}
+
+.container {
+    width: 100%;
+    max-width: 680px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .box {
@@ -25,8 +43,7 @@
     background-color: #fff;
 }
 
-.box.has-advanced-upload .box-dragndrop
-{
+.box.has-advanced-upload .box-dragndrop {
     display: inline;
 }
 .box.has-advanced-upload .box-icon
@@ -96,8 +113,7 @@
     color: #39bfd3;
 }
 
-.js .box-file
-{
+.box-file {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -105,8 +121,7 @@
     position: absolute;
     z-index: -1;
 }
-.js .box-file + label
-{
+.box-file + label {
     max-width: 80%;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -114,35 +129,23 @@
     display: inline-block;
     overflow: hidden;
 }
-.js .box-file + label:hover strong,
-.box-file:focus + label strong,
-.box-file.has-focus + label strong
-{
+
+.box-file:focus + label strong {
     color: #39bfd3;
 }
-.js .box-file:focus + label,
-.js .box-file.has-focus + label
-{
+.box-file:focus + label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
 }
 
-.no-js .box-file + label
-{
-    display: none;
-}
+.box-button {
 
-.no-js .box-button
-{
-    display: block;
-}
-.box-button
-{
     font-weight: 700;
     color: #e5edf1;
     background-color: #39bfd3;
+    display: block;
     padding: 8px 16px;
-    margin: 40px auto 0;
+    margin: 40px auto 0
 }
 .box-button:hover,
 .box-button:focus {

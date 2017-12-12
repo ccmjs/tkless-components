@@ -15,67 +15,70 @@
     config: {
       templates: {
         "file_upload": {
+          "class": "container",
           "inner": {
-            "class": "js",
-            "inner": {
-              "tag": "form",
-              "class": "box has-advanced-upload",
-              "inner": [
-                {
-                  "class": "box-input",
-                  "inner": [
-                    {
-                      "tag": "input",
-                      "id": "file",
-                      "class": "box-file",
-                      "name": "files[]",
-                      "data-multiple-caption": "{count} files selected",
-                      "multiple": true
-                    },
-                    {
-                      "tag": "label",
-                      "for": "file",
-                      "inner":[
-                        {
-                          "tag": "strong",
-                          "inner": "Choose a file",
-                        },
-                        {
-                          "tag": "span",
-                          "class":"box-dragndrop",
-                          "inner": " or drag it here"
-                        }
-                      ]
-                    },
-                    {
-                      "tag": "button",
-                      "class": "box-button",
-                      "type": "submit",
-                      "inner": "Upload"
-                    }
-                  ]
-                },
-                {
-                  "class": "box-uploading",
-                  "inner": "Uploading&hellip;"
-                },
-                {
-                  "class": "box-success",
-                  "inner": "Done!"
-                },
-                {
-                  "class": "box-error",
-                  "inner": "Upload Failed!"
-                }
-              ]
-            }
+            "tag": "form",
+            "class": "box has-advanced-upload",
+            "inner": [
+              {
+                "class": "box-input",
+                "inner": [
+                  {
+                    "tag": "span",
+                    "class": "glyphicon glyphicon-cloud-upload col-md-12"
+                  },
+                  {
+                    "tag": "input",
+                    "type":"file",
+                    "id": "file",
+                    "class": "box-file",
+                    "name": "files[]",
+                    "data-multiple-caption": "{count} files selected",
+                    "multiple": true
+                  },
+                  {
+                    "tag": "label",
+                    "for": "file",
+                    "inner":[
+                      {
+                        "tag": "strong",
+                        "inner": "Choose a file",
+                      },
+                      {
+                        "tag": "span",
+                        "class":"box-dragndrop",
+                        "inner": " or drag it here."
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "button",
+                    "class": "box-button",
+                    "type": "submit",
+                    "inner": "Upload"
+                  }
+                ]
+              },
+              {
+                "class": "box-uploading",
+                "inner": "Uploading&hellip;"
+              },
+              {
+                "class": "box-success",
+                "inner": "Done!"
+              },
+              {
+                "class": "box-error",
+                "inner": "Upload Failed!"
+              }
+            ]
           }
         }
 
       },
       data: { store: [ 'ccm.store' ], key: 'demo' },
       libs: [ 'ccm.load',
-        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
+       { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
         '../../ccm-components/lib/bootstrap/css/bootstrap.css',
         '../file-upload/resources/default.css'
       ]
@@ -90,7 +93,30 @@
 
 
       this.start = callback  => {
+
         $.setContent( this.element, $.html( this.templates.file_upload ) );
+
+        let element = this.element;
+        let inputs = element.querySelectorAll( '.box-file' );
+        Array.prototype.forEach.call( inputs, function( input ) {
+
+          let label	 = input.nextElementSibling,
+            labelVal = label.innerHTML;
+
+          input.addEventListener( 'change', function( e ) {
+
+            let fileName = '';
+            if( this.files && this.files.length > 1 )
+              fileName = ( element.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+              fileName = e.target.value.split( '\\' ).pop();
+
+            if( fileName )
+              label.querySelector( 'span' ).innerHTML = fileName;
+            else
+              label.innerHTML = labelVal;
+          });
+        });
 
         if ( callback ) callback;
       };
