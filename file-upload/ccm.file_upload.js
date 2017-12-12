@@ -22,54 +22,50 @@
             "inner": [
               {
                 "class": "box-input",
-                "inner": [
+                "inner":[
                   {
-                    "tag": "span",
-                    "class": "glyphicon glyphicon-cloud-upload col-md-12"
+                    "id": "preview"
                   },
                   {
-                    "tag": "input",
-                    "type":"file",
-                    "id": "file",
-                    "class": "box-file",
-                    "name": "files[]",
-                    "data-multiple-caption": "{count} files selected",
-                    "multiple": true
-                  },
-                  {
-                    "tag": "label",
-                    "for": "file",
-                    "inner":[
+                    "tag" : "span",
+                    "inner": [
                       {
-                        "tag": "strong",
-                        "inner": "Choose a file",
+                        "tag": "label",
+                        "for": "file",
+                        "inner":[
+                          {
+                            "tag": "span",
+                            "class": "glyphicon glyphicon-cloud-upload col-md-12"
+                          },
+                          {
+                            "tag": "strong",
+                            "inner": "Choose a file",
+                          },
+                          {
+                            "tag": "span",
+                            "class":"box-dragndrop",
+                            "inner": " or drag it here."
+                          },
+                          {
+                            "tag": "input",
+                            "type":"file",
+                            "id": "file",
+                            "class": "box-file",
+                            "name": "files[]",
+                            "data-multiple-caption": "{count} files selected",
+                            "multiple": true
+                          },
+                          {
+                            "tag": "button",
+                            "class": "btn btn-info btn-lg box-button",
+                            "type": "submit",
+                            "inner": "Upload"
+                          }
+                        ]
                       },
-                      {
-                        "tag": "span",
-                        "class":"box-dragndrop",
-                        "inner": " or drag it here."
-                      }
                     ]
-                  },
-                  {
-                    "tag": "button",
-                    "class": "box-button",
-                    "type": "submit",
-                    "inner": "Upload"
                   }
                 ]
-              },
-              {
-                "class": "box-uploading",
-                "inner": "Uploading&hellip;"
-              },
-              {
-                "class": "box-success",
-                "inner": "Done!"
-              },
-              {
-                "class": "box-error",
-                "inner": "Upload Failed!"
               }
             ]
           }
@@ -97,26 +93,39 @@
         $.setContent( this.element, $.html( this.templates.file_upload ) );
 
         let element = this.element;
-        let inputs = element.querySelectorAll( '.box-file' );
-        Array.prototype.forEach.call( inputs, function( input ) {
+        let inputs = element.querySelector( '.box-file' );
+        inputs.addEventListener( 'change', previewFiles );
 
-          let label	 = input.nextElementSibling,
-            labelVal = label.innerHTML;
+        function previewFiles() {
 
-          input.addEventListener( 'change', function( e ) {
+          let preview = element.querySelector('#preview');
+          let files   = element.querySelector('input[type=file]').files;
 
-            let fileName = '';
-            if( this.files && this.files.length > 1 )
-              fileName = ( element.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
-            else
-              fileName = e.target.value.split( '\\' ).pop();
+          function readAndPreview(file) {
 
-            if( fileName )
-              label.querySelector( 'span' ).innerHTML = fileName;
-            else
-              label.innerHTML = labelVal;
-          });
-        });
+            // Make sure `file.name` matches extensions criteria
+            if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+              let reader = new FileReader();
+
+              reader.addEventListener("load", function () {
+                let image = new Image();
+                image.height = 120;
+                image.width = 120;
+                image.title = file.name;
+                image.src = this.result;
+                preview.appendChild( image );
+              }, false);
+
+              reader.readAsDataURL(file);
+            }
+
+          }
+
+          if (files) {
+            [].forEach.call(files, readAndPreview);
+          }
+
+        }
 
         if ( callback ) callback;
       };

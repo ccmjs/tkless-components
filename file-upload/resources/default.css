@@ -1,11 +1,12 @@
 label {
-    font-weight: normal;
+  font-weight: normal;
+  width: 100%;
+  min-height: 200px;;
 }
 
 #element {
     font-family: Roboto, sans-serif;
     color: #0f3c4b;
-    padding: 5rem 1.25rem;
     text-align: center;
 }
 
@@ -16,33 +17,51 @@ label {
     color: rgba(0, 0, 0, 0.09);
 }
 
-.container {
-    width: 100%;
-    max-width: 680px;
-    text-align: center;
-    margin: 0 auto;
+.box {
+    font-size: 1.25em; /* 20 */
+    background-color: #c8dadf;
+    position: relative;
+}
+
+.box-input {
+  padding: 2em 0;
+}
+
+.box-button {
+  display: block;
+  margin: 40px auto 0
 }
 
 .box {
-    font-size: 1.25rem; /* 20 */
-    background-color: #c8dadf;
-    position: relative;
-    padding: 100px 20px;
-}
-.box.has-advanced-upload {
     outline: 2px dashed #92b0b3;
     outline-offset: -10px;
-
-    -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
     transition: outline-offset .15s ease-in-out, background-color .15s linear;
 }
-.box.is-dragover
-{
+.box .is-dragover {
     outline-offset: -20px;
     outline-color: #c8dadf;
     background-color: #fff;
 }
 
+
+.box-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.box-file + label {
+  max-width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/*
 .box.has-advanced-upload .box-dragndrop {
     display: inline;
 }
@@ -57,8 +76,7 @@ label {
 
 .box.is-uploading .box-input,
 .box.is-success .box-input,
-.box.is-error .box-input
-{
+.box.is-error .box-input {
     visibility: hidden;
 }
 
@@ -112,43 +130,11 @@ label {
 {
     color: #39bfd3;
 }
-
-.box-file {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-.box-file + label {
-    max-width: 80%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-}
-
 .box-file:focus + label strong {
     color: #39bfd3;
 }
 .box-file:focus + label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
-}
-
-.box-button {
-
-    font-weight: 700;
-    color: #e5edf1;
-    background-color: #39bfd3;
-    display: block;
-    padding: 8px 16px;
-    margin: 40px auto 0
-}
-.box-button:hover,
-.box-button:focus {
-    background-color: #0f3c4b;
-}
+}*/
 
