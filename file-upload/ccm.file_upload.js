@@ -19,56 +19,66 @@
           "inner": {
             "tag": "form",
             "class": "box has-advanced-upload",
+            "onclick": "%trigger_dialog%",
             "inner": [
               {
                 "class": "box-input",
-                "inner":[
-                  {
-                    "id": "preview"
-                  },
+                "inner":
                   {
                     "tag" : "span",
                     "inner": [
                       {
-                        "tag": "label",
-                        "for": "file",
-                        "inner":[
-                          {
-                            "tag": "span",
-                            "class": "glyphicon glyphicon-cloud-upload col-md-12"
-                          },
-                          {
-                            "tag": "strong",
-                            "inner": "Choose a file",
-                          },
-                          {
-                            "tag": "span",
-                            "class":"box-dragndrop",
-                            "inner": " or drag it here."
-                          },
-                          {
-                            "tag": "input",
-                            "type":"file",
-                            "id": "file",
-                            "class": "box-file",
-                            "name": "files[]",
-                            "data-multiple-caption": "{count} files selected",
-                            "multiple": true
-                          },
-                          {
-                            "tag": "button",
-                            "class": "btn btn-info btn-lg box-button",
-                            "type": "submit",
-                            "inner": "Upload"
-                          }
-                        ]
+                        "tag": "span",
+                        "class": "glyphicon glyphicon-cloud-upload"
+                      },
+                      {
+                        "tag": "strong",
+                        "inner": "Choose a file",
+                      },
+                      {
+                        "tag": "span",
+                        "class":"box-dragndrop",
+                        "inner": " or drag it here."
                       },
                     ]
                   }
-                ]
+              },
+              {
+                "id": "preview"
+              },
+              {
+                "id": "button",
+                "inner": {
+                  "tag": "button",
+                  "class": "btn btn-info btn-lg box-button",
+                  "type": "submit",
+                  "inner": "Upload"
+                }
               }
             ]
           }
+        },
+
+        "preview": {
+          "inner": [
+            {
+              "class": "box-image"
+            },
+            {
+              "class": "box-details",
+              "inner":
+                {
+                  "class": "box-filename",
+                  "inner": {
+                    "tag": "span",
+                    "class": "name"
+                  }
+                }
+            },
+            {
+              "class": "box-progress"
+            }
+          ]
         }
 
       },
@@ -89,40 +99,52 @@
 
 
       this.start = callback  => {
+        let input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('multiple', 'true');
+        input.id = this.index;
+        input.style.visibility = 'hidden';
+        document.body.appendChild( input );
 
-        $.setContent( this.element, $.html( this.templates.file_upload ) );
+        $.setContent( this.element, $.html( this.templates.file_upload , {
+          trigger_dialog: function () {
+            input.click();
+          }
+        } ) );
 
         let element = this.element;
-        let inputs = element.querySelector( '.box-file' );
-        inputs.addEventListener( 'change', previewFiles );
+        input.addEventListener( 'change', previewFiles );
 
+        let self = this;
         function previewFiles() {
 
-          let preview = element.querySelector('#preview');
-          let files   = element.querySelector('input[type=file]').files;
+          let prev_id = element.querySelector( '#preview' ),
+              preview_template = $.html( self.templates.preview ),
+              files   = input.files;
 
-          function readAndPreview(file) {
+          function readAndPreview( file ) {
 
             // Make sure `file.name` matches extensions criteria
-            if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+            if ( /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
               let reader = new FileReader();
 
-              reader.addEventListener("load", function () {
+              reader.addEventListener( 'load', function () {
                 let image = new Image();
-                image.height = 120;
-                image.width = 120;
                 image.title = file.name;
                 image.src = this.result;
-                preview.appendChild( image );
-              }, false);
+                preview_template.querySelector( '.box-image' ).appendChild( image );
+                preview_template.querySelector( '.name' ).innerHTML = file.name;
+              }, false );
 
-              reader.readAsDataURL(file);
+              prev_id.appendChild( preview_template );
+              self.element.querySelector( '.box-input' ).style.display = 'none';
+              reader.readAsDataURL( file );
             }
 
           }
 
-          if (files) {
-            [].forEach.call(files, readAndPreview);
+          if ( files ) {
+            [].forEach.call( files, readAndPreview );
           }
 
         }
