@@ -18,7 +18,7 @@
           "class": "container",
           "inner": {
             "tag": "form",
-            "class": "box has-advanced-upload",
+            "class": "box",
             "onclick": "%trigger_dialog%",
             "inner": [
               {
@@ -43,9 +43,7 @@
                     ]
                   }
               },
-              {
-                "id": "preview"
-              },
+              { "id": "space" },
               {
                 "id": "button",
                 "inner": {
@@ -60,6 +58,7 @@
         },
 
         "preview": {
+          "class": "preview",
           "inner": [
             {
               "class": "box-image"
@@ -91,6 +90,7 @@
     },
 
     Instance: function () {
+      let self = this;
 
       this.ready = callback => {
         $ = this.ccm.helper;
@@ -99,12 +99,7 @@
 
 
       this.start = callback  => {
-        let input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('multiple', 'true');
-        input.id = this.index;
-        input.style.visibility = 'hidden';
-        document.body.appendChild( input );
+        let input = createInputField();
 
         $.setContent( this.element, $.html( this.templates.file_upload , {
           trigger_dialog: function () {
@@ -112,17 +107,45 @@
           }
         } ) );
 
-        let element = this.element;
-        input.addEventListener( 'change', previewFiles );
+        draggableForm();
 
-        let self = this;
-        function previewFiles() {
 
-          let prev_id = element.querySelector( '#preview' ),
-              preview_template = $.html( self.templates.preview ),
-              files   = input.files;
+        function draggableForm() {
+          let form = self.element.querySelector( '.box' );
+
+          [ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( function( event ) {
+            form.addEventListener( event, function( e ) {
+              // preventing the unwanted behaviours
+              e.preventDefault();
+            });
+          });
+
+          [ 'dragover', 'dragenter' ].forEach( function( event ) {
+            form.addEventListener( event, function() {
+              form.classList.add( 'is-dragover' );
+            });
+          });
+
+          [ 'dragleave', 'dragend', 'drop' ].forEach( function( event ) {
+            form.addEventListener( event, function()
+            {
+              form.classList.remove( 'is-dragover' );
+            });
+          });
+
+          form.addEventListener( 'drop', function( e ) {
+            previewFiles( e.dataTransfer.files );
+          });
+
+
+        }
+
+        function previewFiles( inputFiles ) {
+
+          [].forEach.call( inputFiles ? inputFiles : input.files, readAndPreview );
 
           function readAndPreview( file ) {
+            let preview_template = $.html( self.templates.preview );
 
             // Make sure `file.name` matches extensions criteria
             if ( /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
@@ -132,21 +155,28 @@
                 let image = new Image();
                 image.title = file.name;
                 image.src = this.result;
+                image.height = 120;
                 preview_template.querySelector( '.box-image' ).appendChild( image );
                 preview_template.querySelector( '.name' ).innerHTML = file.name;
+                self.element.querySelector( '#space' ).parentNode.insertBefore( preview_template, self.element.querySelector( '#space' )  );
+                self.element.querySelector( '.box-input' ).style.display = 'none';
               }, false );
-
-              prev_id.appendChild( preview_template );
-              self.element.querySelector( '.box-input' ).style.display = 'none';
               reader.readAsDataURL( file );
             }
 
           }
 
-          if ( files ) {
-            [].forEach.call( files, readAndPreview );
-          }
+        }
 
+        function createInputField() {
+          let input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          input.setAttribute('multiple', 'true');
+          input.id = this.index;
+          input.style.visibility = 'hidden';
+          document.body.appendChild( input );
+          input.addEventListener( 'change', function () { previewFiles(); } );
+          return input;
         }
 
         if ( callback ) callback;

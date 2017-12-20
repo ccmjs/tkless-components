@@ -1,73 +1,79 @@
 #element {
-    font-family: Roboto, sans-serif;
-    color: #0f3c4b;
+  font-family: Roboto, sans-serif;
+  color: #0f3c4b;
 }
 
 .glyphicon-cloud-upload {
-    width: 100%;
-    margin-bottom: 0.2em;
-    font-size: 5em;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.09);
+  width: 100%;
+  margin-bottom: 0.2em;
+  font-size: 5em;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.09);
 }
 
 .box {
-    position: relative;
-    font-size: 1.25em;
-    background-color: #c8dadf;
-    min-height: 300px;
-    outline: 2px dashed #92b0b3;
-    outline-offset: -10px;
-    transition: outline-offset .15s ease-in-out, background-color .15s linear;
-    padding: 1em;
-    cursor: pointer;
+  position: relative;
+  font-size: 1.25em;
+  background-color: #c8dadf;
+  min-height: 300px;
+  outline: 2px dashed #92b0b3;
+  outline-offset: -10px;
+  transition: outline-offset .15s ease-in-out, background-color .15s linear;
+  padding: 1em;
+  cursor: pointer;
 }
 
 .box-input {
-    text-align: center;
+  text-align: center;
 }
 
 .box #button {
-    width: 100%;
-    position: absolute;
-    bottom: 2em;
-    text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 2em;
+  text-align: center;
 }
-.box .is-dragover {
-    outline-offset: -20px;
-    outline-color: #c8dadf;
-    background-color: #fff;
-}
-
-.box img {
-    height: 120px;
-    width: 120px;
+.box.is-dragover {
+  outline-offset: -20px;
+  outline-color: #c8dadf;
+  background-color: #fff;
 }
 
-.box #preview {
-    position: relative;
-    cursor: default;
-    display: inline-block;
+.box #space {
+  height: 4em;
+}
+
+.box .preview {
+  cursor: default;
+  background: rgba(255,255,255,0.8);
+  position: relative;
+  display: inline-block;
+  margin: 17px;
+  vertical-align: top;
+  border: 1px solid #acacac;
+  padding: 6px 6px 6px 6px;
+}
+.box .preview .box-filename {
+  font-size: 11px;
+  margin-top: 0.4em;
 }
 
 .box .box-image {
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
-    font-size: 14px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
+  font-size: 14px;
 }
 
-/*
 .box.has-advanced-upload .box-dragndrop {
-    display: inline;
+  display: inline;
 }
-.box.has-advanced-upload .box-icon
-{
-    width: 100%;
-    height: 80px;
-    fill: #92b0b3;
-    display: block;
-    margin-bottom: 40px;
+.box.has-advanced-upload .box-icon {
+  width: 100%;
+  height: 80px;
+  fill: #92b0b3;
+  display: block;
+  margin-bottom: 40px;
 }
-
+/*
 .box.is-uploading .box-input,
 .box.is-success .box-input,
 .box.is-error .box-input {
