@@ -47,6 +47,7 @@
                 "class": "box-buttons col-md-12",
                 "inner": [
                   {
+                    "id": "upload",
                     "tag": "button",
                     "class": "btn btn-info box-button",
                     "onclick": "%submit%",
@@ -133,8 +134,15 @@
                   self.logger.log( 'create', files_data );
                 }
 
-                self.element.querySelector( '.box-success-mark' ).classList.add( 'visible' );
-                self.element.querySelector( '.box-progress' ).classList.add( 'visible' );
+                self.element.querySelector( 'form' ).removeEventListener( 'click', reset() );
+
+                function reset() {
+                  document.body.querySelector( 'input' ).setAttribute( 'disabled', true);
+                  self.element.querySelector( 'form' ).style.cursor = 'default';
+                  self.element.querySelector( '.box-success-mark' ).classList.add( 'visible' );
+                  self.element.querySelector( '.box-progress' ).classList.add( 'visible' );
+                  self.element.querySelector( '#upload' ).classList.add( 'disabled' );
+                }
 
                 if ( self.onfinish ) $.onFinish( self, files_data );
 
