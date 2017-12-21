@@ -18,7 +18,7 @@
           "class": "container",
           "inner": {
             "tag": "form",
-            "class": "box",
+            "id": "box",
             "onclick": "%trigger_dialog%",
             "inner": [
               {
@@ -49,7 +49,7 @@
                 "inner": {
                   "tag": "button",
                   "class": "btn btn-info btn-lg box-button",
-                  "type": "submit",
+                  "onclick": "%submit%",
                   "inner": "Upload"
                 }
               }
@@ -91,31 +91,75 @@
 
     Instance: function () {
       let self = this;
+      let filePaths = [];
 
       this.ready = callback => {
         $ = this.ccm.helper;
         callback();
       };
 
-
       this.start = callback  => {
-        let input = createInputField();
+        let files_data = {
+          slides: []
+        };
 
         $.setContent( this.element, $.html( this.templates.file_upload , {
-          trigger_dialog: function () {
-            input.click();
+          trigger_dialog: () => input.click(),
+          submit: event => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if ( self.user ) self.user.login( proceed ); else proceed();
+
+            function proceed() {
+
+              // update dataset
+              self.data.store.set( files_data, () => {
+
+                if ( self.logger ) {
+                  files_data = $.clone( files_data );
+                  self.logger.log( 'create', files_data );
+                }
+
+                var feedback = document.createElement( 'feedback' );
+                feedback.classList.add( 'text-primary' );
+                feedback.innerHTML = "&nbsp;Saved <span class='glyphicon glyphicon-saved'></span>";
+                self.element.querySelector( '#space' ).appendChild( feedback );
+                self.element.querySelector( '#space' ).style.height = 100;
+
+
+
+                self.element.querySelector( '#button' ).remove();
+                [ ...self.element.querySelectorAll( '.preview' ) ].map( preview => clearPreview( preview ) );
+
+                function clearPreview( element ) {
+                  element.remove();
+                }
+
+                $.wait( 5000, function () {
+                    self.start();
+                } );
+
+                if ( self.onfinish ) $.onFinish( self, files_data );
+
+              } );
+
+            }
+
           }
         } ) );
 
+        if( self.submit === false ) self.element.querySelector( '#box' ).removeChild( self.element.querySelector( '#button' ));
+
+        let input = createInputField();
         draggableForm();
 
 
         function draggableForm() {
-          let form = self.element.querySelector( '.box' );
+          let form = self.element.querySelector( '#box' );
 
           [ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( function( event ) {
             form.addEventListener( event, function( e ) {
-              // preventing the unwanted behaviours
               e.preventDefault();
             });
           });
@@ -127,8 +171,7 @@
           });
 
           [ 'dragleave', 'dragend', 'drop' ].forEach( function( event ) {
-            form.addEventListener( event, function()
-            {
+            form.addEventListener( event, function() {
               form.classList.remove( 'is-dragover' );
             });
           });
@@ -155,11 +198,13 @@
                 let image = new Image();
                 image.title = file.name;
                 image.src = this.result;
+                filePaths.push( image. src );
                 image.height = 120;
                 preview_template.querySelector( '.box-image' ).appendChild( image );
                 preview_template.querySelector( '.name' ).innerHTML = file.name;
                 self.element.querySelector( '#space' ).parentNode.insertBefore( preview_template, self.element.querySelector( '#space' )  );
                 self.element.querySelector( '.box-input' ).style.display = 'none';
+                files_data.slides.push( { name: file.name, data: this.result, MIME: file.type  } );
               }, false );
               reader.readAsDataURL( file );
             }
@@ -181,6 +226,10 @@
 
         if ( callback ) callback;
       };
+
+      this.getValue  = () => {
+        return filePaths;
+      }
     }
   };
 
