@@ -43,7 +43,6 @@
                     ]
                   }
               },
-              { "id": "space" },
               {
                 "id": "button",
                 "inner": {
@@ -64,6 +63,9 @@
               "class": "box-image"
             },
             {
+              "class": "box-progress"
+            },
+            {
               "class": "box-details",
               "inner":
                 {
@@ -75,7 +77,10 @@
                 }
             },
             {
-              "class": "box-progress"
+              "class": "box-success-mark",
+              "inner": "<svg width='54px' height='54px' viewBox='0 0 54 54' version='1.1' xmlns='http://www.w3.org/2000/svg\' xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'>\n" +
+              "<title>Check</title>\n<defs></defs>\n<g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\">\n" +
+              "<path d=\"M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\" id=\"Oval-2\" stroke-opacity=\"0.198794158\" stroke=\"#747474\" fill-opacity=\"0.816519475\" fill=\"#FFFFFF\" sketch:type=\"MSShapeGroup\"></path>\n </g>\n</svg>\n"
             }
           ]
         }
@@ -112,7 +117,6 @@
             if ( self.user ) self.user.login( proceed ); else proceed();
 
             function proceed() {
-
               // update dataset
               self.data.store.set( files_data, () => {
 
@@ -121,31 +125,17 @@
                   self.logger.log( 'create', files_data );
                 }
 
-                var feedback = document.createElement( 'feedback' );
-                feedback.classList.add( 'text-primary' );
-                feedback.innerHTML = "&nbsp;Saved <span class='glyphicon glyphicon-saved'></span>";
-                self.element.querySelector( '#space' ).appendChild( feedback );
-                self.element.querySelector( '#space' ).style.height = 100;
+                self.element.querySelector( '.box-success-mark' ).classList.add( 'visible' );
+                self.element.querySelector( '.box-progress' ).classList.add( 'visible' );
 
-
-
-                self.element.querySelector( '#button' ).remove();
-                [ ...self.element.querySelectorAll( '.preview' ) ].map( preview => clearPreview( preview ) );
-
-                function clearPreview( element ) {
-                  element.remove();
-                }
-
-                $.wait( 5000, function () {
+                $.wait( 2000, function () {
                     self.start();
                 } );
 
                 if ( self.onfinish ) $.onFinish( self, files_data );
 
               } );
-
             }
-
           }
         } ) );
 
@@ -188,6 +178,7 @@
           [].forEach.call( inputFiles ? inputFiles : input.files, readAndPreview );
 
           function readAndPreview( file ) {
+            self.element.querySelector( '#button' ).classList.add( 'visible' );
             let preview_template = $.html( self.templates.preview );
 
             // Make sure `file.name` matches extensions criteria
@@ -202,7 +193,7 @@
                 image.height = 120;
                 preview_template.querySelector( '.box-image' ).appendChild( image );
                 preview_template.querySelector( '.name' ).innerHTML = file.name;
-                self.element.querySelector( '#space' ).parentNode.insertBefore( preview_template, self.element.querySelector( '#space' )  );
+                self.element.querySelector( '#button' ).parentNode.insertBefore( preview_template, self.element.querySelector( '#button' )  );
                 self.element.querySelector( '.box-input' ).style.display = 'none';
                 files_data.slides.push( { name: file.name, data: this.result, MIME: file.type  } );
               }, false );

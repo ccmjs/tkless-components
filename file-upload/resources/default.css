@@ -24,26 +24,21 @@
 }
 
 .box-input {
+  padding-top: 3.5em;
   text-align: center;
 }
 
 #box #button {
   width: 100%;
-  bottom: 2em;
   text-align: center;
+  display: none;
 }
+
 #box.is-dragover {
   outline-offset: -20px;
   outline-color: #c8dadf;
   background-color: #fff;
 }
-
-#box #space {
-  height: 4em;
-  text-align: center;
-  vertical-align: middle;
-}
-
 #box .preview {
   cursor: default;
   background: rgba(255,255,255,0.8);
@@ -65,7 +60,20 @@
   font-size: 14px;
 }
 
-feedback {
-  font-size: 3em;
-  vertical-align: middle;
+#box .box-progress {
+  background-color: rgba(0, 128, 0, 0.6);
+  width: 100%;
+  height: 0.3em;
+  display: none;
+}
+
+#box .box-success-mark {
+ position: absolute;
+  right: -10px;
+  top:-10px;
+  display: none;
+}
+
+#box .visible {
+  display: block !important;
 }
