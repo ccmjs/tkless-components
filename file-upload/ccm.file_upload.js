@@ -44,13 +44,21 @@
                   }
               },
               {
-                "id": "button",
-                "inner": {
-                  "tag": "button",
-                  "class": "btn btn-info btn-lg box-button",
-                  "onclick": "%submit%",
-                  "inner": "Upload"
-                }
+                "class": "box-buttons col-md-12",
+                "inner": [
+                  {
+                    "tag": "button",
+                    "class": "btn btn-info box-button",
+                    "onclick": "%submit%",
+                    "inner": "Upload"
+                  },
+                  {
+                    "tag": "button",
+                    "class": "btn btn-primary box-button",
+                    "onclick": "%restart%",
+                    "inner": "Clear"
+                  }
+                ]
               }
             ]
           }
@@ -128,18 +136,20 @@
                 self.element.querySelector( '.box-success-mark' ).classList.add( 'visible' );
                 self.element.querySelector( '.box-progress' ).classList.add( 'visible' );
 
-                $.wait( 2000, function () {
-                    self.start();
-                } );
-
                 if ( self.onfinish ) $.onFinish( self, files_data );
 
               } );
             }
+          },
+          restart: event => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            self.start();
           }
         } ) );
 
-        if( self.submit === false ) self.element.querySelector( '#box' ).removeChild( self.element.querySelector( '#button' ));
+        if( self.submit === false ) self.element.querySelector( '#box' ).removeChild( self.element.querySelector( '.box-buttons' ));
 
         let input = createInputField();
         draggableForm();
@@ -178,7 +188,7 @@
           [].forEach.call( inputFiles ? inputFiles : input.files, readAndPreview );
 
           function readAndPreview( file ) {
-            self.element.querySelector( '#button' ).classList.add( 'visible' );
+            self.element.querySelector( '.box-buttons' ).classList.add( 'visible' );
             let preview_template = $.html( self.templates.preview );
 
             // Make sure `file.name` matches extensions criteria
@@ -193,7 +203,7 @@
                 image.height = 120;
                 preview_template.querySelector( '.box-image' ).appendChild( image );
                 preview_template.querySelector( '.name' ).innerHTML = file.name;
-                self.element.querySelector( '#button' ).parentNode.insertBefore( preview_template, self.element.querySelector( '#button' )  );
+                self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
                 self.element.querySelector( '.box-input' ).style.display = 'none';
                 files_data.slides.push( { name: file.name, data: this.result, MIME: file.type  } );
               }, false );

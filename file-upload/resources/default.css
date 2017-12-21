@@ -28,10 +28,13 @@
   text-align: center;
 }
 
-#box #button {
-  width: 100%;
+#box .box-buttons {
   text-align: center;
   display: none;
+}
+
+#box .visible {
+  display: block !important;
 }
 
 #box.is-dragover {
@@ -72,8 +75,4 @@
   right: -10px;
   top:-10px;
   display: none;
-}
-
-#box .visible {
-  display: block !important;
 }
