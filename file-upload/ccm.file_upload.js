@@ -106,9 +106,10 @@
     Instance: function () {
       let self = this;
       let filePaths = [];
+      let $;
 
       this.ready = callback => {
-        $ = this.ccm.helper;
+        $ = self.ccm.helper;
         callback();
       };
 
@@ -117,7 +118,7 @@
           slides: []
         };
 
-        $.setContent( this.element, $.html( this.templates.file_upload , {
+        $.setContent( self.element, $.html( self.templates.file_upload , {
           trigger_dialog: () => input.click(),
           submit: event => {
             event.preventDefault();
@@ -134,7 +135,7 @@
                   self.logger.log( 'create', files_data );
                 }
 
-                document.body.querySelector( 'input' ).setAttribute( 'disabled', true);
+                input.setAttribute( 'disabled', true);
                 self.element.querySelector( 'form' ).style.cursor = 'default';
                 self.element.querySelector( '.box-success-mark' ).classList.add( 'visible' );
                 self.element.querySelector( '.box-progress' ).classList.add( 'visible' );
@@ -162,26 +163,26 @@
         function draggableForm() {
           let form = self.element.querySelector( '#box' );
 
-          [ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( function( event ) {
-            form.addEventListener( event, function( e ) {
-              e.preventDefault();
+          [ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( ( event ) => {
+            form.addEventListener( event, ( event ) => {
+              event.preventDefault();
             });
           });
 
-          [ 'dragover', 'dragenter' ].forEach( function( event ) {
+          [ 'dragover', 'dragenter' ].forEach( ( event ) => {
             form.addEventListener( event, function() {
               form.classList.add( 'is-dragover' );
             });
           });
 
-          [ 'dragleave', 'dragend', 'drop' ].forEach( function( event ) {
+          [ 'dragleave', 'dragend', 'drop' ].forEach( ( event ) => {
             form.addEventListener( event, function() {
               form.classList.remove( 'is-dragover' );
             });
           });
 
-          form.addEventListener( 'drop', function( e ) {
-            previewFiles( e.dataTransfer.files );
+          form.addEventListener( 'drop', ( event ) => {
+            previewFiles( event.dataTransfer.files );
           });
 
 
@@ -199,7 +200,7 @@
             if ( /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
               let reader = new FileReader();
 
-              reader.addEventListener( 'load', function () {
+              reader.addEventListener( 'load', function() {
                 let image = new Image();
                 image.title = file.name;
                 image.src = this.result;
@@ -222,14 +223,13 @@
           let input = document.createElement('input');
           input.setAttribute('type', 'file');
           input.setAttribute('multiple', 'true');
-          input.id = this.index;
           input.style.visibility = 'hidden';
-          document.body.appendChild( input );
-          input.addEventListener( 'change', function () { previewFiles(); } );
+          self.element.appendChild( input );
+          input.addEventListener( 'change', () => { previewFiles(); } );
           return input;
         }
 
-        if ( callback ) callback;
+        if ( callback ) callback();
       };
 
       this.getValue  = () => {
