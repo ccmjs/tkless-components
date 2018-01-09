@@ -1,0 +1,9 @@
+#pdf-view {
+    border: 1px solid black;
+    margin-top: 1.0em;
+}
+
+#page {
+     display: flex;
+     align-content: flex-end;
+ }
