@@ -21,7 +21,7 @@
     config: {
       // add this line for highlighting the code within editor
       //code_highlighting: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'],
-      editor: [ 'ccm.load', '../editor/resources/quill.js', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
+      //editor: [ 'ccm.load', '../editor/resources/quill.js', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
       settings: {
         modules: {
           //syntax: true,    // needed for syntax highlighting
@@ -41,24 +41,27 @@
     Instance: function () {
       var editor;
 
+      this.ready = function ( callback ) {
+        if ( hljs ) hljs.initHighlightingOnLoad();
+        callback();
+      };
+
       this.start = function ( callback ) {
-        if( this.code_highlighting ) hljs.initHighlightingOnLoad();
 
         var div = this.ccm.helper.html( {} );
         this.element.innerHTML = '';
         this.element.appendChild( div );
 
-        editor = new Quill( div, this.settings, function () {
-          if ( this.code_highlighting ) {
-            var customButton = this.element.querySelector( '.ql-code-block' );
-            customButton.addEventListener( 'click', function () {
-              hljs.highlightBlock( this.element.querySelector( 'div[contenteditable=true] > pre' ) );
-            });
-          }
+        editor = new Quill( div, this.settings );
 
-        } );
+        if ( hljs ) {
+          var customButton = this.element.querySelector( '.ql-code-block' );
+          customButton.addEventListener( 'click', function () {
+            hljs.highlightBlock( this.element.querySelector( 'div[contenteditable=true] > pre' ) );
+          });
+        }
 
-        if ( callback ) callback( this );
+        if ( callback ) callback();
       };
       this.get = function () { return editor; }
     }

@@ -1,6 +1,17 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
-    code_highlighting: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'],
+    editor: [ 'ccm.load',
+      [
+        [
+          'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css',
+          'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'
+        ],
+        [
+          '../editor/resources/quill.js',
+          '//cdn.quilljs.com/1.2.0/quill.snow.css'
+        ]
+      ]
+    ],
     settings: {
       modules: {
         syntax: true,    // needed for syntax highlighting
