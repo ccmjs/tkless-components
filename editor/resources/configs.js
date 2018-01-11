@@ -7,7 +7,7 @@ ccm.files[ "configs.js" ] = {
           'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'
         ],
         [
-          '../editor/resources/quill.js',
+          'https://tkless.github.io/ccm-components/editor/resources/quill.js',
           '//cdn.quilljs.com/1.2.0/quill.snow.css'
         ]
       ]
