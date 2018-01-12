@@ -12,8 +12,8 @@
     version:[ 1,0,0 ],
 
     ccm: {
-      url: 'https://akless.github.io/ccm/version/ccm-10.0.0.min.js',
-      integrity: 'sha384-AND32Wbfnmb3f2vRMHkXSJpi81oFmy3eO1FbMHb5i2XOzwg0z+T1de180FUH1Tjt',
+      url: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
+      integrity: 'sha384-7lrORUPPd2raLsrPJYo0Arz8csPcGzgyNbKOr9Rx3k0ECU0T8BP+B1ejo8+wmUzh',
       crossorigin: 'anonymous'
     },
 
