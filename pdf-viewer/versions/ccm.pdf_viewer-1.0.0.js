@@ -13,12 +13,13 @@
      * @type {string}
      */
     name: 'pdf_viewer',
+    version:[ 1,0,0 ],
 
-    /**
-     * recommended used framework version
-     * @type {string}
-     */
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm:{
+      url: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
+      integrity: "sha384-7lrORUPPd2raLsrPJYo0Arz8csPcGzgyNbKOr9Rx3k0ECU0T8BP+B1ejo8+wmUzh",
+      crossorigin:"anonymous"
+    },
 
     /**
      * default instance configuration
@@ -74,11 +75,12 @@
       },
       path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
-      //responsive: "..//pdf-viewer/resources/responsive.css",
+      //responsive: "https://tkless.github.io/ccm-components/pdf-viewer/resources/responsive.css",
+
       "pdfJS": [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       "css": [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
-        "..//pdf-viewer/resources/default.css"
+        "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css"
       ]
 
     },
@@ -116,7 +118,7 @@
 
 
       this.init = callback => {
-        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  "..//pdf-viewer/resources/responsive.css" } );
+        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url: self.responsive } );
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
