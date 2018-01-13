@@ -134,7 +134,7 @@
         /**
          * Asynchronously downloads PDF.
          */
-        PDFJS.getDocument( my.path_to_PDF ).then( function( pdf ) {
+        PDFJS.getDocument( my.path_to_pdf ).then( function( pdf ) {
           pdfDoc = pdf;
           callback();
         });
