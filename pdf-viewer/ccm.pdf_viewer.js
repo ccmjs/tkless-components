@@ -31,7 +31,17 @@
         "class": "container-fluid",
         "inner": [
           {
-            "class": "navigation ",
+            "id": "pdf-elem",
+            "inner": {
+              "id": "pdf-view",
+              "inner": {
+                "id": "canvas",
+                "tag": "canvas"
+              }
+            }
+          },
+          {
+            "class": "navigation text-center",
             "inner": [
               {
                 "class": "btn-group",
@@ -59,11 +69,6 @@
                 ]
               }
             ]
-          },
-
-          {
-            "id": "pdf-view",
-            "tag": "canvas"
           }
         ]
       },

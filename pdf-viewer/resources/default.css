@@ -1,9 +1,27 @@
-#pdf-view {
-    border: 1px solid black;
-    margin-top: 1.0em;
+#page {
+   display: flex;
+   align-content: flex-end;
 }
 
-#page {
-     display: flex;
-     align-content: flex-end;
- }
+#pdf-elem {
+  overflow: hidden;
+  max-width: 1000px;
+  margin-bottom: 1.0em;
+  border: 1px solid black;
+}
+
+#pdf-view {
+  position: relative;
+  padding-bottom: 55%;
+  padding-top: 15px;
+  height: 0;
+  overflow: hidden;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
