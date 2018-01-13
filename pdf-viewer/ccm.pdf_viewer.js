@@ -67,7 +67,7 @@
           }
         ]
       },
-      path_to_PDF: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
 
       "pdfJS": [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
