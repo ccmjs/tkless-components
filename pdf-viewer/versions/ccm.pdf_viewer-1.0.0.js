@@ -110,7 +110,7 @@
        */
 
       let pdfDoc,
-          pageNum ,
+          pageNum,
           pageRendering,
           pageNumPending,
           scale = 0.8,
@@ -136,6 +136,8 @@
         // privatize all possible instance members
         my = $.privatize( self );
 
+        if ( self.logger ) self.logger.log( 'ready', my );
+
         // specify PDF.js workerSrc property
         PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
@@ -158,16 +160,20 @@
         // render input elements
         $.setContent( self.element, $.html( my.html, {
           prev: function () {
+            if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
+
             // set active button
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
-            },
+          },
           next: function () {
+            if ( self.logger ) self.logger.log( 'next', pageNum+1 );
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
-            onNextPage(); }
+            onNextPage();
+          }
         } ) );
 
         // set canvas
