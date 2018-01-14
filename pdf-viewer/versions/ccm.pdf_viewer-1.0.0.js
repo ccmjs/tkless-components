@@ -36,7 +36,7 @@
               "tag": "a",
               "href": "%href%",
               "title": "Folien herunterladen",
-              "download": true,
+              "download": "target",
               "target": "_blank",
               "inner": [
                 {
