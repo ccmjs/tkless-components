@@ -35,7 +35,7 @@
             "inner": {
               "tag": "a",
               "href": "%href%",
-              "title": "Folien runterladen",
+              "title": "Folien herunterladen",
               "download": true,
               "target": "_blank",
               "inner": [
