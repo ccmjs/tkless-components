@@ -31,6 +31,22 @@
         "class": "container-fluid",
         "inner": [
           {
+            "inner": {
+              "tag": "a",
+              "href": "%href%",
+              "title": "Folien runterladen",
+              "download": true,
+              "target": "_blank",
+              "inner": [
+                {
+                  "tag": "span",
+                  "class": "glyphicon glyphicon-download"
+                },
+                "&nbsp;Download&nbsp;"
+              ]
+            }
+          },
+          {
             "id": "pdf-elem",
             "inner": {
               "id": "pdf-view",
@@ -42,8 +58,7 @@
           },
           {
             "class": "navigation text-center",
-            "inner": [
-              {
+            "inner": {
                 "class": "btn-group",
                 "inner":[
                   {
@@ -68,7 +83,6 @@
                   }
                 ]
               }
-            ]
           }
         ]
       },
@@ -134,6 +148,8 @@
         // privatize all possible instance members
         my = $.privatize( self );
 
+        if ( self.logger ) self.logger.log( 'ready', my );
+
         // specify PDF.js workerSrc property
         PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
@@ -155,13 +171,18 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
+          href: my.path_to_pdf,
           prev: function () {
+            if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
+
             // set active button
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
             },
           next: function () {
+            if ( self.logger ) self.logger.log( 'prev', pageNum+1 );
+
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );

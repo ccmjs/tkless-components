@@ -32,6 +32,22 @@
         "class": "container-fluid",
         "inner": [
           {
+            "inner": {
+              "tag": "a",
+              "href": "%href%",
+              "title": "Folien runterladen",
+              "download": true,
+              "target": "_blank",
+              "inner": [
+                {
+                  "tag": "span",
+                  "class": "glyphicon glyphicon-download"
+                },
+                "&nbsp;Download&nbsp;"
+              ]
+            }
+          },
+          {
             "id": "pdf-elem",
             "inner": {
               "id": "pdf-view",
@@ -159,6 +175,7 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
+          href: my.path_to_pdf,
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
