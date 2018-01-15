@@ -57,6 +57,7 @@
             }
           },
           {
+            "id": "nav",
             "class": "navigation text-center",
             "inner": {
                 "class": "btn-group",
@@ -87,6 +88,7 @@
         ]
       },
       path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      //pdf_as_data: [ "ccm.load", "path/to/ccm-dtastore"],
       scale: "1.5",
       //responsive: "..//pdf-viewer/resources/responsive.css",
       "pdfJS": [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
@@ -227,14 +229,14 @@
                 renderPage(pageNumPending);
                 pageNumPending = null;
               }
+
+              //set width to display page number in the middle of pdf-file
+              self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
             });
           });
 
           // Update page counters
           self.element.querySelector('#page-num').innerHTML = num + " / "+ pdfDoc.numPages;
-
-          //set page width to display page number in the middle of pdf-file
-          //self.element.querySelector( '#page' ).style.width = self.element.querySelector( '#pdf-view' ).offsetWidth + "px";
 
         }
 
@@ -247,6 +249,9 @@
             pageNumPending = num;
           } else {
             renderPage(num);
+
+            //set width to display page number in the middle of pdf-file
+            self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
           }
         }
 
