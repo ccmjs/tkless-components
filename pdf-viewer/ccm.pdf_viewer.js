@@ -136,6 +136,11 @@
 
       this.init = callback => {
         if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  "../pdf-viewer/resources/responsive.css" } );
+        // pdf.js
+        pdfDoc = null;
+        pageNum = 1;
+        pageRendering = false;
+        pageNumPending = null;
 
         callback();
       };
@@ -152,13 +157,14 @@
         // specify PDF.js workerSrc property
         PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
-        if(my.pdf.slides) my.pdf = my.pdf.slides[0].data;
+        if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
         /**
          * Asynchronously downloads PDF.
          */
         PDFJS.getDocument( my.pdf ).then( function( pdf ) {
           pdfDoc = pdf;
+          console.log(pdfDoc.numPages);
           callback();
         });
 
@@ -169,11 +175,6 @@
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
       this.start = callback => {
-        // pdf.js
-        pdfDoc = null;
-        pageNum = 1;
-        pageRendering = false;
-        pageNumPending = null;
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
@@ -194,11 +195,11 @@
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
             },
-          go_to: function ( ) {
+          go_to: function () {
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
             },
-          all: pdfDoc.numPages
+          all: function () { pdfDoc.numPages; }
         } ) );
 
         // set canvas
