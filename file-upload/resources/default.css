@@ -12,6 +12,7 @@
 }
 
 #box {
+  display: flow-root;
   position: relative;
   font-size: 1.25em;
   background-color: #c8dadf;
@@ -23,7 +24,7 @@
   cursor: pointer;
 }
 
-.box-input {
+#box .box-input {
   padding-top: 3.5em;
   text-align: center;
 }
@@ -61,6 +62,12 @@
 #box .box-image {
   box-shadow: 1px 1px 4px rgba(0,0,0,0.16);
   font-size: 14px;
+}
+
+#box .box-details {
+  width: 120px;
+  overflow: hidden;
+  word-break: keep-all;
 }
 
 #box .box-progress {

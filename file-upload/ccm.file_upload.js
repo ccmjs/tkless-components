@@ -69,7 +69,10 @@
           "class": "preview",
           "inner": [
             {
-              "class": "box-image"
+              "class": "box-image",
+              "inner": {
+                "tag": "canvas"
+              }
             },
             {
               "class": "box-progress"
@@ -95,21 +98,26 @@
         }
 
       },
-      data: { store: [ 'ccm.store' ], key: 'demo' },
-      libs: [ 'ccm.load',
-       { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
-        '../../ccm-components/lib/bootstrap/css/bootstrap.css',
-        '../file-upload/resources/default.css'
+      data_type: "pdf", // or image
+      data: { store: [ "ccm.store'" ], key: "demo" },
+      pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
+      css: [ "ccm.load",
+       { context: "head", url: "../../ccm-components/lib/bootstrap/css/font-face.css" },
+        "../../ccm-components/lib/bootstrap/css/bootstrap.css",
+        "../file-upload/resources/default.css"
       ]
     },
 
     Instance: function () {
-      let self = this;
-      let filePaths = [];
+      const self = this;
       let $;
+      let my;
+      let filePaths = [];
 
       this.ready = callback => {
         $ = self.ccm.helper;
+        // privatize all possible instance members
+        my = $.privatize( self );
         callback();
       };
 
@@ -118,7 +126,7 @@
           slides: []
         };
 
-        $.setContent( self.element, $.html( self.templates.file_upload , {
+        $.setContent( self.element, $.html( my.templates.file_upload , {
           trigger_dialog: () => input.click(),
           submit: event => {
             event.preventDefault();
@@ -127,19 +135,21 @@
             if ( self.user ) self.user.login( proceed ); else proceed();
 
             function proceed() {
+
               // update dataset
-              self.data.store.set( files_data, () => {
+              my.data.store.set( files_data, () => {
 
                 if ( self.logger ) {
                   files_data = $.clone( files_data );
                   self.logger.log( 'create', files_data );
                 }
 
-                input.setAttribute( 'disabled', true);
+                // upload successfull
+                input.setAttribute( 'disabled', true );
                 self.element.querySelector( 'form' ).style.cursor = 'default';
-                self.element.querySelector( '.box-success-mark' ).classList.add( 'visible' );
-                self.element.querySelector( '.box-progress' ).classList.add( 'visible' );
                 self.element.querySelector( '#upload' ).classList.add( 'disabled' );
+                [... self.element.querySelectorAll( '.box-success-mark' )].map( item => item.classList.add( 'visible' ));
+                [... self.element.querySelectorAll( '.box-progress' )].map( item => item.classList.add( 'visible' ));
 
                 if ( self.onfinish ) $.onFinish( self, files_data );
 
@@ -154,11 +164,8 @@
           }
         } ) );
 
-        if( self.submit === false ) self.element.querySelector( '#box' ).removeChild( self.element.querySelector( '.box-buttons' ));
-
         let input = createInputField();
         draggableForm();
-
 
         function draggableForm() {
           let form = self.element.querySelector( '#box' );
@@ -194,10 +201,10 @@
 
           function readAndPreview( file ) {
             self.element.querySelector( '.box-buttons' ).classList.add( 'visible' );
-            let preview_template = $.html( self.templates.preview );
+            let preview_template = $.html( my.templates.preview );
 
-            // Make sure `file.name` matches extensions criteria
-            if ( /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
+            // Make sure filename matches extensions criteria
+            if ( my.data_type === "image " && /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
               let reader = new FileReader();
 
               reader.addEventListener( 'load', function() {
@@ -215,15 +222,54 @@
               reader.readAsDataURL( file );
             }
 
-          }
+            if ( my.data_type === "pdf"   && /\.(pdf)$/i.test(file.name)) {
+              let reader = new FileReader();
 
+              reader.addEventListener( 'load', function() {
+                PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+                PDFJS.getDocument(this.result).then( function (pdf) {
+                  files_data.slides.push( { name: file.name, data: reader.result, MIME: file.type  } );
+
+                  // preview of the first page
+                  pdf.getPage(1).then(function (page) {
+                    let scale = 0.2;
+                    let viewport = page.getViewport(scale);
+
+                    // Prepare canvas using PDF page dimensions
+                    let canvas = preview_template.querySelector('canvas');
+                    let context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    // Render PDF page into canvas context
+                    let task = page.render({
+                      canvasContext: context,
+                      viewport: viewport
+                    });
+                    task.promise.then(function() {
+                      preview_template.querySelector( '.box-image' ).appendChild( canvas );
+                      preview_template.querySelector( '.name' ).innerHTML = file.name;
+                      self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
+                      self.element.querySelector( '.box-input' ).style.display = 'none';
+                    });
+                  });
+                });
+
+              }, false );
+              reader.readAsDataURL(file);
+
+            }
+          }
         }
 
         function createInputField() {
-          let input = document.createElement('input');
-          input.setAttribute('type', 'file');
-          input.setAttribute('multiple', 'true');
+          let input = document.createElement( 'input' );
+          input.setAttribute( 'type', 'file' );
+          input.setAttribute( 'multiple', 'true' );
           input.style.visibility = 'hidden';
+          // set accepted filetype
+          if ( my.data_type  === 'pdf' ) input.setAttribute( 'accept', 'application/pdf' );
+          if ( my.data_type  === 'image' ) input.setAttribute( 'accept', 'image/*' );
           self.element.appendChild( input );
           input.addEventListener( 'change', () => { previewFiles(); } );
           return input;
