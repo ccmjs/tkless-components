@@ -1,4 +1,8 @@
-canvas {
+#canvas {
   margin-bottom: 1.0em;
   border: 1px solid black;
+}
+
+#page-num {
+  padding: 0 0 !important;
 }

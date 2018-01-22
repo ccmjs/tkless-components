@@ -1,5 +1,5 @@
 /**
- * @overview ccm component  pdf htm-viewer
+ * @overview ccm component for pdf-viewer
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
@@ -25,8 +25,7 @@
      * @type {object}
      */
     config: {
-
-      "html": {
+      html: {
         "id": "pdf-viewer",
         "class": "container-fluid",
         "inner": [
@@ -34,7 +33,7 @@
             "inner": {
               "tag": "a",
               "href": "%href%",
-              "title": "Folien runterladen",
+              "title": "Folien herunterladen",
               "download": true,
               "target": "_blank",
               "inner": [
@@ -58,41 +57,46 @@
           },
           {
             "id": "nav",
-            "class": "navigation text-center",
-            "inner": {
-                "class": "btn-group",
-                "inner":[
+            "class": "row",
+            "inner": [
+              {
+                "class": "input-group col-md-2 col-md-offset-5",
+                "inner": [
                   {
-                    "tag": "a",
-                    "typ": "button",
-                    "class": "active btn btn-prev btn-info info",
-                    "onclick": "%prev%",
-                    "inner": "Previous"
+                    "class": "input-group-btn",
+                    "inner": {
+                      "class": "btn btn-prev btn-info",
+                      "onclick": "%prev%",
+                      "inner": "Prev"
+                    }
                   },
                   {
-                    "tag": "a",
-                    "typ": "button",
                     "id": "page-num",
-                    "class": "active btn btn-success info",
+                    "class": "form-control text-center",
+                    "tag": "input",
+                    "type": "text",
+                    "onchange": "%go_to%"
                   },
                   {
-                    "tag": "a",
-                    "typ": "button",
-                    "class": "btn btn-next btn-warning info",
-                    "onclick": "%next%",
-                    "inner": "Next"
+                    "class": "input-group-btn",
+                    "inner": {
+                      "class": "btn btn-next btn-warning",
+                      "onclick": "%next%",
+                      "inner": "Next"
+                    }
                   }
                 ]
               }
+            ]
           }
         ]
       },
-      path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      //pdf_as_data: [ "ccm.load", "path/to/ccm-dtastore"],
+      pdf: [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516286900123X3909963609190472" ],
+        //"//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
       //responsive: "..//pdf-viewer/resources/responsive.css",
-      "pdfJS": [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
-      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
+      pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
+      css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
         "..//pdf-viewer/resources/default.css"
       ]
@@ -127,18 +131,11 @@
           pageNum ,
           pageRendering,
           pageNumPending,
-          scale = 0.8,
           ctx;
 
 
       this.init = callback => {
-        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  "..//pdf-viewer/resources/responsive.css" } );
-        // pdf.js
-        pdfDoc = null;
-        pageNum = 1;
-        pageRendering = false;
-        pageNumPending = null;
-        scale = 0.8;
+        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  "../pdf-viewer/resources/responsive.css" } );
 
         callback();
       };
@@ -155,10 +152,12 @@
         // specify PDF.js workerSrc property
         PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
+        if(my.pdf.slides) my.pdf = my.pdf.slides[0].data;
+
         /**
          * Asynchronously downloads PDF.
          */
-        PDFJS.getDocument( my.path_to_pdf ).then( function( pdf ) {
+        PDFJS.getDocument( my.pdf ).then( function( pdf ) {
           pdfDoc = pdf;
           callback();
         });
@@ -170,10 +169,15 @@
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
       this.start = callback => {
+        // pdf.js
+        pdfDoc = null;
+        pageNum = 1;
+        pageRendering = false;
+        pageNumPending = null;
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
-          href: my.path_to_pdf,
+          href: my.pdf,
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -188,12 +192,18 @@
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
-            onNextPage(); }
+            onNextPage();
+            },
+          go_to: function ( ) {
+            goTo( self.element.querySelector( '#page-num' ).value );
+            self.element.querySelector( '#page-num' ).value = '';
+            },
+          all: pdfDoc.numPages
         } ) );
 
         // set canvas
         canvas = self.element.querySelector( 'canvas' );
-        // disable to downloading the files
+        // disable to downloading the files from canvas element
         canvas.addEventListener('contextmenu', function(e) {
           e.preventDefault();
         });
@@ -233,10 +243,12 @@
               //set width to display page number in the middle of pdf-file
               self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
             });
+          }, function (err) {
+            console.log( err )
           });
 
           // Update page counters
-          self.element.querySelector('#page-num').innerHTML = num + " / "+ pdfDoc.numPages;
+          self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
 
         }
 
@@ -253,6 +265,11 @@
             //set width to display page number in the middle of pdf-file
             self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
           }
+        }
+
+        function goTo( page ) {
+          pageNum = page;
+          queueRenderPage( parseInt( pageNum ) );
         }
 
         /**
