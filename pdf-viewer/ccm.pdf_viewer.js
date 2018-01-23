@@ -57,7 +57,6 @@
           },
           {
             "id": "nav",
-            "class": "row",
             "inner": [
               {
                 "class": "input-group col-md-2 col-md-offset-5",
@@ -72,6 +71,7 @@
                   },
                   {
                     "id": "page-num",
+                    "style": "padding: 0 0 !important",
                     "class": "form-control text-center",
                     "tag": "input",
                     "type": "text",
@@ -91,14 +91,13 @@
           }
         ]
       },
-      pdf: [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516286900123X3909963609190472" ],
+      pdf: [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516652889619X49236842296882855" ],
         //"//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
-      //responsive: "..//pdf-viewer/resources/responsive.css",
+      responsive: "..//pdf-viewer/resources/responsive.css",
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
-        "..//pdf-viewer/resources/default.css"
       ]
 
     },
@@ -122,11 +121,6 @@
        */
       let $;
 
-      /**
-       * is called once after the initialization and is then deleted
-       * @param {function} callback - called after all synchronous and asynchronous operations are complete
-       */
-
       let pdfDoc,
           pageNum ,
           pageRendering,
@@ -135,7 +129,8 @@
 
 
       this.init = callback => {
-        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  "../pdf-viewer/resources/responsive.css" } );
+        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  self.responsive } );
+        else ccm.load( { context: this.element.parentNode, url: "../pdf-viewer/resources/default.css" } );
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
@@ -159,12 +154,12 @@
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
+        PDFJS.disableStream = true;
         /**
          * Asynchronously downloads PDF.
          */
         PDFJS.getDocument( my.pdf ).then( function( pdf ) {
           pdfDoc = pdf;
-          console.log(pdfDoc.numPages);
           callback();
         });
 
@@ -209,9 +204,13 @@
           e.preventDefault();
         });
         ctx = canvas.getContext('2d');
+        let page_elem = self.element.querySelector( '#pdf-view' );
 
         // Initial/first page rendering
         renderPage( pageNum );
+        touchEventHandling();
+
+        if( callback ) callback();
 
         /**
          * Get page info from document, resize canvas accordingly, and render page.
@@ -251,6 +250,50 @@
           // Update page counters
           self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
 
+        }
+
+        function touchEventHandling() {
+          let reachedEdge = false;
+          let touchStart = null;
+          let touchDown = false;
+
+          page_elem.addEventListener( 'touchstart', function( ) {
+            touchDown = true;
+          });
+
+          page_elem.addEventListener( 'touchmove', function( event ) {
+            if ( page_elem.scrollLeft === 0 ||
+              page_elem.scrollLeft === page_elem.scrollWidth - page_elem.clientWidth ) {
+              reachedEdge = true;
+            } else {
+              reachedEdge = false;
+              touchStart = null;
+            }
+
+            if ( reachedEdge && touchDown ) {
+              if (touchStart === null) {
+                touchStart = event.changedTouches[0].clientX;
+              } else {
+                let distance = event.changedTouches[0].clientX - touchStart;
+                if (distance < -100) {
+                  touchStart = null;
+                  reachedEdge = false;
+                  touchDown = false;
+                  onNextPage();
+                } else if ( distance > 100 ) {
+                  touchStart = null;
+                  reachedEdge = false;
+                  touchDown = false;
+                  onPrevPage();
+                }
+              }
+            }
+          });
+
+          page_elem.addEventListener( 'touchend', function() {
+            touchStart = null;
+            touchDown = false;
+          });
         }
 
         /**
@@ -294,9 +337,6 @@
           pageNum++;
           queueRenderPage(pageNum);
         }
-
-
-        if( callback ) callback();
 
       };
 

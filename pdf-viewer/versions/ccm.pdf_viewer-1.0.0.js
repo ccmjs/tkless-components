@@ -95,8 +95,7 @@
 
       "pdfJS": [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       "css": [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
-        "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css"
+        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
       ]
 
     },
@@ -124,7 +123,6 @@
        * is called once after the initialization and is then deleted
        * @param {function} callback - called after all synchronous and asynchronous operations are complete
        */
-
       let pdfDoc,
           pageNum,
           pageRendering,
@@ -135,6 +133,7 @@
 
       this.init = callback => {
         if ( self.responsive ) ccm.load( { context: this.element.parentNode, url: self.responsive } );
+        else ccm.load( { context: this.element.parentNode, url: "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css" } );
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
