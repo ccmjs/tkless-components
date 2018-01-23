@@ -112,7 +112,7 @@
       const self = this;
       let $;
       let my;
-      let filePaths = [];
+      let files_data;
 
       this.ready = callback => {
         $ = self.ccm.helper;
@@ -122,7 +122,7 @@
       };
 
       this.start = callback  => {
-        let files_data = {
+        files_data = {
           slides: []
         };
 
@@ -211,7 +211,6 @@
                 let image = new Image();
                 image.title = file.name;
                 image.src = this.result;
-                filePaths.push( image. src );
                 image.height = 120;
                 preview_template.querySelector( '.box-image' ).appendChild( image );
                 preview_template.querySelector( '.name' ).innerHTML = file.name;
@@ -279,7 +278,7 @@
       };
 
       this.getValue  = () => {
-        return filePaths;
+        return files_data;
       }
     }
   };
