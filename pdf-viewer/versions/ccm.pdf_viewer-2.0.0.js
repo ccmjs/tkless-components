@@ -320,6 +320,8 @@
         }
 
         function goTo( page ) {
+          if ( page > pdfDoc.numPages || page < 1 )
+            return;
           pageNum = page;
           queueRenderPage( parseInt( pageNum ) );
         }

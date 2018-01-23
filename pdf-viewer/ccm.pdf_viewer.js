@@ -91,10 +91,10 @@
           }
         ]
       },
-      pdf: [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516652889619X49236842296882855" ],
-        //"//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      pdf: //[ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516652889619X49236842296882855" ],
+        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
-      responsive: "..//pdf-viewer/resources/responsive.css",
+      //responsive: "..//pdf-viewer/resources/responsive.css",
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
@@ -312,6 +312,8 @@
         }
 
         function goTo( page ) {
+          if ( page > pdfDoc.numPages || page < 1 )
+            return;
           pageNum = page;
           queueRenderPage( parseInt( pageNum ) );
         }
