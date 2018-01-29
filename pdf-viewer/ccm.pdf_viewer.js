@@ -91,8 +91,8 @@
           }
         ]
       },
-      pdf: //[ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516652889619X49236842296882855" ],
-        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      pdf: [ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+        //"//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
       //responsive: "..//pdf-viewer/resources/responsive.css",
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
@@ -129,6 +129,16 @@
 
 
       this.init = callback => {
+
+        window.requestAnimFrame = (function(){
+          return  window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function( callback ){
+              window.setTimeout(callback, 1000 / 60);
+            };
+        })();
+
         if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  self.responsive } );
         else ccm.load( { context: this.element.parentNode, url: "../pdf-viewer/resources/default.css" } );
         // pdf.js
