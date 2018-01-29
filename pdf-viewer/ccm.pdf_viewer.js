@@ -74,7 +74,9 @@
                     "style": "padding: 0 0 !important",
                     "class": "form-control text-center",
                     "tag": "input",
-                    "type": "text",
+                    "type": "number",
+                    "min": "1",
+                    "max": "%all%",
                     "onchange": "%go_to%"
                   },
                   {
@@ -204,7 +206,7 @@
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
             },
-          all: function () { pdfDoc.numPages; }
+          all: function () { pdfDoc.numPages; },
         } ) );
 
         // set canvas
