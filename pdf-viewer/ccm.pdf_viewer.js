@@ -131,7 +131,7 @@
 
 
       this.init = callback => {
-
+        /**
         window.requestAnimFrame = (function(){
           return  window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
@@ -139,7 +139,7 @@
             function( callback ){
               window.setTimeout(callback, 1000 / 60);
             };
-        })();
+        })();**/
 
         if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  self.responsive } );
         else ccm.load( { context: this.element.parentNode, url: "../pdf-viewer/resources/default.css" } );
