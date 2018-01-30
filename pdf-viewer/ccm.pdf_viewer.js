@@ -222,6 +222,10 @@
         renderPage( pageNum );
         touchEventHandling();
 
+        if(window.innerHeight > window.innerWidth){
+          renderPage( pageNum );
+        }
+
         if( callback ) callback();
 
         /**
