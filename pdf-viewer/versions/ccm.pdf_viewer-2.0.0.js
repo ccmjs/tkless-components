@@ -107,7 +107,7 @@
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
-        "../pdf-viewer/resources/default.css"
+        "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css"
       ]
 
     },
