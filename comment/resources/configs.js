@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     comment_template: 'expanded',
     data: { store: [ 'ccm.store', { 'store': 'comment', 'url': 'https://ccm.inf.h-brs.de' } ], key: 'demo' },
     user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js', { sign_on: 'demo' } ],
-    voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/thumb_rating/ccm.thumb_rating.js', {
+    voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/thumb_rating/versions/ccm.thumb_rating-1.0.0.min.js', {
       buttons: true,
       data: { store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/voting/resources/datastore.js' ] },
       user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ]
