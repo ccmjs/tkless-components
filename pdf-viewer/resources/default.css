@@ -1,8 +1,5 @@
 #canvas {
   margin-bottom: 1.0em;
   border: 1px solid black;
-}
-
-#pdf-view {
   max-width: 940px;
 }

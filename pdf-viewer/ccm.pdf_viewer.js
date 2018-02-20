@@ -34,7 +34,7 @@
               "tag": "a",
               "href": "%href%",
               "title": "Folien herunterladen",
-              "download": true,
+              "download": '%filename%',
               "target": "_blank",
               "inner": [
                 {
@@ -93,13 +93,13 @@
           }
         ]
       },
-      pdf: [ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
-        //"//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      scale: "1.5",
+      pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       //responsive: "..//pdf-viewer/resources/responsive.css",
-      pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
+      pdfJS: [ "ccm.load", [ "//mozilla.github.io/pdf.js/build/pdf.js"/*, "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js"*/ ] ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
+        "../pdf-viewer/resources/default.css"
       ]
 
     },
@@ -129,20 +129,12 @@
           pageNumPending,
           ctx;
 
+      let file;
+
 
       this.init = callback => {
-        /**
-        window.requestAnimFrame = (function(){
-          return  window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            function( callback ){
-              window.setTimeout(callback, 1000 / 60);
-            };
-        })();**/
 
-        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  self.responsive } );
-        else ccm.load( { context: this.element.parentNode, url: "../pdf-viewer/resources/default.css" } );
+        file = self.pdf;
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
@@ -153,6 +145,7 @@
       };
 
       this.ready = callback => {
+
         // set shortcut to help functions
         $ = self.ccm.helper;
 
@@ -162,18 +155,19 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+        PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
         PDFJS.disableStream = true;
-        /**
-         * Asynchronously downloads PDF.
-         */
-        PDFJS.getDocument( my.pdf ).then( function( pdf ) {
-          pdfDoc = pdf;
-          callback();
-        });
+
+        if ( my.pdf )
+        // Asynchronously downloads PDF.
+          PDFJS.getDocument( my.pdf ).then( function( pdf ) {
+            pdfDoc = pdf;
+            callback();
+          } );
+        else callback();
 
       };
 
@@ -183,9 +177,16 @@
        */
       this.start = callback => {
 
+        // if pdf not defined, no file will be displayed
+        if ( !my.pdf ) {
+          $.setContent( self.element, 'No File to Display' );
+          return callback && callback();
+        }
+
         // render input elements
         $.setContent( self.element, $.html( my.html, {
           href: my.pdf,
+          filename: ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop(),
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -222,10 +223,6 @@
         renderPage( pageNum );
         touchEventHandling();
 
-        if(window.innerHeight > window.innerWidth){
-          renderPage( pageNum );
-        }
-
         if( callback ) callback();
 
         /**
@@ -242,11 +239,6 @@
 
             canvas.height = viewport.height;
             canvas.width = viewport.width;
-
-            /*
-            let viewport = page.getViewport( my.scale );
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;*/
 
             // Render PDF page into canvas context
             let renderContext = {
