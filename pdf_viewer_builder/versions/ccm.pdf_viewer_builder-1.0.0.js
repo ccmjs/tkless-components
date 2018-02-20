@@ -15,8 +15,6 @@
     name: 'pdf_viewer_builder',
     version:[ 1,0,0 ],
 
-
-
     /**
      * recommended used framework version
      * @type {string}
@@ -270,7 +268,7 @@
       "target": [ "ccm.component", "https://tkless.github.io/ccm-components/pdf-viewer/versions/ccm.pdf_viewer-2.0.0.js" ],
       "submit_button": true,
       "preview": true,
-      "file_upload": [ "ccm.component", "https://tkless.github.io/ccm-components/file-upload/versions/ccm.file_upload-1.0.0.js", {
+      "file_upload": [ "ccm.component", "https://tkless.github.io/ccm-components/file_upload/versions/ccm.file_upload-1.0.0.js", {
         data: { store: [ "ccm.store", { "store": "file_upload", "url": "https://ccm.inf.h-brs.de", "method": "POST" } ] },
       } ],
 

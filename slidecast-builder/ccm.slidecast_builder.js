@@ -274,7 +274,7 @@
       "target": [ "ccm.component", "../slidecast/ccm.slidecast.js" ],
       "submit_button": true,
       "preview": true,
-      "file_upload": [ "ccm.component", "../file-upload/ccm.file_upload.js" ],
+      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js" ],
 
   /*
       "start_values": {

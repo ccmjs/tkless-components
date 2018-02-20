@@ -263,7 +263,7 @@
       "target": [ "ccm.component", "../pdf-viewer/ccm.pdf_viewer.js" ],
       "submit_button": true,
       "preview": true,
-      "file_upload": [ "ccm.component", "../file-upload/ccm.file_upload.js", {
+      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
         data: { store: [ 'ccm.store', { 'store': 'file_upload', 'url': 'http://localhost:8080', 'method': 'POST' } ] },
       } ],
 
