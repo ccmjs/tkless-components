@@ -99,6 +99,7 @@
 
       },
       data_type: "pdf", // or image
+      //mulitple: true, //only set if multiple upload is desired
       data: { store: [ "ccm.store'" ], key: "demo" },
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       css: [ "ccm.load",
@@ -122,9 +123,6 @@
       };
 
       this.start = callback  => {
-        files_data = {
-          slides: []
-        };
 
         $.setContent( self.element, $.html( my.templates.file_upload , {
           trigger_dialog: () => input.click(),
@@ -167,6 +165,8 @@
         let input = createInputField();
         draggableForm();
 
+        if ( callback ) callback();
+
         function draggableForm() {
           let form = self.element.querySelector( '#box' );
 
@@ -190,6 +190,7 @@
 
           form.addEventListener( 'drop', ( event ) => {
             previewFiles( event.dataTransfer.files );
+            console.log(event.dataTransfer.files);
           });
 
 
@@ -197,9 +198,19 @@
 
         function previewFiles( inputFiles ) {
 
-          [].forEach.call( inputFiles ? inputFiles : input.files, readAndPreview );
+          my.multiple ? [].forEach.call( inputFiles ? inputFiles : input.files, readAndPreview ): readAndPreview( inputFiles ? inputFiles[0]:self.element.querySelector('input[type=file]').files[0]);
+
+
+          if ( !my.multiple ) {
+            self.element.querySelector( 'form' ).style.cursor = 'default';
+            input.setAttribute( 'disabled', true );
+          }
 
           function readAndPreview( file ) {
+            files_data = {
+              slides: []
+            };
+
             self.element.querySelector( '.box-buttons' ).classList.add( 'visible' );
             let preview_template = $.html( my.templates.preview );
 
@@ -221,11 +232,12 @@
               reader.readAsDataURL( file );
             }
 
-            if ( my.data_type === "pdf"   && /\.(pdf)$/i.test(file.name)) {
+            if ( my.data_type === "pdf" && /\.(pdf)$/i.test(file.name)) {
+
               let reader = new FileReader();
 
               reader.addEventListener( 'load', function() {
-                PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+                PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
                 PDFJS.getDocument(this.result).then( function (pdf) {
                   files_data.slides.push( { name: file.name, data: reader.result, MIME: file.type  } );
 
@@ -246,7 +258,7 @@
                       viewport: viewport
                     });
                     task.promise.then(function() {
-                      preview_template.querySelector( '.box-image' ).appendChild( canvas );
+                      preview_template.querySelector( '.box-image' ).replaceChild(  preview_template.querySelector('canvas'), canvas );
                       preview_template.querySelector( '.name' ).innerHTML = file.name;
                       self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
                       self.element.querySelector( '.box-input' ).style.display = 'none';
@@ -264,9 +276,10 @@
         function createInputField() {
           let input = document.createElement( 'input' );
           input.setAttribute( 'type', 'file' );
-          input.setAttribute( 'multiple', 'true' );
+          if ( my.multiple )
+            input.setAttribute( 'multiple', 'true' );
           input.style.visibility = 'hidden';
-          // set accepted filetype
+          // set accepted file-type
           if ( my.data_type  === 'pdf' ) input.setAttribute( 'accept', 'application/pdf' );
           if ( my.data_type  === 'image' ) input.setAttribute( 'accept', 'image/*' );
           self.element.appendChild( input );
@@ -274,12 +287,9 @@
           return input;
         }
 
-        if ( callback ) callback();
       };
 
-      this.getValue  = () => {
-        return files_data;
-      }
+      this.getValue  = () => files_data;
     }
   };
 
