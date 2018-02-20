@@ -154,7 +154,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+        PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
         /**
          * Asynchronously downloads PDF.
