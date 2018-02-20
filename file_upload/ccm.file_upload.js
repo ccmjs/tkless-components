@@ -105,7 +105,7 @@
       css: [ "ccm.load",
        { context: "head", url: "../../ccm-components/lib/bootstrap/css/font-face.css" },
         "../../ccm-components/lib/bootstrap/css/bootstrap.css",
-        "../file-upload/resources/default.css"
+        "../file_upload/resources/default.css"
       ]
     },
 
