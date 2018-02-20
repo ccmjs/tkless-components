@@ -1,5 +1,5 @@
 /**
- * @overview ccm component  pdf htm-viewer
+ * @overview ccm component for pdf-viewer
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
@@ -43,7 +43,7 @@
               "tag": "a",
               "href": "%href%",
               "title": "Folien herunterladen",
-              "download": true,
+              "download": '%filename%',
               "target": "_blank",
               "inner": [
                 {
@@ -83,7 +83,9 @@
                     "style": "padding: 0 0 !important",
                     "class": "form-control text-center",
                     "tag": "input",
-                    "type": "text",
+                    "type": "number",
+                    "min": "1",
+                    "max": "%all%",
                     "onchange": "%go_to%"
                   },
                   {
@@ -100,14 +102,14 @@
           }
         ]
       },
-      pdf: //[ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1516652889619X49236842296882855" ],
-      "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      scale: "1.5",
-      //responsive: "https://tkless.github.io/ccm-components/pdf-viewer/resources/responsive.css",
+      pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
+        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
+        "../pdf-viewer/resources/default.css"
       ]
+
     },
 
     Instance: function () {
@@ -135,10 +137,12 @@
         pageNumPending,
         ctx;
 
+      let file;
+
 
       this.init = callback => {
-        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url:  self.responsive } );
-        else ccm.load( { context: this.element.parentNode, url: "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css" } );
+
+        file = self.pdf;
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
@@ -149,6 +153,7 @@
       };
 
       this.ready = callback => {
+
         // set shortcut to help functions
         $ = self.ccm.helper;
 
@@ -158,18 +163,19 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+        PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
         PDFJS.disableStream = true;
-        /**
-         * Asynchronously downloads PDF.
-         */
-        PDFJS.getDocument( my.pdf ).then( function( pdf ) {
-          pdfDoc = pdf;
-          callback();
-        });
+
+        if ( my.pdf )
+        // Asynchronously downloads PDF.
+          PDFJS.getDocument( my.pdf ).then( function( pdf ) {
+            pdfDoc = pdf;
+            callback();
+          } );
+        else callback();
 
       };
 
@@ -179,9 +185,16 @@
        */
       this.start = callback => {
 
+        // if pdf not defined, no file will be displayed
+        if ( !my.pdf ) {
+          $.setContent( self.element, 'No File to Display' );
+          return callback && callback();
+        }
+
         // render input elements
         $.setContent( self.element, $.html( my.html, {
           href: my.pdf,
+          filename: ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop(),
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -202,7 +215,7 @@
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
           },
-          all: function () { pdfDoc.numPages; }
+          all: function () { pdfDoc.numPages; },
         } ) );
 
         // set canvas
@@ -228,7 +241,10 @@
           pageRendering = true;
           // Using promise to fetch the page
           pdfDoc.getPage( num ).then( function( page ) {
-            let viewport = page.getViewport( my.scale );
+            let viewport = page.getViewport(1);
+            let scale = page_elem.clientWidth / viewport.width;
+            viewport = page.getViewport(scale);
+
             canvas.height = viewport.height;
             canvas.width = viewport.width;
 
