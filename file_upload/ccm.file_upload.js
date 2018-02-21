@@ -15,7 +15,7 @@
     config: {
       templates: {
         "file_upload": {
-          "class": "container",
+          "class": "container-fluid",
           "inner": {
             "tag": "form",
             "id": "box",
