@@ -1,5 +1,5 @@
 ccm.files[ "configs.js" ] = {
-  "position": "right",
+
   "demo": {
     data: { store: [ 'ccm.store', { 'store': 'feedback', 'url': 'https://ccm.inf.h-brs.de' } ], key: 'demo' },
   },
