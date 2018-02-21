@@ -265,7 +265,7 @@
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
         "https://tkless.github.io/ccm-components/pdf_viewer_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "https://tkless.github.io/ccm-components/pdf-viewer/versions/ccm.pdf_viewer-2.0.0.js" ],
+      "target": [ "ccm.component", "https://tkless.github.io/ccm-components/pdf-viewer/versions/ccm.pdf_viewer-2.0.0.js", {  "pdf": null  } ],
       "submit_button": true,
       "preview": true,
       "file_upload": [ "ccm.component", "https://tkless.github.io/ccm-components/file_upload/versions/ccm.file_upload-1.0.0.js", {
@@ -324,6 +324,8 @@
 
         /** prepares the start values for the input elements  */
         function prepareStartValues() {
+
+          my.start_values = my.start_values ? my.start_values : {};
 
           // consideration of the default configuration of the target component for start values
           let config = $.clone( my.target.config );
