@@ -16,7 +16,7 @@ ccm.files[ "configs.js" ] = {
   "lea": {
     button: true,
     data: { store: [ 'ccm.store', { 'store': 'file_upload', 'url': 'https://10.100.2.108', 'method': 'POST' } ] },
-    user: [ 'ccm.instance', 'https:/https://194.95.67.24/ccm-components/user/versions/ccm.user-2.0.0.min.js', { "sign_on": "demo" } ],
+    user: [ 'ccm.instance', 'https://194.95.67.24/ccm-components/user/versions/beta/ccm.user-3.1.0.min.js', { "sign_on": "LEA" } ],
     onfinish:  function( results ){ console.log(results) }
   }
 };
