@@ -3,6 +3,9 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version latest 2.1.0
+ * @changes
+ * - download flag ist now optional
  */
 
 {
@@ -13,12 +16,17 @@
      * @type {string}
      */
     name: 'pdf_viewer',
+    version:[ 2,1,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-14.3.0.min.js',
+      integrity: 'sha384-4q30fhc2E3uY9omytSc6dKdoMNQ37dSozhTxgG/wH/9lv+N37TBhwd1jg/u03bRt',
+      crossorigin: 'anonymous'
+    },
 
     /**
      * default instance configuration
@@ -100,8 +108,8 @@
       },
       pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
         "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      // download: true,
-      pdfJS: [ "ccm.load", [ "//mozilla.github.io/pdf.js/build/pdf.js"/*, "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js"*/ ] ],
+      download: true, //only set if file download is required
+      pdfJS: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.min.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
         "../pdf-viewer/resources/default.css"
@@ -129,10 +137,10 @@
       let $;
 
       let pdfDoc,
-          pageNum ,
-          pageRendering,
-          pageNumPending,
-          ctx;
+        pageNum ,
+        pageRendering,
+        pageNumPending,
+        ctx;
 
       let file;
 
@@ -160,7 +168,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+        PDFJS.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js';
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
@@ -198,7 +206,7 @@
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
-            },
+          },
           next: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum+1 );
 
@@ -206,11 +214,11 @@
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
-            },
+          },
           go_to: function () {
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
-            },
+          },
           all: function () { pdfDoc.numPages; },
         } ) );
 
