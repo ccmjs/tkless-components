@@ -47,13 +47,26 @@
 
         "table_row": { "tag": "tr" },
 
-        "table_cell": { "tag": "td" },
+        "table_col": { "tag": "td" },
 
-        "table_head": { "tag": "th" }
+        "table_head": { "tag": "th" },
+
+        "editable": {
+          "tag": "input",
+          "type": "text",
+          "name": "%input_name%",
+          "placeholder": "%placeholder%"
+        },
+
+        "submit": {
+
+        }
       },
       table_row: 5,
-      table_cell: 3,
-      table_head: [ "header_1", "header_2", "header_3", "header_4", "header_5"],
+      table_col: 3,
+      table_head: [ "header-1", "header-2", "header-3" ],
+      editable_cells: true,
+      submit: true,
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
       ]
@@ -100,29 +113,48 @@
        */
       this.start = callback => {
 
-        const table = $.html ( my.html.table );
+        if ( !generateTable() ) return $.setContent( self.element, "Nothig to display" );
 
-
-        if ( my.table_row ) {
-          for ( let i = 0 ; i < my.table_row; i++ ) {
-            const table_row = $.html ( my.html.table_row );
-            if ( my.table_cell ) {
-              for ( let j = 0 ; j < my.table_cell; j++ ) {
-                const table_cell = $.html ( my.html.table_cell );
-                table_cell.innerHTML = "cell_" + j;
-                table_row.appendChild( table_cell );
-              }
-            }
-            table.querySelector( 'tbody' ).appendChild( table_row );
-          }
-
-          $.setContent( self.element, table );
-          if ( callback ) callback();
+        else {
+          $.setContent( self.element, generateTable() );
+          if ( callback ) callback;
         }
+        
+        function generateTable() {
+          const table = $.html ( my.html.table );
 
-        else $.setContent( self.element, "Nothig to display" );
+          if ( my.table_row ) {
+            for ( let i = 0 ; i < my.table_row; i++ ) {
+              const table_row = $.html ( my.html.table_row );
+              if ( my.table_col ) {
+                for ( let j = 0 ; j < my.table_col; j++ ) {
+                  const table_col = $.html ( my.html.table_col );
+                  const editable = $.html ( my.html.editable, {
+                    input_name: ( j + 1 )+ "-" + ( i + 1 ),
+                    placeholder: "cell-" +( j + 1 )+ "-" + ( i + 1 )
+                  } );
 
-        if ( callback ) callback();
+                  table_col.appendChild( editable );
+                  table_row.appendChild( table_col );
+                }
+              }
+              table.querySelector( 'tbody' ).appendChild( table_row );
+            }
+
+            if ( my.table_head ) {
+              const table_row = $.html(my.html.table_row);
+              for ( let j = 0 ; j < my.table_col; j++ ) {
+                const table_head = $.html(my.html.table_head);
+                $.setContent( table_head, my.table_head[ j ]);
+                table_row.appendChild( table_head );
+              }
+              table.querySelector( 'thead' ).appendChild( table_row );
+            }
+
+            if ( callback ) callback();
+          }
+          return table;
+        }
 
       };
 
