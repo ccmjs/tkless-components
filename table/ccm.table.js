@@ -32,15 +32,8 @@
             "tag": "table",
             "class": "table table-striped",
             "inner":[
-              {
-                "tag": "thead",
-                "inner": {
-                  "tag": "tr"
-                }
-              },
-              {
-                "tag": "tbody"
-              }
+              { "tag": "thead" },
+              { "tag": "tbody" }
             ]
           }
         },
@@ -51,11 +44,9 @@
 
         "table_head": { "tag": "th" },
 
-        "editable": {
+        "input": {
           "tag": "input",
-          "type": "text",
-          "name": "%input_name%",
-          "placeholder": "%placeholder%"
+          "name": "%input_name%"
         },
 
         "submit": {
@@ -65,7 +56,11 @@
       table_row: 5,
       table_col: 3,
       table_head: [ "header-1", "header-2", "header-3" ],
-      editable_cells: true,
+      cell_settings: [
+        { "editable": true, "type": "number", "placeholder": "Tel: 049..." },
+        { "inner": "max.musterman@mail.com" },
+        { "editable": true, "type": "date", "foo": "bar" }
+      ],
       submit: true,
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
@@ -117,7 +112,7 @@
 
         else {
           $.setContent( self.element, generateTable() );
-          if ( callback ) callback;
+          if ( callback ) callback();
         }
         
         function generateTable() {
@@ -129,13 +124,39 @@
               if ( my.table_col ) {
                 for ( let j = 0 ; j < my.table_col; j++ ) {
                   const table_col = $.html ( my.html.table_col );
-                  const editable = $.html ( my.html.editable, {
-                    input_name: ( j + 1 )+ "-" + ( i + 1 ),
-                    placeholder: "cell-" +( j + 1 )+ "-" + ( i + 1 )
-                  } );
 
-                  table_col.appendChild( editable );
-                  table_row.appendChild( table_col );
+                  // if setting for each cell is set in config
+                  if ( my.cell_settings ) {
+
+                    const input = $.html ( my.html.input, {
+                      input_name: ( j + 1 )+ "-" + ( i + 1 ),
+                    } );
+
+                    // set input tag property for each cell
+                    for ( const key in my.cell_settings[ j ] ) {
+                      switch ( key ) {
+                        case 'type':
+                          input.setAttribute ( 'type',  my.cell_settings[ j ][ key ] );
+                          break;
+                        case 'placeholder':
+                          input.setAttribute( 'placeholder', my.cell_settings[ j][ key ] );
+                          break;
+                        case 'inner':
+                          $.setContent( table_col, my.cell_settings[ j ][ key ]  );
+                          break;
+                        default:
+                          input.setAttribute( key, my.cell_settings[ j ][ key ] );
+                          break;
+                      }
+                      // if the cell is not to be editable, no input tag is inserted into the cell
+                      if ( my.cell_settings[ j ][ 'editable' ] ) table_col.appendChild( input );
+                    }
+
+                    table_row.appendChild( table_col );
+                  }
+                  else
+                    // no cell_settings? -> display empty table
+                    table_row.appendChild( table_col );
                 }
               }
               table.querySelector( 'tbody' ).appendChild( table_row );
@@ -150,8 +171,6 @@
               }
               table.querySelector( 'thead' ).appendChild( table_row );
             }
-
-            if ( callback ) callback();
           }
           return table;
         }
