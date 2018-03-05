@@ -1,22 +1,26 @@
 /**
  * @overview ccm component for quill editor
- * @author Tea Kless <tea.kless@web.de>, 2017
+ *
+ * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- *
- *
- * Quill Editor v1.2.4 https://quilljs.com/
- * Copyright (c) 2014, Jason Chen
- * Copyright (c) 2013, salesforce.com
  */
 
 ( function () {
 
-
   var component  = {
 
     name: 'editor',
+    version:[ 1,0,1 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/beta/ccm-14.3.0.min.js',
+      integrity: 'sha384-4q30fhc2E3uY9omytSc6dKdoMNQ37dSozhTxgG/wH/9lv+N37TBhwd1jg/u03bRt',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       editor: [ 'ccm.load',
