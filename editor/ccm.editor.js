@@ -63,9 +63,9 @@
 
         editor = new Quill( div, this.settings );
 
-        if (  hljs ) {
-          let customButton = this.element.querySelector( '.ql-code-block' );
-          customButton.addEventListener( 'click', function () {
+        if ( hljs && this.settings.modules.syntax ) {
+          const customButton = this.element.querySelector( '.ql-code-block' );
+          customButton.addEventListener( 'click', () => {
             hljs.highlightBlock( this.element.querySelector( 'div[contenteditable=true] > pre' ) );
           });
         }

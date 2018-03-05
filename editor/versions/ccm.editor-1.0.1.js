@@ -69,7 +69,7 @@
 
         if (  hljs ) {
           let customButton = this.element.querySelector( '.ql-code-block' );
-          customButton.addEventListener( 'click', function () {
+          customButton.addEventListener( 'click', () => {
             hljs.highlightBlock( this.element.querySelector( 'div[contenteditable=true] > pre' ) );
           });
         }
