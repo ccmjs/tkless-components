@@ -38,7 +38,7 @@
           {
             "tag": "legend",
             "class": "text-primary",
-            "inner": "Build your Slide-Viewer"
+            "inner": "Build your PDF-Viewer"
           },
           {
             "tag": "form",
