@@ -246,9 +246,6 @@
               if ( self.user.data().name === dataset.user ) return;
 
               self.editor.start( function ( instance ) {
-
-                console.log( '!!! editor');
-
                 editor_elem.querySelector( '#editor' ).appendChild( instance.root );
                 editor = instance;
                 self.element.querySelector( '#new-answer' ).appendChild( editor_elem );
