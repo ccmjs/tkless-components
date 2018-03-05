@@ -12,9 +12,9 @@
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
-      templates: {
+      html: {
         "main": {
-          "class": "main",
+          "id": "main",
           "inner": [
             {
             "id": "reviewed_stars",
@@ -64,33 +64,63 @@
         }
       },
       data:  {
-          store: [ 'ccm.store', '../star_rating_result/star_rating_result_datastore.js' ],
+          store: [ 'ccm.store', '../star_rating_result/resources/datastore.js' ],
           key:   'demo'
       },
-      style: [ 'ccm.load', '../star_rating_result/style.css' ],
-      icons: [ 'ccm.load',
+      css: [ 'ccm.load',
         { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        '../star_rating_result/style.css'
+        '../star_rating_result/resources/default.css'
       ]
     },
 
     Instance: function () {
-      var self = this;
-      var total = 0;
+      /**
+       * own reference for inner functions
+       * @type {Instance}
+       */
+      const self = this;
 
-      this.start = function ( callback ) {
+      /**
+       * privatized instance members
+       * @type {object}
+       */
+      let my;
 
-        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
+      /**
+       * shortcut to help functions
+       * @type {Object.<string,function>}
+       */
+      let $;
+
+      let total = 0;
+
+      this.ready = callback => {
+
+        // set shortcut to help functions
+        $ = self.ccm.helper;
+
+        // privatize all possible instance members
+        my = $.privatize( self );
+
+        if ( my.logger ) my.logger.log( 'ready', my );
+
+        callback();
+
+      };
+
+      this.start = callback => {
+
+        $.dataset( my.data.store, my.data.key, function ( dataset ) {
           if ( !dataset ) dataset = {};
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main ) ) );
+          $.setContent( self.element, $.html( my.html.main ) );
 
           //calculate average of rating
-          var sum = 0;
-          var count = 0;
+          let sum = 0;
+          let count = 0;
 
-          for ( var i = 1; i <= 5; i++ ) {
+          for ( let i = 1; i <= 5; i++ ) {
             if ( !dataset[ i ] ) continue;
             sum += i * Object.keys( dataset[ i ] ).length;
             count += Object.keys( dataset[ i ] ).length;
@@ -101,27 +131,29 @@
           renderBars();
           renderStars();
 
+          if ( callback )callback();
+
           function renderStars() {
 
-            for ( var i = 5; i >= 0.5; i -= 0.5 ) {
-              self.element.querySelector( '.rating' ).appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.input, {
+            for ( let i = 5; i >= 0.5; i -= 0.5 ) {
+              self.element.querySelector( '.rating' ).appendChild( $.html( my.html.input, {
                 id: i,
                 star: i
-              } ) ) );
+              } ) );
 
-              self.element.querySelector( '.rating' ).appendChild( self.ccm.helper.protect( self.ccm.helper.html( self.templates.label, {
+              self.element.querySelector( '.rating' ).appendChild(  $.html( my.html.label, {
                 class: ( ( i * 2 ) % 2 === 0) ? "full" : "half",
                 for: i
-              } ) ) );
+              } ) );
             }
 
-            self.element.querySelector( '#total-count' ).innerHTML = count;
+            $.setContent( self.element.querySelector( '#total-count' ),  count );
 
             calculateChackedStars();
 
             function calculateChackedStars() {
-              var y = parseInt( total * 100 % 100 );
-              var z = parseInt( total ) + ( y < 25 ? 0 : ( y >= 75 ? 1 : 0.5 ) );
+              let y = parseInt( total * 100 % 100 );
+              let z = parseInt( total ) + ( y < 25 ? 0 : ( y >= 75 ? 1 : 0.5 ) );
 
               self.element.querySelector( 'input[ id = "'+ z +'" ]' ).checked = true;
             }
@@ -129,34 +161,29 @@
 
           function renderBars() {
 
-            for ( var i = 5; i >= 1; i-- ){
-              var bar = self.ccm.helper.protect( self.ccm.helper.html( self.templates.bar, i ) );
+            for ( let i = 5; i >= 1; i-- ){
+              let bar = $.html( my.html.bar, ""+ i) ;
               self.element.querySelector( '#bars' ).appendChild( bar );
 
               //render bar
-              var percentage_div = bar.querySelector( '.percentage' );
-              var percentage = 0;
+              let percentage_div = bar.querySelector( '.percentage' );
+              let percentage = 0;
 
-              if ( dataset[i] ) {
-                percentage_div.innerHTML = Object.keys( dataset[ i ] ).length;
+              if ( dataset[ i ] ) {
+                $.setContent( percentage_div, Object.keys( dataset[ i ] ).length );
                 percentage =  ( Object.keys( dataset[ i ] ).length * 100 ) / count ;
               }
               else
-                percentage_div.innerHTML = '';
+                $.setContent( percentage_div, " " );
 
               percentage_div.style.width = percentage + '%';
             }
           }
-
-          if ( callback )callback();
         } );
 
       };
 
-      this.getValue = function () {
-       return total;
-      }
-
+      this.getValue = () => total;
     }
   };
 
