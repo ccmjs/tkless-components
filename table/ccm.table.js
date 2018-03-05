@@ -53,15 +53,16 @@
 
         }
       },
-      table_row: 5,
-      table_col: 3,
-      table_head: [ "header-1", "header-2", "header-3" ],
-      cell_settings: [
-        { "editable": true, "type": "number", "placeholder": "Tel: 049..." },
-        { "inner": "max.musterman@mail.com" },
-        { "editable": true, "type": "date", "foo": "bar" }
-      ],
-      submit: true,
+      //table_row: 5,
+      //table_col: 3,
+      //table_head: [ "header-1", "header-2", "header-3" ],
+      //col_settings: [
+      //  { "type": "number", "placeholder": "Tel: 049..." },
+      //  { "disabled": "true", "inner": "max.musterman@mail.com" },
+      //  { "type": "date", "foo": "bar" }
+      //],
+      //data: [ "ccm.get", "resources/configs.js", "demo" ],
+      //submit: true,
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
       ]
@@ -125,34 +126,9 @@
                 for ( let j = 0 ; j < my.table_col; j++ ) {
                   const table_col = $.html ( my.html.table_col );
 
-                  // if setting for each cell is set in config
-                  if ( my.cell_settings ) {
-
-                    const input = $.html ( my.html.input, {
-                      input_name: ( j + 1 )+ "-" + ( i + 1 ),
-                    } );
-
-                    // set input tag property for each cell
-                    for ( const key in my.cell_settings[ j ] ) {
-                      switch ( key ) {
-                        case 'type':
-                          input.setAttribute ( 'type',  my.cell_settings[ j ][ key ] );
-                          break;
-                        case 'placeholder':
-                          input.setAttribute( 'placeholder', my.cell_settings[ j][ key ] );
-                          break;
-                        case 'inner':
-                          $.setContent( table_col, my.cell_settings[ j ][ key ]  );
-                          break;
-                        default:
-                          input.setAttribute( key, my.cell_settings[ j ][ key ] );
-                          break;
-                      }
-                      // if the cell is not to be editable, no input tag is inserted into the cell
-                      if ( my.cell_settings[ j ][ 'editable' ] ) table_col.appendChild( input );
-                    }
-
-                    table_row.appendChild( table_col );
+                  // set column properties
+                  if ( my.col_settings ) {
+                    table_row.appendChild( setColumnProperties( i, j, table_col) );
                   }
                   else
                     // no cell_settings? -> display empty table
@@ -163,16 +139,50 @@
             }
 
             if ( my.table_head ) {
-              const table_row = $.html(my.html.table_row);
-              for ( let j = 0 ; j < my.table_col; j++ ) {
-                const table_head = $.html(my.html.table_head);
-                $.setContent( table_head, my.table_head[ j ]);
-                table_row.appendChild( table_head );
-              }
-              table.querySelector( 'thead' ).appendChild( table_row );
+              table.querySelector( 'thead' ).appendChild( getTableHead() );
             }
           }
           return table;
+        }
+
+        function getTableHead() {
+          const table_row = $.html(my.html.table_row);
+          for ( let j = 0 ; j < my.table_col; j++ ) {
+            const table_head = $.html( my.html.table_head );
+            $.setContent( table_head, my.table_head[ j ] );
+            table_row.appendChild( table_head );
+          }
+
+          return table_row;
+        }
+
+        function setColumnProperties( row, col, table_col_div ) {
+
+          const input = $.html ( my.html.input, {
+            input_name: ( col + 1 ) + "-" + ( row + 1 ),
+          } );
+
+          // set input tag property for each column
+          for ( const key in my.col_settings[ col ] ) {
+            switch ( key ) {
+              case 'type':
+                input.setAttribute ( 'type',  my.col_settings[ col ][ key ] );
+                break;
+              case 'placeholder':
+                input.setAttribute( 'placeholder', my.col_settings[ col ][ key ] );
+                break;
+              default:
+                input.setAttribute( key, my.col_settings[ col ][ key ] );
+                break;
+            }
+
+            // set values for each cell
+            if ( my. data ) input.value = my.data[ row ][ col ];
+
+           table_col_div.appendChild( input );
+          }
+
+          return table_col_div;
         }
 
       };
