@@ -175,19 +175,23 @@
 
       data: { store: [ 'ccm.store' ] },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
-        { 'settings.modules.toolbar': [
-          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-          ['bold', 'italic', 'underline'],                  // toggled buttons
-          ['blockquote', 'code-block'],
+        { 'settings.modules': {
+            syntax: true,
+            toolbar: [
+              [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+              ['bold', 'italic', 'underline'],                  // toggled buttons
+              ['blockquote', 'code-block'],
 
-          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+              [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
 
-          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-          [{ 'align': [] }]
-        ] }
+              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+              [{ 'align': [] }]
+            ]
+          }
+        }
       ],
       question: [ 'ccm.component', '../question/ccm.question.js' ],
       css: [ 'ccm.load',

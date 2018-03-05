@@ -179,20 +179,23 @@
       },
 
       data: { store: [ 'ccm.store' ] },
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
-        { 'settings.modules.toolbar': [
-          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-          ['bold', 'italic', 'underline'],                  // toggled buttons
-          ['blockquote', 'code-block'],
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.1.js',
+        { 'settings.modules': {
+            syntax: true,
+            toolbar: [
+              [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+              ['bold', 'italic', 'underline'],                  // toggled buttons
+              ['blockquote', 'code-block'],
 
-          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+              [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+              [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
 
-          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-          [{ 'align': [] }]
-        ] }
+              [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+              [{ 'align': [] }]
+            ]
+          } }
       ],
       question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/versions/ccm.question-1.0.0.js' ],
       libs: [ 'ccm.load',
