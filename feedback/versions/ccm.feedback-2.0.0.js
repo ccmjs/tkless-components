@@ -23,7 +23,7 @@
           "inner": [
             {
               "tag": "img",
-              "src": "../feedback/resources/feedback.png",
+              "src": "https://tkless.github.io/ccm-components/feedback/resources/feedback.png",
               "alt": "feedback"
             },
             {
