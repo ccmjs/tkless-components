@@ -145,7 +145,7 @@
           ]
         }
       },
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
         { 'settings.modules.toolbar': [
             [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown

@@ -182,7 +182,7 @@
         }
       },
 
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.1.js',
         { 'settings.modules': {
             syntax: true,

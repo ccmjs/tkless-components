@@ -173,7 +173,7 @@
         }
       },
 
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules': {
             syntax: true,

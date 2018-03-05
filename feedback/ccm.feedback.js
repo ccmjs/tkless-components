@@ -81,7 +81,7 @@
       },
 
       //onfinish: { log: true },
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       left_css: '../feedback/resources/left.css',
       right_css: '../feedback/resources/right.css',
       css: [ 'ccm.load',

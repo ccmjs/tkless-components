@@ -18,7 +18,7 @@
     },
 
     config: {
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       templates: {
         "simple": {
           "class": "rating",

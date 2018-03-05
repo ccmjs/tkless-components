@@ -86,7 +86,7 @@
       },
 
       //onfinish: { log: true },
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       css: [ 'ccm.load',
         { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
         'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'

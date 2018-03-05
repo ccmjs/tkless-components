@@ -86,7 +86,7 @@
       },
 
       //onfinish: { log: true },
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       left_css: 'https://tkless.github.io/ccm-components/feedback/resources/left.css',
       right_css: 'https://tkless.github.io/ccm-components/feedback/resources/right.css',
       css: [ 'ccm.load',

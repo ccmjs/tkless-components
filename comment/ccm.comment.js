@@ -200,7 +200,7 @@
           ]
         }
       },
-      data: { store: [ 'ccm.store' ], key: 'demo' },
+      data: { store: [ "ccm.store", {} ], key: 'demo' },
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }

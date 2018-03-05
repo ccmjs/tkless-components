@@ -13,7 +13,7 @@
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
-      data: { store: [ 'ccm.store' ] },
+      data: { store: [ "ccm.store", {} ] },
       templates: {
         "simple": {
           "class": "rating",

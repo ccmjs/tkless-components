@@ -38,7 +38,7 @@
       },
       icon_dislikes: 'fa fa-lg fa-chevron-circle-down',
       icon_likes: 'fa fa-lg fa-chevron-circle-up',
-      data: { store: [ 'ccm.store' ], key: 'demo' },
+      data: { store: [ "ccm.store", {} ], key: 'demo' },
       libs: [ 'ccm.load',
         { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: 'head' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
