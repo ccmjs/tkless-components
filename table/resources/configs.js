@@ -14,6 +14,11 @@ ccm.files[ "configs.js" ] = {
       [ "", "erika.mustermann@mail.com", ""],
       [ "", "markus.möglich@mail.com", ""],
       [ "", "jane.doe@mail.com", ""]
-    ]
+    ],
+
+    "submit": "true",
+    "onfinish": {
+      log: true
+    }
   }
 };

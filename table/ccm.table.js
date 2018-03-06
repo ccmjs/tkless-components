@@ -50,7 +50,11 @@
         },
 
         "submit": {
-
+          "tag": "button",
+          "class": "btn btn-default pull-right",
+          "typ": "button",
+          "inner": "Submit",
+          "onclick": "%submit%"
         }
       },
       //table_row: 5,
@@ -63,6 +67,7 @@
       //],
       //data: [ "ccm.get", "resources/configs.js", "demo" ],
       //submit: true,
+      //onfinish
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
       ]
@@ -113,6 +118,14 @@
 
         else {
           $.setContent( self.element, generateTable() );
+
+          if ( my.submit ) {
+           const submit_button = $.html ( my.html.submit, {
+             submit: function () { $.onFinish( self ); }
+           } );
+           self.element.querySelector( '.container' ).appendChild( submit_button );
+          }
+
           if ( callback ) callback();
         }
         
@@ -159,7 +172,7 @@
         function setColumnProperties( row, col, table_col_div ) {
 
           const input = $.html ( my.html.input, {
-            input_name: ( col + 1 ) + "-" + ( row + 1 ),
+            input_name: ( row + 1 ) + "-" + ( col + 1 ),
           } );
 
           // set input tag property for each column
@@ -185,6 +198,29 @@
           return table_col_div;
         }
 
+      };
+
+      this.getValue = () => {
+
+        return prepareFormData();
+
+        // reads the table values and transform it to result data
+        function prepareFormData() {
+
+          let form_data = $.formData( self.element.querySelector( 'table' ) );
+
+          const result = [];
+
+          for( const key in form_data ) {
+            const coord = key.split( '-' );
+            const row = coord[ 0 ] - 1;
+            const col = coord[ 1 ] - 1;
+            if ( !result[ row ] ) result[ row ] = [];
+            result[ row ][ col ] = form_data[ key ];
+          }
+
+          return result;
+        }
       };
 
     }
