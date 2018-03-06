@@ -114,89 +114,93 @@
        */
       this.start = callback => {
 
-        if ( !generateTable() ) return $.setContent( self.element, "Nothig to display" );
+        $.dataset( my.data, data => {
 
-        else {
-          $.setContent( self.element, generateTable() );
+          if ( !generateTable() ) return $.setContent( self.element, "Nothig to display" );
 
-          if ( my.submit ) {
-           const submit_button = $.html ( my.html.submit, {
-             submit: function () { $.onFinish( self ); }
-           } );
-           self.element.querySelector( '.container' ).appendChild( submit_button );
+          else {
+            $.setContent( self.element, generateTable() );
+
+            if ( my.submit ) {
+              const submit_button = $.html ( my.html.submit, {
+                submit: function () { $.onFinish( self ); }
+              } );
+              self.element.querySelector( '.container' ).appendChild( submit_button );
+            }
+
+            if ( callback ) callback();
           }
 
-          if ( callback ) callback();
-        }
-        
-        function generateTable() {
-          const table = $.html ( my.html.table );
+          function generateTable() {
+            const table = $.html ( my.html.table );
 
-          if ( my.table_row ) {
-            for ( let i = 0 ; i < my.table_row; i++ ) {
-              const table_row = $.html ( my.html.table_row );
-              if ( my.table_col ) {
-                for ( let j = 0 ; j < my.table_col; j++ ) {
-                  const table_col = $.html ( my.html.table_col );
+            if ( my.table_row ) {
+              for ( let i = 0 ; i < my.table_row; i++ ) {
+                const table_row = $.html ( my.html.table_row );
+                if ( my.table_col ) {
+                  for ( let j = 0 ; j < my.table_col; j++ ) {
+                    const table_col = $.html ( my.html.table_col );
 
-                  // set column properties
-                  if ( my.col_settings ) {
-                    table_row.appendChild( setColumnProperties( i, j, table_col) );
-                  }
-                  else
+                    // set column properties
+                    if ( my.col_settings ) {
+                      table_row.appendChild( setColumnProperties( i, j, table_col) );
+                    }
+                    else
                     // no cell_settings? -> display empty table
-                    table_row.appendChild( table_col );
+                      table_row.appendChild( table_col );
+                  }
                 }
+                table.querySelector( 'tbody' ).appendChild( table_row );
               }
-              table.querySelector( 'tbody' ).appendChild( table_row );
-            }
 
-            if ( my.table_head ) {
-              table.querySelector( 'thead' ).appendChild( getTableHead() );
+              if ( my.table_head ) {
+                table.querySelector( 'thead' ).appendChild( getTableHead() );
+              }
             }
-          }
-          return table;
-        }
-
-        function getTableHead() {
-          const table_row = $.html(my.html.table_row);
-          for ( let j = 0 ; j < my.table_col; j++ ) {
-            const table_head = $.html( my.html.table_head );
-            $.setContent( table_head, my.table_head[ j ] );
-            table_row.appendChild( table_head );
+            return table;
           }
 
-          return table_row;
-        }
-
-        function setColumnProperties( row, col, table_col_div ) {
-
-          const input = $.html ( my.html.input, {
-            input_name: ( row + 1 ) + "-" + ( col + 1 ),
-          } );
-
-          // set input tag property for each column
-          for ( const key in my.col_settings[ col ] ) {
-            switch ( key ) {
-              case 'type':
-                input.setAttribute ( 'type',  my.col_settings[ col ][ key ] );
-                break;
-              case 'placeholder':
-                input.setAttribute( 'placeholder', my.col_settings[ col ][ key ] );
-                break;
-              default:
-                input.setAttribute( key, my.col_settings[ col ][ key ] );
-                break;
+          function getTableHead() {
+            const table_row = $.html(my.html.table_row);
+            for ( let j = 0 ; j < my.table_col; j++ ) {
+              const table_head = $.html( my.html.table_head );
+              $.setContent( table_head, my.table_head[ j ] );
+              table_row.appendChild( table_head );
             }
 
-            // set values for each cell
-            if ( my. data ) input.value = my.data[ row ][ col ];
-
-           table_col_div.appendChild( input );
+            return table_row;
           }
 
-          return table_col_div;
-        }
+          function setColumnProperties( row, col, table_col_div ) {
+
+            const input = $.html ( my.html.input, {
+              input_name: ( row + 1 ) + "-" + ( col + 1 ),
+            } );
+
+            // set input tag property for each column
+            for ( const key in my.col_settings[ col ] ) {
+              switch ( key ) {
+                case 'type':
+                  input.setAttribute ( 'type',  my.col_settings[ col ][ key ] );
+                  break;
+                case 'placeholder':
+                  input.setAttribute( 'placeholder', my.col_settings[ col ][ key ] );
+                  break;
+                default:
+                  input.setAttribute( key, my.col_settings[ col ][ key ] );
+                  break;
+              }
+
+              // set values for each cell
+              if ( data ) input.value = data[ row ][ col ];
+
+              table_col_div.appendChild( input );
+            }
+
+            return table_col_div;
+          }
+
+        } );
 
       };
 
