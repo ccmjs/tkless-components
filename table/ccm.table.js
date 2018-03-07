@@ -27,7 +27,7 @@
     config: {
       html: {
         "table": {
-          "class": "container",
+          "class": "container-fluid",
           "inner": {
             "tag": "table",
             "class": "table table-striped",
