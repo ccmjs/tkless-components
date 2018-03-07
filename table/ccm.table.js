@@ -27,6 +27,7 @@
     config: {
       html: {
         "table": {
+          "id": "container",
           "class": "container-fluid",
           "inner": {
             "tag": "table",
@@ -125,7 +126,7 @@
               const submit_button = $.html ( my.html.submit, {
                 submit: function () { $.onFinish( self ); }
               } );
-              self.element.querySelector( '.container' ).appendChild( submit_button );
+              self.element.querySelector( '#container' ).appendChild( submit_button );
             }
 
             if ( callback ) callback();
