@@ -6,7 +6,7 @@ ccm.files[ "configs.js" ] = {
     col_settings: [
       { "type": "number", "placeholder": "Tel: 049..." },
       { "disabled": "true", "foo": "bar", "placeholder": "Hier steht Email" },
-      { "type": "date", "foo": "bar" }
+      { "type": "date", "bar": "baz" }
     ],
     data: [
       [ "", "max.mustermann@mail.com", ""],

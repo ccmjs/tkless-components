@@ -47,7 +47,7 @@
 
         "input": {
           "tag": "input",
-          "name": "%input_name%"
+          "type": "text"
         },
 
         "submit": {
@@ -142,13 +142,19 @@
                   for ( let j = 0 ; j < my.table_col; j++ ) {
                     const table_col = $.html ( my.html.table_col );
 
-                    // set column properties
-                    if ( my.col_settings ) {
-                      table_row.appendChild( setColumnProperties( i, j, table_col) );
-                    }
-                    else
-                    // no cell_settings? -> display empty table
-                      table_row.appendChild( table_col );
+                    const input = $.clone( my.html.input );
+                    input.name = ( i + 1 ) + '-' + ( j + 1 );
+
+                    // consider column properties
+                    if ( my.col_settings ) considerColSettings( j, input );
+
+                    // set values of input fields
+                    if ( data ) input.value = data[ i ][ j ];
+
+                    table_col.appendChild( $.html( input ) );
+
+                    table_row.appendChild( table_col );
+
                   }
                 }
                 table.querySelector( 'tbody' ).appendChild( table_row );
@@ -163,6 +169,7 @@
 
           function getTableHead() {
             const table_row = $.html(my.html.table_row);
+
             for ( let j = 0 ; j < my.table_col; j++ ) {
               const table_head = $.html( my.html.table_head );
               $.setContent( table_head, my.table_head[ j ] );
@@ -172,33 +179,22 @@
             return table_row;
           }
 
-          function setColumnProperties( row, col, table_col_div ) {
-
-            const input = $.html ( my.html.input, {
-              input_name: ( row + 1 ) + "-" + ( col + 1 ),
-            } );
-
-            // set input tag property for each column
+          function considerColSettings( col, input ) {
+            // set input tag property for each input => each input tag of one column has same properties
             for ( const key in my.col_settings[ col ] ) {
               switch ( key ) {
                 case 'type':
-                  input.setAttribute ( 'type',  my.col_settings[ col ][ key ] );
+                  input.type = my.col_settings[ col ][ key ];
                   break;
                 case 'placeholder':
-                  input.setAttribute( 'placeholder', my.col_settings[ col ][ key ] );
+                  input.placeholder = my.col_settings[ col ][ key ];
                   break;
                 default:
-                  input.setAttribute( key, my.col_settings[ col ][ key ] );
+                  input[ key ] =  my.col_settings[ col ][ key ];
                   break;
               }
 
-              // set values for each cell
-              if ( data ) input.value = data[ row ][ col ];
-
-              table_col_div.appendChild( input );
             }
-
-            return table_col_div;
           }
 
         } );
