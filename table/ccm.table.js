@@ -142,16 +142,25 @@
                   for ( let j = 0 ; j < my.table_col; j++ ) {
                     const table_col = $.html ( my.html.table_col );
 
-                    const input = $.clone( my.html.input );
-                    input.name = ( i + 1 ) + '-' + ( j + 1 );
+                    if ( !my.col_settings ) {
 
-                    // consider column properties
-                    if ( my.col_settings ) considerColSettings( j, input );
+                      if ( data ) $.setContent( table_col, data[ i ][ j ] );
 
-                    // set values of input fields
-                    if ( data ) input.value = data[ i ][ j ];
+                    }
+                    else {
 
-                    table_col.appendChild( $.html( input ) );
+                      const input = $.clone( my.html.input );
+                      input.name = ( i + 1 ) + '-' + ( j + 1 );
+
+                      // consider column properties
+                      if ( my.col_settings ) considerColSettings( j, input );
+
+                      // set values of input fields
+                      if ( data ) input.value = data[ i ][ j ];
+
+                      table_col.appendChild( $.html( input ) );
+
+                    }
 
                     table_row.appendChild( table_col );
 
