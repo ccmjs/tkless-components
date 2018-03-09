@@ -28,7 +28,7 @@
       html: {
         "table": {
           "id": "container",
-          "class": "container-fluid",
+          "class": "table-responsive",
           "inner": {
             "tag": "table",
             "class": "table table-striped",
