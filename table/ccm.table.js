@@ -50,6 +50,10 @@
           "type": "text"
         },
 
+        "textarea": {
+          "tag": "textarea"
+        },
+
         "submit": {
           "tag": "button",
           "class": "btn btn-default pull-right",
@@ -149,14 +153,14 @@
                     }
                     else {
 
-                      const input = $.clone( my.html.input );
+                      const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
                       input.name = ( i + 1 ) + '-' + ( j + 1 );
 
                       // consider column properties
                       if ( my.col_settings ) considerColSettings( j, input );
 
                       // set values of input fields
-                      if ( data ) input.value = data[ i ][ j ];
+                      if ( data ) data[ i ][ j ] ? input.value = data[ i ][ j ]: input.value = '' ;
 
                       table_col.appendChild( $.html( input ) );
 
@@ -193,7 +197,8 @@
             for ( const key in my.col_settings[ col ] ) {
               switch ( key ) {
                 case 'type':
-                  input.type = my.col_settings[ col ][ key ];
+                  if ( my.col_settings[ col ][ key ] !== 'textarea' )
+                    input.type = my.col_settings[ col ][ key ];
                   break;
                 case 'placeholder':
                   input.placeholder = my.col_settings[ col ][ key ];

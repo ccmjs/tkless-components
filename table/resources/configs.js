@@ -4,7 +4,7 @@ ccm.files[ "configs.js" ] = {
     table_col: 3,
     table_head: [ "header-1", "header-2", "header-3" ],
     col_settings: [
-      { "type": "number", "placeholder": "Tel: 049..." },
+      { "type": "textarea", "placeholder": "Tel: 049..." },
       { "disabled": "true", "foo": "bar", "placeholder": "Hier steht Email" },
       { "type": "date", "bar": "baz" }
     ],
