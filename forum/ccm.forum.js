@@ -195,8 +195,8 @@
       ],
       question: [ 'ccm.component', '../question/ccm.question.js' ],
       css: [ 'ccm.load',
-        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
-        '../../ccm-components/lib/bootstrap/css/bootstrap.css',
+        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
+        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         '../forum/resources/default.css'
       ]

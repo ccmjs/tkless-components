@@ -211,8 +211,8 @@
     },
 
     css: [ 'ccm.load',
-      { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
-        '../../ccm-components/lib/bootstrap/css/bootstrap.css' ],
+      { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
+        '../../ccm-components/libs/bootstrap/css/bootstrap.css' ],
     //preview: [ 'ccm.component', '../comment/ccm.comment.js' ]
   },
 

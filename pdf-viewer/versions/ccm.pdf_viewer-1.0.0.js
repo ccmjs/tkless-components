@@ -94,8 +94,8 @@
       //responsive: "https://tkless.github.io/ccm-components/pdf-viewer/resources/responsive.css",
 
       "pdfJS": [ "ccm.load", "https://tkless.github.io/libs/pdfjs/pdf.min.js" ],
-      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
+      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" }
       ]
 
     },

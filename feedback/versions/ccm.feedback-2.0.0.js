@@ -90,8 +90,8 @@
       left_css: 'https://tkless.github.io/ccm-components/feedback/resources/left.css',
       right_css: 'https://tkless.github.io/ccm-components/feedback/resources/right.css',
       css: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css'
       ],
     },
 

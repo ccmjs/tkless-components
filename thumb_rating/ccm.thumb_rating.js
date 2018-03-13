@@ -66,8 +66,8 @@
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'},
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/bootstrap.css' },
-        '../../ccm-components/lib/bootstrap/css/bootstrap.css',
+        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/bootstrap.css' },
+        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
         '../../../ccm-components/thumb_rating/resources/default.css'
       ]
     },

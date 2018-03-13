@@ -111,8 +111,8 @@
       //mulitple: true, //only set if multiple upload is desired
       data: { store: [ "ccm.store'" ], key: "demo" },
       pdfJS: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.min.js" ],
-      css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
+      css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
         "https://tkless.github.io/ccm-components/file_upload/resources/default.css"
       ]
     },

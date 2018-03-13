@@ -354,8 +354,8 @@
       },
 
       css: [ 'ccm.load',
-        { context: 'head', url: '../../ccm-components/lib/bootstrap/css/font-face.css' },
-        '../../ccm-components/lib/bootstrap/css/bootstrap.css',
+        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
+        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
         '/ccm-components/fill_in_the_blank_text_builder/resources/default.css' ],
 
     },

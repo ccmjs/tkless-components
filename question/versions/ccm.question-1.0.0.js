@@ -164,8 +164,8 @@
       ],
       voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js' ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css',
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         'https://tkless.github.io/ccm-components/question/resources/default.css'
       ]

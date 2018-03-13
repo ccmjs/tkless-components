@@ -88,8 +88,8 @@
       //onfinish: { log: true },
       data: { store: [ "ccm.store", {} ] },
       css: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css'
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css'
       ],
       lib: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ]
     },

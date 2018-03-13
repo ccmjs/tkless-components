@@ -103,8 +103,8 @@
       pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       pdfJS: [ "ccm.load", "https://tkless.github.io/libs/pdfjs/pdf.min.js" ],
-      css: [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" },
+      css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
         "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css"
       ]
 

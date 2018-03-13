@@ -103,8 +103,8 @@
       data: { store: [ "ccm.store'" ], key: "demo" },
       pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
       css: [ "ccm.load",
-       { context: "head", url: "../../ccm-components/lib/bootstrap/css/font-face.css" },
-        "../../ccm-components/lib/bootstrap/css/bootstrap.css",
+       { context: "head", url: "../../ccm-components/libs/bootstrap/css/font-face.css" },
+        "../../ccm-components/libs/bootstrap/css/bootstrap.css",
         "../file_upload/resources/default.css"
       ]
     },
