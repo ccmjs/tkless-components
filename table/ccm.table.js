@@ -53,6 +53,20 @@
           "tag": "textarea"
         },
 
+        "add": {
+          "tag": "button",
+          "class": "btn btn-default",
+          "typ": "button",
+          "onclick": "%add%",
+          "inner": [
+            {
+              "tag": "span",
+              "class": "glyphicon glyphicon-plus"
+            },
+            " Row"
+          ]
+        },
+
         "submit": {
           "tag": "button",
           "class": "btn btn-default pull-right",
@@ -61,6 +75,7 @@
           "onclick": "%submit%"
         }
       },
+      //add_row: true,
       //table_row: 5,
       //table_col: 3,
       //table_head: [ "header-1", "header-2", "header-3" ],
@@ -176,6 +191,16 @@
                 table.querySelector( 'thead' ).appendChild( getTableHead() );
               }
             }
+
+            //
+            if ( my.add_row ) table.appendChild(  $.html( my.html.add, {
+              add: function ( event ) {
+                if ( event ) event.preventDefault();
+                my.table_row = ++ my.table_row;
+                my.data = self.getValue();
+                self.start();
+              }
+            } ) );
             return table;
           }
 

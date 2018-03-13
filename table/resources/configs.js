@@ -2,6 +2,7 @@ ccm.files[ "configs.js" ] = {
   "demo": {
     table_row: 5,
     table_col: 3,
+    add_row: true,
     table_head: [ "header-1", "header-2", "header-3" ],
     col_settings: [
       { "type": "textarea", "placeholder": "Tel: 049..." },
@@ -15,7 +16,6 @@ ccm.files[ "configs.js" ] = {
       [ "", "markus.möglich@mail.com", ""],
       [ "", "jane.doe@mail.com", ""]
     ],
-
     "submit": "true",
     "onfinish": {
       log: true
