@@ -28,14 +28,16 @@
       html: {
         "table": {
           "id": "container",
-          "class": "table-responsive",
           "inner": {
-            "tag": "table",
-            "class": "table table-striped",
-            "inner":[
-              { "tag": "thead" },
-              { "tag": "tbody" }
-            ]
+            "class": "table-responsive",
+            "inner": {
+              "tag": "table",
+              "class": "table table-striped table-responsive",
+              "inner":[
+                { "tag": "thead" },
+                { "tag": "tbody" }
+              ]
+            }
           }
         },
 
@@ -54,6 +56,20 @@
           "tag": "textarea"
         },
 
+        "add": {
+          "tag": "button",
+          "class": "btn btn-default",
+          "typ": "button",
+          "onclick": "%add%",
+          "inner": [
+            {
+              "tag": "span",
+              "class": "glyphicon glyphicon-plus"
+            },
+            " Row"
+          ]
+        },
+
         "submit": {
           "tag": "button",
           "class": "btn btn-default pull-right",
@@ -62,7 +78,8 @@
           "onclick": "%submit%"
         }
       },
-      //table_row: 5,
+      //add_row: true,
+      table_row: 0,
       //table_col: 3,
       //table_head: [ "header-1", "header-2", "header-3" ],
       //col_settings: [
@@ -138,9 +155,12 @@
 
           function generateTable() {
             const table = $.html ( my.html.table );
+            let row;
 
             if ( my.table_row ) {
-              for ( let i = 0 ; i < my.table_row; i++ ) {
+              row = my.data && ( my.data.length > my.table_row) ? my.data.length : my.table_row;
+
+              for ( let i = 0 ; i < row; i++ ) {
                 const table_row = $.html ( my.html.table_row );
                 if ( my.table_col ) {
                   for ( let j = 0 ; j < my.table_col; j++ ) {
@@ -148,7 +168,7 @@
 
                     if ( !my.col_settings ) {
 
-                      if ( data ) $.setContent( table_col, data[ i ][ j ] );
+                      if ( data ) $.setContent( table_col, i < data.length && data[ i ][ j ] ? data[ i ][ j ] : '' );
 
                     }
                     else {
@@ -160,7 +180,7 @@
                       if ( my.col_settings ) considerColSettings( j, input );
 
                       // set values of input fields
-                      if ( data ) data[ i ][ j ] ? input.value = data[ i ][ j ]: input.value = '' ;
+                      if ( data ) ( i < data.length ) && data[ i ][ j ] ? input.value = data[ i ][ j ] : input.value = '';
 
                       table_col.appendChild( $.html( input ) );
 
@@ -177,6 +197,16 @@
                 table.querySelector( 'thead' ).appendChild( getTableHead() );
               }
             }
+
+            // add new row via button
+            if ( my.add_row ) table.appendChild(  $.html( my.html.add, {
+              add: function ( event ) {
+                if ( event ) event.preventDefault();
+                my.table_row = ++row;
+                my.data = self.getValue();
+                self.start();
+              }
+            } ) );
             return table;
           }
 
