@@ -148,7 +148,7 @@
 
                     if ( !my.col_settings ) {
 
-                      if ( data ) $.setContent( table_col, data[ i ][ j ] );
+                      if ( data ) $.setContent( table_col, i < data.length && data[ i ][ j ] ? data[ i ][ j ] : '' );
 
                     }
                     else {
@@ -160,7 +160,7 @@
                       if ( my.col_settings ) considerColSettings( j, input );
 
                       // set values of input fields
-                      if ( data ) data[ i ][ j ] ? input.value = data[ i ][ j ]: input.value = '' ;
+                      if ( data ) ( i < data.length ) && data[ i ][ j ] ? input.value = data[ i ][ j ] : input.value = '';
 
                       table_col.appendChild( $.html( input ) );
 
