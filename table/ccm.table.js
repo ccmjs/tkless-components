@@ -76,7 +76,7 @@
         }
       },
       //add_row: true,
-      //table_row: 5,
+      table_row: 0,
       //table_col: 3,
       //table_head: [ "header-1", "header-2", "header-3" ],
       //col_settings: [
@@ -152,9 +152,12 @@
 
           function generateTable() {
             const table = $.html ( my.html.table );
+            let row;
 
             if ( my.table_row ) {
-              for ( let i = 0 ; i < my.table_row; i++ ) {
+              row = my.data && ( my.data.length > my.table_row) ? my.data.length : my.table_row;
+
+              for ( let i = 0 ; i < row; i++ ) {
                 const table_row = $.html ( my.html.table_row );
                 if ( my.table_col ) {
                   for ( let j = 0 ; j < my.table_col; j++ ) {
@@ -192,11 +195,11 @@
               }
             }
 
-            //
+            // add new row via button
             if ( my.add_row ) table.appendChild(  $.html( my.html.add, {
               add: function ( event ) {
                 if ( event ) event.preventDefault();
-                my.table_row = ++ my.table_row;
+                my.table_row = ++row;
                 my.data = self.getValue();
                 self.start();
               }
