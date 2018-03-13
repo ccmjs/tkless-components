@@ -28,7 +28,6 @@
       html: {
         "table": {
           "id": "container",
-          "class": "",
           "inner": {
             "tag": "table",
             "class": "table table-striped table-responsive",
