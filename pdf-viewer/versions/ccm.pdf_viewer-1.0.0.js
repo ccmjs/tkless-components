@@ -93,7 +93,7 @@
       scale: "1.5",
       //responsive: "https://tkless.github.io/ccm-components/pdf-viewer/resources/responsive.css",
 
-      "pdfJS": [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
+      "pdfJS": [ "ccm.load", "https://tkless.github.io/libs/pdfjs/pdf.min.js" ],
       "css": [ "ccm.load", "https://tkless.github.io/ccm-components/lib/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/lib/bootstrap/css/font-face.css" }
       ]
@@ -154,7 +154,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+        PDFJS.workerSrc = 'https://tkless.github.io/libs/pdfjs/pdf.worker.min.js';
 
         /**
          * Asynchronously downloads PDF.
