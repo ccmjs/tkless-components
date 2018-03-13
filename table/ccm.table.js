@@ -28,10 +28,10 @@
       html: {
         "table": {
           "id": "container",
-          "class": "table-responsive",
+          "class": "",
           "inner": {
             "tag": "table",
-            "class": "table table-striped",
+            "class": "table table-striped table-responsive",
             "inner":[
               { "tag": "thead" },
               { "tag": "tbody" }
