@@ -101,7 +101,7 @@
       data_type: "pdf", // or image
       //mulitple: true, //only set if multiple upload is desired
       data: { store: [ "ccm.store'" ], key: "demo" },
-      pdfJS: [ "ccm.load", "//mozilla.github.io/pdf.js/build/pdf.js" ],
+      pdfJS: [ "ccm.load", "../libs/pdfjs/pdf.js" ],
       css: [ "ccm.load",
        { context: "head", url: "../../ccm-components/libs/bootstrap/css/font-face.css" },
         "../../ccm-components/libs/bootstrap/css/bootstrap.css",
@@ -237,7 +237,7 @@
               let reader = new FileReader();
 
               reader.addEventListener( 'load', function() {
-                PDFJS.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+                PDFJS.workerSrc = '../libs/pdfjs/pdf.worker.js';
                 PDFJS.getDocument(this.result).then( function (pdf) {
                   files_data.slides.push( { name: file.name, data: reader.result, MIME: file.type  } );
 
