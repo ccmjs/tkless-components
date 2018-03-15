@@ -14,15 +14,13 @@
     config: {
       html: {
         "main": {
-          "class": "container",
+          "class": "container-fluid",
           "inner": [
             {
-              "id": "task",
-              "class": "col-md-10"
+              "id": "task"
             },
             {
-              "id": "input",
-              "class": "col-md-10"
+              "id": "input"
             },
           ]
         },

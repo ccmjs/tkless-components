@@ -1,0 +1,37 @@
+/**
+ * @overview default layout of ccm component for slidecast_builder
+ * @author Tea Kless <tea.kless@web.de.de> 2017
+ * @license The MIT License (MIT)
+ */
+
+a, input[type="checkbox"], select {
+  cursor: pointer;
+}
+
+a.active + div {
+  display: block;
+}
+
+a + div {
+  display: none;
+}
+
+a.active + div + div {
+  display: block;
+}
+
+a + div + div {
+  display: none;
+}
+
+label {
+  font-size: 15px;
+}
+
+#basic, #advanced {
+  display: none;
+}
+
+.active {
+  display: block;
+}
