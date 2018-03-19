@@ -26,7 +26,7 @@
             'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'
           ],
           [
-            'https://tkless.github.io/ccm-components/editor/resources/quill.js',
+            '../libs/quill/quill.js',
             '//cdn.quilljs.com/1.2.0/quill.snow.css'
           ]
         ]
@@ -36,7 +36,7 @@
           //syntax: true,    // needed for syntax highlighting
 
           toolbar: [          // if no toolbar needed set: settings.modules.toolbar: false
-            [ { header: [ 1, 2, false ] } ],
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
             [ 'bold', 'italic', 'underline' ],
             [ 'image' ]
             //['code-block'],  // Include code button in toolbar for syntax highlighting
