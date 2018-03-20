@@ -295,7 +295,8 @@
         "user": "['ccm.instance','https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
       }*/
 
-  //  onfinish
+      //onfinish
+      //onchange
 
     },
 
@@ -366,6 +367,7 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
+          change: function () { onChange(); console.log("!!!!"); },
           basic: function () {
             // set active button
             self.element.querySelector( '.btn-adv' ).classList.remove( 'active' );
@@ -428,6 +430,17 @@
           if ( callback ) callback();
 
         } );
+
+        /** callback if an input value has changed */
+        function onChange() {
+
+          // update preview considering the changed input value
+          updatePreview();
+
+          // perform change actions
+          self.onchange && self.onchange( self );
+
+        }
 
         /** (re)renders the preview based on the entered values */
         function updatePreview( ) {
