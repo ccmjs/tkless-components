@@ -273,7 +273,6 @@
         "css": "['ccm.load','ccm-components/pdf-viewer/resources/default.css']",
         "user": "['ccm.instance','https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
       }*/
-
   //  onchange
   //  onfinish
 
