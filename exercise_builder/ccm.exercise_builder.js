@@ -359,7 +359,7 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
-          change: function () { onChange(); console.log("!!!!"); },
+          change: function () { onChange(); },
           basic: function () {
             // set active button
             self.element.querySelector( '.btn-adv' ).classList.remove( 'active' );
@@ -406,9 +406,7 @@
           editor = instance;
           self.element.querySelector( '#editor' ).appendChild( instance.root );
 
-          editor.get().on('text-change', function() {
-            updatePreview();
-          });
+          editor.get().on( 'text-change', onChange );
 
           // render preview
           if ( my.preview ) updatePreview();
