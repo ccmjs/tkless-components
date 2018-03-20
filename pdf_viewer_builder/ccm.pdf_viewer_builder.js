@@ -260,7 +260,7 @@
         { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
         "../pdf_viewer_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../pdf-viewer/ccm.pdf_viewer.js", {  "pdf": null  }],
+      "target": [ "ccm.component", "../pdf-viewer/ccm.pdf_viewer.js" ],
       //"submit_button": true,
       //"preview": true,
       "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
