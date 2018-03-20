@@ -417,7 +417,7 @@
           editor.get().on( 'text-change', onChange );
 
           // render preview
-          if ( my.preview ) updatePreview();
+          if ( my.preview ) updatePreview( my.start_values && my.start_values.task );
 
           // no preview desired? => remove preview section
           else $.removeElement( self.element.querySelector( '.preview' ) );
@@ -441,12 +441,15 @@
         }
 
         /** (re)renders the preview based on the entered values */
-        function updatePreview( ) {
+        function updatePreview( task ) {
 
           // no preview desired? => abort
           if ( !my.preview ) return;
 
           const config = self.getValue();
+
+          // render task from start_values
+          if ( task ) config.task = task;
 
           // (re)render preview
           my.target.start( config, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );
