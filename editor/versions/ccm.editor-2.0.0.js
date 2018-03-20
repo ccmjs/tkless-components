@@ -42,8 +42,8 @@
           toolbar: [          // if no toolbar needed set: settings.modules.toolbar: false
             [ { header: [ 1, 2, false ] } ],
             [ 'bold', 'italic', 'underline' ],
-            [ 'image' ]
-            //['code-block'],  // Include code button in toolbar for syntax highlighting
+            [ 'image' ],
+            ['code-block']  // Include code button in toolbar for syntax highlighting
           ]
         },
         placeholder: 'Write here...',
