@@ -18,7 +18,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: 'https://akless.github.io/ccm/version/ccm-15.0.2.js',
 
     /**
      * default instance configuration
@@ -261,8 +261,8 @@
         "../pdf_viewer_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "../pdf-viewer/ccm.pdf_viewer.js", {  "pdf": null  }],
-      "submit_button": true,
-      "preview": true,
+      //"submit_button": true,
+      //"preview": true,
       "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
         data: { store: [ 'ccm.store', { 'store': 'file_upload', 'url': 'http://localhost:8080', 'method': 'POST' } ] },
       } ],
