@@ -271,7 +271,7 @@
       "submit_button": true,
       "preview": true,
 
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.1.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
         { 'settings.modules.toolbar': [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],  // custom dropdown
             ['bold', 'italic', 'underline'],        // toggled buttons
