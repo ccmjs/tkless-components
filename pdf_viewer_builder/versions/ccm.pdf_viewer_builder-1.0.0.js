@@ -142,7 +142,7 @@
                           {
                             "tag": "option",
                             "inner": "Default",
-                            "value": "['ccm.load',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
+                            "value": "['ccm.load','https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
                           }
                         ]
                       }

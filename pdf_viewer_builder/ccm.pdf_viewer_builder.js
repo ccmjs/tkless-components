@@ -137,7 +137,7 @@
                           {
                             "tag": "option",
                             "inner": "Default",
-                            "value": "['ccm.load',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
+                            "value": "['ccm.load','../pdf-viewer/resources/default.css',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
                           }
                         ]
                       }
@@ -429,6 +429,7 @@
           // render pdf from start_values
           if ( pdf ) config.pdf = pdf;
 
+          console.log('?',$.clone(config),config);
           // (re)render preview
           my.target.start( config, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );
 
