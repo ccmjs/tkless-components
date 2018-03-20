@@ -402,7 +402,7 @@
         }
 
         // render editor
-        my.editor.start( { onfinish: () => updatePreview() }, instance => {
+        my.editor.start( instance => {
           editor = instance;
           self.element.querySelector( '#editor' ).appendChild( instance.root );
 
@@ -440,6 +440,7 @@
           if ( !my.preview ) return;
 
           const config = self.getValue();
+          console.log(config);
 
           // (re)render preview
           my.target.start( config, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );

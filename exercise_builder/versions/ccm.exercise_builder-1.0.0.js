@@ -410,7 +410,7 @@
         }
 
         // render editor
-        my.editor.start( { onfinish: () => updatePreview() }, instance => {
+        my.editor.start( instance => {
           editor = instance;
           self.element.querySelector( '#editor' ).appendChild( instance.root );
 
