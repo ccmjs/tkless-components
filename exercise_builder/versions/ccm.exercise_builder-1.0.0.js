@@ -268,8 +268,8 @@
         "https://tkless.github.io/ccm-components/exercise_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "https://tkless.github.io/ccm-components/exercise/ccm.exercise.js" ],
-      "submit_button": true,
-      "preview": true,
+      //"submit_button": true,
+      //"preview": true,
 
       editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
         {
