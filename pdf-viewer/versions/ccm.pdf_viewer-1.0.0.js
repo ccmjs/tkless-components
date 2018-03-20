@@ -89,7 +89,7 @@
           }
         ]
       },
-      path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      // path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
       //responsive: "https://tkless.github.io/ccm-components/pdf-viewer/resources/responsive.css",
 

@@ -106,8 +106,8 @@
           },
         }
       },
-      pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
-        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+      //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       download: true, //only set if file download is required
       pdfJS: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/pdfjs/pdf.min.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",

@@ -98,8 +98,8 @@
           },
         }
       },
-      pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
-        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+      //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       // download: true,
       pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.min.js"/*, "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js"*/ ] ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
