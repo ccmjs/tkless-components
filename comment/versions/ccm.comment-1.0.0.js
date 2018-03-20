@@ -204,7 +204,7 @@
         }
       },
       data: { store: [ "ccm.store", {} ], key: 'demo' },
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-1.0.0.js',
+      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
