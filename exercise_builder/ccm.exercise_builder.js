@@ -261,13 +261,13 @@
         { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
         "../exercise_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../exercise/ccm.exercise.js",  ["ccm.get", "../exercise/resources/configs.js" ] ],
+      "target": [ "ccm.component", "../exercise/ccm.exercise.js" ],
       "submit_button": true,
       "preview": true,
 
       editor: [ 'ccm.component', '../editor/ccm.editor.js',
         { 'settings.modules.toolbar': [
-            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],  // custom dropdown
             ['bold', 'italic', 'underline'],        // toggled buttons
             ['blockquote', 'code-block'],
 
@@ -287,7 +287,6 @@
         "user": "['ccm.instance','https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
       }*/
 
-  //  onchange
   //  onfinish
 
     },
@@ -359,8 +358,6 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html, {
-          change: function () { onChange(); console.log("!!!!"); },
-
           basic: function () {
             // set active button
             self.element.querySelector( '.btn-adv' ).classList.remove( 'active' );
@@ -424,17 +421,6 @@
 
         } );
 
-        /** callback if an input value has changed */
-        function onChange() {
-
-          // update preview considering the changed input value
-          updatePreview();
-
-          // perform change actions
-          self.onchange && self.onchange( self );
-
-        }
-
         /** (re)renders the preview based on the entered values */
         function updatePreview( ) {
 
@@ -442,11 +428,6 @@
           if ( !my.preview ) return;
 
           const config = self.getValue();
-
-          console.log(config);
-
-          // render pdf from start_values
-          //if ( pdf ) config.exercise = pdf;
 
           // (re)render preview
           my.target.start( config, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );

@@ -21,12 +21,11 @@
             },
             {
               "id": "input"
-            },
+            }
           ]
         },
         "submit": {
           "style": "margin-top: 10px;",
-          "class": "col-md-10",
           "inner": {
               "tag": "button",
               "class": "btn btn-default pull-right",
