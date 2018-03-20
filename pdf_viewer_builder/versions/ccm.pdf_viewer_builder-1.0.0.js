@@ -394,7 +394,7 @@
         }
 
         // render file upload
-        my.file_upload.start( { onfinish: () => updatePreview() }, instance => {
+        my.file_upload.start( { onfinish: () => onChange() }, instance => {
           upload = instance;
           self.element.querySelector( '#upload' ).appendChild( instance.root );
 
