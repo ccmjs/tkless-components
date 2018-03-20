@@ -414,10 +414,11 @@
           editor = instance;
           self.element.querySelector( '#editor' ).appendChild( instance.root );
 
+          editor.get().root.innerHTML = my.start_values.task || '';
           editor.get().on( 'text-change', onChange );
 
           // render preview
-          if ( my.preview ) updatePreview( my.start_values && my.start_values.task );
+          if ( my.preview ) updatePreview();
 
           // no preview desired? => remove preview section
           else $.removeElement( self.element.querySelector( '.preview' ) );
@@ -441,15 +442,12 @@
         }
 
         /** (re)renders the preview based on the entered values */
-        function updatePreview( task ) {
+        function updatePreview() {
 
           // no preview desired? => abort
           if ( !my.preview ) return;
 
           const config = self.getValue();
-
-          // render task from start_values
-          if ( task ) config.task = task;
 
           // (re)render preview
           my.target.start( config, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );
