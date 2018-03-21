@@ -377,6 +377,7 @@
             self.element.querySelector( '#basic' ).classList.remove( 'hide' );
             self.element.querySelector( '#advanced' ).classList.add( 'hide' );
             self.element.querySelector( '#basic' ).classList.add( 'show' );
+            onChange();
           },
           advanced: function () {
             self.element.querySelector( '.btn-basic' ).classList.remove( 'active' );
@@ -386,6 +387,7 @@
             self.element.querySelector( '#basic' ).classList.remove( 'show' );
             self.element.querySelector( '#advanced' ).classList.add( 'show' );
             self.element.querySelector( '#basic' ).classList.add( 'hide' );
+            onChange();
           },
           help: function () {
             // hide and show help texts
