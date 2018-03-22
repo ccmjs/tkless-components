@@ -16,7 +16,7 @@ ccm.files[ "configs.js" ] = {
     ],
     data: {
       values: [
-        [ "", "max.mustermann@mail.com", ""],
+        [ "0045/ 12344567", "max.mustermann@mail.com", ""],
         [ "", "", ""],
         [ "", "erika.mustermann@mail.com", ""],
         [ "", "markus.möglich@mail.com", ""],
