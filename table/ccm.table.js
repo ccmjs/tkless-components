@@ -158,7 +158,7 @@
             let row;
 
             if ( my.table_row ) {
-              row = data && data.values && my.data.values.length > my.table_row ? data.values.length : my.table_row;
+              row = data && data.values && data.values.length > my.table_row ? data.values.length : my.table_row;
 
               for ( let i = 0 ; i < row; i++ ) {
                 const table_row = $.html ( my.html.table_row );
@@ -203,7 +203,7 @@
               add: function ( event ) {
                 if ( event ) event.preventDefault();
                 my.table_row = ++row;
-                my.data = self.getValue();
+                data = self.getValue();
                 self.start();
               }
             } ) );
