@@ -158,7 +158,7 @@
             let row;
 
             if ( my.table_row ) {
-              row = my.data && ( my.data.values && my.data.values.length > my.table_row ) ? my.data.values.length : my.table_row;
+              row = data && data.values && my.data.values.length > my.table_row ? data.values.length : my.table_row;
 
               for ( let i = 0 ; i < row; i++ ) {
                 const table_row = $.html ( my.html.table_row );
@@ -168,7 +168,7 @@
 
                     if ( !my.col_settings ) {
 
-                      if ( data ) $.setContent( table_col, i < data.values.length && data.values[ i ][ j ] ? data.values[ i ][ j ] : '' );
+                      if ( data && data.values ) $.setContent( table_col, i < data.values.length && data.values[ i ][ j ] ? data.values[ i ][ j ] : '' );
 
                     }
                     else {
@@ -180,7 +180,7 @@
                       if ( my.col_settings ) considerColSettings( j, input );
 
                       // set values of input fields
-                      if ( data ) ( i < data.values.length ) && data.values[ i ][ j ] ? input.value = data.values[ i ][ j ] : input.value = '';
+                      if ( data && data.values ) ( i < data.values.length ) && data.values[ i ][ j ] ? input.value = data.values[ i ][ j ] : input.value = '';
 
                       table_col.appendChild( $.html( input ) );
 
