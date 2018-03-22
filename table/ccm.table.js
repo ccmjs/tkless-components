@@ -158,7 +158,7 @@
             let row;
 
             if ( my.table_row ) {
-              row = my.data && ( my.data.values.length > my.table_row) ? my.data.values.length : my.table_row;
+              row = my.data.values && ( my.data.values.length > my.table_row) ? my.data.values.length : my.table_row;
 
               for ( let i = 0 ; i < row; i++ ) {
                 const table_row = $.html ( my.html.table_row );
