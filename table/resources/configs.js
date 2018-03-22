@@ -14,13 +14,15 @@ ccm.files[ "configs.js" ] = {
         "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. " },
       { "type": "textarea", "disabled": "true", "placeholder": "Hier kannst du nichts schreiben." }
     ],
-    data: [
-      [ "", "max.mustermann@mail.com", ""],
-      [ "", "", ""],
-      [ "", "erika.mustermann@mail.com", ""],
-      [ "", "markus.möglich@mail.com", ""],
-      [ "", "jane.doe@mail.com", ""]
-    ],
+    data: {
+      values: [
+        [ "", "max.mustermann@mail.com", ""],
+        [ "", "", ""],
+        [ "", "erika.mustermann@mail.com", ""],
+        [ "", "markus.möglich@mail.com", ""],
+        [ "", "jane.doe@mail.com", ""]
+      ]
+    },
     "submit": "true",
     "onfinish": {
       log: true
