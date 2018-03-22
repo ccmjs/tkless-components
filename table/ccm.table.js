@@ -160,38 +160,8 @@
             if ( my.table_row ) {
               row = data && data.values && data.values.length > my.table_row ? data.values.length : my.table_row;
 
-              for ( let i = 0 ; i < row; i++ ) {
-                const table_row = $.html ( my.html.table_row );
-                if ( my.table_col ) {
-                  for ( let j = 0 ; j < my.table_col; j++ ) {
-                    const table_col = $.html ( my.html.table_col );
-
-                    if ( !my.col_settings ) {
-
-                      if ( data && data.values ) $.setContent( table_col, i < data.values.length && data.values[ i ][ j ] ? data.values[ i ][ j ] : '' );
-
-                    }
-                    else {
-
-                      const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
-                      input.name = ( i + 1 ) + '-' + ( j + 1 );
-
-                      // consider column properties
-                      if ( my.col_settings ) considerColSettings( j, input );
-
-                      // set values of input fields
-                      if ( data && data.values ) ( i < data.values.length ) && data.values[ i ][ j ] ? input.value = data.values[ i ][ j ] : input.value = '';
-
-                      table_col.appendChild( $.html( input ) );
-
-                    }
-
-                    table_row.appendChild( table_col );
-
-                  }
-                }
-                table.querySelector( 'tbody' ).appendChild( table_row );
-              }
+              for ( let i = 0 ; i < row; i++ )
+                addRow( i, data && data.values );
 
               if ( my.table_head ) {
                 table.querySelector( 'thead' ).appendChild( getTableHead() );
@@ -202,12 +172,45 @@
             if ( my.add_row ) table.appendChild(  $.html( my.html.add, {
               add: function ( event ) {
                 if ( event ) event.preventDefault();
-                my.table_row = ++row;
-                data = self.getValue();
-                self.start();
+                addRow( row++ );
               }
             } ) );
             return table;
+
+            function addRow( i, values ) {
+
+              const table_row = $.html ( my.html.table_row );
+              if ( my.table_col ) {
+                for ( let j = 0 ; j < my.table_col; j++ ) {
+                  const table_col = $.html ( my.html.table_col );
+
+                  if ( !my.col_settings ) {
+
+                    if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] ? values[ i ][ j ] : '' );
+
+                  }
+                  else {
+
+                    const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
+                    input.name = ( i + 1 ) + '-' + ( j + 1 );
+
+                    // consider column properties
+                    if ( my.col_settings ) considerColSettings( j, input );
+
+                    // set values of input fields
+                    if ( values ) ( i < values.length ) && values[ i ][ j ] ? input.value = values[ i ][ j ] : input.value = '';
+
+                    table_col.appendChild( $.html( input ) );
+
+                  }
+
+                  table_row.appendChild( table_col );
+
+                }
+              }
+              table.querySelector( 'tbody' ).appendChild( table_row );
+
+            }
           }
 
           function getTableHead() {
