@@ -463,7 +463,7 @@
          */
         const config =  $.formData( self.element.querySelector( 'form' ) );
 
-        config.pdf = upload.getValue();
+        config.pdf = upload.getValue() || ( my.start_values && my.start_values.pdf );
 
         // now values of input elements are transformed to resulting instance configuration
         return config;
