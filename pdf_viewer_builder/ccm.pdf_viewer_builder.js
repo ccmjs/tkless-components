@@ -258,7 +258,7 @@
       },
       "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
-        "../pdf_viewer_builder/resources/default.css"
+        "../ccm-components/pdf_viewer_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "../pdf-viewer/ccm.pdf_viewer.js" ],
       //"submit_button": true,
@@ -458,7 +458,10 @@
          */
         const config =  $.formData( self.element.querySelector( 'form' ) );
 
-        config.pdf = upload.getValue();
+        config.pdf = upload.getValue() || ( my.start_values && my.start_values.pdf );
+
+        // render pdf from start_values
+        //if ( pdf ) config.pdf = pdf;
 
         // now values of input elements are transformed to resulting instance configuration
         return config;
