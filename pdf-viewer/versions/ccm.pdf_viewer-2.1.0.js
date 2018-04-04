@@ -168,7 +168,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = 'https://tkless.github.io/libs/pdfjs/pdf.worker.min.js';
+        PDFJS.workerSrc = 'https://tkless.github.io/ccm-components/libs/pdfjs/pdf.worker.min.js';
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
