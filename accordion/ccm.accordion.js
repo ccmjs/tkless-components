@@ -30,12 +30,24 @@
         key: 'demo',
         entries: [
           {
-            "title": "Say Hallo",
-            "content": "Hallo."
+            "title": "Learning Goals",
+            "content": "..."
           },
           {
-            "title": "Say Hallo 2",
-            "content": "Hallo!"
+            "title": "Lecture",
+            "content": "..."
+          },
+          {
+            "title": "Additional Materials",
+            "content": "..."
+          },
+          {
+            "title": "Exercises",
+            "content": "..."
+          },
+          {
+            "title": "Bibliography",
+            "content": "..."
           }
         ]
       },
