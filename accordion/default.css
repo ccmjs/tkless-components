@@ -1,0 +1,31 @@
+#element {
+  font-family: Verdana,Arial,sans-serif;
+}
+
+#element button {
+  border-radius: 2px !important;
+  width: 100%;
+  text-align: left;
+  padding: .5em .5em .5em .7em;
+  margin-top: 1px;
+}
+
+#element p {
+  margin: 10px 10px 10px;
+}
+
+div div div {
+  max-height: 0;
+  padding: 0 18px;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  border: 1px solid #aaaaaa;
+  background: #ffffff;
+  color: #222222;
+  border-top: 0;
+}
+
+.glyphicon {
+  font-size: 0.7em;
+  margin-right: 0.4em;
+}
