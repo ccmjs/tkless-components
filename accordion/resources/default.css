@@ -14,7 +14,7 @@
   margin: 10px 10px 10px;
 }
 
-div div div {
+#element .content {
   max-height: 0;
   padding: 0 18px;
   overflow: hidden;

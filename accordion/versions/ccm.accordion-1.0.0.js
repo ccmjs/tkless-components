@@ -1,5 +1,5 @@
 /**
- * @overview ccm component for acoordion
+ * @overview ccm component for accordion
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
@@ -13,20 +13,24 @@
      * @type {string}
      */
     name: 'accordion',
+    version:[ 1,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://akless.github.io/ccm/ccm.js',
-
+    ccm: {
+      url: 'https://akless.github.io/ccm/version/ccm-15.0.2.min.js',
+      integrity: 'sha384-4X0IFdACgz2SAKu0knklA+SRQ6OVU4GipKhm7p6l7e7k/CIM8cjCFprWmM4qkbQz',
+      crossorigin: 'anonymous'
+    },
     /**
      * default instance configuration
      * @type {object}
      */
     config: {
       title: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
-      data: {
+      /*data: {
         key: 'demo',
         entries: [
           {
@@ -50,14 +54,13 @@
             "content": "..."
           }
         ]
-      },
-      content: [ "ccm.component", "https://akless.github.io/ccm-components/content/versions/beta/ccm.content-4.0.0.js" ],
-      css: [ "ccm.load",
-        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
-        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
-        'default.css'
+      },*/
+      //content: [ "ccm.component", "https://akless.github.io/ccm-components/content/versions/beta/ccm.content-4.0.0.js" ],
+      libs: [ 'ccm.load',
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',
+        'https://tkless.github.io/ccm-components/accordion/resources/default.css'
       ]
-
     },
 
     Instance: function () {
@@ -196,7 +199,7 @@
           const content = document.createElement( 'content' );
           const p = document.createElement( 'p' );
 
-          my.data.entries.map(  entry => {
+          my.data.entries.map( entry => {
             const title_clone = title.cloneNode( true );
             const content_clone = content.cloneNode( true );
             const p_clone = p.cloneNode( true );
