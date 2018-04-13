@@ -120,6 +120,7 @@
       };
 
       this.ready = callback => {
+
         // set shortcut to help functions
         $ = self.ccm.helper;
 
@@ -138,8 +139,11 @@
 
         $.dataset( my.data, data => {
 
-          if ( !generateTable() ) return $.setContent( self.element, "Nothig to display" );
+          // support different forms of data structure
+          uniformData();
 
+          if ( !generateTable() )
+            $.setContent( self.element, "Nothing to display" );
           else {
             $.setContent( self.element, generateTable() );
 
@@ -150,14 +154,16 @@
               self.element.querySelector( '#container' ).appendChild( submit_button );
             }
 
-            if ( callback ) callback();
           }
 
+          callback && callback();
+
           function generateTable() {
+            if ( !my.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) ) my.table_col = data.values[ 0 ].length;
             const table = $.html ( my.html.table );
             let row;
 
-            if ( my.table_row ) {
+            if ( my.table_row || data.values.length > 0 ) {
               row = data && data.values && data.values.length > my.table_row ? data.values.length : my.table_row;
 
               for ( let i = 0 ; i < row; i++ )
@@ -241,6 +247,23 @@
                   break;
               }
 
+            }
+          }
+
+          /** brings given data to uniform data structure - @author André Kless <andre.kless@web.de>, 2018 */
+          function uniformData() {
+            if ( Array.isArray( data ) )
+              data = { values: data };
+            if ( data.values.length > 0 && $.isObject( data.values[ 0 ] ) ) {
+              const values = [];
+              data.values.map( obj => {
+                const row = [];
+                for ( const key in obj )
+                  if ( typeof obj[ key ] !== 'object' )
+                    row.push( obj[ key ] );
+                values.push( row );
+              } );
+              data.values = values;
             }
           }
 
