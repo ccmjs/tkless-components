@@ -254,7 +254,7 @@
           function uniformData() {
             if ( Array.isArray( data ) )
               data = { values: data };
-            if ( data.values.length > 0 && $.isObject( data.values[ 0 ] ) ) {
+            if ( Array.isArray( data.values ) && data.values.length > 0 && $.isObject( data.values[ 0 ] ) ) {
               const values = [];
               data.values.map( obj => {
                 const row = [];
