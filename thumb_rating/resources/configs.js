@@ -14,9 +14,6 @@ ccm.files[ 'configs.js' ] = {
     "data":  {
       "store": [ "ccm.store", "resources/datastore.js" ],
       "key": "demo"
-    },
-    "logger": [ "ccm.instance", "https://akless.github.io/ccm-components/log/ccm.log.min.js",
-      [ "ccm.get", "https://akless.github.io/ccm-components/log/resources/configs.min.js", "greedy" ]
-    ]
+    }
   }
 };

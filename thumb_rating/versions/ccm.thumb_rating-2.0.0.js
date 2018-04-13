@@ -9,6 +9,7 @@
   var component  = {
 
     name: 'thumb_rating',
+    version: [ 2,0,0 ],
 
     ccm: 'https://akless.github.io/ccm/ccm.js',
 
@@ -33,9 +34,9 @@
 
         "buttons": {
           "class": "rating",
-          "inner": [
-            {
-              "inner": {
+          "inner": {
+            "inner": [
+              {
                 "tag": "a",
                 "class": "likes btn btn-default",
                 "inner": [
@@ -45,10 +46,8 @@
                   },
                   "%likes%"
                 ]
-              }
-            },
-            {
-              "inner": {
+              },
+              {
                 "tag": "a",
                 "class": "dislikes btn btn-default",
                 "inner": [
@@ -58,19 +57,17 @@
                   },
                   "%dislikes%"
                 ]
-              }
-            }
-          ]
-
-
+              },
+            ]
+          }
         }
       },
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'},
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/bootstrap.css' },
-        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
-        '../../../ccm-components/thumb_rating/resources/default.css'
+        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
+        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',
+        'https://tkless.github.io/ccm-components/thumb_rating/resources/default.css'
       ]
     },
 
