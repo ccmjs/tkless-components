@@ -88,7 +88,7 @@
        * starts the instance
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
-      this.start = function (callback) {
+      this.start = callback => {
 
         let main_elem = $.html( my.html.main );
 
