@@ -1,6 +1,6 @@
 /**
  * @overview posts template for <i>ccm</i> component
- * @author Tea Kless <tea.kless@web.de> 2017
+ * @author Tea Kless <tea.kless@web.de> 2018
  * @license The MIT License (MIT)
  */
 
@@ -8,18 +8,9 @@
 
   var component  = {
 
-    name: 'posts',
-    version:[ 1,0,0 ],
+    name: 'news',
 
-    /**
-     * recommended used framework version
-     * @type {string}
-     */
-    ccm: {
-      url: 'https://akless.github.io/ccm/version/ccm-14.3.0.min.js',
-      integrity: 'sha384-4q30fhc2E3uY9omytSc6dKdoMNQ37dSozhTxgG/wH/9lv+N37TBhwd1jg/u03bRt',
-      crossorigin: 'anonymous'
-    },
+    ccm: 'https://akless.github.io/ccm/ccm.js',
 
     config: {
       templates: {
@@ -33,7 +24,7 @@
               "inner":
                 {
                   "tag": "button",
-                  "onclick": "%click%",
+                  "onclick": "%new_post%",
                   "inner": "posten"
                 }
             },
@@ -105,69 +96,93 @@
         }
 
       },
-      editable: true, //[true, false]
       data:  {
-        store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/news/posts_datastore.js' ],
+        store: [ 'ccm.store', '../news/resources/datastore.js' ],
         key: 'demo'
       },
-      user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.min.js' ],
-      css: [ 'ccm.load',
-        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/beta/ccm.user-4.0.0.min.js' ],
+      icons: [ 'ccm.load',
+        {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        'https://tkless.github.io/ccm-components/news/style.css'
+        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
+        '../news/resources/default.css',
       ]
     },
 
     Instance: function () {
+      /**
+       * own reference for inner functions
+       * @type {Instance}
+       */
+      const self = this;
 
-      var self = this;
+      /**
+       * privatized instance members
+       * @type {object}
+       */
+      let my;
 
-      this.start = function ( callback ) {
+      /**
+       * shortcut to help functions
+       * @type {Object.<string,function>}
+       */
+      let $;
 
-        document.head.appendChild( self.ccm.helper.html( {
-          tag:   'style',
-          inner: "@font-face { font-family: 'FontAwesome'; src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0'); src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../libs/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../libs/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg'); font-weight: normal; font-style: normal; }"
-        } ) );
+      this.ready = callback => {
+        // set shortcut to help functions
+        $ = self.ccm.helper;
+
+        // privatize all possible instance members
+        my = $.privatize( self );
+
+        if ( self.logger ) self.logger.log( 'ready', my );
+
+        callback();
+      };
+
+      this.start = callback => {
 
         // login user if not logged in
-        if ( self.editable && !self.user.isLoggedIn() ) return self.user.login( function () { self.start( callback ); } );
+        if ( my.editable && !self.user.isLoggedIn() ) return self.user.login( function () { self.start( callback ); } );
 
         // get dataset for rendering
-        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
+        $.dataset( my.data, function ( dataset ) {
 
           if ( !dataset.posts ) dataset.posts = [];
 
           // render main html structure
-          self.ccm.helper.setContent( self.element, self.ccm.helper.protect( self.ccm.helper.html( self.templates.main, {
-            click: function () { updatePost(); }
-          } ) ) );
+          $.setContent( self.element, $.html( my.templates.main, {
+            new_post: function () { updatePost(); }
+          } ) );
 
-          for ( var i = 0; i < dataset.posts.length; i++ ) {
+          for ( let i = 0; i < dataset.posts.length; i++ ) {
               renderPost( dataset.posts[i], i) ;
           }
-          if ( self.editable )
+
+          if ( my.editable ) {
             renderPost( newPost(), dataset.posts.length );
 
-          //placehoder for empty content
-          var first = self.element.querySelector( '#posts' ).firstElementChild;
-          first.classList.add( 'new_post' );
-          var divs = first.querySelectorAll( 'div[contenteditable]' );
+            //placehoder for empty content
+            let first = self.element.querySelector( '#posts' ).firstElementChild;
+            first.classList.add( 'new-post' );
+            let divs = first.querySelectorAll( 'div[contenteditable]' );
 
-          if ( divs[0].getAttribute( 'contenteditable' ) === 'true' );
-            divs[0].classList.add( 'empty' );
-          if ( divs[1].getAttribute( 'contenteditable' ) === 'true' );
-            divs[1].classList.add( 'empty' );
+            if ( divs[0].getAttribute( 'contenteditable' ) === 'true' ) divs[0].classList.add( 'empty' );
+            if ( divs[1].getAttribute( 'contenteditable' ) === 'true' ) divs[1].classList.add( 'empty' );
 
-          // no close icon for emty post
-          first.querySelector( '.fa-close' ).classList.remove( 'fa-close' );
+            // no close icon for empty post
+            first.querySelector( '.fa-close' ).classList.remove( 'fa-close' );
+          }
 
           /**
            * when editable set to false no delete and post possible
            * so remove all colose icons and post-button
            */
-          if ( !self.editable ) {
-            self.element.querySelector( '.fa-close' ).classList.remove( '.fa_close' );
-            self.element.querySelector( '#button' ).removeAttribute( 'id' );
+          else {
+            self.element.querySelectorAll( '.fa-close' ).forEach( function ( close ) {
+              close.classList.remove( 'fa-close', 'fa', 'fw' );
+            });
+            self.element.querySelector( '#button' ).remove();
           }
 
           // perform callback
@@ -175,53 +190,32 @@
 
           function renderPost( post, i )  {
 
-            var posts = self.element.querySelector( '#posts' );
-            var post_elem = self.ccm.helper.protect( self.ccm.helper.html( self.templates.post, {
+            let posts = self.element.querySelector( '#posts' );
+            let post_elem = $.html( my.templates.post, {
               delete_post: function () {
-                dataset.posts.splice(i, 1);
+                dataset.posts.splice( i, 1 );
                 updatePost();
               },
 
               title:   post.title || "",
-              date:    post.date,
+              date:    moment( post.date ).format( "MMMM Do YYYY, h:mm a" ),
               name:    post.user,
-              avatar:  post.avatar || 'fa fa-user fa-fw fa-lg',
+              avatar:  post.avatar || 'fa fa-user fa-fw',
               content: post.content || "",
-              edit:    !!self.editable,
+              edit:    !!my.editable,
 
               input_title: function () {
-                console.log(this);
                 change( i, this, "title" );
               },
               input_content: function () {
                 change( i, this, "content" );
               }
-            } ) );
+            } );
 
             if( posts.hasChildNodes() )
               posts.insertBefore( post_elem, posts.firstChild );
             else
               posts.appendChild( post_elem );
-          }
-
-          function getDateTime () {
-
-            var today = new Date();
-            var dd    = today.getDate();
-            var mm    = today.getMonth();
-            var yyyy  = today.getFullYear();
-            var hour  = today.getHours();
-            var min   = today.getMinutes();
-
-            var monat = ["Januar", "Februar", "März", "April", "Mai", "Juni","Juli", "August", "September", "Oktober", "November", "Dezember"];
-
-            if ( dd < 10 ) dd = '0' + dd;
-
-            if ( hour < 10 ) hour = '0' + hour;
-            if ( min  < 10 ) min  = '0' + min;
-
-            return dd + ' ' + monat[ mm ].substring( 0, 3 ) + '. '  + yyyy + ' ' + hour + ':' + min;
-
           }
 
           function change ( post, div, prop ) {
@@ -238,14 +232,14 @@
 
           function newPost() {
             return {
-              date: getDateTime(),
-              user: self.user.data().key,
+              date: moment().format(),
+              user: self.user.data().user,
               avatar: self.user.data().avatar || ''
             }
           }
 
           function updatePost() {
-            self.data.store.set(dataset, function () {
+            my.data.store.set(dataset, function () {
               self.start();
             } );
           }

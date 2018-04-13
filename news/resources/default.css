@@ -1,3 +1,10 @@
+#element {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+}
+
 .ccm-posts {
   font-size: 90%;
   margin: 0;
@@ -29,6 +36,15 @@
   font-weight: bold;
   font-size: 110%;
   order: 1;
+}
+
+.name {
+  text-align: center;
+}
+
+.date {
+  font-family: verdana;
+  font-size: 0.7em;
 }
 
 .name,
