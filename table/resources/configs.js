@@ -16,11 +16,11 @@ ccm.files[ "configs.js" ] = {
     ],
     data: {
       values: [
-        [ "0045/ 12344567", "max.mustermann@mail.com", ""],
+        [ "0045/ 12344567", "max.mustermann@mail.com", "12.01.2018",  "textarea 1", "textarea 2"],
         [ "", "", ""],
-        [ "", "erika.mustermann@mail.com", ""],
-        [ "", "markus.möglich@mail.com", ""],
-        [ "", "jane.doe@mail.com", ""]
+        [ "", "erika.mustermann@mail.com", "", "", ""],
+        [ "", "markus.möglich@mail.com", "", "", ""],
+        [ "", "jane.doe@mail.com", "", "", ""]
       ]
     },
     "submit": "true",

@@ -203,11 +203,10 @@
                     // consider column properties
                     if ( my.col_settings ) considerColSettings( j, input );
 
+                    const input_tag = table_col.appendChild( $.html( input ) );
+
                     // set values of input fields
-                    if ( values ) ( i < values.length ) && values[ i ][ j ] ? input.value = values[ i ][ j ] : input.value = '';
-
-                    table_col.appendChild( $.html( input ) );
-
+                    if ( values && ( i < values.length ) ) values[ i ][ j ] ? input_tag.value = values[ i ][ j ]: input_tag.value = '';
                   }
 
                   table_row.appendChild( table_col );
