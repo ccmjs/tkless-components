@@ -1,51 +1,61 @@
 #element {
-    margin: 0.7em;
+  margin: 0.7em;
+}
+
+.edit,
+.sub-text{
+  color:#aaa;
+  font-size: 0.7em;
 }
 
 .sub-text {
-    color:#aaa;
-    font-family: verdana !important;
-    font-size: 0.7em;
-}
-
-hr {
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
+  font-family: verdana !important;
 }
 
 #new-comment {
-    margin-top: 0.5em;
+  margin-top: 0.5em;
 }
 
 .fade-comment {
-    width:  100%;
-    height: 100%;
-    -webkit-animation: fadeinout 2s ease-in forwards;
-    animation: fadeinout 2s linear forwards;
-    opacity: 0;
+  width:  100%;
+  height: 100%;
+  -webkit-animation: fadeinout 2s ease-in forwards;
+  animation: fadeinout 2s linear forwards;
+  opacity: 0;
+}
+
+.comment-overview {
+  margin: 1px;
+  padding: 15px 20px 15px 20px;
 }
 
 .comment-overview > span {
-    color: #999;
+  color: #999;
 }
+
+.comment-overview .comment-content {
+  margin-bottom: 0.5em;
+}
+
 #add-comment {
-    margin-left: 13px;
+  margin-left: 13px;
 }
 
 @-webkit-keyframes fadeinout {
-    100% { opacity: 1; }
+  100% { opacity: 1; }
 }
 
 @keyframes fadeinout {
-    100% { opacity: 1; }
+  100% { opacity: 1; }
 }
 
+/* expanded comment layout*/
 .panel-shadow {
-    box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+  box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
 }
 
 .panel-white {
-    border: 1px solid #dddddd;
+  border: 1px solid #dddddd;
 }
 
 .post .post-heading {
