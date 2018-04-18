@@ -12,7 +12,7 @@
     name: 'editor',
     version:[ 1,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-11.5.0.min.js',
 
     config: {
       // add this line for highlighting the code within editor

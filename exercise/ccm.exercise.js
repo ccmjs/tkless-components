@@ -9,7 +9,7 @@
 
     name: 'exercise',
 
-    ccm: 'https://akless.github.io/ccm/version/ccm-15.0.2.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-15.0.2.js',
 
     config: {
       html: {
