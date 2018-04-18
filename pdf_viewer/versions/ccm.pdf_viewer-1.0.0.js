@@ -91,11 +91,11 @@
       },
       // path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       scale: "1.5",
-      //responsive: "https://tkless.github.io/ccm-components/pdf_viewer/resources/responsive.css",
+      //responsive: "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/responsive.css",
 
-      "pdfJS": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/pdfjs/pdf.min.js" ],
-      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" }
+      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
       ]
 
     },
@@ -133,7 +133,7 @@
 
       this.init = callback => {
         if ( self.responsive ) ccm.load( { context: this.element.parentNode, url: self.responsive } );
-        else ccm.load( { context: this.element.parentNode, url: "https://tkless.github.io/ccm-components/pdf_viewer/resources/default.css" } );
+        else ccm.load( { context: this.element.parentNode, url: "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/default.css" } );
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
@@ -154,7 +154,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = 'https://tkless.github.io/ccm-components/libs/pdfjs/pdf.worker.min.js';
+        PDFJS.workerSrc = 'https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js';
 
         /**
          * Asynchronously downloads PDF.

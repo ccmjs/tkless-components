@@ -102,10 +102,10 @@
       },
       /*pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
        "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",*/
-      pdfJS: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/pdfjs/pdf.min.js" ],
-      css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
-        "https://tkless.github.io/ccm-components/pdf_viewer/resources/default.css"
+      pdfJS: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/default.css"
       ]
 
     },
@@ -161,7 +161,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = 'https://tkless.github.io/ccm-components/libs/pdfjs/pdf.worker.min.js';
+        PDFJS.workerSrc = 'https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js';
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 

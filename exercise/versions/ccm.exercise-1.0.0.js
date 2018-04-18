@@ -48,13 +48,13 @@
       //task: "<h1>Einleitung</h1>",
       //submit: true,
       //onfinish
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
+      editor: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-2.0.0.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css'
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css'
       ]
      },
 

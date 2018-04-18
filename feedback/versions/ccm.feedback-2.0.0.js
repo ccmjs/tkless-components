@@ -23,7 +23,7 @@
           "inner": [
             {
               "tag": "img",
-              "src": "https://tkless.github.io/ccm-components/feedback/resources/feedback.png",
+              "src": "https://ccmjs.github.io/tkless-components/feedback/resources/feedback.png",
               "alt": "feedback"
             },
             {
@@ -87,11 +87,11 @@
 
       //onfinish: { log: true },
       data: { store: [ "ccm.store", {} ] },
-      left_css: 'https://tkless.github.io/ccm-components/feedback/resources/left.css',
-      right_css: 'https://tkless.github.io/ccm-components/feedback/resources/right.css',
+      left_css: 'https://ccmjs.github.io/tkless-components/feedback/resources/left.css',
+      right_css: 'https://ccmjs.github.io/tkless-components/feedback/resources/right.css',
       css: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css'
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css'
       ],
     },
 

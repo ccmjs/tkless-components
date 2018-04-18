@@ -44,7 +44,7 @@
       },
 
       data:  {
-          store: [ 'ccm.store', 'https://tkless.github.io/ccm-components/star_rating/star_rating_datastore.js' ],
+          store: [ 'ccm.store', 'https://ccmjs.github.io/tkless-components/star_rating/star_rating_datastore.js' ],
           key:   'demo'
       },
       star_title: [ "Gefällt mir gar nicht", "Gefällt mir nicht",
@@ -53,7 +53,7 @@
       css: [ 'ccm.load',
         { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        'https://tkless.github.io/ccm-components/star_rating/style.css'
+        'https://ccmjs.github.io/tkless-components/star_rating/style.css'
       ]
     },
 

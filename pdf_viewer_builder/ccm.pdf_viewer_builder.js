@@ -137,7 +137,7 @@
                           {
                             "tag": "option",
                             "inner": "Default",
-                            "value": "['ccm.load','../pdf_viewer/resources/default.css',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
+                            "value": "['ccm.load','../pdf_viewer/resources/default.css',['https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css'}]]"
                           }
                         ]
                       }
@@ -256,8 +256,8 @@
           }
         ]
       },
-      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "../ccm-components/pdf_viewer_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],

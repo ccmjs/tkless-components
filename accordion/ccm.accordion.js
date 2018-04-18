@@ -55,7 +55,7 @@
       css: [ "ccm.load",
         { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
         '../../ccm-components/libs/bootstrap/css/bootstrap.css',
-        'default.css'
+        'resources/default.css'
       ]
 
     },

@@ -3,7 +3,7 @@ ccm.files[ 'configs.js' ] = {
     "buttons": true,
     "user":  [ "ccm.instance", "https://akless.github.io/ccm-components/user/ccm.user.min.js"],
     "data":  {
-      "store": [ "ccm.store", "https://tkless.github.io/ccm-components/thumb_rating/resources/datastore.js" ],
+      "store": [ "ccm.store", "https://ccmjs.github.io/tkless-components/thumb_rating/resources/datastore.js" ],
       "key": "demo"
     }
   },

@@ -142,7 +142,7 @@
                           {
                             "tag": "option",
                             "inner": "Default",
-                            "value": "['ccm.load','https://tkless.github.io/ccm-components/pdf_viewer/resources/default.css',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
+                            "value": "['ccm.load','https://ccmjs.github.io/tkless-components/pdf_viewer/resources/default.css',['https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css'}]]"
                           }
                         ]
                       }
@@ -261,20 +261,20 @@
           }
         ]
       },
-      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
-        "https://tkless.github.io/ccm-components/pdf_viewer_builder/resources/default.css"
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "https://tkless.github.io/ccm-components/pdf_viewer/versions/ccm.pdf_viewer-2.0.0.js" ],
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-2.0.0.js" ],
       //"submit_button": true,
       //"preview": true,
-      "file_upload": [ "ccm.component", "https://tkless.github.io/ccm-components/file_upload/versions/ccm.file_upload-1.0.0.js", {
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-1.0.0.js", {
         data: { store: [ "ccm.store", { "store": "file_upload", "url": "https://ccm.inf.h-brs.de", "method": "POST" } ] },
       } ]
       /*
       "start_values": {
         "pdf": [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1518776028787X4201785986475841" ],
-        "css": "['ccm.load','https://tkless.github.io/ccm-components/pdf_viewer/resources/default.css']",
+        "css": "['ccm.load','https://ccmjs.github.io/tkless-components/pdf_viewer/resources/default.css']",
         "user": "['ccm.instance','https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
       }*/
 

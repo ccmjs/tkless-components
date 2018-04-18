@@ -23,7 +23,7 @@
           "inner": [
             {
               "tag": "img",
-              "src": "https://tkless.github.io/ccm-components/feedback/resources/feedback.png",
+              "src": "https://ccmjs.github.io/tkless-components/feedback/resources/feedback.png",
               "alt": "feedback"
             },
             {
@@ -88,8 +88,8 @@
       //onfinish: { log: true },
       data: { store: [ "ccm.store", {} ] },
       css: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css'
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css'
       ],
       lib: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js' ]
     },
@@ -99,9 +99,9 @@
 
       this.init = callback => {
         if ( this.position === 'left')
-          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/left.css' } );
+          ccm.load( { context: this.element.parentNode, url: 'https://ccmjs.github.io/tkless-components/feedback/resources/left.css' } );
         else
-          ccm.load( { context: this.element.parentNode, url: 'https://tkless.github.io/ccm-components/feedback/resources/right.css' } );
+          ccm.load( { context: this.element.parentNode, url: 'https://ccmjs.github.io/tkless-components/feedback/resources/right.css' } );
         callback();
       };
 

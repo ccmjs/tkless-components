@@ -102,8 +102,8 @@
       //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       // download: true,
       pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.min.js"/*, "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js"*/ ] ],
-      css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "../pdf_viewer/resources/default.css"
       ]
 

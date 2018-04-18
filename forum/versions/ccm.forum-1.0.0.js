@@ -183,7 +183,7 @@
       },
 
       data: { store: [ "ccm.store", {} ] },
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
+      editor: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-2.0.0.js',
         { 'settings.modules': {
             syntax: true,
             toolbar: [
@@ -201,12 +201,12 @@
             ]
           } }
       ],
-      question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/versions/ccm.question-1.0.0.js' ],
+      question: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/question/versions/ccm.question-1.0.0.js' ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
-        'https://tkless.github.io/ccm-components/forum/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/forum/resources/default.css'
       ]
     },
 

@@ -153,7 +153,7 @@
                       "class": "pull-left image",
                       "inner": {
                         "tag": "img",
-                        "src": "https://tkless.github.io/ccm-components/comment/resources/user.jpg",
+                        "src": "https://ccmjs.github.io/tkless-components/comment/resources/user.jpg",
                         "class": "img-circle avatar",
                         "alt": "user profile image"
                       }
@@ -204,14 +204,14 @@
         }
       },
       data: { store: [ "ccm.store", {} ], key: 'demo' },
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
+      editor: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-2.0.0.js',
         { 'settings.modules.toolbar': false },
         { 'settings.placeholder': 'Write your comment here ...' }
       ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',
-        'https://tkless.github.io/ccm-components/comment/resources/default.css',
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',
+        'https://ccmjs.github.io/tkless-components/comment/resources/default.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'
       ]
     },

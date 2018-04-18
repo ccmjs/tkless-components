@@ -3,10 +3,10 @@ ccm.files[ 'configs.js' ] = {
     data: { store: [ 'ccm.store', { 'store': 'forum', 'url': 'https://ccm.inf.h-brs.de' } ], key: 'demo' },
     user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js', { 'sign_on': 'demo'} ],
 
-    question: [ 'ccm.component', 'https://tkless.github.io/ccm-components/question/versions/ccm.question-1.0.0.js', {
+    question: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/question/versions/ccm.question-1.0.0.js', {
       data: { store: [ 'ccm.store', { 'store': 'question', 'url': 'ws://ccm.inf.h-brs.de' } ] },
       user:  [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js', { logged_in: true, 'sign_on': 'demo'} ],
-      voting: [ 'ccm.component', 'https://tkless.github.io/ccm-components/voting/versions/ccm.voting-1.0.0.js', {
+      voting: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/voting/versions/ccm.voting-1.0.0.js', {
         data: { store: [ 'ccm.store', { 'store': 'voting', 'url': 'ws://ccm.inf.h-brs.de' } ] },
         user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js', { 'sign_on': 'demo' } ]
       }]

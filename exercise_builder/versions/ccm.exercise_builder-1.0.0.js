@@ -143,7 +143,7 @@
                           {
                             "tag": "option",
                             "inner": "Default",
-                            "value": "['ccm.load',['https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css'}]]"
+                            "value": "['ccm.load',['https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css'}]]"
                           }
                         ]
                       }
@@ -263,15 +263,15 @@
           }
         ]
       },
-      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
-        "https://tkless.github.io/ccm-components/exercise_builder/resources/default.css"
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/exercise_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "https://tkless.github.io/ccm-components/exercise/ccm.exercise.js" ],
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/exercise/ccm.exercise.js" ],
       //"submit_button": true,
       //"preview": true,
 
-      editor: [ 'ccm.component', 'https://tkless.github.io/ccm-components/editor/versions/ccm.editor-2.0.0.js',
+      editor: [ 'ccm.component', 'https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-2.0.0.js',
         {
           'settings.modules': {'syntax': true},
           'settings.modules.toolbar': [

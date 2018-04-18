@@ -17,7 +17,7 @@
     config: {
       // add this line for highlighting the code within editor
       //code_highlighting: [ 'ccm.load', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css', 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'],
-      editor: [ 'ccm.load', 'https://tkless.github.io/ccm-components/libs/quill/quill.js', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
+      editor: [ 'ccm.load', 'https://ccmjs.github.io/tkless-components/libs/quill/quill.js', '//cdn.quilljs.com/1.2.0/quill.snow.css' ],
       settings: {
         modules: {
           //syntax: true,    // needed for syntax highlighting

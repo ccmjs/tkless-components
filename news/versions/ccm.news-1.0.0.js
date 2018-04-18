@@ -115,7 +115,7 @@
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
-        'https://tkless.github.io/ccm-components/news/resources/default.css',
+        'https://ccmjs.github.io/tkless-components/news/resources/default.css',
       ]
     },
 

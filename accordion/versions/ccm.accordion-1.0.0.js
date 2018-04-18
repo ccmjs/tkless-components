@@ -57,9 +57,9 @@
       },*/
       //content: [ "ccm.component", "https://akless.github.io/ccm-components/content/versions/beta/ccm.content-4.0.0.js" ],
       libs: [ 'ccm.load',
-        { context: 'head', url: 'https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css' },
-        'https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css',
-        'https://tkless.github.io/ccm-components/accordion/resources/default.css'
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',
+        'https://ccmjs.github.io/tkless-components/accordion/resources/default.css'
       ]
     },
 
