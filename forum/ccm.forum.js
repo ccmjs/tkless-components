@@ -10,7 +10,7 @@
 
     name: 'forum',
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
     config: {
       templates: {

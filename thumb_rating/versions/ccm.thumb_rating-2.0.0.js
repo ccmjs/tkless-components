@@ -11,7 +11,7 @@
     name: 'thumb_rating',
     version: [ 2,0,0 ],
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
     config: {
       data: { store: [ "ccm.store", {} ] },

@@ -9,7 +9,7 @@
 
     name: 'star_rating_result',
 
-    ccm: 'https://akless.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
     config: {
       html: {
