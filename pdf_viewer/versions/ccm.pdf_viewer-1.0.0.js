@@ -1,10 +1,8 @@
 /**
- * @overview ccm component for pdf-viewer
+ * @overview ccm component  pdf htm-viewer
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @changes
- * version 2.2.0 (23.01.2018): add support for display of base64 encoded pdf-file, add touch-event supporting
  */
 
 {
@@ -15,16 +13,12 @@
      * @type {string}
      */
     name: 'pdf_viewer',
-    version:[ 2,0,0 ],
+    version:[ 1,0,0 ],
 
-    /**
-     * recommended used framework version
-     * @type {string}
-     */
-    ccm: {
-      url: 'https://akless.github.io/ccm/version/ccm-15.0.2.min.js',
-      integrity: 'sha384-4X0IFdACgz2SAKu0knklA+SRQ6OVU4GipKhm7p6l7e7k/CIM8cjCFprWmM4qkbQz',
-      crossorigin: 'anonymous'
+    ccm:{
+      url: 'https://akless.github.io/ccm/version/ccm-11.5.0.min.js',
+      integrity: "sha384-7lrORUPPd2raLsrPJYo0Arz8csPcGzgyNbKOr9Rx3k0ECU0T8BP+B1ejo8+wmUzh",
+      crossorigin:"anonymous"
     },
 
     /**
@@ -32,7 +26,8 @@
      * @type {object}
      */
     config: {
-      html: {
+
+      "html": {
         "id": "pdf-viewer",
         "class": "container-fluid",
         "inner": [
@@ -41,7 +36,7 @@
               "tag": "a",
               "href": "%href%",
               "title": "Folien herunterladen",
-              "download": '%filename%',
+              "download": "target",
               "target": "_blank",
               "inner": [
                 {
@@ -63,36 +58,30 @@
             }
           },
           {
-            "id": "nav",
+            "class": "navigation text-center",
             "inner": [
               {
-                "class": "input-group col-md-2 col-md-offset-5",
-                "inner": [
+                "class": "btn-group",
+                "inner":[
                   {
-                    "class": "input-group-btn",
-                    "inner": {
-                      "class": "btn btn-prev btn-info",
-                      "onclick": "%prev%",
-                      "inner": "Prev"
-                    }
+                    "tag": "a",
+                    "typ": "button",
+                    "class": "active btn btn-prev btn-info info",
+                    "onclick": "%prev%",
+                    "inner": "Previous"
                   },
                   {
+                    "tag": "a",
+                    "typ": "button",
                     "id": "page-num",
-                    "style": "padding: 0 0 !important",
-                    "class": "form-control text-center",
-                    "tag": "input",
-                    "type": "number",
-                    "min": "1",
-                    "max": "%all%",
-                    "onchange": "%go_to%"
+                    "class": "active btn btn-success info",
                   },
                   {
-                    "class": "input-group-btn",
-                    "inner": {
-                      "class": "btn btn-next btn-warning",
-                      "onclick": "%next%",
-                      "inner": "Next"
-                    }
+                    "tag": "a",
+                    "typ": "button",
+                    "class": "btn btn-next btn-warning info",
+                    "onclick": "%next%",
+                    "inner": "Next"
                   }
                 ]
               }
@@ -100,12 +89,13 @@
           }
         ]
       },
-      /*pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
-       "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",*/
-      pdfJS: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/pdfjs/pdf.min.js" ],
-      css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
-        "https://tkless.github.io/ccm-components/pdf-viewer/resources/default.css"
+      // path_to_pdf: "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      scale: "1.5",
+      //responsive: "https://tkless.github.io/ccm-components/pdf_viewer/resources/responsive.css",
+
+      "pdfJS": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/pdfjs/pdf.min.js" ],
+      "css": [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" }
       ]
 
     },
@@ -129,29 +119,32 @@
        */
       let $;
 
+      /**
+       * is called once after the initialization and is then deleted
+       * @param {function} callback - called after all synchronous and asynchronous operations are complete
+       */
       let pdfDoc,
-        pageNum ,
-        pageRendering,
-        pageNumPending,
-        ctx;
-
-      let file;
+          pageNum,
+          pageRendering,
+          pageNumPending,
+          scale = 0.8,
+          ctx;
 
 
       this.init = callback => {
-
-        file = self.pdf;
+        if ( self.responsive ) ccm.load( { context: this.element.parentNode, url: self.responsive } );
+        else ccm.load( { context: this.element.parentNode, url: "https://tkless.github.io/ccm-components/pdf_viewer/resources/default.css" } );
         // pdf.js
         pdfDoc = null;
         pageNum = 1;
         pageRendering = false;
         pageNumPending = null;
+        scale = 0.8;
 
         callback();
       };
 
       this.ready = callback => {
-
         // set shortcut to help functions
         $ = self.ccm.helper;
 
@@ -163,17 +156,13 @@
         // specify PDF.js workerSrc property
         PDFJS.workerSrc = 'https://tkless.github.io/ccm-components/libs/pdfjs/pdf.worker.min.js';
 
-        if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
-
-        PDFJS.disableStream = true;
-
-        if ( my.pdf )
-        // Asynchronously downloads PDF.
-          PDFJS.getDocument( my.pdf ).then( function( pdf ) {
-            pdfDoc = pdf;
-            callback();
-          } );
-        else callback();
+        /**
+         * Asynchronously downloads PDF.
+         */
+        PDFJS.getDocument( my.path_to_pdf ).then( function( pdf ) {
+          pdfDoc = pdf;
+          callback();
+        });
 
       };
 
@@ -183,16 +172,9 @@
        */
       this.start = callback => {
 
-        // if pdf not defined, no file will be displayed
-        if ( !my.pdf ) {
-          $.setContent( self.element, 'No File to Display' );
-          return callback && callback();
-        }
-
         // render input elements
         $.setContent( self.element, $.html( my.html, {
-          href: my.pdf,
-          filename: ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop(),
+          href: my.path_to_pdf,
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -202,34 +184,24 @@
             onPrevPage();
           },
           next: function () {
-            if ( self.logger ) self.logger.log( 'prev', pageNum+1 );
-
+            if ( self.logger ) self.logger.log( 'next', pageNum+1 );
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
-          },
-          go_to: function () {
-            goTo( self.element.querySelector( '#page-num' ).value );
-            self.element.querySelector( '#page-num' ).value = '';
-          },
-          all: function () { pdfDoc.numPages; },
+          }
         } ) );
 
         // set canvas
         canvas = self.element.querySelector( 'canvas' );
-        // disable to downloading the files from canvas element
+        // disable to downloading the files
         canvas.addEventListener('contextmenu', function(e) {
           e.preventDefault();
         });
         ctx = canvas.getContext('2d');
-        let page_elem = self.element.querySelector( '#pdf-view' );
 
         // Initial/first page rendering
         renderPage( pageNum );
-        touchEventHandling();
-
-        if( callback ) callback();
 
         /**
          * Get page info from document, resize canvas accordingly, and render page.
@@ -239,10 +211,7 @@
           pageRendering = true;
           // Using promise to fetch the page
           pdfDoc.getPage( num ).then( function( page ) {
-            let viewport = page.getViewport(1);
-            let scale = page_elem.clientWidth / viewport.width;
-            viewport = page.getViewport(scale);
-
+            let viewport = page.getViewport( my.scale );
             canvas.height = viewport.height;
             canvas.width = viewport.width;
 
@@ -261,61 +230,15 @@
                 renderPage(pageNumPending);
                 pageNumPending = null;
               }
-
-              //set width to display page number in the middle of pdf-file
-              self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
             });
-          }, function (err) {
-            console.log( err )
           });
 
           // Update page counters
-          self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
+          self.element.querySelector('#page-num').innerHTML = num + " / "+ pdfDoc.numPages;
 
-        }
+          //set page width to display page number in the middle of pdf-file
+          //self.element.querySelector( '#page' ).style.width = self.element.querySelector( '#pdf-view' ).offsetWidth + "px";
 
-        function touchEventHandling() {
-          let reachedEdge = false;
-          let touchStart = null;
-          let touchDown = false;
-
-          page_elem.addEventListener( 'touchstart', function( ) {
-            touchDown = true;
-          });
-
-          page_elem.addEventListener( 'touchmove', function( event ) {
-            if ( page_elem.scrollLeft === 0 ||
-              page_elem.scrollLeft === page_elem.scrollWidth - page_elem.clientWidth ) {
-              reachedEdge = true;
-            } else {
-              reachedEdge = false;
-              touchStart = null;
-            }
-
-            if ( reachedEdge && touchDown ) {
-              if (touchStart === null) {
-                touchStart = event.changedTouches[0].clientX;
-              } else {
-                let distance = event.changedTouches[0].clientX - touchStart;
-                if (distance < -100) {
-                  touchStart = null;
-                  reachedEdge = false;
-                  touchDown = false;
-                  onNextPage();
-                } else if ( distance > 100 ) {
-                  touchStart = null;
-                  reachedEdge = false;
-                  touchDown = false;
-                  onPrevPage();
-                }
-              }
-            }
-          });
-
-          page_elem.addEventListener( 'touchend', function() {
-            touchStart = null;
-            touchDown = false;
-          });
         }
 
         /**
@@ -327,17 +250,7 @@
             pageNumPending = num;
           } else {
             renderPage(num);
-
-            //set width to display page number in the middle of pdf-file
-            self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
           }
-        }
-
-        function goTo( page ) {
-          if ( page > pdfDoc.numPages || page < 1 )
-            return;
-          pageNum = page;
-          queueRenderPage( parseInt( pageNum ) );
         }
 
         /**
@@ -361,6 +274,9 @@
           pageNum++;
           queueRenderPage(pageNum);
         }
+
+
+        if( callback ) callback();
 
       };
 

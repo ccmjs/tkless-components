@@ -3,9 +3,8 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @version latest 2.1.0
  * @changes
- * - download flag ist now optional
+ * version 2.2.0 (23.01.2018): add support for display of base64 encoded pdf-file, add touch-event supporting
  */
 
 {
@@ -16,7 +15,7 @@
      * @type {string}
      */
     name: 'pdf_viewer',
-    version:[ 2,1,0 ],
+    version:[ 2,0,0 ],
 
     /**
      * recommended used framework version
@@ -34,66 +33,15 @@
      */
     config: {
       html: {
-        "main": {
-          "id": "pdf-viewer",
-          "class": "container-fluid",
-          "inner": [
-            {
-              "id": "pdf-elem",
-              "inner": {
-                "id": "pdf-view",
-                "inner": {
-                  "id": "canvas",
-                  "tag": "canvas"
-                }
-              }
-            },
-            {
-              "id": "nav",
-              "inner": [
-                {
-                  "class": "input-group col-md-2 col-md-offset-5",
-                  "inner": [
-                    {
-                      "class": "input-group-btn",
-                      "inner": {
-                        "class": "btn btn-prev btn-info",
-                        "onclick": "%prev%",
-                        "inner": "Prev"
-                      }
-                    },
-                    {
-                      "id": "page-num",
-                      "style": "padding: 0 0 !important",
-                      "class": "form-control text-center",
-                      "tag": "input",
-                      "type": "number",
-                      "min": "1",
-                      "max": "%all%",
-                      "onchange": "%go_to%"
-                    },
-                    {
-                      "class": "input-group-btn",
-                      "inner": {
-                        "class": "btn btn-next btn-warning",
-                        "onclick": "%next%",
-                        "inner": "Next"
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "download": {
-          "inner": {
+        "id": "pdf-viewer",
+        "class": "container-fluid",
+        "inner": [
+          {
             "inner": {
               "tag": "a",
-              "id": "download",
               "href": "%href%",
               "title": "Folien herunterladen",
-              "download": "%filename%",
+              "download": '%filename%',
               "target": "_blank",
               "inner": [
                 {
@@ -104,15 +52,60 @@
               ]
             }
           },
-        }
+          {
+            "id": "pdf-elem",
+            "inner": {
+              "id": "pdf-view",
+              "inner": {
+                "id": "canvas",
+                "tag": "canvas"
+              }
+            }
+          },
+          {
+            "id": "nav",
+            "inner": [
+              {
+                "class": "input-group col-md-2 col-md-offset-5",
+                "inner": [
+                  {
+                    "class": "input-group-btn",
+                    "inner": {
+                      "class": "btn btn-prev btn-info",
+                      "onclick": "%prev%",
+                      "inner": "Prev"
+                    }
+                  },
+                  {
+                    "id": "page-num",
+                    "style": "padding: 0 0 !important",
+                    "class": "form-control text-center",
+                    "tag": "input",
+                    "type": "number",
+                    "min": "1",
+                    "max": "%all%",
+                    "onchange": "%go_to%"
+                  },
+                  {
+                    "class": "input-group-btn",
+                    "inner": {
+                      "class": "btn btn-next btn-warning",
+                      "onclick": "%next%",
+                      "inner": "Next"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
-      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
-      //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      download: true, //only set if file download is required
+      /*pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+       "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",*/
       pdfJS: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/pdfjs/pdf.min.js" ],
       css: [ "ccm.load", "https://tkless.github.io/ccm-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://tkless.github.io/ccm-components/libs/bootstrap/css/font-face.css" },
-        "../pdf-viewer/resources/default.css"
+        "https://tkless.github.io/ccm-components/pdf_viewer/resources/default.css"
       ]
 
     },
@@ -197,8 +190,9 @@
         }
 
         // render input elements
-        $.setContent( self.element, $.html( my.html.main, {
+        $.setContent( self.element, $.html( my.html, {
           href: my.pdf,
+          filename: ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop(),
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -221,15 +215,6 @@
           },
           all: function () { pdfDoc.numPages; },
         } ) );
-
-        // if file download is set in config, show download link
-        if ( my.download ) {
-          const download_elem = $.html( my.html.download, {
-            filename :  ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop()
-          } );
-
-          self.element.querySelector( '#pdf-elem' ).prepend( download_elem );
-        }
 
         // set canvas
         canvas = self.element.querySelector( 'canvas' );
