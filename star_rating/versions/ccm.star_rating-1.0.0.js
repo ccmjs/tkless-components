@@ -21,7 +21,7 @@
     },
 
     config: {
-      templates: {
+      html: {
         "main": {
           "class" : "rating"
         },
@@ -76,7 +76,7 @@
        */
       let $;
 
-      this.init = function ( callback ) {
+      this.init = callback => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
@@ -92,7 +92,7 @@
         callback();
       };
 
-      this.start = function ( callback ) {
+      this.start = callback => {
 
         $.dataset( my.data, function ( dataset ) {
 
