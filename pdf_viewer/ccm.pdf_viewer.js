@@ -44,7 +44,7 @@
               "id": "nav",
               "inner": [
                 {
-                  "class": "input-group col-md-2 col-md-offset-5",
+                  "class": "input-group",
                   "inner": [
                     {
                       "class": "input-group-btn",
@@ -80,22 +80,18 @@
         },
         "download": {
           "inner": {
-            "inner": {
-              "tag": "a",
-              "id": "download",
-              "href": "%href%",
-              "title": "Folien herunterladen",
-              "download": "%filename%",
-              "target": "_blank",
-              "inner": [
-                {
-                  "tag": "span",
-                  "class": "glyphicon glyphicon-download"
-                },
-                "&nbsp;Download&nbsp;"
-              ]
-            }
-          },
+            "class": "btn btn-link",
+            "id": "download",
+            "title": "Folien herunterladen",
+            "onclick": "%get_file%",
+            "inner": [
+              {
+                "tag": "span",
+                "class": "glyphicon glyphicon-download"
+              },
+              "&nbsp;Download&nbsp;"
+            ]
+          }
         }
       },
       // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
@@ -104,7 +100,7 @@
       pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.min.js"/*, "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js"*/ ] ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../pdf_viewer/resources/default.css"
+        "resources/default.css"
       ]
 
     },
@@ -190,7 +186,6 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html.main, {
-          href: my.pdf,
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -214,17 +209,49 @@
           all: function () { pdfDoc.numPages; },
         } ) );
 
-        // if file download is set in config, show download link
+        /*// if file download is set in config, show download link
         if ( my.download ) {
           const download_elem = $.html( my.html.download, {
+            get_file: function (){
+              //let blob = new Blob( my.pdf, {type: 'application/pdf'});
+              //window.location.href = window.URL.createObjectURL(blob);
+              //window.open("data:application/pdf;base64," + Base64.encode(my.pdf));
+              b64toBlob( my.pdf,  'application/pdf');
+              window.location.href = window.URL.createObjectURL( b64toBlob( my.pdf,  'application/pdf') );
+            },
             filename :  ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop()
           } );
 
           self.element.querySelector( '#pdf-elem' ).prepend( download_elem );
+          //download_elem.querySelector( 'a' ).href = my.pdf;
         }
 
+        function b64toBlob(b64Data, contentType, sliceSize) {
+          contentType = contentType || '';
+          sliceSize = sliceSize || 512;
+
+          var byteCharacters = btoa(b64Data);
+          var byteArrays = [];
+
+          for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+              byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+          }
+
+          var blob = new Blob(byteArrays, {type: contentType});
+          return blob;
+        }*/
+
         // set canvas
-        canvas = self.element.querySelector( 'canvas' );
+        const canvas = self.element.querySelector( 'canvas' );
         // disable to downloading the files from canvas element
         canvas.addEventListener('contextmenu', function(e) {
           e.preventDefault();
@@ -246,9 +273,10 @@
           pageRendering = true;
           // Using promise to fetch the page
           pdfDoc.getPage( num ).then( function( page ) {
+
             let viewport = page.getViewport(1);
             let scale = page_elem.clientWidth / viewport.width;
-            viewport = page.getViewport(scale);
+            viewport = page.getViewport( scale );
 
             canvas.height = viewport.height;
             canvas.width = viewport.width;
@@ -261,7 +289,7 @@
             let renderTask = page.render( renderContext );
 
             // Wait for rendering to finish
-            renderTask.promise.then(function() {
+            renderTask.promise.then( function() {
               pageRendering = false;
               if (pageNumPending !== null) {
                 // New page rendering is pending
@@ -269,15 +297,18 @@
                 pageNumPending = null;
               }
 
-              //set width to display page number in the middle of pdf-file
-              self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+              if ( pdfDoc.numPages > 1 ) {
+                //set width to display page number in the middle of pdf-file
+                self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+                // Update page counters
+                self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
+              }
+              else
+                self.element.querySelector( '#nav' ).remove();
             });
-          }, function (err) {
+          }, function ( err ) {
             console.log( err )
           });
-
-          // Update page counters
-          self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
 
         }
 
@@ -329,7 +360,7 @@
          * If another page rendering in progress, waits until the rendering is
          * finised. Otherwise, executes rendering immediately.
          */
-        function queueRenderPage(num) {
+        function queueRenderPage( num ) {
           if (pageRendering) {
             pageNumPending = num;
           } else {
