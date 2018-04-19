@@ -9,12 +9,12 @@ ccm.files[ "datastore.js" ] = {
             "store": [ "ccm.store", { "store": "slidecast_comments", "url": "http://localhost:8080" } ],
             "key": "demo_offline_slide01"
           },
-          "user": [ "ccm.instance", "https://akless.github.io/ccm-components/user/ccm.user.js" ],
+          "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ],
           "voting": [ "ccm.component", "../voting/ccm.voting.js", {
             "icon_likes": "fa fa-lg fa-chevron-up",
             "icon_dislikes": "fa fa-lg fa-chevron-down",
             "data": { "store": [ "ccm.store", { "store": "voting", "url": "ws://localhost:8080" } ] },
-            "user": [ "ccm.instance", "https://akless.github.io/ccm-components/user/versions/ccm.user-2.0.0.min.js" ]
+            "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js" ]
           } ]
         } ]
       },
@@ -27,7 +27,7 @@ ccm.files[ "datastore.js" ] = {
             store: [ 'ccm.store', { store: 'slidecast_comments', url: 'https://ccm.inf.h-brs.de' } ],
             key: 'demo_offline_slide02'
           },
-          user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/ccm.user.js' ]
+          user: [ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/ccm.user.js' ]
         } ]
       },
       {
@@ -37,7 +37,7 @@ ccm.files[ "datastore.js" ] = {
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie04.jpg",
 
-        "optional_content": [ "ccm.instance", "https://akless.github.io/ccm-components/le/versions/ccm.le-2.0.0.min.js", { "key": ["ccm.get","https://akless.github.io/akless/ccm/ccm-overview/configs.js","le"] } ]
+        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/le/versions/ccm.le-2.0.0.min.js", { "key": ["ccm.get","https://akless.github.io/akless/ccm/ccm-overview/configs.js","le"] } ]
       },
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie05.jpg"

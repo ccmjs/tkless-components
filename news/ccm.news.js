@@ -100,7 +100,7 @@
         store: [ 'ccm.store', '../news/resources/datastore.js' ],
         key: 'demo'
       },
-      user: [ 'ccm.instance', 'https://akless.github.io/ccm-components/user/versions/beta/ccm.user-4.0.0.min.js' ],
+      user: [ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/beta/ccm.user-4.0.0.min.js' ],
       icons: [ 'ccm.load',
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
