@@ -192,7 +192,7 @@
 
                   if ( !my.col_settings ) {
 
-                    if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] ? values[ i ][ j ] : '' );
+                    if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] != undefined ? values[ i ][ j ] : '' );
 
                   }
                   else {
