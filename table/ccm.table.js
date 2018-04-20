@@ -1,6 +1,5 @@
 /**
  * @overview ccm component for table generating
- * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
  */
@@ -113,11 +112,6 @@
        * @type {Object.<string,function>}
        */
       let $;
-
-      this.init = callback => {
-
-        callback();
-      };
 
       this.ready = callback => {
 
