@@ -12,7 +12,7 @@
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
     config: {
-      templates: {
+      html: {
         "main": {
           "class" : "rating"
         },
@@ -33,52 +33,69 @@
           "title": "%title%"
         }
       },
-
       data:  {
-          store: [ 'ccm.store', '../star_rating/star_rating_datastore.js' ],
+          store: [ 'ccm.store', 'resources/datastore.js' ],
           key:   'demo'
       },
       star_title: [ "Gefällt mir gar nicht", "Gefällt mir nicht",
         "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ],
       user:  [ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/ccm.user.min.js' ],
       css: [ 'ccm.load',
-        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        '../star_rating/style.css'
+        'resources/default.css'
       ]
     },
 
 
     Instance: function () {
-      var self = this;
+      /**
+       * own reference for inner functions
+       * @type {Instance}
+       */
+      const self = this;
 
-      this.init = function ( callback ) {
+      /**
+       * privatized instance members
+       * @type {object}
+       */
+      let my;
+
+      /**
+       * shortcut to help functions
+       * @type {Object.<string,function>}
+       */
+      let $;
+
+      this.init = callback => {
+
+        // set shortcut to help functions
+        $ = self.ccm.helper;
+
+        // privatize all possible instance members
+        my = $.privatize( self );
+
+        if ( self.logger ) self.logger.log( 'ready', my );
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange = function () { self.start(); };
+        my.data.store.onChange = function () { self.start(); };
 
         callback();
       };
 
-      this.start = function ( callback ) {
+      this.start = callback => {
 
-        document.head.appendChild( self.ccm.helper.html( {
-           tag:   'style',
-           inner: "@font-face { font-family: 'FontAwesome'; src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0'); src: url('../libs/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../libs/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../libs/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../libs/font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg'); font-weight: normal; font-style: normal; }"
-        } ) );
+        $.dataset( my.data, function ( dataset ) {
 
-        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
-
-          var main_elem = self.ccm.helper.html( self.templates.main );
+          let main_elem = $.html( my.html.main );
 
           // render html content
           renderStars();
 
-
           function renderStars() {
 
-            for ( var i = 5; i >= 1; i-- ) {
-              var input_elem = self.ccm.helper.html( self.templates.input, {
+            for ( let i = 5; i >= 1; i-- ) {
+              const input_elem = $.html( my.html.input, {
                 id: i,
                 star: i,
                 click: function () { if ( self.user ) doVoting(); }
@@ -87,23 +104,24 @@
               if ( self.user && self.user.isLoggedIn() && dataset[ i ] && dataset[ i ][ self.user.data().user ] ) input_elem.checked = true;
               main_elem.appendChild( input_elem );
 
-              main_elem.appendChild( self.ccm.helper.html( self.templates.label, {
+              main_elem.appendChild( $.html( my.html.label, {
                 for: i,
-                title: self.star_title[ i - 1 ]
+                title: my.star_title[ i - 1 ]
               } ) );
             }
 
-            self.ccm.helper.setContent( self.element, self.ccm.helper.protect( main_elem ) );
+            $.setContent( self.element, main_elem );
 
+            if ( callback )callback();
           }
 
           function doVoting() {
 
             self.user.login( function () {
 
-              var checked = self.element.querySelector( 'input[name="rating"]:checked' ).value;
+              let checked = self.element.querySelector( 'input[name="rating"]:checked' ).value;
 
-              var user = self.user.data().key;
+              let user = self.user.data().user;
 
               if ( !dataset[ checked ] )
                 dataset[ checked ] = {};
@@ -115,7 +133,7 @@
               // not voted
               else {
 
-                for ( var key in dataset ) {
+                for ( let key in dataset ) {
                   if ( dataset[ key ][ user ] ) delete dataset[ key ][ user ];
                 }
 
@@ -124,12 +142,10 @@
               }
 
               // update dataset for rendering => (re)render own content
-              self.data.store.set( dataset, function () { self.start(); } );
+              my.data.store.set( dataset, function () { self.start(); } );
 
             });
           }
-
-          if ( callback )callback();
         } );
 
       };

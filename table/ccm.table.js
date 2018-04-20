@@ -186,7 +186,7 @@
 
                   if ( !my.col_settings ) {
 
-                    if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] ? values[ i ][ j ] : '' );
+                    if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] !== undefined ? values[ i ][ j ] : '' );
 
                   }
                   else {
@@ -200,7 +200,7 @@
                     const input_tag = table_col.appendChild( $.html( input ) );
 
                     // set values of input fields
-                    if ( values && ( i < values.length ) ) values[ i ][ j ] ? input_tag.value = values[ i ][ j ]: input_tag.value = '';
+                    if ( values && ( i < values.length ) ) values[ i ][ j ] !== undefined ? input_tag.value = values[ i ][ j ]: input_tag.value = '';
                   }
 
                   table_row.appendChild( table_col );

@@ -68,7 +68,7 @@
           key:   'demo'
       },
       css: [ 'ccm.load',
-        { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
+        { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
         '../star_rating_result/resources/default.css'
       ]
@@ -111,7 +111,7 @@
 
       this.start = callback => {
 
-        $.dataset( my.data.store, my.data.key, function ( dataset ) {
+        $.dataset( my.data, function ( dataset ) {
           if ( !dataset ) dataset = {};
 
           $.setContent( self.element, $.html( my.html.main ) );
