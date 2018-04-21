@@ -26,7 +26,7 @@
     config: {
       html: {
         "text": {
-          "id": "container",
+          "class": "container-fluid",
           "inner": [
             {
               "id": "text"
@@ -45,17 +45,18 @@
           "onclick": "%submit%"
         }
       },
-      data: {
-        "key": "demo",
-        "value": "<h1>Click the various types of berries mentioned in the text below!</h1>" +
-        "<p>Bilberries, also known as blueberries are edible, nearly black berries found in nutrient-poor soils.</p>" +
-        "<p>Cloudberries are edible orange berries similar to raspberries or blackberries found in alpine and arctic tundra.</p>" +
-        "<p>Redcurrants are red translucent berries with a diameter of 8–10 mm, and are closely related to blackcurrants.</p>"
-      },
+      inner: "<h1>Mark words in the text below</h1><p>Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen.</p>" +
+      "<p>Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um Schriften zu testen.</p>" +
+      "<p>Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze »Pangrams«.</p>" +
+      "<p>Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog.</p>" +
+      "<p>Oft werden in Typoblindtexte auch fremdsprachige Satzteile eingebaut (AVAIL® and Wefox™ are testing aussi la Kerning), um die Wirkung in anderen Sprachen zu testen.</p>" +
+      "<p>In Lateinisch sieht zum Beispiel fast jede Schrift gut aus. Quod erat demonstrandum. Seit 1975 fehlen in den meisten Testtexten die Zahlen, weswegen nach TypoGb.</p>" +
+      "<p>204 § ab dem Jahr 2034 Zahlen in 86 der Texte zur Pflicht werden. Nichteinhaltung wird mit bis zu 245 € oder 368 $ bestraft.</p>",
       //submit: true,
       //onfinish
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        'resources/default.css'
       ]
     },
 
@@ -96,22 +97,41 @@
        */
       this.start = callback => {
 
-        $.dataset( my.data, data => {
+        const main_elem = $.html( my.html.text );
 
-          const main_elem = $.html( my.html.text );
+        const div = document.createElement( 'div' );
+        div.innerHTML = my.inner;
 
-          $.setContent( main_elem.querySelector( '#text' ), my.data.value );
+        const text_nodes = collectTextNodes( div );
 
-          main_elem.querySelector( '#text' ).addEventListener( 'click', function (event) {
-            console.log( event.target.value );
-          });
+        text_nodes.map( ( node )  => {
+          const value = node.textContent.replace( /\S+(?<![,\.])/g, '<span marked>$&</span>' );
+          node.parentNode.replaceChild( $.html( { tag: 'text', inner: value } ), node );
+        });
 
-          $.setContent( self.element, main_elem );
+        $.setContent( main_elem.querySelector( '#text' ), div );
 
-          callback && callback();
+        main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
+          const span = event.target;
+          if ( !span.hasAttribute( 'marked' ) ) return;
 
-        } );
+          span.classList.toggle( 'selected' );
 
+          self.onchange && self.onchange( span );
+        });
+
+        $.setContent( self.element, main_elem );
+
+        callback && callback();
+
+        function collectTextNodes( node ){
+          let all = [];
+          for ( node = node.firstChild; node; node = node.nextSibling ){
+            if ( node.nodeType === 3 ) all.push(node);
+            else all = all.concat( collectTextNodes( node ) );
+          }
+          return all;
+        }
       };
 
       this.getValue = () => {
