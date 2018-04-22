@@ -39,10 +39,25 @@
 
         "submit": {
           "tag": "button",
-          "class": "btn btn-default pull-right",
+          "class": "%class%",
           "typ": "button",
-          "inner": "Submit",
-          "onclick": "%submit%"
+          "inner": "%label%",
+          "onclick": "%check%"
+        },
+
+        "feedback": {
+          "inner": [
+            {
+              "id": "points",
+              "inner": "%points%"
+            },
+            {
+              "id": "feedback",
+              "inner": {
+                "id": "progress-bar"
+              }
+            }
+          ]
         }
       },
       inner: "<h1>Mark words in the text below</h1><p>Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen.</p>" +
@@ -52,7 +67,8 @@
       "<p>Oft werden in Typoblindtexte auch fremdsprachige Satzteile eingebaut (AVAIL® and Wefox™ are testing aussi la Kerning), um die Wirkung in anderen Sprachen zu testen.</p>" +
       "<p>In Lateinisch sieht zum Beispiel fast jede Schrift gut aus. Quod erat demonstrandum. Seit 1975 fehlen in den meisten Testtexten die Zahlen, weswegen nach TypoGb.</p>" +
       "<p>204 § ab dem Jahr 2034 Zahlen in 86 der Texte zur Pflicht werden. Nichteinhaltung wird mit bis zu 245 € oder 368 $ bestraft.</p>",
-      //submit: true,
+      submit: true,
+      keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
       //onfinish
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
@@ -79,13 +95,25 @@
        */
       let $;
 
-      this.ready = callback => {
+      let solution;
+
+      this.init = callback => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
 
+        // text is given as HTML Element Node? => use innerHTML
+        if ( $.isElementNode( self.inner ) ) self.inner = self.inner.innerHTML;
+
+        callback();
+      };
+
+      this.ready = callback => {
+
         // privatize all possible instance members
         my = $.privatize( self );
+
+        my.solution = [];
 
         callback();
 
@@ -97,33 +125,78 @@
        */
       this.start = callback => {
 
+        if ( !my.inner ){
+          $.setContent( self.element, 'Nothing to display!' );
+          return callback();
+        }
+
         const main_elem = $.html( my.html.text );
+        prepareTextForMarking();
 
-        const div = document.createElement( 'div' );
-        div.innerHTML = my.inner;
+        if ( my.submit ) {
+          main_elem.appendChild( $.html( my.html.submit, {
+            class: 'btn btn-success btn-lg',
+            label: 'Check',
+            check: function ( event ) {
+              event.preventDefault();
 
-        const text_nodes = collectTextNodes( div );
+              let zahl = 0;
 
-        text_nodes.map( ( node )  => {
-          const value = node.textContent.replace( /\S+(?<![,\.])/g, '<span marked>$&</span>' );
-          node.parentNode.replaceChild( $.html( { tag: 'text', inner: value } ), node );
-        });
+              my.keywords.every( keyword => {
+                if (  my.solution.indexOf( keyword ) !== -1 ) zahl++;
+                else zahl;
+                return my.solution.indexOf( keyword ) !== -1;
+              });
 
-        $.setContent( main_elem.querySelector( '#text' ), div );
+              const elem = $.html( my.html.feedback, {
+                points: zahl + '/' + my.keywords.length
+              } );
+              main_elem. querySelector( '#conclusion' ).appendChild( elem );
 
-        main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
-          const span = event.target;
-          if ( !span.hasAttribute( 'marked' ) ) return;
 
-          span.classList.toggle( 'selected' );
+              checkSolution(); //TODO
+              renderProgressBar( zahl );
 
-          self.onchange && self.onchange( span );
-        });
+            }
+          } ) );
+        }
 
         $.setContent( self.element, main_elem );
 
         callback && callback();
 
+        function prepareTextForMarking() {
+          const div = document.createElement( 'div' );
+          div.innerHTML = my.inner;
+
+          const text_nodes = collectTextNodes( div );
+
+          text_nodes.map( ( node )  => {
+            const value = node.textContent.replace( /\S+(?<![,\.])/g, '<span marked>$&</span>' );
+            node.parentNode.replaceChild( $.html( { tag: 'text', inner: value } ), node );
+          });
+
+          $.setContent( main_elem.querySelector( '#text' ), div );
+
+          main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
+            const span = event.target;
+            if ( !span.hasAttribute( 'marked' ) ) return;
+
+            // add selected class to span tags
+            span.classList.toggle( 'selected' );
+
+            // add or remove selected words from solutions array
+            if( my.solution.includes( span.innerHTML ) )
+              my.solution.splice( [ my.solution.indexOf( span.innerHTML ) ], 1 );
+            else
+              my.solution.push( span.innerHTML );
+
+            // set onChange behavior
+            self.onchange && self.onchange( span );
+          });
+        }
+
+        // pile up all text nodes from given div element
         function collectTextNodes( node ){
           let all = [];
           for ( node = node.firstChild; node; node = node.nextSibling ){
@@ -132,13 +205,42 @@
           }
           return all;
         }
+
+        // TODO
+        function checkSolution() {
+          
+        }
+
+        function renderProgressBar( zahl ) {
+          const goal = zahl * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
+          let width = 1;
+          let id = setInterval(frame, 10);
+
+          function frame() {
+            if ( width >= goal ) {
+              clearInterval( id );
+            } else {
+              width++;
+              self.element.querySelector( '#progress-bar' ).style.width = width + 'px';
+            }
+          }
+
+          main_elem.querySelector( 'button' ).remove();
+
+          main_elem.appendChild( $.html( my.html.submit, {
+            class: 'btn btn-primary btn-lg',
+            label: 'Retry',
+            check: function ( event ) {
+              event.preventDefault();
+              self.start();
+            }
+          } ) );
+
+
+        }
       };
 
-      this.getValue = () => {
-
-        return 0;
-      };
-
+      this.getValue = () => my.solution;
     }
 
   };
