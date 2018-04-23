@@ -37,12 +37,18 @@
           ]
         },
 
-        "submit": {
+        "button": {
           "tag": "button",
           "class": "%class%",
           "typ": "button",
-          "inner": "%label%",
-          "onclick": "%check%"
+          "onclick": "%check%",
+          "inner": [
+            {
+              "tag": "span",
+              "class": "%glyphicon%"
+            },
+            "%label%"
+          ]
         },
 
         "feedback": {
@@ -69,6 +75,7 @@
       "<p>204 § ab dem Jahr 2034 Zahlen in 86 der Texte zur Pflicht werden. Nichteinhaltung wird mit bis zu 245 € oder 368 $ bestraft.</p>",
       submit: true,
       keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
+      show_solution: true,
       //onfinish
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
@@ -113,7 +120,7 @@
         // privatize all possible instance members
         my = $.privatize( self );
 
-        my.solution = [];
+        my.solutions = [];
 
         callback();
 
@@ -134,29 +141,12 @@
         prepareTextForMarking();
 
         if ( my.submit ) {
-          main_elem.appendChild( $.html( my.html.submit, {
+          main_elem.appendChild( $.html( my.html.button, {
             class: 'btn btn-success btn-lg',
             label: 'Check',
             check: function ( event ) {
               event.preventDefault();
-
-              let zahl = 0;
-
-              my.keywords.every( keyword => {
-                if (  my.solution.indexOf( keyword ) !== -1 ) zahl++;
-                else zahl;
-                return my.solution.indexOf( keyword ) !== -1;
-              });
-
-              const elem = $.html( my.html.feedback, {
-                points: zahl + '/' + my.keywords.length
-              } );
-              main_elem. querySelector( '#conclusion' ).appendChild( elem );
-
-
-              checkSolution(); //TODO
-              renderProgressBar( zahl );
-
+              verify();
             }
           } ) );
         }
@@ -172,7 +162,7 @@
           const text_nodes = collectTextNodes( div );
 
           text_nodes.map( ( node )  => {
-            const value = node.textContent.replace( /\S+(?<![,\.])/g, '<span marked>$&</span>' );
+            const value = node.textContent.replace( /\S+(?<![,\.:])/g, '<span marked>$&</span>' );
             node.parentNode.replaceChild( $.html( { tag: 'text', inner: value } ), node );
           });
 
@@ -186,10 +176,10 @@
             span.classList.toggle( 'selected' );
 
             // add or remove selected words from solutions array
-            if( my.solution.includes( span.innerHTML ) )
-              my.solution.splice( [ my.solution.indexOf( span.innerHTML ) ], 1 );
+            if( my.solutions.includes( span.innerHTML ) )
+              my.solutions.splice( [ my.solutions.indexOf( span.innerHTML ) ], 1 );
             else
-              my.solution.push( span.innerHTML );
+              my.solutions.push( span.innerHTML );
 
             // set onChange behavior
             self.onchange && self.onchange( span );
@@ -206,13 +196,59 @@
           return all;
         }
 
-        // TODO
-        function checkSolution() {
-          
+        function verify() {
+          const keywords = $.clone( my.keywords );
+
+          const correct = [];
+          const incorrect = [];
+
+          my.solutions.map( solution => {
+            if ( keywords.includes( solution) ) {
+              correct.push( solution );
+              keywords.splice( [ keywords.indexOf( solution ) ], 1 );
+            }
+            else
+              incorrect.push( solution );
+          } );
+
+          [ ...main_elem.querySelectorAll( 'span.selected' ) ].map( span => {
+
+            if ( correct.includes( span.innerHTML ) ) {
+              span.classList.add( 'correct' );
+            }
+            else span.classList.add( 'incorrect' );
+
+          });
+
+          if ( my.show_solution ) {
+            // render solution button
+            main_elem.appendChild( $.html( my.html.button, {
+              label: 'Solution',
+              class: 'btn btn-warning btn-lg solution-btn',
+              glyphicon: 'glyphicon glyphicon-eye-open',
+              check: function () {
+                [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
+
+                  if ( keywords.includes( span.innerHTML ) ) {
+                    span.classList.add( 'solution' );
+                    keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
+                  }
+                });
+              }
+            } ) );
+          }
+
+          const elem = $.html( my.html.feedback, {
+            points: correct.length + '/' + my.keywords.length
+          } );
+          main_elem. querySelector( '#conclusion' ).appendChild( elem );
+
+          renderProgressBar( correct.length );
+
         }
 
-        function renderProgressBar( zahl ) {
-          const goal = zahl * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
+        function renderProgressBar( correct ) {
+          const goal = correct * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
           let width = 1;
           let id = setInterval(frame, 10);
 
@@ -227,20 +263,22 @@
 
           main_elem.querySelector( 'button' ).remove();
 
-          main_elem.appendChild( $.html( my.html.submit, {
+          const retry_btn = main_elem.appendChild( $.html( my.html.button, {
             class: 'btn btn-primary btn-lg',
             label: 'Retry',
+            glyphicon: 'glyphicon glyphicon-repeat',
             check: function ( event ) {
               event.preventDefault();
+              my.solutions = [];
               self.start();
             }
           } ) );
-
+           main_elem.querySelector( '.solution-btn' ).parentNode.insertBefore( retry_btn, main_elem.querySelector( '.solution-btn' ) );
 
         }
       };
 
-      this.getValue = () => my.solution;
+      this.getValue = () => my.solutions;
     }
 
   };

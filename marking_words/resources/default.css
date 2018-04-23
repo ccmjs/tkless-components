@@ -8,6 +8,7 @@ span {
 }
 
 .selected,
+.solution,
 #points {
   font-family: Verdana, Arial, sans-serif;
   font-size: 15px;
@@ -26,7 +27,7 @@ text {
 }
 
 #conclusion > div {
-  width: 25%;
+  width: 25rem;
   margin: 2em 0;
   padding: 0.5em 1em;
   display: flex;
@@ -51,4 +52,18 @@ text {
   height: 20px;
   background-color: #4CAF50;
 
+}
+
+.correct {
+  background-color: rgba(62, 143, 62, 0.45);
+}
+
+.incorrect {
+  background-color: rgba(255, 0, 0, 0.36);
+}
+
+.solution {
+  padding: 5px 10px 5px 10px;
+  border: solid 1px rgba(62, 143, 62, 0.72);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgb(62, 143, 62);
 }
