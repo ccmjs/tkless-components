@@ -41,7 +41,7 @@
           "tag": "button",
           "class": "%class%",
           "typ": "button",
-          "onclick": "%check%",
+          "onclick": "%click%",
           "inner": [
             {
               "tag": "span",
@@ -74,9 +74,16 @@
       "<p>In Lateinisch sieht zum Beispiel fast jede Schrift gut aus. Quod erat demonstrandum. Seit 1975 fehlen in den meisten Testtexten die Zahlen, weswegen nach TypoGb.</p>" +
       "<p>204 § ab dem Jahr 2034 Zahlen in 86 der Texte zur Pflicht werden. Nichteinhaltung wird mit bis zu 245 € oder 368 $ bestraft.</p>",
       submit: true,
-      keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
+      submit_button_label: "Save",
+      retry: true,
       show_solution: true,
-      //onfinish
+      check: true,
+      keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
+      onfinish: {
+        log: true
+      },
+      "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+      //onchange
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         'resources/default.css'
@@ -102,7 +109,7 @@
        */
       let $;
 
-      let solution;
+      let solutions;
 
       this.init = callback => {
 
@@ -121,6 +128,7 @@
         my = $.privatize( self );
 
         my.solutions = [];
+        if ( self.logger ) self.logger.log( 'ready', my );
 
         callback();
 
@@ -132,6 +140,8 @@
        */
       this.start = callback => {
 
+        if ( self.logger ) self.logger.log( 'start' );
+
         if ( !my.inner ){
           $.setContent( self.element, 'Nothing to display!' );
           return callback();
@@ -140,13 +150,27 @@
         const main_elem = $.html( my.html.text );
         prepareTextForMarking();
 
+        if ( my.check ) {
+          main_elem.appendChild( $.html( my.html.button, {
+            class: 'btn btn-success btn-lg check-btn',
+            label: 'Check',
+            click: function ( event ) {
+              event.preventDefault();
+              if ( my.solutions.length === 0 ) return alert( 'No solution to check !!!');
+              verify();
+            }
+          } ) );
+        }
+
         if ( my.submit ) {
           main_elem.appendChild( $.html( my.html.button, {
-            class: 'btn btn-success btn-lg',
-            label: 'Check',
-            check: function ( event ) {
+            class: 'btn btn-info btn-lg save-btn',
+            label: my.submit_button_label,
+            glyphicon: 'glyphicon glyphicon-save',
+            click: function ( event ) {
               event.preventDefault();
-              verify();
+              $.onFinish( self );
+              if( self.logger ) self.logger.log( 'onfinish', self );
             }
           } ) );
         }
@@ -183,6 +207,8 @@
 
             // set onChange behavior
             self.onchange && self.onchange( span );
+
+            if ( self.logger ) self.logger.log( 'change', { word: span.innerHTML, selected: span.classList.contains('selected')} );
           });
         }
 
@@ -220,24 +246,6 @@
 
           });
 
-          if ( my.show_solution ) {
-            // render solution button
-            main_elem.appendChild( $.html( my.html.button, {
-              label: 'Solution',
-              class: 'btn btn-warning btn-lg solution-btn',
-              glyphicon: 'glyphicon glyphicon-eye-open',
-              check: function () {
-                [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
-
-                  if ( keywords.includes( span.innerHTML ) ) {
-                    span.classList.add( 'solution' );
-                    keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
-                  }
-                });
-              }
-            } ) );
-          }
-
           const elem = $.html( my.html.feedback, {
             points: correct.length + '/' + my.keywords.length
           } );
@@ -245,6 +253,34 @@
 
           renderProgressBar( correct.length );
 
+          if ( my.show_solution ) {
+            // render solution button
+            main_elem.appendChild( $.html( my.html.button, {
+              label: 'Solution',
+              class: 'btn btn-warning btn-lg solution-btn',
+              glyphicon: 'glyphicon glyphicon-eye-open',
+              click: function () {
+                const missed = [];
+                [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
+                  if ( keywords.includes( span.innerHTML ) ) {
+                    missed.push( span.innerHTML );
+                    span.classList.add( 'solution' );
+                    keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
+                  }
+                });
+
+                if ( self.logger ) self.logger.log( 'solution', { missed: missed } );
+              }
+            } ) );
+          }
+
+          if ( self.logger ) self.logger.log( 'check', {
+            marked: self.getValue(),
+            correct: correct,
+            incorrect: incorrect,
+            points: correct.length,
+            amount: my.keywords.length
+          });
         }
 
         function renderProgressBar( correct ) {
@@ -261,20 +297,21 @@
             }
           }
 
-          main_elem.querySelector( 'button' ).remove();
+          main_elem.querySelector( '.check-btn' ).remove();
 
-          const retry_btn = main_elem.appendChild( $.html( my.html.button, {
-            class: 'btn btn-primary btn-lg',
-            label: 'Retry',
-            glyphicon: 'glyphicon glyphicon-repeat',
-            check: function ( event ) {
-              event.preventDefault();
-              my.solutions = [];
-              self.start();
-            }
-          } ) );
-           main_elem.querySelector( '.solution-btn' ).parentNode.insertBefore( retry_btn, main_elem.querySelector( '.solution-btn' ) );
-
+          if ( my.retry ) {
+            const retry_btn = main_elem.appendChild( $.html( my.html.button, {
+              class: 'btn btn-primary btn-lg retry-btn',
+              label: 'Retry',
+              glyphicon: 'glyphicon glyphicon-repeat',
+              click: function ( event ) {
+                event.preventDefault();
+                my.solutions = [];
+                self.start();
+              }
+            } ) );
+            main_elem.querySelector( 'button' ).parentNode.insertBefore( retry_btn, main_elem.querySelector( '.solution-btn' ) );
+          }
         }
       };
 
