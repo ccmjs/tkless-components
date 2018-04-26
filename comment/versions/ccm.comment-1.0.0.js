@@ -12,8 +12,8 @@
     version: [ 1,0,0 ],
 
     ccm: {
-      url: 'https://ccmjs.github.io/ccm/versions/ccm-11.5.0.min.js',
-      integrity: 'sha384-7lrORUPPd2raLsrPJYo0Arz8csPcGzgyNbKOr9Rx3k0ECU0T8BP+B1ejo8+wmUzh',
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.3.1.0.min.js',
+      integrity: 'sha384-0EhLGq8EAxc2nd3NuK+aLtqSj6wfK7lrFCLPbKmBKRRoKjvND/3zPza8zqgNFSur',
       crossorigin: 'anonymous'
     },
 
@@ -24,12 +24,11 @@
           "inner": [
             {
               "tag": "h3",
-              "class": "row text-success",
+              "class": "row text-muted",
               "inner": "Comments"
             },
             {
-              "id": "comment-list",
-              "class": "row"
+              "id": "comment-list"
             },
             {
               "tag": "form",
@@ -99,101 +98,97 @@
         "simple_comment": {
           "inner": [
             {
-              "class": "row comment-item",
+              "class": "comment-item row",
               "inner": [
                 {
-                  "class": "col-md-1 col-xs-1 voting-area"
-                },
-                {
-                  "class": "col-md-11 col-xs-11 comment-overview",
+                  "class": " comment-overview callout callout-primary",
                   "inner": [
-                    "%comment_content%&nbsp;",
                     {
-                      "tag": "span",
                       "class": "sub-text",
                       "inner": [
                         {
                           "tag": "span",
-                          "class": "glyphicon glyphicon-minus",
-                          "aria-hidden": "true"
-                        },
-                        "&nbsp;",
-                        {
-                          "tag": "span",
+                          "aria-label": "user: ",
                           "class": "glyphicon glyphicon-user",
                           "aria-hidden": "true"
                         },
                         "&nbsp;%user%&nbsp;",
                         {
                           "tag": "span",
+                          "aria-label": "post: ",
                           "class": "glyphicon glyphicon-time",
                           "aria-hidden": "true"
                         },
                         "&nbsp;%date%&nbsp;"
                       ]
+                    },
+                    {
+                      "class": "comment-content",
+                      "inner": [
+                        "%comment_content%"
+                      ]
+                    },
+                    {
+                      "class": "voting-area"
                     }
                   ]
                 }
               ]
-            },
-            {
-              "tag": "hr",
-              "class": "row"
             }
           ]
         },
         "expanded_comment": {
           "inner": {
-              "class": "panel panel-white post panel-shadow",
-              "inner": [
-                {
-                  "class": "post-heading",
-                  "inner":[
-                    {
-                      "class": "pull-left image",
-                      "inner": {
-                        "tag": "img",
-                        "src": "https://ccmjs.github.io/tkless-components/comment/resources/user.jpg",
-                        "class": "img-circle avatar",
-                        "alt": "user profile image"
+            "class": "panel panel-white post panel-shadow",
+            "inner": [
+              {
+                "class": "post-heading",
+                "inner":[
+                  {
+                    "class": "pull-left image",
+                    "inner": {
+                      "tag": "img",
+                      "src": "../../ccm-components/comment/resources/user.jpg",
+                      "class": "img-circle avatar",
+                      "alt": "user profile image"
+                    }
+                  },
+                  {
+                    "class": "pull-left meta",
+                    "inner": [
+                      {
+                        "class": "title h5",
+                        "inner": "<b>%user%</b>&nbsp;made a post."
+                      },
+                      {
+                        "tag": "h6",
+                        "class": "text-muted time",
+                        "inner": "%date%"
                       }
-                    },
-                    {
-                      "class": "pull-left meta",
-                      "inner": [
-                        {
-                          "class": "title h5",
-                          "inner": "<b>%user%</b>&nbsp;made a post."
-                        },
-                        {
-                          "tag": "h6",
-                          "class": "text-muted time",
-                          "inner": "%date%"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "class": "post-description",
-                  "inner": [
-                    {
-                      "tag": "p",
-                      "class": "comment-overview",
-                      "inner": "%comment_content%&nbsp;"
-                    },
-                    {
-                      "class": "stats voting-area"
-                    }
-                  ]
-                }
-              ]
-            }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "post-description",
+                "inner": [
+                  {
+                    "tag": "p",
+                    "class": "comment-overview",
+                    "inner": "%comment_content%&nbsp;"
+                  },
+                  {
+                    "class": "stats voting-area"
+                  }
+                ]
+              }
+            ]
+          }
         },
         "edit": {
           "tag": "span",
           "type": "btn",
-          "class": "btn",
+          "class": "btn edit",
           "onclick": "%edit%",
           "inner": [
             {
@@ -217,11 +212,28 @@
     },
 
     Instance: function () {
-      var self = this;
-      var editor;
-      var dataset;
+      /**
+       * own reference for inner functions
+       * @type {Instance}
+       */
+      const self = this;
 
-      this.init = function ( callback ) {
+      /**
+       * privatized instance members
+       * @type {object}
+       */
+      let my;
+
+      /**
+       * shortcut to help functions
+       * @type {Object.<string,function>}
+       */
+      let $;
+
+      let editor;
+      let dataset;
+
+      this.init = callback => {
 
         // listen to change event of ccm realtime datastore => (re)render own content
         if ( self.data.store ) self.data.store.onChange = function ( comment ) {
@@ -232,28 +244,38 @@
         callback();
       };
 
-      this.ready = function ( callback ) {
+      this.ready = callback => {
+        // set shortcut to help functions
+        $ = self.ccm.helper;
+
+        // privatize all possible instance members
+        my = $.privatize( self );
+
+        if ( self.logger ) self.logger.log( 'ready', my );
+
+
         if ( self.user )
           self.user.addObserver( self.index, function ( event ) {
-          if ( event) self.start();
-        });
+            if ( event) self.start();
+          });
 
         if ( self.logger ) self.logger.log( 'ready', {
-          key: self.data.key,
-          store: self.data.store.source()
+          key: my.data.key,
+          store: my.data.store.source()
         } );
+
         callback();
       };
 
-      this.start = function ( callback ) {
+      this.start = callback => {
 
-        self.ccm.helper.dataset( self.data.store, self.data.key, function ( dataset ) {
-          if ( self.logger )
-            self.logger.log( 'start', dataset );
+        $.dataset( my.data, function ( dataset ) {
+          console.log(dataset);
+          if ( self.logger ) self.logger.log( 'start', dataset );
 
           if ( !dataset.comments ) dataset.comments = [];
 
-           var main_elem = self.ccm.helper.html( self.templates.main, {
+          let main_elem = self.ccm.helper.html( my.templates.main, {
             render_editor: function () {
               self.element.querySelector( '#new-comment' ).classList.add( 'fade-comment' );
               renderEditor();
@@ -263,11 +285,11 @@
           renderComments();
 
           function renderComments() {
-            var unsorted_comments = [];
+            let unsorted_comments = [];
 
             main_elem.querySelector( '#comment-list' ).innerHTML = '';
 
-            var counter = 1;
+            let counter = 1;
             //asynchronous problem
             dataset.comments.map( renderComment );
             check();
@@ -277,15 +299,15 @@
               counter--;
               if( counter > 0 ) return;
 
-              if ( self.sorting_by_voting )
+              if ( my.sorting_by_voting )
                 unsorted_comments.sort( compare );
 
               unsorted_comments.map( function ( entry ) {
                 // prepend element to DOM
-                self.ccm.helper.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
+                $.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
               });
 
-              self.ccm.helper.setContent( self.element, main_elem );
+              $.setContent( self.element, main_elem );
               if ( callback ) callback();
 
               function compare( a, b ) {
@@ -299,32 +321,31 @@
             }
 
             function renderComment( comment ) {
-              var old_comment = comment.content;
-              var comment_elem;
+              let old_comment = comment.content;
+              let comment_elem;
 
-              if( self.comment_template === 'expanded' ) {
+              if( my.comment_template === 'expanded' ) {
                 // generate on-the-fly element
-                comment_elem = self.ccm.helper.html( self.templates.expanded_comment, {
+                comment_elem = $.html( my.templates.expanded_comment, {
                   comment_content: comment.content,
                   user: comment.user,
                   date: moment( comment.date ).fromNow()
                 });
               }
               else
-                comment_elem = self.ccm.helper.html( self.templates.simple_comment, {
+                comment_elem = $.html( my.templates.simple_comment, {
                   comment_content: comment.content,
                   user: comment.user,
                   date: moment( comment.date ).fromNow()
                 });
 
-              if ( self.editable ) {
+              if ( my.editable ) {
 
-                var edit_elem = self.ccm.helper.html( self.templates.edit, {
+                let edit_elem = self.ccm.helper.html( my.templates.edit, {
                   edit: function () {
-
-                   var content = comment_elem.querySelector( '.comment-overview' ).childNodes[0].textContent;
-                    self.editor.start( function (instance) {
-                      self.ccm.helper.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
+                    let content = comment_elem.querySelector( '.comment-content' ).childNodes[0].textContent;
+                    my.editor.start( ( instance ) => {
+                      $.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
                       instance.get().setText( content );
                       instance.get().focus();
                       instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', function () {
@@ -338,7 +359,7 @@
                           };
 
                         // update dataset for rendering => (re)render accepted answer
-                        self.data.store.set( dataset, function () {
+                        my.data.store.set( dataset, function () {
                           self.start();
                           if( self.logger ) self.logger.log( 'edit', { 'old': old_comment, 'new': comment.content });
                         } );
@@ -347,19 +368,18 @@
                   }
                 } );
 
-                if ( self.user && self.user.isLoggedIn() && ( self.user.data().name === comment.user ) ) {
-                  comment_elem.querySelector( '.comment-overview' ).appendChild( edit_elem );
+                if ( self.user && self.user.isLoggedIn() && ( self.user.data().user === comment.user ) ) {
+                  comment_elem.querySelector( '.comment-content' ).appendChild( edit_elem );
                 }
               }
 
               //if voting is set then render voting-component
-              if ( self.voting )
+              if ( my.voting )
                 renderVoting( comment.voting );
               else {
                 unsorted_comments.push( { "comment": comment_elem, "date": comment.date } );
                 comment_elem.querySelector( '.voting-area' ).remove();
-                comment_elem.querySelector( '.comment-overview' ).classList.remove( 'col-md-11' );
-                comment_elem.querySelector( '.comment-overview' ).classList.add( 'col-md-12' );
+
               }
 
               function renderVoting( voting ) {
@@ -371,10 +391,10 @@
                   onvote: function ( event ) { return event.user !== comment.user; }
                 };
 
-                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().name ) )
+                if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
                   voting.user = '';
 
-                self.voting.start( voting, function ( voting_inst ) {
+                my.voting.start( voting, function ( voting_inst ) {
                   // fill array for sorting
                   unsorted_comments.push( { "voting": voting_inst.getValue(), "comment": comment_elem, "date": comment.date } );
                   comment_elem.querySelector( '.voting-area' ).appendChild( voting_inst.root );
@@ -389,23 +409,23 @@
 
             self.element.querySelector( '#new-comment' ).innerHTML = '';
 
-            var editor_elem = self.ccm.helper.html( self.templates.editor, {
+            const editor_elem = $.html( my.templates.editor, {
               add_comment: function () {
                 self.user.login( function () { newComment(); } );
               }
             });
 
-            self.editor.start( function ( instance ) {
+            my.editor.start( function ( instance ) {
               editor_elem.querySelector( '#editor' ).appendChild( instance.root );
               editor = instance
             } );
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
-          
+
           function newComment() {
-            var data = {
-              "user": self.user.data().name,
+            let data = {
+              "user": self.user.data().user,
               "date": moment().format(),
               "content": editor.get().getText().trim(),
               "voting": dataset.key + '_' + ( dataset.comments.length + 1 )
@@ -413,10 +433,10 @@
 
             dataset.comments.push( data );
             // update dataset for rendering => (re)render accepted answer
-            self.data.store.set( dataset, function () {
+            my.data.store.set( dataset, function () {
               self.start();
               if ( self.logger ) {
-                data = self.ccm.helper.clone( data );
+                data = $.clone( data );
                 delete dataset.user;
                 self.logger.log( 'create', data );
               }

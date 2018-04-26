@@ -264,7 +264,8 @@
 
       this.start = callback => {
 
-        self.ccm.helper.dataset( my.data, function ( dataset ) {
+        $.dataset( my.data, function ( dataset ) {
+          console.log(dataset);
           if ( self.logger ) self.logger.log( 'start', dataset );
 
           if ( !dataset.comments ) dataset.comments = [];
