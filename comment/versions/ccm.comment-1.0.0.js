@@ -12,7 +12,7 @@
     version: [ 1,0,0 ],
 
     ccm: {
-      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.3.1.0.min.js',
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.3.1.min.js',
       integrity: 'sha384-0EhLGq8EAxc2nd3NuK+aLtqSj6wfK7lrFCLPbKmBKRRoKjvND/3zPza8zqgNFSur',
       crossorigin: 'anonymous'
     },
