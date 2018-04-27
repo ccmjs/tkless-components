@@ -63,11 +63,10 @@
           ]
         }
       },
-      data:  {
-          store: [ 'ccm.store', '../star_rating_result/resources/datastore.js' ],
-          key:   'demo'
-      },
-
+      // data:  {
+      //     store: [ 'ccm.store', '../star_rating_result/resources/datastore.js' ],
+      //     key:   'demo'
+      // },
       css: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
