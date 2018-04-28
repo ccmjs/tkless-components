@@ -121,9 +121,9 @@
 
       this.start = callback => {
 
-        $.dataset( my.data.store, my.data.key, function ( dataset ) {
+        $.dataset( my.data, function ( dataset ) {
+
           if ( my.logger ) my.logger.log( 'start', my );
-          if ( !dataset ) dataset = {};
 
           $.setContent( self.element, $.html( my.html.main ) );
 
@@ -131,12 +131,14 @@
           let sum = 0;
           let count = 0;
 
-          for ( let i = 1; i <= 5; i++ ) {
-            if ( !dataset[ i ] ) continue;
-            sum += i * Object.keys( dataset[ i ] ).length;
-            count += Object.keys( dataset[ i ] ).length;
+          if ( Object.keys( dataset ).length > 1 ) {
+            for ( let i = 1; i <= 5; i++ ) {
+              if ( !dataset[ i ] ) continue;
+              sum += i * Object.keys( dataset[ i ] ).length;
+              count += Object.keys( dataset[ i ] ).length;
+            }
+            total = sum / count;
           }
-          total = sum / count;
 
           //render html content
           if ( my.detailed ) renderBars();
@@ -145,7 +147,6 @@
           if ( callback )callback();
 
           function renderStars() {
-
             for ( let i = 5; i >= 0.5; i -= 0.5 ) {
               self.element.querySelector( '.rating' ).appendChild( $.html( my.html.input, {
                 id: i,
@@ -160,7 +161,7 @@
 
             $.setContent( self.element.querySelector( '#total-count' ),  count );
 
-            calculateChackedStars();
+            if ( Object.keys( dataset ).length > 1 ) calculateChackedStars();
 
             function calculateChackedStars() {
               let y = parseInt( total * 100 % 100 );
