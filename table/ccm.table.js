@@ -26,16 +26,21 @@
     config: {
       html: {
         "table": {
-          "id": "container",
           "inner": {
-            "class": "table-responsive",
+            "tag": "form",
             "inner": {
-              "tag": "table",
-              "class": "table table-striped table-responsive",
-              "inner":[
-                { "tag": "thead" },
-                { "tag": "tbody" }
-              ]
+              "id": "container",
+              "inner": {
+                "class": "table-responsive",
+                "inner": {
+                  "tag": "table",
+                  "class": "table table-striped table-responsive",
+                  "inner":[
+                    { "tag": "thead" },
+                    { "tag": "tbody" }
+                  ]
+                }
+              }
             }
           }
         },
@@ -72,7 +77,7 @@
         "submit": {
           "tag": "button",
           "class": "btn btn-default pull-right",
-          "typ": "button",
+          "typ": "submit",
           "inner": "Submit",
           "onclick": "%submit%"
         }

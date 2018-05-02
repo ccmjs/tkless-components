@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     add_row: true,
     table_head: [ "Header 1", "Header 2", "Header 3", "Header 4", "Header 5" ],
     col_settings: [
-      { "type": "text", "placeholder": "Tel: 049..." },
+      { "type": "tel", "placeholder": "Tel: 049...", "required": true },
       { "foo": "bar", "placeholder": "Hier steht Email" },
       { "type": "date", "bar": "baz" },
       { "type": "textarea", "placeholder": "Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da " +
