@@ -39,6 +39,12 @@
       },
       star_title: [ "Gefällt mir gar nicht", "Gefällt mir nicht",
         "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ],
+      onfinish: {
+        log: true,
+        store: {
+          settings: { store: "star_rating", url: "http://localhost:8080" }
+        }
+      },
       user:  [ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/ccm.user.min.js' ],
       css: [ 'ccm.load',
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
