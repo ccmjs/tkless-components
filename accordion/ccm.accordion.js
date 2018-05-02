@@ -51,7 +51,7 @@
           }
         ]
       },
-      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/beta/ccm.content-4.0.0.js" ],
+      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js" ],
       css: [ "ccm.load",
         { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
         '../../ccm-components/libs/bootstrap/css/bootstrap.css',
