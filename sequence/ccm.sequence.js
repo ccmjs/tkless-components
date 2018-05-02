@@ -26,7 +26,7 @@
      */
     config: {
       entries: [
-        [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/ccm.table.js",
+        [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/ccm.table.js",
           {
             table_row: 2,
             table_col: 5,
@@ -57,37 +57,34 @@
             }
           }
         ],
-        [ "ccm.component", "https://ccmjs.github.io/tkless-components/accordion/ccm.accordion.js",
+        [ "ccm.instance", "https://ccmjs.github.io/tkless-components/accordion/ccm.accordion.js",
           {
             title: 'success',
-            data: {
-              key: 'demo',
-              entries: [
-                {
-                  "title": "Learning Goals",
-                  "content": "..."
-                },
-                {
-                  "title": "Lecture",
-                  "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
-                },
-                {
-                  "title": "Additional Materials",
-                  "content": "..."
-                },
-                {
-                  "title": "Exercises",
-                  "content": "..."
-                },
-                {
-                  "title": "Bibliography",
-                  "content": "..."
-                }
-              ]
-            },
+            entries: [
+              {
+                "title": "Learning Goals",
+                "content": "..."
+              },
+              {
+                "title": "Lecture",
+                "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
+              },
+              {
+                "title": "Additional Materials",
+                "content": "..."
+              },
+              {
+                "title": "Exercises",
+                "content": "..."
+              },
+              {
+                "title": "Bibliography",
+                "content": "..."
+              }
+            ]
           }
         ],
-        [ "ccm.component", "https://ccmjs.github.io/tkless-components/marking_words/ccm.marking_words.js" ]
+        [ "ccm.instance", "https://ccmjs.github.io/tkless-components/marking_words/ccm.marking_words.js" ]
       ],
       css: [ "ccm.load",
         { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
@@ -137,13 +134,13 @@
         $.setContent( self.element, '' );
         renderEntries();
 
-        if( callback ) callback();
+        callback && callback();
 
         function renderEntries() {
 
           for( let component in my.entries ) {
-            my.entries[ component ].start( instance => {
-              self.element.appendChild( instance.root );
+            my.entries[ component ].start( ()=> {
+              self.element.appendChild( my.entries[ component ].root );
             });
           }
         }

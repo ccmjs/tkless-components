@@ -26,31 +26,28 @@
      */
     config: {
       title: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
-      data: {
-        key: 'demo',
-        entries: [
-          {
-            "title": "Learning Goals",
-            "content": "..."
-          },
-          {
-            "title": "Lecture",
-            "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
-          },
-          {
-            "title": "Additional Materials",
-            "content": "..."
-          },
-          {
-            "title": "Exercises",
-            "content": "..."
-          },
-          {
-            "title": "Bibliography",
-            "content": "..."
-          }
-        ]
-      },
+      entries: [
+        {
+          "title": "Learning Goals",
+          "content": "..."
+        },
+        {
+          "title": "Lecture",
+          "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
+        },
+        {
+          "title": "Additional Materials",
+          "content": [ "ccm.instance", "../sequence/ccm.sequence.js" ]
+        },
+        {
+          "title": "Exercises",
+          "content": "..."
+        },
+        {
+          "title": "Bibliography",
+          "content": "..."
+        }
+      ],
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js" ],
       css: [ "ccm.load",
         { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
@@ -196,12 +193,19 @@
           const content = document.createElement( 'content' );
           const p = document.createElement( 'p' );
 
-          my.data.entries.map(  entry => {
+          my.entries.map(  entry => {
             const title_clone = title.cloneNode( true );
             const content_clone = content.cloneNode( true );
             const p_clone = p.cloneNode( true );
             title_clone.innerHTML = entry.title;
-            $.setContent( p_clone, $.html( entry.content ) );
+
+            if ( $.isInstance( entry.content ) ) {
+              entry.content.start( () => {
+                $.setContent( p_clone, entry.content.root );
+              });
+            }
+            else $.setContent( p_clone, $.html( entry.content ) );
+
             content_clone.appendChild( p_clone );
             div.appendChild( title_clone );
             div.appendChild( content_clone );
