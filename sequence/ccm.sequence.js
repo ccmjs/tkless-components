@@ -84,8 +84,29 @@
             ]
           }
         ],
-        [ "ccm.instance", "https://ccmjs.github.io/tkless-components/marking_words/ccm.marking_words.js" ]
+        [ "ccm.instance", "https://ccmjs.github.io/tkless-components/marking_words/ccm.marking_words.js" ],
+        '<div class="container">' +
+        '  <div class="jumbotron text-center">' +
+        '    <h1>Welcome </h1>' +
+        '      <br>' +
+        '    <h1> Virtual Monitoring Program </h1>' +
+        '    <br>' +
+        '    <p> Choose the Button below...</p>' +
+        '    <br><br>' +
+        '    <p>' +
+        '      <a class="btn btn-primary btn-lg" id="source-data-btn" role="button"><span class="glyphicon glyphicon-edit"></span> To Source Data</a>' +
+        '      <a class="btn btn-success btn-lg" id="simulation-btn" role="button"><span class="glyphicon glyphicon-play"></span> To Simulation</a>' +
+        '      <a class="btn btn-info btn-lg" id="corrupt-data-btn" role="button"><span class="glyphicon glyphicon-edit"></span> To Corrupt Data</a>' +
+        '    </p>' +
+        '  </div>' +
+        '</div>'
       ],
+      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js", {
+        css: [ "ccm.load",
+          { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
+          '../../ccm-components/libs/bootstrap/css/bootstrap.css'
+        ]
+      } ],
       css: [ "ccm.load",
         { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
         '../../ccm-components/libs/bootstrap/css/bootstrap.css'
@@ -139,9 +160,17 @@
         function renderEntries() {
 
           for( let component in my.entries ) {
-            my.entries[ component ].start( ()=> {
+            if ( $.isInstance( my.entries[ component ] ) )
+              my.entries[ component ].start( ()=> {
               self.element.appendChild( my.entries[ component ].root );
             });
+            else if ( my.content )
+              my.content.start( { "inner": my.entries[ component ] }, instance => {
+                console.log(instance);
+                self.element.appendChild( instance.root );
+              } );
+            else
+              self.element.appendChild( $.html( my.entries[ component ] ) );
           }
         }
 
