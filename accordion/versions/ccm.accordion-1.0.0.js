@@ -199,12 +199,19 @@
           const content = document.createElement( 'content' );
           const p = document.createElement( 'p' );
 
-          my.data.entries.map( entry => {
+          my.entries.map(  entry => {
             const title_clone = title.cloneNode( true );
             const content_clone = content.cloneNode( true );
             const p_clone = p.cloneNode( true );
             title_clone.innerHTML = entry.title;
-            $.setContent( p_clone, $.html( entry.content ) );
+
+            if ( $.isInstance( entry.content ) ) {
+              entry.content.start( () => {
+                $.setContent( p_clone, entry.content.root );
+              });
+            }
+            else $.setContent( p_clone, $.html( entry.content ) );
+
             content_clone.appendChild( p_clone );
             div.appendChild( title_clone );
             div.appendChild( content_clone );
