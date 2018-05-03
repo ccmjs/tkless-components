@@ -160,17 +160,19 @@
         function renderEntries() {
 
           for( let component in my.entries ) {
+            const entry = document.createElement( 'div' );
+
+            $.append( self.element, entry );
             if ( $.isInstance( my.entries[ component ] ) )
-              my.entries[ component ].start( ()=> {
-              self.element.appendChild( my.entries[ component ].root );
-            });
+              my.entries[ component ].start( () => {
+              $.replace( my.entries[ component ].root, entry );
+            } );
             else if ( my.content )
               my.content.start( { "inner": my.entries[ component ] }, instance => {
-                console.log(instance);
-                self.element.appendChild( instance.root );
+                $.replace( instance.root, entry );
               } );
             else
-              self.element.appendChild( $.html( my.entries[ component ] ) );
+              $.replace( $.html( my.entries[ component ] ), entry );
           }
         }
 

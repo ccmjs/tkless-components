@@ -30,31 +30,28 @@
      */
     config: {
       title: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
-      /*data: {
-        key: 'demo',
-        entries: [
-          {
-            "title": "Learning Goals",
-            "content": "..."
-          },
-          {
-            "title": "Lecture",
-            "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
-          },
-          {
-            "title": "Additional Materials",
-            "content": "..."
-          },
-          {
-            "title": "Exercises",
-            "content": "..."
-          },
-          {
-            "title": "Bibliography",
-            "content": "..."
-          }
-        ]
-      },*/
+/*      entries: [
+        {
+          "title": "Learning Goals",
+          "content": "..."
+        },
+        {
+          "title": "Lecture",
+          "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
+        },
+        {
+          "title": "Additional Materials",
+          "content": "..."
+        },
+        {
+          "title": "Exercises",
+          "content": "..."
+        },
+        {
+          "title": "Bibliography",
+          "content": "..."
+        }
+      ],*/
       //content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/beta/ccm.content-4.0.0.js" ],
       libs: [ 'ccm.load',
         { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
