@@ -31,10 +31,10 @@
             "inner": {
               "id": "container",
               "inner": {
-                "class": "table-responsive",
+                "class": "table-responsive-sm",
                 "inner": {
                   "tag": "table",
-                  "class": "table table-striped table-responsive",
+                  "class": "table table-striped",
                   "inner":[
                     { "tag": "thead" },
                     { "tag": "tbody" }
@@ -53,7 +53,7 @@
 
         "input": {
           "tag": "input",
-          "type": "text"
+          "class": "form-control"
         },
 
         "textarea": {
@@ -62,13 +62,14 @@
 
         "add": {
           "tag": "button",
-          "class": "btn btn-default",
+          "class": "btn btn-outline-success",
           "typ": "button",
           "onclick": "%add%",
           "inner": [
             {
               "tag": "span",
-              "class": "glyphicon glyphicon-plus"
+              "class": "material-icons",
+              "inner": "add"
             },
             " Row"
           ]
@@ -76,7 +77,7 @@
 
         "submit": {
           "tag": "button",
-          "class": "btn btn-default pull-right",
+          "class": "btn btn-outline-secondary float-right",
           "typ": "submit",
           "inner": "Submit",
           "onclick": "%submit%"
@@ -94,8 +95,9 @@
       //data: [ "ccm.get", "resources/configs.js", "demo" ],
       //submit: true,
       //onfinish
-      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap-4/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/icons/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/icons/icons.css"
       ]
     },
 
