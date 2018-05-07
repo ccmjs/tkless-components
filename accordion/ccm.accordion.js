@@ -118,7 +118,7 @@
                 changeIcon( this.querySelector( 'span' ), 'glyphicon-triangle-right' );
               }
               else {
-                if(self.onclick ) self.onclick( this, self );
+                if(self.onclick ) self.onclick( this, content_div, self );
                 content_div.style.maxHeight = content_div.scrollHeight + "px";
                 changeIcon( this.querySelector( 'span' ), 'glyphicon-triangle-bottom' );
 
