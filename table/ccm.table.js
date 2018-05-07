@@ -31,7 +31,7 @@
             "inner": {
               "id": "container",
               "inner": {
-                "class": "table-responsive-sm",
+                "class": "table-responsive",
                 "inner": {
                   "tag": "table",
                   "class": "table table-striped",
