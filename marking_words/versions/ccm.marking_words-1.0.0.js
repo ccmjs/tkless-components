@@ -12,12 +12,17 @@
      * @type {string}
      */
     name: 'marking_words',
+    version: [ 1,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.5.0.min.js',
+      integrity: 'sha384-dPvtDx3tOHMruUQO3aoboXyHbU/QtSgT/c4OI8co/6/aXD6L8L+citr+fMC4gW+Z',
+      crossorigin: 'anonymous'
+    },
 
     /**
      * default instance configuration
