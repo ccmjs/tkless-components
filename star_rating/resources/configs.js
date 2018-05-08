@@ -1,7 +1,7 @@
 ccm.files[ "configs.js" ] = {
   "local": {
     data:  {
-      store: [ 'ccm.store', 'resources/datastore.js' ],
+      store: [ 'ccm.store', 'https://ccmjs.github.io/tkless-components/star_rating/resources/datastore.js' ],
       key:   'demo'
     },
     star_title: [ "Gefällt mir gar nicht", "Gefällt mir nicht",
