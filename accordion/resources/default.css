@@ -14,11 +14,14 @@
   margin: 10px 10px 10px;
 }
 
+#element > div, .content {
+  transition: height 0.2s ease-out;
+  height: auto;
+}
+
 #element .content {
-  max-height: 0;
   padding: 0 18px;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
   border: 1px solid #aaaaaa;
   background: #ffffff;
   color: #222222;

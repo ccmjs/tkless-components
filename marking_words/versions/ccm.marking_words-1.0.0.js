@@ -12,12 +12,17 @@
      * @type {string}
      */
     name: 'marking_words',
+    version: [ 1,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.5.0.min.js',
+      integrity: 'sha384-dPvtDx3tOHMruUQO3aoboXyHbU/QtSgT/c4OI8co/6/aXD6L8L+citr+fMC4gW+Z',
+      crossorigin: 'anonymous'
+    },
 
     /**
      * default instance configuration
@@ -83,10 +88,10 @@
       //   log: true
       // },
       // "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
-      // //onchange
+      //onchange
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        '../marking_words/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/marking_words/resources/default.css'
       ]
     },
 
