@@ -34,7 +34,7 @@
                 "class": "table-responsive",
                 "inner": {
                   "tag": "table",
-                  "class": "table table-striped",
+                  "class": "table table-striped table-sm",
                   "inner":[
                     { "tag": "thead" },
                     { "tag": "tbody" }
@@ -57,7 +57,8 @@
         },
 
         "textarea": {
-          "tag": "textarea"
+          "tag": "textarea",
+          "class": "form-control"
         },
 
         "add": {
