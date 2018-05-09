@@ -151,7 +151,8 @@
 
             if ( my.submit ) {
               const submit_button = $.html ( my.html.submit, {
-                submit: function () {
+                submit: function ( event ) {
+                  event.preventDefault();
                   $.onFinish( self );
                   return false; // prevent page reload
                 }
