@@ -212,9 +212,9 @@
                     if ( my.col_settings ) considerColSettings( j, input );
 
                     const input_tag = table_col.appendChild( $.html( input, {
-                      change: self.onchange ? function () {
-                        self.onchange( this, self );
-                      } : ''
+                      change: function () {
+                        self.onchange && self.onchange( this, this.value, self );
+                      }
                     } ) );
 
                     // set values of input fields

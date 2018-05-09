@@ -24,7 +24,7 @@ ccm.files[ "configs.js" ] = {
       ]
     },
     "submit": "true",
-    "onchange": function ( result, self ) { console.log( result, self ); },
+    "onchange": function ( result, value, self ) { console.log( result, value, self ); },
     "onfinish": {
       log: true
     }
