@@ -31,7 +31,7 @@
         {
           "title": "Learning Goals",
           "content": "..."
-        },
+        }/*,
         {
           "title": "Lecture",
           "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
@@ -47,7 +47,7 @@
         {
           "title": "Bibliography",
           "content": "..."
-        }
+        }*/
       ],
 /*      onclick: function ( target ){
         console.log( target );
@@ -115,7 +115,6 @@
               let content_div = this.nextElementSibling;
 
               if( content_div.getAttribute('data-collapsed') === 'true' ) {
-                console.log('!');
                 expand( content_div );
 
                 content_div.setAttribute('data-collapsed', 'false');
@@ -129,11 +128,13 @@
                   content_div.classList.add( 'open' );
                   button.classList.add( 'open' );
 
-                  changeIcon(  acc.querySelector( 'button:not( .open )' ).querySelector( 'span' ), 'glyphicon-triangle-right' );
+                  if ( my.entries.length > 1) {
+                    changeIcon(  acc.querySelector( 'button:not( .open )' ).querySelector( 'span' ), 'glyphicon-triangle-right' );
 
-                 /*[ ...acc.querySelectorAll( '.content:not( .open )' ) ].map( ( div )=>{
-                    div.style.height = 0 + "px";
-                  });*/
+                    /*[ ...acc.querySelectorAll( '.content:not( .open )' ) ].map( ( div )=>{
+                       div.style.height = 0 + "px";
+                     });*/
+                  }
 
                   content_div.classList.remove('open');
                   button.classList.remove( 'open' );
@@ -156,7 +157,6 @@
 
                 // temporarily disable all css transitions
                 let elementTransition = element.style.transition;
-                console.log( elementTransition );
                 element.style.transition = '';
 
                 // on the next frame (as soon as the previous style change has taken effect),

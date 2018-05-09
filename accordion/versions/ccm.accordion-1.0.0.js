@@ -113,37 +113,86 @@
             button.addEventListener( 'click', function ( ) {
               let content_div = this.nextElementSibling;
 
-              if (content_div.style.maxHeight) {
-                content_div.style.maxHeight = null;
-                changeIcon( this.querySelector( 'span' ), 'glyphicon-triangle-right' );
-              }
-              else {
-                if(self.onclick ) self.onclick( this, content_div, self );
-                content_div.style.maxHeight = content_div.scrollHeight + "px";
+              if( content_div.getAttribute('data-collapsed') === 'true' ) {
+                expand( content_div );
+
+                content_div.setAttribute('data-collapsed', 'false');
+
                 changeIcon( this.querySelector( 'span' ), 'glyphicon-triangle-bottom' );
 
                 closeOpenContents();
 
                 function closeOpenContents() {
 
-                  button.classList.add( 'open' );
                   content_div.classList.add( 'open' );
+                  button.classList.add( 'open' );
 
-                  acc.querySelectorAll( 'button:not(.open)' ).forEach( button => {
-                    changeIcon( button.querySelector( 'span' ), 'glyphicon-triangle-right' );
-                  });
-                  acc.querySelectorAll( 'div:not(.open)' ).forEach( div  => {
-                    div.style.maxHeight = null;
-                  });
+                  if ( my.entries.length > 1) {
+                    changeIcon(  acc.querySelector( 'button:not( .open )' ).querySelector( 'span' ), 'glyphicon-triangle-right' );
+
+                    /*[ ...acc.querySelectorAll( '.content:not( .open )' ) ].map( ( div )=>{
+                       div.style.height = 0 + "px";
+                     });*/
+                  }
 
                   content_div.classList.remove('open');
                   button.classList.remove( 'open' );
+
                 }
+              } else {
+                collapse( content_div );
+                changeIcon( this.querySelector( 'span' ), 'glyphicon-triangle-right' );
               }
+
 
               function changeIcon( span, icon ) {
                 span.classList.remove( span.className.split(' ').pop() );
                 span.classList.add( icon );
+              }
+
+              function collapse( element ) {
+                // get the height of the element's inner content, regardless of its actual size
+                let sectionHeight = element.scrollHeight;
+
+                // temporarily disable all css transitions
+                let elementTransition = element.style.transition;
+                element.style.transition = '';
+
+                // on the next frame (as soon as the previous style change has taken effect),
+                // explicitly set the element's height to its current pixel height, so we
+                // aren't transitioning out of 'auto'
+                requestAnimationFrame( function() {
+                  element.style.height = sectionHeight + 'px';
+                  element.style.transition = elementTransition;
+                  // on the next frame (as soon as the previous style change has taken effect),
+                  // have the element transition to height: 0
+                  requestAnimationFrame( function() {
+                    element.style.height = 0 + 'px';
+                  });
+                });
+
+                // mark the section as "currently collapsed"
+                element.setAttribute('data-collapsed', 'true');
+              }
+
+              function expand(element) {
+                // get the height of the element's inner content, regardless of its actual size
+                let sectionHeight = element.scrollHeight;
+
+                // have the element transition to the height of its inner content
+                element.style.height = sectionHeight + 'px';
+
+                // when the next css transition finishes (which should be the one we just triggered)
+                element.addEventListener('transitionend', function(e) {
+                  // remove this event listener so it only gets triggered once
+                  element.removeEventListener('transitionend', arguments.callee);
+
+                  // remove "height" from the element's inline styles, so it can return to its initial value
+                  element.style.height = null;
+                });
+
+                // mark the section as "currently not collapsed"
+                element.setAttribute('data-collapsed', 'false');
               }
             });
           } );
@@ -172,7 +221,9 @@
               const fragment = document.createDocumentFragment();
               [ ...content.children ].map( child => fragment.appendChild( child ) );
               const div = document.createElement( 'div' );
-              div.classList.add('content');
+              div.classList.add('content', "collapsible" );
+              div.setAttribute(  "data-collapsed", "true" );
+              div.style.height = 0 + 'px';
               content.parentNode.replaceChild( div, content );
               const p = document.createElement( 'p' );
               div.appendChild( p );
