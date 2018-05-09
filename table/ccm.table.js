@@ -53,7 +53,8 @@
 
         "input": {
           "tag": "input",
-          "class": "form-control"
+          "class": "form-control",
+          "onchange": "%change%"
         },
 
         "textarea": {
@@ -96,6 +97,7 @@
       //data: [ "ccm.get", "resources/configs.js", "demo" ],
       //submit: true,
       //onfinish
+      //onchange
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap-4/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/icons/font-face.css" },
         "https://ccmjs.github.io/tkless-components/libs/icons/icons.css"
@@ -209,7 +211,11 @@
                     // consider column properties
                     if ( my.col_settings ) considerColSettings( j, input );
 
-                    const input_tag = table_col.appendChild( $.html( input ) );
+                    const input_tag = table_col.appendChild( $.html( input, {
+                      change: self.onchange ? function () {
+                        self.onchange( this, self );
+                      } : ''
+                    } ) );
 
                     // set values of input fields
                     if ( values && ( i < values.length ) ) values[ i ][ j ] !== undefined ? input_tag.value = values[ i ][ j ]: input_tag.value = '';
