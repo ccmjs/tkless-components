@@ -151,7 +151,10 @@
 
             if ( my.submit ) {
               const submit_button = $.html ( my.html.submit, {
-                submit: function () { $.onFinish( self ); }
+                submit: function () {
+                  $.onFinish( self );
+                  return false; // prevent page reload
+                }
               } );
               self.element.querySelector( '#container' ).appendChild( submit_button );
             }
