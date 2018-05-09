@@ -112,7 +112,7 @@
 
               main_elem.appendChild( $.html( my.html.label, {
                 for: i,
-                title: my.star_title[ i - 1 ]
+                title: my.star_title ? my.star_title[ i - 1 ]: ''
               } ) );
             }
 
