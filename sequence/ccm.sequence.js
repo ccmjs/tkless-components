@@ -25,7 +25,7 @@
      * @type {object}
      */
     config: {
-      space_between_entries: true,
+      //space_between_entries: true,
       entries: [
         [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/ccm.table.js",
           {
