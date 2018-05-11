@@ -25,6 +25,7 @@
      * @type {object}
      */
     config: {
+      spacing_between_etries: true,
       entries: [
         [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/ccm.table.js",
           {
@@ -110,7 +111,6 @@
       css: [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        'https://ccmjs.github.io/tkless-components/sequence/resources/default.css'
       ]
     },
 
@@ -155,6 +155,11 @@
 
         $.setContent( self.element, '' );
         renderEntries();
+
+        if ( my.spacing_between_etries )
+          [ ...self.element.querySelectorAll( 'div' )].map( div => {
+            div.style.padding = '1rem 0 1rem 0';
+          });
 
         callback && callback();
 
