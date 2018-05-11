@@ -108,9 +108,9 @@
         ]
       } ],
       css: [ "ccm.load",
-        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
-        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
-        'https://ccmjs.github.io/tkless-components/sequence/resurces/default.css'
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        'https://ccmjs.github.io/tkless-components/sequence/resources/default.css'
       ]
     },
 

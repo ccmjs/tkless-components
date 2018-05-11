@@ -31,7 +31,7 @@
         {
           "title": "Learning Goals",
           "content": "..."
-        }/*,
+        },
         {
           "title": "Lecture",
           "content": "<source src=\"../table/ccm.table.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table>"
@@ -47,16 +47,14 @@
         {
           "title": "Bibliography",
           "content": "..."
-        }*/
+        }
       ],
-/*      onclick: function ( target ){
-        console.log( target );
-        },*/
+      //  onclick: function ( target ){ console.log( target ); },
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js" ],
       css: [ "ccm.load",
-        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
-        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
-        '../../ccm-components/accordion/resources/default.css'
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        'https://ccmjs.github.io/tkless-components/accordion/resources/default.css'
       ]
 
     },
