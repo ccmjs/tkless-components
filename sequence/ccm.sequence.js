@@ -104,8 +104,8 @@
       ],
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js", {
         css: [ "ccm.load",
-          { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
-          '../../ccm-components/libs/bootstrap/css/bootstrap.css'
+          "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+          { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         ]
       } ],
       css: [ "ccm.load",
@@ -156,11 +156,6 @@
         $.setContent( self.element, '' );
         renderEntries();
 
-        if ( my.space_between_entries )
-          [ ...self.element.querySelectorAll( 'div' )].map( div => {
-            div.style.padding = '1rem 0 1rem 0';
-          });
-
         callback && callback();
 
         function renderEntries() {
@@ -180,6 +175,11 @@
             else
               $.replace( $.html( my.entries[ component ] ), entry );
           }
+
+          if ( my.space_between_entries )
+            [ ...self.element.querySelectorAll( 'div' )].map( div => {
+              div.style.padding = '1rem 0 1rem 0';
+            });
         }
 
       };
