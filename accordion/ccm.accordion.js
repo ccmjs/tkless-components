@@ -54,7 +54,7 @@
       css: [ "ccm.load",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
-        'https://ccmjs.github.io/tkless-components/accordion/resources/default.css'
+        'resources/default.css'
       ]
 
     },
