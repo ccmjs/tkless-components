@@ -138,8 +138,9 @@
 
         $.dataset( my.data, data => {
 
-          // support different forms of data structure
-          uniformData();
+          if ( data )
+            // support different forms of data structure
+            uniformData();
 
           if ( !generateTable() )
             $.setContent( self.element, "Nothing to display" );
