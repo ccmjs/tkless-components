@@ -328,8 +328,6 @@
         $.dataset( my.data, dataset => {
           data = dataset;
 
-          console.log( dataset );
-
           // prepare initial form values
           prepareValues();
 
@@ -416,7 +414,7 @@
 
           function prepareFileUpload( callback ) {
             // render file upload
-            my.file_upload.start( { onfinish: () => onChange() }, instance => {
+            my.file_upload.start( { onfinish: ( inst, data, key ) => onChange(  inst, data, key ) }, instance => {
               upload = instance;
               self.element.querySelector( '#upload' ).appendChild( instance.root );
 
