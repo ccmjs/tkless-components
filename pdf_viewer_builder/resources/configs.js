@@ -1,7 +1,38 @@
 ccm.files[ "configs.js" ] = {
-  "demo": {
-    "submit_button": true,
+  "local": {
+    "submit_button": "Submit",
     "preview": true,
-    "start_values": [ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "w2c_pdf_viewer" }, "1522845622714X4736088714744411" ]
+    "data": {
+      "store": [ "ccm.store", { "store": "file_upload" } ],
+      "key": "local"
+    },
+    "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
+      "data_type": "pdf",
+      "data": { "store": [ "ccm.store", { "store": "file_upload" } ] },
+    } ],
+    "onfinish": { "log": true }
+  },
+
+  "localhost": {
+    "submit_button": "Submit",
+    "preview": true,
+    "data": {
+      "store": [ "ccm.store", "resources/datasets.js" ],
+      "key": "test"
+    },
+    "onfinish": { "log": true }
+  },
+
+  "lea": {
+    "submit_button": "Submit",
+    "preview": true,
+    "data": {
+      "store": [ "ccm.store", { "store": "cloze", "url": "https://ccm-data.bib.h-brs.de" } ],
+      "key": "test"
+    },
+    "onfinish": {
+      "log": true,
+      "alert": "Saved!"
+    }
   }
 };

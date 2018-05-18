@@ -2,7 +2,8 @@
  * @overview ccm component for building a slidecast component
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
- * TODO: prevent line breack by clicking on info-icon
+ * version 2.0.0
+ * - switch to ccm cloud v2
  */
 
 {
@@ -13,12 +14,17 @@
      * @type {string}
      */
     name: 'pdf_viewer_builder',
+    version:[ 2,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     /**
      * default instance configuration
@@ -258,25 +264,24 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],
-      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/ccm.pdf_viewer.js" ],
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-1.0.0.js", {
         "data_type": "pdf",
         "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
       } ],
 
-
-    // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
-    // "submit_button": true,
-    // "preview": true,
-    // "start_values": {
-    //   "pdf": [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1518776028787X4201785986475841" ],
-    //   "css": "['ccm.load','ccm-components/pdf_viewer/resources/default.css']",
-    //   "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
-    // }
-    // "onchange": instance => console.log( instance.getValue() ),
-    // "onfinish": { "log": true }
+      // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
+      // "submit_button": true,
+      // "preview": true,
+      // "start_values": {
+      //   "pdf": [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1518776028787X4201785986475841" ],
+      //   "css": "['ccm.load','ccm-components/pdf_viewer/resources/default.css']",
+      //   "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
+      // }
+      // "onchange": instance => console.log( instance.getValue() ),
+      // "onfinish": { "log": true }
 
     },
 
