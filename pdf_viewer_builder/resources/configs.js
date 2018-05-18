@@ -26,8 +26,12 @@ ccm.files[ "configs.js" ] = {
   "lea": {
     "submit_button": "Submit",
     "preview": true,
+    "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-2.0.0.js", {
+      "data_type": "pdf",
+      "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm-data.bib.h-brs.de", "method": "POST" } ] },
+    } ],
     "data": {
-      "store": [ "ccm.store", { "store": "cloze", "url": "https://ccm-data.bib.h-brs.de" } ],
+      "store": [ "ccm.store", { "store": "pdf_viewer", "url": "https://ccm-data.bib.h-brs.de" } ],
       "key": "test"
     },
     "onfinish": {

@@ -267,9 +267,9 @@
         "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/ccm.pdf_viewer.js" ],
-      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-1.0.0.js", {
-        "data_type": "pdf",
-        "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-2.0.0.js", {
+        // "data_type": "pdf",
+        // "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
       } ],
 
       // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
