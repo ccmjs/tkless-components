@@ -375,7 +375,7 @@
             else $.removeElement( self.element.querySelector( '#preview' ) );
 
             // no submit button wanted? => remove submit button
-            !my.submit_button && $.removeElement( self.element.querySelector( '#button-submit' ) );
+            !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
 
             // individual caption for submit button? => set caption of submit button
             if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
