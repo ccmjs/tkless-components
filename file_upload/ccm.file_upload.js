@@ -50,7 +50,7 @@
                     "id": "upload",
                     "tag": "button",
                     "class": "btn btn-info box-button",
-                    "onclick": "%submit%",
+                    "onclick": "%upload%",
                     "inner": "Upload"
                   },
                   {
@@ -125,7 +125,7 @@
 
         $.setContent( self.element, $.html( my.html.file_upload , {
           trigger_dialog: () => input.click(),
-          submit: event => {
+          upload: event => {
             event.preventDefault();
             event.stopPropagation();
 
