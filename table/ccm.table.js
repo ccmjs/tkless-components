@@ -259,6 +259,7 @@
 
           /** brings given data to uniform data structure - @author André Kless <andre.kless@web.de>, 2018 */
           function uniformData() {
+            if ( !data ) return;
             if ( Array.isArray( data ) )
               data = { values: data };
             if ( Array.isArray( data.values ) && data.values.length > 0 && $.isObject( data.values[ 0 ] ) ) {
