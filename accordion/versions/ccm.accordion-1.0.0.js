@@ -208,8 +208,8 @@
              */
             acc.querySelectorAll( 'title' ).forEach( title => {
               // insert icon span-tag before title
-              title.classList.add( 'btn', 'btn-lg', 'btn-' + my.title);
-              title.prepend( span_tag.cloneNode( true ));
+              title.classList.add( 'btn', 'btn-lg', 'btn-' + my.color );
+              title.prepend( span_tag.cloneNode( true ) );
               title.outerHTML = title.outerHTML.replace( 'title', 'button' );
             });
 
