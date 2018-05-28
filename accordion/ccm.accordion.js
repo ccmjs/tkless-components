@@ -26,7 +26,7 @@
      * @type {object}
      */
     config: {
-      title: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
+      color: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
       entries: [
         {
           "title": "Learning Goals",
