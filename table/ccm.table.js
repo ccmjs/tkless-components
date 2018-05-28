@@ -138,9 +138,8 @@
 
         $.dataset( my.data, data => {
 
-          if ( data )
-            // support different forms of data structure
-            uniformData();
+          // support different forms of data structure
+          uniformData();
 
           if ( !generateTable() )
             $.setContent( self.element, "Nothing to display" );
@@ -163,6 +162,9 @@
           callback && callback();
 
           function generateTable() {
+
+            if ( !my.table_col && !data ) return;
+
             if ( !my.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) ) my.table_col = data.values[ 0 ].length;
             const table = $.html ( my.html.table );
             let row;
