@@ -163,7 +163,7 @@
 
           function generateTable() {
 
-            if ( !my.table_col && !data ) return;
+            if ( !my.col_settings && !data ) return;
 
             if ( !my.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) ) my.table_col = data.values[ 0 ].length;
             const table = $.html ( my.html.table );
