@@ -94,6 +94,7 @@
       //data: [ "ccm.get", "resources/configs.js", "demo" ],
       //submit: true,
       //onfinish
+      //onchange
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
       ]
@@ -137,14 +138,20 @@
       this.start = callback => {
 
         $.dataset( my.data, data => {
+          let start_data;
 
           // support different forms of data structure
           uniformData();
+
+          //uniform data to fulfill form.js data structure
+          //dataToFormdataInput();
 
           if ( !generateTable() )
             $.setContent( self.element, "Nothing to display" );
           else {
             $.setContent( self.element, generateTable() );
+
+            $.fillForm( self.element, dataToFormdataInput() );
 
             if ( my.submit ) {
               const submit_button = $.html ( my.html.submit, {
@@ -215,8 +222,6 @@
                       }
                     } ) );
 
-                    // set values of input fields
-                    if ( values && ( i < values.length ) ) values[ i ][ j ] !== undefined ? input_tag.value = values[ i ][ j ]: input_tag.value = '';
                   }
 
                   table_row.appendChild( table_col );
@@ -224,7 +229,6 @@
                 }
               }
               table.querySelector( 'tbody' ).appendChild( table_row );
-
             }
           }
 
@@ -277,6 +281,19 @@
             }
           }
 
+          function dataToFormdataInput() {
+            if ( !data || !Array.isArray( data.values ) || data.values.length === 0 ) return;
+
+            const start_values = {};
+            for ( let i = 0; i < data.values.length; i++ ){
+              for ( let j = 0; j < data.values[ i ].length; j++ ) {
+                let key = ( i + 1 )+"-"+ ( j + 1);
+                start_values[ key ] = data.values[ i ][ j ];
+              }
+            }
+            return start_values;
+          }
+
         } );
 
       };
@@ -292,7 +309,7 @@
 
           const result = [];
 
-          for( const key in form_data ) {
+          for ( const key in form_data ) {
             const coord = key.split( '-' );
             const row = coord[ 0 ] - 1;
             const col = coord[ 1 ] - 1;

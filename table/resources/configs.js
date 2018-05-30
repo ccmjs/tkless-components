@@ -1,10 +1,11 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
     table_row: 2,
-    table_col: 5,
+    table_col: 6,
     add_row: true,
-    table_head: [ "Header 1", "Header 2", "Header 3", "Header 4", "Header 5" ],
+    table_head: [ "Header 1", "Header 2", "Header 3", "Header 4", "Header 5", "Header 6" ],
     col_settings: [
+      { "type": "checkbox" },
       { "type": "tel", "placeholder": "Tel: 049...", "required": true },
       { "foo": "bar", "placeholder": "Hier steht Email" },
       { "type": "date", "bar": "baz" },
@@ -16,11 +17,11 @@ ccm.files[ "configs.js" ] = {
     ],
     data: {
       values: [
-        [ "0045/ 12344567", "max.mustermann@mail.com", "12.01.2018",  "textarea 1", "textarea 2"],
-        [ "", "", ""],
-        [ "", "erika.mustermann@mail.com", "", "", ""],
-        [ "", "markus.möglich@mail.com", "", "", ""],
-        [ "", "jane.doe@mail.com", "", "", ""]
+        [ true, "0045/ 12344567", "max.mustermann@mail.com", "12.01.2018",  "textarea 1", "textarea 2"],
+        [ "", "", "", ""],
+        [ false, "erika.mustermann@mail.com", "", "", ""],
+        [ "", "", "markus.möglich@mail.com", "", "", ""],
+        [ true, "", "jane.doe@mail.com", "", "", ""]
       ]
     },
     "submit": "true",
