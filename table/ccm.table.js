@@ -53,7 +53,8 @@
 
         "input": {
           "tag": "input",
-          "type": "text"
+          "type": "text",
+          "onchange": "%change%"
         },
 
         "textarea": {
@@ -210,6 +211,7 @@
                     if ( my.col_settings ) considerColSettings( j, input );
 
                     const input_tag = table_col.appendChild( $.html( input, {
+                      // onchange event for input fields
                       change: function () {
                         self.onchange && self.onchange( this, this.value, self );
                       }
