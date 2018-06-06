@@ -28,6 +28,7 @@
         "table": {
           "inner": {
             "tag": "form",
+            "onsubmit": "%submit%",
             "inner": {
               "id": "container",
               "inner": {
@@ -78,8 +79,7 @@
           "tag": "button",
           "class": "btn btn-default pull-right",
           "typ": "submit",
-          "inner": "Submit",
-          "onclick": "%submit%"
+          "inner": "Submit"
         }
       },
       //add_row: true,
