@@ -155,13 +155,7 @@
             $.fillForm( self.element, dataToFormdataInput() );
 
             if ( my.submit ) {
-              const submit_button = $.html ( my.html.submit, {
-                submit: function ( event ) {
-                  event.preventDefault();
-                  $.onFinish( self );
-                  return false; // prevent page reload
-                }
-              } );
+              const submit_button = $.html ( my.html.submit );
               self.element.querySelector( '#container' ).appendChild( submit_button );
             }
 
@@ -174,7 +168,14 @@
             if ( !my.col_settings && !data ) return;
 
             if ( !my.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) ) my.table_col = data.values[ 0 ].length;
-            const table = $.html ( my.html.table );
+            const table = $.html ( my.html.table, {
+              submit: event => {
+                event.stopPropagation();
+                if ( event ) event.preventDefault();
+                $.onFinish( self );
+                return false; // prevent page reload
+              }
+            }  );
             let row;
 
             if ( my.table_row || data.values.length > 0 ) {
