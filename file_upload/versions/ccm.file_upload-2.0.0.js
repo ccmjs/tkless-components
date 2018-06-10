@@ -247,7 +247,7 @@
               let reader = new FileReader();
 
               reader.addEventListener( 'load', function() {
-                PDFJS.workerSrc = '../libs/pdfjs/pdf.worker.js';
+                PDFJS.workerSrc = 'https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js';
                 PDFJS.getDocument(this.result).then( function (pdf) {
                   files_data.slides.push( { name: file.name, data: reader.result, MIME: file.type  } );
 
