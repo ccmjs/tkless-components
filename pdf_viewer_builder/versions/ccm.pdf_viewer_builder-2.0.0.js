@@ -263,12 +263,12 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],
-      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
-        "data_type": "pdf",
-        "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-3.0.0.js" ],
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-2.0.0.js", {
+        // "data_type": "pdf",
+        // "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
       } ],
 
 
