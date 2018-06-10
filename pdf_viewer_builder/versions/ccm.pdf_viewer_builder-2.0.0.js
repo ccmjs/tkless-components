@@ -2,8 +2,7 @@
  * @overview ccm component for building a slidecast component
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
- * version 2.0.0
- * - switch to ccm cloud v2
+ * TODO: prevent line breack by clicking on info-icon
  */
 
 {
@@ -264,13 +263,14 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
+        "resources/default.css"
       ],
-      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-3.0.0.js" ],
-      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-2.0.0.js", {
-        // "data_type": "pdf",
-        // "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
+      "target": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],
+      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
+        "data_type": "pdf",
+        "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
       } ],
+
 
       // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
       // "submit_button": true,
@@ -419,7 +419,7 @@
 
           function prepareFileUpload( callback ) {
             // render file upload
-            my.file_upload.start( { onfinish: () => onChange() }, instance => {
+            my.file_upload.start( { onfinish: ( inst, data, key ) => onChange(  inst, data, key ) }, instance => {
               upload = instance;
               self.element.querySelector( '#upload' ).appendChild( instance.root );
 

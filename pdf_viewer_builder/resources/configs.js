@@ -41,7 +41,7 @@ ccm.files[ "configs.js" ] = {
   },
 
   "crud_app": {
-    "builder": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/ccm.pdf_viewer_builder.js",
+    "builder": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/versions/ccm.pdf_viewer_builder-2.0.0.js",
       {
         "preview": true,
         "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-2.0.0.js", {
