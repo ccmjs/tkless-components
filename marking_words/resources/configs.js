@@ -16,6 +16,5 @@ ccm.files[ "configs.js" ] = {
     "onfinish": {
       "log": true
     },
-    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
   }
 };
