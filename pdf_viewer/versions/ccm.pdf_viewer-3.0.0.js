@@ -3,10 +3,6 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @version latest 2.1.0
- * @changes
- * - download flag ist now optional
- * version 3.0.0 - switch to ccm cloud v2
  */
 
 {
@@ -53,7 +49,7 @@
               "id": "nav",
               "inner": [
                 {
-                  "class": "input-group col-md-2 col-md-offset-5",
+                  "class": "input-group",
                   "inner": [
                     {
                       "class": "input-group-btn",
@@ -169,7 +165,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = 'https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js';
+        PDFJS.workerSrc = '../libs/pdfjs/pdf.worker.min.js';
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
@@ -199,7 +195,6 @@
 
         // render input elements
         $.setContent( self.element, $.html( my.html.main, {
-          href: my.pdf,
           prev: function () {
             if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
 
@@ -223,17 +218,8 @@
           all: function () { pdfDoc.numPages; },
         } ) );
 
-        // if file download is set in config, show download link
-        if ( my.download ) {
-          const download_elem = $.html( my.html.download, {
-            filename :  ( $.isObject( file ) && file.slides  ) ? file.slides[ 0 ].name : file.split( '/' ).pop()
-          } );
-
-          self.element.querySelector( '#pdf-elem' ).prepend( download_elem );
-        }
-
         // set canvas
-        canvas = self.element.querySelector( 'canvas' );
+        const canvas = self.element.querySelector( 'canvas' );
         // disable to downloading the files from canvas element
         canvas.addEventListener('contextmenu', function(e) {
           e.preventDefault();
@@ -255,9 +241,10 @@
           pageRendering = true;
           // Using promise to fetch the page
           pdfDoc.getPage( num ).then( function( page ) {
+
             let viewport = page.getViewport(1);
             let scale = page_elem.clientWidth / viewport.width;
-            viewport = page.getViewport(scale);
+            viewport = page.getViewport( scale );
 
             canvas.height = viewport.height;
             canvas.width = viewport.width;
@@ -270,23 +257,26 @@
             let renderTask = page.render( renderContext );
 
             // Wait for rendering to finish
-            renderTask.promise.then(function() {
+            renderTask.promise.then( function() {
               pageRendering = false;
-              if (pageNumPending !== null) {
+              if ( pageNumPending !== null ) {
                 // New page rendering is pending
-                renderPage(pageNumPending);
+                renderPage( pageNumPending );
                 pageNumPending = null;
               }
 
-              //set width to display page number in the middle of pdf-file
-              self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+              if ( pdfDoc.numPages > 1 ) {
+                //set width to display page number in the middle of pdf-file
+                self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+                // Update page counters
+                self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
+              }
+              else
+                self.element.querySelector( '#nav' ).remove();
             });
-          }, function (err) {
+          }, function ( err ) {
             console.log( err )
           });
-
-          // Update page counters
-          self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
 
         }
 
@@ -338,7 +328,7 @@
          * If another page rendering in progress, waits until the rendering is
          * finised. Otherwise, executes rendering immediately.
          */
-        function queueRenderPage(num) {
+        function queueRenderPage( num ) {
           if (pageRendering) {
             pageNumPending = num;
           } else {
