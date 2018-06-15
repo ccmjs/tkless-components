@@ -83,11 +83,11 @@
       //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       // download: true,
       pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.min.js"/*, "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.385/pdf.worker.min.js"*/ ] ],
+      pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css"
       ]
-
     },
 
     Instance: function () {
@@ -141,7 +141,7 @@
         if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = '../libs/pdfjs/pdf.worker.min.js';
+        PDFJS.workerSrc = my.pdfJS_workerSrc;
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
