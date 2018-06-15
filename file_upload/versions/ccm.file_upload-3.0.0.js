@@ -2,6 +2,8 @@
  * @overview ccm component for saving given files as data in ccm datasore
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
+ *  * version 2.0.0
+ * - switch to ccm cloud v2
  */
 
 ( function () {
@@ -9,8 +11,17 @@
   var component = {
 
     name: 'file_upload',
+    version:[ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       "html": {
@@ -19,11 +30,10 @@
           "inner": {
             "tag": "form",
             "id": "box",
-            "onchange": "%onchange%",
             "onclick": "%trigger_dialog%",
             "inner": [
               {
-                "id": "box-input",
+                "class": "box-input",
                 "inner":
                   {
                     "tag" : "span",
@@ -45,23 +55,18 @@
                   }
               },
               {
-                "id": "box-preview"
-              },
-              {
-                "id": "box-buttons",
-                "class": "col-md-12",
+                "class": "box-buttons col-md-12",
                 "inner": [
                   {
                     "id": "upload",
                     "tag": "button",
-                    "class": "btn btn-info",
-                    "onclick": "%upload%",
+                    "class": "btn btn-info box-button",
+                    "onclick": "%submit%",
                     "inner": "Upload"
                   },
                   {
-                    "id": "clear",
                     "tag": "button",
-                    "class": "btn btn-primary",
+                    "class": "btn btn-primary box-button",
                     "onclick": "%restart%",
                     "inner": "Clear"
                   }
@@ -104,16 +109,13 @@
         }
 
       },
-      // "data_type": "pdf", // or image
-      // "mulitple": true, //only set if multiple upload is desired
-      // "data": { store: [ "ccm.store'" ], key: "demo" },
-
-      //"upload_button": true,
-      "clear_button": true,
-      "pdfJS": [ "ccm.load", "../libs/pdfjs/pdf.js" ],
+      //"data_type": "pdf", // or image
+      //"mulitple": true, //only set if multiple upload is desired
+      //"data": { store: [ "ccm.store'" ], key: "demo" },
+      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../file_upload/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
       ]
     },
 
@@ -134,7 +136,7 @@
 
         $.setContent( self.element, $.html( my.html.file_upload , {
           trigger_dialog: () => input.click(),
-          upload: event => {
+          submit: event => {
             event.preventDefault();
             event.stopPropagation();
 
@@ -145,17 +147,17 @@
               // update dataset
               my.data.store.set( files_data, () => {
 
-                  if ( self.logger ) {
-                    files_data = $.clone( files_data );
-                    self.logger.log( 'create', files_data );
-                  }
+                if ( self.logger ) {
+                  files_data = $.clone( files_data );
+                  self.logger.log( 'create', files_data );
+                }
 
-                  // upload successfull
-                  input.setAttribute( 'disabled', true );
-                  self.element.querySelector( 'form' ).style.cursor = 'default';
-                  self.element.querySelector( '#upload' ).classList.add( 'disabled' );
-                  [... self.element.querySelectorAll( '.box-success-mark' )].map( item => item.classList.add( 'visible' ));
-                  [... self.element.querySelectorAll( '.box-progress' )].map( item => item.classList.add( 'visible' ));
+                // upload successfull
+                input.setAttribute( 'disabled', true );
+                self.element.querySelector( 'form' ).style.cursor = 'default';
+                self.element.querySelector( '#upload' ).classList.add( 'disabled' );
+                [... self.element.querySelectorAll( '.box-success-mark' )].map( item => item.classList.add( 'visible' ));
+                [... self.element.querySelectorAll( '.box-progress' )].map( item => item.classList.add( 'visible' ));
 
                 if ( self.onfinish ) $.onFinish( self, files_data );
 
@@ -167,12 +169,8 @@
             event.stopPropagation();
 
             self.start();
-          },
-          onchange: onChange
+          }
         } ) );
-
-        if ( !my.upload_button ) self.element.querySelector( '#upload' ).remove();
-        if ( !my.clear_button ) self.element.querySelector( '#clear' ).remove();
 
         let input = createInputField();
         draggableForm();
@@ -223,8 +221,7 @@
               slides: []
             };
 
-
-            self.element.querySelector( '#box-buttons' ).classList.add( 'visible' );
+            self.element.querySelector( '.box-buttons' ).classList.add( 'visible' );
             let preview_template = $.html( my.html.preview );
 
             // Make sure filename matches extensions criteria
@@ -241,7 +238,6 @@
                 self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
                 self.element.querySelector( '.box-input' ).style.display = 'none';
                 files_data.slides.push( { name: file.name, data: this.result, MIME: file.type  } );
-                onChange();
               }, false );
               reader.readAsDataURL( file );
             }
@@ -251,7 +247,7 @@
               let reader = new FileReader();
 
               reader.addEventListener( 'load', function() {
-                PDFJS.workerSrc = '../libs/pdfjs/pdf.worker.js';
+                PDFJS.workerSrc = 'https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js';
                 PDFJS.getDocument(this.result).then( function (pdf) {
                   files_data.slides.push( { name: file.name, data: reader.result, MIME: file.type  } );
 
@@ -271,12 +267,11 @@
                       canvasContext: context,
                       viewport: viewport
                     });
-                    task.promise.then( function() {
+                    task.promise.then(function() {
                       preview_template.querySelector( '.box-image' ).replaceChild(  preview_template.querySelector('canvas'), canvas );
                       preview_template.querySelector( '.name' ).innerHTML = file.name;
-                      self.element.querySelector( '#box-preview' ).appendChild( preview_template );
-                      self.element.querySelector( '#box-input' ).style.display = 'none';
-                      onChange();
+                      self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
+                      self.element.querySelector( '.box-input' ).style.display = 'none';
                     });
                   });
                 });
@@ -300,10 +295,6 @@
           self.element.appendChild( input );
           input.addEventListener( 'change', () => { previewFiles(); } );
           return input;
-        }
-
-        function onChange() {
-          self.onchange && self.onchange( self );
         }
 
       };

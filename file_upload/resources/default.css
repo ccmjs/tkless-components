@@ -24,12 +24,12 @@
   cursor: pointer;
 }
 
-#box .box-input {
+#box #box-input {
   padding-top: 3.5em;
   text-align: center;
 }
 
-#box .box-buttons {
+#box #box-buttons {
   text-align: center;
   display: none;
 }
