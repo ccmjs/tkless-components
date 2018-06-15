@@ -2,8 +2,11 @@
  * @overview ccm component for saving given files as data in ccm datasore
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
- *  * version 2.0.0
+ * @version 2.0.0
  * - switch to ccm cloud v2
+ * @version 3.0.0
+ * - react to changes in drop field via onchange.
+ * - optional update, clear-button.
  */
 
 ( function () {
@@ -11,7 +14,7 @@
   var component = {
 
     name: 'file_upload',
-    version:[ 2,0,0 ],
+    version:[ 3,0,0 ],
 
     /**
      * recommended used framework version
@@ -30,10 +33,11 @@
           "inner": {
             "tag": "form",
             "id": "box",
+            "onchange": "%onchange%",
             "onclick": "%trigger_dialog%",
             "inner": [
               {
-                "class": "box-input",
+                "id": "box-input",
                 "inner":
                   {
                     "tag" : "span",
@@ -55,18 +59,23 @@
                   }
               },
               {
-                "class": "box-buttons col-md-12",
+                "id": "box-preview"
+              },
+              {
+                "id": "box-buttons",
+                "class": "col-md-12",
                 "inner": [
                   {
                     "id": "upload",
                     "tag": "button",
-                    "class": "btn btn-info box-button",
-                    "onclick": "%submit%",
+                    "class": "btn btn-info",
+                    "onclick": "%upload%",
                     "inner": "Upload"
                   },
                   {
+                    "id": "clear",
                     "tag": "button",
-                    "class": "btn btn-primary box-button",
+                    "class": "btn btn-primary",
                     "onclick": "%restart%",
                     "inner": "Clear"
                   }
@@ -109,10 +118,13 @@
         }
 
       },
-      //"data_type": "pdf", // or image
-      //"mulitple": true, //only set if multiple upload is desired
-      //"data": { store: [ "ccm.store'" ], key: "demo" },
-      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
+      // "data_type": "pdf", // or image
+      // "mulitple": true, //only set if multiple upload is desired
+      // "data": { store: [ "ccm.store'" ], key: "demo" },
+
+      //"upload_button": true,
+      //"clear_button": true,
+      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.js" ],
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
@@ -136,7 +148,7 @@
 
         $.setContent( self.element, $.html( my.html.file_upload , {
           trigger_dialog: () => input.click(),
-          submit: event => {
+          upload: event => {
             event.preventDefault();
             event.stopPropagation();
 
@@ -169,8 +181,12 @@
             event.stopPropagation();
 
             self.start();
-          }
+          },
+          onchange: onChange
         } ) );
+
+        if ( !my.upload_button ) self.element.querySelector( '#upload' ).remove();
+        if ( !my.clear_button ) self.element.querySelector( '#clear' ).remove();
 
         let input = createInputField();
         draggableForm();
@@ -221,7 +237,7 @@
               slides: []
             };
 
-            self.element.querySelector( '.box-buttons' ).classList.add( 'visible' );
+            self.element.querySelector( '#box-buttons' ).classList.add( 'visible' );
             let preview_template = $.html( my.html.preview );
 
             // Make sure filename matches extensions criteria
@@ -238,6 +254,7 @@
                 self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
                 self.element.querySelector( '.box-input' ).style.display = 'none';
                 files_data.slides.push( { name: file.name, data: this.result, MIME: file.type  } );
+                onChange();
               }, false );
               reader.readAsDataURL( file );
             }
@@ -267,11 +284,12 @@
                       canvasContext: context,
                       viewport: viewport
                     });
-                    task.promise.then(function() {
+                    task.promise.then( function() {
                       preview_template.querySelector( '.box-image' ).replaceChild(  preview_template.querySelector('canvas'), canvas );
                       preview_template.querySelector( '.name' ).innerHTML = file.name;
-                      self.element.querySelector( '.box-buttons' ).parentNode.insertBefore( preview_template, self.element.querySelector( '.box-buttons' )  );
-                      self.element.querySelector( '.box-input' ).style.display = 'none';
+                      self.element.querySelector( '#box-preview' ).appendChild( preview_template );
+                      self.element.querySelector( '#box-input' ).style.display = 'none';
+                      onChange();
                     });
                   });
                 });
@@ -295,6 +313,10 @@
           self.element.appendChild( input );
           input.addEventListener( 'change', () => { previewFiles(); } );
           return input;
+        }
+
+        function onChange() {
+          self.onchange && self.onchange( self );
         }
 
       };
