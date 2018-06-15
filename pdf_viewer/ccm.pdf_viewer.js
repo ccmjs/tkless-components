@@ -77,21 +77,6 @@
               ]
             }
           ]
-        },
-        "download": {
-          "inner": {
-            "class": "btn btn-link",
-            "id": "download",
-            "title": "Folien herunterladen",
-            "onclick": "%get_file%",
-            "inner": [
-              {
-                "tag": "span",
-                "class": "glyphicon glyphicon-download"
-              },
-              "&nbsp;Download&nbsp;"
-            ]
-          }
         }
       },
       // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],

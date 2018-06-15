@@ -82,30 +82,10 @@
               ]
             }
           ]
-        },
-        "download": {
-          "inner": {
-            "inner": {
-              "tag": "a",
-              "id": "download",
-              "href": "%href%",
-              "title": "Folien herunterladen",
-              "download": "%filename%",
-              "target": "_blank",
-              "inner": [
-                {
-                  "tag": "span",
-                  "class": "glyphicon glyphicon-download"
-                },
-                "&nbsp;Download&nbsp;"
-              ]
-            }
-          },
         }
       },
       // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
       //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      //download: true, //only set if file download is required
       pdfJS: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
@@ -221,10 +201,10 @@
         // set canvas
         const canvas = self.element.querySelector( 'canvas' );
         // disable to downloading the files from canvas element
-        canvas.addEventListener('contextmenu', function(e) {
-          e.preventDefault();
+        canvas.addEventListener( 'contextmenu', event => {
+          event.preventDefault();
         });
-        ctx = canvas.getContext('2d');
+        ctx = canvas.getContext( '2d' );
         let page_elem = self.element.querySelector( '#pdf-view' );
 
         // Initial/first page rendering
