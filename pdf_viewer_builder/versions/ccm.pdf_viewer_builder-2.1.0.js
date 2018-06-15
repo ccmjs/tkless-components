@@ -2,7 +2,6 @@
  * @overview ccm component for building a slidecast component
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
- * TODO: prevent line breack by clicking on info-icon
  */
 
 {
@@ -13,7 +12,7 @@
      * @type {string}
      */
     name: 'pdf_viewer_builder',
-    version:[ 2,0,0 ],
+    version:[ 2,1,0 ],
 
     /**
      * recommended used framework version
@@ -142,7 +141,7 @@
                           {
                             "tag": "option",
                             "inner": "Default",
-                            "value": "['ccm.load','https://ccmjs.github.io/tkless-components/pdf_viewer/resources/default.css',['https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css'}]]"
+                            "value": "['ccm.load','../pdf_viewer/resources/default.css',['https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css',{'context':'head','url':'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css'}]]"
                           }
                         ]
                       }
@@ -243,9 +242,10 @@
                 ]
               },
               {
-                "class": "submit submit-button form-group",
+                "class": "form-group",
                 "inner": [
                   {
+                    "id": "section-submit",
                     "class": "col-md-12",
                     "inner": {
                       "tag": "input",
@@ -266,12 +266,9 @@
         "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-3.0.0.js" ],
-      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-2.0.0.js", {
-        // "data_type": "pdf",
-        // "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "https://ccm2.inf.h-brs.de", "method": "POST" } ] },
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-3.0.0.js", {
+        "data_type": "pdf", "clear_button": true
       } ],
-
-
       // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
       // "submit_button": true,
       // "preview": true,
@@ -338,7 +335,8 @@
 
           // render input elements
           $.setContent(self.element, $.html(my.html, {
-            change: () => onChange,
+            submit: self.submit,
+            change: onChange,
             basic: () => {
               // set active button
               self.element.querySelector('.btn-adv').classList.remove('active');
@@ -407,6 +405,7 @@
             // no preview desired? => abort
             if (!my.preview) return;
 
+
             const config = self.getValue();
 
             // render pdf from start_values
@@ -419,7 +418,7 @@
 
           function prepareFileUpload( callback ) {
             // render file upload
-            my.file_upload.start( { onfinish: ( inst, data, key ) => onChange(  inst, data, key ) }, instance => {
+            my.file_upload.start( { onchange: ( data ) => onChange( data ) }, instance => {
               upload = instance;
               self.element.querySelector( '#upload' ).appendChild( instance.root );
 
@@ -439,7 +438,7 @@
             updatePreview();
 
             // perform change actions
-            self.onchange && self.onchange(self);
+            self.onchange && self.onchange( self );
 
           }
 
