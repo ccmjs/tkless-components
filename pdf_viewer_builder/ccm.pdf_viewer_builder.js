@@ -371,7 +371,7 @@
             if ( my.preview ) updatePreview( dataset.pdf );
 
             // no preview desired? => remove preview section
-            else $.removeElement( self.element.querySelector( '#preview' ) );
+            else $.removeElement( self.element.querySelector( '.preview' ) );
 
             // no submit button wanted? => remove submit button
             !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
