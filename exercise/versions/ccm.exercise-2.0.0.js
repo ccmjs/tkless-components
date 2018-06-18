@@ -2,14 +2,26 @@
  * @overview ccm component for exercise
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @versoin 2.0.0
+ * - task can be html-strings or components or combination of both
+ * - customize submit button caption
  */
 ( function () {
 
   var component = {
 
     name: 'exercise',
+    version: [ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       html: {
@@ -35,19 +47,17 @@
         }
       },
 
-      //"task": "<h1>Einleitung</h1>",
+      //"task": "<h1>Einleitung</h1>", //as html string or component or both
       //"submit_button": true,
       //onfinish
       "editor": [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-2.0.0.js", {
         "settings.modules.toolbar": false
       } ],
-
       "content": [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js" ],
-      "libs": [ 'ccm.load',
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../libs/bootstrap/css/bootstrap.css"
+      "libs": [ 'ccm.load', "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
       ]
-     },
+    },
 
     Instance: function () {
       /**
