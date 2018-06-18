@@ -261,7 +261,7 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "'https://ccmjs.github.io/tkless-components/exercise_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "'https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-2.0.0.js", { "submit_button": "Save" } ],
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-2.0.0.js", { "submit_button": "Save" } ],
       "submit_button": "Submit",
       "preview": true,
 
