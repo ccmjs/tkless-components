@@ -1,9 +1,7 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
-    "submit_button": true,
     "preview": true,
-    "start_values": {
-      "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]",
+    "data": {
       "task": "<h4>1. Lesen Sie den Text und reflektieren Sie.</h4>" +
       "<p>Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der " +
       "Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel? Gerade jetzt, wo er das Ding " +
@@ -13,7 +11,7 @@ ccm.files[ "configs.js" ] = {
       "Handgelenke würde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon hören.</p>",
     },
     "onfinish": {
-      log: true
+      "log": true
     }
   }
 };
