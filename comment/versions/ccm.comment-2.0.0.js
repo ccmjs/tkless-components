@@ -2,15 +2,31 @@
  * @overview ccm component for commenting
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ *  - ES6
+ *  - support ccm2 datastore
  */
 
 {
 
   var component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'comment',
+    version: [ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       "html": {
@@ -134,51 +150,51 @@
         },
         "expanded_comment": {
           "inner": {
-              "class": "panel panel-white post panel-shadow",
-              "inner": [
-                {
-                  "class": "post-heading",
-                  "inner":[
-                    {
-                      "class": "pull-left image",
-                      "inner": {
-                        "tag": "img",
-                        "src": "../../ccm-components/comment/resources/user.jpg",
-                        "class": "img-circle avatar",
-                        "alt": "user profile image"
+            "class": "panel panel-white post panel-shadow",
+            "inner": [
+              {
+                "class": "post-heading",
+                "inner":[
+                  {
+                    "class": "pull-left image",
+                    "inner": {
+                      "tag": "img",
+                      "src": "../../ccm-components/comment/resources/user.jpg",
+                      "class": "img-circle avatar",
+                      "alt": "user profile image"
+                    }
+                  },
+                  {
+                    "class": "pull-left meta",
+                    "inner": [
+                      {
+                        "class": "title h5",
+                        "inner": "<b>%user%</b>&nbsp;made a post."
+                      },
+                      {
+                        "tag": "h6",
+                        "class": "text-muted time",
+                        "inner": "%date%"
                       }
-                    },
-                    {
-                      "class": "pull-left meta",
-                      "inner": [
-                        {
-                          "class": "title h5",
-                          "inner": "<b>%user%</b>&nbsp;made a post."
-                        },
-                        {
-                          "tag": "h6",
-                          "class": "text-muted time",
-                          "inner": "%date%"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "class": "post-description",
-                  "inner": [
-                    {
-                      "tag": "p",
-                      "class": "comment-overview",
-                      "inner": "%comment_content%&nbsp;"
-                    },
-                    {
-                      "class": "stats voting-area"
-                    }
-                  ]
-                }
-              ]
-            }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "post-description",
+                "inner": [
+                  {
+                    "tag": "p",
+                    "class": "comment-overview",
+                    "inner": "%comment_content%&nbsp;"
+                  },
+                  {
+                    "class": "stats voting-area"
+                  }
+                ]
+              }
+            ]
+          }
         },
         "edit": {
           "tag": "span",
@@ -201,9 +217,9 @@
       // "sorting_by_voting": true,
       // "comment_template": "expanded",
       // "data": { "store": [ "ccm.store", {} ], "key": 'demo' },
-      "libs": [ "ccm.load", "../libs/bootstrap/css/bootstrap.css",
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../comment/resources/default.css",
+      "libs": [ "ccm.load", ".https://ccmjs.github.io/tkless-components//libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/comment/resources/default.css",
         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"
       ]
     },
@@ -337,7 +353,7 @@
 
                 let edit_elem = $.html( my.html.edit, {
                   edit: function () {
-                   let content = comment_elem.querySelector( '.comment-content' ).childNodes[0].textContent;
+                    let content = comment_elem.querySelector( '.comment-content' ).childNodes[0].textContent;
                     my.editor.start( ( instance ) => {
                       $.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
                       instance.get().setText( content );
@@ -415,7 +431,7 @@
 
             self.element.querySelector( '#new-comment' ).appendChild( editor_elem );
           }
-          
+
           function newComment() {
             let data = {
               "user": self.user.data().user,
