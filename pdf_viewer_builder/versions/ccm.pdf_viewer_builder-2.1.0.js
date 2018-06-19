@@ -272,11 +272,6 @@
       // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
       // "submit_button": true,
       // "preview": true,
-      // "start_values": {
-      //   "pdf": [ "ccm.get", { url: "http://localhost:8080", store: "file_upload" }, "1518776028787X4201785986475841" ],
-      //   "css": "['ccm.load','ccm-components/pdf_viewer/resources/default.css']",
-      //   "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
-      // }
       // "onchange": instance => console.log( instance.getValue() ),
       // "onfinish": { "log": true }
 
