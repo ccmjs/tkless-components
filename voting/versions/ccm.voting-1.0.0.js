@@ -50,7 +50,7 @@
       "libs": [ "ccm.load",
         {  "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        "../voting/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/voting/resources/default.css"
       ],
     },
 
