@@ -1,8 +1,7 @@
 /**
- * @overview ccm component for building a slidecast component
- * @author Tea Kless <tea.kless@web.de>, 2017
+ * @overview ccm component for building a pdf-viewer component
+ * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * TODO: prevent line breack by clicking on info-icon
  */
 
 {
