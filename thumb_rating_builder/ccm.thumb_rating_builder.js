@@ -76,7 +76,7 @@
                           {
                             "tag": "option",
                             "inner": "w2c",
-                            "value": "'data': { 'store': [ 'ccm.store', { 'store': 'w2c_thumb_rating', 'url': 'https://ccm2.inf.h-brs.de' } ] },"
+                            "value": "{ 'store': [ 'ccm.store', { 'store': 'w2c_thumb_rating', 'url': 'https://ccm2.inf.h-brs.de' } ] }"
                           }
                         ]
                       }
@@ -147,14 +147,6 @@
                               "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
                               {
                                 "tag": "h5",
-                                "inner": "Guest Mode"
-                              },
-                              {
-                                "tag": "p",
-                                "inner": "Every user will automatically logged in as the user \"guest\". This mode is mostly used for test scenarios."
-                              },
-                              {
-                                "tag": "h5",
                                 "inner": "Demo Mode"
                               },
                               {
@@ -188,17 +180,12 @@
                           {
                             "tag": "option",
                             "inner": "Guest Mode",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/ccm.user.js',{'sign_on':'guest'}]"
-                          },
-                          {
-                            "tag": "option",
-                            "inner": "Demo Mode",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'demo'}]"
+                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
                           },
                           {
                             "tag": "option",
                             "inner": "H-BRS FB02",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js',{'sign_on':'hbrsinfkaul'}]"
+                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','hbrsinfkaul']]"
                           }
                         ]
                       }
@@ -386,11 +373,12 @@
          */
         let result =  $.formData( self.element.querySelector( 'form' ) );
 
-        // convert dot notation properties to deeper objects
-        result = $.solveDotNotation( result );
 
         if ( result.data_storage ) {
           result.data = result.data_storage;
+          // encode dependencies
+          $.encodeDependencies( result.data );
+
           delete result.data_storage;
         }
 
@@ -398,7 +386,7 @@
         delete result.layout;
 
         // use empty string if no value was specified
-        if ( !result.user ) result.user = '';
+        if ( !result.user ) delete result.user;
 
         // now values of input elements are transformed to resulting instance configuration
         return $.clone( result );
