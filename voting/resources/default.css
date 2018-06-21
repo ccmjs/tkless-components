@@ -2,6 +2,9 @@
 #dislikes {
     cursor: pointer;
 }
+#total {
+    padding: 0.25rem;
+}
 
 .disabled {
     cursor: default;
@@ -9,7 +12,5 @@
 }
 
 #main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
 }
