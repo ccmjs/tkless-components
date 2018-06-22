@@ -184,7 +184,7 @@
                 ]
               },
               {
-                "class": "preview",
+                "id": "section-preview",
                 "inner": [
                   {
                     "tag": "legend",
@@ -205,7 +205,7 @@
                     "inner": {
                       "tag": "input",
                       "type": "submit",
-                      "id": "btn-submit",
+                      "id": "button-submit",
                       "class": "btn btn-primary pull-right"
                     }
                   }
@@ -293,27 +293,44 @@
             change: onChange
           }));
 
-          // initialize selectize for star range titles
-          jQuery( self.element.querySelector('#star-title') ).selectize( {
-            delimiter: ',',
-            persist: true,
-            create: true,
-            plugins: ['remove_button'],
-            maxItems: 5,
-            placeholder: 'Type Title Here...',
-            valueField: 'value',
-            labelField: 'value',
-            searchField: 'value',
-            options: [
-              { value: "Gefällt mir gar nicht" }, { value: "Gefällt mir nicht" },
-              { value: "Ist Ok" }, { value: "Gefällt mir" }, { value: "Gefällt mir sehr" }
-            ]
-          } ).on( 'change' , () =>  onChange() );
-
-          // (re)render preview
-          my.target.start( dataset, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );
+          prepare();
 
           callback && callback();
+
+          function prepare() {
+
+            // initialize selectize for star range titles
+            jQuery( self.element.querySelector('#star-title') ).selectize( {
+              delimiter: ',',
+              persist: true,
+              create: true,
+              plugins: ['remove_button'],
+              maxItems: 5,
+              placeholder: 'Type Title Here...',
+              valueField: 'value',
+              labelField: 'value',
+              searchField: 'value',
+              options: [
+                { value: "Gefällt mir gar nicht" }, { value: "Gefällt mir nicht" },
+                { value: "Ist Ok" }, { value: "Gefällt mir" }, { value: "Gefällt mir sehr" }
+              ]
+            } ).on( 'change' , () =>  onChange() );
+
+            // fill form with initial values
+            $.fillForm( self.element, dataset );
+
+            // render preview
+            if ( my.preview ) updatePreview();
+
+            // no preview desired? => remove preview section
+            else $.removeElement( self.element.querySelector( '#section-preview' ) );
+
+            // no submit button wanted? => remove submit button
+            !my.submit_button && $.removeElement( self.element.querySelector( '#button-submit' ) );
+
+            // individual caption for submit button? => set caption of submit button
+            if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#button-submit' ).value = my.submit_button;
+          }
 
           /** prepares the start values for the input elements  */
           function prepareValues() {
