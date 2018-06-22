@@ -2,13 +2,25 @@
  * @overview ccm component for voting
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ *  - ccm v16.6.0
+ *  - update "magic line"
  */
 {
   var component = {
 
     name: 'star_rating_result',
+    version:[ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       "html": {
@@ -16,15 +28,15 @@
           "id": "main",
           "inner": [
             {
-            "id": "reviewed_stars",
-            "inner": [
-              {
-                "class" : "rating"
-              },
-              {
-                "id": "total-count"
-              }
-            ]
+              "id": "reviewed_stars",
+              "inner": [
+                {
+                  "class" : "rating"
+                },
+                {
+                  "id": "total-count"
+                }
+              ]
             },
             {
               "id": "bars"
@@ -70,7 +82,7 @@
       "css": [ "ccm.load",
         { context: 'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        '../star_rating_result/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/star_rating_result/resources/default.css'
       ]
     },
 
