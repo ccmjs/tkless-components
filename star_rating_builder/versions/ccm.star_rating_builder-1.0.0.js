@@ -231,7 +231,7 @@
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/js/bootstrap.min.js",
         "https://ccmjs.github.io/tkless-components/libs/selectize/selectize.min.js"]
       ],
-      "target": [ "ccm.component", "../star_rating/ccm.star_rating.js" ]
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/star_rating/versions/ccm.star_rating-2.0.0.js" ]
     // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
     // "submit_button": true,
     // "preview": true,
