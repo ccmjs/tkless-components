@@ -76,7 +76,7 @@
                           {
                             "tag": "option",
                             "inner": "w2c",
-                            "value": "{ 'store': [ 'ccm.store', { 'store': 'w2c_thumb_rating', 'url': 'https://ccm2.inf.h-brs.de' } ] }"
+                            "value": "{ 'store': [ 'ccm.store', { 'store': 'w2c_voting', 'url': 'https://ccm2.inf.h-brs.de' } ] }"
                           }
                         ]
                       }
@@ -104,7 +104,7 @@
                               "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
                               {
                                 "tag": "h5",
-                                "inner": "Demo Mode"
+                                "inner": "Guest Mode"
                               },
                               {
                                 "tag": "p",
