@@ -40,161 +40,126 @@
             "onsubmit": "%submit%",
             "inner": [
               {
-                "id": "advanced",
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.store"
+              },
+              {
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.key"
+              },
+              {
+                "class": "layout form-group",
                 "inner": [
                   {
-                    "class": "data-storage form-group",
+                    "tag": "label",
+                    "for": "layout",
+                    "class": "control-label",
                     "inner": [
+                      "Layout ",
                       {
-                        "tag": "label",
-                        "for": "user",
-                        "class": "control-label",
-                        "inner": [
-                          "Data Storage ",
-                          {
-                            "tag": "a",
-                            "onclick": "%help%",
-                            "inner": {
-                              "class": "glyphicon glyphicon-info-sign warning"
-                            }
-                          },
-                          {
-                            "class": "alert alert-info",
-                            "inner": [
-                              "Database URL"
-                            ]
-                          }
-                        ]
+                        "tag": "a",
+                        "onclick": "%help%",
+                        "inner": {
+                          "class": "glyphicon glyphicon-info-sign"
+                        }
                       },
                       {
-                        "tag": "select",
-                        "onchange": "%change%",
-                        "class": "form-control",
-                        "id": "data-storage",
-                        "name": "data_storage",
-                        "inner": [
-                          {
-                            "tag": "option",
-                            "inner": "w2c",
-                            "value": "{ 'store': [ 'ccm.store', { 'store': 'w2c_voting', 'url': 'https://ccm2.inf.h-brs.de' } ] }"
-                          }
-                        ]
+                        "class": "alert alert-info",
+                        "inner": "Choose between different layouts, in which the thumb rating is displayed."
                       }
                     ]
                   },
                   {
-                    "class": "css form-group",
+                    "tag": "select",
+                    "onchange": "%change%",
+                    "class": "form-control",
+                    "id": "layout",
+                    "name": "layout",
                     "inner": [
                       {
-                        "tag": "label",
-                        "for": "css",
-                        "class": "control-label",
-                        "inner": [
-                          "Layout ",
-                          {
-                            "tag": "a",
-                            "onclick": "%help%",
-                            "inner": {
-                              "class": "glyphicon glyphicon-info-sign"
-                            }
-                          },
-                          {
-                            "class": "alert alert-info",
-                            "inner": "Choose between different layouts, in which the thumb rating is displayed."
-                          }
-                        ]
+                        "tag": "option",
+                        "inner": "Default",
+                        "value": ""
                       },
                       {
-                        "tag": "select",
-                        "onchange": "%change%",
-                        "class": "form-control",
-                        "id": "layout",
-                        "name": "layout",
-                        "inner": [
-                          {
-                            "tag": "option",
-                            "inner": "Default",
-                            "value": ""
-                          },
-                          {
-                            "tag": "option",
-                            "inner": "Button Like",
-                            "value": "buttons"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "class": "user form-group",
-                    "inner": [
-                      {
-                        "tag": "label",
-                        "for": "user",
-                        "class": "control-label",
-                        "inner": [
-                          "Sign-on ",
-                          {
-                            "tag": "a",
-                            "onclick": "%help%",
-                            "inner": {
-                              "class": "glyphicon glyphicon-info-sign warning"
-                            }
-                          },
-                          {
-                            "class": "alert alert-info",
-                            "inner": [
-                              "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
-                              {
-                                "tag": "h5",
-                                "inner": "Guest Mode"
-                              },
-                              {
-                                "tag": "p",
-                                "inner": "The user can authenticate with any username and without password. This mode is mostly used for demo scenarios."
-                              },
-                              {
-                                "tag": "h5",
-                                "inner": "H-BRS FB02"
-                              },
-                              {
-                                "tag": "p",
-                                "inner": "In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences at Hochschule Bonn-Rhein-Sieg University of Applied Sciences."
-                              }
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "tag": "select",
-                        "onchange": "%change%",
-                        "class": "form-control",
-                        "id": "user",
-                        "name": "user",
-                        "inner": [
-                          {
-                            "tag": "option",
-                            "inner": "None",
-                            "value": ""
-                          },
-                          {
-                            "tag": "option",
-                            "inner": "Guest Mode",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
-                          },
-                          {
-                            "tag": "option",
-                            "inner": "H-BRS FB02",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','hbrsinfkaul']]"
-                          }
-                        ]
+                        "tag": "option",
+                        "inner": "Buttons",
+                        "value": "buttons"
                       }
                     ]
                   }
                 ]
               },
               {
-                "class": "preview",
+                "class": "user form-group",
+                "inner": [
+                  {
+                    "tag": "label",
+                    "for": "user",
+                    "class": "control-label",
+                    "inner": [
+                      "Sign-on ",
+                      {
+                        "tag": "a",
+                        "onclick": "%help%",
+                        "inner": {
+                          "class": "glyphicon glyphicon-info-sign warning"
+                        }
+                      },
+                      {
+                        "class": "alert alert-info",
+                        "inner": [
+                          "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
+                          {
+                            "tag": "h5",
+                            "inner": "Guest Mode"
+                          },
+                          {
+                            "tag": "p",
+                            "inner": "The user can authenticate with any username and without password. This mode is mostly used for demo scenarios."
+                          },
+                          {
+                            "tag": "h5",
+                            "inner": "H-BRS FB02"
+                          },
+                          {
+                            "tag": "p",
+                            "inner": "In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences at Hochschule Bonn-Rhein-Sieg University of Applied Sciences."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "select",
+                    "onchange": "%change%",
+                    "class": "form-control",
+                    "id": "user",
+                    "name": "user",
+                    "inner": [
+                      {
+                        "tag": "option",
+                        "inner": "None",
+                        "value": ""
+                      },
+                      {
+                        "tag": "option",
+                        "inner": "Guest Mode",
+                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
+                      },
+                      {
+                        "tag": "option",
+                        "inner": "H-BRS FB02",
+                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','hbrsinfkaul']]"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "section-preview",
                 "inner": [
                   {
                     "tag": "legend",
@@ -215,7 +180,7 @@
                     "inner": {
                       "tag": "input",
                       "type": "submit",
-                      "id": "btn-submit",
+                      "id": "button-submit",
                       "class": "btn btn-primary pull-right"
                     }
                   }
@@ -230,12 +195,16 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css"
       ],
-      "target": [ "ccm.component", "../thumb_rating/ccm.thumb_rating.js" ]
-    // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
-    // "submit_button": true,
-    // "preview": true,
-    // "onchange": instance => console.log( instance.getValue() ),
-    // "onfinish": { "log": true }
+      "target": [ "ccm.component", "../thumb_rating/ccm.thumb_rating.js" ],
+      // "defaults": {
+      //    "data.store": "['ccm.store',{'store':'thumb_rating_data','url':'http://localhost:8080'}]",
+      //    "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
+      // }
+      // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
+      // "submit_button": true,
+      // "preview": true,
+      // "onchange": instance => console.log( instance.getValue() ),
+      // "onfinish": { "log": true }
 
     },
 
@@ -290,7 +259,7 @@
           prepareValues();
 
           // render input elements
-          $.setContent(self.element, $.html(my.html, {
+          $.setContent( self.element, $.html( my.html, {
             submit: self.submit,
             help: function () {
               // hide and show help texts
@@ -302,13 +271,28 @@
             change: onChange
           }));
 
-          // (re)render preview
-          my.target.start( dataset, instance => $.setContent( self.element.querySelector( '#preview' ), instance.root ) );
+          // fill form with initial values
+          $.fillForm( self.element, dataset );
+
+          // render preview
+          if ( my.preview ) updatePreview();
+
+          // no preview desired? => remove preview section
+          else $.removeElement( self.element.querySelector( '#section-preview' ) );
+
+          // no submit button wanted? => remove submit button
+          !my.submit_button && $.removeElement( self.element.querySelector( '#button-submit' ) );
+
+          // individual caption for submit button? => set caption of submit button
+          if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#button-submit' ).value = my.submit_button;
 
           callback && callback();
 
           /** prepares the start values for the input elements  */
           function prepareValues() {
+
+            // set default value for dataset key of app-specific teambuild data
+            if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
 
             // given default values? => integrate them as defaults into initial values
             dataset = $.integrate( my.defaults, dataset, true );
@@ -373,17 +357,12 @@
          */
         let result =  $.formData( self.element.querySelector( 'form' ) );
 
-
-        if ( result.data_storage ) {
-          result.data = result.data_storage;
-          // encode dependencies
-          $.encodeDependencies( result.data );
-
-          delete result.data_storage;
-        }
-
         if ( result.layout === 'buttons' ) result.buttons = true;
-        delete result.layout;
+        else
+          result.layout = "default";
+
+        // convert dot notation properties to deeper objects
+        result = $.solveDotNotation( result );
 
         // use empty string if no value was specified
         if ( !result.user ) delete result.user;
