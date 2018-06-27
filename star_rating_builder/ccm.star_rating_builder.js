@@ -40,147 +40,112 @@
             "onsubmit": "%submit%",
             "inner": [
               {
-                "id": "advanced",
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.store"
+              },
+              {
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.key"
+              },
+              {
+                "class": "user form-group",
                 "inner": [
                   {
-                    "class": "data-storage form-group",
+                    "tag": "label",
+                    "for": "user",
+                    "class": "control-label",
                     "inner": [
+                      "Sign-on ",
                       {
-                        "tag": "label",
-                        "for": "user",
-                        "class": "control-label",
-                        "inner": [
-                          "Data Storage ",
-                          {
-                            "tag": "a",
-                            "onclick": "%help%",
-                            "inner": {
-                              "class": "glyphicon glyphicon-info-sign warning"
-                            }
-                          },
-                          {
-                            "class": "alert alert-info",
-                            "inner": [
-                              "Database URL"
-                            ]
-                          }
-                        ]
+                        "tag": "a",
+                        "onclick": "%help%",
+                        "inner": {
+                          "class": "glyphicon glyphicon-info-sign warning"
+                        }
                       },
                       {
-                        "tag": "select",
-                        "onchange": "%change%",
-                        "class": "form-control",
-                        "id": "data-storage",
-                        "name": "data_storage",
+                        "class": "alert alert-info",
                         "inner": [
+                          "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
                           {
-                            "tag": "option",
-                            "inner": "w2c",
-                            "value": "{ 'store': [ 'ccm.store', { 'store': 'w2c_voting', 'url': 'https://ccm2.inf.h-brs.de' } ] }"
+                            "tag": "h5",
+                            "inner": "Guest Mode"
+                          },
+                          {
+                            "tag": "p",
+                            "inner": "The user can authenticate with any username and without password. This mode is mostly used for demo scenarios."
+                          },
+                          {
+                            "tag": "h5",
+                            "inner": "H-BRS FB02"
+                          },
+                          {
+                            "tag": "p",
+                            "inner": "In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences at Hochschule Bonn-Rhein-Sieg University of Applied Sciences."
                           }
                         ]
                       }
                     ]
                   },
                   {
-                    "class": "user form-group",
+                    "tag": "select",
+                    "onchange": "%change%",
+                    "class": "form-control",
+                    "id": "user",
+                    "name": "user",
                     "inner": [
                       {
-                        "tag": "label",
-                        "for": "user",
-                        "class": "control-label",
-                        "inner": [
-                          "Sign-on ",
-                          {
-                            "tag": "a",
-                            "onclick": "%help%",
-                            "inner": {
-                              "class": "glyphicon glyphicon-info-sign warning"
-                            }
-                          },
-                          {
-                            "class": "alert alert-info",
-                            "inner": [
-                              "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
-                              {
-                                "tag": "h5",
-                                "inner": "Guest Mode"
-                              },
-                              {
-                                "tag": "p",
-                                "inner": "The user can authenticate with any username and without password. This mode is mostly used for demo scenarios."
-                              },
-                              {
-                                "tag": "h5",
-                                "inner": "H-BRS FB02"
-                              },
-                              {
-                                "tag": "p",
-                                "inner": "In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences at Hochschule Bonn-Rhein-Sieg University of Applied Sciences."
-                              }
-                            ]
-                          }
-                        ]
+                        "tag": "option",
+                        "inner": "None",
+                        "value": ""
                       },
                       {
-                        "tag": "select",
-                        "onchange": "%change%",
-                        "class": "form-control",
-                        "id": "user",
-                        "name": "user",
+                        "tag": "option",
+                        "inner": "Guest Mode",
+                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
+                      },
+                      {
+                        "tag": "option",
+                        "inner": "H-BRS FB02",
+                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','hbrsinfkaul']]"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "star-title form-group",
+                "inner": [
+                  {
+                    "tag": "label",
+                    "for": "star_title",
+                    "class": "control-label",
+                    "inner": [
+                      "Star Title ",
+                      {
+                        "tag": "a",
+                        "onclick": "%help%",
+                        "inner": {
+                          "class": "glyphicon glyphicon-info-sign warning"
+                        }
+                      },
+                      {
+                        "class": "alert alert-info",
                         "inner": [
-                          {
-                            "tag": "option",
-                            "inner": "None",
-                            "value": ""
-                          },
-                          {
-                            "tag": "option",
-                            "inner": "Guest Mode",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
-                          },
-                          {
-                            "tag": "option",
-                            "inner": "H-BRS FB02",
-                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','hbrsinfkaul']]"
-                          }
+                          "Here you can specify the title of the star that will be displayed when you move the cursor over each start."
                         ]
                       }
                     ]
                   },
                   {
-                    "class": "star-title form-group",
-                    "inner": [
-                      {
-                        "tag": "label",
-                        "for": "star_title",
-                        "class": "control-label",
-                        "inner": [
-                          "Star Title ",
-                          {
-                            "tag": "a",
-                            "onclick": "%help%",
-                            "inner": {
-                              "class": "glyphicon glyphicon-info-sign warning"
-                            }
-                          },
-                          {
-                            "class": "alert alert-info",
-                            "inner": [
-                              "Here you can specify the title of the star that will be displayed when you move the cursor over each start."
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "tag": "select",
-                        "multiple": true,
-                        "onchange": "%change%",
-                        "id": "star-title",
-                        "name": "star_title"
-                      }
-                    ]
-                  },
+                    "tag": "select",
+                    "multiple": true,
+                    "onchange": "%change%",
+                    "id": "star-title",
+                    "name": "star_title"
+                  }
                 ]
               },
               {
@@ -220,14 +185,18 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css", "../libs/selectize/selectize.default.min.css"
       ],
-
       "js": [ "ccm.load", [ "../libs/jquery/jquery.min.js", "../libs/bootstrap/js/bootstrap.min.js", "../libs/selectize/selectize.min.js"] ],
-      "target": [ "ccm.component", "../star_rating/ccm.star_rating.js" ]
-    // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
-    // "submit_button": true,
-    // "preview": true,
-    // "onchange": instance => console.log( instance.getValue() ),
-    // "onfinish": { "log": true }
+      "target": [ "ccm.component", "../star_rating/ccm.star_rating.js" ],
+      // "defaults": {
+      //   "star_title": [ "Gefällt mir gar nicht", "Gefällt mir nicht", "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ],
+      //   "data.store": "['ccm.store',{'store':'star_rating_data','url':'http://localhost:8080'}]",
+      //   "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
+      // }
+      // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
+      // "submit_button": true,
+      // "preview": true,
+      // "onchange": instance => console.log( instance.getValue() ),
+      // "onfinish": { "log": true }
 
     },
 
@@ -293,47 +262,50 @@
             change: onChange
           }));
 
-          prepare();
+          // initialize selectize for star range titles
+          let selectize = jQuery( self.element.querySelector('#star-title') ).selectize( {
+            delimiter: ',',
+            persist: true,
+            create: true,
+            plugins: ['remove_button'],
+            maxItems: 5,
+            placeholder: 'Type Title Here...',
+            valueField: 'value',
+            labelField: 'value',
+            searchField: 'value',
+            options: [
+              { value: "Gefällt mir gar nicht" }, { value: "Gefällt mir nicht" },
+              { value: "Ist Ok" }, { value: "Gefällt mir" }, { value: "Gefällt mir sehr" }
+            ]
+          } ).on( 'change' , () =>  onChange() );
+
+          // fill star_title input field with initial values
+          if ( dataset && dataset.star_title ) {
+            selectize[0].selectize.setValue( $.decodeObject( dataset.star_title ) );
+          }
+
+          // fill form with initial values
+          $.fillForm( self.element, dataset );
+
+          // render preview
+          if ( my.preview ) updatePreview();
+
+          // no preview desired? => remove preview section
+          else $.removeElement( self.element.querySelector( '#section-preview' ) );
+
+          // no submit button wanted? => remove submit button
+          !my.submit_button && $.removeElement( self.element.querySelector( '#button-submit' ) );
+
+          // individual caption for submit button? => set caption of submit button
+          if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#button-submit' ).value = my.submit_button;
 
           callback && callback();
 
-          function prepare() {
-
-            // initialize selectize for star range titles
-            jQuery( self.element.querySelector('#star-title') ).selectize( {
-              delimiter: ',',
-              persist: true,
-              create: true,
-              plugins: ['remove_button'],
-              maxItems: 5,
-              placeholder: 'Type Title Here...',
-              valueField: 'value',
-              labelField: 'value',
-              searchField: 'value',
-              options: [
-                { value: "Gefällt mir gar nicht" }, { value: "Gefällt mir nicht" },
-                { value: "Ist Ok" }, { value: "Gefällt mir" }, { value: "Gefällt mir sehr" }
-              ]
-            } ).on( 'change' , () =>  onChange() );
-
-            // fill form with initial values
-            $.fillForm( self.element, dataset );
-
-            // render preview
-            if ( my.preview ) updatePreview();
-
-            // no preview desired? => remove preview section
-            else $.removeElement( self.element.querySelector( '#section-preview' ) );
-
-            // no submit button wanted? => remove submit button
-            !my.submit_button && $.removeElement( self.element.querySelector( '#button-submit' ) );
-
-            // individual caption for submit button? => set caption of submit button
-            if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#button-submit' ).value = my.submit_button;
-          }
-
           /** prepares the start values for the input elements  */
           function prepareValues() {
+
+            // set default value for dataset key of app-specific teambuild data
+            if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
 
             // given default values? => integrate them as defaults into initial values
             dataset = $.integrate( my.defaults, dataset, true );
@@ -341,8 +313,14 @@
             // encode dependencies
             $.encodeDependencies( dataset );
 
+            // star_title have not to be transformed to dot notation
+            const star_title = dataset.star_title;
+            delete dataset.star_title;
+
             // convert initial values to dot notation
             dataset = $.toDotNotation( dataset );
+
+            dataset.star_title = star_title;
 
           }
 
@@ -400,16 +378,11 @@
          */
         let result =  $.formData( self.element.querySelector( 'form' ) );
 
-        if ( result.data_storage ) {
-          result.data = result.data_storage;
-          // encode dependencies
-          $.encodeDependencies( result.data );
-
-          delete result.data_storage;
-        }
-
         // delete star_title property if no values was specified
         if ( result.star_title.length === 0 ) delete result.star_title;
+
+        // convert dot notation properties to deeper objects
+        result = $.solveDotNotation( result );
 
         // delete user property if no value was specified
         if ( !result.user ) delete result.user;
