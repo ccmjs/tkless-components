@@ -112,14 +112,6 @@
 
           function setIconAvailability() {
 
-            if ( !self.user ) {
-              let likes_elem = main_elem.querySelector( '#likes' );
-              likes_elem.parentNode.removeChild( likes_elem );
-
-              let dislikes_elem = main_elem.querySelector( '#dislikes' );
-              dislikes_elem.parentNode.removeChild( dislikes_elem );
-            }
-
             if ( !self.user || !self.user.isLoggedIn() ) return;
 
             let user = self.user.data().user;
