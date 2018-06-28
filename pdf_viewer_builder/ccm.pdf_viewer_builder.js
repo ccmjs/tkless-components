@@ -49,7 +49,7 @@
                         "tag": "a",
                         "typ": "button",
                         "id": "button-basic",
-                        "class": "active btn btn-info info",
+                        "class": "active btn btn-info",
                         "onclick": "%basic%",
                         "inner": "Basic"
                       },
@@ -57,7 +57,7 @@
                         "tag": "a",
                         "typ": "button",
                         "id": "button-advanced",
-                        "class": "btn btn-warning info",
+                        "class": "btn btn-warning",
                         "onclick": "%advanced%",
                         "inner": "Advanced"
                       }
@@ -113,6 +113,7 @@
               },
               {
                 "id": "section-advanced",
+                "class": "hide",
                 "inner": [
                   {
                     "class": "css form-group",

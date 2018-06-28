@@ -7,6 +7,7 @@ ccm.files[ "configs.js" ] = {
   },
 
   "localhost": {
+    //"html.inner.1.inner.0": "",
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
