@@ -198,7 +198,7 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "https://ccmjs.github.io/tkless-components/thumb_rating_bulder/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/thumb_rating_builder/resources/default.css"
       ],
       "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-2.0.0.js" ],
       // "defaults": {
