@@ -2,14 +2,30 @@
  * @overview ccm component for saving given files as data in ccm datasore
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ * - switch to ccm cloud v2
+ * @version 3.0.0
+ * - react to changes in drop field via onchange.
+ * - optional update, clear-button.
+ *  @version 3.1.0
+ * - trigger onchange after clear event was fired
  */
 
 {
   var component = {
 
     name: 'file_upload',
+    version:[ 3,1,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       "html": {
@@ -103,19 +119,19 @@
         }
 
       },
-      "pdfJS": [ "ccm.load", "../libs/pdfjs/pdf.js" ],
-      "pdfJS_workerSrc": [ "ccm.load", "../libs/pdfjs/pdf.worker.js" ],
+      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
+      "pdfJS_workerSrc": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js" ],
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../file_upload/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
       ],
       // "data_type": "pdf", // or image
       // "mulitple": true, //only set if multiple upload is desired
       // "data": { store: [ "ccm.store'" ], key: "demo" },
       // "upload_button": true
       // "clear_button": true,
-      // onfinisch: function( results ){ console.log(results) },
-      // onchange: function( results ){ console.log(results) }
+      // onfinisch: function( results ){ console.log( results ) },
+      // onchange: function( results ){ console.log( results ) }
     },
 
     Instance: function () {
@@ -164,7 +180,7 @@
               } );
             }
           },
-          restart: event => {
+          restart: () => {
             self.start( () => {
               files_data = null;
               onChange();
@@ -206,7 +222,6 @@
             previewFiles( event.dataTransfer.files );
             console.log(event.dataTransfer.files);
           });
-
 
         }
 
