@@ -2,6 +2,8 @@
  * @overview ccm component for building a pdf-viewer component
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.2.0
+ *  - reset the preview after the clear-button is clicked
  */
 
 {
@@ -12,12 +14,17 @@
      * @type {string}
      */
     name: 'pdf_viewer_builder',
+    version:[ 2,2,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     /**
      * default instance configuration
@@ -270,8 +277,8 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css"
       ],
-      "target": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],
-      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-3.0.0.js" ],
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-3.1.0.js", {
         "data_type": "pdf", "clear_button": true
       } ],
       // "defaults": {
