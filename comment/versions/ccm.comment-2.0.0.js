@@ -29,6 +29,10 @@
     },
 
     config: {
+      // "editable": true,
+      // "sorting_by_voting": true,
+      // "comment_template": "expanded",
+      // "data": { "store": [ "ccm.store", {} ], "key": 'demo' },
       "html": {
         "main": {
           "class": "container-fluid",
@@ -209,14 +213,10 @@
           ]
         }
       },
-      "editor": [ 'ccm.component', '../editor/ccm.editor.js',
-        { 'settings.modules.toolbar': false },
-        { 'settings.placeholder': 'Write your comment here ...' }
+      "editor": [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-2.0.0.js",
+        { "settings.modules.toolbar": false },
+        { "settings.placeholder": "Write here ..." }
       ],
-      // "editable": true,
-      // "sorting_by_voting": true,
-      // "comment_template": "expanded",
-      // "data": { "store": [ "ccm.store", {} ], "key": 'demo' },
       "libs": [ "ccm.load", ".https://ccmjs.github.io/tkless-components//libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/comment/resources/default.css",
