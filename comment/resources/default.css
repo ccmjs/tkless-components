@@ -25,8 +25,8 @@
 }
 
 .comment-overview {
-  margin: 1px;
-  padding: 15px 20px 15px 20px;
+  margin: 0.1em;
+  padding: 9px 10px 0px 10px;
 }
 
 .comment-overview > span {
@@ -35,6 +35,10 @@
 
 .comment-overview .comment-content {
   margin-bottom: 0.5em;
+}
+
+.voting-area {
+  padding-bottom: 5px;
 }
 
 #add-comment {
@@ -50,41 +54,34 @@
 }
 
 /* expanded comment layout*/
-.panel-shadow {
+.panel {
   box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
-}
-
-.panel-white {
   border: 1px solid #dddddd;
 }
 
-.post .post-heading {
-    height: 95px;
-    padding: 20px 15px;
-}
-.post .post-heading .avatar {
-    width: 60px;
-    height: 60px;
-    display: block;
-    margin-right: 15px;
-}
-.post .post-heading .meta .title {
-    margin-bottom: 0;
+.post-heading {
+  height: 95px;
+  padding: 20px 15px;
 }
 
-.post .post-heading .meta .time {
-    margin-top: 8px;
-    color: #999;
+.avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin-right: 15px;
 }
-.post .post-image .image {
-    width: 100%;
-    height: auto;
-}
-.post .post-description {
-    padding: 15px;
-    padding-bottom: 30px;
+.title {
+  margin-bottom: 0;
 }
 
-.post .post-description .stats {
-    margin-top: 20px;
+.time {
+  margin-top: 0.2rem;
+  color: #999;
+}
+.post-image .image {
+  width: 100%;
+  height: auto;
+}
+.post-description {
+  padding: 15px;
 }

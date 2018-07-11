@@ -2,15 +2,33 @@
  * @overview ccm component for commenting
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ *  - ES6
+ *  - support ccm2 datastore
+ *  @version 3.0.0
+ *  - supports comment configuration as chat
  */
 
 {
 
   var component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'comment',
+    version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.6.0.js',
+      integrity: 'sha256-9U5Q2yiY5v1Tqp8ZJjCRnZrG8T1B14LdVf/PWOOUycE= sha384-LcGBJPmX/Aq5Jkre3q9yE+UCsd7vPWIgeBb9ayc4TIAl5H1nJpewlkKCDK8eCc7s sha512-YANGRGQdJYghxk/7O2bIMsT+XOJ1fzE6Lc6zGJxG+GsdMKznGTdZ8z3d+fnrvqOeEl6qmqxkIP6DueDq2dG0rw==',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       // "chat": true,
@@ -112,51 +130,51 @@
         },
         "expanded": {
           "inner": {
-              "class": "panel row",
-              "inner": [
-                {
-                  "class": "post-heading",
-                  "inner":[
-                    {
-                      "class": "pull-left image",
-                      "inner": {
-                        "tag": "img",
-                        "src": "../../ccm-components/comment/resources/user.jpg",
-                        "class": "img-circle avatar",
-                        "alt": "user profile image"
+            "class": "panel row",
+            "inner": [
+              {
+                "class": "post-heading",
+                "inner":[
+                  {
+                    "class": "pull-left image",
+                    "inner": {
+                      "tag": "img",
+                      "src": "../../ccm-components/comment/resources/user.jpg",
+                      "class": "img-circle avatar",
+                      "alt": "user profile image"
+                    }
+                  },
+                  {
+                    "class": "pull-left meta",
+                    "inner": [
+                      {
+                        "class": "title h5",
+                        "inner": "<b>%user%</b>&nbsp;made a post."
+                      },
+                      {
+                        "tag": "h6",
+                        "class": "text-muted time",
+                        "inner": "%date%"
                       }
-                    },
-                    {
-                      "class": "pull-left meta",
-                      "inner": [
-                        {
-                          "class": "title h5",
-                          "inner": "<b>%user%</b>&nbsp;made a post."
-                        },
-                        {
-                          "tag": "h6",
-                          "class": "text-muted time",
-                          "inner": "%date%"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "class": "post-description comment-overview",
-                  "inner": [
-                    {
-                      "tag": "p",
-                      "class": "comment-content",
-                      "inner": "%comment_content%&nbsp;"
-                    },
-                    {
-                      "class": "voting-area"
-                    }
-                  ]
-                }
-              ]
-            }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "post-description comment-overview",
+                "inner": [
+                  {
+                    "tag": "p",
+                    "class": "comment-content",
+                    "inner": "%comment_content%&nbsp;"
+                  },
+                  {
+                    "class": "voting-area"
+                  }
+                ]
+              }
+            ]
+          }
         },
         "edit": {
           "tag": "span",
@@ -177,7 +195,7 @@
       ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css",
+        "https://ccmjs.github.io/tkless-components/comment/resources/default.css",
         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"
       ]
     },
