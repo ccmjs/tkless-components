@@ -13,31 +13,43 @@
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
     config: {
-      //"data": { "store": [ "ccm.store", {} ] },
+      // "data": { "store": [ "ccm.store", {} ] },
+      // "template": "buttons" // or "simple"
       "html": {
+        "main": {
+          "inner": [
+            {
+              "id": "login-section"
+            },
+            {
+              "id": "rating-section"
+            }
+          ]
+        },
+
         "simple": {
-          "class": "rating",
-          "inner": {
-            "inner": [
-              {
-                "class": "likes fa fa-lg fa-thumbs-up",
-                "inner": "%likes%"
-              },
-              {
-                "class": "dislikes fa fa-lg fa-thumbs-down",
-                "inner": "%dislikes%"
-              }
-            ]
-          }
+          "inner": [
+            {
+              "id": "likes",
+              "class": "fa fa-thumbs-up",
+              "inner": [ "&#8198;", "%likes%" ]
+            },
+            {
+              "id": "dislikes",
+              "class": "fa fa-thumbs-down",
+              "inner":  [ "&#8198;", "%dislikes%"]
+            }
+          ]
         },
 
         "buttons": {
-          "class": "rating",
+          "id": "rating",
           "inner": [
             {
               "inner": {
                 "tag": "a",
-                "class": "likes btn btn-default",
+                "id": "likes",
+                "class": "btn btn-default",
                 "inner": [
                   {
                     "tag": "i",
@@ -50,7 +62,8 @@
             {
               "inner": {
                 "tag": "a",
-                "class": "dislikes btn btn-default",
+                "id": "dislikes",
+                "class": "btn btn-default",
                 "inner": [
                   {
                     "tag": "i",
@@ -61,8 +74,6 @@
               }
             }
           ]
-
-
         }
       },
       "libs": [ "ccm.load",
@@ -128,12 +139,20 @@
         $.dataset( my.data, dataset => {
           if( self.logger ) self.logger.log( 'start', dataset );
 
+          const main_elem = $.html( my.html.main );
+
           renderThumbs();
 
+          $.setContent( self.element, main_elem );
           // perform callback
           callback && callback();
 
           function renderThumbs() {
+
+            if ( self.user )
+              self.user.start( () => {
+                main_elem.querySelector( '#login-section' ).appendChild( self.user.root );
+              } );
 
             // set default like and dislike property
             if ( !dataset.likes    ) dataset.likes    = {};
@@ -141,34 +160,34 @@
 
             total = ( Object.keys( dataset.likes ).length ) - ( Object.keys( dataset.dislikes ).length );
 
-            if ( my.buttons )
-              $.setContent( self.element, $.html( my.html.buttons, {
-                likes: Object.keys( dataset.likes ).length,
-                dislikes: Object.keys( dataset.dislikes ).length
-              }));
-            else
-            // render main html structure
-             $.setContent( self.element, $.html( my.html.simple, {
-                likes: Object.keys( dataset.likes ).length,
-                dislikes: Object.keys( dataset.dislikes ).length
-              } ) );
+            const rating_elem = $.html( my.template === 'buttons' ? my.html.buttons : my.html.simple, {
+              likes: Object.keys( dataset.likes ).length,
+              dislikes: Object.keys( dataset.dislikes ).length
+            } );
+
+            main_elem.querySelector( '#rating-section').appendChild( rating_elem );
 
             // ccm instance for user authentication not exists? => abort
-            if ( !self.user ) return;
+            if ( !self.user ) {
+              if ( my.template === 'buttons') {
+                [ ...main_elem.querySelectorAll( '.btn' ) ].map( btn => {
+                  btn.classList.add( 'disabled' );
+                } );
+              }
+              return;
+            }
 
             /**
              * website area for likes and dislikes
              * @type {{likes: ccm.types.element, dislikes: ccm.types.element}}
              */
             const div = {
-              likes:    self.element.querySelector( '.likes' ),
-              dislikes: self.element.querySelector( '.dislikes' )
+              likes:    main_elem.querySelector( '#likes' ),
+              dislikes: main_elem.querySelector( '#dislikes' )
             };
 
             // add class for user specific interactions
-            self.element.querySelector( '.rating' ).classList.add( 'user' );
-
-
+            main_elem.querySelector( '#rating-section' ).classList.add( 'user' );
 
             // user is logged in?
             if ( self.user.isLoggedIn() ) {
@@ -201,7 +220,7 @@
 
                   const user = self.user.data().user;
 
-                  if( my.onvote && !my.onvote( { user: user } ) ) return;
+                  if( self.onvote && !self.onvote( { user: user } ) ) return;
 
                   // has already voted?
                   if ( dataset[ index ][ user ] ) {

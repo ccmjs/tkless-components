@@ -1,6 +1,6 @@
 ccm.files[ 'configs.js' ] = {
   "demo": {
-    "buttons": true,
+    "template": "buttons",
     "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
       [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
     ],
