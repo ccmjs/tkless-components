@@ -229,7 +229,6 @@
 
         // listen to change event of ccm realtime datastore => (re)render own content
         if ( self.data.store ) self.data.store.onchange = comment => {
-          console.log( comment );
           data = comment;
           renderComments();
         };
