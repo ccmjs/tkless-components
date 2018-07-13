@@ -121,7 +121,7 @@
         if ( self.user ) self.user.onchange = () => self.start;
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange =  () => { self.start(); };
+        self.data.store.onchange =  () => { self.start(); };
 
         callback();
       };

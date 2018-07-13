@@ -65,7 +65,7 @@
       this.init = callback => {
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange = function () { self.start(); };
+        self.data.store.onchange = () => { self.start(); };
 
         callback();
       };
