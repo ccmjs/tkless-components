@@ -362,9 +362,9 @@
          */
         let result =  $.formData( self.element.querySelector( 'form' ) );
 
-        if ( result.layout === 'buttons' ) result.buttons = true;
+        if ( result.layout === 'buttons' ) result.template = 'buttons';
         else
-          result.layout = "default";
+          result.template = "default";
 
         // convert dot notation properties to deeper objects
         result = $.solveDotNotation( result );
