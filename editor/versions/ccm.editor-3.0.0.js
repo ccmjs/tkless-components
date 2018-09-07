@@ -2,7 +2,7 @@
  * @overview ccm component for quill editor
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @version latest (3.0.0)
+ * @version 3.0.0
  * @changes
  * version 3.0.0 (05.09.2018)
  * - uses ccm v18.0.0
