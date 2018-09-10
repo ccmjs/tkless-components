@@ -9,7 +9,7 @@
 
     name: 'file_upload',
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-16.7.0.js',
 
     config: {
       "html": {
@@ -103,8 +103,8 @@
         }
 
       },
-      "pdfJS": [ "ccm.load", "../libs/pdfjs/pdf.js" ],
-      "pdfJS_workerSrc": [ "ccm.load", "../libs/pdfjs/pdf.worker.js" ],
+      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
+      "pdfJS_workerSrc": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js" ],
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "../file_upload/resources/default.css"
