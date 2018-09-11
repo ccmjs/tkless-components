@@ -4,8 +4,9 @@
  * @license The MIT License (MIT)
  */
 
-{
-  var component = {
+( function () {
+
+  const component = {
 
     /**
      * unique component name
@@ -120,184 +121,178 @@
        */
       let $;
 
-      this.ready = callback => {
+      this.ready = async () => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
 
         // privatize all possible instance members
         my = $.privatize( self );
-
-        callback();
-
       };
 
       /**
        * starts the instance
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
-      this.start = callback => {
+      this.start = async () => {
 
-        $.dataset( my.data, data => {
-          let start_data;
+        let data  = await $.dataset( my.data );
 
-          // support different forms of data structure
-          uniformData();
+        let start_data;
 
-          //uniform data to fulfill form.js data structure
-          //dataToFormdataInput();
+        // support different forms of data structure
+        uniformData();
 
-          if ( !generateTable() )
-            $.setContent( self.element, "Nothing to display" );
-          else {
-            $.setContent( self.element, generateTable() );
+        //uniform data to fulfill form.js data structure
+        //dataToFormdataInput();
 
-            $.fillForm( self.element, dataToFormdataInput() );
+        if ( !generateTable() )
+          $.setContent( self.element, "Nothing to display" );
+        else {
+          $.setContent( self.element, generateTable() );
 
-            if ( my.submit ) {
-              const submit_button = $.html ( my.html.submit );
-              self.element.querySelector( '#container' ).appendChild( submit_button );
-            }
+          $.fillForm( self.element, dataToFormdataInput() );
 
+          if ( my.submit ) {
+            const submit_button = $.html ( my.html.submit );
+            self.element.querySelector( '#container' ).appendChild( submit_button );
           }
 
-          callback && callback();
+        }
 
-          function generateTable() {
+        function generateTable() {
 
-            if ( !my.col_settings && !data ) return;
+          if ( !my.col_settings && !data ) return;
 
-            if ( !my.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) ) my.table_col = data.values[ 0 ].length;
-            const table = $.html ( my.html.table, {
-              submit: event => {
-                event.stopPropagation();
-                if ( event ) event.preventDefault();
-                $.onFinish( self );
-                return false; // prevent page reload
-              }
-            }  );
-            let row;
-
-            if ( my.table_row || data.values.length > 0 ) {
-              row = data && data.values && data.values.length > my.table_row ? data.values.length : my.table_row;
-
-              for ( let i = 0 ; i < row; i++ )
-                addRow( i, data && data.values );
-
-              if ( my.table_head ) {
-                table.querySelector( 'thead' ).appendChild( getTableHead() );
-              }
+          if ( !my.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) ) my.table_col = data.values[ 0 ].length;
+          const table = $.html ( my.html.table, {
+            submit: event => {
+              event.stopPropagation();
+              if ( event ) event.preventDefault();
+              $.onFinish( self );
+              return false; // prevent page reload
             }
+          }  );
+          let row;
 
-            // add new row via button
-            if ( my.add_row ) table.appendChild(  $.html( my.html.add, {
-              add: function ( event ) {
-                if ( event ) event.preventDefault();
-                addRow( row++ );
-              }
-            } ) );
-            return table;
+          if ( my.table_row || data.values.length > 0 ) {
+            row = data && data.values && data.values.length > my.table_row ? data.values.length : my.table_row;
 
-            function addRow( i, values ) {
+            for ( let i = 0 ; i < row; i++ )
+              addRow( i, data && data.values );
 
-              const table_row = $.html ( my.html.table_row );
-              if ( my.table_col ) {
-                for ( let j = 0 ; j < my.table_col; j++ ) {
-                  const table_col = $.html ( my.html.table_col );
+            if ( my.table_head ) {
+              table.querySelector( 'thead' ).appendChild( getTableHead() );
+            }
+          }
 
-                  if ( !my.col_settings ) {
+          // add new row via button
+          if ( my.add_row ) table.appendChild(  $.html( my.html.add, {
+            add: function ( event ) {
+              if ( event ) event.preventDefault();
+              addRow( row++ );
+            }
+          } ) );
+          return table;
 
-                    if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] !== undefined ? values[ i ][ j ] : '' );
+          function addRow( i, values ) {
 
-                  }
-                  else {
+            const table_row = $.html ( my.html.table_row );
+            if ( my.table_col ) {
+              for ( let j = 0 ; j < my.table_col; j++ ) {
+                const table_col = $.html ( my.html.table_col );
 
-                    const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
-                    input.name = ( i + 1 ) + '-' + ( j + 1 );
+                if ( !my.col_settings ) {
 
-                    // consider column properties
-                    if ( my.col_settings ) considerColSettings( j, input );
-
-                    const input_tag = table_col.appendChild( $.html( input, {
-                      // onchange event for input fields
-                      change: function () {
-                        self.onchange && self.onchange( this, this.value, self );
-                      }
-                    } ) );
-
-                  }
-
-                  table_row.appendChild( table_col );
+                  if ( values ) $.setContent( table_col, i < values.length && values[ i ][ j ] !== undefined ? values[ i ][ j ] : '' );
 
                 }
-              }
-              table.querySelector( 'tbody' ).appendChild( table_row );
-            }
-          }
+                else {
 
-          function getTableHead() {
-            const table_row = $.html(my.html.table_row);
+                  const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
+                  input.name = ( i + 1 ) + '-' + ( j + 1 );
 
-            for ( let j = 0 ; j < my.table_col; j++ ) {
-              const table_head = $.html( my.html.table_head );
-              $.setContent( table_head, my.table_head[ j ] );
-              table_row.appendChild( table_head );
-            }
+                  // consider column properties
+                  if ( my.col_settings ) considerColSettings( j, input );
 
-            return table_row;
-          }
+                  table_col.appendChild( $.html( input, {
+                    // onchange event for input fields
+                    change: function () {
+                      self.onchange && self.onchange( this, this.value, self );
+                    }
+                  } ) );
 
-          function considerColSettings( col, input ) {
-            // set input tag property for each input => each input tag of one column has same properties
-            for ( const key in my.col_settings[ col ] ) {
-              switch ( key ) {
-                case 'type':
-                  if ( my.col_settings[ col ][ key ] !== 'textarea' )
-                    input.type = my.col_settings[ col ][ key ];
-                  break;
-                case 'placeholder':
-                  input.placeholder = my.col_settings[ col ][ key ];
-                  break;
-                default:
-                  input[ key ] =  my.col_settings[ col ][ key ];
-                  break;
-              }
+                }
 
-            }
-          }
+                table_row.appendChild( table_col );
 
-          /** brings given data to uniform data structure - @author André Kless <andre.kless@web.de>, 2018 */
-          function uniformData() {
-            if ( !data ) return;
-            if ( Array.isArray( data ) )
-              data = { values: data };
-            if ( Array.isArray( data.values ) && data.values.length > 0 && $.isObject( data.values[ 0 ] ) ) {
-              const values = [];
-              data.values.map( obj => {
-                const row = [];
-                for ( const key in obj )
-                  if ( typeof obj[ key ] !== 'object' )
-                    row.push( obj[ key ] );
-                values.push( row );
-              } );
-              data.values = values;
-            }
-          }
-
-          function dataToFormdataInput() {
-            if ( !data || !Array.isArray( data.values ) || data.values.length === 0 ) return;
-
-            const start_values = {};
-            for ( let i = 0; i < data.values.length; i++ ){
-              for ( let j = 0; j < data.values[ i ].length; j++ ) {
-                let key = ( i + 1 )+"-"+ ( j + 1);
-                start_values[ key ] = data.values[ i ][ j ];
               }
             }
-            return start_values;
+            table.querySelector( 'tbody' ).appendChild( table_row );
+          }
+        }
+
+        function getTableHead() {
+          const table_row = $.html(my.html.table_row);
+
+          for ( let j = 0 ; j < my.table_col; j++ ) {
+            const table_head = $.html( my.html.table_head );
+            $.setContent( table_head, my.table_head[ j ] );
+            table_row.appendChild( table_head );
           }
 
-        } );
+          return table_row;
+        }
+
+        function considerColSettings( col, input ) {
+          // set input tag property for each input => each input tag of one column has same properties
+          for ( const key in my.col_settings[ col ] ) {
+            switch ( key ) {
+              case 'type':
+                if ( my.col_settings[ col ][ key ] !== 'textarea' )
+                  input.type = my.col_settings[ col ][ key ];
+                break;
+              case 'placeholder':
+                input.placeholder = my.col_settings[ col ][ key ];
+                break;
+              default:
+                input[ key ] =  my.col_settings[ col ][ key ];
+                break;
+            }
+
+          }
+        }
+
+        /** brings given data to uniform data structure - @author André Kless <andre.kless@web.de>, 2018 */
+        function uniformData() {
+          if ( !data ) return;
+          if ( Array.isArray( data ) )
+            data = { values: data };
+          if ( Array.isArray( data.values ) && data.values.length > 0 && $.isObject( data.values[ 0 ] ) ) {
+            const values = [];
+            data.values.map( obj => {
+              const row = [];
+              for ( const key in obj )
+                if ( typeof obj[ key ] !== 'object' )
+                  row.push( obj[ key ] );
+              values.push( row );
+            } );
+            data.values = values;
+          }
+        }
+
+        function dataToFormdataInput() {
+          if ( !data || !Array.isArray( data.values ) || data.values.length === 0 ) return;
+
+          const start_values = {};
+          for ( let i = 0; i < data.values.length; i++ ){
+            for ( let j = 0; j < data.values[ i ].length; j++ ) {
+              let key = ( i + 1 )+"-"+ ( j + 1);
+              start_values[ key ] = data.values[ i ][ j ];
+            }
+          }
+          return start_values;
+        }
 
       };
 
@@ -328,5 +323,5 @@
 
   };
 
-  function p(){window.ccm[v].component(component)}const f="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[f])window.ccm.files[f]=component;else{const n=window.ccm&&window.ccm.components[component.name];n&&n.ccm&&(component.ccm=n.ccm),"string"==typeof component.ccm&&(component.ccm={url:component.ccm});var v=component.ccm.url.split("/").pop().split("-");if(v.length>1?(v=v[1].split("."),v.pop(),"min"===v[v.length-1]&&v.pop(),v=v.join(".")):v="latest",window.ccm&&window.ccm[v])p();else{const e=document.createElement("script");document.head.appendChild(e),component.ccm.integrity&&e.setAttribute("integrity",component.ccm.integrity),component.ccm.crossorigin&&e.setAttribute("crossorigin",component.ccm.crossorigin),e.onload=function(){p(),document.head.removeChild(e)},e.src=component.ccm.url}}
-}
+  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||["latest"])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
+} )();
