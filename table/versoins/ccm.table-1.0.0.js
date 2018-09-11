@@ -18,7 +18,11 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-16.7.0.js',
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-16.7.0.js',
+      integrity: 'sha384-fk3OkuRXEnsul8MjBArcaNMkvTUS+Vr6YJMivVosPwMWyslsN2x0OFN8QoYyqWXL',
+      crossorigin: 'anonymous'
+    },
 
     /**
      * default instance configuration
