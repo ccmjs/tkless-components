@@ -1,6 +1,5 @@
 /**
  * @overview ccm component for accordion
- * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
  */

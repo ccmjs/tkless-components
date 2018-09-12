@@ -1,9 +1,12 @@
 /**
  * @overview ccm component for acoordion
- * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * TODO close open contents
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (12.09.2018)
+ * - uses ccm v18.0.0
+ *
  */
 
 ( function () {
@@ -15,12 +18,13 @@
      * @type {string}
      */
     name: 'accordion',
+    version: [ 2,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     /**
      * default instance configuration
@@ -55,7 +59,7 @@
       css: [ "ccm.load",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
-        '../accordion/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/accordion/resources/default.css'
       ]
 
     },
@@ -98,11 +102,11 @@
       this.start = async () => {
 
         if ( !my.inner && ( !my.entries ||  my.entries.length === 0 ) ) {
-          $.setContent( self.element, $.html( 'Nothing to Display') );
+          $.setContent(self.element, $.html('Nothing to Display'));
           return;
         }
 
-        // render accordion
+          // render accordion
         $.setContent( self.element, $.html( accordion( my.inner || data() ) ) );
 
         function accordion( element ) {
