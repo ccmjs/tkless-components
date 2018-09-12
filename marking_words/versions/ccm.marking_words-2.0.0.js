@@ -2,8 +2,9 @@
  * @overview ccm component for marking thew words in Text
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
  * @changes
- * version (12.09.2018)
+ * version 2.0.0 (12.09.2018)
  * - uses ccm v18.0.0
  */
 
@@ -16,12 +17,13 @@
      * @type {string}
      */
     name: 'marking_words',
+    version: [ 2,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     /**
      * default instance configuration
@@ -70,7 +72,7 @@
           ]
         }
       },
-      //submit: true,
+      // submit: true,
       // submit_button_label: "Save",
       // retry: true,
       // show_solution: true,
@@ -83,7 +85,7 @@
       // onchange
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        '../marking_words/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/marking_words/resources/default.css'
       ]
     },
 
