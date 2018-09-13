@@ -1,12 +1,12 @@
 /**
  * @overview ccm component for running of sequence of ccm components
- * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
  */
 
-{
-  var component = {
+( function () {
+
+  const component = {
 
     /**
      * unique component name
@@ -18,14 +18,14 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     /**
      * default instance configuration
      * @type {object}
      */
     config: {
-      //space_between_entries: true,
+      space_between: true,
       entries: [
         [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/ccm.table.js",
           {
@@ -85,7 +85,6 @@
             ]
           }
         ],
-        [ "ccm.instance", "https://ccmjs.github.io/tkless-components/marking_words/ccm.marking_words.js" ],
         '<div class="container">' +
         '  <div class="jumbotron text-center">' +
         '    <h1>Welcome </h1>' +
@@ -102,7 +101,7 @@
         '  </div>' +
         '</div>'
       ],
-      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-4.0.0.js", {
+      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.0.js", {
         css: [ "ccm.load",
           "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
           { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
@@ -133,7 +132,7 @@
        */
       let $;
 
-      this.ready = callback => {
+      this.ready = async () => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
@@ -143,40 +142,37 @@
 
         if ( self.logger ) self.logger.log( 'ready', my );
 
-        callback();
-
       };
 
       /**
        * starts the instance
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
-      this.start = callback => {
+      this.start = async () => {
 
         $.setContent( self.element, '' );
-        renderEntries();
+        await renderEntries();
 
-        callback && callback();
-
-        function renderEntries() {
+        async function renderEntries() {
 
           for( let component in my.entries ) {
             const entry = document.createElement( 'div' );
 
             $.append( self.element, entry );
-            if ( $.isInstance( my.entries[ component ] ) )
-              my.entries[ component ].start( () => {
+
+            if ( $.isInstance( my.entries[ component ] ) ) {
+              await my.entries[ component ].start();
               $.replace( my.entries[ component ].root, entry );
-            } );
-            else if ( my.content )
-              my.content.start( { "inner": my.entries[ component ] }, instance => {
-                $.replace( instance.root, entry );
-              } );
+            }
+            else if ( my.content ) {
+              const instance = await my.content.start( { "inner": my.entries[ component ] } );
+              $.replace( instance.root, entry );
+            }
             else
               $.replace( $.html( my.entries[ component ] ), entry );
           }
 
-          if ( my.space_between_entries )
+          if ( my.space_between )
             [ ...self.element.querySelectorAll( 'div' )].map( div => {
               div.style.padding = '1rem 0 1rem 0';
             });
@@ -188,5 +184,5 @@
 
   };
 
-  function p(){window.ccm[v].component(component)}const f="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[f])window.ccm.files[f]=component;else{const n=window.ccm&&window.ccm.components[component.name];n&&n.ccm&&(component.ccm=n.ccm),"string"==typeof component.ccm&&(component.ccm={url:component.ccm});var v=component.ccm.url.split("/").pop().split("-");if(v.length>1?(v=v[1].split("."),v.pop(),"min"===v[v.length-1]&&v.pop(),v=v.join(".")):v="latest",window.ccm&&window.ccm[v])p();else{const e=document.createElement("script");document.head.appendChild(e),component.ccm.integrity&&e.setAttribute("integrity",component.ccm.integrity),component.ccm.crossorigin&&e.setAttribute("crossorigin",component.ccm.crossorigin),e.onload=function(){p(),document.head.removeChild(e)},e.src=component.ccm.url}}
-}
+  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||["latest"])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
+} )();
