@@ -1,7 +1,11 @@
 /**
  * @overview ccm component for commenting
- * @author Tea Kless <tea.kless@web.de>, 2017
+ * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 4.0.0
+ * @changes
+ * version 4.0.0 (12.09.2018)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
@@ -9,8 +13,9 @@
   const component = {
 
     name: 'comment',
+    version: [ 4,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     config: {
       // "chat": true,
@@ -360,7 +365,7 @@
             if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
               voting.user = '';
 
-           const voting_inst = await my.voting.start( voting );
+            const voting_inst = await my.voting.start( voting );
 
             // fill array for sorting
             unsorted_comments.push( { "voting": voting_inst.getValue(), "comment": comment_elem, "date": comment.date } );

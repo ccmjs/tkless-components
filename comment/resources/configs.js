@@ -3,10 +3,10 @@ ccm.files[ "configs.js" ] = {
     "chat": true,
     "editable": true,
     "data": {
-      "store": [ "ccm.store", { "store": "chat" } ],
+      "store": [ "ccm.store", { "name": "chat" } ],
       "key": "demo"
     },
-    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.0.0.js",
       {
         "html.logged_in": {
           "id": "logged_in",
@@ -63,10 +63,10 @@ ccm.files[ "configs.js" ] = {
     "editable": true,
     "chat": true,
     "data": {
-      "store": [ "ccm.store", { "store": "chat", "url": "ws://localhost:8080" } ],
+      "store": [ "ccm.store", { "name": "chat", "url": "ws://localhost:8080" } ],
       "key": "test"
     },
-    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.0.0.js",
       {
         "html.logged_in": {
           "id": "logged_in",
@@ -126,7 +126,7 @@ ccm.files[ "configs.js" ] = {
     "data": {
       "store": [ "ccm.store", "https://ccmjs.github.io/tkless-components/comment/resources/datastore.js" ],
       "key": "demo" },
-    "voting": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-2.0.0.js", {
+    "voting": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-3.0.0.js", {
       "template": "buttons",
       "data": {
         "store": [ "ccm.store", "https://ccmjs.github.io/tkless-components/voting/resources/datastore.js" ]
@@ -139,10 +139,10 @@ ccm.files[ "configs.js" ] = {
     "sorting_by_voting": true,
     "template": "expanded",
     "data": {
-      "store": [ "ccm.store", { "store": "comment", "url": "http://localhost:8080" } ],
+      "store": [ "ccm.store", { "name": "comment", "url": "http://localhost:8080" } ],
       "key": "demo"
     },
-    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.0.0.js",
       {
         "html.logged_in": {
           "id": "logged_in",
@@ -194,8 +194,8 @@ ccm.files[ "configs.js" ] = {
       }
     ],
     "voting": [ "ccm.component", "../thumb_rating/ccm.thumb_rating.js", {
-      "data": { "store": [ "ccm.store", { "store": "comment_voting", "url": "http://localhost:8080" } ] },
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
+      "data": { "store": [ "ccm.store", { "name": "comment_voting", "url": "http://localhost:8080" } ] },
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.0.0.js",
         [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
       ]
     } ]
