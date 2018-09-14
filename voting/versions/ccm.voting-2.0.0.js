@@ -2,14 +2,19 @@
  * @overview ccm component for voting
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ * @changes
+ * version 2.0.0 (12.09.2018)
+ * - uses ccm v18.0.0
  */
 ( function () {
 
   const component = {
 
     name: 'voting',
+    version: [ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     config: {
       "html": {
@@ -41,8 +46,8 @@
       "libs": [ "ccm.load",
         {  "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        "../voting/resources/default.css"
-      ],
+        "https://ccmjs.github.io/tkless-components/voting/resources/default.css"
+      ]
     },
 
     Instance: function () {

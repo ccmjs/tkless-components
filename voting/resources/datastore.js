@@ -7,8 +7,7 @@ ccm.files[ "datastore.js" ] = {
       "kschus2m": true
     },
     "dislikes": {
-      "akless2s": true,
-      "mkaul2s": true
+      "akless2s": true
     }
   },
 
