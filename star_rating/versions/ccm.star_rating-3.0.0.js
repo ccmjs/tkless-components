@@ -1,7 +1,11 @@
 /**
  * @overview ccm component for voting
- * @author Tea Kless <tea.kless@web.de>, 2017
+ * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (14.09.2018)
+ * - uses ccm v18.0.0
  */
 ( function () {
 
@@ -10,7 +14,7 @@
     name: 'star_rating',
     version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/version/ccm-18.0.0.js',
 
     config: {
       "html": {
@@ -83,7 +87,7 @@
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        my.data.store.onChange = async function () {  event.preventDefault(); await self.start(); };
+        my.data.store.onChange = async function () { await self.start(); };
       };
 
       this.start = async () => {
