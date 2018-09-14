@@ -2,6 +2,10 @@
  * @overview ccm component for voting
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ *  @version 3.0.0
+ * @changes
+ * version 3.0.0 (14.09.2018)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
@@ -9,8 +13,9 @@
   const component = {
 
     name: 'star_rating_result',
+    version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     config: {
 
@@ -61,7 +66,7 @@
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
         "https://ccmjs.github.io/tkless-components/star_rating_result/resources/default.css"
-      ],
+      ]
 
       //  "data": {
       //    "store": [ "ccm.store", "https://ccmjs.github.io/tkless-components/star_rating_result/resources/datastore.js" ],
