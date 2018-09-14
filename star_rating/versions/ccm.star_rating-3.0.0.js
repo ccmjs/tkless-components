@@ -8,6 +8,7 @@
   const component = {
 
     name: 'star_rating',
+    version: [ 3,0,0 ],
 
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
@@ -48,10 +49,9 @@
       "css": [ "ccm.load",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        "../star_rating/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/star_rating/resources/default.css"
       ]
     },
-
 
     Instance: function () {
       /**
@@ -83,7 +83,7 @@
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        my.data.store.onChange = async function () { await self.start(); };
+        my.data.store.onChange = async function () {  event.preventDefault(); await self.start(); };
       };
 
       this.start = async () => {
@@ -101,7 +101,7 @@
             const input_elem = $.html( my.html.input, {
               id: i,
               star: i,
-              click: async function () {  event.preventDefault(); if ( self.user ) await doVoting(); }
+              click: async function () { event.preventDefault(); if ( self.user ) await doVoting(); }
             } );
 
             if ( self.user && self.user.isLoggedIn() && dataset[ i ] && dataset[ i ][ self.user.data().user ] ) input_elem.checked = true;
