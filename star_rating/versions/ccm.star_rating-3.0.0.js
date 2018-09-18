@@ -105,7 +105,7 @@
             const input_elem = $.html( my.html.input, {
               id: i,
               star: i,
-              click: async function ( event ) { event.preventDefault(); if ( self.user ) await doVoting(); }
+              click:  doVoting
             } );
 
             if ( self.user && self.user.isLoggedIn() && dataset[ i ] && dataset[ i ][ self.user.data().user ] ) input_elem.checked = true;
