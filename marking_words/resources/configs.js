@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     "retry": true,
     "show_solution": true,
     "check": true,
-    "keywords": [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
+    "keywords": [ 'Manchmal', 'Manchmal', 'Typoblindtexte', 'Zahlen' ],
     "onfinish": {
       "log": true
     },

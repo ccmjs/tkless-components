@@ -192,7 +192,7 @@
             span.classList.toggle( 'selected' );
 
             // add or remove selected words from solutions array
-            if( my.solutions.includes( span.innerHTML ) )
+            if( my.solutions.includes( span.innerHTML ) && !span.classList.contains( 'selected' ) )
               my.solutions.splice( [ my.solutions.indexOf( span.innerHTML ) ], 1 );
             else
               my.solutions.push( span.innerHTML );

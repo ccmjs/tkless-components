@@ -122,7 +122,7 @@
         // privatize all possible instance members
         my = $.privatize( self );
 
-        my.solutions = [];
+        solutions = [];
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
       };
 
@@ -148,7 +148,7 @@
             label: 'Check',
             click: function ( event ) {
               event.preventDefault();
-              if ( my.solutions.length === 0 ) return alert( 'No solution to check !!!');
+              if ( solutions.length === 0 ) return alert( 'No solution to check !!!');
               verify();
             }
           } ) );
@@ -190,10 +190,11 @@
             span.classList.toggle( 'selected' );
 
             // add or remove selected words from solutions array
-            if( my.solutions.includes( span.innerHTML ) )
-              my.solutions.splice( [ my.solutions.indexOf( span.innerHTML ) ], 1 );
+            if( solutions.includes( span.innerHTML ) && !span.classList.contains( 'selected' ) )
+              solutions.splice( [ solutions.indexOf( span.innerHTML ) ], 1 );
             else
-              my.solutions.push( span.innerHTML );
+              solutions.push( span.innerHTML );
+            debugger;
 
             // set onChange behavior
             self.onchange && self.onchange( span );
@@ -218,7 +219,7 @@
           const correct = [];
           const incorrect = [];
 
-          my.solutions.map( solution => {
+          solutions.map( solution => {
             if ( keywords.includes( solution) ) {
               correct.push( solution );
               keywords.splice( [ keywords.indexOf( solution ) ], 1 );
@@ -296,7 +297,7 @@
               glyphicon: 'glyphicon glyphicon-repeat',
               click: function ( event ) {
                 event.preventDefault();
-                my.solutions = [];
+                solutions = [];
                 self.start();
               }
             } ) );
@@ -305,7 +306,7 @@
         }
       };
 
-      this.getValue = () => my.solutions;
+      this.getValue = () => solutions;
     }
 
   };
