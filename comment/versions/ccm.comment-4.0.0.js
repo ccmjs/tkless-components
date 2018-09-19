@@ -182,7 +182,7 @@
       ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css",
+        "https://ccmjs.github.io/tkless-components/comment/resources/default.css",
         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"
       ]
     },
