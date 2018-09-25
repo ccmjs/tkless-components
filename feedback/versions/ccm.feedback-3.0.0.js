@@ -2,6 +2,10 @@
  * @overview ccm component for feedback
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (25.09.2018)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
@@ -82,12 +86,12 @@
       },
 
       //onfinish: { log: true },
-      //"data": { "store": [ "ccm.store", {} ] },
-      "left_css": "resources/left.css",
-      "right_css": "resources/right.css",
-      "css": [ "ccm.load",
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../libs/bootstrap/css/bootstrap.css"
+      //data: { store: [ 'ccm.store', {} ] },
+      left_css: 'https://ccmjs.github.io/tkless-components/feedback/resources/left.css',
+      right_css: 'https://ccmjs.github.io/tkless-components/feedback/resources/right.css',
+      css: [ 'ccm.load',
+        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
+        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css'
       ]
     },
 
