@@ -88,20 +88,15 @@
 
       //onfinish: { log: true },
       //data: { store: [ 'ccm.store', {} ] },
-      left_css: 'https://ccmjs.github.io/tkless-components/feedback/resources/left.css',
-      right_css: 'https://ccmjs.github.io/tkless-components/feedback/resources/right.css',
-      css: [ 'ccm.load',
-        { context: 'head', url: 'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css' },
-        'https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css'
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/right.css" ], //'https://ccmjs.github.io/tkless-components/feedback/resources/left.css'
+      bootstrap: [ 'ccm.load',
+        { context: "head", url: "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
       ]
     },
 
     Instance: function () {
       let $;
-
-      this.init = async () => {
-        await ccm.load( { context: this.element.parentNode, url: this.position === 'left' ? this.left_css : this.right_css } );
-      };
 
       this.ready = async () => {
         $ = this.ccm.helper;

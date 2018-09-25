@@ -83,9 +83,8 @@
 
       //onfinish: { log: true },
       //"data": { "store": [ "ccm.store", {} ] },
-      "left_css": "resources/left.css",
-      "right_css": "resources/right.css",
-      "css": [ "ccm.load",
+      "css": [ "ccm.load", "resources/right.css"], // "resources/left.css",
+      "bootstrap": [ "ccm.load",
         { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
         "../libs/bootstrap/css/bootstrap.css"
       ]
@@ -93,10 +92,6 @@
 
     Instance: function () {
       let $;
-
-      this.init = async () => {
-        await ccm.load( { context: this.element.parentNode, url: this.position === 'left' ? this.left_css : this.right_css } );
-      };
 
       this.ready = async () => {
         $ = this.ccm.helper;

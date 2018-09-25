@@ -6,13 +6,18 @@ ccm.files[ "configs.js" ] = {
 
   "localhost": {
     "from_above": "30%",
-    "position": "right",
     "data": { "store": [ "ccm.store", { "name": "feedback", "url": "http://localhost:8080" } ], "key": "demo" }
   },
 
-  "local": {
+  "local_left": {
     "from_above": "30%",
-    "position": "right",
+    "css": [ "ccm.load", "resources/left.css" ],
+    "data": { "store": [ "ccm.store", { "name": "feedback" } ], "key": "demo" },
+  },
+
+  "local_right": {
+    "from_above": "30%",
+    "css": [ "ccm.load", "resources/right.css" ],
     "data": { "store": [ "ccm.store", { "name": "feedback" } ], "key": "demo" },
   }
 
