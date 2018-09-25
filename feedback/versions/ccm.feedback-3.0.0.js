@@ -13,8 +13,9 @@
   const component = {
 
     name: 'feedback',
+    version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     config: {
       "html": {
@@ -23,7 +24,7 @@
           "inner": [
             {
               "tag": "img",
-              "src": "../feedback/resources/feedback.png",
+              "src": "https://ccmjs.github.io/tkless-components/feedback/resources/feedback.png",
               "alt": "feedback"
             },
             {
