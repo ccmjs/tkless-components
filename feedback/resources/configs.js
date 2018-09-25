@@ -11,13 +11,13 @@ ccm.files[ "configs.js" ] = {
 
   "local_left": {
     "from_above": "30%",
-    "css": [ "ccm.load", "resources/left.css" ],
+    "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/left.css" ],
     "data": { "store": [ "ccm.store", { "name": "feedback" } ], "key": "demo" },
   },
 
   "local_right": {
     "from_above": "30%",
-    "css": [ "ccm.load", "resources/right.css" ],
+    "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/right.css" ],
     "data": { "store": [ "ccm.store", { "name": "feedback" } ], "key": "demo" },
   }
 
