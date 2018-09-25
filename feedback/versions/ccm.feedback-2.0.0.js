@@ -8,9 +8,13 @@
   var component = {
 
     name: 'feedback',
-    version: [ 4,0,0 ],
+    version:[ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
+    ccm: {
+      url: 'https://ccmjs.github.io/ccm/versions/ccm-11.5.0.min.js',
+      integrity: 'sha384-7lrORUPPd2raLsrPJYo0Arz8csPcGzgyNbKOr9Rx3k0ECU0T8BP+B1ejo8+wmUzh',
+      crossorigin: 'anonymous'
+    },
 
     config: {
       "templates": {
