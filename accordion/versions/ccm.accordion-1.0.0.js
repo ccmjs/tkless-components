@@ -29,6 +29,7 @@
      */
     config: {
       color: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
+      size: 'xs', //lg, md, sm, xs
       /* entries: [
         {
           "title": "Learning Goals",
@@ -207,7 +208,7 @@
              */
             acc.querySelectorAll( 'title' ).forEach( title => {
               // insert icon span-tag before title
-              title.classList.add( 'btn', 'btn-lg', 'btn-' + my.color );
+              title.classList.add( 'btn', 'btn-'+my.size, 'btn-' + my.color );
               title.prepend( span_tag.cloneNode( true ) );
               title.outerHTML = title.outerHTML.replace( 'title', 'button' );
             });
