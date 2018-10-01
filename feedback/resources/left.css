@@ -23,19 +23,21 @@
 }
 #slideout:hover {
   left: 250px;
+  cursor: pointer;
 }
 
 #slideout:hover #slideout-inner {
   left: 0;
+  cursor: pointer;
 }
 
-#slideout:focus {
+/*#slideout:focus {
   left: 250px;
 }
 
 #slideout:focus #slideout-inner {
   left: 0;
-}
+}*/
 
 .saved {
   animation-name: fadeOut;

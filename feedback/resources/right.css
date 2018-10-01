@@ -25,17 +25,11 @@
 
 #slideout:hover {
   right: 250px;
+  cursor: pointer;
 }
 #slideout:hover #slideout-inner {
   right: 0;
-}
-
-#slideout:focus {
-  left: 250px;
-}
-
-#slideout:focus #slideout-inner {
-  left: 0;
+  cursor: pointer;
 }
 
 .saved {
