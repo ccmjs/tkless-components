@@ -167,9 +167,6 @@
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
       this.start = callback => {
-        if ( my.pdf && my.pdf.slides && ( my.pdf.slides.length > 0 ) && my.pdf.slides[0].name )
-          if ( self.logger ) self.logger.log( 'start', my.pdf.my.pdf.slides[0].name );
-
         if ( self.logger ) self.logger.log( 'start' );
 
         // if pdf not defined, no file will be displayed
@@ -181,16 +178,12 @@
         // render input elements
         $.setContent( self.element, $.html( my.html.main, {
           prev: function () {
-            if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
-
             // set active button
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
           },
           next: function () {
-            if ( self.logger ) self.logger.log( 'next', pageNum+1 );
-
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
@@ -330,7 +323,7 @@
           pageNum = page;
           queueRenderPage( parseInt( pageNum ) );
 
-          if ( self.logger ) self.logger.log( 'goto', page );
+          if ( self.logger ) self.logger.log( 'goto', parseInt( page ) );
         }
 
         /**
@@ -342,6 +335,7 @@
           }
           pageNum--;
           queueRenderPage(pageNum);
+          if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
         }
 
         /**
@@ -353,6 +347,7 @@
           }
           pageNum++;
           queueRenderPage(pageNum);
+          if ( self.logger ) self.logger.log( 'next', pageNum+1 );
         }
 
       };
