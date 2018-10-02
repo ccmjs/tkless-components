@@ -167,8 +167,8 @@
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
       this.start = callback => {
-        if ( my.pdf && my.pdf.slides && my.pdf.slides.name )
-          if ( self.logger ) self.logger.log( 'start', my.pdf.my.pdf.slides.name );
+        if ( my.pdf && my.pdf.slides && ( my.pdf.slides.length > 0 ) && my.pdf.slides[0].name )
+          if ( self.logger ) self.logger.log( 'start', my.pdf.my.pdf.slides[0].name );
 
         if ( self.logger ) self.logger.log( 'start' );
 
