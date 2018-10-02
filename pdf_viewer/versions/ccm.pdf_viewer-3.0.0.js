@@ -335,7 +335,7 @@
           }
           pageNum--;
           queueRenderPage(pageNum);
-          if ( self.logger ) self.logger.log( 'prev', pageNum-1 );
+          if ( self.logger ) self.logger.log( 'prev', pageNum );
         }
 
         /**
@@ -347,7 +347,7 @@
           }
           pageNum++;
           queueRenderPage(pageNum);
-          if ( self.logger ) self.logger.log( 'next', pageNum+1 );
+          if ( self.logger ) self.logger.log( 'next', pageNum );
         }
 
       };
