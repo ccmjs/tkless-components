@@ -2,6 +2,12 @@
  * @overview ccm component for feedback
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (25.09.2018)
+ * - uses ccm v18.0.0
+ * version 4.0.0 (25.09.2018)
+ * - uses click event insteed of hover to slide feedabck in or out (only with right.css )
  */
 
 ( function () {
@@ -9,8 +15,9 @@
   const component = {
 
     name: 'feedback',
+    version: [ 4,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     config: {
       "html": {
@@ -19,7 +26,7 @@
           "inner": [
             {
               "tag": "img",
-              "src": "../feedback/resources/feedback.png",
+              "src": "https://ccmjs.github.io/tkless-components/feedback/resources/feedback.png",
               "alt": "feedback",
               "onclick": '%slide_in_out%'
             },
@@ -84,10 +91,10 @@
 
       //onfinish: { log: true },
       //"data": { "store": [ "ccm.store", {} ] },
-      "css": [ "ccm.load", "resources/right.css"], // "resources/left.css" not suitable for mobile devices
-      "bootstrap": [ "ccm.load",
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../libs/bootstrap/css/bootstrap.css"
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/right.css" ], //'https://ccmjs.github.io/tkless-components/feedback/resources/left.css'
+      bootstrap: [ 'ccm.load',
+        { context: "head", url: "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
       ]
     },
 

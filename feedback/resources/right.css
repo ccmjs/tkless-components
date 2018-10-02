@@ -22,13 +22,7 @@
   text-align: left;
   border-radius: 0 0 0 5px;
 }
-
-#slideout:hover {
-  right: 250px;
-  cursor: pointer;
-}
-#slideout:hover #slideout-inner {
-  right: 0;
+#slideout {
   cursor: pointer;
 }
 

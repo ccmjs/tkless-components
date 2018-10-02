@@ -1,7 +1,8 @@
 ccm.files[ "configs.js" ] = {
 
   "demo": {
-    "data": { "store": [ "ccm.store", { "name": "feedback", "url": "https://ccm2.inf.h-brs.de" } ], "key": "demo" },
+    "from_above": "30%",
+    "data": { "store": [ "ccm.store", { "name": "feedback" } ], "key": "demo" }
   },
 
   "localhost": {

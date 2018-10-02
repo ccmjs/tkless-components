@@ -1,3 +1,7 @@
+/*
+  Stylesheet for positioning feedback on the left side of the page.
+  !!! Mobile devices do not trigger hover event correctly. Use "right.css" for this.
+*/
 #slideout {
   position: fixed;
   top: 40px;
@@ -9,6 +13,7 @@
   transition-duration: 0.3s;
   border-radius: 0 5px 5px 0;
 }
+
 #slideout-inner {
   position: fixed;
   top: 40px;
@@ -21,6 +26,7 @@
   text-align: left;
   border-radius: 0 0 5px 0;
 }
+
 #slideout:hover {
   left: 250px;
   cursor: pointer;
@@ -30,14 +36,6 @@
   left: 0;
   cursor: pointer;
 }
-
-/*#slideout:focus {
-  left: 250px;
-}
-
-#slideout:focus #slideout-inner {
-  left: 0;
-}*/
 
 .saved {
   animation-name: fadeOut;
