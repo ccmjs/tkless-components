@@ -167,6 +167,10 @@
        * @param {function} [callback] - called after all synchronous and asynchronous operations are complete
        */
       this.start = callback => {
+        if ( my.pdf && my.pdf.slides && my.pdf.slides.name )
+          if ( self.logger ) self.logger.log( 'start', my.pdf.my.pdf.slides.name );
+
+        if ( self.logger ) self.logger.log( 'start' );
 
         // if pdf not defined, no file will be displayed
         if ( !my.pdf ) {
@@ -185,7 +189,7 @@
             onPrevPage();
           },
           next: function () {
-            if ( self.logger ) self.logger.log( 'prev', pageNum+1 );
+            if ( self.logger ) self.logger.log( 'next', pageNum+1 );
 
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
@@ -325,6 +329,8 @@
             return;
           pageNum = page;
           queueRenderPage( parseInt( pageNum ) );
+
+          if ( self.logger ) self.logger.log( 'goto', page );
         }
 
         /**
