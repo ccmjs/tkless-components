@@ -1,1 +1,28 @@
-<?xml version="1.0" ?><svg enable-background="new 0 0 64 64" height="64px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="64px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><circle cx="32" cy="32" fill="#E0995E" r="32"/><polygon fill="#231F20" opacity="0.2" points="26,52 14,48 14,16 26,20 "/><polygon fill="#231F20" opacity="0.2" points="38,48 26,52 26,20 38,16 "/><polygon fill="#231F20" opacity="0.2" points="50,52 38,48 38,16 50,20 "/><polygon fill="#E0E0D1" points="26,50 14,46 14,14 26,18 "/><polygon fill="#FFFFFF" points="38,46 26,50 26,18 38,14 "/><polygon fill="#E0E0D1" points="50,50 38,46 38,14 50,18 "/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<svg enable-background="new 0 0 64 64" height="64px" id="Layer_1" version="1.1" viewBox="0 0 64 64" width="64px" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <circle cx="32" cy="32" fill="#E0995E" r="32"/>
+  <g transform="matrix(0.012635, 0.999921, -0.999921, 0.012635, 63.635231, 0.237299)">
+    <polygon fill="#231F20" opacity="0.2" points="26 52 14 48 14 16 26 20"/>
+    <polygon fill="#231F20" opacity="0.2" points="38 48 26 52 26 20 38 16"/>
+    <polygon fill="#231F20" opacity="0.2" points="50 52 38 48 38 16 50 20"/>
+    <g>
+      <polygon fill="#E0E0D1" points="26 50 14 46 14 14 26 18"/>
+      <polygon fill="#FFFFFF" points="38 46 26 50 26 18 38 14"/>
+      <polygon fill="#E0E0D1" points="50 50 38 46 38 14 50 18"/>
+    </g>
+  </g>
+  <g>
+    <line x1="19.418" y1="20.201" x2="25.513" y2="20.201" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="28.735" y1="20.114" x2="44.321" y2="20.114" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="25.209" y1="24.033" x2="36.441" y2="24.033" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="30.259" y1="47.543" x2="34.003" y2="47.543" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="33.655" y1="32.523" x2="44.103" y2="32.436" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="32.479" y1="29.302" x2="42.579" y2="29.302" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="40.141" y1="24.033" x2="44.669" y2="24.033" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="35.527" y1="35.788" x2="45.627" y2="35.788" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="34.134" y1="43.798" x2="44.234" y2="43.798" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="21.943" y1="44.06" x2="28.212" y2="44.06" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+    <line x1="17.328" y1="24.033" x2="21.856" y2="24.033" style="stroke: rgb(164, 141, 141); stroke-linecap: round;"/>
+  </g>
+  <path transform="matrix(0.083367, -0.012774, 0.025275, 0.087075, -14.663836, 1.623995)" style="fill: rgb(224, 224, 209); stroke-linecap: round; stroke-opacity: 0.56;" d="M 400.089 413.521 A 53.488 53.488 0 1 1 342.424 353.708 L 347 407 A 0 0 0 1 0 347 407 Z" bx:shape="pie 347 407 0 53.488 97.003 355.092 1@f0eccf03"/>
+</svg>
