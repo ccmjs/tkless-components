@@ -14,7 +14,7 @@
     name: 'star_rating',
     version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/version/ccm-18.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     config: {
       "html": {
