@@ -65,6 +65,11 @@
           "tag": "textarea"
         },
 
+        "select": {
+          "tag": "select",
+          "inner": []
+        },
+
         "add": {
           "tag": "button",
           "class": "btn btn-default",
@@ -210,8 +215,21 @@
 
                 }
                 else {
-
-                  const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
+                  let input;
+                  if ( my.col_settings && my.col_settings[ j ] ) {
+                    switch ( my.col_settings[ j ].type ) {
+                      case 'textarea':
+                        input = $.clone( my.html[ 'textarea' ] );
+                        break;
+                      case 'select':
+                        input = $.clone( my.html[ 'select' ] );
+                        break;
+                      default:
+                        input = $.clone( my.html[ 'input' ] );
+                        break;
+                    }
+                  }
+                  //const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
                   input.name = ( i + 1 ) + '-' + ( j + 1 );
 
                   // consider column properties
@@ -256,6 +274,12 @@
                 break;
               case 'placeholder':
                 input.placeholder = my.col_settings[ col ][ key ];
+                break;
+              case 'options':
+                const option = my.col_settings[ col ][ key ];
+                for ( let i=0; i<option.length; i++ ){
+                  input.inner.push( { "tag": "option", "inner": option[ i ] } );
+                }
                 break;
               default:
                 input[ key ] =  my.col_settings[ col ][ key ];
