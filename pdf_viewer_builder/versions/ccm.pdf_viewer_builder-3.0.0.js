@@ -2,8 +2,11 @@
  * @overview ccm component for building a pdf-viewer component
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (26.10.2018)
+ * - uses ccm v18.0.7
  */
-
 
 ( function () {
 
@@ -14,12 +17,13 @@
      * @type {string}
      */
     name: 'pdf_viewer_builder',
+    version: [ 3,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.7.js',
 
     /**
      * default instance configuration
@@ -27,7 +31,7 @@
      */
     config: {
 
-      "html": {
+      html: {
         "id": "main",
         "class": "container-fluid",
         "inner": [
@@ -269,12 +273,12 @@
           }
         ]
       },
-      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],
-      "file_upload": [ "ccm.component", "../file_upload/ccm.file_upload.js", {
+      target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-4.0.0.js" ],
+      file_upload: [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-4.0.0.js", {
         "data_type": "pdf", "clear_button": true
       } ],
       // "defaults": {

@@ -2,16 +2,15 @@ ccm.files[ "configs.js" ] = {
   "local": {
     "submit_button": "Submit",
     "preview": true,
-    "defaults": { "store": [ "ccm.store", { "store": "file_upload" } ] },
+    "defaults": {"data.store": "[ 'ccm.store',{ 'name':'pdf-viewer' ]", },
     "onfinish": { "log": true }
   },
 
   "localhost": {
-    //"html.inner.1.inner.0": "",
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
-      "data.store": "[ 'ccm.store',{ 'store':'pdf-viewer','url':'http://localhost:8080' } ]",
+      "data.store": "[ 'ccm.store',{ 'name':'pdf-viewer','url':'http://localhost:8080' } ]",
     },
     "onfinish": {
       "log": true,
@@ -25,7 +24,7 @@ ccm.files[ "configs.js" ] = {
     "submit_button": "Submit",
     "preview": true,
     "data": {
-      "store": [ "ccm.store", { "store": "pdf_viewer", "url": "https://ccm-data.bib.h-brs.de" } ],
+      "store": [ "ccm.store", { "name": "pdf_viewer", "url": "https://ccm-data.bib.h-brs.de" } ],
       "key": "test"
     },
     "onfinish": {
@@ -43,7 +42,7 @@ ccm.files[ "configs.js" ] = {
         }
       }
     ],
-    "store": [ "ccm.store", { "store": "pdf_viewer", "url": "http://localhost:8080", "method": "POST" } ],
+    "store": [ "ccm.store", { "name": "pdf_viewer", "url": "http://localhost:8080", "method": "POST" } ],
     "url": "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-3.0.0.js"
   }
 };
