@@ -1,17 +1,34 @@
 /**
- * @overview posts template for <i>ccm</i> component
+ * @overview <i>ccm</i> component for create a news
  * @author Tea Kless <tea.kless@web.de> 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ * @changes
+ * version 2.0.0 (26.10.2018)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'news',
+    version: [ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.7.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       templates: {
         "main": {
@@ -98,10 +115,7 @@
         }
 
       },
-      data:  {
-        store: [ 'ccm.store', '../news/resources/datastore.js' ],
-        key: 'demo'
-      },
+      data: { 'store': [ 'ccm.store' ] },
       user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
         {
           "realm": "guest",
@@ -109,7 +123,7 @@
           "no_password": true
         }
       ],
-      css: [ 'ccm.load', '../news/resources/default.css' ],
+      css: [ 'ccm.load', 'https://ccmjs.github.io/tkless-components/news/resources/default.css' ],
       libs: [ 'ccm.load',
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
