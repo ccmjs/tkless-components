@@ -2,16 +2,33 @@
  * @overview ccm component for exercise
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (26.09.2018)
+ * - uses ccm v18.0.0
+ *
  */
 ( function () {
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'exercise',
+    version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       html: {
         "main": {
@@ -42,11 +59,10 @@
       editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
         "settings.modules.toolbar": false
       } ],
-
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.1.js" ],
       libs: [ "ccm.load",
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../libs/bootstrap/css/bootstrap.css"
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
       ]
      },
 
