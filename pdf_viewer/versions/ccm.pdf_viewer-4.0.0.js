@@ -13,12 +13,13 @@
      * @type {string}
      */
     name: 'pdf_viewer',
+    version: [ 4,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.7.js',
 
     /**
      * default instance configuration
@@ -79,9 +80,8 @@
           ]
         }
       },
-      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
-      //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.js" ] ],
+      // pdf: [ "ccm.get", { url: "", store: "" }, "key" ],
+      pdfJS: [ "ccm.load", [ "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.js" ] ],
       pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
