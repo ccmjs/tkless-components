@@ -2,8 +2,14 @@
  * @overview ccm component for saving given files as data in ccm datasore
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @latest
- * @changes
+ * @version 2.0.0
+ * - switch to ccm cloud v2
+ * @version 3.0.0
+ * - react to changes in drop field via onchange.
+ * - optional update, clear-button.
+ * @version 3.1.0
+ * - trigger onchange after clear event was fired
+ * @version 4.0.0 (26.10.2018)
  * - uses ccm v18.0.7
  */
 
@@ -11,10 +17,23 @@
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'file_upload',
+    version: [ 4,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.7.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       html: {
         "file_upload": {
@@ -109,8 +128,8 @@
       pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../file_upload/resources/default.css"
-      ],
+        "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
+      ]
       // data_type: "pdf", // or image
       // mulitple: true, //only set if multiple upload is desired
       // data: { store: [ "ccm.store'" ], key: "demo" },
