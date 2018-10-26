@@ -10,8 +10,6 @@ ccm.files[ "configs.js" ] = {
       "die Schritte hinter ihm zu einem der unzähligen Gesetzeshüter dieser Stadt, und die stählerne Acht um seine " +
       "Handgelenke würde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon hören.</p>",
     },
-    "onfinish": {
-      "log": true
-    }
+    "onfinish": { "log": true }
   }
 };

@@ -2,6 +2,10 @@
  * @overview ccm component for building a exercise component
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (26.09.2018)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
@@ -13,12 +17,13 @@
      * @type {string}
      */
     name: 'exercise_builder',
+    version: [ 3,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
 
     /**
      * default instance configuration
@@ -256,7 +261,7 @@
       //data: { "store": [ "ccm.store", { "test": { ... } } ], "key": "test" },
       //onfinish
       //onchange
-      target: [ "ccm.component", "/exercise/ccm.exercise.js", { "submit_button": "Save" } ],
+      target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-3.0.0.js", { "submit_button": "Save" } ],
       submit_button: "Submit",
       preview: true,
       editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
@@ -271,7 +276,7 @@
       } ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../exercise_builder/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/exercise_builder/resources/default.css"
       ]
     },
 
