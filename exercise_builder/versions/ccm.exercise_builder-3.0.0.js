@@ -438,7 +438,7 @@
           await updatePreview();
 
           // perform change actions
-          self.onchange && self.onchange( self );
+          self.onchange && self.onchange.call( self );
 
           // log 'change' event
           self.logger && self.logger.log( 'change', { name: this.name || 'text', value: this.name ? ( this.type === 'checkbox' ? this.checked : this.value ) : editor.get().root.innerHTML } );
