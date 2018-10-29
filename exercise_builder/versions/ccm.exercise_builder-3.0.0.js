@@ -262,8 +262,8 @@
       //onfinish
       //onchange
       target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-3.0.0.js", { "submit_button": "Save" } ],
-      submit_button: "Submit",
-      preview: true,
+      //submit_button: "Submit",
+      //preview: true,
       editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
         "settings.modules.toolbar": [
           [ { 'header': [ 1, 2, 3, 4, 5, 6, false ] } ],
