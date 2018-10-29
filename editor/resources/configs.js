@@ -1,5 +1,6 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
+    key: "demo",
     settings: {
       modules: {
         syntax: true,    // needed for syntax highlighting
