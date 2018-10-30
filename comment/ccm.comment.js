@@ -35,34 +35,21 @@
             {
               "id": "comment-list",
               "style": "padding-top: 0.5rem;"
-            },
-            {
-              "id": "new-comment",
-              "class": "row"
             }
           ]
         },
         "editor":{
+          "id": "editor",
           "class": "row",
           "inner": [
             {
-              "class": "form-group",
-              "inner":
-                {
-                  "class": "container-fluid",
-                  "id": "editor"
-                }
+              "id": "editor"
             },
             {
-              "id": "add-comment",
-              "inner": [
-                {
-                  "tag": "input",
-                  "type": "submit",
-                  "class": "btn btn-success btn-xs",
-                  "onclick": "%new_comment%"
-                }
-              ]
+              "tag": "input",
+              "type": "submit",
+              "class": "btn btn-success btn-xs",
+              "onclick": "%new_comment%"
             }
           ]
         },
@@ -206,20 +193,21 @@
       let main_elem;
 
       this.init = async () => {
+        // set shortcut to help functions
+        $ = self.ccm.helper;
 
-        if ( self.user ) self.user.onchange = () => self.start();
+        // listen to login/logout events => restart
+        if ( self.user ) self.user.onchange = self.start;
 
-        // listen to change event of ccm realtime datastore => (re)render own content
-        if ( self.data.store )
+        // listen to datastore changes => (re)render own content
+        if ( $.isObject( self.data ) && $.isDatastore( self.data.store ) )
           self.data.store.onchange = async comment => {
             data = comment;
             await renderComments();
-          }
+          };
       };
 
       this.ready = async () => {
-        // set shortcut to help functions
-        $ = self.ccm.helper;
 
         // privatize all possible instance members
         my = $.privatize( self );
@@ -243,6 +231,7 @@
         }
 
         await renderComments();
+        if ( self.user ) await renderEditor();
 
       };
 
@@ -251,41 +240,28 @@
 
         main_elem.querySelector( '#comment-list' ).innerHTML = '';
 
-        let counter = 1;
-
         // asynchronous problem
         for ( const comment  in data.comments )
           await renderComment( data.comments[ comment ] );
 
-        await check();
+        if ( my.voting && my.sorting_by_voting )
+          unsorted_comments.sort( compare );
 
-        // waiting: all comments and their voting ist put in on-the-fly object
-        async function check()  {
-          counter--;
-          if( counter > 0 ) return;
+        unsorted_comments.map(  entry => {
+          // prepend element to DOM
+          //$.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
 
-          if ( my.voting && my.sorting_by_voting )
-            unsorted_comments.sort( compare );
+          my.chat ? $.append( main_elem.querySelector( '#comment-list' ), entry.comment ) : $.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
+        });
 
-          unsorted_comments.map(  entry => {
-            // prepend element to DOM
-            //$.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
+        $.setContent( self.element, main_elem );
 
-            my.chat ? $.append( main_elem.querySelector( '#comment-list' ), entry.comment ) : $.prepend( main_elem.querySelector( '#comment-list' ), entry.comment );
-          });
-
-          $.setContent( self.element, main_elem );
-
-          if ( self.user ) await renderEditor();
-
-          function compare( a, b ) {
-            if ( a.voting < b.voting )
-              return -1;
-            if ( a.voting > b.voting )
-              return 1;
-            return a.date.localeCompare( b.date );
-          }
-
+        function compare( a, b ) {
+          if ( a.voting < b.voting )
+            return -1;
+          if ( a.voting > b.voting )
+            return 1;
+          return a.date.localeCompare( b.date );
         }
 
         async function renderComment( comment ) {
@@ -350,8 +326,6 @@
 
           async function renderVoting( voting ) {
 
-            counter++;
-
             voting = {
               'data.key': voting,
               onvote: ( event ) => { return event.user !== comment.user; }
@@ -365,7 +339,6 @@
             // fill array for sorting
             unsorted_comments.push( { "voting": voting_inst.getValue(), "comment": comment_elem, "date": comment.date } );
             comment_elem.querySelector( '.voting-area' ).appendChild( voting_inst.root );
-            await check();
           }
         }
       }
@@ -381,8 +354,9 @@
           }
         } );
 
-        editor  = await my.editor.start( { root: editor_elem.querySelector( '#editor' ) } );
-        main_elem.querySelector( '#new-comment' ).appendChild( editor_elem );
+        editor  = await my.editor.start();
+        $.setContent ( editor_elem.querySelector( '#editor' ), editor.root );
+        main_elem.appendChild( editor_elem );
       }
 
       async function newComment() {
@@ -391,7 +365,7 @@
         let new_data = {
           "user": self.user.data().user,
           "date": moment().format(),
-          "content": editor.get().getText().trim()
+          "content": await editor.get().getText().trim()
         };
 
         if ( my.voting ) new_data.voting = data.key + '_' + ( data.comments.length + 1 );
@@ -399,13 +373,14 @@
         data.comments.push( new_data );
 
         // update dataset for rendering => (re)render accepted answer
-        await my.data.store.set( data );
+        my.data.store.set( data );
 
         // clear editor area
-        $.setContent( main_elem.querySelector( '#new-comment' ),  '' );
+        //$.setContent( main_elem.querySelector( '#editor' ),  '' );
 
         // rerender comments
         await renderComments( data );
+        //renderEditor();
 
         if ( self.logger ) {
           new_data = $.clone( new_data );

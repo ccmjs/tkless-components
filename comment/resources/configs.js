@@ -130,7 +130,7 @@ ccm.files[ "configs.js" ] = {
       "store": [ "ccm.store", { "name": "chat" } ],
       "key": "demo"
     },
-    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.0.0.js",
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
       {
         "html.logged_in": {
           "id": "logged_in",
@@ -254,7 +254,103 @@ ccm.files[ "configs.js" ] = {
       "template": "buttons",
       "data": {
         "store": [ "ccm.store", "https://ccmjs.github.io/tkless-components/voting/resources/datastore.js" ]
-      }
+      },
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.1.0.js", {
+        "html.logged_in": {
+          "id": "logged_in",
+          "class": "row",
+          "style": "float:none",
+          "inner":
+            {
+              "id": "button",
+              "class": "btn btn-default",
+              "inner": [
+                {
+                  "tag": "span",
+                  "id": "user",
+                  "inner": [
+                    { "class": "glyphicon glyphicon-user" },
+                    "%user%&#8196;"
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "class": "glyphicon glyphicon-log-out",
+                },
+                "Logout"
+              ],
+              "onclick": "%click%"
+            }
+        },
+        "html.logged_out": {
+          "id": "logged_out",
+          "class": "row",
+          "style": "float:none",
+          "inner": {
+            "id": "button",
+            "class": "btn btn-default",
+            "inner": [
+              {
+                "tag": "span",
+                "class": "glyphicon glyphicon-log-in"
+              },
+              "Login"
+            ],
+            "onclick": "%click%"
+          }
+        },
+        "realm": "guest",
+        "title": "Please enter any Username",
+        "no_password": true
+      } ]
+    } ],
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.1.0.js", {
+      "html.logged_in": {
+        "id": "logged_in",
+        "class": "row",
+        "style": "float:none",
+        "inner":
+          {
+            "id": "button",
+            "class": "btn btn-default",
+            "inner": [
+              {
+                "tag": "span",
+                "id": "user",
+                "inner": [
+                  { "class": "glyphicon glyphicon-user" },
+                  "%user%&#8196;"
+                ]
+              },
+              {
+                "tag": "span",
+                "class": "glyphicon glyphicon-log-out",
+              },
+              "Logout"
+            ],
+            "onclick": "%click%"
+          }
+      },
+      "html.logged_out": {
+        "id": "logged_out",
+        "class": "row",
+        "style": "float:none",
+        "inner": {
+          "id": "button",
+          "class": "btn btn-default",
+          "inner": [
+            {
+              "tag": "span",
+              "class": "glyphicon glyphicon-log-in"
+            },
+            "Login"
+          ],
+          "onclick": "%click%"
+        }
+      },
+      "realm": "guest",
+      "title": "Please enter any Username",
+      "no_password": true
     } ]
   },
 
