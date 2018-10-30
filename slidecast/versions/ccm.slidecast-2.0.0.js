@@ -2,17 +2,29 @@
  * @overview ccm component for slidecast
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ * @changes
+ * version 2.0.0 (30.10.2018)
+ * - uses ccm v18.1.0
  */
-
 
 ( function () {
 
   const component = {
 
     name: 'slidecast',
+    version: [ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       html: {
         "main":      {

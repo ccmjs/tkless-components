@@ -1,34 +1,13 @@
-ccm.files[ "datastore.js" ] = {
+ccm.files[ "datasets.js" ] = {
   "demo_offline": {
     "slides": [
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie01.jpg",
-        "optional_content": [ "ccm.instance", "../comment/ccm.comment.js", {
-          "comment_template": "expanded",
-          "data": {
-            "store": [ "ccm.store", { "store": "slidecast_comments", "url": "http://localhost:8080" } ],
-            "key": "demo_offline_slide01"
-          },
-          "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ],
-          "voting": [ "ccm.component", "../voting/ccm.voting.js", {
-            "icon_likes": "fa fa-lg fa-chevron-up",
-            "icon_dislikes": "fa fa-lg fa-chevron-down",
-            "data": { "store": [ "ccm.store", { "store": "voting", "url": "ws://localhost:8080" } ] },
-            "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-2.0.0.min.js" ]
-          } ]
-        } ]
       },
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie02.jpg",
         "audio": "../slidecast/resources/slides/kolloquium/audio.004.mp3",
         "description": "<h2>Lorem ipsum</h2> dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt.",
-        "optional_content": [ 'ccm.instance', '../comment/ccm.comment.js', {
-          data: {
-            store: [ 'ccm.store', { store: 'slidecast_comments', url: 'https://ccm.inf.h-brs.de' } ],
-            key: 'demo_offline_slide02'
-          },
-          user: [ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/ccm.user.js' ]
-        } ]
       },
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie03.jpg",
@@ -36,8 +15,9 @@ ccm.files[ "datastore.js" ] = {
       },
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie04.jpg",
-
-        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/le/versions/ccm.le-2.0.0.min.js", { "key": ["ccm.get","https://akless.github.io/akless/ccm/ccm-overview/configs.js","le"] } ]
+        "optional_content": [ "ccm.instance", "../comment/versions/ccm.comment-4.0.0.js", [
+          "ccm.get", "../comment/resources/configs.js", "comment_local"
+        ] ]
       },
       {
         "image": "../slidecast/resources/slides/kolloquium/Folie05.jpg"
@@ -71,8 +51,7 @@ ccm.files[ "datastore.js" ] = {
   "demo_online": {
     "slides": [
       {
-        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie01.jpg",
-        "audio": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/audio.004.mp3"
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie01.jpg"
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie02.jpg",
@@ -83,10 +62,14 @@ ccm.files[ "datastore.js" ] = {
         "description": "Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? Aber wer hat irgend ein Recht, einen Menschen zu tadeln, der die Entscheidung trifft, eine Freude zu genießen, die keine unangenehmen Folgen hat, oder einen, der Schmerz vermeidet, welcher keine daraus resultierende Freude nach sich zieht? Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? Aber wer hat irgend ein Recht, einen Menschen zu tadeln, der die Entscheidung trifft, eine Freude zu genießen, die keine unangenehmen Folgen hat, oder einen, der Schmerz vermeidet, welcher keine daraus resultierende Freude nach sich zieht?Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht."
       },
       {
-        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie04.jpg"
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie04.jpg",
+        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.0.0.js", [
+          "ccm.get", "https://ccmjs.github.io/tkless-components/comment/resources/configs.js", "comment_local"
+        ] ]
       },
       {
-        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie05.jpg"
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie05.jpg",
+        "audio": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/audio.004.mp3"
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie06.jpg"
