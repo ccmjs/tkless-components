@@ -70,7 +70,8 @@
           ]
         }
       },
-      //submit: true,
+      // inner: "some html text for marking",
+      // submit: true,
       // submit_button_label: "Save",
       // retry: true,
       // show_solution: true,
