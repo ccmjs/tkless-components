@@ -325,7 +325,7 @@
       this.start = async () => {
 
         // get initial form values
-        let dataset = $.dataset( my.data );
+        let dataset = await $.dataset( my.data );
         // prepare initial form values
         prepareValues();
 

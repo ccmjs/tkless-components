@@ -330,9 +330,10 @@
       this.start = async () => {
 
         // get initial form values
-        let dataset = $.dataset( my.data );
-        // prepare initial form values
-        prepareValues();
+        let dataset = await $.dataset( my.data );
+
+        // given default values? => integrate them as defaults into initial values
+        dataset = $.integrate( my.defaults, dataset, true );
 
         // render main HTML structure
         $.setContent( self.element, $.html( my.html, {
@@ -368,19 +369,6 @@
 
         // individual caption for submit button? => set caption of submit button
         if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
-
-        /** prepares initial form values */
-        function prepareValues() {
-
-          // given default values? => integrate them as defaults into initial values
-          dataset = $.integrate( my.defaults, dataset, true );
-
-          // encode dependencies
-          $.encodeDependencies( dataset );
-
-          // convert initial values to dot notation
-          dataset = $.toDotNotation( dataset );
-        }
 
         /**
          * switches to basic or advanced section
