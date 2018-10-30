@@ -256,9 +256,9 @@
       //data: { "store": [ "ccm.store", { "test": { ... } } ], "key": "test" },
       //onfinish
       //onchange
-      target: [ "ccm.component", "/exercise/ccm.exercise.js", { "submit_button": "Save" } ],
-      submit_button: "Submit",
-      preview: true,
+      target: [ "ccm.component", "../exercise/ccm.exercise.js", { "submit_button": "Save" } ],
+      //submit_button: "Submit",
+      //preview: true,
       editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
         "settings.modules.toolbar": [
           [ { 'header': [ 1, 2, 3, 4, 5, 6, false ] } ],
@@ -347,24 +347,22 @@
         } ) );
 
         // prepare text editor
-        await prepareEditor( () => {
+        await prepareEditor();
 
-          // fill form with initial values
-          $.fillForm( self.element, dataset );
+        // fill form with initial values
+        $.fillForm( self.element, dataset );
 
-          // render preview
-          if ( my.preview ) updatePreview();
+        // render preview
+        if ( my.preview ) updatePreview();
 
-          // no preview desired? => remove preview section
-          else $.removeElement( self.element.querySelector( '#section-preview' ) );
+        // no preview desired? => remove preview section
+        else self.element.querySelector( '#section-preview' ).remove();
 
-          // no submit button wanted? => remove submit button
-          !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
+        // no submit button wanted? => remove submit button
+        !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
 
-          // individual caption for submit button? => set caption of submit button
-          if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
-
-        } );
+        // individual caption for submit button? => set caption of submit button
+        if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
 
         /** prepares initial form values */
         function prepareValues() {
