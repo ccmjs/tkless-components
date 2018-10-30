@@ -350,22 +350,22 @@
           }
         } ) );
 
-        prepareFileUpload( () => {
-          // fill form with initial values
-          $.fillForm( self.element, dataset );
+        await prepareFileUpload();
 
-          // render preview
-          if ( my.preview ) updatePreview( dataset.pdf );
+        // fill form with initial values
+        $.fillForm( self.element, dataset );
 
-          // no preview desired? => remove preview section
-          else $.removeElement( self.element.querySelector( '.preview' ) );
+        // render preview
+        if ( my.preview ) updatePreview( dataset.pdf );
 
-          // no submit button wanted? => remove submit button
-          !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
+        // no preview desired? => remove preview section
+        else $.removeElement( self.element.querySelector( '.preview' ) );
 
-          // individual caption for submit button? => set caption of submit button
-          if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
-        } );
+        // no submit button wanted? => remove submit button
+        !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
+
+        // individual caption for submit button? => set caption of submit button
+        if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
 
         /** prepares the start values for the input elements  */
         function prepareValues() {
