@@ -1,4 +1,19 @@
 ccm.files[ "configs.js" ] = {
+  "demo": {
+    "key": "demo",
+    "submit_button": "Submit",
+    "preview": true,
+    "defaults": {
+      "data.store": "[ 'ccm.store',{ 'name':'pdf-viewer','url':'http://ccm2.inf.h-brs.de' } ]",
+    },
+    "onfinish": {
+      "log": true,
+      "store": {
+        "settings": { "store": "pdf_viewer", "url": "http://ccm2.inf.h-brs.de" }
+      },
+    }
+  },
+
   "local": {
     "submit_button": "Submit",
     "preview": true,
