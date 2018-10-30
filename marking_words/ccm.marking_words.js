@@ -115,7 +115,7 @@
         // set shortcut to help functions
         $ = self.ccm.helper;
         // text is given as HTML Element Node? => use innerHTML
-        if ( $.isElementNode( self.inner ) ) self.inner = self.inner.innerHTML;
+        if ( $.isElementNode( self.text ) ) self.text = self.inner.innerHTML;
       };
 
       this.ready = async () => {
@@ -135,7 +135,7 @@
 
         if ( self.logger ) self.logger.log( 'start' );
 
-        if ( !my.inner ){
+        if ( !my.text ){
           $.setContent( self.element, 'Nothing to display!' );
           return;
         }
