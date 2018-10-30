@@ -1,5 +1,6 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
+    "kay": "demo",
     "submit": true,
     "submit_button_label": "Save",
     "retry": true,
