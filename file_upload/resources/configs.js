@@ -8,6 +8,7 @@ ccm.files[ "configs.js" ] = {
   },
 
   "local": {
+    "key": "local",
     "upload_button": true,
     "clear_button": true,
     "data_type": "pdf",
