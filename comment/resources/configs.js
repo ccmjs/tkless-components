@@ -1,6 +1,7 @@
 ccm.files[ "configs.js" ] = {
 
   "demo_chat": {
+    "key": "demo",
     "chat": true,
     "editable": true,
     "data": {
