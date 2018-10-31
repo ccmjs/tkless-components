@@ -5,7 +5,7 @@
  * @version 2.0.0
  * @changes
  * version 2.0.0 (26.10.2018)
- * - uses ccm v18.0.0
+ * - uses ccm v18.1.0
  */
 
 ( function () {
@@ -23,7 +23,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.7.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
 
     /**
      * default instance configuration
