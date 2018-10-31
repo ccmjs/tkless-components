@@ -378,6 +378,7 @@
 
         // rerender comments
         await renderComments( data );
+        editor.get().setContents([{ insert: '\n' }]);
 
         if ( self.logger ) {
           new_data = $.clone( new_data );
