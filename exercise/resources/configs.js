@@ -12,7 +12,7 @@ ccm.files[ "configs.js" ] = {
     "onfinish": {
       "log": true,
       "data": {
-        "store": [ "ccm.store", { "name": "exercise", "url": "https://ccm2.inf.h-brs.de" } ],
+        "store": [ "ccm.store", { "name": "exercise_results", "url": "https://ccm2.inf.h-brs.de" } ],
         "key": "demo"
       },
     }
