@@ -7,7 +7,6 @@ ccm.files[ "configs.js" ] = {
       "data.store": "[ 'ccm.store',{ 'name':'pdf_viewer','url':'http://ccm2.inf.h-brs.de' } ]",
     },
     "onfinish": {
-      "log": true,
       "store": {
         "settings": { "store": "pdf_viewer", "url": "http://ccm2.inf.h-brs.de" }
       },

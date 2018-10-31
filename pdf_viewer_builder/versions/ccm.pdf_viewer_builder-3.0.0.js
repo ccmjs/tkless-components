@@ -4,8 +4,8 @@
  * @license The MIT License (MIT)
  * @version 3.0.0
  * @changes
- * version 3.0.0 (26.10.2018)
- * - uses ccm v18.0.7
+ * version 3.0.0 (31.10.2018)
+ * - uses ccm v18.1.0
  */
 
 ( function () {
@@ -23,7 +23,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.7.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1..js',
 
     /**
      * default instance configuration
@@ -373,7 +373,7 @@
         /** prepares the start values for the input elements  */
         function prepareValues() {
 
-          // set default value for dataset key of app-specific teambuild data
+          // set default value for dataset key
           if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
 
           // given default values? => integrate them as defaults into initial values

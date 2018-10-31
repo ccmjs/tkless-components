@@ -370,7 +370,7 @@
         /** prepares the start values for the input elements  */
         function prepareValues() {
 
-          // set default value for dataset key of app-specific teambuild data
+          // set default value for dataset key
           if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
 
           // given default values? => integrate them as defaults into initial values
