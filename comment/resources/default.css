@@ -12,7 +12,7 @@
   font-family: verdana !important;
 }
 
-#editor {
+#editor, #post-new {
   margin-top: 0.5em;
 }
 

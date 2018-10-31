@@ -2,16 +2,34 @@
  * @overview ccm component for commenting
  * @author Tea Kless <tea.kless@web.de>, 2017
  * @license The MIT License (MIT)
+ * @version 4.1.0
+ * @changes
+ * version 4.1.0 (31.10.2018)
+ * - uses ccm v18.1.0
+ * - some improvement in voting
  */
 
 ( function () {
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'comment',
+    version: [ 4,1,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       // "chat": true,
       // "editable": true,
@@ -100,51 +118,51 @@
         },
         "expanded": {
           "inner": {
-              "class": "panel row",
-              "inner": [
-                {
-                  "class": "post-heading",
-                  "inner":[
-                    {
-                      "class": "pull-left image",
-                      "inner": {
-                        "tag": "img",
-                        "src": "../../ccm-components/comment/resources/user.jpg",
-                        "class": "img-circle avatar",
-                        "alt": "user profile image"
+            "class": "panel row",
+            "inner": [
+              {
+                "class": "post-heading",
+                "inner":[
+                  {
+                    "class": "pull-left image",
+                    "inner": {
+                      "tag": "img",
+                      "src": "https://ccmjs.github.io/tkless-components/comment/resources/user.jpg",
+                      "class": "img-circle avatar",
+                      "alt": "user profile image"
+                    }
+                  },
+                  {
+                    "class": "pull-left meta",
+                    "inner": [
+                      {
+                        "class": "title h5",
+                        "inner": "<b>%user%</b>&nbsp;made a post."
+                      },
+                      {
+                        "tag": "h6",
+                        "class": "text-muted time",
+                        "inner": "%date%"
                       }
-                    },
-                    {
-                      "class": "pull-left meta",
-                      "inner": [
-                        {
-                          "class": "title h5",
-                          "inner": "<b>%user%</b>&nbsp;made a post."
-                        },
-                        {
-                          "tag": "h6",
-                          "class": "text-muted time",
-                          "inner": "%date%"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "class": "post-description comment-overview",
-                  "inner": [
-                    {
-                      "tag": "p",
-                      "class": "comment-content",
-                      "inner": "%comment_content%&nbsp;"
-                    },
-                    {
-                      "class": "voting-area"
-                    }
-                  ]
-                }
-              ]
-            }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "post-description comment-overview",
+                "inner": [
+                  {
+                    "tag": "p",
+                    "class": "comment-content",
+                    "inner": "%comment_content%&nbsp;"
+                  },
+                  {
+                    "class": "voting-area"
+                  }
+                ]
+              }
+            ]
+          }
         },
         "edit": {
           "tag": "span",
@@ -165,7 +183,7 @@
       ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css",
+        "https://ccmjs.github.io/tkless-components/comment/resources/default.css",
         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"
       ]
     },
@@ -335,7 +353,7 @@
             if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
               voting.user = '';
 
-           const voting_inst = await my.voting.start( voting );
+            const voting_inst = await my.voting.start( voting );
 
             // fill array for sorting
             unsorted_comments.push( { "voting": voting_inst.getValue(), "comment": comment_elem, "date": comment.date } );
