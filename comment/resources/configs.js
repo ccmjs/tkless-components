@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     "chat": true,
     "editable": true,
     "data": {
-      "store": [ "ccm.store", { "store": "chat", "url": "https://ccm2.inf.h-brs.de" } ],
+      "store": [ "ccm.store", { "name": "chat", "url": "https://ccm2.inf.h-brs.de" } ],
       "key": "demo"
     },
     "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.1.0.js", {
