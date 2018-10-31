@@ -64,7 +64,7 @@ ccm.files[ "datasets.js" ] = {
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/kolloquium/Folie04.jpg",
         "optional_content": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.0.0.js", [
-          "ccm.get", "https://ccmjs.github.io/tkless-components/comment/resources/configs.js", "comment_local"
+          "ccm.get", "https://ccmjs.github.io/tkless-components/comment/resources/configs.js", "demo_comment"
         ] ]
       },
       {
