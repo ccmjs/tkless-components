@@ -159,7 +159,7 @@
             main_elem.appendChild( $.html( my.html.button, {
               class: 'btn btn-success btn-lg check-btn',
               label: 'Check',
-              click: () => {debugger;
+              click: () => {
                 if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
                 verify();
               }
