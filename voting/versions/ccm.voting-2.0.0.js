@@ -4,18 +4,30 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (12.09.2018)
- * - uses ccm v18.0.0
+ * version 2.0.0 (31.10.2018)
+ * - uses ccm v18.1.0
  */
 ( function () {
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'voting',
     version: [ 2,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       "html": {
         "main": {
