@@ -4,7 +4,7 @@ ccm.files[ "configs.js" ] = {
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
-      "data.store": "[ 'ccm.store',{ 'name':'pdf-viewer','url':'http://ccm2.inf.h-brs.de' } ]",
+      "data.store": "[ 'ccm.store',{ 'name':'pdf_viewer','url':'http://ccm2.inf.h-brs.de' } ]",
     },
     "onfinish": {
       "log": true,
@@ -17,7 +17,7 @@ ccm.files[ "configs.js" ] = {
   "local": {
     "submit_button": "Submit",
     "preview": true,
-    "defaults": {"data.store": "[ 'ccm.store',{ 'name':'pdf-viewer' ]", },
+    "defaults": {"data.store": "[ 'ccm.store',{ 'name':'pdf_viewer' ]", },
     "onfinish": { "log": true }
   },
 
@@ -25,7 +25,7 @@ ccm.files[ "configs.js" ] = {
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
-      "data.store": "[ 'ccm.store',{ 'name':'pdf-viewer','url':'http://localhost:8080' } ]",
+      "data.store": "[ 'ccm.store',{ 'name':'pdf_viewer','url':'http://localhost:8080' } ]",
     },
     "onfinish": {
       "log": true,
