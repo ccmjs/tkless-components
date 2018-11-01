@@ -4,12 +4,12 @@ ccm.files[ "configs.js" ] = {
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
-      "data.store": "[ 'ccm.store',{ 'name':'pdf_viewer','url':'http://ccm2.inf.h-brs.de' } ]",
+      "data.store": "[ 'ccm.store',{ 'name':'pdf_viewer','url':'http://ccm2.inf.h-brs.de' } ]"
     },
     "onfinish": {
       "store": {
-        "settings": { "store": "pdf_viewer", "url": "http://ccm2.inf.h-brs.de" }
-      },
+        "settings": { "name": "pdf_viewer", "url": "http://ccm2.inf.h-brs.de" }
+      }
     }
   },
 
