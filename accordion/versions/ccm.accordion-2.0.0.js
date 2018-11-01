@@ -5,7 +5,7 @@
  * @version 2.0.0
  * @changes
  * version 2.0.0 (12.09.2018)
- * - uses ccm v18.0.0
+ * - uses ccm v18.1.0
  *
  */
 
@@ -24,37 +24,16 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
 
     /**
      * default instance configuration
      * @type {object}
      */
     config: {
-      color: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
-      size: 'xs', //lg, md, sm, xs
-      entries: [
-        {
-          "title": "Learning Goals",
-          "content": "..."
-        },
-        {
-          "title": "Lecture",
-          "content": "<source src=\"../table/versions/ccm.table-2.0.0.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table-2-0-0 key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table-2-0-0>"
-        },
-        {
-          "title": "Additional Materials",
-          "content": ""
-        },
-        {
-          "title": "Exercises",
-          "content": "<textarea placeholder='text'></textarea>"
-        },
-        {
-          "title": "Bibliography",
-          "content": "..."
-        }
-      ],
+      //color: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
+      //size: 'xs', //lg, md, sm, xs
+      //entries: [],
       //  onclick: function ( target ){ console.log( target ); },
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.0.js" ],
       css: [ "ccm.load",
