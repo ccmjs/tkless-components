@@ -4,8 +4,8 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (12.09.2018)
- * - uses ccm v18.0.0
+ * version 2.0.0 (01.11.2018)
+ * - uses ccm v18.1.0
  */
 
 ( function () {
@@ -23,7 +23,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versoins/ccm-18.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versoins/ccm-18.1.0.js',
 
     /**
      * default instance configuration
