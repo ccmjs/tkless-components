@@ -30,7 +30,8 @@
           "class": "container-fluid",
           "inner": [
             {
-              "id": "login-section"
+              "id": "login-section",
+              "class": "row"
             },
             {
               "id": "comment-list",
