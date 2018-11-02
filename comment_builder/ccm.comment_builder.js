@@ -472,7 +472,6 @@
           result.voting[ 2 ].data.store[1].name = "voting_data"
         }
 
-        console.log(result);
         // convert dot notation properties to deeper objects
         result = $.solveDotNotation( result );
 
