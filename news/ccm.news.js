@@ -15,11 +15,14 @@
     config: {
       templates: {
         "main": {
-          "tag": "div",
           "id": "main",
+          "class": "container-fluid",
           "inner": [
             {
-              "tag": "div",
+              "id": "login-section",
+              "style": "margin-bottom: 1em"
+            },
+            {
               "id": "button",
               "inner":
                 {
@@ -30,37 +33,30 @@
                 }
             },
             {
-              "tag": "div",
               "id": "posts"
             }
           ]
         },
 
         "post": {
-          "tag": "div",
           "class": "post",
           "inner": [
             {
-              "tag": "div",
               "title": "Delete Message",
               "class": "close fa fw fa-close",
               "onclick": "%delete_post%"
             },
             {
-              "tag": "div",
               "class": "head",
               "inner": [
                 {
-                  "tag": "div",
                   "class": "title",
                   "inner": [
                     {
-                      "tag": "div",
                       "class": "date",
                       "inner": "%date%"
                     },
                     {
-                      "tag": "div",
                       "inner": "%title%",
                       "contenteditable": "%edit%",
                       "oninput": "%input_title%"
@@ -68,16 +64,13 @@
                   ]
                 },
                 {
-                  "tag": "div",
                   "class": "user",
                   "inner": [
                     {
-                      "tag": "div",
                       "class": "name",
                       "inner": "%name%"
                     },
                     {
-                      "tag": "div",
                       "class": "%avatar%"
                     }
                   ]
@@ -85,10 +78,8 @@
               ]
             },
             {
-              "tag": "div",
               "class": "content",
               "inner": {
-                "tag": "div",
                 "inner": "%content%",
                 "contenteditable": "%edit%",
                 "oninput": "%input_content%"
@@ -98,17 +89,9 @@
         }
 
       },
-      data:  {
-        store: [ 'ccm.store', '../news/resources/datastore.js' ],
-        key: 'demo'
-      },
-      user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
-        {
-          "realm": "guest",
-          "title": "Guest Mode: Please enter any username",
-          "no_password": true
-        }
-      ],
+      //data:  { store: [ 'ccm.store' ], key: '' },
+      //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
+      //  [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
       css: [ 'ccm.load', '../news/resources/default.css' ],
       libs: [ 'ccm.load',
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
@@ -148,18 +131,25 @@
       };
 
       this.start = async () => {
+        if ( !self.user ) return $.setContent( self.element, "User is not configured!");
 
         // login user if not logged in
-        if ( my.editable &&!self.user.isLoggedIn() ) await self.user.login();
+        if ( my.editable && !self.user.isLoggedIn() ) await self.user.login();
 
         // get dataset for rendering
         let dataset = await $.dataset( my.data );
         if ( !dataset.posts ) dataset.posts = [];
 
-          // render main html structure
-          $.setContent( self.element, $.html( my.templates.main, {
-            new_post: async function () { await updatePost(); }
-          } ) );
+        // render main html structure
+        $.setContent( self.element, $.html( my.templates.main, {
+          new_post: async function () { await updatePost(); }
+        } ) );
+
+        if ( self.user ) {
+          await  self.user.start();
+          if( !self.parent )
+            self.element.querySelector( '#login-section' ).appendChild( self.user.root );
+        }
 
         for ( let i = 0; i < dataset.posts.length; i++ ) {
           renderPost( dataset.posts[i], i) ;
@@ -225,7 +215,7 @@
 
           if ( post === dataset.posts.length ) dataset.posts.push( newPost() );
 
-          dataset.posts[ post ][ prop ] = div.innerHTML.replace( new RegExp( '\r?\n', 'g' ), '' ).trim();
+          dataset.posts[ post ][ prop ] = $.protect ( div.innerHTML.replace( new RegExp( '\r?\n', 'g' ), '' ).trim() );
 
           if ( !div.innerHTML )
             div.classList.add( 'empty' ).innerHTML = ' ';
