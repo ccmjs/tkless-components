@@ -321,10 +321,9 @@
 
                   // update dataset for rendering => (re)render accepted answer
                   await my.data.store.set( data );
-                  // clear editor area
-                  self.element.querySelector( '#new-comment' ).innerHTML = '';
 
-                  renderComments( data.comments );
+                  // (re)render comments
+                  await renderComments( data.comments );
 
                   if( self.logger ) self.logger.log( 'edit', { 'old': old_comment, 'new': comment.content });
                 } );
