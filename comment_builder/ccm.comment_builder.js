@@ -50,6 +50,16 @@
                 "name": "data.key"
               },
               {
+                "tag": "input",
+                "type": "hidden",
+                "name": "chat"
+              },
+              {
+                "tag": "input",
+                "type": "hidden",
+                "name": "template"
+              },
+              {
                 "class": "layout form-group",
                 "inner": [
                   {
@@ -142,19 +152,21 @@
                       {
                         "tag": "option",
                         "inner": "Guest Mode",
-                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
+                        "[ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
                       },
                       {
                         "tag": "option",
                         "inner": "H-BRS FB02",
-                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','hbrsinfkaul']]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
+                          "{ 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
                       }
                     ]
                   }
                 ]
               },
               {
-                "class": "sorting form-group",
+                "class": "voting form-group",
                 "inner": [
                   {
                     "tag": "label",
@@ -465,6 +477,8 @@
         else
           result.template = "expanded";
 
+        if ( !result.layout ) result.template = 'simple';
+
         delete result.layout;
 
         if ( result.voting ) {
@@ -474,9 +488,6 @@
 
         // convert dot notation properties to deeper objects
         result = $.solveDotNotation( result );
-
-        // use empty string if no value was specified
-        if ( !result.user ) delete result.user;
 
         // now values of input elements are transformed to resulting instance configuration
         return $.clone( result );
