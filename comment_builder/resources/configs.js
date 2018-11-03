@@ -3,10 +3,10 @@ ccm.files[ "configs.js" ] = {
   "chat": {
     "key": "chat",
     "html.inner.0.inner": 'Build your Chat Component',
-    "html.inner.1.inner.2": '',
     "html.inner.1.inner.4": '',
-    "html.inner.1.inner.5": '',
     "html.inner.1.inner.6": '',
+    "html.inner.1.inner.7": '',
+    "html.inner.1.inner.8": '',
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
