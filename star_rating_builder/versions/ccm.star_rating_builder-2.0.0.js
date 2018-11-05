@@ -12,12 +12,13 @@
      * @type {string}
      */
     name: 'star_rating_builder',
+    version: [ 2,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     /**
      * default instance configuration
@@ -187,8 +188,11 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css", "../libs/selectize/selectize.default.min.css"
       ],
-      "js": [ "ccm.load", [ "../libs/jquery/jquery.min.js", "../libs/bootstrap/js/bootstrap.min.js", "../libs/selectize/selectize.min.js"] ],
-      "target": [ "ccm.component", "../star_rating/ccm.star_rating.js" ],
+      "js": [ "ccm.load", [ "https://ccmjs.github.io/tkless-components/libs/jquery/jquery.min.js",
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/js/bootstrap.min.js",
+        "https://ccmjs.github.io/tkless-components/libs/selectize/selectize.min.js"]
+      ],
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/star_rating/versions/ccm.star_rating.3.0.0.js" ],
       // "defaults": {
       //   "star_title": ["I Do Not Like It at All", "I do not like it", "It is OK", "I Like It", "Like It a Lot"],
       //   "data.store": "['ccm.store',{'store':'star_rating_data','url':'http://localhost:8080'}]",
