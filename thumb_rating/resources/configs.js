@@ -8,7 +8,7 @@ ccm.files[ 'configs.js' ] = {
     "data": {
       "store": [ "ccm.store", { "name": "thumb_rating_data", "url": "https://ccm2.inf.h-brs.de" } ],
       "key": "demo"
-    },
+    }
   },
 
   "local": {
