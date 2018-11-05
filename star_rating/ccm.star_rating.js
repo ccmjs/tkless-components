@@ -33,15 +33,12 @@
           "title": "%title%"
         }
       },
-      // "star_title": [ "Gefällt mir gar nicht", "Gefällt mir nicht",
-      //   "Ist Ok", "Gefällt mir", "Gefällt mir sehr" ],
+      // "star_title": ["I do not Like It at All", "I do not Like It", "It Is OK", "I Like It", "Like It a Lot"],
       // "data":  {
       //     "store": [ "ccm.store", "resources/datastore.js" ],
       //     "key":   "demo"
       // },
-      // "onfinish": {
-      //   "log": true
-      // },
+      // "onfinish": { "log": true },
       // "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
       //   [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
       // ],
@@ -83,7 +80,10 @@
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        my.data.store.onChange = async function () { await self.start(); };
+        if ( self.data ) self.data.store.onchange = self.start;
+
+        // listen to login/logout event => (re)render own content
+        if ( self.user ) self.user.onchange = self.start;
       };
 
       this.start = async () => {
@@ -116,9 +116,9 @@
           $.setContent( self.element, main_elem );
         }
 
-        async function doVoting() {
+        async function doVoting()   {
 
-          await self.user.login( self );
+          await self.user.login( self.start );
 
           let checked = self.element.querySelector( 'input[name="rating"]:checked' ).value;
 
