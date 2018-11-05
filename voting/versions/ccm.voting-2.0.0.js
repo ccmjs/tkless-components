@@ -4,8 +4,8 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (31.10.2018)
- * - uses ccm v18.1.0
+ * version 2.0.0 (05.11.2018)
+ * - uses ccm v18.3.0
  */
 ( function () {
 
@@ -22,7 +22,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     /**
      * default instance configuration
@@ -82,7 +82,10 @@
       this.init = async () => {
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onchange = async () => { await self.start(); };
+        self.data.store.onchange = self.start;
+
+        // listen to login/logout event => (re)render own content
+        if ( self.user ) self.user.onchange = self.start;
       };
 
       this.ready = async () => {
@@ -93,10 +96,6 @@
         my = $.privatize( self );
 
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
-
-        // listen to login/logout event => (re)render own content
-        if ( self.user ) self.user.onchange = await self.start;
-
       };
 
       this.start = async () => {
@@ -137,7 +136,7 @@
         async function doVoting( vote ) {
           if ( !self.user ) return;
 
-          await self.user.login( self );
+          await self.user.login( self.start );
 
           let user = self.user.data().user;
           let not_vote;

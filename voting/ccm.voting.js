@@ -7,10 +7,22 @@
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'voting',
 
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       "html": {
         "main": {
@@ -65,7 +77,10 @@
       this.init = async () => {
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onchange = async () => { await self.start(); };
+        self.data.store.onchange = self.start;
+
+        // listen to login/logout event => (re)render own content
+        if ( self.user ) self.user.onchange = self.start;
       };
 
       this.ready = async () => {
@@ -76,10 +91,6 @@
         my = $.privatize( self );
 
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
-
-        // listen to login/logout event => (re)render own content
-        if ( self.user ) self.user.onchange = await self.start;
-
       };
 
       this.start = async () => {
@@ -120,7 +131,7 @@
         async function doVoting( vote ) {
           if ( !self.user ) return;
 
-          await self.user.login( self );
+          await self.user.login( self.start );
 
           let user = self.user.data().user;
           let not_vote;
