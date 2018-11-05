@@ -70,7 +70,7 @@
           ]
         }
       },
-      // inner: "some html text for marking",
+      // text: "some html text for marking",
       // submit: true,
       // submit_button_label: "Save",
       // retry: true,
@@ -179,7 +179,7 @@
 
         function prepareTextForMarking() {
           const div = document.createElement( 'div' );
-          div.innerHTML = my.inner;
+          div.innerHTML = my.text;
 
           const text_nodes = collectTextNodes( div );
 
@@ -304,7 +304,7 @@
         function renderProgressBar( correct ) {
           const goal = correct * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
           let width = 1;
-          let id = setInterval(frame, 10);
+          let id = setInterval(frame, 8);
 
           function frame() {
             if ( width >= goal ) {

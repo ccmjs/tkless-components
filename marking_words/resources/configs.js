@@ -13,7 +13,7 @@ ccm.files[ "configs.js" ] = {
     "retry": true,
     "show_solution": true,
     "check": true,
-    "keywords": [ 'Manchmal', 'Manchmal', 'Typoblindtexte', 'Zahlen' ],
+    "keywords": [ 'Manchmal', 'Manchmal', 'Typoblindtexte' ],
     //"data": { solutions: [], marked: [ 'marking_words-42' ] },
     "onfinish": { "log": true }
   }
