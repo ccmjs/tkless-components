@@ -12,12 +12,13 @@
      * @type {string}
      */
     name: 'thumb_rating_builder',
+    version: [ 2,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     /**
      * default instance configuration
@@ -195,9 +196,9 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/thumb_rating_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../thumb_rating/ccm.thumb_rating.js" ],
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/ccm.thumb_rating.js" ],
       // "defaults": {
       //    "data.store": "['ccm.store',{'store':'thumb_rating_data','url':'http://localhost:8080'}]",
       //    "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
