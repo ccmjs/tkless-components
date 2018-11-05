@@ -2,6 +2,10 @@
  * @overview ccm component for building a voting component
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ * @changes
+ * version 2.0.0 (05.11.2018)
+ * - uses ccm v18.3.0
  */
 
 {
@@ -12,12 +16,13 @@
      * @type {string}
      */
     name: 'voting_builder',
+    version: [ 2,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     /**
      * default instance configuration
@@ -152,9 +157,9 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/voting_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "../voting/ccm.voting.js" ]
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/voting/versions/ccm.voting-2.0.0.js" ]
       // "defaults": {
       //   "data.store": "['ccm.store',{'name':'voting_data','url':'http://localhost:8080'}]",
       //   "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
