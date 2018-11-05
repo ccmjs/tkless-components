@@ -11,10 +11,22 @@
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'thumb_rating',
 
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       // "data": { "store": [ "ccm.store", {} ] },
       // "template": "buttons" // or "simple"
@@ -111,7 +123,10 @@
 
       this.init = async () => {
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onchange = async () => { await self.start(); };
+        self.data.store.onchange = self.start;
+
+        // listen to login/logout event => (re)render own content
+        if ( self.user ) self.user.onchange = self.start;
       };
 
       this.ready = async () => {
@@ -123,9 +138,6 @@
         my = $.privatize( self );
 
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
-
-        // listen to login/logout event => (re)render own content
-        if ( self.user ) self.user.onchange = await self.start;
 
       };
 
@@ -211,7 +223,7 @@
             div[ index ].addEventListener( 'click', async () => {
 
               // login user if not logged in
-              await self.user.login();
+              await self.user.login( self.start );
 
               const user = self.user.data().user;
 
