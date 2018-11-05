@@ -198,7 +198,7 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/thumb_rating_builder/resources/default.css"
       ],
-      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/ccm.thumb_rating.js" ],
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/verions/ccm.thumb_rating-3.0.0.js" ],
       // "defaults": {
       //    "data.store": "['ccm.store',{'store':'thumb_rating_data','url':'http://localhost:8080'}]",
       //    "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
