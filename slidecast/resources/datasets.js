@@ -100,25 +100,25 @@ ccm.files[ "datasets.js" ] = {
   "learning_apps": {
     "slides": [
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie01.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie01.png",
       },
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie02.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie02.png",
       },
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie03.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie03.png",
       },
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie04.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie04.png",
       },
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie05.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie05.png",
       },
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie06.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie06.png",
       },
       {
-        "image": "../slidecast/resources/slides/learningApps/Folie07.png",
+        "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/Folie07.png",
       }
     ]
   }

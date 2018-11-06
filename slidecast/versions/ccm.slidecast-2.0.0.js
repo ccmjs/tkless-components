@@ -114,7 +114,6 @@
           "onclick": "%back%"
         }
       },
-      img_width: 720,
       icons: [ 'ccm.load',
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
@@ -197,7 +196,7 @@
         renderSlides();
 
         //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
-        const width = self.width || self.element.querySelector('img').offsetWidth;
+        let width = self.width || self.element.querySelector('img').offsetWidth;
         self.element.querySelector('.inner').style.width = width + 'px';
 
 
