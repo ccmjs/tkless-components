@@ -186,7 +186,7 @@
       },
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css", "../libs/selectize/selectize.default.min.css"
+        "https://ccmjs.github.io/tkless-components/star_rating_builder/resources/default.css", "https://ccmjs.github.io/tkless-components/libs/selectize/selectize.default.min.css"
       ],
       "js": [ "ccm.load", [ "https://ccmjs.github.io/tkless-components/libs/jquery/jquery.min.js",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/js/bootstrap.min.js",
