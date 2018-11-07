@@ -126,10 +126,13 @@
         urls.push();
 
         // preload all collected resources in parallel
-        self.ccm.load.apply( undefined, urls );
+        await self.ccm.load.apply( undefined, urls );
       };
 
       this.start = async () => {
+        if ( !self.slides )
+          return $.setContent( self.element, "Nothing to Display!");
+
         let currentSlide = 0;
 
         $.setContent( self.element, '');
@@ -180,10 +183,8 @@
 
         self.element.appendChild( $.html( self.html.overlay ) );
 
-        if ( self.slides ) {
-          await renderSlide( currentSlide );
-          renderSlides();
-        }
+        await renderSlide( currentSlide );
+        renderSlides();
 
 
         //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
@@ -200,7 +201,7 @@
 
           element.appendChild( $.html( self.html.slide_img, {
             size: 'wrapper big',
-            src: () => { if ( self.slides[ slide ] ) self.slides[ slide ].image },
+            src: () => self.slides[ slide ].image,
             click: ''
           } ) );
 
