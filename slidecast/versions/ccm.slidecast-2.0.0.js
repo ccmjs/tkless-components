@@ -266,7 +266,7 @@
           let element = self.element.querySelector( '.audio' );
 
           if ( self.slides[ index ].audio )
-            $.setContent( element, $.html( '<audio autoplay controls><source src="' + self.slides[ index ].audio + '"></audio>' ) );
+            $.setContent( element, $.html( '<audio controls><source src="' + self.slides[ index ].audio + '"></audio>' ) );
           else
             $.setContent( element, '' );
         }
