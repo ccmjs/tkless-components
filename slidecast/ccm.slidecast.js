@@ -201,7 +201,7 @@
 
           element.appendChild( $.html( self.html.slide_img, {
             size: 'wrapper big',
-            src: () => self.slides[ slide ].image,
+            src: self.slides[ slide ].image,
             click: ''
           } ) );
 

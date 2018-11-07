@@ -133,7 +133,7 @@
         let urls = [];
         self.slides.map( slide => {
           if ( slide.image ) urls.push( slide.image );
-          //if ( slide.audio ) urls.push( slide.audio );
+          if ( slide.audio ) urls.push( slide.audio );
         } );
         urls.push();
 
@@ -212,7 +212,7 @@
 
           element.appendChild( $.html( self.html.slide_img, {
             size: 'wrapper big',
-            src: () => self.slides[ slide ].image,
+            src: self.slides[ slide ].image,
             click: ''
           } ) );
 
