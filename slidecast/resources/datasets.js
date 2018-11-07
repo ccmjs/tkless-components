@@ -105,52 +105,52 @@ ccm.files[ "datasets.js" ] = {
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie02.png",
-        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.1.0.js", [
+        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.1.0.js",
           [
             "ccm.get",
             "https://ccmjs.github.io/tkless-components/comment/resources/configs.js",
             "demo_comment"
           ]
-        ] ]
+        ]
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie03.png",
-        "optional_content": [  "ccm.instance", "https://ccmjs.github.io/akless-components/kanban_board/versions/kanban_board-2.0.0.js", [
+        "optional_content": [  "ccm.instance", "https://ccmjs.github.io/akless-components/kanban_board/versions/ccm.kanban_board-2.0.0.js", [
           "ccm.get", "https://ccmjs.github.io/akless-components/kanban_board/resources/configs.js", "realtime"
         ] ]
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie04.png",
-        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/teambuild/versions/teambuild-3.0.0.js", [
+        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/teambuild/versions/ccm.teambuild-3.0.0.js",
           [
             "ccm.get",
             "https://ccmjs.github.io/akless-components/teambuild/resources/configs.js",
             "demo"
           ]
-        ] ]
+        ]
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie05.png",
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie06.png",
-        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/quiz-3.0.0.js", [
+        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-3.0.0.js",
           [
             "ccm.get",
             "https://ccmjs.github.io/akless-components/quiz/resources/configs.js",
             "demo"
           ]
-        ] ]
+        ]
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie07.png",
-        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/cloze-5.0.0.js", [
+        "optional_content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-5.0.0.js",
           [
             "ccm.get",
             "https://ccmjs.github.io/akless-components/cloze/resources/configs.js",
             "demo"
           ]
-        ] ]
+        ]
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie08.png",

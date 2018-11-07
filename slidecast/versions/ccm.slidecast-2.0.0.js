@@ -133,7 +133,7 @@
         let urls = [];
         self.slides.map( slide => {
           if ( slide.image ) urls.push( slide.image );
-          if ( slide.audio ) urls.push( slide.audio );
+          //if ( slide.audio ) urls.push( slide.audio );
         } );
         urls.push();
 
