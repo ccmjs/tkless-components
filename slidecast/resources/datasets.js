@@ -105,6 +105,7 @@ ccm.files[ "datasets.js" ] = {
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie02.png",
+        "description": "Digitale Werkzeuge können natürlich auch Arbeit erleichtern für Studierende und Lehrende. Zum Beispiel individuelles Feedback bei hoher Studierendenzahl.",
         "optional_content": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.1.0.js",
           [
             "ccm.get",
@@ -131,6 +132,11 @@ ccm.files[ "datasets.js" ] = {
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie05.png",
+        "optional_content": [  "ccm.instance", "https://ccmjs.github.io/akless-components/kanban_board/versions/ccm.kanban_board-2.0.0.js", [
+          "ccm.get",
+          "https://ccmjs.github.io/akless-components/teambuild/resources/configs.js",
+          "clicker"
+        ] ]
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie06.png",
