@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
-      xmlns="http://www.w3.org/1999/html">
-<link rel="stylesheet" href="https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css">
 <style>
   .info > .alert-info {
     display: none;
@@ -12,24 +9,37 @@
   .info >label {
     cursor: pointer;
   }
-
   .info >input[type=checkbox]:checked ~ .alert-info {
     display: block;
   }
-
   .alert { margin-bottom: 0px !important; }
 </style>
 
-<div id="element">
   <div class="page-header">
     <h2>Settings <small class="text-primary">Slidecast</small></h2>
   </div>
   <br>
 
-
   <h4 class="text-primary">Slide of Slidecast</h4>
   <div class="callout callout-primary">
     <several name="slides">
+      <style>
+        .info > .alert-info {
+          display: none;
+        }
+        .info > input[type=checkbox] {
+          position: absolute;
+          display: none;
+        }
+        .info >label {
+          cursor: pointer;
+        }
+        .info >input[type=checkbox]:checked ~ .alert-info {
+          display: block;
+        }
+        .alert { margin-bottom: 0px !important; }
+      </style>
+
       <div class="form-group">
         <label>Slide <nr></nr>
 
@@ -83,6 +93,3 @@
 
     </several>
   </div>
-  <br>
-
-</div>
