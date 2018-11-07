@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     "chat": true,
     "editable": true,
     "data": {
-      "store": [ "ccm.store", { "name": "chat", "url": "https://ccm2.inf.h-brs.de" } ],
+      "store": [ "ccm.store", { "name": "chat_data", "url": "https://ccm2.inf.h-brs.de" } ],
       "key": "demo"
     },
     "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
@@ -18,7 +18,7 @@ ccm.files[ "configs.js" ] = {
     "sorting_by_voting": true,
     "template": "expanded",
     "data": {
-      "store": [ "ccm.store", { "name": "comment", "url": "https://ccm2.inf.h-brs.de" } ],
+      "store": [ "ccm.store", { "name": "comment_data", "url": "https://ccm2.inf.h-brs.de" } ],
       "key": "demo" },
     "voting": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-3.0.0.js", {
       "template": "buttons",
