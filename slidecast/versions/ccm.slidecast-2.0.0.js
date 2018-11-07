@@ -4,8 +4,8 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (30.10.2018)
- * - uses ccm v18.1.0
+ * version 2.0.0 (05.11.2018)
+ * - uses ccm v18.3.0
  */
 
 ( function () {
@@ -19,7 +19,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     /**
      * default instance configuration
@@ -114,7 +114,6 @@
           "onclick": "%back%"
         }
       },
-      img_width: 720,
       icons: [ 'ccm.load',
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
@@ -197,7 +196,7 @@
         renderSlides();
 
         //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
-        const width = self.width || self.element.querySelector('img').offsetWidth;
+        let width = self.width || self.element.querySelector('img').offsetWidth;
         self.element.querySelector('.inner').style.width = width + 'px';
 
 

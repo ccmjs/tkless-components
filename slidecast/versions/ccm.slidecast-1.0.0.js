@@ -11,11 +11,7 @@
     name: 'slidecast',
     version:[ 1,0,0 ],
 
-    ccm: {
-      url: 'https://ccmjs.github.io/ccm/versions/ccm-14.3.0.min.js',
-      integrity: 'sha384-4q30fhc2E3uY9omytSc6dKdoMNQ37dSozhTxgG/wH/9lv+N37TBhwd1jg/u03bRt',
-      crossorigin: 'anonymous'
-    },
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-14.3.0.js',
 
     config: {
       templates: {
@@ -106,7 +102,6 @@
           "onclick": "%back%"
         }
       },
-      img_width: 720,
       css: [ 'ccm.load',
         { url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', context: document.head },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
