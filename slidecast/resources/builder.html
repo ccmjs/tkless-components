@@ -15,81 +15,81 @@
   .alert { margin-bottom: 0px !important; }
 </style>
 
-  <div class="page-header">
-    <h2>Settings <small class="text-primary">Slidecast</small></h2>
-  </div>
-  <br>
+<div class="page-header">
+  <h2>Settings <small class="text-primary">Slidecast</small></h2>
+</div>
+<br>
 
-  <h4 class="text-primary">Slide of Slidecast</h4>
+<h4 class="text-primary">Slide of Slidecast</h4>
+<several name="slides">
   <div class="callout callout-primary">
-    <several name="slides">
-      <style>
-        .info > .alert-info {
-          display: none;
-        }
-        .info > input[type=checkbox] {
-          position: absolute;
-          display: none;
-        }
-        .info >label {
-          cursor: pointer;
-        }
-        .info >input[type=checkbox]:checked ~ .alert-info {
-          display: block;
-        }
-        .alert { margin-bottom: 0px !important; }
-      </style>
+    <style>
+      .info > .alert-info {
+        display: none;
+      }
+      .info > input[type=checkbox] {
+        position: absolute;
+        display: none;
+      }
+      .info >label {
+        cursor: pointer;
+      }
+      .info >input[type=checkbox]:checked ~ .alert-info {
+        display: block;
+      }
+      .alert { margin-bottom: 0px !important; }
+    </style>
 
-      <div class="form-group">
-        <label>Slide <nr></nr>
+    <div class="form-group">
+      <label>Slide <nr></nr>
 
-          <!------- info icon ----->
-          <span class="info">
-          <input type="checkbox" id="i">
-          <label for="i"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
-          <span class="alert alert-info">
-            The image must have been previously made available under public url.
-          </span>
-          </span>
-          <!---  end info -------->
+        <!------- info icon ----->
+        <span class="info">
+        <input type="checkbox" id="i">
+        <label for="i"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+        <span class="alert alert-info">
+          The image must have been previously made available under public url.
+        </span>
+        </span>
+        <!---  end info -------->
 
-        </label>
-        <input type="url" name="image" class="form-control" placeholder="Url to your Slide">
-      </div>
+      </label>
+      <input type="url" name="image" class="form-control" placeholder="Url to your Slide">
+    </div>
 
-      <div class="form-group">
-        <label>Audio <nr></nr>
+    <div class="form-group">
+      <label>Audio <nr></nr>
 
-          <!------- info icon ----->
-          <span class="info">
-          <input type="checkbox" id="ii">
-          <label for="ii"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
-          <span class="alert alert-info">
-            The audio file must have been previously made available under public url.
-          </span>
-          </span>
-          <!---  end info -------->
+        <!------- info icon ----->
+        <span class="info">
+        <input type="checkbox" id="ii">
+        <label for="ii"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+        <span class="alert alert-info">
+          The audio file must have been previously made available under public url.
+        </span>
+        </span>
+        <!---  end info -------->
 
-        </label>
-        <input type="url" name="audio" class="form-control" placeholder="Url to your Audio">
-      </div>
+      </label>
+      <input type="url" name="audio" class="form-control" placeholder="Url to your Audio">
+    </div>
 
-      <div class="form-group">
-        <label>Description <nr></nr>
+    <div class="form-group">
+      <label>Description <nr></nr>
 
-          <!------- info icon ----->
-          <span class="info">
-          <input type="checkbox" id="iii">
-          <label for="iii"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
-          <span class="alert alert-info">
-            Here you can enter the explanations for your slide.
-          </span>
-          </span>
-          <!---  end info -------->
+        <!------- info icon ----->
+        <span class="info">
+        <input type="checkbox" id="iii">
+        <label for="iii"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+        <span class="alert alert-info">
+          Here you can enter the explanations for your slide.
+        </span>
+        </span>
+        <!---  end info -------->
 
-        </label>
-        <textarea name="description" class="form-control" placeholder="Description for your Slide"></textarea>
-      </div>
+      </label>
+      <textarea name="description" class="form-control" placeholder="Description for your Slide"></textarea>
+    </div>
 
-    </several>
   </div>
+</several>
