@@ -132,7 +132,7 @@ ccm.files[ "datasets.js" ] = {
       },
       {
         "image": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/folie05.png",
-        "optional_content": [  "ccm.instance", "https://ccmjs.github.io/akless-components/kanban_board/versions/ccm.kanban_board-2.0.0.js", [
+        "optional_content": [  "ccm.instance", "https://ccmjs.github.io/akless-components/teambuild/versions/ccm.teambuild-3.0.0.js", [
           "ccm.get",
           "https://ccmjs.github.io/akless-components/teambuild/resources/configs.js",
           "clicker"
