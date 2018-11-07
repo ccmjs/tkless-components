@@ -192,8 +192,10 @@
 
         self.element.appendChild( $.html( self.html.overlay ) );
 
-        await renderSlide( currentSlide );
-        renderSlides();
+        if ( self.slides ) {
+          await renderSlide( currentSlide );
+          renderSlides();
+        }
 
         //set width of inner-Div equal to img-Div, to fit description-text to same width as its parent.
         let width = self.width || self.element.querySelector('img').offsetWidth;
@@ -209,7 +211,7 @@
 
           element.appendChild( $.html( self.html.slide_img, {
             size: 'wrapper big',
-            src: () => { if ( self.slides &&  self.slides[ slide ] ) self.slides[ slide ].image },
+            src: () => { if ( self.slides[ slide ] ) self.slides[ slide ].image },
             click: ''
           } ) );
 
