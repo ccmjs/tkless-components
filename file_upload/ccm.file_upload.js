@@ -294,7 +294,7 @@
           self.element.appendChild( input );
           input.addEventListener( 'change', function () {
             if( this.files[0].size > 16777216) {
-               alert( "Upload Filed. The maximum file size is 10 MB." );
+               alert( "Upload Failed. The maximum file size is 10 MB." );
                this.value = "";
                return;
             }
