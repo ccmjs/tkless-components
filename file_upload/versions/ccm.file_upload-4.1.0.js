@@ -314,7 +314,7 @@
           if ( my.data_type  === 'image' ) input.setAttribute( 'accept', 'image/*' );
           self.element.appendChild( input );
           input.addEventListener( 'change', function () {
-            if( this.files[0].size > 16777216) {
+            if( this.files[0].size > 10485760 ) {
               alert( "Upload Failed. The maximum file size is 10 MB." );
               this.value = "";
               return;
