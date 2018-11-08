@@ -25,7 +25,7 @@
      * @type {string}
      */
     name: 'file_upload',
-    version: [ 4,0,0 ],
+    version: [ 4,1,0 ],
 
     /**
      * recommended used framework version
