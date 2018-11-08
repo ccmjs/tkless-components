@@ -6,6 +6,9 @@
  * @changes
  * version 3.0.0 (31.10.2018)
  * - uses ccm v18.1.0
+ *  version 3.0.0 (31.10.2018)
+ * - uses ccm v18.3.0
+ * - uses ccm.file-upload.js v4.1.0
  */
 
 ( function () {
@@ -17,13 +20,13 @@
      * @type {string}
      */
     name: 'pdf_viewer_builder',
-    version: [ 3,0,0 ],
+    version: [ 3,1,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1..js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     /**
      * default instance configuration
@@ -105,7 +108,7 @@
                             "inner":
                               {
                                 "tag": "p",
-                                "inner": "Drop or choose files to upload."
+                                "inner": "Drop or choose files to upload. <code>10 MB is Maximum file size you can upload.</code>"
                               }
                           }
                         ]
@@ -277,8 +280,8 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
-      target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-4.1.0.js" ],
-      file_upload: [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-4.0.0.js", {
+      target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-4.0.0.js" ],
+      file_upload: [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-4.1.0.js", {
         "data_type": "pdf", "clear_button": true
       } ],
       // "defaults": {
