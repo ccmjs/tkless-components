@@ -3,7 +3,7 @@ ccm.files[ "configs.js" ] = {
     "upload_button": true,
     "clear_button": true,
     "data_type": "pdf",
-    "data": { "store": [ "ccm.store", { "store": "file_upload", "url": "http://localhost:8080", "method": "POST" } ] },
+    "data": { "store": [ "ccm.store", { "name": "file_upload", "url": "http://localhost:8080" } ] },
     "onfinish":  function( results ){ console.log(results) }
   },
 
@@ -12,7 +12,7 @@ ccm.files[ "configs.js" ] = {
     "upload_button": true,
     "clear_button": true,
     "data_type": "pdf",
-    "data": { "store": [ "ccm.store", { "store": "file_upload" } ] },
+    "data": { "store": [ "ccm.store", { "name": "file_upload" } ] },
     "onfinish":  function( results ){ console.log( results ) }
   },
 
