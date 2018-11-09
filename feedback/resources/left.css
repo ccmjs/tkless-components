@@ -3,6 +3,7 @@
   !!! Mobile devices do not trigger hover event correctly. Use "right.css" for this.
 */
 #slideout {
+  z-index: 99999;
   position: fixed;
   top: 40px;
   left: 0px;

@@ -1,4 +1,5 @@
 #slideout {
+  z-index: 999999;
   position: fixed;
   top: 40px;
   right: 0px;
