@@ -146,7 +146,7 @@
 
           // change feedback position from above
           if ( this.from_above ) {
-            this.element.querySelector( '#slideout' ).style.top = this.from_above;
+            this.element.querySelector( '#slideout' ).style.top = this.from_above+'%';
             this.element.querySelector( '#slideout-inner' ).style.top = this.from_above;
           }
 
