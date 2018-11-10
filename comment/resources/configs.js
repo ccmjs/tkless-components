@@ -62,7 +62,7 @@ ccm.files[ "configs.js" ] = {
     "data": {
       "store": [ "ccm.store", { "name": "comment" } ],
       "key": "demo" },
-    "voting": [ "ccm.component", "../thumb_rating/ccm.thumb_rating.js", {
+    "voting": [ "ccm.component", "https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-3.0.0.js", {
       "template": "buttons",
       "data": {
         "store": [ "ccm.store", { "name": "comment_voting" } ],
