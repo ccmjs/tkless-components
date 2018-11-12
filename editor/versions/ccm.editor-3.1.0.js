@@ -90,7 +90,7 @@
 
         if ( self.data ){
           const data= await $.dataset( self.data );
-          editor.root.innerHTML =  data.value;
+          editor.root.innerHTML =  data.inner;
         }
 
         if ( self.onchange )
@@ -100,7 +100,7 @@
       this.get = () => editor;
 
       this.getValue = () => {
-        return { "value": editor.root.innerHTML };
+        return { "inner": editor.root.innerHTML };
       };
 
     }
