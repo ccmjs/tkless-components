@@ -111,7 +111,7 @@
                       {
                         "class": "alert alert-info",
                         "inner": [
-                          "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
+                          "If you select a sign-on mode here, authentication will be requested after the completion of the rating and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
                           {
                             "tag": "h5",
                             "inner": "Guest Mode"
@@ -126,7 +126,8 @@
                           },
                           {
                             "tag": "p",
-                            "inner": "In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences at Hochschule Bonn-Rhein-Sieg University of Applied Sciences."
+                            "inner": "In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences at " +
+                            "Hochschule Bonn-Rhein-Sieg University of Applied Sciences."
                           }
                         ]
                       }
