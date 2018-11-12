@@ -1,0 +1,176 @@
+<link rel="stylesheet" type="text/css" href="https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css">
+
+<style>
+  .info > .alert-info {
+    display: none;
+  }
+  .info > input[type=checkbox] {
+    position: absolute;
+    display: none;
+  }
+  .info >label {
+    cursor: pointer;
+  }
+  .info >input[type=checkbox]:checked ~ .alert-info {
+    display: block;
+  }
+  .alert { margin-bottom: 0px !important; }
+</style>
+
+
+<div id="element">
+  <div class="page-header">
+    <h2>Settings <small class="text-primary">Feedback</small></h2>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label>Text
+
+    <!------- info icon ----->
+    <span class="info">
+      <input type="checkbox" id="i">
+      <label for="i"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+      <span class="alert alert-info">
+        Enter here the text or task in which the words should be marked.
+      </span>
+    </span>
+      <!---  end info -------->
+
+    </label>
+    <input type="editor" name="text" class="form-control">
+  </div>
+  <br>
+
+
+  <legend class="text-primary">Keywords</legend>
+    <style>
+      .info > .alert-info {
+        display: none;
+      }
+      .info > input[type=checkbox] {
+        position: absolute;
+        display: none;
+      }
+      .info >label {
+        cursor: pointer;
+      }
+      .info >input[type=checkbox]:checked ~ .alert-info {
+        display: block;
+      }
+      .alert {
+        margin-bottom: 0px !important;
+      }
+    </style>
+  <!------- info icon ----->
+  <span class="info">
+     <input type="checkbox" id="ii">
+      <label for="ii">Keyword <span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+      <span class="alert alert-info">
+        Enter the solution words here.
+      </span>
+    </span>
+  <!---  end info -------->
+    <div class="callout callout-primary">
+      <several>
+        <p>
+        <div class="form-group">
+          <label>Keyword <nr></nr></label>
+          <input type="text" name="keywords" class="form-control" placeholder="Type in Keyword...">
+        </div>
+        </p>
+      </several>
+    </div>
+  <br>
+
+  <div class="form-group">
+    <label>User Sign On
+
+      <!------- info icon ----->
+      <span class="info">
+  <input type="checkbox" id="iii">
+  <label for="iii"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+  <span class="alert alert-info">
+    If you select a sign-on mode here, authentication will be requested after the completion of the marking-words and
+    the results will only be submitted if the authentication was successful.
+    The various sign-on modes are described below.
+    <h5>Guest Mode</h5> The user can authenticate with any username and without password. This mode is mostly used for demo scenarios.
+    <h5> H-BRS FB02</h5> In this mode the user has to authenticate access with a valid account from the Department of Computer Sciences
+    at Hochschule Bonn-Rhein-Sieg University of Applied Sciences.
+  </span>
+  </span>
+      <!---  end info -------->
+
+    </label>
+    <select class="form-control" name="css">
+      <option value="">None</option>
+      <option value="[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js',
+      [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]">Guest Mode</option>
+      <option value="[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js',
+      { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]">H-BRS FB02</option>
+    </select>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label>Submit Button
+      <span class="info">
+      <input type="checkbox" id="iv">
+      <label for="iv"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+      <span class="alert alert-info">
+        Only select if the result should be saved. In this case a user login should be set.
+      </span>
+    </span>
+    </label>
+    <input type="checkbox" name="submit" class="form-control">
+  </div>
+  <br>
+
+
+  <div class="form-group">
+    <label>Retry
+      <span class="info">
+      <input type="checkbox" id="v">
+      <label for="v"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+      <span class="alert alert-info">
+        Select if several attempts can be made.
+      </span>
+    </span>
+    </label>
+    <input type="checkbox" name="retry" class="form-control">
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label>Check
+      <span class="info">
+      <input type="checkbox" id="vi">
+      <label for="vi"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+      <span class="alert alert-info">
+        Choose whether user can check his solution. This means that the words marked by user are displayed
+        green (correct) or red (wrong). It will not reveal what he should have marked as in "Show Solution".
+      </span>
+    </span>
+    </label>
+    <input type="checkbox" name="check" class="form-control">
+  </div>
+  <br>
+
+  <div class="form-group">
+    <label>Show Solution
+      <span class="info">
+      <input type="checkbox" id="vii">
+      <label for="vii"><span class="glyphicon glyphicon-info-sign" style="color: #428bca"></span></label>
+      <span class="alert alert-info">
+        Choose if the solution can be seen. It will reveal what user should have marked.
+      </span>
+    </span>
+    </label>
+    <input type="checkbox" name="show_solution" class="form-control">
+  </div>
+
+  <input type="hidden" name="data.store" value="['ccm.store',{'name':'marking_words_data'}]">
+
+</div>
+
