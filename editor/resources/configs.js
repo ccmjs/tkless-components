@@ -1,6 +1,7 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
     key: "demo",
+    onchange: function () { console.log( this.getValue() ) },
     settings: {
       modules: {
         syntax: true,    // needed for syntax highlighting

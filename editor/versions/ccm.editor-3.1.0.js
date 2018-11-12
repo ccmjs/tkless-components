@@ -2,10 +2,13 @@
  * @overview ccm component for quill editor
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @version latest (3.0.0)
+ * @version 3.0.0
  * @changes
  * version 3.0.0 (05.09.2018)
  * - uses ccm v18.0.0
+ * version 3.1.0 (05.09.2018)
+ * - supports onchange callback and getValue method
+ * - uses ccm v18.3.0
  *
  *
  * Quill Editor v1.2.4 https://quilljs.com/
@@ -18,15 +21,16 @@
   const component  = {
 
     name: 'editor',
+    version:[ 3,1,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versoins/ccm-18.3.0.js',
 
     config: {
       //data: {
       //  store: [ "ccm.store", { "name": "editor_data" } ],
       //  key: "demo"
       //},
-      onchange: function () { console.log( this.getValue() ) },
+      //onchange: function () { console.log( this.getValue() ) },
       editor: [ 'ccm.load',
         [
           [
@@ -85,8 +89,8 @@
         }
 
         if ( self.data ){
-         const data= await $.dataset( self.data );
-         editor.root.innerHTML =  data.value;
+          const data= await $.dataset( self.data );
+          editor.root.innerHTML =  data.value;
         }
 
         if ( self.onchange )
