@@ -119,8 +119,8 @@
         }
 
       },
-      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
-      "pdfJS_workerSrc": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js" ],
+      "pdfJS": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.js" ],
+      "pdfJS_workerSrc": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
