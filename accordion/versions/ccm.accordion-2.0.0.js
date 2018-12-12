@@ -24,7 +24,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.6.5.js',
 
     /**
      * default instance configuration
@@ -193,7 +193,7 @@
              */
             acc.querySelectorAll( 'title' ).forEach( title => {
               // insert icon span-tag before title
-              title.classList.add( 'btn', 'btn-'+my.size, 'btn-' + my.color );
+              title.classList.add( 'btn', 'btn-'+my.size, 'btn-'+my.color );
               title.prepend( span_tag.cloneNode( true ) );
               title.outerHTML = title.outerHTML.replace( 'title', 'button' );
             });

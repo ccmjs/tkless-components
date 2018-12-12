@@ -3,7 +3,6 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * TODO close open contents
  */
 
 ( function () {
@@ -27,38 +26,16 @@
      * @type {object}
      */
     config: {
-      color: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
-      size: 'xs', //lg, md, sm, xs
-      entries: [
-        {
-          "title": "Learning Goals",
-          "content": "..."
-        },
-        {
-          "title": "Lecture",
-          "content": "<source src=\"../table/versions/ccm.table-2.0.0.js\"> <p>Hier steht <i>ccm</i>-Komponente</p> <ccm-table-2-0-0 key='[\"ccm.get\",\"../table/resources/configs.js\",\"demo\"]'></ccm-table-2-0-0>"
-        },
-        {
-          "title": "Additional Materials",
-          "content": ""
-        },
-        {
-          "title": "Exercises",
-          "content": "<textarea placeholder='text'></textarea>"
-        },
-        {
-          "title": "Bibliography",
-          "content": "..."
-        }
-      ],
-      //  onclick: function ( target ){ console.log( target ); },
-      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.0.js" ],
+      //color: 'success', //basic, default, primary, info, success,  warning, danger, link  (see https://www.w3schools.com/bootstrap/bootstrap_buttons.asp)
+      //size: 'xs', //lg, md, sm, xs
+      //entries: [],
+      //onclick: function ( target ){ console.log( target ); },
+      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.1.js" ],
       css: [ "ccm.load",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         '../accordion/resources/default.css'
       ]
-
     },
 
     Instance: function () {
