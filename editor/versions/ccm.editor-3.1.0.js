@@ -23,7 +23,7 @@
     name: 'editor',
     version:[ 3,1,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versoins/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
 
     config: {
       //data: {
