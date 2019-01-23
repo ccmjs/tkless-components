@@ -59,16 +59,19 @@
           "type": "button"
         },
       },
-      modal_title: "My Modal",
+      modal_title: "", //"My Modal",
       modal_content: [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-3.0.1.js",
         [ "ccm.get","https://ccmjs.github.io/akless-components/quiz/resources/configs.js","demo" ] ],
       footer: [
-        { "caption": "Save", "style": "success", "onclick": () => { console.log( 'Save' ); } },
+        { "caption": "Save", "style": "success", "onclick": function ( event ){ console.log( 'Save', event, this ); } },
         { "caption": "Close", "style": "danger", "onclick": () => { console.log( 'Close' ); } }
       ],
-      libs: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
-        "modal/resources/default.css"
-      ]
+      libs: [ "ccm.load",
+        "../libs/elementQueries/ElementQueries.js", "../libs/elementQueries/ResizeSensor.js",
+        "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
+        "../modal/resources/default.css"
+      ],
+      elQueries: [ "ccm.load", "../libs/elementQueries/ElementQueries.js", "../libs/elementQueries/ResizeSensor.js" ]
     },
 
     Instance: function () {
@@ -106,7 +109,7 @@
       this.start = async () => {
 
         const main = $.html( my.html.main, {
-          modal_title: my.modal_title,
+          modal_title: $.html( my.modal_title ),
           modal_close: () => {
             $.removeElement( self.root );
           }
@@ -116,7 +119,7 @@
           renderFooter();
         }
         
-        if( self.modal_content ){
+        if( self.modal_content || my.modal_content ){
           await renderContent();
         }
 
@@ -134,7 +137,7 @@
         function renderFooter() {
           for ( let i = 0; i < my.footer.length; i++ ){
             let button = my.html.button;
-            for( let prop in my.footer[i] ){
+            for( let prop in my.footer[ i ] ){
               switch ( prop ) {
                 case 'caption':
                   button.inner = my.footer[ i ][ prop ];
@@ -143,8 +146,11 @@
                   button.class = "btn btn-"+ my.footer[ i ][ prop ];
                   break;
                 case 'onclick':
-                  button.onclick = my.footer[ i ][ prop ];
+                  button.onclick = event => my.footer[ i ].onclick.call( self, event );
                   break;
+                default:
+                    button[ prop ] = my.footer[ i ][ prop ];
+                    break;
               }
             }
             main.querySelector( "footer" ).appendChild( $.html( button ) );
@@ -156,7 +162,11 @@
       this.open = () => {
         self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 1rem; left: 0;" );
         self.element.querySelector( "#modal" ).classList.add( "active" );
-      }
+      };
+
+      this.close = () => {
+        $.removeElement( self.root );
+      };
     }
   };
 
