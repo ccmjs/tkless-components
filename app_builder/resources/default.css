@@ -1,0 +1,98 @@
+/**
+ * @overview default layout of ccm component for creating apps
+ * @author Tea Kless <andre.kless@web.de> 2018
+ * @license The MIT License (MIT)
+ */
+
+#wrapper {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  height: 100%;
+}
+
+#section-preview {
+  position: relative;
+}
+
+#preview {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 100%;
+  margin-right: -300px;
+  transition-duration: 0.3s;
+  background-color: rgba(133, 163, 102, 0.06);
+  border-left: solid 1px #85a366;
+  padding: 0.5rem;
+}
+
+#preview.active {
+  margin-right: 0;
+  transition-duration: 0.3s;
+}
+
+#section-builder {
+  width: 100%;overflow: scroll;
+}
+
+#button {
+  position: absolute;
+  left: -47px;
+  top: 47px;
+  z-index: 999;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  cursor: pointer;
+}
+
+.button > p {
+  margin: 0 0 2em 0;
+}
+
+#previewCollapse {
+  display: block;
+  background: #85a360;
+  width: 85px;
+  text-align: center;
+  padding: 0px 0px;
+  color: #fdc600;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 6px 6px 0 0;
+}
+
+#buttons {
+  width: 100%;
+  position: sticky;
+  border-top: 1px solid #eee;
+  bottom: 0;
+  padding: 1em 0;
+  z-index: 1000;
+  background-color: snow;
+  color: grey;
+  display:flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.footer-icon {
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 0.5em;
+}
+
+#buttons > button {
+  background-color: snow;
+}
+
+#buttons > button:not([disabled]):hover {
+  transform: scale(1.7);
+  color: #5c5c5c;
+}
+
+#buttons > button[disabled] {
+  color: rgba(92, 92, 92, 0.61);
+}
