@@ -35,8 +35,6 @@
 #section-builder {
   width: 100%;
   overflow: scroll;
-  height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
