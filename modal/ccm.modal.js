@@ -66,10 +66,8 @@
         { "caption": "Save", "style": "success", "onclick": function ( event ){ console.log( 'Save', event, this ); } },
         { "caption": "Close", "style": "danger", "onclick": () => { console.log( 'Close' ); } }
       ],
-      libs: [ "ccm.load",
-        "../libs/elementQueries/ElementQueries.js", "../libs/elementQueries/ResizeSensor.js",
-        "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
-        "../modal/resources/default.css"
+      libs: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
+        "https://ccmjs.github.io/tkless-components/modal/resources/default.css"
       ]
     },
 
