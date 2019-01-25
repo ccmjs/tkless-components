@@ -26,7 +26,7 @@ ccm.files[ "configs.js" ] = {
       {
         "title": "Lecture",
         "content": "<source src=\"https://ccmjs.github.io/tkless-components/table/versions/ccm.table-2.0.0.js\"> <p>Hier steht <i>ccm</i>-Komponente</p>" +
-        "<ccm-table key='[\"ccm.get\",\"https://ccmjs.github.io/tkless-components/table/resources/configs.js\",\"demo\"]'></ccm-table>"
+        "<ccm-table-2-0-0 key='[\"ccm.get\",\"https://ccmjs.github.io/tkless-components/table/resources/configs.js\",\"demo\"]'></ccm-table-2-0-0>"
       },
       {
         "title": "Exercises",
