@@ -33,7 +33,13 @@
 }
 
 #section-builder {
-  width: 100%;overflow: scroll;
+  width: 100%;
+  overflow: scroll;
+  height: 100%;
+}
+
+#builder {
+  height: 100%;
 }
 
 #button {

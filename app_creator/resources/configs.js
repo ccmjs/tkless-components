@@ -8,11 +8,6 @@ ccm.files[ 'configs.js' ] = {
 
   "local": {
     "key": "local",
-    "css": [ "ccm.load",
-      "../libs/bootstrap/css/bootstrap.css",
-      { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-      "../app_builder/resources/default.css"
-    ],
     "data": {
       "store": [ "ccm.store", "https://ccmjs.github.io/akless-components/content/resources/configs.js" ],
       "key": "demo"
@@ -27,16 +22,11 @@ ccm.files[ 'configs.js' ] = {
 
   "localhost": {
     "key": "localhost",
-    "css": [ "ccm.load",
-      "../libs/bootstrap/css/bootstrap.css",
-      { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-      "../app_builder/resources/default.css"
-    ],
-    "builder": [ "ccm.component", "../json_builder/ccm.json_builder.js", {
+    "builder": [ "ccm.component", "https://ccmjs.github.io/akless-components/json_builder/ccm.json_builder.js", {
       "html.inner.1": "",
       "directly": true
     } ],
-    "app": [ "ccm.component", "../content/ccm.content.js" ]
+    "app": [ "ccm.component", "https://ccmjs.github.io/akless-components/content/ccm.content.js" ]
   },
 
   "demo": {
