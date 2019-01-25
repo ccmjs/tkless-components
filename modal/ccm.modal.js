@@ -70,8 +70,7 @@
         "../libs/elementQueries/ElementQueries.js", "../libs/elementQueries/ResizeSensor.js",
         "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
         "../modal/resources/default.css"
-      ],
-      elQueries: [ "ccm.load", "../libs/elementQueries/ElementQueries.js", "../libs/elementQueries/ResizeSensor.js" ]
+      ]
     },
 
     Instance: function () {
