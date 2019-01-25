@@ -35,7 +35,7 @@
       //size: 'xs', //lg, md, sm, xs
       //entries: [],
       //  onclick: function ( target ){ console.log( target ); },
-      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.0.js" ],
+      content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.2.0.js" ],
       css: [ "ccm.load",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
