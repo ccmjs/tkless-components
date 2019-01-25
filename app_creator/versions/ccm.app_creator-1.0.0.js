@@ -254,10 +254,11 @@
       "data": { "store": [ "ccm.store" ] },
       "warning": "Are you sure you want to delete this App?",
       "modal": [ "ccm.component",  "https://ccmjs.github.io/tkless-components/modal/ccm.modal.js" ],
-      "css": [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css", "resources/default.css",
+      "css": [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
         "https://use.fontawesome.com/releases/v5.6.3/css/all.css",
         { "context": "head", "url": "https://use.fontawesome.com/releases/v5.6.3/css/all.css" },
-        { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" }
+        { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" },
+        "resources/default.css"
       ]
 
   //  "convert": { "app_to_builder": json => json, "builder_to_app": json => json },
@@ -352,7 +353,6 @@
         const preview_elem = this.element.querySelector( '#preview' );
 
         this.element.querySelector( '#button' ).addEventListener( 'click', () => {
-          console.log('jee');
           preview_elem.classList.toggle( 'active' );
         } );
 
