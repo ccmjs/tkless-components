@@ -242,6 +242,16 @@
               ]
             }
           ]
+        },
+
+        "deleted": {
+          "id": "deleted",
+          "inner": {
+            "tag": "p",
+            "id": "success",
+            "class": "lead text-danger",
+            "inner": "App was deleted successfully."
+          }
         }
 
       },
