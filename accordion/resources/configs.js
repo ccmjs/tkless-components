@@ -93,6 +93,7 @@ ccm.files[ "configs.js" ] = {
           }
         ]
       },
+      "<br>",
       {
         "label": "Size",
         "name": "size",
@@ -158,7 +159,7 @@ ccm.files[ "configs.js" ] = {
       "defaults": {
         "entries": [
           {
-            "title": "Firs Section Title",
+            "title": "First Section Title",
             "content": "First Section Content"
           }
         ],
