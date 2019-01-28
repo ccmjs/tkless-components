@@ -93,9 +93,8 @@ ccm.files[ "configs.js" ] = {
           }
         ]
       },
-      "<legend class=\"text-primary\">Size</legend>",
       {
-        "label": "select",
+        "label": "Size",
         "name": "size",
         "type": "select",
         "info": "Sets Size of Accordion Sections",
@@ -118,9 +117,8 @@ ccm.files[ "configs.js" ] = {
           }
         ]
       },
-      "<legend class=\"text-primary\">Style</legend>",
       {
-        "label": "select",
+        "label": "Style",
         "name": "color",
         "type": "select",
         "info": "Sets color of Accordion.",
@@ -164,7 +162,7 @@ ccm.files[ "configs.js" ] = {
         }
       ],
       "size": "lg",
-      "color": "success"
+      "color": "info"
     }
   }
 
