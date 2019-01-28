@@ -8,10 +8,6 @@ ccm.files[ 'configs.js' ] = {
 
   "local": {
     "key": "local",
-    "data": {
-      "store": [ "ccm.store", "https://ccmjs.github.io/tkless-components/accordion/resources/configs.js" ],
-      "key": "demo"
-    },
     "builder": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-6.7.2.js", [ "ccm.get", "https://ccmjs.github.io/tkless-components/accordion/resources/configs.js", "accordion_builder" ] ],
     "app": [ "ccm.component", "https://ccmjs.github.io/tkless-components/accordion/versions/ccm.accordion-2.0.0.js" ]},
 
