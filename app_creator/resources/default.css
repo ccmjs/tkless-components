@@ -51,7 +51,6 @@
   position: absolute;
   left: -47px;
   top: 47px;
-  z-index: 999;
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   cursor: pointer;
