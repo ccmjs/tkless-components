@@ -159,7 +159,7 @@ ccm.files[ "configs.js" ] = {
     "defaults": {
       "entries": [
         {
-          "Title": "Firs Section Title",
+          "title": "Firs Section Title",
           "content": "First Section Content"
         }
       ],
