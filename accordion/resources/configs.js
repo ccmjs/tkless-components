@@ -154,15 +154,17 @@ ccm.files[ "configs.js" ] = {
         ]
       }
     ],
-    "defaults": {
-      "entries": [
-        {
-          "title": "Firs Section Title",
-          "content": "First Section Content"
-        }
-      ],
-      "size": "lg",
-      "color": "info"
+    "ignore": {
+      "defaults": {
+        "entries": [
+          {
+            "title": "Firs Section Title",
+            "content": "First Section Content"
+          }
+        ],
+        "size": "lg",
+        "color": "info"
+      }
     }
   }
 
