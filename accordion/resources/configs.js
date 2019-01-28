@@ -81,7 +81,7 @@ ccm.files[ "configs.js" ] = {
         "items": [
           {
             "label": "Title",
-            "name": "text",
+            "name": "title",
             "type": "text",
             "info": "Title of Accordion Section."
           },
