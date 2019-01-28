@@ -69,5 +69,94 @@ ccm.files[ "configs.js" ] = {
   },
     "updated_at": "2018-10-12T11:38:29+02:00",
     "created_at": "2018-10-12T11:38:29+02:00"
+  },
+
+  "accordion_builder": {
+    "entries": [
+      "<div class=\"page-header\"><h2>Settings <small class=\"text-primary\">Accordion</small></h2></div>",
+      "<legend class=\"text-primary\">Sections</legend>",
+      {
+        "name": "entries",
+        "type": "several",
+        "items": [
+          {
+            "label": "Title",
+            "name": "text",
+            "type": "text",
+            "info": "Title of Accordion Section."
+          },
+          {
+            "label": "Content",
+            "name": "content",
+            "type": "text",
+            "info": "Content of Accordion Section, which displayed by open or close of section."
+          }
+        ]
+      },
+      "<legend class=\"text-primary\">Size</legend>",
+      {
+        "label": "select",
+        "name": "size",
+        "type": "select",
+        "info": "Sets Size of Accordion Sections",
+        "items": [
+          {
+            "inner": "Large",
+            "value": "lg"
+          },
+          {
+            "inner": "Medium",
+            "value": "md"
+          },
+          {
+            "inner": "Small",
+            "value": "sm"
+          },
+          {
+            "inner": "Smaller",
+            "value": "xs"
+          }
+        ]
+      },
+      "<legend class=\"text-primary\">Style</legend>",
+      {
+        "label": "select",
+        "name": "color",
+        "type": "select",
+        "info": "Sets color of Accordion.",
+        "items": [
+          {
+            "inner": "Basic",
+            "value": ""
+          },
+          {
+            "inner": "Default",
+            "value": "default"
+          },
+          {
+            "inner": "Primary",
+            "value": "primary"
+          },
+          {
+            "inner": "Success",
+            "value": "success"
+          },
+          {
+            "inner": "Info",
+            "value": "info"
+          },
+          {
+            "inner": "Warning",
+            "value": "warning"
+          },
+          {
+            "inner": "Danger",
+            "value": "danger"
+          }
+        ]
+      }
+    ]
   }
+
+
 };
