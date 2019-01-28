@@ -65,9 +65,9 @@
 #previewCollapse {
   display: block;
   background: #85a360;
-  width: 85px;
+  width: 90px;
   text-align: center;
-  padding: 0px 0px;
+  padding: 0 0;
   color: #fdc600;
   font-family: Arial, sans-serif;
   font-size: 17px;
