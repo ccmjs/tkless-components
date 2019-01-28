@@ -18,113 +18,108 @@
 
       "html": {
         "main": {
+          "id": "wrapper",
           "inner": [
             {
-              "id": "wrapper",
-              "inner": [
+              "id": "section-builder",
+              "inner":[
                 {
-                  "id": "section-builder",
-                  "inner":[
-                    {
-                      "id": "builder"
-                    },
-                    {
-                      "id": "buttons",
-                      "class": "text-center",
-                      "inner": [
-                        {
-                          "tag": "button",
-                          "id": "button-load",
-                          "class": "btn",
-                          "onclick": "%open_modal%",
-                          "inner": [
-                            {
-                              "tag": "span",
-                              "class": "fas fa-wrench"
-                            },
-                            {
-                              "class": "footer-icon",
-                              "inner": "LOAD APP"
-                            }
-                          ]
-                        },
-                        {
-                          "tag": "button",
-                          "id": "button-update",
-                          "class": "btn",
-                          "disabled": true,
-                          "onclick": "%onUpdate%",
-                          "inner":[
-                            {
-                              "tag": "span",
-                              "class": "fas fa-cloud-upload-alt"
-                            },
-                            {
-                              "class": "footer-icon",
-                              "inner": "UPDATE APP"
-                            }
-                          ]
-                        },
-                        {
-                          "tag": "button",
-                          "id": "button-create",
-                          "class": "btn",
-                          "onclick": "%onCreate%",
-                          "inner": [
-                            {
-                              "tag": "span",
-                              "class": "far fa-plus-square"
-                            },
-                            {
-                              "class": "footer-icon",
-                              "inner": "NEW APP"
-                            }
-                          ]
-                        },
-                        {
-                          "tag": "button",
-                          "id": "button-delete",
-                          "disabled": true,
-                          "class": "btn",
-                          "onclick": "%onDelete%",
-                          "inner": [
-                            {
-                              "tag": "span",
-                              "class": "far fa-trash-alt"
-                            },
-                            {
-                              "class": "footer-icon",
-                              "inner": "DELETE APP"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
+                  "id": "builder"
                 },
                 {
-                  "id": "section-preview",
+                  "id": "buttons",
+                  "class": "text-center",
                   "inner": [
                     {
-                      "id": "button",
-                      "inner": {
-                        "tag": "p",
-                        "id": "previewCollapse",
-                        "inner": {
-                          "tag": "a",
-                          "inner": "preview",
-                          "style": "color: #fff;"
+                      "tag": "button",
+                      "id": "button-load",
+                      "class": "btn",
+                      "onclick": "%open_modal%",
+                      "inner": [
+                        {
+                          "tag": "span",
+                          "class": "fas fa-wrench"
+                        },
+                        {
+                          "class": "footer-icon",
+                          "inner": "LOAD APP"
                         }
-                      }
+                      ]
                     },
                     {
-                      "id": "preview"
+                      "tag": "button",
+                      "id": "button-update",
+                      "class": "btn",
+                      "disabled": true,
+                      "onclick": "%onUpdate%",
+                      "inner":[
+                        {
+                          "tag": "span",
+                          "class": "fas fa-cloud-upload-alt"
+                        },
+                        {
+                          "class": "footer-icon",
+                          "inner": "UPDATE APP"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "id": "button-create",
+                      "class": "btn",
+                      "onclick": "%onCreate%",
+                      "inner": [
+                        {
+                          "tag": "span",
+                          "class": "far fa-plus-square"
+                        },
+                        {
+                          "class": "footer-icon",
+                          "inner": "NEW APP"
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "id": "button-delete",
+                      "disabled": true,
+                      "class": "btn",
+                      "onclick": "%onDelete%",
+                      "inner": [
+                        {
+                          "tag": "span",
+                          "class": "far fa-trash-alt"
+                        },
+                        {
+                          "class": "footer-icon",
+                          "inner": "DELETE APP"
+                        }
+                      ]
                     }
                   ]
                 }
               ]
             },
-
+            {
+              "id": "section-preview",
+              "inner": [
+                {
+                  "id": "button",
+                  "inner": {
+                    "tag": "p",
+                    "id": "previewCollapse",
+                    "inner": {
+                      "tag": "a",
+                      "inner": "preview",
+                      "style": "color: #fff;"
+                    }
+                  }
+                },
+                {
+                  "id": "preview"
+                }
+              ]
+            }
           ]
         },
 
