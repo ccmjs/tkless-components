@@ -22,7 +22,7 @@
   height: 100%;
   background-color: #000;
   opacity: 0.5;
-  z-index: 101;
+  z-index: 997;
 }
 
 #modal-body {
@@ -45,7 +45,7 @@
   background-clip: padding-box;
   border: 1px solid rgba(0,0,0,.2);
   border-radius: .3rem;
-  z-index: 102;
+  z-index: 999;
 }
 
 label {
