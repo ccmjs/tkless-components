@@ -248,7 +248,7 @@
       },
       "data": { "store": [ "ccm.store" ] },
       "warning": "Are you sure you want to delete this App?",
-      "modal": [ "ccm.component",  "https://ccmjs.github.io/tkless-components/modal/ccm.modal.js" ],
+      "modal": [ "ccm.component",  "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-1.0.0.js" ],
       "css": [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
         "https://use.fontawesome.com/releases/v5.6.3/css/all.css",
         { "context": "head", "url": "https://use.fontawesome.com/releases/v5.6.3/css/all.css" },
