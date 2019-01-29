@@ -16,13 +16,13 @@
 #wrapper:not(.active) {
   transition-duration: 0.3s;
   transition-property: grid-template-columns;
-  grid-template-columns: 1fr 0;
+  grid-template-columns: auto 0;
 }
 
 #wrapper.active {
   transition-duration: 0.3s;
   transition-property: grid-template-columns;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr auto;
 }
 
 #section-builder {
@@ -81,7 +81,7 @@
 
 #wrapper-button {
   position: absolute;
-  right: -30px;
+  right: -32px;
   top: 100px;
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
