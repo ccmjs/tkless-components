@@ -2,6 +2,7 @@
  * @overview ccm component for marking thew words in Text
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
+ * @version 3.1.0
  * @changes
  *  version 3.1.0 (30.01.2018)
  * - uses ccm v20.0.0
@@ -15,6 +16,7 @@
  *
  *  version 2.0.0 (12.09.2018)
  * - uses ccm v18.0.0
+ *
  */
 
 ( function () {
@@ -26,12 +28,13 @@
      * @type {string}
      */
     name: 'mark_words',
+    version: [ 3,2,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration
@@ -80,22 +83,19 @@
           ]
         }
       },
-      // text: "some html text for marking",
-      // submit: true,
+      //submit: true,
       // submit_button_label: "Save",
       // retry: true,
       // show_solution: true,
       // check: true,
       // keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
-      // onfinish: {
-      //   log: true
-      // },
+      // data: { solutions: [], marked [] },
+      // onfinish: { log: true },
       // "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       // onchange,
-      // marked: [],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        '../mark_words/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/mark_words/resources/default.css'
       ]
     },
 
@@ -313,7 +313,7 @@
         function renderProgressBar( correct ) {
           const goal = correct * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
           let width = 1;
-          let id = setInterval(frame, 8);
+          let id = setInterval(frame, 10);
 
           function frame() {
             if ( width >= goal ) {
