@@ -31,9 +31,18 @@
         "class": "container-fluid",
         "inner": [
           {
-            "tag": "legend",
-            "class": "text-primary",
-            "inner": "Build your Comment Component"
+            "class": "page-header",
+            "inner": {
+              "tag": "h2",
+              "inner": [
+                "Settings ",
+                {
+                  "tag": "small",
+                  "class": "text-primary",
+                  "inner": "Comment"
+                }
+              ]
+            }
           },
           {
             "tag": "form",
