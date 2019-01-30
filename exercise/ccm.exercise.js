@@ -37,7 +37,7 @@
       },
 
       //task: "<h1>Einleitung</h1>",
-      //submit_button: true,
+      submit_button: true,
       //onfinish
       //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
       //  [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
