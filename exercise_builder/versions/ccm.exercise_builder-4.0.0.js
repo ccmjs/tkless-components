@@ -400,7 +400,7 @@
           $.encodeDependencies( dataset );
 
           // convert initial values to dot notation
-          dataset = $.toDotNotation( dataset );
+          dataset = $.toDotNotation( dataset, true );
 
         }
 
