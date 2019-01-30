@@ -21,7 +21,7 @@ ccm.files[ "configs.js" ] = {
     "submit_button": "Submit",
     "preview": true,
     "defaults": {
-      "data.store": "[ 'ccm.store',{ 'name':'voting_data', 'url': 'https://ccm2.inf.h-brs.de' } ]",
+      "data.store": "[ 'ccm.store',{ 'name':'comment_data', 'url': 'https://ccm2.inf.h-brs.de' } ]",
       "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js'," +
       "['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','compact']]"
     }
