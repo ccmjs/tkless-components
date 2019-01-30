@@ -344,9 +344,8 @@
 
         // get initial form values
         let dataset = await $.dataset( my.data );
-
-        // given default values? => integrate them as defaults into initial values
-        dataset = $.integrate( my.defaults, dataset, true );
+        // prepare initial form values
+        prepareValues();
 
         // render main HTML structure
         $.setContent( self.element, $.html( my.html, {
@@ -375,13 +374,30 @@
         if ( my.preview ) updatePreview();
 
         // no preview desired? => remove preview section
-        else $.removeElement( self.element.querySelector( '#section-preview' ) );
+        else self.element.querySelector( '#section-preview' ).remove();
 
         // no submit button wanted? => remove submit button
         !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
 
         // individual caption for submit button? => set caption of submit button
         if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
+
+        /** prepares initial form values */
+        function prepareValues() {
+
+          // set default value for dataset key of app-specific data
+          if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
+
+          // given default values? => integrate them as defaults into initial values
+          dataset = $.integrate( my.defaults, dataset, true );
+
+          // encode dependencies
+          $.encodeDependencies( dataset );
+
+          // convert initial values to dot notation
+          dataset = $.toDotNotation( dataset );
+
+        }
 
         /**
          * switches to basic or advanced section
@@ -437,7 +453,7 @@
           await updatePreview();
 
           // perform change actions
-          self.onchange && self.onchange.call( self );
+          self.onchange && self.onchange( self );
 
           // log 'change' event
           self.logger && self.logger.log( 'change', { name: this.name || 'text', value: this.name ? ( this.type === 'checkbox' ? this.checked : this.value ) : editor.get().root.innerHTML } );

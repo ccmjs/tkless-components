@@ -50,6 +50,16 @@
             "onsubmit": "%submit%",
             "inner": [
               {
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.store"
+              },
+              {
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.key"
+              },
+              {
                 "class": "navigation text-center",
                 "inner": [
                   {
@@ -376,6 +386,9 @@
         /** prepares initial form values */
         function prepareValues() {
 
+          // set default value for dataset key of app-specific data
+          if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
+
           // given default values? => integrate them as defaults into initial values
           dataset = $.integrate( my.defaults, dataset, true );
 
@@ -384,6 +397,7 @@
 
           // convert initial values to dot notation
           dataset = $.toDotNotation( dataset );
+
         }
 
         /**
