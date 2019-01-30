@@ -80,7 +80,6 @@
 
         // privatize all possible instance members
         my = $.privatize( self );
-        self.onfinish = my.onfinish;
 
         if ( self.logger ) self.logger.log( 'ready', $.clone(my) );
 
