@@ -263,7 +263,7 @@
         "https://use.fontawesome.com/releases/v5.6.3/css/all.css",
         { "context": "head", "url": "https://use.fontawesome.com/releases/v5.6.3/css/all.css" },
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" },
-        "https://ccmjs.github.io/tkless-components/app_creator/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/app_creator/resources/v1/default.css"
       ]
 
   //  "convert": { "app_to_builder": json => json, "builder_to_app": json => json },
