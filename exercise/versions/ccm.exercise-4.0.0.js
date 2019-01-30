@@ -33,12 +33,13 @@
           "id": "button-submit",
           "class": "btn btn-default pull-right",
           "style": "margin-top: 1.0rem;",
-          "onclick": "%submit%"
+          "onclick": "%submit%",
+          "inner": "%btn_label%"
         }
       },
 
       //task: "<h1>Einleitung</h1>",
-      submit_button: "Save",
+      //submit_button_label: "Save",
       //onfinish
       //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
       //  [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
@@ -105,13 +106,10 @@
                 await self.user.login();
                 $.onFinish( self );
               }
-            }
+            },
+            btn_label: my.submit_button_label ? my.submit_button_label: "Save"
           } );
           main_elem.appendChild( submit_button );
-
-          // individual caption for submit button? => set caption of submit button
-          if ( typeof my.submit_button === 'string' ) main_elem.querySelector( '#button-submit' ).value = my.submit_button;
-
         }
 
         $.setContent( self.element, main_elem );
