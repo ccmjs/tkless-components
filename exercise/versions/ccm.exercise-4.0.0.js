@@ -28,7 +28,7 @@
           ]
         },
         "submit": {
-          "tag": "input",
+          "tag": "button",
           "type": "button",
           "id": "button-submit",
           "class": "btn btn-default pull-right",
