@@ -2,6 +2,14 @@
  * @overview ccm component for building a exercise component
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (26.09.2018)
+ * - uses ccm v18.0.0
+ * version 3.0.0 (30.01.2018)
+ * - uses ccm v20.0.0
+ * - saves solutions data user specific
+ * - uses exercise v4
  */
 
 ( function () {
@@ -13,12 +21,13 @@
      * @type {string}
      */
     name: 'exercise_builder',
+    version: [ 4,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration
@@ -265,7 +274,7 @@
       //data: { "store": [ "ccm.store", { "test": { ... } } ], "key": "test" },
       //onfinish
       //onchange
-      target: [ "ccm.component", "../exercise/ccm.exercise.js", { "submit_button": "Save" } ],
+      target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-4.0.0.js", { "submit_button": "Save" } ],
       //submit_button: "Submit",
       //preview: true,
       editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
@@ -280,7 +289,7 @@
       } ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../exercise_builder/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/exercise_builder/resources/default.css"
       ]
     },
 
@@ -335,8 +344,9 @@
 
         // get initial form values
         let dataset = await $.dataset( my.data );
-        // prepare initial form values
-        prepareValues();
+
+        // given default values? => integrate them as defaults into initial values
+        dataset = $.integrate( my.defaults, dataset, true );
 
         // render main HTML structure
         $.setContent( self.element, $.html( my.html, {
@@ -365,26 +375,13 @@
         if ( my.preview ) updatePreview();
 
         // no preview desired? => remove preview section
-        else self.element.querySelector( '#section-preview' ).remove();
+        else $.removeElement( self.element.querySelector( '#section-preview' ) );
 
         // no submit button wanted? => remove submit button
         !my.submit_button && $.removeElement( self.element.querySelector( '#btn-submit' ) );
 
         // individual caption for submit button? => set caption of submit button
         if ( typeof my.submit_button === 'string' ) self.element.querySelector( '#btn-submit' ).value = my.submit_button;
-
-        /** prepares initial form values */
-        function prepareValues() {
-
-          // given default values? => integrate them as defaults into initial values
-          dataset = $.integrate( my.defaults, dataset, true );
-
-          // encode dependencies
-          $.encodeDependencies( dataset );
-
-          // convert initial values to dot notation
-          dataset = $.toDotNotation( dataset );
-        }
 
         /**
          * switches to basic or advanced section
@@ -440,7 +437,7 @@
           await updatePreview();
 
           // perform change actions
-          self.onchange && self.onchange( self );
+          self.onchange && self.onchange.call( self );
 
           // log 'change' event
           self.logger && self.logger.log( 'change', { name: this.name || 'text', value: this.name ? ( this.type === 'checkbox' ? this.checked : this.value ) : editor.get().root.innerHTML } );
