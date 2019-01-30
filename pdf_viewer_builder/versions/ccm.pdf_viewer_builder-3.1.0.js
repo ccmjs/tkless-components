@@ -34,7 +34,7 @@
      */
     config: {
 
-      html: {
+      "html": {
         "id": "main",
         "class": "container-fluid",
         "inner": [
@@ -95,7 +95,7 @@
                         "for": "drop",
                         "class": "control-label",
                         "inner": [
-                          "Upload slides ",
+                          "Upload File ",
                           {
                             "tag": "a",
                             "onclick": "%help%",
@@ -108,7 +108,7 @@
                             "inner":
                               {
                                 "tag": "p",
-                                "inner": "Drop or choose files to upload. <code>10 MB is Maximum file size you can upload.</code>"
+                                "inner": "Drop or choose File to upload."
                               }
                           }
                         ]

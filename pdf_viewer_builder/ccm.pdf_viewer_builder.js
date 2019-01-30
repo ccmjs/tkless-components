@@ -88,7 +88,7 @@
                         "for": "drop",
                         "class": "control-label",
                         "inner": [
-                          "Upload slides ",
+                          "Upload File ",
                           {
                             "tag": "a",
                             "onclick": "%help%",
@@ -101,7 +101,7 @@
                             "inner":
                               {
                                 "tag": "p",
-                                "inner": "Drop or choose files to upload."
+                                "inner": "Drop or choose File to upload."
                               }
                           }
                         ]
