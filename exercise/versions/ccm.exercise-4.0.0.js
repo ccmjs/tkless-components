@@ -120,7 +120,7 @@
         }
       };
 
-      this.getValue = () => this.getValue = () => { return { result: editor.get().root.innerHTML } };
+      this.getValue = () => { return { result: editor.get().root.innerHTML } };
     }
   };
 
