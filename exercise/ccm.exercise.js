@@ -40,7 +40,7 @@
       //task: "<h1>Einleitung</h1>",
       //submit_button_label: "Save",
       //onfinish
-      //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
+      //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
       //  [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
       editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
         "settings.modules.toolbar": false
@@ -80,6 +80,7 @@
 
         // privatize all possible instance members
         my = $.privatize( self );
+        self.onfinish = my.onfinish;
 
         if ( self.logger ) self.logger.log( 'ready', $.clone(my) );
 
