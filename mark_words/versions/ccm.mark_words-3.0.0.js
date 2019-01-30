@@ -87,7 +87,7 @@
       // onchange,
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        'https://ccmjs.github.io/tkless-components/marking_words/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/mark_words/resources/default.css'
       ]
     },
 

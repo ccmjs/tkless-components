@@ -85,7 +85,7 @@
       // marked: [],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        '../marking_words/resources/default.css'
+        '../mark_words/resources/default.css'
       ]
     },
 
