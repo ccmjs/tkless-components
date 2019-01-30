@@ -9,8 +9,9 @@
   const component = {
 
     name: 'exercise',
+    version: [ 4, 0, 0],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
       html: {
@@ -46,8 +47,8 @@
       } ],
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.1.js" ],
       libs: [ "ccm.load",
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../libs/bootstrap/css/bootstrap.css"
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
       ]
      },
 
