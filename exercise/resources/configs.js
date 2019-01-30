@@ -8,7 +8,6 @@ ccm.files[ "configs.js" ] = {
     "Idee gehabt, ihn beobachtet und abgewartet, um ihn nun um die Früchte seiner Arbeit zu erleichtern? Oder gehörten " +
     "die Schritte hinter ihm zu einem der unzähligen Gesetzeshüter dieser Stadt, und die stählerne Acht um seine " +
     "Handgelenke würde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon hören.</p>",
-    "submit_button": "Save",
     "onfinish": {
       "log": true,
       "data": {

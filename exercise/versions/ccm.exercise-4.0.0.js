@@ -98,19 +98,17 @@
         $.setContent( main_elem.querySelector( "#task" ), instance.root  );
         await getEditor();
 
-        if ( my.submit_button ) {
-          const submit_button = $.html ( my.html.submit, {
-            submit: async event  => {
-              if ( event ) event.preventDefault();
-              if ( self.user ) {
-                await self.user.login();
-                $.onFinish( self );
-              }
-            },
-            btn_label: my.submit_button_label ? my.submit_button_label: "Save"
-          } );
-          main_elem.appendChild( submit_button );
-        }
+        const submit_button = $.html ( my.html.submit, {
+          submit: async event  => {
+            if ( event ) event.preventDefault();
+            if ( self.user ) {
+              await self.user.login();
+              $.onFinish( self );
+            }
+          },
+          btn_label: my.submit_button_label ? my.submit_button_label: "Save"
+        } );
+        main_elem.appendChild( submit_button );
 
         $.setContent( self.element, main_elem );
 
