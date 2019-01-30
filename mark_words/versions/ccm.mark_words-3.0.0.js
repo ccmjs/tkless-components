@@ -2,13 +2,9 @@
  * @overview ccm component for marking thew words in Text
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @version 3.1.0
+ * @version 3.0.0
  * @changes
- * version 3.1.0 (12.11.2018)
- * - uses $.html before text processing
- * - uses ccm v18.3.0
- *
- * version 3.0.0 (20.09.2018)
+ * * version 3.0.0 (20.09.2018)
  * - initial data for preselect words
  *
  *  version 2.0.0 (12.09.2018)
@@ -23,14 +19,14 @@
      * unique component name
      * @type {string}
      */
-    name: 'marking_words',
-    version: [ 3,1,0 ],
+    name: 'mark_words',
+    version: [ 3,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
 
     /**
      * default instance configuration
@@ -184,7 +180,8 @@
         }
 
         function prepareTextForMarking() {
-          const div = $.html( my.text );
+          const div = document.createElement( 'div' );
+          div.innerHTML = my.text;
 
           const text_nodes = collectTextNodes( div );
 

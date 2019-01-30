@@ -2,9 +2,8 @@
  * @overview ccm component for marking thew words in Text
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
- * @version 2.0.0
  * @changes
- * version 2.0.0 (12.09.2018)
+ * version (12.09.2018)
  * - uses ccm v18.0.0
  */
 
@@ -16,14 +15,13 @@
      * unique component name
      * @type {string}
      */
-    name: 'marking_words',
-    version: [ 2,0,0 ],
+    name: 'mark_words',
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
     /**
      * default instance configuration
@@ -72,6 +70,7 @@
           ]
         }
       },
+      // text: "some html text for marking",
       // submit: true,
       // submit_button_label: "Save",
       // retry: true,
@@ -82,10 +81,11 @@
       //   log: true
       // },
       // "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
-      // onchange
+      // onchange,
+      // marked: [],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        'https://ccmjs.github.io/tkless-components/marking_words/resources/default.css'
+        '../marking_words/resources/default.css'
       ]
     },
 
@@ -108,15 +108,14 @@
        */
       let $;
 
-      let solutions;
+      let dataset;
 
       this.init = async () => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
-
         // text is given as HTML Element Node? => use innerHTML
-        if ( $.isElementNode( self.inner ) ) self.inner = self.inner.innerHTML;
+        if ( $.isElementNode( self.text ) ) self.text = self.inner.innerHTML;
       };
 
       this.ready = async () => {
@@ -124,7 +123,7 @@
         // privatize all possible instance members
         my = $.privatize( self );
 
-        my.solutions = [];
+
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
       };
 
@@ -136,53 +135,72 @@
 
         if ( self.logger ) self.logger.log( 'start' );
 
-        if ( !my.inner ){
+        if ( !my.text ){
           $.setContent( self.element, 'Nothing to display!' );
           return;
         }
 
+        dataset = await $.dataset( my.data );
+
+        if( !dataset.solutions ) dataset.solutions = [];
+        if( !dataset.marked ) dataset.marked = [];
+
         const main_elem = $.html( my.html.text );
+
         prepareTextForMarking();
-
-        if ( my.check ) {
-          main_elem.appendChild( $.html( my.html.button, {
-            class: 'btn btn-success btn-lg check-btn',
-            label: 'Check',
-            click: function ( event ) {
-              event.preventDefault();
-              if ( my.solutions.length === 0 ) return alert( 'No solution to check !!!');
-              verify();
-            }
-          } ) );
-        }
-
-        if ( my.submit ) {
-          main_elem.appendChild( $.html( my.html.button, {
-            class: 'btn btn-info btn-lg save-btn',
-            label: my.submit_button_label,
-            glyphicon: 'glyphicon glyphicon-save',
-            click: function ( event ) {
-              event.preventDefault();
-              $.onFinish( self );
-              if( self.logger ) self.logger.log( 'onfinish', self );
-            }
-          } ) );
-        }
+        renderButtons();
 
         $.setContent( self.element, main_elem );
 
+        function renderButtons() {
+          if ( my.check ) {
+            main_elem.appendChild( $.html( my.html.button, {
+              class: 'btn btn-success btn-lg check-btn',
+              label: 'Check',
+              click: () => {
+                if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
+                verify();
+              }
+            } ) );
+          }
+
+          if ( my.submit ) {
+            main_elem.appendChild( $.html( my.html.button, {
+              class: 'btn btn-info btn-lg save-btn',
+              label: my.submit_button_label,
+              glyphicon: 'glyphicon glyphicon-save',
+              click: () => {
+                $.onFinish( self );
+                if( self.logger ) self.logger.log( 'onfinish', self );
+              }
+            } ) );
+          }
+        }
+
         function prepareTextForMarking() {
-          const div = document.createElement( 'div' );
-          div.innerHTML = my.inner;
+          const div = $.html( my.text );
 
           const text_nodes = collectTextNodes( div );
 
           text_nodes.map( ( node )  => {
-            const value = node.textContent.replace( /\S+(?<![,\.:])/g, '<span marked>$&</span>' );
+            const value = node.textContent.replace( /\S+(?<![,\.:])/g, '<span class="marking_words" marked>$&</span>' );
             node.parentNode.replaceChild( $.html( { tag: 'text', inner: value } ), node );
           });
 
           $.setContent( main_elem.querySelector( '#text' ), div );
+
+          main_elem.querySelectorAll( '.marking_words' ).forEach( ( elem, i ) => {
+            elem.id = "marking_words-" + (i+1);
+          } );
+
+          if ( dataset.marked.length > 0 ) {
+            main_elem.querySelectorAll( 'span' ).forEach( span => {
+              if (dataset.marked.includes( span.id ) ) {
+                span.classList.add( 'selected' );
+              }
+            } );
+          }
+
 
           main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
             const span = event.target;
@@ -192,16 +210,23 @@
             span.classList.toggle( 'selected' );
 
             // add or remove selected words from solutions array
-            if( my.solutions.includes( span.innerHTML ) && !span.classList.contains( 'selected' ) )
-              my.solutions.splice( [ my.solutions.indexOf( span.innerHTML ) ], 1 );
-            else
-              my.solutions.push( span.innerHTML );
+            if( !span.classList.contains( 'selected' ) ){
+              dataset.solutions.splice( [ dataset.solutions.indexOf( span.innerHTML ) ], 1 );
+              dataset.marked.splice( [ dataset.marked.indexOf( span.id ) ], 1  );
+            }
+
+            else{
+              dataset.marked.push( span.id );
+              dataset.solutions.push( span.innerHTML );
+            }
+
 
             // set onChange behavior
             self.onchange && self.onchange( span );
 
             if ( self.logger ) self.logger.log( 'change', { word: span.innerHTML, selected: span.classList.contains('selected')} );
           });
+
         }
 
         // pile up all text nodes from given div element
@@ -220,7 +245,7 @@
           const correct = [];
           const incorrect = [];
 
-          my.solutions.map( solution => {
+          dataset.solutions.map( solution => {
             if ( keywords.includes( solution) ) {
               correct.push( solution );
               keywords.splice( [ keywords.indexOf( solution ) ], 1 );
@@ -278,7 +303,7 @@
         function renderProgressBar( correct ) {
           const goal = correct * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
           let width = 1;
-          let id = setInterval(frame, 10);
+          let id = setInterval(frame, 8);
 
           function frame() {
             if ( width >= goal ) {
@@ -296,18 +321,16 @@
               class: 'btn btn-primary btn-lg retry-btn',
               label: 'Retry',
               glyphicon: 'glyphicon glyphicon-repeat',
-              click: function ( event ) {
-                event.preventDefault();
-                my.solutions = [];
-                self.start();
-              }
+              click: self.start
             } ) );
             main_elem.querySelector( 'button' ).parentNode.insertBefore( retry_btn, main_elem.querySelector( '.solution-btn' ) );
           }
         }
       };
 
-      this.getValue = () => my.solutions;
+      this.getValue = () => {
+        return { "solutions": dataset.solutions, "marked": dataset.marked };
+      };
     }
 
   };
