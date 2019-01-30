@@ -32,9 +32,18 @@
         "class": "container-fluid",
         "inner": [
           {
-            "tag": "legend",
-            "class": "text-primary",
-            "inner": "Build your PDF-Viewer"
+            "class": "page-header",
+            "inner": {
+              "tag": "h2",
+              "inner": [
+                "Settings ",
+                {
+                  "tag": "small",
+                  "class": "text-primary",
+                  "inner": "PDF Viewer"
+                }
+              ]
+            }
           },
           {
             "tag": "form",
