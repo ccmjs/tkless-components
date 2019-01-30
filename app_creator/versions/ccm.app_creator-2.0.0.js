@@ -3,7 +3,6 @@
  * @author Tea Kless <tea.kless@web.de> 2018
  * @license The MIT License (MIT)
  * @version latest (2.0.0)
- * @based on ccm.app_builder by Andrè Kless
  */
 
 ( function () {
@@ -11,8 +10,9 @@
   const component = {
 
     name: 'app_creator',
+    version: [ 2, 0, 0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
 
@@ -270,7 +270,7 @@
         "https://use.fontawesome.com/releases/v5.6.3/css/all.css",
         { "context": "head", "url": "https://use.fontawesome.com/releases/v5.6.3/css/all.css" },
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/app_creator/resources/default.css"
       ]
 
       //  "convert": { "app_to_builder": json => json, "builder_to_app": json => json },

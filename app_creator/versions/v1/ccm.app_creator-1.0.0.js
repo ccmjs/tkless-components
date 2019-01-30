@@ -2,7 +2,7 @@
  * @overview ccm component for creating apps
  * @author Tea Kless <tea.kless@web.de> 2018
  * @license The MIT License (MIT)
- * @version latest (1.1.0)
+ * @version latest (1.0.0)
  * @based on ccm.app_builder by Andrè Kless
  */
 
