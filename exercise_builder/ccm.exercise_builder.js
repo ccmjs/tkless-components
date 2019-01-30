@@ -52,12 +52,7 @@
               {
                 "tag": "input",
                 "type": "hidden",
-                "name": "data.store"
-              },
-              {
-                "tag": "input",
-                "type": "hidden",
-                "name": "data.key"
+                "name": "onfinish"
               },
               {
                 "class": "navigation text-center",
@@ -387,7 +382,7 @@
         function prepareValues() {
 
           // set default value for dataset key of app-specific data
-          if ( !my.defaults[ 'data.key' ] ) my.defaults[ 'data.key' ] = $.generateKey();
+          if ( !$.deepValue( my.defaults, 'onfinish.store.key' ) ) $.deepValue( my.defaults, 'onfinish.store.key', $.generateKey() );
 
           // given default values? => integrate them as defaults into initial values
           dataset = $.integrate( my.defaults, dataset, true );
