@@ -59,6 +59,16 @@
             "onsubmit": "%submit%",
             "inner": [
               {
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.store"
+              },
+              {
+                "tag": "input",
+                "type": "hidden",
+                "name": "data.key"
+              },
+              {
                 "class": "navigation text-center",
                 "inner": [
                   {
