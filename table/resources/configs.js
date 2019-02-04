@@ -1,5 +1,6 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
+    key: "demo",
     table_row: 2,
     table_col: 7,
     add_row: true,
