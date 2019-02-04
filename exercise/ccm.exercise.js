@@ -73,6 +73,11 @@
 
       let editor;
 
+      this.init = async () => {
+        if ( !self.task && self.inner )
+          self.task = self.inner;
+      };
+
       this.ready = async () => {
 
         // set shortcut to help functions
