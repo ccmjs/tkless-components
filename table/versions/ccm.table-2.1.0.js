@@ -4,6 +4,9 @@
  * @license The MIT License (MIT)
  * @changes
  * -(12.09.2018) uses ccm v18.0.0
+ * @version 2.1.0
+ * - selectable input field
+ * - uses ccm v20.0.0
  */
 
 ( function () {
@@ -15,12 +18,13 @@
      * @type {string}
      */
     name: 'table',
+    version: [2, 1, 0],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration

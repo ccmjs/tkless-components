@@ -1,11 +1,11 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
-    key: "demo",
-    table_row: 2,
-    table_col: 7,
-    add_row: true,
-    table_head: [ "Checkbox", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
-    col_settings: [
+    "key": "demo",
+    "table_row": 2,
+    "table_col": 7,
+    "add_row": true,
+    "table_head": [ "Checkbox", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
+    "col_settings": [
       { "type": "checkbox" },
       { "type": "select", "options": [ "a", "b", "c" ] },
       { "type": "tel", "placeholder": "Tel: 049...", "required": true },
@@ -17,8 +17,8 @@ ccm.files[ "configs.js" ] = {
         "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. " },
       { "type": "textarea", "disabled": "true", "placeholder": "Hier kannst du nichts schreiben." }
     ],
-    data: {
-      values: [
+    "data": {
+      "values": [
         [ true, "a", "0045/ 12344567", "max.mustermann@mail.com", "2017-01-03",  "", "textarea 2"],
         [ "", "b", "", "", "2017-08-03", "", ""],
         [ false, "c", "", "erika.mustermann@mail.com", "2017-04-03", "", ""],
