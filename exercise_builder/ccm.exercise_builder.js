@@ -177,7 +177,7 @@
                           {
                             "class": "alert alert-info",
                             "inner": [
-                              "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
+                              "If you select a sign-on mode here, authentication will be requested after the completion of the exercise and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
                               {
                                 "tag": "h5",
                                 "inner": "Guest Mode"
