@@ -14,10 +14,23 @@
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'news',
+    version: [ 2,1,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       templates: {
         "main": {
@@ -95,10 +108,10 @@
         }
 
       },
-      //data:  { store: [ 'ccm.store' ], key: '' },
+      //data:  { store: [  ],  key: '' },
       //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
       //  [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
-      css: [ 'ccm.load', '../news/resources/default.css' ],
+      css: [ 'ccm.load', 'https://ccmjs.github.io/tkless-components/news/resources/default.css' ],
       libs: [ 'ccm.load',
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
