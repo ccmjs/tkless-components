@@ -88,8 +88,8 @@ ccm.files[ "configs.js" ] = {
           {
             "label": "Content",
             "name": "content",
-            "type": "text",
-            "info": "Content of Accordion Section, which displayed by open or close of section."
+            "type": "textarea",
+            "info": "Content of the section of the accordion that is displayed when the section is opened or closed. <br>The <code>Embed Code</code> of the already generated APP can be specified as accordion content."
           }
         ]
       },
