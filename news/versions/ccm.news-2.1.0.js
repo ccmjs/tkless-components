@@ -108,6 +108,7 @@
         }
 
       },
+      //editable: true,
       //data:  { store: [  ],  key: '' },
       //user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js",
       //  [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
@@ -160,6 +161,9 @@
         // get dataset for rendering
         dataset = await $.dataset( my.data );
         if ( !dataset.posts ) dataset.posts = [];
+
+        if ( !dataset.posts && !my.editable )
+          return $.setContent( self.element, "No News to display.");
 
         // render main html structure
         $.setContent( self.element, $.html( my.templates.main, {
