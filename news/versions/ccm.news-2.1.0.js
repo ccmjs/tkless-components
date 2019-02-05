@@ -139,7 +139,7 @@
        */
       let $;
 
-      let data;
+      let dataset;
 
       this.ready = async () => {
         // set shortcut to help functions
@@ -158,9 +158,8 @@
         if ( my.editable && !self.user.isLoggedIn() ) await self.user.login();
 
         // get dataset for rendering
-        let dataset = await $.dataset( my.data );
+        dataset = await $.dataset( my.data );
         if ( !dataset.posts ) dataset.posts = [];
-        data = dataset;
 
         // render main html structure
         $.setContent( self.element, $.html( my.templates.main, {
@@ -264,7 +263,7 @@
        * returns current result data
        * @returns {Object} current result data
        */
-      this.getValue = () => data;
+      this.getValue = () => $.clone( dataset );
     }
 
   };
