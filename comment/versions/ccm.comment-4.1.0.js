@@ -1,11 +1,11 @@
 /**
  * @overview ccm component for commenting
- * @author Tea Kless <tea.kless@web.de>, 2017
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 4.1.0
  * @changes
- * version 4.1.0 (31.10.2018)
- * - uses ccm v18.1.0
+ * version 4.1.0 (06.01.2019)
+ * - uses ccm v20.0.0
  * - some improvement in voting
  */
 
@@ -24,7 +24,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.1.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration

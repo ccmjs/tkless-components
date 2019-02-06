@@ -1,17 +1,34 @@
 /**
  * @overview ccm component for commenting
- * @author Tea Kless <tea.kless@web.de>, 2017
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
+ * @latest 4.1.0
+ * @changes
+ * version 4.1.0 (06.01.2019)
+ * - uses ccm v20.0.0
+ * - some improvement in voting
  */
 
 ( function () {
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'comment',
 
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       // "chat": true,
       // "editable": true,
