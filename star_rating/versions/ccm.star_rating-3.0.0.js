@@ -1,11 +1,11 @@
 /**
  * @overview ccm component for voting
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 3.0.0
  * @changes
- * version 3.0.0 (05.06.2018)
- * - uses ccm v18.3.0
+ * version 3.0.0 (06.01.2019)
+ * - uses ccm v20.0.0
  */
 ( function () {
 
@@ -14,7 +14,7 @@
     name: 'star_rating',
     version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
       "html": {
@@ -44,7 +44,7 @@
       //     "key":   "demo"
       // },
       // "onfinish": { "log": true },
-      // "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
+      // "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
       //   [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
       // ],
       "css": [ "ccm.load",

@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for voting
- * @author Tea Kless <tea.kless@web.de>, 2017
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  */
 ( function () {
