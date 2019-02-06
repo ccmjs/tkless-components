@@ -7,7 +7,7 @@
 
 ( function () {
 
-  var component  = {
+  const component = {
 
     name: 'question',
 
@@ -22,29 +22,29 @@
               "id": "answers-view",
               "inner": [
                 {
-                  "class": "question row",
+                  "class": "question row mb-5",
                   "inner": [
                     {
-                      "class": "question-title col-md-12",
+                      "class": "question-title",
                         "inner": {
-                          "tag": "h3",
+                          "tag": "h2",
                           "inner": [
                              "%title% ",
                             {
-                              "tag": "small",
-                              "inner": "%signatur%"
+                              "class": "badge badge-warning",
+                              "inner": "%signature%"
                             }
                           ]
                         }
                     },
                     {
-                      "class": "col-md-12",
+                      "class": "d-flex flex-flow align-items-center",
                       "inner": [
                         {
-                          "class": "voting col-md-1"
+                          "class": "voting mr-2"
                         },
                         {
-                          "class": "question col-md-11",
+                          "class": "question",
                           "inner": {
                             "tag": "blockquote",
                             "inner": {
@@ -60,7 +60,19 @@
                   ]
                 },
                 {
-                  "id": "answers"
+                  "inner": [
+                    {
+                      "id": "section",
+                      "class": "text-success text-monospace",
+                      "inner":"ANSWERS",
+                    },
+                    {
+                      "tag": "hr"
+                    }
+                  ]
+                },
+                {
+                  "id": "answers",
                 },
                 {
                   "id": "new-answer",
@@ -71,54 +83,49 @@
         },
 
         "answer": {
+          "class": "answer d-flex flex-flow align-items-top mb-3",
           "inner": [
             {
-              "class": "answer row",
+              "class": "voting-area mr-4  d-flex flex-column",
               "inner": [
                 {
-                  "class": "voting-area col-md-1 col-sm-1",
-                  "inner": [
-                    {
-                      "class": "voting-overview"
-                    },
-                    {
-                      "class": "answer-accepted",
-                      "inner": {
-                        "tag": "span",
-                        "class": "glyphicon glyphicon-ok",
-                        "oncklick": "%accepted%"
-                      }
-                    }
-                  ]
+                  "class": "voting-overview"
                 },
                 {
-                  "class": "answer-overview col-md-11 col-sm-11",
-                  "inner": [
-                    "%answer%",
-                    {
-                      "tag": "blockquote",
-                      "class": "blockquote-reverse",
-                      "inner": {
-                        "tag": "footer",
-                        "inner": "%signatur%"
-                      }
-                    }
-                  ]
+                  "class": "answer-accepted",
+                  "inner": {
+                    "tag": "span",
+                    "class": "glyphicon glyphicon-ok",
+                    "onclick": "%accepted%"
+                  }
                 }
               ]
             },
             {
-              "tag": "hr"
+              "class": "answer-overview",
+              "inner": [
+                "%answer%",
+                {
+                  "tag": "blockquote",
+                  "id": "signature",
+                  "class": "blockquote text-monospace mt-1",
+                  "inner": {
+                    "tag": "footer",
+                    "class": "blockquote-footer",
+                    "inner": "%signature%"
+                  }
+                }
+              ]
             }
           ]
-
         },
 
         "new_answer": {
           "inner": [
             {
-              "tag": "h4",
-              "inner": "Your Answer"
+              "id": "new-answer-heading",
+              "class": "text-monospace text-success",
+              "inner": "YOUR ANSWER"
             },
             {
               "id": "editor"
@@ -144,9 +151,7 @@
             ['bold', 'italic', 'underline'],        // toggled buttons
             ['blockquote', 'code-block'],
 
-            [{ 'header': 1 }, { 'header': 2 }],               // custom button values
             [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
             [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
 
             [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
@@ -156,146 +161,136 @@
       ],
       voting: [ 'ccm.component', '../voting/ccm.voting.js' ],
       libs: [ 'ccm.load',
-        { context: 'head', url: '../../ccm-components/libs/bootstrap/css/font-face.css' },
-        '../../ccm-components/libs/bootstrap/css/bootstrap.css',
+        { context: 'head', url: '../../ccm-components/libs/bootstrap-4/css/bootstrap.css' },
+        '../../ccm-components/libs/bootstrap-4/css/bootstrap.css',
         'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js',
         '../question/resources/default.css'
       ]
     },
 
     Instance: function () {
-      var self = this;
-      var editor;
-      var dataset;
+      let self = this;
+      let editor;
+      let dataset;
+      let $;
 
-      this.init = function ( callback ) {
+      this.init = async () => {
+        $ = self.ccm.helper;
 
         // listen to change event of ccm realtime datastore => (re)render own content
-        self.data.store.onChange = function ( question ) {
-
+        self.data.store.onchange = question => {
           dataset = question;
           self.start();
         };
 
-        callback();
+        // listen to login/logout event => (re)render own content
+        if ( self.user ) self.user.onchange = self.start;
       };
 
-      this.ready = function ( callback ) {
-        if ( self.user )
-          self.user.addObserver( self.index, function ( event ) {
-            if ( event ) self.start();
-          });
-        callback();
-      };
+      this.start = async () => {
 
-      this.start = function ( callback ) {
+        dataset = await $.dataset( self.data );
+        if ( !dataset.title && !dataset.content )
+          return $.setContent( self.element, "No Question to display.");
 
-        self.ccm.helper.dataset( self.data.store, self.data.key, function ( question ) {
 
-          dataset = question;
-          if ( !dataset.answers ) dataset.answers = [];
 
-          self.ccm.helper.setContent( self.element, self.ccm.helper.html( self.templates.main, {
-            title: dataset.title,
-            signatur: dataset.user + '&nbsp;'+ moment( dataset.date ).fromNow(),
-            question: dataset.content
-          }));
+        if ( !dataset.answers ) dataset.answers = [];
 
-          renderVoting( self.element.querySelector( '.voting' ), dataset.voting || 'question_' + dataset.key, false );
+        await self.user.login();
 
-          renderAnswers();
+        $.setContent( self.element, $.html( self.templates.main, {
+          title: dataset.title,
+          signature: dataset.user + '&nbsp;'+ moment( dataset.date ).fromNow(),
+          question: dataset.content
+        }));
 
-          renderEditor();
+        await renderVoting( self.element.querySelector( '.voting' ), dataset.voting || 'question_' + dataset.key, false );
 
-          function renderAnswers() {
-            self.element.querySelector( '#answers').innerHTML = '';
+        await renderAnswers();
 
-            if ( dataset.answers ) dataset.answers.map ( renderAnswer );
+        function renderAnswers() {
+          self.element.querySelector( '#answers').innerHTML = '';
 
-            function renderAnswer( answer ) {
+          if ( dataset.answers ) dataset.answers.map ( renderAnswer );
 
-              // generate on-the-fly element
-              var answer_elem = self.ccm.helper.html( self.templates.answer, {
-                answer: answer.content,
-                signatur: answer.user + ' ' + moment( answer.date).fromNow(),
-                accepted: function () {
-                  answerAccepted( answer );
-                }
-              });
+          async function renderAnswer( answer ) {
 
-              // prepend element to DOM
-              self.ccm.helper.prepend( self.element.querySelector( '#answers' ), answer_elem );
-
-              // render accepted answer green
-              if (answer.accepted === true)
-                self.element.querySelector( '.glyphicon-ok' ).classList.add( 'accepted' );
-
-              renderVoting( answer_elem.querySelector( '.voting-overview' ), answer.voting, answer );
-            }
-          }
-
-          function renderEditor() {
-
-            if ( !self.user ) return;
-
-            var editor_elem = self.ccm.helper.html( self.templates.new_answer, {
-              new_answer: function () { newAnswer(); }
-            } );
-
-            self.user.login( function () {
-              if ( self.user.data().name === dataset.user ) return;
-
-              self.editor.start( function ( instance ) {
-                editor_elem.querySelector( '#editor' ).appendChild( instance.root );
-                editor = instance;
-                self.element.querySelector( '#new-answer' ).appendChild( editor_elem );
-              } );
-            } );
-
-          }
-
-          function renderVoting( element, voting, questionAnswer ) {
-            if ( !self.user ) return;
-            voting = { 'data.key': voting };
-
-            if ( self.user && self.user.isLoggedIn() && ( ( questionAnswer ? questionAnswer : dataset ).user === self.user.data().name ) )
-              voting.user = '';
-
-            self.voting.start( voting, function ( inst ) {
-              element.appendChild( inst.root );
-            } );
-
-          }
-
-          function newAnswer() {
-
-            self.user.login( function () {
-              var user = self.user.data().name;
-
-              // only not question author can be able to create new answer
-              if ( user !== dataset.user ) {
-                dataset.answers.push(
-                  {
-                    "date": moment().format(),
-                    "user": user,
-                    "content": editor.get().root.innerHTML.trim(),
-                    "voting": dataset.voting + '_answer_' + ( dataset.answers.length + 1 )
-                  }
-                );
-
-                // update dataset for rendering => (re)render accepted answer
-                self.data.store.set( dataset, function () { renderAnswers(); } );
+            // generate on-the-fly element
+            let answer_elem = $.html( self.templates.answer, {
+              answer: answer.content,
+              signature: answer.user + ' ' + moment( answer.date).fromNow(),
+              accepted: () => {
+                answerAccepted( answer );
               }
+            });
 
-            } );
+            // prepend element to DOM
+            $.prepend( self.element.querySelector( '#answers' ), answer_elem );
+
+            // render accepted answer green
+            if ( answer.accepted === true )
+              self.element.querySelector( '.glyphicon-ok' ).classList.add( 'accepted' );
+
+
+            await renderVoting( answer_elem.querySelector( '.voting-overview' ), answer.voting, answer );
+
+            await renderEditor();
           }
+        }
 
-          if ( callback ) callback();
+        async function renderEditor() {
+          $.setContent(self.element.querySelector( '#new-answer' ), '' );
 
-        } );
+          let editor_elem = $.html( self.templates.new_answer, {
+            new_answer: async () => { await newAnswer(); }
+          } );
+
+
+          if ( self.user.data().user === dataset.user ) return;
+
+          editor = await self.editor.start();
+          editor_elem.querySelector( '#editor' ).appendChild( editor.root );
+          $.setContent(self.element.querySelector( '#new-answer' ), editor_elem );
+
+        }
+
+        async function renderVoting( element, voting, questionAnswer ) {
+          if ( !self.user ) return;
+          voting = { 'data.key': voting };
+
+          if ( self.user && self.user.isLoggedIn() && ( ( questionAnswer ? questionAnswer : dataset ).user === self.user.data().user ) )
+            voting.user = '';
+
+          const voting_inst = await self.voting.start( voting );
+          $.setContent( element, voting_inst.root );
+
+        }
+
+        async function newAnswer() {
+
+          await self.user.login();
+          const user = self.user.data().user;
+
+          // only not question author can be able to create new answer
+          if ( user !== dataset.user ) {
+            dataset.answers.push(
+              {
+                "date": moment().format(),
+                "user": user,
+                "content": editor.get().root.innerHTML.trim(),
+                "voting": dataset.voting + '_answer_' + ( dataset.answers.length + 1 )
+              }
+            );
+
+            // update dataset for rendering => (re)render accepted answer
+            await self.data.store.set( dataset );
+            renderAnswers();
+          }
+        }
       };
     }
   };
 
-  function p(){window.ccm[v].component(component)}var f="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[f])window.ccm.files[f]=component;else{var n=window.ccm&&window.ccm.components[component.name];n&&n.ccm&&(component.ccm=n.ccm),"string"==typeof component.ccm&&(component.ccm={url:component.ccm});var v=component.ccm.url.split("/").pop().split("-");if(v.length>1?(v=v[1].split("."),v.pop(),"min"===v[v.length-1]&&v.pop(),v=v.join(".")):v="latest",window.ccm&&window.ccm[v])p();else{var e=document.createElement("script");document.head.appendChild(e),component.ccm.integrity&&e.setAttribute("integrity",component.ccm.integrity),component.ccm.crossorigin&&e.setAttribute("crossorigin",component.ccm.crossorigin),e.onload=function(){p(),document.head.removeChild(e)},e.src=component.ccm.url}}
-}() );
+  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||["latest"])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
+} )();
