@@ -83,9 +83,9 @@ ccm.files[ "configs.js" ] = {
       "key": "demo"
     },
     "voting": [ "ccm.component", "../thumb_rating/ccm.thumb_rating.js", {
-      "data": { "store": [ "ccm.store", { "name": "comment_voting", "url": "http://localhost:8080" } ] },
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.0.0.js",
-        [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
+      "data": { "store": [ "ccm.store", { "name": "comment_voting_data", "url": "http://localhost:8080" } ] },
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
+        [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ]
       ]
     } ],
     "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
