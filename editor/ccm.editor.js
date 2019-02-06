@@ -35,7 +35,8 @@
           ],
           [
             'https://ccmjs.github.io/tkless-components/libs/quill/quill.js',
-            '//cdn.quilljs.com/1.2.0/quill.snow.css'
+            'https://cdn.quilljs.com/1.2.0/quill.snow.css',
+            'resources/default.css'
           ]
         ]
       ],

@@ -1,0 +1,4 @@
+#element .ql-editor.ql-blank,
+#element .ql-container.ql-snow {
+  height: unset;
+}
