@@ -1,11 +1,11 @@
 /**
  * @overview ccm component for quill editor
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 3.0.0
  * @changes
- * version 3.0.0 (05.09.2018)
- * - uses ccm v18.0.0
+ * version 3.0.0 (06.01.2019)
+ * - uses ccm v20.0.0
  * version 3.1.0 (05.09.2018)
  * - supports onchange callback and getValue method
  * - uses ccm v18.3.0
@@ -23,7 +23,7 @@
     name: 'editor',
     version:[ 3,1,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
       //data: {
@@ -39,7 +39,7 @@
           ],
           [
             'https://ccmjs.github.io/tkless-components/libs/quill/quill.js',
-            '//cdn.quilljs.com/1.2.0/quill.snow.css'
+            'https://cdn.quilljs.com/1.2.0/quill.snow.css'
           ]
         ]
       ],
