@@ -4,8 +4,8 @@
  * @license The MIT License (MIT)
  *  @version 3.0.1
  * @changes
- * version 3.0.1 (13.01.2019)
- * - uses ccm v19.0.0
+ * version 3.0.1 (06.02.2019)
+ * - uses ccm v20.0.0
  * version 3.0.0 (14.09.2018)
  * - uses ccm v18.0.0
  */
@@ -17,7 +17,7 @@
     name: 'star_rating_result',
     version: [ 3,0,1 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-19.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
 
@@ -133,13 +133,13 @@
 
           $.setContent( self.element.querySelector( '#total-count' ),  count );
 
-          if ( Object.keys( dataset ).length > 1 ) calculateChackedStars();
+          if ( Object.keys( dataset ).length > 1 ) calculateCheckedStars();
 
-          function calculateChackedStars() {
+          function calculateCheckedStars() {
             let y = parseInt( total * 100 % 100 );
             let z = parseInt( total ) + ( y < 25 ? 0 : ( y >= 75 ? 1 : 0.5 ) );
 
-            self.element.querySelector( 'input[ id = "'+ z +'" ]' ).checked = true;
+            self.element.querySelector( 'input[ id = "'+ z +'" ]' ).setAttribute( 'checked', true );
           }
         }
 

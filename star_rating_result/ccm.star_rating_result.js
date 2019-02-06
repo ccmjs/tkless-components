@@ -126,13 +126,13 @@
 
           $.setContent( self.element.querySelector( '#total-count' ),  count );
 
-          if ( Object.keys( dataset ).length > 1 ) calculateChackedStars();
+          if ( Object.keys( dataset ).length > 1 ) calculateCheckedStars();
 
-          function calculateChackedStars() {
+          function calculateCheckedStars() {
             let y = parseInt( total * 100 % 100 );
             let z = parseInt( total ) + ( y < 25 ? 0 : ( y >= 75 ? 1 : 0.5 ) );
 
-            self.element.querySelector( 'input[ id = "'+ z +'" ]' ).checked = true;
+            self.element.querySelector( 'input[ id = "'+ z +'" ]' ).setAttribute( 'checked', true );
           }
         }
 
