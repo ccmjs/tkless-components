@@ -177,7 +177,7 @@
           ]
         }
       },
-      "editor": [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js",
+      "editor": [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.1.0.js",
         { "settings.modules.toolbar": false },
         { "settings.placeholder": "Write here ..." }
       ],
