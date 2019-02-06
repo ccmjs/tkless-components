@@ -161,14 +161,12 @@
                       {
                         "tag": "option",
                         "inner": "Guest Mode",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
-                        "[ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
                       },
                       {
                         "tag": "option",
                         "inner": "H-BRS FB02",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
-                          "{ 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
                       }
                     ]
                   }
@@ -216,7 +214,7 @@
                       {
                         "tag": "option",
                         "inner": "Voting",
-                        "value": "['ccm.component','https://ccmjs.github.io/tkless-components/voting/versions/ccm.voting-2.0.0.js',{ 'data': {} }]"
+                        "value": "['ccm.component','https://ccmjs.github.io/tkless-components/voting/versions/ccm.voting-3.0.0.js',{ 'data': {} }]"
                       }
                     ]
                   }
@@ -492,7 +490,8 @@
 
         if ( result.voting ) {
           result.voting[ 2 ].data = $.clone ( result.data );
-          result.voting[ 2 ].data.store[1].name = "voting_data"
+          result.voting[ 2 ].data.store[1].name = "voting_data";
+          result.voting[ 2 ].user = result.user;
         }
 
         // convert dot notation properties to deeper objects
