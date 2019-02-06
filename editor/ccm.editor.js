@@ -26,7 +26,7 @@
       //  store: [ "ccm.store", { "name": "editor_data" } ],
       //  key: "demo"
       //},
-      onchange: function () { console.log( this.getValue() ) },
+      //onchange: function () { console.log( this.getValue() ) },
       editor: [ 'ccm.load',
         [
           [
