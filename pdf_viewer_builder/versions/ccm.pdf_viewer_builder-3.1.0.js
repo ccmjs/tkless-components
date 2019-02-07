@@ -1,10 +1,10 @@
 /**
  * @overview ccm component for building a pdf-viewer component
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 3.0.0
  * @changes
- * version 3.0.0 (31.10.2018)
+ * version 3.0.0 (07.01.2019)
  * - uses ccm v18.1.0
  *  version 3.0.0 (31.10.2018)
  * - uses ccm v18.3.0
@@ -26,7 +26,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration

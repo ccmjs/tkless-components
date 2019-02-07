@@ -56,7 +56,7 @@ ccm.files[ "configs.js" ] = {
         }
       }
     ],
-    "store": [ "ccm.store", { "name": "pdf_viewer", "url": "http://localhost:8080", "method": "POST" } ],
+    "store": [ "ccm.store", { "name": "pdf_viewer", "url": "http://localhost:8080" } ],
     "url": "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-3.0.0.js"
   }
 };
