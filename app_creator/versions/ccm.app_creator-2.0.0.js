@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for creating apps
- * @author Tea Kless <tea.kless@web.de> 2018
+ * @author Tea Kless <tea.kless@web.de> 2019
  * @license The MIT License (MIT)
  * @version latest (2.0.0)
  */
