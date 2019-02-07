@@ -1,10 +1,10 @@
 /**
  * @overview ccm component for feedback
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 3.0.0
  * @changes
- * version 3.0.0 (25.09.2018)
+ * version 3.0.0 (07.01.2019)
  * - uses ccm v18.0.0
  * version 4.0.0 (25.09.2018)
  * - uses click event insteed of hover to slide feedabck in or out (only with right.css )
@@ -17,7 +17,7 @@
     name: 'feedback',
     version: [ 4,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
       "html": {
