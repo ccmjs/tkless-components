@@ -1,10 +1,10 @@
 /**
  * @overview ccm component for saving given files as data in ccm datasore
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @latest
  * @changes
- * - uses ccm v18.0.7
+ * - uses ccm v20.0.0
  */
 
 ( function () {

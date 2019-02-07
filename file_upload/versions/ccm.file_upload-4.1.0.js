@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for saving given files as data in ccm datasore
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 2.0.0
  * - switch to ccm cloud v2
@@ -11,8 +11,8 @@
  * - trigger onchange after clear event was fired
  * @version 4.0.0 (26.10.2018)
  * - uses ccm v18.0.7
- *  @version 4.1.0 (08.11.2018)
- * - uses ccm v18.3.0
+ *  @version 4.1.0 (07.01.2019)
+ * - uses ccm v20.0.0
  * - Uploading files larger than 10 MB is prevented
  */
 
@@ -31,7 +31,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-18.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration
