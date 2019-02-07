@@ -1,8 +1,12 @@
 /**
  * @overview ccm component for pdf-viewer
  * @see https://github.com/mozilla/pdf.js/
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
+ * @version 3.0.0
+ * @changes
+ * version 3.0.0 (07.01.2019)
+ * - uses ccm v20.0.0
  */
 
 ( function () {
