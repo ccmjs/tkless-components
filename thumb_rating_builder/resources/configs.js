@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     "preview": true,
     "defaults": {
       "data.store": "{ [ 'ccm.store',{ 'name':'thumb_rating_data', 'url': 'https://ccm2.inf.h-brs.de' } ], 'key': 'demo' }",
-      "user": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
+      "user": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', " +
       "[ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"    }
   },
 
@@ -14,7 +14,7 @@ ccm.files[ "configs.js" ] = {
     "preview": true,
     "defaults": {
       "data.store": "['ccm.store',{'name':'thumb_rating_data'}]",
-      "user": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
+      "user": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', " +
       "[ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
     },
     "onfinish": { "log": true }
@@ -26,7 +26,7 @@ ccm.files[ "configs.js" ] = {
         "preview": true,
         "defaults": {
           "data.store": "['ccm.store',{'store':'thumb_rating_data'}]",
-          "user": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.2.0.js', " +
+          "user": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', " +
           "[ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
         },
         "onfinish": { "log": true }
