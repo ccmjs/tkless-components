@@ -96,59 +96,59 @@
       let self = this;
 
       this.ready = async () => {
-        $ = this.ccm.helper;
+        $ = self.ccm.helper;
       };
 
       this.start = async () => {
 
-          if ( this.logger ) self.logger.log( 'start' );
+        if ( self.logger ) self.logger.log( 'start' );
 
-          let slide_out = false;
+        let slide_out = false;
 
-          $.setContent( this.element, this.ccm.helper.html( this.html.feedback, {
-            slide_in_out: () => {
-              if ( !slide_out ) {
-                self.element.querySelector( '#slideout' ).style.right = '250px';
-                self.element.querySelector( '#slideout-inner' ).style.right = '-0px';
-                slide_out = true;
-              }
-              else {
-                self.element.querySelector( '#slideout' ).style.right = '-0px';
-                self.element.querySelector( '#slideout-inner' ).style.right = '-250px';
-                slide_out = false;
-              }
-            },
-            submit: async ( event ) => {
-             event.preventDefault();
-
-              let data = {
-                "title": this.element.querySelector( 'input[type=text]' ).value,
-                "content": this.element.querySelector( 'textarea' ).value
-              };
-
-              // update dataset
-              await this.data.store.set( data );
-
-              if ( this.logger ) this.logger.log( 'create', $.clone ( data ) );
-
-              // visual effect, that the feedback was saved successfully
-              if ( this.element.querySelector( '.saved' ) ) $.removeElement( this.element.querySelector( '.saved' ) );
-              this.element.querySelector( '.panel-body' ).appendChild( $.html( {
-                "tag": "strong",
-                "class": "text-success saved",
-                "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
-              } ) );
-              this.element.querySelector( 'form' ).reset();
-
-              if ( this.onfinish ) $.onFinish( this, data );
+        $.setContent( self.element, self.ccm.helper.html( self.html.feedback, {
+          slide_in_out: () => {
+            if ( !slide_out ) {
+              self.element.querySelector( '#slideout' ).style.right = '250px';
+              self.element.querySelector( '#slideout-inner' ).style.right = '-0px';
+              slide_out = true;
             }
-          } ));
+            else {
+              self.element.querySelector( '#slideout' ).style.right = '-0px';
+              self.element.querySelector( '#slideout-inner' ).style.right = '-250px';
+              slide_out = false;
+            }
+          },
+          submit: async ( event ) => {
+            event.preventDefault();
 
-          // change feedback position from above
-          if ( this.from_above ) {
-            this.element.querySelector( '#slideout' ).style.top = this.from_above+'%';
-            this.element.querySelector( '#slideout-inner' ).style.top = this.from_above+'%';
+            let data = {
+              "title": self.element.querySelector( 'input[type=text]' ).value,
+              "content": self.element.querySelector( 'textarea' ).value
+            };
+
+            // update dataset
+            await self.data.store.set( data );
+
+            if ( self.logger ) self.logger.log( 'create', $.clone ( data ) );
+
+            // visual effect, that the feedback was saved successfully
+            if ( self.element.querySelector( '.saved' ) ) $.removeElement( self.element.querySelector( '.saved' ) );
+            self.element.querySelector( '.panel-body' ).appendChild( $.html( {
+              "tag": "strong",
+              "class": "text-success saved",
+              "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
+            } ) );
+            self.element.querySelector( 'form' ).reset();
+
+            if ( self.onfinish ) $.onFinish( self, data );
           }
+        } ));
+
+        // change feedback position from above
+        if ( self.from_above ) {
+          self.element.querySelector( '#slideout' ).style.top = self.from_above+'%';
+          self.element.querySelector( '#slideout-inner' ).style.top = self.from_above+'%';
+        }
 
       };
 
