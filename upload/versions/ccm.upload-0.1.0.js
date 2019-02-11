@@ -3,8 +3,9 @@
   var component = {
 
     name: 'upload',
+    version: [ 0, 1, 0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-16.3.0.js',
 
     config: {
       templates: {
