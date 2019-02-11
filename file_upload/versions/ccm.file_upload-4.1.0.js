@@ -134,11 +134,11 @@
         "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
       ]
       // data_type: "pdf", // or image
-      // mulitple: true, //only set if multiple upload is desired
+      // multiple: true, //only set if multiple upload is desired
       // data: { store: [ "ccm.store'" ], key: "demo" },
       // upload_button: true
       // clear_button: true,
-      // onfinisch: function( results ){ console.log(results) },
+      // onfinish: function( results ){ console.log(results) },
       // onchange: function( results ){ console.log(results) }
     },
 
