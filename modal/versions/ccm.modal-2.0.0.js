@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
  * @version 2.0.0
- * start open dialog automatically, no open needed
+ * start modal dialog automatically, no open needed
  */
 
 ( function () {
