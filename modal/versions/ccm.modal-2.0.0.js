@@ -1,7 +1,9 @@
 /**
- * @overview ccm component for modal dilaog
- * @author Tea Kless <tea.kless@web.de>, 2019
+ * @overview ccm component for modal dialog
+ * @author Tea Kless <tea.kless@web.de>, 2018
  * @license The MIT License (MIT)
+ * @version 2.0.0
+ * start open dialog automatically, no open needed
  */
 
 ( function () {
@@ -9,8 +11,9 @@
   const component = {
 
     name: 'modal',
+    version: [2,0,0],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
       html: {
@@ -60,12 +63,11 @@
         },
       },
       modal_title: "", //"My Modal",
-      modal_content: [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-3.0.1.js",
-        [ "ccm.get","https://ccmjs.github.io/akless-components/quiz/resources/configs.js","demo" ] ],
-      footer: [
-        { "caption": "Save", "style": "success", "onclick": function ( event ){ console.log( 'Save', event, this ); } },
-        { "caption": "Close", "style": "danger", "onclick": () => { console.log( 'Close' ); } }
-      ],
+      modal_content: "",//[ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-3.0.1.js", [ "ccm.get","https://ccmjs.github.io/akless-components/quiz/resources/configs.js","demo" ] ],
+      footer: "", //[
+        //{ "caption": "Save", "style": "success", "onclick": function ( event ){ console.log( 'Save', event, this ); } },
+        //{ "caption": "Close", "style": "danger", "onclick": () => { console.log( 'Close' ); } }
+      //],
       libs: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
         "https://ccmjs.github.io/tkless-components/modal/resources/default.css"
       ]
