@@ -122,11 +122,11 @@
         }
 
         $.setContent( self.element, main );
-        self.parent.element.scrollIntoView(true);
-        self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 1rem; left: 0;" );
+        self.ccm.context.root( self ).element.scrollIntoView(true);
         document.body.style.overflowY = 'hidden';
 
         $.append( self.parent.element.parentNode, self.root );
+        self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 1rem; left: 0;" );
 
         async function renderContent() {
           if( $.isInstance( self.modal_content ) ) {
