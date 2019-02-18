@@ -110,6 +110,7 @@
         const main = $.html( my.html.main, {
           modal_title: $.html( my.modal_title ),
           modal_close: () => {
+            document.body.style.overflowY = 'unset';
             $.removeElement( self.root );
           }
         } );
