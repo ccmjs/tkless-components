@@ -122,8 +122,8 @@
         }
 
         $.setContent( self.element, main );
-        self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 1rem; left: 0;" );
         self.parent.element.scrollIntoView(true);
+        self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 1rem; left: 0;" );
         document.body.style.overflowY = 'hidden';
 
         $.append( self.parent.element.parentNode, self.root );
