@@ -104,7 +104,7 @@
                             "inner":
                               {
                                 "tag": "p",
-                                "inner": "Write / Create Task via Editor."
+                                "inner": "Write a task using the editor below."
                               }
                           }
                         ]
