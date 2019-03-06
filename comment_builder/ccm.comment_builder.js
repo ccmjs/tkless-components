@@ -38,7 +38,7 @@
                 {
                   "tag": "small",
                   "class": "text-primary",
-                  "inner": "Comment"
+                  "inner": "Comments"
                 }
               ]
             }
