@@ -267,7 +267,7 @@
                     "for": "editable",
                     "class": "control-label",
                     "inner": [
-                      "Edits ",
+                      "Editable",
                       {
                         "tag": "a",
                         "onclick": "%help%",
@@ -490,7 +490,6 @@
           result.voting[ 2 ].data = $.clone ( result.data );
           result.voting[ 2 ].data.store[1].name = my.voting_data_store ? my.voting_data_store : 'voting_data';
           result.voting[ 2 ].user = result.user;
-          console.log( result.select_voting, result.voting );
         }
 
         // convert dot notation properties to deeper objects
