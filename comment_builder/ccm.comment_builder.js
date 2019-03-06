@@ -86,7 +86,7 @@
                       },
                       {
                         "class": "alert alert-info",
-                        "inner": "Choose between different layouts, in which the commentary is displayed."
+                        "inner": "Choose between a layout format for your comment section."
                       }
                     ]
                   },
@@ -161,12 +161,12 @@
                       {
                         "tag": "option",
                         "inner": "Guest Mode",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
                       },
                       {
                         "tag": "option",
                         "inner": "H-BRS FB02",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
                       }
                     ]
                   }
@@ -180,7 +180,7 @@
                     "for": "voting",
                     "class": "control-label",
                     "inner": [
-                      "Voting ",
+                      "Rating ",
                       {
                         "tag": "a",
                         "onclick": "%help%",
@@ -190,7 +190,7 @@
                       },
                       {
                         "class": "alert alert-info",
-                        "inner": "voting"
+                        "inner": "Select if users can rate on the given comments."
                       }
                     ]
                   },
@@ -229,7 +229,7 @@
                     "for": "sorting-by-voting",
                     "class": "control-label",
                     "inner": [
-                      "Sort Comments by Voting",
+                      "Sort Comments by Rating ",
                       {
                         "tag": "a",
                         "onclick": "%help%",
@@ -239,7 +239,7 @@
                       },
                       {
                         "class": "alert alert-info",
-                        "inner": "Select whether the comments should be sorted by the best rating. Otherwise, the new comment is first."
+                        "inner": "Select whether the comments should be sorted by the highest rating. Otherwise, the new comment is displayed on the top."
                       }
                     ]
                   },
@@ -266,7 +266,7 @@
                     "for": "editable",
                     "class": "control-label",
                     "inner": [
-                      "Editable ",
+                      "Edits ",
                       {
                         "tag": "a",
                         "onclick": "%help%",
