@@ -52,6 +52,11 @@
               {
                 "tag": "input",
                 "type": "hidden",
+                "name": "data"
+              },
+              {
+                "tag": "input",
+                "type": "hidden",
                 "name": "onfinish"
               },
               {
