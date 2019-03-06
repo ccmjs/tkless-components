@@ -55,5 +55,20 @@ ccm.files[ "configs.js" ] = {
       "['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','compact']]"
     },
     "onfinish": { "log": true }
+  },
+
+  "create": {
+    "builder": [ "ccm.component", "ccm.comment_builder.js",
+      {
+        "html.inner.1.inner.4.style": "display:none",
+        "defaults": {
+          "data.store": "[ 'ccm.store',{ 'name':'ws_comment_data', 'url': 'https://ccm2.inf.h-brs.de' } ]",
+          "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','compact']]"
+        },
+        "submit_button": false,
+        "preview": false
+      }
+    ],
+    "app": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.1.0.js" ]
   }
 };

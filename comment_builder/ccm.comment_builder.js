@@ -66,7 +66,7 @@
               {
                 "tag": "input",
                 "type": "hidden",
-                "name": "template"
+                "name": "voting"
               },
               {
                 "class": "layout form-group",
@@ -95,7 +95,7 @@
                     "onchange": "%change%",
                     "class": "form-control",
                     "id": "layout",
-                    "name": "layout",
+                    "name": "template",
                     "inner": [
                       {
                         "tag": "option",
@@ -161,12 +161,12 @@
                       {
                         "tag": "option",
                         "inner": "Guest Mode",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
+                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','compact']]"
                       },
                       {
                         "tag": "option",
                         "inner": "H-BRS FB02",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
+                        "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js',{'key':['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','compact'],'realm':'hbrsinfkaul'}]"
                       }
                     ]
                   }
@@ -199,7 +199,7 @@
                     "onchange": "%change%",
                     "class": "form-control",
                     "id": "voting",
-                    "name": "voting",
+                    "name": "select_voting",
                     "inner": [
                       {
                         "tag": "option",
@@ -209,12 +209,12 @@
                       {
                         "tag": "option",
                         "inner": "Thumb Rating",
-                        "value": "['ccm.component','https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-3.0.0.js',{ 'data': {} }]"
+                        "value": "['ccm.component','https://ccmjs.github.io/tkless-components/thumb_rating/versions/ccm.thumb_rating-3.0.0.js',{'data':{}}]"
                       },
                       {
                         "tag": "option",
                         "inner": "Voting",
-                        "value": "['ccm.component','https://ccmjs.github.io/tkless-components/voting/versions/ccm.voting-3.0.0.js',{ 'data': {} }]"
+                        "value": "['ccm.component','https://ccmjs.github.io/tkless-components/voting/versions/ccm.voting-3.0.0.js',{'data':{}}]"
                       }
                     ]
                   }
@@ -328,6 +328,7 @@
           }
         ]
       },
+      "voting_data_store": "voting_data",
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css"
@@ -480,18 +481,15 @@
          */
         let result =  $.formData( self.element.querySelector( 'form' ) );
 
-        if ( result.layout === 'simple' ) result.template = 'simple';
-        else
-          result.template = "expanded";
+        if ( result.template === 'Simple' ) result.template = 'simple';
+        if ( result.template === 'Expanded' ) result.template = 'expanded';
 
-        if ( !result.layout ) result.template = 'simple';
-
-        delete result.layout;
-
-        if ( result.voting ) {
+        if ( result.select_voting ) {
+          result.voting = $.clone ( result.select_voting );
           result.voting[ 2 ].data = $.clone ( result.data );
-          result.voting[ 2 ].data.store[1].name = "voting_data";
+          result.voting[ 2 ].data.store[1].name = my.voting_data_store ? my.voting_data_store : 'voting_data';
           result.voting[ 2 ].user = result.user;
+          console.log( result.select_voting, result.voting );
         }
 
         // convert dot notation properties to deeper objects
