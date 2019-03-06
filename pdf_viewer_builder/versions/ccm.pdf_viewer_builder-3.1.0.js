@@ -117,7 +117,7 @@
                             "inner":
                               {
                                 "tag": "p",
-                                "inner": "Drop or choose File to upload. <code>10 MB is Maximum file size you can upload.</code>"
+                                "inner": "Drop or choose a file to upload. <code>10 MB is the maximum file size you can upload.</code>"
                               }
                           }
                         ]
@@ -285,12 +285,12 @@
           }
         ]
       },
-      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/default.css"
       ],
-      target: [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-4.0.0.js" ],
-      file_upload: [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-4.1.0.js", {
+      "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-4.0.0.js" ],
+      "file_upload": [ "ccm.component", "https://ccmjs.github.io/tkless-components/file_upload/versions/ccm.file_upload-4.1.0.js", {
         "data_type": "pdf", "clear_button": true
       } ],
       // "defaults": {

@@ -116,7 +116,7 @@
                             "inner":
                               {
                                 "tag": "p",
-                                "inner": "Drop or choose File to upload. <code>10 MB is Maximum file size you can upload.</code>"
+                                "inner": "Drop or choose a file to upload. <code>10 MB is the maximum file size you can upload.</code>"
                               }
                           }
                         ]
