@@ -162,12 +162,12 @@
                       {
                         "tag": "option",
                         "inner": "Guest Mode",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ] ]"
                       },
                       {
                         "tag": "option",
                         "inner": "H-BRS FB02",
-                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js', { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
+                        "value": "[ 'ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', { 'key': [ 'ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact' ], 'realm':'hbrsinfkaul' } ]"
                       }
                     ]
                   }
@@ -336,7 +336,7 @@
       "target": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-4.1.0.js" ],
       // "defaults": {
       //    "data.store": "['ccm.store',{'store':'comment_data','url':'http://localhost:8080'}]",
-      //    "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
+      //    "user": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js',['ccm.get','https://ccmjs.github.io/akless-components/user/resources/configs.js','guest']]"
       // }
       // "data": { "store": [ "ccm.store", "test": { ... } ], "key": "test" },
       // "submit_button": true,
