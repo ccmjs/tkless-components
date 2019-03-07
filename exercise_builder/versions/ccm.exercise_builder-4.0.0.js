@@ -191,7 +191,7 @@
                           {
                             "class": "alert alert-info",
                             "inner": [
-                              "If you select a sign-on mode here, authentication will be requested after the completion of the fill-in-the-blank text and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
+                              "If you select a sign-on mode here, authentication will be requested after the completion of the exercise and the results will only be submitted if the authentication was successful. The various sign-on modes are described below.",
                               {
                                 "tag": "h5",
                                 "inner": "Guest Mode"
@@ -235,7 +235,7 @@
                           {
                             "tag": "option",
                             "inner": "Guest Mode",
-                            "value": "['ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', ['ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact']]"
+                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js',{'realm':'guest','title':'Guest Mode:'Please enter any username'}]"
                           },
                           {
                             "tag": "option",

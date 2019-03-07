@@ -226,7 +226,7 @@
                           {
                             "tag": "option",
                             "inner": "Guest Mode",
-                            "value": "['ccm.instance', 'https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js', ['ccm.get', 'https://ccmjs.github.io/akless-components/user/resources/configs.js', 'compact']]"
+                            "value": "['ccm.instance','https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js',{'realm':'guest','title':'Guest Mode:'Please enter any username'}]"
                           },
                           {
                             "tag": "option",

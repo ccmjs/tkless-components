@@ -17,11 +17,4 @@ ccm.files[ "configs.js" ] = {
     },
     "onfinish": { "log": true }
   }
-
-  /*"html.inner.1.inner.0": "",
-    "html.inner.1.inner.2.class": "",
-   "html.inner.1.inner.2.inner.0": "",
-   "html.inner.1.inner.2.inner.1.inner.1.inner.2": "",*/
-
-
 };
