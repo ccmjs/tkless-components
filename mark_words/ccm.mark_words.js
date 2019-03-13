@@ -193,7 +193,7 @@
           const text_nodes = collectTextNodes( div );
 
           text_nodes.map( ( node )  => {
-            const value = node.textContent.replace( /\S+(?<![,\.:])/g, '<span class="marking_words" marked>$&</span>' );
+            const value = node.textContent.replace( /\w+/g, '<span class="marking_words" marked>$&</span>' );
             node.parentNode.replaceChild( $.html( { tag: 'text', inner: value } ), node );
           });
 
