@@ -4,7 +4,7 @@
  * @license The MIT License (MIT)
  * @changes
  *
- * version 3.3.0 (30.01.2018)
+ * version 3.3.0 (03.04.2019)
  * - supports show_results convention
  *
  *  version 3.1.0 (30.01.2018)

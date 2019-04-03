@@ -87,12 +87,12 @@
       // show_solution: true,
       // check: true,
       // keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
-      // onfinish: {
-      //   log: true
-      // },
+      // data: { solutions: [], marked [] },
+      // onfinish: { log: true },
       // "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       // onchange,
       // marked: [],
+      // show_results: true,
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         '../mark_words/resources/default.css'
@@ -158,34 +158,8 @@
         const main_elem = $.html( my.html.text );
 
         prepareTextForMarking();
-        renderButtons();
 
         $.setContent( self.element, main_elem );
-
-        function renderButtons() {
-          if ( my.check ) {
-            main_elem.appendChild( $.html( my.html.button, {
-              class: 'btn btn-success btn-lg check-btn',
-              label: 'Check',
-              click: () => {
-                if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
-                verify();
-              }
-            } ) );
-          }
-
-          if ( my.submit ) {
-            main_elem.appendChild( $.html( my.html.button, {
-              class: 'btn btn-info btn-lg save-btn',
-              label: my.submit_button_label,
-              glyphicon: 'glyphicon glyphicon-save',
-              click: () => {
-                $.onFinish( self );
-                if( self.logger ) self.logger.log( 'onfinish', self );
-              }
-            } ) );
-          }
-        }
 
         function prepareTextForMarking() {
           const div = $.html( my.text );
@@ -211,32 +185,58 @@
             } );
           }
 
+          if( !my.show_results ) {
+            main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
+              const span = event.target;
+              if ( !span.hasAttribute( 'marked' ) ) return;
 
-          main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
-            const span = event.target;
-            if ( !span.hasAttribute( 'marked' ) ) return;
+              // add selected class to span tags
+              span.classList.toggle( 'selected' );
 
-            // add selected class to span tags
-            span.classList.toggle( 'selected' );
+              // add or remove selected words from solutions array
+              if( !span.classList.contains( 'selected' ) ){
+                dataset.solutions.splice( [ dataset.solutions.indexOf( span.innerHTML ) ], 1 );
+                dataset.marked.splice( [ dataset.marked.indexOf( span.id ) ], 1  );
+              }
 
-            // add or remove selected words from solutions array
-            if( !span.classList.contains( 'selected' ) ){
-              dataset.solutions.splice( [ dataset.solutions.indexOf( span.innerHTML ) ], 1 );
-              dataset.marked.splice( [ dataset.marked.indexOf( span.id ) ], 1  );
+              else{
+                dataset.marked.push( span.id );
+                dataset.solutions.push( span.innerHTML );
+              }
+
+
+              // set onChange behavior
+              self.onchange && self.onchange( span );
+
+              if ( self.logger ) self.logger.log( 'change', { word: span.innerHTML, selected: span.classList.contains('selected')} );
+            });
+            renderButtons();
+          }
+
+          function renderButtons() {
+            if ( my.check ) {
+              main_elem.appendChild( $.html( my.html.button, {
+                class: 'btn btn-success btn-lg check-btn',
+                label: 'Check',
+                click: () => {
+                  if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
+                  verify();
+                }
+              } ) );
             }
 
-            else{
-              dataset.marked.push( span.id );
-              dataset.solutions.push( span.innerHTML );
+            if ( my.submit ) {
+              main_elem.appendChild( $.html( my.html.button, {
+                class: 'btn btn-info btn-lg save-btn',
+                label: my.submit_button_label,
+                glyphicon: 'glyphicon glyphicon-save',
+                click: () => {
+                  $.onFinish( self );
+                  if( self.logger ) self.logger.log( 'onfinish', self );
+                }
+              } ) );
             }
-
-
-            // set onChange behavior
-            self.onchange && self.onchange( span );
-
-            if ( self.logger ) self.logger.log( 'change', { word: span.innerHTML, selected: span.classList.contains('selected')} );
-          });
-
+          }
         }
 
         // pile up all text nodes from given div element

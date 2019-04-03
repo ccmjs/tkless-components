@@ -16,7 +16,8 @@ ccm.files[ "configs.js" ] = {
     "show_solution": true,
     "check": true,
     "keywords": [ 'Manchmal', 'Manchmal', 'Typoblindtexte' ],
-    //"data": { solutions: [], marked: [ 'marking_words-42' ] },
+    "data": { solutions: [], marked: [ 'marking_words-42' ] },
+    "show_results": true,
     //"onfinish": { "log": true }
   }
 };
