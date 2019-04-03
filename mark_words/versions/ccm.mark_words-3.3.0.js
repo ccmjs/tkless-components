@@ -190,7 +190,7 @@
             } );
           }
 
-          if( !my.show_results ) {
+          if( !my.show_results === true ) {
             main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
               const span = event.target;
               if ( !span.hasAttribute( 'marked' ) ) return;
