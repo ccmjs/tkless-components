@@ -124,7 +124,7 @@
 
           $.setContent( self.element.querySelector( '#total-count' ),  count );
 
-          if ( Object.keys( dataset ).length > 1 ) calculateCheckedStars();
+          total && calculateCheckedStars();
 
           function calculateCheckedStars() {
             let y = parseInt( total * 100 % 100 );
