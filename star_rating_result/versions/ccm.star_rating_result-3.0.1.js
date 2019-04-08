@@ -105,14 +105,12 @@
         // calculate average of rating
         let sum = 0;
         let count = 0;
-        if ( Object.keys( dataset ).length > 1 ) {
-          for ( let i = 1; i <= 5; i++ ) {
-            if ( !dataset[ i ] ) continue;
-            sum += i * Object.keys( dataset[ i ] ).length;
-            count += Object.keys( dataset[ i ] ).length;
-          }
-          total = sum / count;
+        for ( let i = 1; i <= 5; i++ ) {
+          if ( !dataset[ i ] ) continue;
+          sum += i * Object.keys( dataset[ i ] ).length;
+          count += Object.keys( dataset[ i ] ).length;
         }
+        total = count ? sum / count : 0;
 
         // render html content
         if ( self.detailed ) renderBars();
