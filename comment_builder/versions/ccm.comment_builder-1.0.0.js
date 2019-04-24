@@ -267,7 +267,7 @@
                     "for": "editable",
                     "class": "control-label",
                     "inner": [
-                      "Editable",
+                      "Editable ",
                       {
                         "tag": "a",
                         "onclick": "%help%",
