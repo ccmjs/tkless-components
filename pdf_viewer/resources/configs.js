@@ -1,6 +1,6 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
     "key": "demo",
-    "pdf": "https://ccmjs.github.io/tkless-components/libs/pdfjs/tracemonke.pdf"
+    "pdf": "http://was.hs-koblenz.de/downloads/forschung/GameChanger.pdf"
   }
 };
