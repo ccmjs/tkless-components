@@ -1,6 +1,6 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
     "key": "demo",
-    "pdf": "https://files.eric.ed.gov/fulltext/ED579383.pdf"
+    "pdf": [ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "ws_pdf_viewer" }, "1556096359223X511708264580848" ]
   }
 };
