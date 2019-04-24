@@ -1,6 +1,6 @@
 ccm.files[ "configs.js" ] = {
   "demo": {
     "key": "demo",
-    "pdf": "http://was.hs-koblenz.de/downloads/forschung/GameChanger.pdf"
+    "pdf": "https://files.eric.ed.gov/fulltext/ED579383.pdf"
   }
 };
