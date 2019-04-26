@@ -1,15 +1,22 @@
 /**
  * @overview ccm component for voting
- * @author Tea Kless <tea.kless@web.de>, 2019
+ * @author Tea Kless <tea.kless@web.de>, 2016-2019
  * @license The MIT License (MIT)
+ * @version 4.0.0
+ * @changes
+ * version 3.0.0 (26.04.2019)
+ * - data structure changed due to side effects
+ * version 3.0.0 (06.01.2019)
+ * - uses ccm v20.0.0
  */
 ( function () {
 
   const component = {
 
     name: 'star_rating',
+    version: [ 3,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     config: {
       "html": {
@@ -39,7 +46,7 @@
       //     "key":   "demo"
       // },
       // "onfinish": { "log": true },
-      // "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
+      // "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
       //   [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
       // ],
       //"show_results": true,
@@ -47,10 +54,9 @@
       "css": [ "ccm.load",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        "../star_rating/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/star_rating/resources/default.css"
       ]
     },
-
 
     Instance: function () {
       /**
