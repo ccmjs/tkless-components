@@ -1,5 +1,4 @@
 ccm.files[ "configs.js" ] = {
-
   "demo": {
     "key": "demo",
     "detailed": true,
