@@ -42,6 +42,8 @@
       // "user":  [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-7.0.1.js",
       //   [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
       // ],
+      "show_results": true,
+      "rating_result": [ "ccm.component", "https://ccmjs.github.io/tkless-components/star_rating_result/versions/ccm.star_rating_result-3.0.1.js" ],
       "css": [ "ccm.load",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
@@ -89,6 +91,14 @@
       this.start = async () => {
 
         const dataset = await $.dataset( my.data );
+
+        if( my.show_results ){
+          return await my.rating_result.start({
+            root: self.element,
+            detailed: true,
+            data: my.data
+          });
+        }
 
         let main_elem = $.html( my.html.main );
 
