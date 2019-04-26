@@ -14,7 +14,7 @@
   const component = {
 
     name: 'star_rating',
-    version: [ 3,0,0 ],
+    version: [ 4,0,0 ],
 
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
