@@ -99,6 +99,8 @@
 
         const dataset = await $.dataset( self.data );
 
+        if ( !dataset.stars ) dataset.stars = {};
+
         // logging of 'start' event
         self.logger && self.logger.log( 'start', dataset );
 
