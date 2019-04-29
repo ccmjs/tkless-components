@@ -26,6 +26,7 @@ ccm.files[ "configs.js" ] = {
         [ true, "", "", "jane.doe@mail.com", "2016-12-28", "", ""]
       ]
     },
+    //"cell_onclick": function ( target, value, self  ){ console.log( target, value, self ); },
     "submit": "true",
     "onchange": function ( result, value, self ) { console.log( result, value, self ); },
     "onfinish": {

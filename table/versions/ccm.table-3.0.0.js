@@ -3,6 +3,8 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @license The MIT License (MIT)
  * @changes
+ * @version 3.0.0
+ * -(29.04.2019) onclick event for table cells
  *  @version 2.2.0
  * -(29.04.2019) contains changes from vimp
  * @version 2.1.0
@@ -19,12 +21,13 @@
      * @type {string}
      */
     name: 'table',
+    version: [3, 0, 0],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration
@@ -61,7 +64,7 @@
 
         "table_row": { "tag": "tr" },
 
-        "table_cell": { "tag": "td" },
+        "table_col": { "tag": "td" },
 
         "table_head": { "tag": "th" },
 
