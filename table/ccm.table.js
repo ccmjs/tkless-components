@@ -3,6 +3,8 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @license The MIT License (MIT)
  * @changes
+ * @version 3.0.0
+ * -(29.04.2019) onclick event for table cells
  *  @version 2.2.0
  * -(29.04.2019) contains changes from vimp
  * @version 2.1.0

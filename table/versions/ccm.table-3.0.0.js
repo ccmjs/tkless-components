@@ -64,7 +64,7 @@
 
         "table_row": { "tag": "tr" },
 
-        "table_col": { "tag": "td" },
+        "table_cell": { "tag": "td" },
 
         "table_head": { "tag": "th" },
 
