@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for exercise
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @
  */
@@ -11,7 +11,7 @@
     name: 'exercise',
     version: [ 4, 0, 0],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.1.0.js',
 
     config: {
       html: {
