@@ -6,6 +6,7 @@
  *
  *  version 4.0.0 (30.04.2019)
  * - used self.data instead of my.data
+ * - support properties for analytics
  *
  * version 3.3.0 (03.04.2019)
  * - supports show_results convention
@@ -55,6 +56,23 @@
             },
             {
               "id": "conclusion"
+            },
+            {
+              "id": "buttons",
+              "inner": [
+                {
+                  "id": "check"
+                },
+                {
+                  "id": "save"
+                },
+                {
+                  "id": "retry"
+                },
+                {
+                  "id": "solution"
+                }
+              ]
             }
           ]
         },
@@ -160,6 +178,11 @@
 
         dataset = await $.dataset( self.data );
 
+        const keywords = $.clone( my.keywords );
+
+        const correct = [];
+        const incorrect = [];
+
         if( !dataset.solutions ) dataset.solutions = [];
         if( !dataset.marked ) dataset.marked = [];
 
@@ -193,8 +216,8 @@
             } );
           }
 
-          if( !my.show_results === true ) {
-            main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
+          if( !my.show_results ) {
+            main_elem.querySelector( '#text' ).addEventListener( 'click', event => {
               const span = event.target;
               if ( !span.hasAttribute( 'marked' ) ) return;
 
@@ -206,7 +229,6 @@
                 dataset.solutions.splice( [ dataset.solutions.indexOf( span.innerHTML ) ], 1 );
                 dataset.marked.splice( [ dataset.marked.indexOf( span.id ) ], 1  );
               }
-
               else{
                 dataset.marked.push( span.id );
                 dataset.solutions.push( span.innerHTML );
@@ -220,21 +242,35 @@
             });
             renderButtons();
           }
+          else {
+            verify();
+            my.show_solution && showSolution();
+          }
 
           function renderButtons() {
             if ( my.check ) {
-              main_elem.appendChild( $.html( my.html.button, {
+              $.setContent( main_elem.querySelector( '#check' ), $.html( my.html.button, {
                 class: 'btn btn-success btn-lg check-btn',
                 label: 'Check',
                 click: () => {
                   if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
                   verify();
+                  renderProgressBar( correct.length );
+                  if ( my.show_solution ) {
+                    // render solution button
+                    $.setContent( main_elem. querySelector( '#solution' ), $.html( my.html.button, {
+                      label: 'Solution',
+                      class: 'btn btn-warning btn-lg solution-btn',
+                      glyphicon: 'glyphicon glyphicon-eye-open',
+                      click: showSolution
+                    } ) );
+                  }
                 }
               } ) );
             }
 
             if ( my.submit ) {
-              main_elem.appendChild( $.html( my.html.button, {
+              $.setContent( main_elem.querySelector( '#save' ), $.html( my.html.button, {
                 class: 'btn btn-info btn-lg save-btn',
                 label: my.submit_button_label,
                 glyphicon: 'glyphicon glyphicon-save',
@@ -244,6 +280,19 @@
                 }
               } ) );
             }
+          }
+
+          function showSolution() {
+            const missed = [];
+            [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
+              if ( keywords.includes( span.innerHTML ) ) {
+                missed.push( span.innerHTML );
+                span.classList.add( 'solution' );
+                keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
+              }
+            });
+
+            if ( self.logger ) self.logger.log( 'solution', { missed: missed } );
           }
         }
 
@@ -258,18 +307,21 @@
         }
 
         function verify() {
-          const keywords = $.clone( my.keywords );
-
-          const correct = [];
-          const incorrect = [];
+          dataset.sections = [];
 
           dataset.solutions.map( solution => {
+            const entry = {};
             if ( keywords.includes( solution) ) {
+              entry.correct = true;
               correct.push( solution );
               keywords.splice( [ keywords.indexOf( solution ) ], 1 );
             }
-            else
+            else {
+              entry.correct = false;
               incorrect.push( solution );
+            }
+
+            dataset.sections.push( entry );
           } );
 
           [ ...main_elem.querySelectorAll( 'span.selected' ) ].map( span => {
@@ -281,33 +333,8 @@
 
           });
 
-          const elem = $.html( my.html.feedback, {
-            points: correct.length + '/' + my.keywords.length
-          } );
-          main_elem. querySelector( '#conclusion' ).appendChild( elem );
-
-          renderProgressBar( correct.length );
-
-          if ( my.show_solution ) {
-            // render solution button
-            main_elem.appendChild( $.html( my.html.button, {
-              label: 'Solution',
-              class: 'btn btn-warning btn-lg solution-btn',
-              glyphicon: 'glyphicon glyphicon-eye-open',
-              click: function () {
-                const missed = [];
-                [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
-                  if ( keywords.includes( span.innerHTML ) ) {
-                    missed.push( span.innerHTML );
-                    span.classList.add( 'solution' );
-                    keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
-                  }
-                });
-
-                if ( self.logger ) self.logger.log( 'solution', { missed: missed } );
-              }
-            } ) );
-          }
+          dataset.correct = correct.length;
+          dataset.total = my.keywords.length;
 
           if ( self.logger ) self.logger.log( 'check', {
             marked: self.getValue(),
@@ -318,8 +345,14 @@
           });
         }
 
-        function renderProgressBar( correct ) {
-          const goal = correct * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
+        function renderProgressBar() {
+          const elem = $.html( my.html.feedback, {
+            points: correct.length + '/' + my.keywords.length
+          } );
+          $.setContent( main_elem. querySelector( '#conclusion' ), elem );
+
+
+          const goal = correct.length * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
           let width = 1;
           let id = setInterval(frame, 8);
 
@@ -335,13 +368,12 @@
           main_elem.querySelector( '.check-btn' ).remove();
 
           if ( my.retry ) {
-            const retry_btn = main_elem.appendChild( $.html( my.html.button, {
+            $.setContent( main_elem. querySelector( '#retry' ), $.html( my.html.button, {
               class: 'btn btn-primary btn-lg retry-btn',
               label: 'Retry',
               glyphicon: 'glyphicon glyphicon-repeat',
               click: self.start
             } ) );
-            main_elem.querySelector( 'button' ).parentNode.insertBefore( retry_btn, main_elem.querySelector( '.solution-btn' ) );
           }
         }
       };

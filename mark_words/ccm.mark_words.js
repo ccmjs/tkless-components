@@ -5,6 +5,7 @@
  * @changes
  * version 4.0.0 (30.04.2019)
  * - used self.data instead of my.data
+ * - support properties for analytics
  *
  * version 3.3.0 (03.04.2019)
  * - supports show_results convention
@@ -175,6 +176,11 @@
 
         dataset = await $.dataset( self.data );
 
+        const keywords = $.clone( my.keywords );
+
+        const correct = [];
+        const incorrect = [];
+
         if( !dataset.solutions ) dataset.solutions = [];
         if( !dataset.marked ) dataset.marked = [];
 
@@ -221,7 +227,6 @@
                 dataset.solutions.splice( [ dataset.solutions.indexOf( span.innerHTML ) ], 1 );
                 dataset.marked.splice( [ dataset.marked.indexOf( span.id ) ], 1  );
               }
-
               else{
                 dataset.marked.push( span.id );
                 dataset.solutions.push( span.innerHTML );
@@ -235,6 +240,10 @@
             });
             renderButtons();
           }
+          else {
+            verify();
+            my.show_solution && showSolution();
+          }
 
           function renderButtons() {
             if ( my.check ) {
@@ -244,6 +253,16 @@
                 click: () => {
                   if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
                   verify();
+                  renderProgressBar( correct.length );
+                  if ( my.show_solution ) {
+                    // render solution button
+                    $.setContent( main_elem. querySelector( '#solution' ), $.html( my.html.button, {
+                      label: 'Solution',
+                      class: 'btn btn-warning btn-lg solution-btn',
+                      glyphicon: 'glyphicon glyphicon-eye-open',
+                      click: showSolution
+                    } ) );
+                  }
                 }
               } ) );
             }
@@ -260,6 +279,19 @@
               } ) );
             }
           }
+
+          function showSolution() {
+            const missed = [];
+            [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
+              if ( keywords.includes( span.innerHTML ) ) {
+                missed.push( span.innerHTML );
+                span.classList.add( 'solution' );
+                keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
+              }
+            });
+
+            if ( self.logger ) self.logger.log( 'solution', { missed: missed } );
+          }
         }
 
         // pile up all text nodes from given div element
@@ -273,18 +305,21 @@
         }
 
         function verify() {
-          const keywords = $.clone( my.keywords );
-
-          const correct = [];
-          const incorrect = [];
+          dataset.sections = [];
 
           dataset.solutions.map( solution => {
+            const entry = {};
             if ( keywords.includes( solution) ) {
+              entry.correct = true;
               correct.push( solution );
               keywords.splice( [ keywords.indexOf( solution ) ], 1 );
             }
-            else
+            else {
+              entry.correct = false;
               incorrect.push( solution );
+            }
+
+            dataset.sections.push( entry );
           } );
 
           [ ...main_elem.querySelectorAll( 'span.selected' ) ].map( span => {
@@ -296,33 +331,8 @@
 
           });
 
-          const elem = $.html( my.html.feedback, {
-            points: correct.length + '/' + my.keywords.length
-          } );
-          $.setContent( main_elem. querySelector( '#conclusion' ), elem );
-
-          renderProgressBar( correct.length );
-
-          if ( my.show_solution ) {
-            // render solution button
-            $.setContent( main_elem. querySelector( '#solution' ), $.html( my.html.button, {
-              label: 'Solution',
-              class: 'btn btn-warning btn-lg solution-btn',
-              glyphicon: 'glyphicon glyphicon-eye-open',
-              click: function () {
-                const missed = [];
-                [ ...main_elem.querySelectorAll( 'span' ) ].map( span => {
-                  if ( keywords.includes( span.innerHTML ) ) {
-                    missed.push( span.innerHTML );
-                    span.classList.add( 'solution' );
-                    keywords.splice( [ keywords.indexOf( span.innerHTML ) ], 1 );
-                  }
-                });
-
-                if ( self.logger ) self.logger.log( 'solution', { missed: missed } );
-              }
-            } ) );
-          }
+          dataset.correct = correct.length;
+          dataset.total = my.keywords.length;
 
           if ( self.logger ) self.logger.log( 'check', {
             marked: self.getValue(),
@@ -333,8 +343,14 @@
           });
         }
 
-        function renderProgressBar( correct ) {
-          const goal = correct * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
+        function renderProgressBar() {
+          const elem = $.html( my.html.feedback, {
+            points: correct.length + '/' + my.keywords.length
+          } );
+          $.setContent( main_elem. querySelector( '#conclusion' ), elem );
+
+
+          const goal = correct.length * self.element.querySelector( '#feedback' ).offsetWidth / my.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
           let width = 1;
           let id = setInterval(frame, 8);
 
