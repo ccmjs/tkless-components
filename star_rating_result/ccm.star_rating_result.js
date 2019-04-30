@@ -1,7 +1,15 @@
 /**
  * @overview ccm component for voting
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2016-2019
  * @license The MIT License (MIT)
+ *  @version 4.0.0
+ * @changes
+ * version 4.0.0 (26.04.2019)
+ * - refactoring due to the changed data structure of the star rating
+ * version 3.0.1 (06.02.2019)
+ * - uses ccm v20.0.0
+ * version 3.0.0 (14.09.2018)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
@@ -148,7 +156,7 @@
             let percentage_div = bar.querySelector( '.percentage' );
             let percentage = 0;
 
-            if ( dataset.stars[ i ] ) {
+            if ( dataset.stars[ i ].length > 0 ) {
               $.setContent( percentage_div, Object.keys( dataset.stars[ i ] ).length );
               percentage =  ( Object.keys( dataset.stars[ i ] ).length * 100 ) / count ;
             }
