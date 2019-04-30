@@ -53,6 +53,23 @@
             },
             {
               "id": "conclusion"
+            },
+            {
+              "id": "buttons",
+              "inner": [
+                {
+                  "id": "check"
+                },
+                {
+                  "id": "save"
+                },
+                {
+                  "id": "retry"
+                },
+                {
+                  "id": "solution"
+                }
+              ]
             }
           ]
         },
@@ -192,7 +209,7 @@
           }
 
           if( !my.show_results ) {
-            main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
+            main_elem.querySelector( '#text' ).addEventListener( 'click', event => {
               const span = event.target;
               if ( !span.hasAttribute( 'marked' ) ) return;
 
@@ -221,7 +238,7 @@
 
           function renderButtons() {
             if ( my.check ) {
-              main_elem.appendChild( $.html( my.html.button, {
+              $.setContent( main_elem.querySelector( '#check' ), $.html( my.html.button, {
                 class: 'btn btn-success btn-lg check-btn',
                 label: 'Check',
                 click: () => {
@@ -232,7 +249,7 @@
             }
 
             if ( my.submit ) {
-              main_elem.appendChild( $.html( my.html.button, {
+              $.setContent( main_elem.querySelector( '#save' ), $.html( my.html.button, {
                 class: 'btn btn-info btn-lg save-btn',
                 label: my.submit_button_label,
                 glyphicon: 'glyphicon glyphicon-save',
@@ -282,13 +299,13 @@
           const elem = $.html( my.html.feedback, {
             points: correct.length + '/' + my.keywords.length
           } );
-          main_elem. querySelector( '#conclusion' ).appendChild( elem );
+          $.setContent( main_elem. querySelector( '#conclusion' ), elem );
 
           renderProgressBar( correct.length );
 
           if ( my.show_solution ) {
             // render solution button
-            main_elem.appendChild( $.html( my.html.button, {
+            $.setContent( main_elem. querySelector( '#solution' ), $.html( my.html.button, {
               label: 'Solution',
               class: 'btn btn-warning btn-lg solution-btn',
               glyphicon: 'glyphicon glyphicon-eye-open',
@@ -333,13 +350,12 @@
           main_elem.querySelector( '.check-btn' ).remove();
 
           if ( my.retry ) {
-            const retry_btn = main_elem.appendChild( $.html( my.html.button, {
+            $.setContent( main_elem. querySelector( '#retry' ), $.html( my.html.button, {
               class: 'btn btn-primary btn-lg retry-btn',
               label: 'Retry',
               glyphicon: 'glyphicon glyphicon-repeat',
               click: self.start
             } ) );
-            main_elem.querySelector( 'button' ).parentNode.insertBefore( retry_btn, main_elem.querySelector( '.solution-btn' ) );
           }
         }
       };
