@@ -30,7 +30,7 @@ ccm.files[ "configs.js" ] = {
       },
       {
         "title": "Exercises",
-        "content": ""
+        "content": "..."
       },
       {
         "title": "Bibliography",
