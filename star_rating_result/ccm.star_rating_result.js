@@ -156,7 +156,7 @@
             let percentage_div = bar.querySelector( '.percentage' );
             let percentage = 0;
 
-            if ( dataset.stars[ i ].length > 0 ) {
+            if ( dataset.stars[ i ] && dataset.stars[ i ].length > 0 ) {
               $.setContent( percentage_div, Object.keys( dataset.stars[ i ] ).length );
               percentage =  ( Object.keys( dataset.stars[ i ] ).length * 100 ) / count ;
             }
