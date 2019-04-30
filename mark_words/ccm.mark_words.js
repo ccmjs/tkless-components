@@ -183,6 +183,7 @@
 
         if( !dataset.solutions ) dataset.solutions = [];
         if( !dataset.marked ) dataset.marked = [];
+        if( !dataset.sections ) dataset.sections = [];
 
         const main_elem = $.html( my.html.text );
 
@@ -273,6 +274,7 @@
                 label: my.submit_button_label,
                 glyphicon: 'glyphicon glyphicon-save',
                 click: () => {
+                  verify();
                   $.onFinish( self );
                   if( self.logger ) self.logger.log( 'onfinish', self );
                 }
@@ -305,7 +307,6 @@
         }
 
         function verify() {
-          dataset.sections = [];
 
           dataset.solutions.map( solution => {
             const entry = {};
@@ -377,7 +378,7 @@
       };
 
       this.getValue = () => {
-        return { "solutions": dataset.solutions, "marked": dataset.marked };
+        return dataset;
       };
     }
 
