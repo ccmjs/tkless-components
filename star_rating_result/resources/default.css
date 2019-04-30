@@ -2,6 +2,11 @@
     width: 250px;
 }
 
+.container {
+    padding-left: unset;
+    padding-right: unset;
+}
+
 .star {
     margin: 5px;
     color: #ddd;
@@ -13,6 +18,7 @@
 }
 
 .rating {
+    padding-top: .5rem;
     border: none;
     float: left;
     padding-bottom: 2px;
@@ -43,13 +49,19 @@
  { color: #FFD700;  } /* hover previous stars in list */
 
 
+#total-count {
+    font-size: 19px !important;
+    padding-left: .4rem;
+}
+
 #bars {
-    width: 100%;
-    margin: 7px;
+    width: 200px;
+    margin: 0 7px;
 }
 
 .bar {
     display: flex;
+    align-items: center;
     white-space: nowrap;
     padding: 3px;
 }
@@ -78,6 +90,7 @@
     text-align: right;
     line-height: 22px;
     padding-right: 3px;
+    font-size: 12px;
 
     background-color: #FFD700;
     background-image: -moz-linear-gradient(top, #FFED85, #FFD700);
@@ -94,5 +107,7 @@
 }
 
 .stars {
+    color: #5A5A5A;
+    font-size: 12px;
     padding-right: 10px;
 }
