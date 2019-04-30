@@ -3,7 +3,8 @@
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @changes
- * version 4.0.0 (30.04.2019)
+ *
+ *  version 4.0.0 (30.04.2019)
  * - used self.data instead of my.data
  *
  * version 3.3.0 (03.04.2019)
@@ -32,12 +33,13 @@
      * @type {string}
      */
     name: 'mark_words',
+    version: [ 4,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.1.0.js',
 
     /**
      * default instance configuration
@@ -101,7 +103,7 @@
       // show_results: true,
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        '../mark_words/resources/default.css'
+        'https://ccmjs.github.io/tkless-components/mark_words/resources/default.css'
       ]
     },
 
@@ -191,7 +193,7 @@
             } );
           }
 
-          if( !my.show_results ) {
+          if( !my.show_results === true ) {
             main_elem.querySelector( '#text' ).addEventListener( 'click', ( event ) => {
               const span = event.target;
               if ( !span.hasAttribute( 'marked' ) ) return;
