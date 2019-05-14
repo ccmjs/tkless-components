@@ -8,6 +8,8 @@ ccm.files[ "configs.js" ] = {
     "Idee gehabt, ihn beobachtet und abgewartet, um ihn nun um die Früchte seiner Arbeit zu erleichtern? Oder gehörten " +
     "die Schritte hinter ihm zu einem der unzähligen Gesetzeshüter dieser Stadt, und die stählerne Acht um seine " +
     "Handgelenke würde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon hören.</p>",
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
+      [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
     "onfinish": {
       "log": true,
       "data": {
@@ -25,9 +27,19 @@ ccm.files[ "configs.js" ] = {
     "Idee gehabt, ihn beobachtet und abgewartet, um ihn nun um die Früchte seiner Arbeit zu erleichtern? Oder gehörten " +
     "die Schritte hinter ihm zu einem der unzähligen Gesetzeshüter dieser Stadt, und die stählerne Acht um seine " +
     "Handgelenke würde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon hören.</p>",
+    "data": {
+      "store": [ "ccm.store", { "name": "exercise" } ],
+      "key": "exercise",
+      "user": true
+    },
+    "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-8.3.1.js",
+      [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
     "submit_button": "Save",
+    //"show_results": true,
     "onfinish": {
-      "log": true
+      "alert": "Saved!",
+      "login": true,
+      "store": true
     }
   }
 };

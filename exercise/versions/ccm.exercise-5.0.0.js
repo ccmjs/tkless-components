@@ -2,15 +2,15 @@
  * @overview ccm component for exercise
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
- * @
  */
 ( function () {
 
   const component = {
 
     name: 'exercise',
+    version: [ 5, 0, 0],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.1.0.js',
 
     config: {
       html: {
@@ -36,7 +36,7 @@
           "inner": "%btn_label%"
         }
       },
-      //data: { result: "" },
+      ///data: { result: "" },
       //task: "<h1>Einleitung</h1>",
       //submit_button_label: "Save",
       //show_results,
@@ -48,8 +48,8 @@
       } ],
       content: [ "ccm.component", "https://ccmjs.github.io/akless-components/content/versions/ccm.content-5.0.1.js" ],
       libs: [ "ccm.load",
-        { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
-        "../libs/bootstrap/css/bootstrap.css"
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
       ]
      },
 
