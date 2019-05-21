@@ -27,7 +27,8 @@ ccm.files[ "configs.js" ] = {
       ]
     },
     //"cell_onclick": function ( target, value, self  ){ console.log( target, value, self ); },
-    "submit": "true",
+    //"cell_onrender": function ( event ) { console.log( this, event ); },
+    "submit": true,
     "onchange": function ( result, value, self ) { console.log( result, value, self ); },
     "onfinish": {
       log: true

@@ -25,12 +25,13 @@
      * @type {string}
      */
     name: 'table',
+    version: [4, 0, 0],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.7.0.min.js',
 
     /**
      * default instance configuration
@@ -122,8 +123,8 @@
       //submit: true,
       //onfinish
       //onchange
-      //cell_onrender: function ( event ) { console.log( this, event ); }
-      //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
+      //cell_onrender: function ( event ) { console.log( this, event ); },
+      //cell_onclick: function ( target, value, self ){ console.log( target, value, self ); },
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
       ]
