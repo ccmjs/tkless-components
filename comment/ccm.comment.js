@@ -260,8 +260,8 @@
         main_elem.querySelector( '#comment-list' ).innerHTML = '';
 
         // asynchronous problem
-        for ( const comment  in data.comments )
-          await renderComment( data.comments[ comment ] );
+        for ( let i = 0; i < data.comments.length; i ++ )
+          await renderComment( data.comments[ i ] );
 
         if ( my.voting && my.sorting_by_voting )
           unsorted_comments.sort( compare );
@@ -299,13 +299,9 @@
               edit: async ( event ) => {
                 event.preventDefault();
 
-                let content = comment_elem.querySelector( '.comment-content' ).childNodes[0].textContent;
+                const instance = await my.editor.start( { root: comment_elem.querySelector( '.comment-overview' ) } );
 
-                const instance = await my.editor.start();
-
-                $.setContent( comment_elem.querySelector( '.comment-overview' ), instance.root );
-
-                instance.get().setText( content );
+                instance.get().setText( comment.content );
                 instance.get().focus();
 
                 instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
@@ -352,7 +348,7 @@
             if ( self.user && self.user.isLoggedIn() && ( comment.user === self.user.data().user ) )
               voting.user = '';
 
-           const voting_inst = await my.voting.start( voting );
+            const voting_inst = await my.voting.start( voting );
 
             // fill array for sorting
             unsorted_comments.push( { "voting": voting_inst.getValue(), "comment": comment_elem, "date": comment.date } );
