@@ -6,6 +6,6 @@ ccm.files[ "configs.js" ] = {
 
   "ws_demo": {
     "key": "ws_demo",
-    "pdf": "http://was.hs-koblenz.de/downloads/forschung/GameChanger.pdf"
+    "pdf": "https://ccmjs.github.io/work-and-study/learningapp-marketplace/resources/GameChanger.pdf"
   }
 };
