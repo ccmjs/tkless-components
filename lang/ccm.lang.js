@@ -37,8 +37,7 @@
           "onclick": "%change_lang%",
           "inner": {
             "tag": "img",
-            "src": "%flag%",
-            "style": "width: 23px;"
+            "src": "%flag%"
           }
         },
       },
@@ -50,7 +49,8 @@
           "flag": "resources/en.svg"
         }
       },
-      "active": "de"
+      "active": "de",
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/lang/resources/default.css"]
     },
 
     Instance: function () {
