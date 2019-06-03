@@ -50,7 +50,7 @@
         }
       },
       "active": "de",
-      "onchange": event => console.log( event ),
+      //"onchange": event => console.log( event ),
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/lang/resources/default.css" ]
     },
 
