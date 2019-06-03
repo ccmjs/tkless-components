@@ -78,7 +78,7 @@
 
         const parent = self.ccm.context.find( self, 'lang', true );
         if ( self.parent && parent )
-          parent.onchange.push( self.translate );
+          parent.onchange.push( lang => { my.active = lang; self.translate(); } );
 
         // set shortcut to help functions
         $ = self.ccm.helper;
