@@ -74,19 +74,15 @@
        */
       let $;
 
-      this.init = async () => {
+      this.ready = async () => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
 
-        this.onchange = this.onchange ? [ this.onchange ] : [];
-
-      };
-
-      this.ready = async () => {
-
         // privatize all possible instance members
         my = $.privatize( self );
+
+        self.onchange = self.onchange ? [ self.onchange ] : [];
 
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
 
@@ -100,7 +96,7 @@
 
         const parent = self.ccm.context.find( self, 'lang', true );
         if ( self.parent && parent ) {
-          parent.onchange.push( this.translate );
+          parent.onchange.push( self.translate );
           return $.setContent( self.element, '' );
         }
 
@@ -120,7 +116,7 @@
             change_lang: () => {
               my.active = lang;
               self.translate();
-              this.onchange.forEach( onchange => onchange( lang ) );
+              self.onchange.forEach( onchange => onchange( lang ) );
             }
           } );
           main.appendChild( flag );
