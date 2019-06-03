@@ -50,7 +50,8 @@
         }
       },
       "active": "de",
-      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/lang/resources/default.css"]
+      "onchange": event => console.log( event ),
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/lang/resources/default.css" ]
     },
 
     Instance: function () {
@@ -73,10 +74,16 @@
        */
       let $;
 
-      this.ready = async () => {
+      this.init = async () => {
 
         // set shortcut to help functions
         $ = self.ccm.helper;
+
+        this.onchange = this.onchange ? [ this.onchange ] : [];
+
+      };
+
+      this.ready = async () => {
 
         // privatize all possible instance members
         my = $.privatize( self );
@@ -91,8 +98,11 @@
        */
       this.start = async () => {
 
-        if( self.parent && self.ccm.context.find( self, 'lang', true ) )
+        const parent = self.ccm.context.find( self, 'lang', true );
+        if ( self.parent && parent ) {
+          parent.onchange.push( this.translate );
           return $.setContent( self.element, '' );
+        }
 
         const main =  $.html( my.html.main );
 
@@ -110,6 +120,7 @@
             change_lang: () => {
               my.active = lang;
               self.translate();
+              this.onchange.forEach( onchange => onchange( lang ) );
             }
           } );
           main.appendChild( flag );
