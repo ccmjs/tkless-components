@@ -76,6 +76,10 @@
 
       this.ready = async () => {
 
+        const parent = self.ccm.context.find( self, 'lang', true );
+        if ( self.parent && parent )
+          parent.onchange.push( self.translate );
+
         // set shortcut to help functions
         $ = self.ccm.helper;
 
@@ -95,10 +99,8 @@
       this.start = async () => {
 
         const parent = self.ccm.context.find( self, 'lang', true );
-        if ( self.parent && parent ) {
-          parent.onchange.push( self.translate );
+        if ( self.parent && parent )
           return $.setContent( self.element, '' );
-        }
 
         const main =  $.html( my.html.main );
 
