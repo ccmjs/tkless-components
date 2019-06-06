@@ -13,6 +13,7 @@
      * @type {string}
      */
     name: 'lang',
+    version: [ 1, 0, 0 ],
 
     /**
      * recommended used framework version
