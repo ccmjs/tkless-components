@@ -77,18 +77,23 @@
 
       this.ready = async () => {
 
-        const parent = self.ccm.context.find( self, 'lang', true );
-        if ( self.parent && parent )
-          parent.onchange.push( lang => { my.active = lang; self.translate(); } );
-
         // set shortcut to help functions
         $ = self.ccm.helper;
 
         // privatize all possible instance members
         my = $.privatize( self );
 
+        // consideration of the highest instance for multilingualism
+        const parent = self.ccm.context.find( self, 'lang', true );
+        if ( self.parent && parent ) {
+          parent.onchange.push( lang => { my.active = lang; self.translate(); } );
+          my.active = parent.getValue();
+        }
+
+        // prepare onchange event listeners
         self.onchange = self.onchange ? [ self.onchange ] : [];
 
+        // logging of ready event
         if ( self.logger ) self.logger.log( 'ready', $.clone( my ) );
 
       };
