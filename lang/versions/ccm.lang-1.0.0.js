@@ -141,6 +141,12 @@
         } );
       }
 
+      /**
+       * returns current selected language
+       * @returns {string} current selected language
+       */
+      this.getValue = () => my.active;
+
     }
 
   };
