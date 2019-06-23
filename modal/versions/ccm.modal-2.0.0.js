@@ -133,11 +133,13 @@
         self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 0; left: 0;" );
 
         // translate content
+        const lang_elem = this.element.querySelector( '#lang' );
         if ( self.lang ) {
           await self.lang.start();
-          $.setContent( this.element.querySelector( '#lang' ), self.lang.root );
+          lang_elem && $.setContent( lang_elem, self.lang.root );
           self.lang.translate();
         }
+        else $.removeElement( lang_elem );
 
         async function renderContent() {
           if( $.isInstance( self.modal_content ) ) {
