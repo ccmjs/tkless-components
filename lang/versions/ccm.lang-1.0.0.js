@@ -19,7 +19,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.7.2.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-21.1.0.min.js',
 
     /**
      * default instance configuration
@@ -84,10 +84,10 @@
         my = $.privatize( self );
 
         // consideration of the highest instance for multilingualism
-        const parent = self.ccm.context.find( self, 'lang', true );
+        const parent = self.ccm.context.highestByProperty( self, 'lang', true );
         if ( self.parent && parent ) {
-          parent.onchange.push( lang => { my.active = lang; self.translate(); } );
-          my.active = parent.getValue();
+          parent.lang.onchange.push( lang => { my.active = lang; self.translate(); } );
+          my.active = parent.lang.getValue();
         }
 
         // prepare onchange event listeners
