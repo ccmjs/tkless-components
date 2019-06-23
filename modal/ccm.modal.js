@@ -69,6 +69,7 @@
       libs: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
         "https://ccmjs.github.io/tkless-components/modal/resources/default.css"
       ]
+//    lang: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/lang/versions/ccm.lang-1.0.0.js" ]
     },
 
     Instance: function () {
@@ -127,6 +128,13 @@
 
         $.append( self.parent.element.parentNode, self.root );
         self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 0; left: 0;" );
+
+        // translate content
+        if ( self.lang ) {
+          await self.lang.start();
+          $.setContent( this.element.querySelector( '#lang' ), self.lang.root );
+          self.lang.translate();
+        }
 
         async function renderContent() {
           if( $.isInstance( self.modal_content ) ) {

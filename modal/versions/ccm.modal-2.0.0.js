@@ -1,9 +1,10 @@
 /**
- * @overview ccm component for modal dialog
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @overview ccm component for modal dilaog
+ * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
  * @version 2.0.0
  * start modal dialog automatically, no open needed
+ * added support of multilingualism
  */
 
 ( function () {
@@ -13,7 +14,7 @@
     name: 'modal',
     version: [2,0,0],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-21.1.0.js',
 
     config: {
       html: {
@@ -71,6 +72,7 @@
       libs: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
         "https://ccmjs.github.io/tkless-components/modal/resources/default.css"
       ]
+//    lang: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/lang/versions/ccm.lang-1.0.0.js" ]
     },
 
     Instance: function () {
@@ -129,6 +131,13 @@
 
         $.append( self.parent.element.parentNode, self.root );
         self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 0; left: 0;" );
+
+        // translate content
+        if ( self.lang ) {
+          await self.lang.start();
+          $.setContent( this.element.querySelector( '#lang' ), self.lang.root );
+          self.lang.translate();
+        }
 
         async function renderContent() {
           if( $.isInstance( self.modal_content ) ) {
