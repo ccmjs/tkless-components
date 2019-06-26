@@ -136,7 +136,7 @@
           lang_elem && $.setContent( lang_elem, self.lang.root );
           self.lang.translate();
         }
-        else $.removeElement( lang_elem );
+        else if ( lang_elem ) $.removeElement( lang_elem );
 
         async function renderContent() {
           if( $.isInstance( self.modal_content ) ) {
