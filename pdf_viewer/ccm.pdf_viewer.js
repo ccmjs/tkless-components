@@ -9,7 +9,7 @@
  * - uses ccm v20.0.0
  */
 
-( function () {
+( () => {
 
   const component = {
 
@@ -84,7 +84,7 @@
           ]
         }
       },
-      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", store: "file_upload" }, "1517228670954X509252249813553" ],
+      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", name: "file_upload" }, "1517228670954X509252249813553" ],
       //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
       pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.js" ] ],
       pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
@@ -100,12 +100,6 @@
        * @type {Instance}
        */
       const self = this;
-
-      /**
-       * privatized instance members
-       * @type {object}
-       */
-      let my;
 
       /**
        * shortcut to help functions
@@ -136,21 +130,18 @@
         // set shortcut to help functions
         $ = self.ccm.helper;
 
-        // privatize all possible instance members
-        my = $.privatize( self );
-
-        if ( self.logger ) self.logger.log( 'ready', my );
+        if ( self.logger ) self.logger.log( 'ready', self );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = my.pdfJS_workerSrc;
+        PDFJS.workerSrc = self.pdfJS_workerSrc;
 
-        if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
+        if ( $.isObject( self.pdf ) && self.pdf.slides ) self.pdf = self.pdf.slides[ 0 ].data;
 
         PDFJS.disableStream = true;
 
-        if ( my.pdf )
+        if ( self.pdf )
           // Asynchronously downloads PDF.
-          pdfDoc = await PDFJS.getDocument( my.pdf );
+          pdfDoc = await PDFJS.getDocument( self.pdf );
 
       };
 
@@ -162,13 +153,13 @@
         if ( self.logger ) self.logger.log( 'start' );
 
         // if pdf not defined, no file will be displayed
-        if ( !my.pdf ) {
+        if ( !self.pdf ) {
           return $.setContent( self.element, 'No File to Display' );
 
         }
 
         // render input elements
-        $.setContent( self.element, $.html( my.html.main, {
+        $.setContent( self.element, $.html( self.html.main, {
           prev: () => {
             // set active button
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );

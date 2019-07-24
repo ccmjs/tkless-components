@@ -3,8 +3,10 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
- * @version 3.0.0
+ * @version 4.0.0
  * @changes
+ * version 4.0.0 (24.07.2019)
+ * - privatization removed
  * version 3.0.0 (07.01.2019)
  * - uses ccm v20.0.0
  */
@@ -85,7 +87,7 @@
           ]
         }
       },
-      // pdf: [ "ccm.get", { url: "", store: "" }, "key" ],
+      // pdf: [ "ccm.get", { url: "", name: "" }, "key" ],
       pdfJS: [ "ccm.load", [ "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.js" ] ],
       pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
@@ -102,22 +104,16 @@
       const self = this;
 
       /**
-       * privatized instance members
-       * @type {object}
-       */
-      let my;
-
-      /**
        * shortcut to help functions
        * @type {Object.<string,function>}
        */
       let $;
 
       let pdfDoc,
-          pageNum ,
-          pageRendering,
-          pageNumPending,
-          ctx;
+        pageNum ,
+        pageRendering,
+        pageNumPending,
+        ctx;
 
       let file;
 
@@ -136,21 +132,18 @@
         // set shortcut to help functions
         $ = self.ccm.helper;
 
-        // privatize all possible instance members
-        my = $.privatize( self );
-
-        if ( self.logger ) self.logger.log( 'ready', my );
+        if ( self.logger ) self.logger.log( 'ready', self );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = my.pdfJS_workerSrc;
+        PDFJS.workerSrc = self.pdfJS_workerSrc;
 
-        if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
+        if ( $.isObject( self.pdf ) && self.pdf.slides ) self.pdf = self.pdf.slides[ 0 ].data;
 
         PDFJS.disableStream = true;
 
-        if ( my.pdf )
-          // Asynchronously downloads PDF.
-          pdfDoc = await PDFJS.getDocument( my.pdf );
+        if ( self.pdf )
+        // Asynchronously downloads PDF.
+          pdfDoc = await PDFJS.getDocument( self.pdf );
 
       };
 
@@ -162,29 +155,29 @@
         if ( self.logger ) self.logger.log( 'start' );
 
         // if pdf not defined, no file will be displayed
-        if ( !my.pdf ) {
+        if ( !self.pdf ) {
           return $.setContent( self.element, 'No File to Display' );
 
         }
 
         // render input elements
-        $.setContent( self.element, $.html( my.html.main, {
+        $.setContent( self.element, $.html( self.html.main, {
           prev: () => {
             // set active button
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
-            },
+          },
           next: () => {
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
-            },
+          },
           go_to: () =>{
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
-            },
+          },
           all: () => { pdfDoc.numPages; },
         } ) );
 
