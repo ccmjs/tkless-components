@@ -3,10 +3,8 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
- * @version 4.0.0
+ * @version 3.0.0
  * @changes
- * version 4.0.0 (24.07.2019)
- * - privatization removed
  * version 3.0.0 (07.01.2019)
  * - uses ccm v20.0.0
  */
@@ -104,16 +102,22 @@
       const self = this;
 
       /**
+       * privatized instance members
+       * @type {object}
+       */
+      let my;
+
+      /**
        * shortcut to help functions
        * @type {Object.<string,function>}
        */
       let $;
 
       let pdfDoc,
-        pageNum ,
-        pageRendering,
-        pageNumPending,
-        ctx;
+          pageNum ,
+          pageRendering,
+          pageNumPending,
+          ctx;
 
       let file;
 
@@ -132,18 +136,21 @@
         // set shortcut to help functions
         $ = self.ccm.helper;
 
-        if ( self.logger ) self.logger.log( 'ready', self );
+        // privatize all possible instance members
+        my = $.privatize( self );
+
+        if ( self.logger ) self.logger.log( 'ready', my );
 
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = self.pdfJS_workerSrc;
+        PDFJS.workerSrc = my.pdfJS_workerSrc;
 
-        if ( $.isObject( self.pdf ) && self.pdf.slides ) self.pdf = self.pdf.slides[ 0 ].data;
+        if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
         PDFJS.disableStream = true;
 
-        if ( self.pdf )
-        // Asynchronously downloads PDF.
-          pdfDoc = await PDFJS.getDocument( self.pdf );
+        if ( my.pdf )
+          // Asynchronously downloads PDF.
+          pdfDoc = await PDFJS.getDocument( my.pdf );
 
       };
 
@@ -155,29 +162,29 @@
         if ( self.logger ) self.logger.log( 'start' );
 
         // if pdf not defined, no file will be displayed
-        if ( !self.pdf ) {
+        if ( !my.pdf ) {
           return $.setContent( self.element, 'No File to Display' );
 
         }
 
         // render input elements
-        $.setContent( self.element, $.html( self.html.main, {
+        $.setContent( self.element, $.html( my.html.main, {
           prev: () => {
             // set active button
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
-          },
+            },
           next: () => {
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
-          },
+            },
           go_to: () =>{
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
-          },
+            },
           all: () => { pdfDoc.numPages; },
         } ) );
 
