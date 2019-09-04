@@ -2,8 +2,11 @@
  * @overview ccm component for commenting
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
- * @latest 4.1.0
+ * @version 5.0.0
  * @changes
+ * version 5.0.0 (04.09.2019)
+ * - changed self.data to my.data
+ * - retain the formatting of the user
  * version 4.1.0 (06.01.2019)
  * - uses ccm v20.0.0
  * - some improvement in voting
@@ -18,12 +21,13 @@
      * @type {string}
      */
     name: 'comment',
+    version: [ 5,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-22.5.0.js',
 
     /**
      * default instance configuration
@@ -118,51 +122,51 @@
         },
         "expanded": {
           "inner": {
-              "class": "panel row",
-              "inner": [
-                {
-                  "class": "post-heading",
-                  "inner":[
-                    {
-                      "class": "pull-left image",
-                      "inner": {
-                        "tag": "img",
-                        "src": "../../ccm-components/comment/resources/user.jpg",
-                        "class": "img-circle avatar",
-                        "alt": "user profile image"
+            "class": "panel row",
+            "inner": [
+              {
+                "class": "post-heading",
+                "inner":[
+                  {
+                    "class": "pull-left image",
+                    "inner": {
+                      "tag": "img",
+                      "src": "https://ccmjs.github.io/tkless-components/comment/resources/user.jpg",
+                      "class": "img-circle avatar",
+                      "alt": "user profile image"
+                    }
+                  },
+                  {
+                    "class": "pull-left meta",
+                    "inner": [
+                      {
+                        "class": "title h5",
+                        "inner": "<b>%user%</b>&nbsp;made a post."
+                      },
+                      {
+                        "tag": "h6",
+                        "class": "text-muted time",
+                        "inner": "%date%"
                       }
-                    },
-                    {
-                      "class": "pull-left meta",
-                      "inner": [
-                        {
-                          "class": "title h5",
-                          "inner": "<b>%user%</b>&nbsp;made a post."
-                        },
-                        {
-                          "tag": "h6",
-                          "class": "text-muted time",
-                          "inner": "%date%"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "class": "post-description comment-overview",
-                  "inner": [
-                    {
-                      "tag": "p",
-                      "class": "comment-content",
-                      "inner": "%comment_content%&nbsp;"
-                    },
-                    {
-                      "class": "voting-area"
-                    }
-                  ]
-                }
-              ]
-            }
+                    ]
+                  }
+                ]
+              },
+              {
+                "class": "post-description comment-overview",
+                "inner": [
+                  {
+                    "tag": "p",
+                    "class": "comment-content",
+                    "inner": "%comment_content%&nbsp;"
+                  },
+                  {
+                    "class": "voting-area"
+                  }
+                ]
+              }
+            ]
+          }
         },
         "edit": {
           "tag": "span",
@@ -183,7 +187,7 @@
       ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css",
+        "https://ccmjs.github.io/tkless-components/comment/resources/default.css",
         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"
       ]
     },
