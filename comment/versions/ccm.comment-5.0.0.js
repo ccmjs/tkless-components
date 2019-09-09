@@ -300,16 +300,14 @@
           if ( my.editable ) {
 
             let edit_elem = $.html( my.html.edit, {
-              edit: async ( event ) => {
-                event.preventDefault();
-
+              edit: async () => {
                 const instance = await my.editor.start( { root: comment_elem.querySelector( '.comment-overview' ) } );
 
-                instance.get().setText( comment.content );
+                instance.get().root.innerHTML = comment.content;
                 instance.get().focus();
 
                 instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
-                  comment.content = instance.get().getText().trim();
+                  comment.content = instance.get().root.innerHTML.trim();
                   data.comments[ comment ] =
                     {
                       "user": comment.user,
