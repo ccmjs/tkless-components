@@ -5,7 +5,7 @@
  * @version 5.0.0
  * @changes
  * * version 5.0.0 (16.09.2019)
- * - switch to ccm v22.4.0
+ * - switch to ccm v22.6.1
  * - use self.data convention
  * version 3.0.0 (26.04.2019)
  * - data structure changed due to side effects
@@ -19,7 +19,7 @@
     name: 'star_rating',
     version: [ 5,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-22.4.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-22.6.1.js',
 
     config: {
       "html": {
@@ -71,7 +71,7 @@
       //   [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "guest" ]
       // ],
       //"show_results": true,
-      "rating_result": [ "ccm.component", "https://ccmjs.github.io/tkless-components/star_rating_result/versions/ccm.star_rating_result-4.0.0.js" ],
+      "rating_result": [ "ccm.component", "https://ccmjs.github.io/tkless-components/star_rating_result/versions/ccm.star_rating_result-5.0.0.js" ],
       "css": [ "ccm.load",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
