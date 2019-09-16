@@ -1,15 +1,25 @@
 /**
  * @overview ccm component for voting
- * @author Tea Kless <tea.kless@web.de>, 2019
+ * @author Tea Kless <tea.kless@web.de>, 2016-2019
  * @license The MIT License (MIT)
+ * @version 5.0.0
+ * @changes
+ * * version 5.0.0 (16.09.2019)
+ * - switch to ccm v22.4.0
+ * - use self.data convention
+ * version 3.0.0 (26.04.2019)
+ * - data structure changed due to side effects
+ * version 3.0.0 (06.01.2019)
+ * - uses ccm v20.0.0
  */
 ( function () {
 
   const component = {
 
     name: 'star_rating',
+    version: [ 5,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-22.4.0.js',
 
     config: {
       "html": {
@@ -180,7 +190,6 @@
       };
 
     }
-
   };
 
   let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||["latest"])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
