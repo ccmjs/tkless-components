@@ -75,7 +75,7 @@
       "css": [ "ccm.load",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/star_rating/resources/default.css"
       ]
     },
 
