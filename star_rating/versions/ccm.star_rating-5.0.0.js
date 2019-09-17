@@ -27,22 +27,24 @@
           "inner": [
             {
               "class" : "rating"
-            },
+            } ,
             {
-              "id": "overview",
-              "inner": [
-                {
-                  "tag": "h3",
-                  "id": "reviews",
-                  "inner": "Reviews"
-                },
-                {
-                  "id" : "result"
-                }
-              ]
+              "id": "overview"
             }
           ]
+          },
 
+        "overview": {
+          "inner": [
+            {
+              "tag": "h3",
+              "id": "reviews",
+              "inner": "Reviews"
+            },
+            {
+              "id" : "result"
+            }
+          ]
         },
 
         "input": {
@@ -123,13 +125,15 @@
 
         let main_elem = $.html( my.html.main );
 
-        if( my.show_results )
+        if( my.show_results ) {
+          main_elem.appendChild( $.html( my.html.overview  ) );
           await my.rating_result.start({
             root: main_elem.querySelector( '#result' ),
             detailed: true,
             data: self.data
           });
 
+        }
 
         // render html content
         renderStars();
