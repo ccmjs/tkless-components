@@ -3,10 +3,14 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
+ * @latest
+ * !!! neue version von Pdf.js ausprobiert, ist noch nocht in versiondatei eingeflossen
+ *
  * @version 3.0.0
  * @changes
  * version 3.0.0 (07.01.2019)
  * - uses ccm v20.0.0
+ *
  */
 
 ( () => {
@@ -86,8 +90,8 @@
       },
       // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", name: "file_upload" }, "1517228670954X509252249813553" ],
       //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
-      pdfJS: [ "ccm.load", [ "../libs/pdfjs/pdf.js" ] ],
-      pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
+      pdfJS: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.228/pdf.js" ],
+      pdfJS_workerSrc: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.228/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css"
@@ -141,16 +145,16 @@
 
         if ( self.logger ) self.logger.log( 'ready', my );
 
+        let pdfjsLib = window['pdfjs-dist/build/pdf'];
+
         // specify PDF.js workerSrc property
-        PDFJS.workerSrc = my.pdfJS_workerSrc;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = my.pdfJS_workerSrc;
 
         if ( $.isObject( my.pdf ) && my.pdf.slides ) my.pdf = my.pdf.slides[ 0 ].data;
 
-        PDFJS.disableStream = true;
-
         if ( my.pdf )
         // Asynchronously downloads PDF.
-          pdfDoc = await PDFJS.getDocument( my.pdf );
+          pdfDoc = await pdfjsLib.getDocument( my.pdf );
 
       };
 
