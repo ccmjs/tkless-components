@@ -74,7 +74,7 @@
               "type": "submit",
               "class": "btn btn-success btn-xs",
               "onclick": "%new_comment%",
-              "inner":  "%submit_button_label%"
+              "value":  "%submit_button_label%"
             }
           ]
         },
