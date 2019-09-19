@@ -30,6 +30,7 @@
      * @type {object}
      */
     config: {
+      //"submit_button_label": "Sent" //default value ist "Senden",
       // "chat": true,
       // "editable": true,
       // "sorting_by_voting": true,
@@ -68,7 +69,8 @@
               "tag": "input",
               "type": "submit",
               "class": "btn btn-success btn-xs",
-              "onclick": "%new_comment%"
+              "onclick": "%new_comment%",
+              "value":  "%submit_button_label%"
             }
           ]
         },
@@ -177,6 +179,7 @@
           ]
         }
       },
+
       "editor": [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.1.0.js",
         { "settings.modules.toolbar": false },
         { "settings.placeholder": "Write here ..." }
@@ -359,6 +362,7 @@
         if ( !self.user ) return;
 
         const editor_elem = $.html( my.html.editor, {
+          submit_button_label: my.submit_button_label ? my.submit_button_label: 'Senden',
           new_comment: async ( event ) => {
             event.preventDefault();
             self.user && await self.user.login( self.start );

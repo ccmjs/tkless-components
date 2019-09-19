@@ -34,6 +34,7 @@
      * @type {object}
      */
     config: {
+      //"submit_button_label": "Sent" //default value ist "Senden",
       // "chat": true,
       // "editable": true,
       // "sorting_by_voting": true,
@@ -72,7 +73,8 @@
               "tag": "input",
               "type": "submit",
               "class": "btn btn-success btn-xs",
-              "onclick": "%new_comment%"
+              "onclick": "%new_comment%",
+              "value":  "%submit_button_label%"
             }
           ]
         },
@@ -131,7 +133,7 @@
                     "class": "pull-left image",
                     "inner": {
                       "tag": "img",
-                      "src": "https://ccmjs.github.io/tkless-components/comment/resources/user.jpg",
+                      "src": "../../ccm-components/comment/resources/user.jpg",
                       "class": "img-circle avatar",
                       "alt": "user profile image"
                     }
@@ -363,6 +365,7 @@
         if ( !self.user ) return;
 
         const editor_elem = $.html( my.html.editor, {
+          submit_button_label: my.submit_button_label ? my.submit_button_label: 'Senden',
           new_comment: async ( event ) => {
             event.preventDefault();
             self.user && await self.user.login( self.start );
