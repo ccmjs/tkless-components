@@ -5,7 +5,7 @@
  * @latest 5.0.1
  * @changes
  *  version 5.0.1
- *  - uses ccm v.22.6.1
+ *  - uses ccm v.23.0.0
  */
 ( function () {
 
@@ -14,7 +14,7 @@
     name: 'exercise',
     version: [ 5, 0, 1],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-22.6.1.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-23.0.0.js',
 
     config: {
       html: {
