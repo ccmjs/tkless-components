@@ -29,11 +29,9 @@
       "html": {
         "main": {
           "id": "main"
-
         },
         "flag": {
           "tag": "a",
-          "href": "#",
           "id": "%lang%",
           "onclick": "%change_lang%",
           "inner": {
