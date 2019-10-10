@@ -440,23 +440,6 @@
           "title": "News",
           "icon": "rss_feed",
           "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/news/versions/ccm.news-2.1.0.js", {
-            "editable": "true",
-            "data": {
-              "store": [ "ccm.store", { "name": "news" } ],
-              "key": "test_news"
-            },
-            "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-              "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-              "realm": "guest",
-              "title": "Please enter any Username"
-            } ],
-          } ]
-        },
-        {
-          "title": "News",
-          "icon": "rss_feed",
-          "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/news/versions/ccm.news-2.1.0.js", {
-            "editable": "true",
             "data": {
               "store": [ "ccm.store", { "name": "news" } ],
               "key": "test_news"
@@ -601,6 +584,8 @@
 
         async function renderFooter() {
           for( const entry of self.footer ) {
+            if( entry.user && self.user.data().user !== entry.user )
+              return;
             const footer_entry = $.html( self.html.footer_entry, {
               id: entry.title.toLocaleLowerCase(),
               icon: entry.icon,
