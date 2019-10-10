@@ -521,7 +521,7 @@
 
         let main_elem = $.html( self.html.main, {
           title: self.title,
-          renderContent: () => {
+          renderHome: () => {
             $.setContent( main_elem.querySelector( '#title' ), self.title );
             renderContent();
           }
@@ -532,26 +532,8 @@
           main_elem.querySelector( '#user' ).appendChild( self.user.root );
         }
 
-        await renderContent();
-        await renderFooter();
-
-        $.setContent( self.element, main_elem );
-
-        if ( checkOverflow( self.element.querySelector( '.article' ) ) ) {
-          const more = $.html( self.html.more, {
-            id: 'more',
-            scroll_down: () => {
-              console.log( 'click' );
-              self.element.querySelector( '.article' ).lastChild.scrollIntoView( { block: 'end',  behavior: 'smooth' } );
-            }
-          } );
-          self.element.appendChild( more );
-        }
-
-        function checkOverflow( element ) {
-
-          return element.clientHeight < element.scrollHeight;
-        }
+        renderContent();
+        renderFooter();
 
         async function renderContent() {
           $.setContent( main_elem.querySelector( '.article' ), '' );
@@ -566,6 +548,7 @@
               root: content.querySelector("#menu-list"),
               data: entry,
               onclick: async event => {
+                self.element.querySelector( '#more' ).remove();
                 let div = document.createElement( 'small' );
                 div.setAttribute( 'id', 'subtitle' );
 
@@ -580,6 +563,8 @@
               }
             } );
           }
+          $.setContent( self.element, main_elem );
+          checkOverflow( self.element.querySelector( '.article' ) );
         }
 
         async function renderFooter() {
@@ -600,6 +585,22 @@
             } );
 
             main_elem.querySelector( '.footer' ).appendChild( footer_entry );
+            $.setContent( self.element, main_elem );
+          }
+        }
+
+        function checkOverflow( element ) {
+          let checkOverflow = element.clientHeight < element.scrollHeight;
+
+          if ( checkOverflow ) {
+            const more = $.html( self.html.more, {
+              id: 'more',
+              scroll_down: () => {
+                console.log( 'click' );
+                self.element.querySelector( '.article' ).lastChild.scrollIntoView( { block: 'end',  behavior: 'smooth' } );
+              }
+            } );
+            self.element.appendChild( more );
           }
         }
 
