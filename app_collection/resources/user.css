@@ -1,0 +1,20 @@
+.well {
+  background-color: unset;
+  box-shadow: unset;
+  border: unset;
+  border-radius: unset;
+}
+
+#logged_in #user {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+#logged_in .glyphicon-user {
+  font-size: 18px;
+}
+
+#logged_in {
+  flex-direction: column;
+  align-items: center;
+}

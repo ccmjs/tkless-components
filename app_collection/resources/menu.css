@@ -1,0 +1,13 @@
+.entry {
+  font-size: 1.2rem;
+  letter-spacing: -1px;
+  padding: .2rem 2rem;
+  cursor: pointer;
+  line-height: 1.5rem;
+  color: #42a5f5;
+}
+
+.entry:hover {
+  background-color: #64b5f6;
+  color: #ffffff;
+}

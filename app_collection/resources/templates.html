@@ -1,0 +1,31 @@
+<ccm-template key="main">
+  <div id="container">
+    <div class="header valign-wrapper z-depth-1">
+      <i class="material-icons" onclick="%renderContent%">home</i>
+      <div id="title">%title%</div>
+      <div id="user"></div>
+    </div>
+
+    <div class="article"></div>
+    <div class="footer z-depth-2 hoverable"></div>
+  </div>
+</ccm-template>
+
+
+<ccm-template key="content">
+  <h3 id="section" class="header"></h3>
+  <div id="menu-list"></div>
+</ccm-template>
+
+<ccm-template key="footer_entry">
+  <div id="%id%">
+    <i class="material-icons">%icon%</i>
+    <div>%icon_title%</div>
+  </div>
+</ccm-template>
+
+<ccm-template key="more">
+  <div id="%id%" onclick="%scroll_down%">
+    <a id="more" class="btn-floating btn-large waves-effect waves-light  yellow darken-2" title="More"><i class="large material-icons">arrow_drop_down</i></a>
+  </div>
+</ccm-template>
