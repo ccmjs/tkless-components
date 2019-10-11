@@ -15,7 +15,7 @@
     config: {
       "html": [ "ccm.load", "resources/templates.html" ],
       "title": "My Apps",
-      "color_scheme": "blue",
+      "color_scheme": "#ee6e73",
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
         "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
         "logged_in": true,
