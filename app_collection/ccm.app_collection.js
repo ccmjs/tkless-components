@@ -15,6 +15,7 @@
     config: {
       "html": [ "ccm.load", "resources/templates.html" ],
       "title": "My Apps",
+      "color_scheme": "blue",
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
         "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
         "logged_in": true,
@@ -521,6 +522,7 @@
 
         let main_elem = $.html( self.html.main, {
           title: self.title,
+          bg_color: self.color_scheme,
           renderHome: () => {
             $.setContent( main_elem.querySelector( '#title' ), self.title );
             renderContent();
@@ -543,6 +545,7 @@
 
             $.append( main_elem.querySelector( '.article' ), content );
             $.setContent( content.querySelector( "#section" ), entry.section );
+            content.querySelector( "#section" ).style.color = self.color_scheme;
 
             await self.menu.start({
               root: content.querySelector("#menu-list"),
@@ -573,6 +576,8 @@
               return;
             const footer_entry = $.html( self.html.footer_entry, {
               id: entry.title.toLocaleLowerCase(),
+              mouse_over: function () { this.style.color = self.color_scheme; this.style.backgroundColor = 'white'; },
+              mouse_leave: function () { this.style.color = 'white'; this.style.backgroundColor = self.color_scheme; },
               icon: entry.icon,
               icon_title: entry.title
             } );

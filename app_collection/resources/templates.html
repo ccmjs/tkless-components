@@ -1,13 +1,13 @@
 <ccm-template key="main">
   <div id="container">
-    <div class="header valign-wrapper z-depth-1">
+    <div class="header valign-wrapper z-depth-1" style="background-color: %bg_color%">
       <i class="material-icons" onclick="%renderHome%">home</i>
       <div id="title">%title%</div>
       <div id="user"></div>
     </div>
 
     <div class="article"></div>
-    <div class="footer z-depth-2 hoverable"></div>
+    <div class="footer z-depth-2 hoverable" style="background-color: %bg_color%"></div>
   </div>
 </ccm-template>
 
@@ -18,7 +18,7 @@
 </ccm-template>
 
 <ccm-template key="footer_entry">
-  <div id="%id%">
+  <div id="%id%" onmouseover="%mouse_over%" onmouseleave="%mouse_leave%">
     <i class="material-icons">%icon%</i>
     <div>%icon_title%</div>
   </div>
