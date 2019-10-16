@@ -1,7 +1,8 @@
 /**
- * @overview example ccm component that just renders "Hello, World!"
- * @author André Kless <andre.kless@web.de> 2017-2018
+ * @overview ccm component of app collection
+ * @author Tea Kless <tea.kless@web.de> 2019
  * @license The MIT License (MIT)
+ *
  */
 
 ( function () {
