@@ -2,16 +2,11 @@
   height: 100%;
 }
 #container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 80px 1fr 1fr 70px;
-  grid-template-areas:
-      "header header header header"
-      "article article article article "
-      "article article article article"
-      "footer footer footer footer";
+
 }
 
 #container > .header {
@@ -35,15 +30,14 @@
 }
 
 .sidebar {
-  grid-area: sidebar;
   border: 1px solid grey;
 }
 
 .article {
-  grid-area: article;
   border-left: 1px solid grey;
   border-right: 1px solid grey;
   overflow: scroll;
+  height: 100%;
 }
 
 #section.header {
@@ -53,10 +47,8 @@
 }
 
 .footer {
-  padding: 1rem;
   background-color: #ee6e73;
   color: white;
-  grid-area: footer;
   display: flex;
   justify-content: space-around;
   align-items: center;

@@ -535,7 +535,10 @@
         }
 
         renderContent();
-        renderFooter();
+        if( !self.footer )
+          main_elem.querySelector( '.footer' ).remove();
+        else
+          renderFooter();
 
         async function renderContent() {
           $.setContent( main_elem.querySelector( '.article' ), '' );
