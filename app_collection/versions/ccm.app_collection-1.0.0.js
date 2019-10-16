@@ -520,7 +520,7 @@
       this.start = async () => {
 
         // login user, if not logged in
-        this.user && await this.user.login();
+        self.user && await self.user.login();
 
         let main_elem = $.html( self.html.main, {
           title: self.title,

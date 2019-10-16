@@ -16,51 +16,51 @@
       "html": [ "ccm.load", "resources/templates.html" ],
       "title": "My Apps",
       "color_scheme": "#ee6e73",
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
+     /* "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
         "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
         "logged_in": true,
         "realm": "guest",
         "title": "Please enter any Username.",
         "style": [ "ccm.load", "resources/user.css" ]
-      } ],
+      } ],*/
       "content": [
         {
           "section": "Phase 1",
           "entries": [
-          {
-            "title": "What do you do? Part 1",
-            "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-              "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-              "data": {
-                "store": [ "ccm.store", { "name": "exercise_results" } ],
-                "user": true,
-                "key": "what_do_you_do_part_1"
-              },
-              "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                "logged_in": true,
-                "realm": "guest",
-                "title": "Please enter eny Username"
+            {
+              "title": "What do you do? Part 1",
+              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
+                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
+                "data": {
+                  "store": [ "ccm.store", { "name": "exercise_results" } ],
+                  "user": true,
+                  "key": "what_do_you_do_part_1"
+                },
+                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
+                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
+                  "logged_in": true,
+                  "realm": "guest",
+                  "title": "Please enter eny Username"
+                } ]
               } ]
-            } ]
-          },
-          {
-            "title": "Present Simple vs Present Progressive",
-            "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-              "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-              "data": {
-                "store": [ "ccm.store", { "name": "cloze_results" } ],
-                "user": true,
-                "key": "simple_vs_progressive_02"
-              },
-              "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                "realm": "quest",
-                "title": "Please enter any Username"
+            },
+            {
+              "title": "Present Simple vs Present Progressive",
+              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
+                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
+                "data": {
+                  "store": [ "ccm.store", { "name": "cloze_results" } ],
+                  "user": true,
+                  "key": "simple_vs_progressive_02"
+                },
+                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
+                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
+                  "realm": "quest",
+                  "title": "Please enter any Username"
+                } ]
               } ]
-            } ]
-          }
-        ]
+            }
+          ]
         },
         {
           "section": "Phase 2",
@@ -479,7 +479,7 @@
         "css": [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
           "https://use.fontawesome.com/releases/v5.6.3/css/all.css",
           "resources/menu.css" ]
-        } ],
+      } ],
       "css": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
         { "context": "head", "url": "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" },
         {  "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css" },
@@ -518,7 +518,7 @@
       this.start = async () => {
 
         // login user, if not logged in
-        this.user && await this.user.login();
+        self.user && await self.user.login();
 
         let main_elem = $.html( self.html.main, {
           title: self.title,
