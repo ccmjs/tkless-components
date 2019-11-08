@@ -14,12 +14,12 @@
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-24.0.4.js',
 
     config: {
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/icpn_picker/resources/templates.html" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/icon_picker/resources/templates.html" ],
       "css": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css",
         { "context": "head", "url": "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" },
         {  "url": "https://fonts.googleapis.com/icon?family=Material+Icons", "type": "css" },
         {  "url": "https://fonts.googleapis.com/icon?family=Material+Icons", "type": "css", "context": "head" },
-        "https://ccmjs.github.io/tkless-components/icpn_picker/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/icon_picker/resources/default.css"
       ],
       "js": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" ]
     },
