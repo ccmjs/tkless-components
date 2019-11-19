@@ -6,22 +6,34 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-
 }
 
 #container > .header {
   font-size: 20px;
   display: flex;
   justify-content: space-between;
-  color: white;
   grid-area: header;
   border: 1px solid grey;
+  background-color: #f8f9fa;
+  color: #777;
+  height: 80px;
+}
+
+.header #home {
+  padding: .4rem 1rem;
+  height: 100%;
+}
+.header #home:hover,
+.footer .app-icon:hover {
+  background-color: #eeeeee;
+  color: #333;
 }
 
 #title {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 2rem;
 }
 
 .material-icons {
@@ -40,30 +52,28 @@
   height: 100%;
 }
 
-#section.header {
-  margin: 1rem;
-  color: #ee6e73;
-  font-weight: 300;
+#section{
+  background-color: #009ee0;
+  color: #fff;
+  padding: 0.7em 1em;
+  font-size: 1.4em;
 }
 
 .footer {
-  background-color: #ee6e73;
-  color: white;
+  background-color: #f8f9fa;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  color: #777;
 }
 
 .footer:last-child {
   line-height: 8px;
   text-align: center;
+  font-weight: 600;
 }
 .footer > div {
   padding: 4px 11px 6px;
-}
-
-.footer > div:hover {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
 #more {

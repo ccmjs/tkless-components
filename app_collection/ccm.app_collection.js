@@ -15,48 +15,40 @@
     config: {
       "html": [ "ccm.load", "resources/templates.html" ],
       "title": "My Apps",
-      "color_scheme": "#ee6e73",
-     /* "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
         "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
         "logged_in": true,
-        "realm": "guest",
-        "title": "Please enter any Username.",
         "style": [ "ccm.load", "resources/user.css" ]
-      } ],*/
+      } ],
       "content": [
         {
           "section": "Phase 1",
           "entries": [
             {
-              "title": "What do you do? Part 1",
+              "title": "Title 1",
               "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
                 "data": {
                   "store": [ "ccm.store", { "name": "exercise_results" } ],
                   "user": true,
-                  "key": "what_do_you_do_part_1"
+                  "key": "title_1"
                 },
                 "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
                   "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "logged_in": true,
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
+                  "logged_in": true
                 } ]
               } ]
             },
             {
-              "title": "Present Simple vs Present Progressive",
+              "title": "Title 2",
               "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
                 "data": {
                   "store": [ "ccm.store", { "name": "cloze_results" } ],
                   "user": true,
-                  "key": "simple_vs_progressive_02"
+                  "key": "title_2"
                 },
                 "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
                   "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "quest",
-                  "title": "Please enter any Username"
+                  "logged_in": true
                 } ]
               } ]
             }
@@ -66,352 +58,30 @@
           "section": "Phase 2",
           "entries": [
             {
-              "title": "What do you do?",
-              "ignore":[ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.0.0.js",  {
-                "key": [ "ccm.get", { "name": "ws_quiz", "url": "https://ccm2.inf.h-brs.de" }, "1558986834264X3190854012585904" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "quiz_results"  } ],
-                  "user": true,
-                  "key": "what_do_you_do"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 3",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
+              "title": "Title 1",
               "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results"} ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 4",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
                 "data": {
                   "store": [ "ccm.store", { "name": "exercise_results" } ],
                   "user": true,
-                  "key": "what_do_you_do_part_1"
+                  "key": "title_1"
                 },
                 "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
                   "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "logged_in": true,
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
+                  "logged_in": true
                 } ]
               } ]
             },
             {
-              "title": "Present Simple vs Present Progressive",
+              "title": "Title 2",
               "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
                 "data": {
                   "store": [ "ccm.store", { "name": "cloze_results" } ],
                   "user": true,
-                  "key": "simple_vs_progressive_02"
+                  "key": "title_2"
                 },
                 "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
                   "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            }
-          ]
-        },
-        {
-          "section": "Phase 5",
-          "entries": [
-            {
-              "title": "What do you do? Part 1",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/exercise/versions/ccm.exercise-5.0.1.js", {
-                "key": [ "ccm.get", { "name": "ws_exercise", "url": "https://ccm2.inf.h-brs.de" }, "1562227411089X5472852610388494" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "exercise_results" } ],
-                  "user": true,
-                  "key": "what_do_you_do_part_1"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
-                } ]
-              } ]
-            },
-            {
-              "title": "Present Simple vs Present Progressive",
-              "ignore": [ "ccm.instance", "https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.0.js", {
-                "key": [ "ccm.get", { "name": "ws_cloze", "url": "https://ccm2.inf.h-brs.de" }, "1558988788863X5301679270557094" ],
-                "data": {
-                  "store": [ "ccm.store", { "name": "cloze_results" } ],
-                  "user": true,
-                  "key": "simple_vs_progressive_02"
-                },
-                "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-                  "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-                  "realm": "guest",
-                  "title": "Please enter eny Username"
+                  "logged_in": true
                 } ]
               } ]
             }
@@ -432,8 +102,7 @@
             },
             "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
               "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-              "realm": "guest",
-              "title": "Please enter any Username"
+              "logged_in": true
             } ],
           } ]
         },
@@ -447,8 +116,7 @@
             },
             "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
               "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-              "realm": "guest",
-              "title": "Please enter any Username"
+              "logged_in": true
             } ],
           } ]
         },
@@ -464,8 +132,7 @@
             },
             "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
               "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
-              "realm": "guest",
-              "title": "Please enter any Username"
+              "logged_in": true
             } ],
           } ]
         }
@@ -473,7 +140,7 @@
       "feedback": [ "ccm.component", "https://ccmjs.github.io/tkless-components/feedback/versions/ccm.feedback-4.0.0.js", {
         "from_above": 20,
         "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/right.css" ],
-        "data": { "store": [ "ccm.store", { "name": "feedback", "url": "https://ccm2.inf.h-brs.de" } ], "key": "be1_WiSe19_feedback" }
+        "data": { "store": [ "ccm.store", { "name": "feedback" } ] }
       } ],
       "menu": [ "ccm.component", "https://ccmjs.github.io/akless-components/menu/versions/ccm.menu-2.8.1.js", {
         "css": [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
@@ -486,7 +153,8 @@
         {  "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" },
         "resources/default.css"
       ],
-      "js": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" ]
+      "js": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" ],
+      "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.4.js", { "app": "app_collection" } ],
     },
 
     Instance: function () {
@@ -522,10 +190,10 @@
 
         let main_elem = $.html( self.html.main, {
           title: self.title,
-          bg_color: self.color_scheme,
           renderHome: () => {
             $.setContent( main_elem.querySelector( '#title' ), self.title );
             renderContent();
+            self.routing && self.routing.set( 'home' );
           }
         } );
 
@@ -534,67 +202,114 @@
           main_elem.querySelector( '#user' ).appendChild( self.user.root );
         }
 
-        renderContent();
+        await renderContent();
+
         if( !self.footer )
           main_elem.querySelector( '.footer' ).remove();
         else
           renderFooter();
 
+        // define and check routes
+        self.routing && await self.routing.define( {
+          home: async () =>  {
+            $.setContent( main_elem.querySelector( '.article' ), '' );
+            await renderContent();
+            updateBreadcrumb( self.title, 'home' )
+          },
+          app: ( loc, i, app ) => {
+            switch ( loc ) {
+              case 'footer':
+                renderApp( self.footer[ i ] );
+                updateBreadcrumb( self.title, app );
+                break;
+              case 'content':
+                $.setContent( main_elem.querySelector( '.article' ), '' );
+                renderApp ( self.content[ i ].entries[ app ] );
+                updateBreadcrumb( self.content[ i ].section, self.content[ i ].entries[ app ].title );
+                break;
+            }
+
+
+          }
+        } );
+
         async function renderContent() {
           $.setContent( main_elem.querySelector( '.article' ), '' );
 
-          for ( const entry of self.content ) {
+          for ( const i in self.content ) {
+            const entry = self.content[ i ];
             let content = $.html( self.html.content );
 
             $.append( main_elem.querySelector( '.article' ), content );
             $.setContent( content.querySelector( "#section" ), entry.section );
-            content.querySelector( "#section" ).style.color = self.color_scheme;
 
-            await self.menu.start({
-              root: content.querySelector("#menu-list"),
+            await self.menu.start( {
+              root: content.querySelector( "#menu-list" ),
               data: entry,
               onclick: async event => {
-                self.element.querySelector( '#more' ).remove();
-                let div = document.createElement( 'small' );
-                div.setAttribute( 'id', 'subtitle' );
+                self.element.querySelector( '#more' ) && self.element.querySelector( '#more' ).remove();
 
-                $.setContent( main_elem.querySelector( '#title' ), entry.section );
-                main_elem.querySelector( '#title' ).appendChild( div );
-                $.setContent( main_elem.querySelector( '#subtitle' ), event.title );
+                await renderApp( event );
+                updateBreadcrumb( entry.section, event.title );
 
-                event.ignore[2].root = main_elem.querySelector( '.article' );
-                event.ignore[2].parent = self;
-                let inst = await $.solveDependency( event.ignore );
-                inst.start();
+                self.routing && self.routing.set( 'app-content-'+ i + '-' + ( event.nr - 1 ) );
               }
             } );
           }
+
+          if ( self.feedback ) {
+            await self.feedback.start( { root:  main_elem.querySelector( '#feedback' ) } );
+          }
+
           $.setContent( self.element, main_elem );
           checkOverflow( self.element.querySelector( '.article' ) );
         }
 
         async function renderFooter() {
-          for( const entry of self.footer ) {
-            if( entry.user && self.user.data().user !== entry.user )
+          for( const i in self.footer ) {
+            const entry = self.footer[ i ];
+            if( entry.user && self.user.data().user !== entry.user ) {
+              self.routing && self.routing.set( 'home' );
               return;
+            }
             const footer_entry = $.html( self.html.footer_entry, {
               id: entry.title.toLocaleLowerCase(),
-              mouse_over: function () { this.style.color = self.color_scheme; this.style.backgroundColor = 'white'; },
-              mouse_leave: function () { this.style.color = 'white'; this.style.backgroundColor = self.color_scheme; },
               icon: entry.icon,
               icon_title: entry.title
             } );
 
             footer_entry.addEventListener( 'click', async ()=> {
-              entry.ignore[2].root = main_elem.querySelector( '.article' );
-              entry.ignore[2].parent = self;
-              let inst = await $.solveDependency( entry.ignore );
-              inst.start();
+              await renderApp( entry );
+              // update route
+              self.routing && self.routing.set( 'app-footer-'+ i + '-'+ entry.title.toLocaleLowerCase() );
+              // update breadcrumb
+              updateBreadcrumb( self.title, entry.title );
             } );
 
             main_elem.querySelector( '.footer' ).appendChild( footer_entry );
             $.setContent( self.element, main_elem );
           }
+        }
+
+        function updateBreadcrumb( title, subtitle ) {
+          if ( subtitle === 'home')
+            $.setContent( main_elem.querySelector( '#title' ), title );
+          else {
+            let div = document.createElement( 'small' );
+            div.setAttribute( 'id', 'subtitle' );
+
+            $.setContent( main_elem.querySelector( '#title' ), title );
+            main_elem.querySelector( '#title' ).appendChild( div );
+            $.setContent( main_elem.querySelector( '#subtitle' ), subtitle );
+          }
+
+        }
+
+        async function renderApp( config ) {
+          config.ignore[ config.ignore.length - 1 ].root = main_elem.querySelector( '.article' );
+          config.ignore[ config.ignore.length - 1 ].parent = self;
+          let inst = await $.solveDependency( config.ignore );
+          inst.start();
         }
 
         function checkOverflow( element ) {

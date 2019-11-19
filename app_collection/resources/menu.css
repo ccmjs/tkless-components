@@ -1,15 +1,11 @@
 .entry {
-  font-size: 1.1rem;
-  letter-spacing: -1px;
-  padding: .2rem 2rem;
+  padding: 0.6rem 2.3rem;
   cursor: pointer;
   line-height: 1.5rem;
-  color: #42a5f5;
+  color: rgb(35, 155, 209);
 }
 
 .entry:hover {
-  background-color: #64b5f6;
+  background-color: rgba(132, 162, 102, .9);
   color: #ffffff;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-  font-size: 1.4rem;
 }
