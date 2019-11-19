@@ -1,3 +1,7 @@
+#element {
+  min-height: 400px;
+}
+
 .material-icon-picker {
   position: absolute;
   background: #fcfcfc;
@@ -35,8 +39,4 @@ div.material-icon-picker input[type="text"] {
 
 .material-icon-picker .material-icons:hover {
   background: #ececec;
-}
-
-.row {
-  height: 2px;
 }
