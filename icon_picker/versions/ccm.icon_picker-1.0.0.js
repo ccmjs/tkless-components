@@ -94,7 +94,7 @@
         // Hide the picker when the input field lose focus.
         document.addEventListener( 'mouseup', function focusout( e ) {
           const picker = self.root;
-          if ( !$.hasDomContact( self.root ) ) { document.removeEventListener( "mouseup", focusout, true ) }
+          //if ( !$.hasDomContact( self.root ) ) { document.removeEventListener( "mouseup", focusout, true ) }
           if ( picker && picker !== e.target ) {
             self.element.querySelector( '.material-icon-picker' ).style.display = 'none';
           }
