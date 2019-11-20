@@ -89,17 +89,14 @@
         // Show the picker when the input field gets focus.
         input.addEventListener( 'focus', function () {
           self.element.querySelector( '.material-icon-picker' ).style.display = 'block';
-        }  );
+        } );
 
         // Hide the picker when the input field lose focus.
-        document.addEventListener( 'mouseup', function focusout( e ) {
-          e.stopPropagation();
-          const picker = self.root;
-          //if ( !$.hasDomContact( self.root ) ) { document.removeEventListener( "mouseup", focusout, true ) }
-          if ( picker && picker !== e.target ) {
+        document.addEventListener( 'mouseup', function focusout() {
+          if ( !self.element.querySelector( '*:focus' ) )
             self.element.querySelector( '.material-icon-picker' ).style.display = 'none';
-          }
-        });
+          if ( !$.hasDomContact( self.root ) ) { document.removeEventListener( "mouseup", focusout, true ) }
+        } );
       };
 
       this.getValue = () => {
