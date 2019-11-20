@@ -93,6 +93,7 @@
 
         // Hide the picker when the input field lose focus.
         document.addEventListener( 'mouseup', function focusout( e ) {
+          e.stopPropagation();
           const picker = self.root;
           //if ( !$.hasDomContact( self.root ) ) { document.removeEventListener( "mouseup", focusout, true ) }
           if ( picker && picker !== e.target ) {
