@@ -1,8 +1,4 @@
-#element {
-  min-height: 400px;
-}
-
-.material-icon-picker {
+ccm-icon_picker .material-icon-picker {
   position: absolute;
   background: #fcfcfc;
   text-align: center;
@@ -10,25 +6,25 @@
   padding: 20px;
 }
 
-.material-icon-picker:focus {
+ccm-icon_picker .material-icon-picker:focus {
   outline: none;
 }
 
-.material-icon-picker-prefix {
+ccm-icon_picker .material-icon-picker-prefix {
   top: .5rem;
 }
 
-.material-icon-picker .icons {
+ccm-icon_picker .material-icon-picker .icons {
   max-width: 300px;
   max-height: 200px;
   overflow: scroll;
 }
 
-div.material-icon-picker input[type="text"] {
+ccm-icon_picker div.material-icon-picker input[type="text"] {
   width: 100%;
 }
 
-.material-icon-picker .material-icons {
+ccm-icon_picker .material-icon-picker .material-icons {
   font-size: 30px;
   cursor: pointer;
   border-radius: 50%;
@@ -37,6 +33,6 @@ div.material-icon-picker input[type="text"] {
   transition: .2s;
 }
 
-.material-icon-picker .material-icons:hover {
+ccm-icon_picker .material-icon-picker .material-icons:hover {
   background: #ececec;
 }
