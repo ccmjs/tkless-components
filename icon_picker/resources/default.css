@@ -1,4 +1,4 @@
-ccm-icon_picker .material-icon-picker {
+div[id^="icon_picker"] .material-icon-picker {
   position: absolute;
   background: #fcfcfc;
   text-align: center;
@@ -6,25 +6,25 @@ ccm-icon_picker .material-icon-picker {
   padding: 20px;
 }
 
-ccm-icon_picker .material-icon-picker:focus {
+div[id^="icon_picker"] .material-icon-picker:focus {
   outline: none;
 }
 
-ccm-icon_picker .material-icon-picker-prefix {
+div[id^="icon_picker"] .material-icon-picker-prefix {
   top: .5rem;
 }
 
-ccm-icon_picker .material-icon-picker .icons {
+div[id^="icon_picker"] .material-icon-picker .icons {
   max-width: 300px;
   max-height: 200px;
   overflow: scroll;
 }
 
-ccm-icon_picker div.material-icon-picker input[type="text"] {
+div[id^="icon_picker"] div.material-icon-picker input[type="text"] {
   width: 100%;
 }
 
-ccm-icon_picker .material-icon-picker .material-icons {
+div[id^="icon_picker"] .material-icon-picker .material-icons {
   font-size: 30px;
   cursor: pointer;
   border-radius: 50%;
@@ -33,6 +33,6 @@ ccm-icon_picker .material-icon-picker .material-icons {
   transition: .2s;
 }
 
-ccm-icon_picker .material-icon-picker .material-icons:hover {
+div[id^="icon_picker"] .material-icon-picker .material-icons:hover {
   background: #ececec;
 }
