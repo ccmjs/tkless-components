@@ -308,10 +308,12 @@
         }
 
         async function renderApp( config ) {
-          config.ignore[ config.ignore.length - 1 ].root = main_elem.querySelector( '.article' );
-          config.ignore[ config.ignore.length - 1 ].parent = self;
-          let inst = await $.solveDependency( config.ignore );
-          inst.start();
+          const instance_config = await $.solveDependency( config.ignore[ 2 ] );
+          instance_config.root = main_elem.querySelector( '.article' );
+          instance_config.parent = self;
+          config.ignore[ 2 ] = instance_config;
+          const instance = await $.solveDependency( config.ignore );
+          await instance.start();
         }
 
         function checkOverflow( element ) {
