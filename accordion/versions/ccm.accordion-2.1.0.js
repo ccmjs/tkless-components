@@ -89,7 +89,7 @@
         }
 
           // render accordion
-        $.setContent( self.element, $.html( accordion( my.inner || data() ) ) );
+        $.setContent( self.element, $.html( accordion( my.inner || await data() ) ) );
 
         function accordion( element ) {
           const acc = element;
@@ -229,28 +229,28 @@
         /*
          * forms my.inner structure from given data (my.data)
          */
-        function data() {
+        async function data() {
           const div = document.createElement( 'div' );
           const title = document.createElement( 'title' );
           const content = document.createElement( 'content' );
           const p = document.createElement( 'p' );
 
-          my.entries.map(  async entry => {
+          for( const entry of my.entries) {
             const title_clone = title.cloneNode( true );
             const content_clone = content.cloneNode( true );
             const p_clone = p.cloneNode( true );
             title_clone.innerHTML = entry.title;
 
             if ( $.isInstance( entry.content ) ) {
-             await entry.content.start();
-             $.setContent( p_clone, entry.content.root );
+              await entry.content.start();
+              $.setContent( p_clone, entry.content.root );
             }
             else $.setContent( p_clone, $.html( entry.content ) );
 
             content_clone.appendChild( p_clone );
             div.appendChild( title_clone );
             div.appendChild( content_clone );
-          } );
+          }
 
           return div;
         }
