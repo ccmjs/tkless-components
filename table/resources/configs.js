@@ -5,7 +5,7 @@ ccm.files[ "configs.js" ] = {
     "table_col": 7,
     "add_row": true,
     "table_head": [ "Checkbox", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
-    "col_settings": [
+    /*"col_settings": [
       { "type": "checkbox" },
       { "type": "select", "options": [ "a", "b", "c" ] },
       { "type": "tel", "placeholder": "Tel: 049...", "required": true },
@@ -16,7 +16,7 @@ ccm.files[ "configs.js" ] = {
         "Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze " +
         "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. " },
       { "type": "textarea", "disabled": "true", "placeholder": "Hier kannst du nichts schreiben." }
-    ],
+    ],*/
     "data": {
       "values": [
         [ true, "a", "0045/ 12344567", "max.mustermann@mail.com", "2017-01-03",  "", "textarea 2"],
@@ -28,6 +28,7 @@ ccm.files[ "configs.js" ] = {
     },
     //"cell_onclick": function ( target, value, self  ){ console.log( target, value, self ); },
     //"cell_onrender": function ( event ) { console.log( this, event ); },
+    "filter_values": true,
     "submit": true,
     "onchange": function ( result, value, self ) { console.log( result, value, self ); },
     "onfinish": {

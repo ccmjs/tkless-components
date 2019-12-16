@@ -3,6 +3,9 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @license The MIT License (MIT)
  * @changes
+ * @version 4.1.0
+ * -(16.12.2019)
+ *    support of filtering of table cell values
  *  @version 4.0.0
  * -(21.05.2019)
  *    onrender event for table cells
@@ -25,19 +28,20 @@
      * @type {string}
      */
     name: 'table',
+    version: [4, 1, 0],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-24.1.1.min.js',
 
     /**
      * default instance configuration
      * @type {object}
      */
     config: {
-      templates: [ "ccm.load", "resources/templates.html" ],
+      templates: [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.html" ],
       html: {
         "table": {
           "inner": {
@@ -50,7 +54,7 @@
                   "class": "table-responsive",
                   "inner": {
                     "tag": "table",
-                    "class": "table table-striped",
+                    "class": "table table-striped table-responsive",
                     "inner":[
                       { "tag": "thead" },
                       { "tag": "tbody" }
@@ -123,8 +127,8 @@
       //submit: true,
       //onfinish
       //onchange
-      //cell_onrender: function ( event ) { console.log( this, event ); }
-      //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
+      //cell_onrender: function ( event ) { console.log( this, event ); },
+      //cell_onclick: function ( target, value, self ){ console.log( target, value, self ); },
       //filter_values
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
