@@ -317,25 +317,36 @@
                 instance.get().focus();
 
                 instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
-                  comment.content = instance.get().root.innerHTML.trim();
-
                   if( instance.get().getText().trim() === '' ) {
                     await my.modal.start( {
                       modal_title: " Delete Message",
                       modal_content: "Are you sure you want to delete this message?",
                       footer: [
                         { "caption": "Yes", "style": "success", "onclick": async function (){
+                            comment.content = instance.get().root.innerHTML.trim();
+                            data.comments[ comment ] = {
+                              "user": comment.user,
+                              "date": comment.date,
+                              "content": comment.content,
+                              "voting": comment.voting
+                            };
+
+                            // update dataset for rendering
+                            await self.data.store.set( data );
                             await renderComments();
-                            comment_elem.remove();
                             this.close();
                           }},
-                        { "caption": "Close", "style": "danger", "onclick": async function () {
+                        { "caption": "No", "style": "danger", "onclick": async function () {
                             comment.content = old_comment;
                             await renderComments();
                             this.close();
                           } }
                       ],
                     } );
+                  }
+                  else {
+                    comment.content = instance.get().root.innerHTML.trim();
+
                     data.comments[ comment ] = {
                       "user": comment.user,
                       "date": comment.date,
@@ -345,21 +356,10 @@
 
                     // update dataset for rendering
                     await self.data.store.set( data );
-                    return;
+
+                    // (re)render comments
+                    await renderComments( data.comments );
                   }
-
-                  data.comments[ comment ] = {
-                    "user": comment.user,
-                    "date": comment.date,
-                    "content": comment.content,
-                    "voting": comment.voting
-                  };
-
-                  // update dataset for rendering
-                  await self.data.store.set( data );
-
-                  // (re)render comments
-                  await renderComments( data.comments );
 
                   if( self.logger ) self.logger.log( 'edit', { 'old': old_comment, 'new': comment.content });
                 } );
