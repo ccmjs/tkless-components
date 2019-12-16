@@ -26,15 +26,11 @@
 
 .comment-overview {
   margin: 0.1em;
-  padding: 9px 10px 0px 10px;
+  padding: 4px;
 }
 
 .comment-overview > span {
   color: #999;
-}
-
-.comment-overview .comment-content {
-  margin-bottom: 0.5em;
 }
 
 .voting-area {

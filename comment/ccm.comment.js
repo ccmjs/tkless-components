@@ -173,6 +173,7 @@
           "onclick": "%edit%",
           "inner": [
             {
+              "tag": "span",
               "class": "glyphicon glyphicon-edit"
             },
             "&#8196;Edit&#8196;",
@@ -181,14 +182,16 @@
       },
 
       "editor": [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.1.0.js",
-        { "settings.modules.toolbar": false },
-        { "settings.placeholder": "Write here ..." }
+        { "settings.modules.toolbar": false,
+          "settings.placeholder": "New Message ..."
+        }
       ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "resources/default.css",
         "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"
-      ]
+      ],
+      "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ]
     },
 
     Instance: function () {
@@ -287,6 +290,8 @@
         }
 
         async function renderComment( comment ) {
+          if ( comment.content === '<p><br></p>' ) return;
+
           const old_comment = comment.content;
           const comment_elem = $.html( ( my.template === 'expanded' ) ? my.html.expanded: my.html.simple,
             {
@@ -307,15 +312,44 @@
 
                 instance.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
                   comment.content = instance.get().root.innerHTML.trim();
-                  data.comments[ comment ] =
-                    {
+
+                  if( instance.get().getText().trim() === '' ) {
+                    await my.modal.start( {
+                      modal_title: " Delete Message",
+                      modal_content: "Are you sure you want to delete this message?",
+                      footer: [
+                        { "caption": "Yes", "style": "success", "onclick": async function (){
+                          await renderComments();
+                          comment_elem.remove();
+                          this.close();
+                        }},
+                        { "caption": "Close", "style": "danger", "onclick": async function () {
+                          comment.content = old_comment;
+                          await renderComments();
+                          this.close();
+                        } }
+                      ],
+                    } );
+                    data.comments[ comment ] = {
                       "user": comment.user,
                       "date": comment.date,
                       "content": comment.content,
                       "voting": comment.voting
                     };
 
-                  // update dataset for rendering => (re)render accepted answer
+                    // update dataset for rendering
+                    await self.data.store.set( data );
+                    return;
+                  }
+
+                  data.comments[ comment ] = {
+                      "user": comment.user,
+                      "date": comment.date,
+                      "content": comment.content,
+                      "voting": comment.voting
+                    };
+
+                  // update dataset for rendering
                   await self.data.store.set( data );
 
                   // (re)render comments
