@@ -2,19 +2,42 @@
  * @overview ccm component for saving given files as data in ccm datasore
  * @author Tea Kless <tea.kless@web.de>, 2019
  * @license The MIT License (MIT)
- * @latest
- * @changes
+ * @version 2.0.0
+ * - switch to ccm cloud v2
+ * @version 3.0.0
+ * - react to changes in drop field via onchange.
+ * - optional update, clear-button.
+ * @version 3.1.0
+ * - trigger onchange after clear event was fired
+ * @version 4.0.0 (26.10.2018)
+ * - uses ccm v18.0.7
+ *  @version 4.1.0 (07.01.2019)
  * - uses ccm v20.0.0
+ * *  @version 4.1.1 (07.01.2020)
+ * - some changes
  */
 
 ( function () {
 
   const component = {
 
+    /**
+     * unique component name
+     * @type {string}
+     */
     name: 'file_upload',
+    version: [ 4,1,1 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    /**
+     * recommended used framework version
+     * @type {string}
+     */
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-24.0.4.js',
 
+    /**
+     * default instance configuration
+     * @type {object}
+     */
     config: {
       html: {
         "file_upload": {
@@ -99,8 +122,8 @@
             {
               "class": "box-success-mark",
               "inner": "<svg width='54px' height='54px' viewBox='0 0 54 54' version='1.1' xmlns='http://www.w3.org/2000/svg\' xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'>\n" +
-              "<title>Check</title>\n<defs></defs>\n<g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\">\n" +
-              "<path d=\"M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\" id=\"Oval-2\" stroke-opacity=\"0.198794158\" stroke=\"#747474\" fill-opacity=\"0.816519475\" fill=\"#FFFFFF\" sketch:type=\"MSShapeGroup\"></path>\n </g>\n</svg>\n"
+                "<title>Check</title>\n<defs></defs>\n<g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\">\n" +
+                "<path d=\"M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z\" id=\"Oval-2\" stroke-opacity=\"0.198794158\" stroke=\"#747474\" fill-opacity=\"0.816519475\" fill=\"#FFFFFF\" sketch:type=\"MSShapeGroup\"></path>\n </g>\n</svg>\n"
             }
           ]
         }
@@ -109,8 +132,8 @@
       pdfJS_workerSrc: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "../file_upload/resources/default.css"
-      ],
+        "https://ccmjs.github.io/tkless-components/file_upload/resources/default.css"
+      ]
       // data_type: "pdf", // or image
       // multiple: true, //only set if multiple upload is desired
       // data: { store: [ "ccm.store'" ], key: "demo" },
@@ -294,12 +317,12 @@
           self.element.appendChild( input );
           input.addEventListener( 'change', function () {
             if( this.files && this.files[0].size > 10485760 ) {
-               alert( "Upload Failed. The maximum file size is 10 MB." );
-               this.value = "";
-               return;
+              alert( "Upload Failed. The maximum file size is 10 MB." );
+              this.value = "";
+              return;
             }
             previewFiles(); }
-            );
+          );
           return input;
         }
 
