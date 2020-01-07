@@ -241,7 +241,7 @@
             let preview_template = $.html( my.html.preview );
 
             // Make sure filename matches extensions criteria
-            if ( my.data_type === "image " && /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
+            if ( my.data_type === "image" && /\.(jpe?g|png|gif)$/i.test( file.name ) ) {
               let reader = new FileReader();
 
               reader.addEventListener( 'load', function() {
