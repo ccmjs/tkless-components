@@ -30,7 +30,7 @@ ccm.files[ "configs.js" ] = {
       },
       {
         "title": "Exercises",
-        "content": "..."
+        "content": ["ccm.instance","https://ccmjs.github.io/akless-components/guess_picture/versions/ccm.guess_picture-1.0.0.js",["ccm.get",{"name":"dms-configs","url":"https://ccm2.inf.h-brs.de"},"1569241796177X2258972457047841"]]
       },
       {
         "title": "Bibliography",

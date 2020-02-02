@@ -156,7 +156,7 @@
       ],
       "js": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" ],
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.4.js", { "app": "app_collection" } ],
-      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/helper.mjs" } ]
+      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-1.0.0.mjs" } ]
     },
 
     Instance: function () {
