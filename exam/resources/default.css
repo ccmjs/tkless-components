@@ -1,0 +1,22 @@
+.material-icons {
+  font-size: 2rem;
+  color: #28a745;
+}
+
+#add {
+  color: unset;
+}
+
+.item-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.list-group-item:hover, .list-group-item:focus {
+  z-index: unset;
+}
+
+.hook {
+  display: none;
+  height: 30px;
+}
