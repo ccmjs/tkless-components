@@ -24,6 +24,14 @@
   </a>
 </ccm-template>
 
-<ccm-template key="new_item">
-  <button type="button" class="new-item btn btn-outline-secondary btn mt-4 w-100"><i id="add" class="material-icons">add</i></button>
+<ccm-template key="add_button">
+  <button type="button" class="new-item btn btn-outline-secondary btn mt-4 w-100" onclick="%new_task_item%"><i id="add" class="material-icons">add</i></button>
+</ccm-template>
+
+<ccm-template key="item_settings">
+  <div id="settings"></div>
+  <div id="submit">
+    <button type="button" class="new-item btn btn-outline-info btn mt-4 w-100" onclick="%save_task%">Save and back to List</button>
+    <button type="button" class="back-to btn btn-outline-danger btn mt-4 w-100" onclick="%back_to%">Don't Save and back to List</button>
+  </div>
 </ccm-template>

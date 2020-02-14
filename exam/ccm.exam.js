@@ -20,9 +20,225 @@
         {  "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" },
         "resources/default.css"
       ],
-      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-7.3.3.js" ],
+      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-7.3.3.js", {
+        "data": {
+          "store": [
+            "ccm.store"
+          ]
+        },
+        "entries": [
+          {
+            "name": "css",
+            "type": "hidden"
+          },
+          {
+            "name": "data",
+            "type": "hidden"
+          },
+          {
+            "name": "data.key",
+            "type": "key"
+          },
+          {
+            "name": "onfinish",
+            "type": "hidden"
+          },
+          {
+            "name": "user",
+            "type": "hidden"
+          },
+          "<div class=\"page-header\"><h2>Settings <small class=\"text-primary\">New QA Task</small></h2></div>",
+          {
+            "label": "Title",
+            "name": "title",
+            "type": "text",
+            "info": "Title of your Task.",
+            "required": true
+          },
+          "<br><br>",
+          {
+            "label": "Question",
+            "name": "text",
+            "type": "text",
+            "info": "Enter the text of the question here. Add or remove questions with the plus and minus buttons."
+          },
+          {
+            "label": "Type",
+            "name": "input",
+            "type": "radio",
+            "info": "Select single choice if only one answer or multiple choice if multiple answers can be selected.",
+            "items": [
+              {
+                "label": "Single Choice",
+                "value": "radio"
+              },
+              {
+                "label": "Multiple Choice",
+                "value": "checkbox"
+              }
+            ]
+          },
+          {
+            "label": "Description",
+            "name": "description",
+            "type": "textarea",
+            "info": "Enter the description of the question here."
+          },
+          {
+            "label": "Random Answers",
+            "name": "random",
+            "type": "checkbox",
+            "info": "When enabled, the answers to the questions are presented in random order."
+          },
+          {
+            "label": "Answers",
+            "name": "answers",
+            "type": "several",
+            "items": [
+              {
+                "label": "Answer",
+                "name": "text",
+                "type": "text",
+                "info": "Enter the text of the answer here. Add or remove answers with the plus and minus buttons."
+              },
+              {
+                "label": "Correct",
+                "name": "correct",
+                "type": "checkbox",
+                "info": "Indicates if the answer is a correct answer."
+              },
+              {
+                "label": "Comment",
+                "name": "comment",
+                "type": "text",
+                "info": "A comment can give an indication of why a response is right or wrong. The comment is displayed during automatic feedback."
+              }
+
+            ]
+          }
+        ],
+        "ignore": {
+          "defaults": {
+            "html": {
+              "start": {
+                "id": "start",
+                "inner": {
+                  "tag": "button",
+                  "inner": "Start",
+                  "onclick": "%%"
+                }
+              },
+              "question": {
+                "id": "%id%",
+                "class": "question",
+                "inner": [
+                  {
+                    "class": "title",
+                    "inner": [
+                      {
+                        "inner": "Question"
+                      },
+                      {
+                        "inner": "%nr%/%count%"
+                      },
+                      {
+                        "inner": "%text%"
+                      }
+                    ]
+                  },
+                  {
+                    "class": "description",
+                    "inner": "%description%"
+                  },
+                  {
+                    "class": "answers"
+                  }
+                ]
+              },
+              "answer": {
+                "id": "%id%",
+                "class": "answer %class%",
+                "inner": {
+                  "class": "entry",
+                  "inner": [
+                    {
+                      "class": "text",
+                      "inner": {
+                        "tag": "label",
+                        "inner": "%text%",
+                        "for": "%id%-input"
+                      }
+                    },
+                    {
+                      "class": "comment"
+                    }
+                  ]
+                }
+              },
+              "comment": {
+                "class": "tooltip",
+                "onclick": "%click%",
+                "inner": [
+                  "i",
+                  {
+                    "tag": "div",
+                    "class": "tooltiptext",
+                    "inner": {
+                      "inner": {
+                        "inner": "%comment%"
+                      }
+                    }
+                  }
+                ]
+              },
+              "timer": {
+                "tag": "span",
+                "inner": "%%"
+              }
+            },
+            "css": [
+              "ccm.load",
+              "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css",
+              {
+                "context": "head",
+                "url": "https://ccmjs.github.io/akless-components/libs/weblysleekui/font.css"
+              }
+            ],
+
+            "feedback": true,
+            "user": [
+              "ccm.instance",
+              "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js",
+              {
+                "realm": "guest",
+                "title": "Guest Mode: Please enter any username"
+              }
+            ],
+            "data": {
+              "login": true,
+              "store": [
+                "ccm.store",
+                {
+                  "name": "ws_result_data",
+                  "url": "https://ccm2.inf.h-brs.de"
+                }
+              ],
+              "user": true
+            },
+            "onfinish": {
+              "alert": "Saved!",
+              "login": true,
+              "store": true
+            }
+          }
+        }
+      } ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ],
-      "tasks": [
+      "data": {
+        "store": [ "ccm.store", { "name": "exam_data", "url": "https://ccm2.inf.h-brs.de" } ],
+        "key": "demo_exam"
+      },
+      /*"tasks": [
         {
           "type": "quiz",
           "title": "One of the answers is correct.",
@@ -102,7 +318,7 @@
               "random": true
             }
         }
-      ],
+      ],*/
       "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ],
       "live_poll": {
         "url": "https://ccmjs.github.io/akless-components/live_poll/versions/ccm.live_poll-2.3.2.js",
@@ -130,26 +346,37 @@
 
       this.start = async () => {
 
+        let data = await $.dataset( self.data );
+
+        if ( self.logger ) self.logger.log( 'start', $.clone( data ) );
+
+        if ( !data.tasks ) data.tasks = [];
+
         let main_elem = $.html( self.html.main );
         renderTasks();
-        main_elem.appendChild( $.html( self.html.new_item ) );
+        addNewTask();
         $.setContent( self.element, main_elem );
 
         function renderTasks() {
           $.setContent( main_elem.querySelector( '.list-group' ), '' );
-          for( let i = 0; i < self.tasks.length; i++ ) {
+          for( let i = 0; i < data.tasks.length; i++ ) {
             const list_item = $.html( self.html.list_item, {
-              title: self.tasks[ i ].title,
+              title: data.tasks[ i ].title,
               id: "id_"+ i,
+              edit_task: async () => {
+                await renderSettings( i );
+              },
               delete_task: async () => {
                 await self.modal.start( {
-                  modal_title: self.tasks[ i ].title,
+                  modal_title: data.tasks[ i ].title,
                   modal_content: "Are you sure you want to delete this Task?",
                   footer: [ {
                     "caption": "Delete",
                     "style": "danger btn-sm",
-                    "onclick": function ( ) {
-                      self.tasks.splice( i, 1 );
+                    "onclick": async function ( ) {
+                      data.tasks.splice( i, 1 );
+                      // update dataset for rendering
+                      await self.data.store.set( data );
                       renderTasks();
                       this.close();
                     }
@@ -165,21 +392,27 @@
                   modal_content: ( await self.handover_app.start( {
                     component_url: self.live_poll.url,
                     data: {
-                      user: self.user,
-                      data: {
-                        store: self.live_poll.store,
-                        key: {
-                          key: $.generateKey(),
-                          answers: ( self.tasks[ i ].content.answers || [] ).map( answer => typeof answer === 'string' ? answer : answer.text ),
-                          question: self.tasks[ i ].content.text
+                      store: [ "ccm.store", {
+                        app: {
+                          key: 'app',
+                          user: [ 'ccm.instance', self.user.component.url, self.user.config ],
+                          data: {
+                            store: [ "ccm.store", self.live_poll.store.source() ],
+                            key: {
+                              key: $.generateKey(),
+                              answers: self.tasks[ i ].content.answers.map( answer => typeof answer === 'string' ? answer : answer.text ),
+                              question: self.tasks[ i ].content.text
+                            }
+                          }
                         }
-                      }
+                      } ],
+                      key: 'app'
                     },
-                    qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ],
+                    qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
                   } ) ).root,
                   footer: [ {
                     "caption": "Close",
-                    "style": "danger",
+                    "style": "warning",
                     "onclick": () => { this.close(); }
                   } ]
                 } );
@@ -198,6 +431,51 @@
             } );
             main_elem.querySelector( '.list-group' ).appendChild( list_item );
           }
+        }
+
+        function addNewTask() {
+          const add_button = $.html ( self.html.add_button,  {
+            new_task_item: async function () { await renderSettings(); }
+          } );
+          main_elem.appendChild( add_button );
+        }
+
+        async function renderSettings( submit_data ) {
+          let submit_inst;
+
+          if ( submit_data !== undefined ) {
+            submit_inst = await self.submit.start({
+              root: main_elem,
+              data: data.tasks[submit_data]
+            });
+          }
+          else
+            submit_inst = await self.submit.start();
+
+          const item_settings = $.html( self.html.item_settings, {
+            back_to: async () => {
+              await self.start();
+            },
+            save_task: async ()=> {
+              const result = submit_inst.getValue();
+              const new_data =  {
+                "type": "quiz",
+                "title": result.title,
+                "text": result.text,
+                "description": result.description,
+                "input": result.input,
+                "random": result.random,
+                "answers": result.answers
+              };
+              submit_data !== undefined ? data.tasks[ submit_data ] = new_data : data.tasks.push( new_data );
+
+              // update dataset for rendering
+              await self.data.store.set( data );
+              await self.start()
+            }
+          } );
+          item_settings.querySelector( '#settings' ).appendChild( submit_inst.root );
+          $.setContent( main_elem, item_settings );
         }
       };
 
