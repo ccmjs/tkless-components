@@ -238,95 +238,17 @@
         "store": [ "ccm.store", { "name": "exam_data", "url": "https://ccm2.inf.h-brs.de" } ],
         "key": "demo_exam"
       },
-      /*"tasks": [
-        {
-          "type": "quiz",
-          "title": "One of the answers is correct.",
-          "content": {
-            "text": "How many of these answers are correct?",
-            "description": "Select the correct answer from the following answers.",
-            "answers": [
-              {
-                "text": "one",
-                "comment": "Because you can't choose more than one answer."
-              },
-              "two",
-              "three"
-            ],
-            "input": "radio",
-            "solution": 0
-          }
-        },
-        {
-          "type": "quiz",
-          "title": "More than one answers are correct.",
-          "content": {
-            "text": "How many answers can be correct here?",
-            "description": "Pay attention to the input field type.",
-            "answers": [
-              "absolutely none",
-              {
-                "text": "maximum of one",
-                "comment": "Because you can choose more than one answer."
-              },
-              "more than one"
-            ],
-            "solution": [ true, false, true ]
-          }
-        },
-        {
-          "type": "quiz",
-          "title": "Computational Task.",
-          "content": {
-              "text": "What is the solution to the following arithmetical tasks?",
-              "description": "Please enter the solutions into the input fields.",
-              "answers": [
-                "=&nbsp; 1 + 1",
-                "=&nbsp; 1 - 1",
-                "=&nbsp;-1 - 1"
-              ],
-              "input": "number",
-              "attributes": {
-                "min": -2,
-                "max": 2
-              },
-              "solution": [ 2, 0, -2 ]
-            }
-        },
-        {
-          "type": "quiz",
-          "title": "HTML Task.",
-          "content": {
-              "text": "Which <code style='color:orange'>code</code> is written in the <b style='color:blue'>Java</b> programming language?",
-              "description": "Quiz questions and answers may contain special characters.",
-              "answers": [
-                {
-                  "text": "<span>Hello World</span>",
-                  "escape": true,
-                  "comment": "This code is written in HTML."
-                },
-                {
-                  "text": "System.out.println(\"Hello World!\");",
-                  "correct": true
-                },
-                {
-                  "text": "console.log(\"Hello World!\");",
-                  "comment": "This code is written in JavaScript."
-                }
-              ],
-              "input": "radio",
-              "random": true
-            }
-        }
-      ],*/
       "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ],
       "live_poll": {
         "url": "https://ccmjs.github.io/akless-components/live_poll/versions/ccm.live_poll-2.3.2.js",
         "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "exam_live_poll" } ],
       },
+      "quiz": {
+        "url": "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.0.3.js",
+        "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "exam_quiz" } ],
+      },
       "handover_app": [ "ccm.component", "https://ccmjs.github.io/akless-components/handover_app/versions/ccm.handover_app-2.0.0.js" ],
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-        "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.3.0.js", {
         "logged_in": true
       } ]
     },
@@ -363,8 +285,15 @@
             const list_item = $.html( self.html.list_item, {
               title: data.tasks[ i ].title,
               id: "id_"+ i,
+              trigger_select: function ( event ) {
+                if( event.target === list_item.querySelector( 'input[type=checkbox]' ) )
+                  return;
+                const change_event = new Event('change');
+                list_item.querySelector( 'input[type=checkbox]' ).checked = !list_item.querySelector( 'input[type=checkbox]' ).checked;
+                list_item.querySelector( 'input[type=checkbox]' ).dispatchEvent( change_event );
+              },
               edit_task: async () => {
-                await renderSettings( i );
+                await renderLivePollSettings( i );
               },
               delete_task: async () => {
                 await self.modal.start( {
@@ -383,70 +312,39 @@
                   }],
                 } );
               },
-              select_item: function () {
-                (this.checked === true) ? ( list_item.querySelector( '.hook' ).style.display = 'block'): ( list_item.querySelector( '.hook' ).style.display = 'none');
-              },
-              livepoll: async function () {
-                await self.modal.start( {
-                  modal_title: "Handover Live Poll",
-                  modal_content: ( await self.handover_app.start( {
-                    component_url: self.live_poll.url,
-                    data: {
-                      store: [ "ccm.store", {
-                        app: {
-                          key: 'app',
-                          user: [ 'ccm.instance', self.user.component.url, self.user.config ],
-                          data: {
-                            store: [ "ccm.store", self.live_poll.store.source() ],
-                            key: {
-                              key: $.generateKey(),
-                              answers: self.tasks[ i ].content.answers.map( answer => typeof answer === 'string' ? answer : answer.text ),
-                              question: self.tasks[ i ].content.text
-                            }
-                          }
-                        }
-                      } ],
-                      key: 'app'
-                    },
-                    qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
-                  } ) ).root,
-                  footer: [ {
-                    "caption": "Close",
-                    "style": "warning",
-                    "onclick": () => { this.close(); }
-                  } ]
-                } );
-                /**await self.live_poll.start( {
-                  user: self.user,
-                  data: {
-                    store: self.live_poll_store,
-                    key: {
-                      key: $.generateKey(),
-                      answers: ( self.tasks[ i ].content.answers || [] ).map( answer => typeof answer === 'string' ? answer : answer.text ),
-                      question: self.tasks[ i ].content.text
-                    }
-                  }
-                } );*/
-              }
+              select_item: function ( ) {
+                selectQA( this, list_item );
+                },
+              livepoll: async () => { await handOverLivePoll( data.tasks[ i ] ); }
             } );
             main_elem.querySelector( '.list-group' ).appendChild( list_item );
           }
         }
 
-        function addNewTask() {
-          const add_button = $.html ( self.html.add_button,  {
-            new_task_item: async function () { await renderSettings(); }
-          } );
-          main_elem.appendChild( add_button );
+        function selectQA( element, list_item ) {
+          element.checked === true ? ( list_item.querySelector( '.hook' ).style.display = 'block'): ( list_item.querySelector( '.hook' ).style.display = 'none');
         }
 
-        async function renderSettings( submit_data ) {
+        //TODO muss umbennant werden
+        function addNewTask() {
+          const buttons = $.html ( self.html.buttons,  {
+            new_task_item: async function () { await renderLivePollSettings(); },
+            quiz: async function () {
+              if ( [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].length === 0 )
+                return alert( "Please select questions!" );
+              await renderQuizSettings();
+            }
+          } );
+          main_elem.querySelector( 'footer' ).appendChild( buttons );
+        }
+
+        async function renderLivePollSettings( submit_data ) {
           let submit_inst;
 
           if ( submit_data !== undefined ) {
             submit_inst = await self.submit.start({
               root: main_elem,
-              data: data.tasks[submit_data]
+              data: data.tasks[ submit_data ]
             });
           }
           else
@@ -476,6 +374,248 @@
           } );
           item_settings.querySelector( '#settings' ).appendChild( submit_inst.root );
           $.setContent( main_elem, item_settings );
+        }
+
+        /*
+        * param qa => question-answer-item
+        */
+        async function handOverLivePoll( qa ) {
+          const key = $.generateKey();
+          await self.live_poll.store.set( {
+            key: key,
+            answers: qa.answers.map( answer => typeof answer === 'string' ? answer : answer.text ),
+            question: qa.text
+          } );
+
+          await self.modal.start( {
+            modal_title: "Handover Live Poll",
+            modal_content: ( await self.handover_app.start( {
+              component_url: self.live_poll.url,
+              data: {
+                store: [ "ccm.store", {
+                  app: {
+                    key: 'app',
+                    user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
+                    data: {
+                      store: [ "ccm.store", self.live_poll.store.source() ],
+                      key: key
+                    }
+                  }
+                } ],
+                key: 'app'
+              },
+              qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
+            } ) ).root,
+            footer: [ {
+              "caption": "Close",
+              "style": "warning",
+              "onclick": () => { this.close(); }
+            } ]
+          } );
+        }
+
+        async function renderQuizSettings() {
+          const questions = [];
+          [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
+            questions.push( data.tasks[ checkbox.id.split('_')[1] ] );
+          }  );
+
+          const elem = $.html( self.html.quiz_settings, {
+            handover_quiz: async ()=> {
+              await self.modal.start( {
+              modal_title: "Handover Quiz",
+              modal_content: ( await self.handover_app.start( {
+                component_url: self.quiz.url,
+                data: {
+                  store: [ "ccm.store", {
+                    app: {
+                      key: 'app',
+                      css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
+                      user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
+                      questions: questions,
+                      shuffle: submit_inst.getValue().radio === 'shuffle'? 'shuffle': undefined
+                    }
+                  } ],
+                  key: 'app'
+                }
+              } ) ).root,
+              footer: [ {
+                "caption": "Close",
+                "style": "warning",
+                "onclick": function () {
+                  [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
+                    checkbox.checked = false;
+                    selectQA( checkbox, checkbox.closest( 'a' ) );
+                  }  );
+                  this.close();
+                }
+              } ]
+            } );
+            }
+          } );
+
+          const submit_inst = await self.submit.start({
+            root: elem.querySelector( '.submit' ),
+            entries: [
+              {
+                "name": "css",
+                "type": "hidden"
+              },
+              "<div class=\"page-header\"><h2>Settings <small class=\"text-primary\">Quiz</small></h2></div>",
+              {
+                "label": "Shuffle Questions",
+                "name": "radio",
+                "type": "radio",
+                "info": "When enabled, the questions are shuffled so that their order is random at each startup.",
+                "items": [
+                  {
+                    "label": "Automatically",
+                    "value": "shuffle"
+                  },
+                  {
+                    "label": "Manually",
+                    "value": "manually"
+                  }
+                ]
+              }
+            ],
+            onchange: function () {
+              if ( submit_inst.getValue().radio === 'manually' ){
+                renderQuestionList( questions );
+              } else
+                self.element.querySelector( '#questions' ) && $.setContent( self.element.querySelector( '#questions' ), '' );
+            },
+          });
+          $.setContent( main_elem, elem );
+
+          /*await self.modal.start( {
+            modal_title: "Handover Quiz",
+            modal_content: ( await self.handover_app.start( {
+              component_url: self.quiz.url,
+              data: {
+                store: [ "ccm.store", {
+                  app: {
+                    key: 'app',
+                    css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
+                    user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
+                    questions: questions
+                  }
+                } ],
+                key: 'app'
+              },
+              qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
+            } ) ).root,
+            footer: [ {
+              "caption": "Close",
+              "style": "warning",
+              "onclick": function () {
+                [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
+                  checkbox.checked = false;
+                  selectQA( checkbox, checkbox.closest( 'a' ) );
+                }  );
+                this.close();
+              }
+            } ]
+          } );*/
+        }
+
+        function renderQuestionList( questions ) {
+          $.setContent( self.element.querySelector( '#questions' ), '' );
+
+          for( let entry in questions ) {
+            let elem = $.html( self.html.questions, {
+              id: 'title_'+ entry,
+              i: entry,
+              quiz_title: questions[ entry ].title
+            } );
+            self.element.querySelector( '#questions' ).appendChild( elem );
+          }
+          $.prepend(
+            self.element.querySelector( '#questions > div' ),
+            $.html( '<h5 id="h4"  class="text-info mt-4">Drag and drop the element in the desired order.</h5>' )
+          );
+
+          handleDragDrop();
+
+        }
+
+        function handleDragDrop() {
+          let dragSrcEl = null;
+          const entry = self.element.querySelectorAll('#questions > div');
+          [].forEach.call( entry, function( entry ) {
+            entry.addEventListener('dragstart', handleDragStart, false);
+            entry.addEventListener('dragenter', handleDragEnter, false);
+            entry.addEventListener('dragover', handleDragOver, false);
+            entry.addEventListener('dragleave', handleDragLeave, false);
+            entry.addEventListener('drop', handleDrop, false);
+            entry.addEventListener('dragend', handleDragEnd, false);
+          });
+
+          function handleDragOver(e) {
+            if (e.preventDefault) {
+              e.preventDefault(); // Necessary. Allows us to drop.
+            }
+            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+            return false;
+          }
+
+          function handleDragEnter(e) {
+            // this / e.target is the current hover target.
+            e.target.classList.add('over');
+          }
+
+          function handleDragLeave(e) {
+            e.target.classList.remove('over');  // this / e.target is previous target element.
+          }
+
+          function handleDragEnd(e) {
+            [].forEach.call( entry, function ( entry ) {
+              entry.classList.remove('over');
+            });
+          }
+
+          function handleDragStart(e) {
+            // Target (this) element is the source node.
+            e.target.style.opacity = '0.4';
+
+            dragSrcEl = e.target;
+
+            e.dataTransfer.effectAllowed = 'move';
+            //e.dataTransfer.setData('html', e.target.innerHTML);
+          }
+
+          function handleDrop(e) {
+            // this/e.target is current target element.
+
+            if (e.stopPropagation) {
+              e.stopPropagation(); // Stops some browsers from redirecting.
+            }
+
+            const dropSrcEl = e.target.closest( 'div[draggable]' );
+
+            // Don't do anything if dropping the same column we're dragging.
+            if ( dropSrcEl && dragSrcEl !== dropSrcEl ) {
+
+              const tmp = dragSrcEl.innerHTML;
+              dragSrcEl.innerHTML = dropSrcEl.innerHTML;
+              dropSrcEl.innerHTML = tmp;
+
+              /*
+              const id = dragSrcEl.id;
+              dragSrcEl.id = dropSrcEl.id;
+              dropSrcEl.id = id;
+               */
+
+              // Set the source column's HTML to the HTML of the column dropped on.
+              //dragSrcEl = e.target.innerHTML;
+              //$.replace( dropSrcEl, dragSrcEl.cloneNode( true ) );
+              //$.replace( dragSrcEl, dropSrcEl );
+              //e.target.closest( 'div[draggable]' ).innerHTML = e.dataTransfer.getData('html');
+
+            }
+
+            return false;
+          }
         }
       };
 

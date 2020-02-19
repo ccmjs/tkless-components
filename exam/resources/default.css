@@ -1,6 +1,5 @@
 .material-icons {
-  font-size: 2rem;
-  color: #28a745;
+  vertical-align: middle;
 }
 
 #add {
@@ -12,11 +11,37 @@
   overflow: hidden;
 }
 
+.list-group-item {
+  cursor: pointer;
+}
+
 .list-group-item:hover, .list-group-item:focus {
   z-index: unset;
 }
 
 .hook {
   display: none;
-  height: 30px;
+  font-size: 2rem;
+  color: #28a745;
+}
+
+#quiz, #new-item {
+  font-size: 1.2rem;
+}
+
+footer {
+  border-top: 1px solid gray;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  box-shadow: 0 0 5px gray;
+}
+
+#questions .form-control:disabled {
+  background: unset;
+}
+
+.over {
+  border: 2px dashed #000;
 }
