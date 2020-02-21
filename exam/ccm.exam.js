@@ -250,7 +250,8 @@
       "handover_app": [ "ccm.component", "https://ccmjs.github.io/akless-components/handover_app/versions/ccm.handover_app-2.0.0.js" ],
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.3.0.js", {
         "logged_in": true
-      } ]
+      } ],
+      "swap": [ 'ccm.load', "http://SortableJS.github.io/Sortable/Sortable.js" ]
     },
 
     Instance: function () {
@@ -415,45 +416,51 @@
         }
 
         async function renderQuizSettings() {
-          const questions = [];
+
+          // get selected questions
+          let questions = [];
           [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
             questions.push( data.tasks[ checkbox.id.split('_')[1] ] );
           }  );
 
+          // render quiz settings
           const elem = $.html( self.html.quiz_settings, {
-            handover_quiz: async ()=> {
-              await self.modal.start( {
-              modal_title: "Handover Quiz",
-              modal_content: ( await self.handover_app.start( {
-                component_url: self.quiz.url,
-                data: {
-                  store: [ "ccm.store", {
-                    app: {
-                      key: 'app',
-                      css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
-                      user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
-                      questions: questions,
-                      shuffle: submit_inst.getValue().radio === 'shuffle'? 'shuffle': undefined
-                    }
-                  } ],
-                  key: 'app'
-                }
-              } ) ).root,
-              footer: [ {
-                "caption": "Close",
-                "style": "warning",
-                "onclick": function () {
-                  [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
-                    checkbox.checked = false;
-                    selectQA( checkbox, checkbox.closest( 'a' ) );
-                  }  );
-                  this.close();
-                }
-              } ]
-            } );
-            }
-          } );
+            handover_quiz: async () => {
+              const sorted_questions = [];
 
+              if ( submit_inst.getValue().radio === 'manually' ) {
+                const elem = self.element.querySelector( '#questions' );
+                elem.querySelectorAll( '[ data-i ]' ).forEach( list_item => {
+                  sorted_questions.push( data.tasks[ list_item.getAttribute( 'data-i' ) ] );
+                } );
+              }
+
+              //TODO set onfinish by quiz
+              await self.modal.start( {
+                modal_title: "Handover Quiz",
+                modal_content: ( await self.handover_app.start( {
+                  component_url: self.quiz.url,
+                  data: {
+                    store: [ "ccm.store", {
+                      app: {
+                        key: 'app',
+                        css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
+                        user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
+                        questions: $.clone( sorted_questions.length ? sorted_questions : questions ),
+                        shuffle: submit_inst.getValue().radio === 'shuffle' && 'shuffle'
+                      }
+                    } ],
+                    key: 'app'
+                  }
+                } ) ).root,
+                footer: [ {
+                  "caption": "Close",
+                  "style": "warning",
+                  "onclick": function () { this.close(); }
+                } ] } );
+              },
+            back_to: async () => { await self.start(); }
+          } );
           const submit_inst = await self.submit.start({
             root: elem.querySelector( '.submit' ),
             entries: [
@@ -470,7 +477,8 @@
                 "items": [
                   {
                     "label": "Automatically",
-                    "value": "shuffle"
+                    "value": "shuffle",
+                    "checked": true
                   },
                   {
                     "label": "Manually",
@@ -484,65 +492,43 @@
                 renderQuestionList( questions );
               } else
                 self.element.querySelector( '#questions' ) && $.setContent( self.element.querySelector( '#questions' ), '' );
-            },
+            }
           });
           $.setContent( main_elem, elem );
-
-          /*await self.modal.start( {
-            modal_title: "Handover Quiz",
-            modal_content: ( await self.handover_app.start( {
-              component_url: self.quiz.url,
-              data: {
-                store: [ "ccm.store", {
-                  app: {
-                    key: 'app',
-                    css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
-                    user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
-                    questions: questions
-                  }
-                } ],
-                key: 'app'
-              },
-              qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
-            } ) ).root,
-            footer: [ {
-              "caption": "Close",
-              "style": "warning",
-              "onclick": function () {
-                [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
-                  checkbox.checked = false;
-                  selectQA( checkbox, checkbox.closest( 'a' ) );
-                }  );
-                this.close();
-              }
-            } ]
-          } );*/
         }
 
         function renderQuestionList( questions ) {
           $.setContent( self.element.querySelector( '#questions' ), '' );
+          const questions_elem = self.element.querySelector( '#questions' );
 
           for( let entry in questions ) {
             let elem = $.html( self.html.questions, {
-              id: 'title_'+ entry,
-              i: entry,
+              nr: Number( entry)  + 1,
+              data: entry,
               quiz_title: questions[ entry ].title
             } );
-            self.element.querySelector( '#questions' ).appendChild( elem );
+            questions_elem.appendChild( elem );
           }
-          $.prepend(
-            self.element.querySelector( '#questions > div' ),
-            $.html( '<h5 id="h4"  class="text-info mt-4">Drag and drop the element in the desired order.</h5>' )
-          );
 
-          handleDragDrop();
+          const h5 =  $.html( '<small id="h5"  class="badge badge-info mt-4">Drag and drop the element in the desired order.</small>' );
+          questions_elem.insertBefore( h5,  self.element.querySelector( '#questions > li' ) );
 
+          Sortable.create( questions_elem, {
+            animation: 100,
+            group: 'list-1',
+            draggable: '.list-group-item',
+            handle: '.list-group-item',
+            sort: true,
+            filter: '.sortable-disabled',
+            chosenClass: 'active' }
+            );
         }
 
         function handleDragDrop() {
           let dragSrcEl = null;
-          const entry = self.element.querySelectorAll('#questions > div');
-          [].forEach.call( entry, function( entry ) {
+          let dropSrcEl = null;
+          const div = self.element.querySelectorAll('#questions > div');
+          [].forEach.call( div, function( entry ) {
             entry.addEventListener('dragstart', handleDragStart, false);
             entry.addEventListener('dragenter', handleDragEnter, false);
             entry.addEventListener('dragover', handleDragOver, false);
@@ -556,27 +542,31 @@
               e.preventDefault(); // Necessary. Allows us to drop.
             }
             e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+
+            [].forEach.call( div, function( entry ) {
+              entry.querySelector( 'input' ).style[ 'background-color' ] = 'unset';
+            } );
+            e.target.closest( 'div[draggable]' ).querySelector( 'input' ).style[ 'background-color' ] = '#80808059';
             return false;
           }
 
           function handleDragEnter(e) {
             // this / e.target is the current hover target.
-            e.target.classList.add('over');
+            //e.target.querySelector( '.input-group' ).classList.add('over');
           }
 
           function handleDragLeave(e) {
-            e.target.classList.remove('over');  // this / e.target is previous target element.
+            dragSrcEl.querySelector( 'input' ).style[ 'background-color' ] = 'unset';
           }
 
           function handleDragEnd(e) {
-            [].forEach.call( entry, function ( entry ) {
-              entry.classList.remove('over');
-            });
+            dropSrcEl.querySelector( 'input' ).style[ 'background-color' ] = 'unset';
           }
 
           function handleDragStart(e) {
             // Target (this) element is the source node.
-            e.target.style.opacity = '0.4';
+            e.target.querySelector( 'input' ).style[ 'background-color' ] = '#80808059';
+            e.target.querySelector( 'input' ).style[ 'z-index' ]='100';
 
             dragSrcEl = e.target;
 
@@ -591,7 +581,8 @@
               e.stopPropagation(); // Stops some browsers from redirecting.
             }
 
-            const dropSrcEl = e.target.closest( 'div[draggable]' );
+            dropSrcEl = e.target.closest( 'div[draggable]' );
+            dropSrcEl.querySelector( 'input' ).style[ 'background-color' ] = 'unset';
 
             // Don't do anything if dropping the same column we're dragging.
             if ( dropSrcEl && dragSrcEl !== dropSrcEl ) {

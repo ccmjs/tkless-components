@@ -38,10 +38,7 @@ footer {
   box-shadow: 0 0 5px gray;
 }
 
-#questions .form-control:disabled {
-  background: unset;
-}
-
-.over {
-  border: 2px dashed #000;
+.list-group-item.active {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
 }

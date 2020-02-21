@@ -46,18 +46,12 @@
 
 <ccm-template key="quiz_settings">
     <div class="submit"></div>
-    <div id="questions" class="m-4"></div>
+    <ul id="questions" class="list-group m-4">
+  </ul>
     <button type="button" class="new-item btn btn-outline-info btn mt-4 w-100" onclick="%handover_quiz%">Handover Quiz and back to List</button>
     <button type="button" class="back-to btn btn-outline-danger btn mt-4 w-100" onclick="%back_to%">Back to List</button>
 </ccm-template>
 
 <ccm-template key="questions">
-  <div class="form-row align-items-center" draggable="true">
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text"><i class="material-icons">reorder</i></div>
-        </div>
-        <input type="text" class="form-control" id="%id%" disabled placeholder="%quiz_title%" data-i="%i%">
-      </div>
-  </div>
+  <li class="list-group-item" data-i="%data%"><span class="badge badge-pill badge-info">%nr%</span> <a> %quiz_title%</a></li>
 </ccm-template>
