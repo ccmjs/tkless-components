@@ -94,7 +94,9 @@
         }
 
         if ( self.onchange )
-          editor.on('text-change', () => self.onchange.call( self ) );
+          self.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
+            self.onchange.call( self );
+          } );
       };
 
       this.get = () => editor;
