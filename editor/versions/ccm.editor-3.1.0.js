@@ -62,6 +62,7 @@
       let editor;
       let self = this;
       let $;
+      let data;
 
       this.init = async () => {
         // set shortcut to help functions
@@ -88,8 +89,8 @@
         }
 
         if ( self.data ){
-          const data= await $.dataset( self.data );
-          editor.root.innerHTML =  $.isObject( data ) ? data.inner : data;
+          data= await $.dataset( self.data );
+          editor.root.innerHTML = $.isObject( data ) ? data.inner : data;
         }
 
         if ( self.onchange )
@@ -99,7 +100,8 @@
       this.get = () => editor;
 
       this.getValue = () => {
-        return { "inner": editor.root.innerHTML };
+        const value = editor.root.innerHTML;
+        return $.isObject( data ) ? { inner: value } : value;
       };
 
     }
