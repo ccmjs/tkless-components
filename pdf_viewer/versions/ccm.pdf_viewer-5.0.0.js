@@ -12,7 +12,7 @@
  * - uses ccm v20.0.0
  */
 
-( () => {
+( function () {
 
   const component = {
 
@@ -21,12 +21,13 @@
      * @type {string}
      */
     name: 'pdf_viewer',
+    version: [ 5,0,0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.0.0.js',
 
     /**
      * default instance configuration
@@ -87,14 +88,12 @@
           ]
         }
       },
-      //1582232423236X8503292914974735
-      // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", name: "file_upload" }, "1517228670954X509252249813553" ],
-      //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      // pdf: [ "ccm.get", { url: "", name: "" }, "key" ],
       pdfJS: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.js" ],
       pdfJS_workerSrc: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/default.css"
       ],
       helper: [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ]
     },
@@ -113,10 +112,10 @@
       let $;
 
       let pdfDoc,
-        pageNum ,
-        pageRendering,
-        pageNumPending,
-        ctx;
+          pageNum ,
+          pageRendering,
+          pageNumPending,
+          ctx;
 
       let file;
 
@@ -160,7 +159,6 @@
         // if pdf not defined, no file will be displayed
         if ( !self.pdf ) return $.setContent( self.element, 'No File to Display' );
 
-
         // render input elements
         $.setContent( self.element, $.html( self.html.main, {
           prev: () => {
@@ -168,17 +166,17 @@
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
-          },
+            },
           next: () => {
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
-          },
+            },
           go_to: () =>{
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
-          },
+            },
           all: () => { pdfDoc.numPages; },
         } ) );
 
