@@ -1,10 +1,13 @@
 /**
  * @overview ccm component for feedback
- * @author Tea Kless <tea.kless@web.de>, 2019
+ * @author Tea Kless <tea.kless@web.de>, 2020
  * @license The MIT License (MIT)
- * @version 4.0.0
+ * @version 5.0.0
  * @changes
- *  * version 4.0.0 (25.09.2019)
+ * version 5.0.0 (05.03.2020)
+ * - remove onfinish property
+ * - switched to ccm v25.0.0
+ * version 4.0.0 (25.09.2019)
  * - uses click event insteed of hover to slide feedabck in or out (only with right.css )
  * version 3.0.0 (07.01.2019)
  * - uses ccm v18.0.0
@@ -14,10 +17,9 @@
 
   const component = {
 
-    name: 'feedback',
-    version: [ 4,0,0 ],
+    name: 'feedback', version: [ 5,0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.0.0.js',
 
     config: {
       "html": {
@@ -89,11 +91,12 @@
         }
       },
       //"data": { "store": [ "ccm.store", {} ] },
-      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/right.css" ], //'https://ccmjs.github.io/tkless-components/feedback/resources/left.css'
-      bootstrap: [ 'ccm.load',
-        { context: "head", url: "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/feedback/resources/right.css" ], //'https://ccmjs.github.io/tkless-components/feedback/resources/left.css'
+      "bootstrap": [ 'ccm.load',
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css"
-      ]
+      ],
+      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-1.0.0.mjs" } ]
     },
 
     Instance: function () {
@@ -101,57 +104,59 @@
       let self = this;
 
       this.ready = async () => {
-        $ = self.ccm.helper;
+        // set shortcut to help functions
+        $ = Object.assign( {}, this.ccm.helper, this.helper );
       };
 
       this.start = async () => {
 
-          if ( self.logger ) self.logger.log( 'start' );
+        if ( self.logger ) self.logger.log( 'start' );
 
-          let slide_out = false;
+        let slide_out = false;
 
-          $.setContent( self.element, self.ccm.helper.html( self.html.feedback, {
-            slide_in_out: () => {
-              if ( !slide_out ) {
-                self.element.querySelector( '#slideout' ).style.right = '250px';
-                self.element.querySelector( '#slideout-inner' ).style.right = '-0px';
-                slide_out = true;
-              }
-              else {
-                self.element.querySelector( '#slideout' ).style.right = '-0px';
-                self.element.querySelector( '#slideout-inner' ).style.right = '-250px';
-                slide_out = false;
-              }
-            },
-            submit: async ( event ) => {
-             event.preventDefault();
-
-              let data = {
-                "title": self.element.querySelector( 'input[type=text]' ).value,
-                "content": self.element.querySelector( 'textarea' ).value
-              };
-
-              // update dataset
-              await self.data.store.set( data );
-
-              if ( self.logger ) self.logger.log( 'create', $.clone ( data ) );
-
-              // visual effect, that the feedback was saved successfully
-              if ( self.element.querySelector( '.saved' ) ) $.removeElement( self.element.querySelector( '.saved' ) );
-              self.element.querySelector( '.panel-body' ).appendChild( $.html( {
-                "tag": "strong",
-                "class": "text-success saved",
-                "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
-              } ) );
-              self.element.querySelector( 'form' ).reset();
+        $.setContent( self.element, self.ccm.helper.html( self.html.feedback, {
+          slide_in_out: () => {
+            if ( !slide_out ) {
+              self.element.querySelector( '#slideout' ).style.right = '250px';
+              self.element.querySelector( '#slideout-inner' ).style.right = '-0px';
+              slide_out = true;
             }
-          } ));
+            else {
+              self.element.querySelector( '#slideout' ).style.right = '-0px';
+              self.element.querySelector( '#slideout-inner' ).style.right = '-250px';
+              slide_out = false;
+            }
+          },
+          submit: async ( event ) => {
+            event.preventDefault();
 
-          // change feedback position from above
-          if ( self.from_above ) {
-            self.element.querySelector( '#slideout' ).style.top = self.from_above+'%';
-            self.element.querySelector( '#slideout-inner' ).style.top = self.from_above+'%';
+            let data = {
+              "title": self.element.querySelector( 'input[type=text]' ).value,
+              "content": self.element.querySelector( 'textarea' ).value
+            };
+
+            // update dataset
+            await self.data.store.set( data );
+
+            if ( self.logger ) self.logger.log( 'create', $.clone ( data ) );
+
+            // visual effect, that the feedback was saved successfully
+            if ( self.element.querySelector( '.saved' ) ) $.removeElement( self.element.querySelector( '.saved' ) );
+            self.element.querySelector( '.panel-body' ).appendChild( $.html( {
+              "tag": "strong",
+              "class": "text-success saved",
+              "inner": "Saved <span class='glyphicon glyphicon-saved'></span>"
+            } ) );
+            self.element.querySelector( 'form' ).reset();
+
           }
+        } ));
+
+        // change feedback position from above
+        if ( self.from_above ) {
+          self.element.querySelector( '#slideout' ).style.top = self.from_above+'%';
+          self.element.querySelector( '#slideout-inner' ).style.top = self.from_above+'%';
+        }
 
       };
 

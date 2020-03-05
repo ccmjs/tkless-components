@@ -1,7 +1,16 @@
 /**
  * @overview ccm component for feedback
- * @author Tea Kless <tea.kless@web.de>, 2018
+ * @author Tea Kless <tea.kless@web.de>, 2020
  * @license The MIT License (MIT)
+ * @version 5.0.0
+ * @changes
+ * version 5.0.0 (05.03.2020)
+ * - remove onfinish property
+ * - switched to ccm v25.0.0
+ * version 4.0.0 (25.09.2019)
+ * - uses click event insteed of hover to slide feedabck in or out (only with right.css )
+ * version 3.0.0 (07.01.2019)
+ * - uses ccm v18.0.0
  */
 
 ( function () {
@@ -82,13 +91,13 @@
         }
       },
 
-      //onfinish: { log: true },
       //"data": { "store": [ "ccm.store", {} ] },
       "css": [ "ccm.load", "resources/right.css"], // "resources/left.css" not suitable for mobile devices
       "bootstrap": [ "ccm.load",
         { "context": "head", "url": "../libs/bootstrap/css/font-face.css" },
         "../libs/bootstrap/css/bootstrap.css"
-      ]
+      ],
+      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-1.0.0.mjs" } ]
     },
 
     Instance: function () {
@@ -96,7 +105,8 @@
       let self = this;
 
       this.ready = async () => {
-        $ = self.ccm.helper;
+        // set shortcut to help functions
+        $ = Object.assign( {}, this.ccm.helper, this.helper );
       };
 
       this.start = async () => {
@@ -140,7 +150,6 @@
             } ) );
             self.element.querySelector( 'form' ).reset();
 
-            if ( self.onfinish ) $.onFinish( self, data );
           }
         } ));
 
