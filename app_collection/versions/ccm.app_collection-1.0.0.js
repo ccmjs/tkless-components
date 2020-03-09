@@ -11,13 +11,13 @@
     name: 'app_collection',
     version: [ 1, 0,0 ],
 
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-24.0.4.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.0.0.js',
 
     config: {
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/templates.html" ],
       "title": "My Apps",
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
-        "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ],
+        "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js" ],
         "logged_in": true,
         "style": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/user.css" ]
       } ],
@@ -179,7 +179,7 @@
       this.ready = async () => {
 
         // set shortcut to help functions
-        $ = this.ccm.helper;
+        $ = Object.assign( {}, this.ccm.helper, this.helper );
 
         if ( this.logger ) this.logger.log( 'ready', $.clone ( this ) );
 
@@ -302,14 +302,18 @@
 
             $.setContent( main_elem.querySelector( '#title' ), title );
             main_elem.querySelector( '#title' ).appendChild( div );
-            $.setContent( main_elem.querySelector( '#subtitle' ), subtitle );
+            main_elem.querySelector( '#subtitle' ).innerHTML = subtitle;
+            //$.setContent( main_elem.querySelector( '#subtitle' ), subtitle );
           }
 
         }
 
         async function renderApp( config ) {
+          const div = document.createElement( 'div' );
+          div.setAttribute( 'id', 'padding' );
+          $.setContent(  main_elem.querySelector( '.article ' ), div );
           const instance_config = await $.solveDependency( config.ignore[ 2 ] );
-          instance_config.root = main_elem.querySelector( '.article' );
+          instance_config.root = main_elem.querySelector( '.article > div' );
           instance_config.parent = self;
           config.ignore[ 2 ] = instance_config;
           const instance = await $.solveDependency( config.ignore );

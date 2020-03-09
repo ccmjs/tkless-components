@@ -1,6 +1,11 @@
 #element {
   height: 100%;
 }
+
+.article > #padding {
+  padding: 1rem;
+}
+
 #container {
   display: flex;
   flex-direction: column;
@@ -9,7 +14,6 @@
 }
 
 #container > .header {
-  font-size: 20px;
   display: flex;
   justify-content: space-between;
   grid-area: header;
@@ -17,15 +21,11 @@
   background-color: #f8f9fa;
   color: #777;
   height: 80px;
+  padding: .5rem;
 }
 
-.header #home {
-  padding: .4rem 1rem;
-  height: 100%;
-}
 .header #home:hover,
 .footer .app-icon:hover {
-  background-color: #eeeeee;
   color: #333;
 }
 
@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .material-icons {
@@ -60,6 +60,7 @@
 }
 
 .footer {
+  padding: .4rem;
   background-color: #f8f9fa;
   display: flex;
   justify-content: space-around;
@@ -68,12 +69,9 @@
 }
 
 .footer:last-child {
-  line-height: 8px;
+  line-height: .8rem;
   text-align: center;
   font-weight: 600;
-}
-.footer > div {
-  padding: 4px 11px 6px;
 }
 
 #more {
