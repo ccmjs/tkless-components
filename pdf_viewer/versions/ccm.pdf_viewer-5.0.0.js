@@ -89,6 +89,7 @@
         }
       },
       // pdf: [ "ccm.get", { url: "", name: "" }, "key" ],
+      // onchange: function ( self, page ) { console.log( self, page )  },
       pdfJS: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.js" ],
       pdfJS_workerSrc: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
@@ -166,17 +167,17 @@
             self.element.querySelector( '.btn-next' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-prev' ).classList.add( 'active' );
             onPrevPage();
-            },
+          },
           next: () => {
             // set active button
             self.element.querySelector( '.btn-prev' ).classList.remove( 'active' );
             self.element.querySelector( '.btn-next' ).classList.add( 'active' );
             onNextPage();
-            },
+          },
           go_to: () =>{
             goTo( self.element.querySelector( '#page-num' ).value );
             self.element.querySelector( '#page-num' ).value = '';
-            },
+          },
           all: () => { pdfDoc.numPages; },
         } ) );
 
@@ -198,6 +199,8 @@
          * @param num Page number.
          */
         function renderPage( num ) {
+          self.onchange && self.onchange( self, num );
+
           pageRendering = true;
           // Using promise to fetch the page
           pdfDoc.getPage( num ).then( function( page ) {
@@ -293,7 +296,6 @@
             pageNumPending = num;
           } else {
             renderPage(num);
-
             //set width to display page number in the middle of pdf-file
             self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
           }

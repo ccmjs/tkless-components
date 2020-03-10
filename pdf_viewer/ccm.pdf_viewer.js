@@ -90,6 +90,7 @@
       //1582232423236X8503292914974735
       // pdf: //[ "ccm.get", { url: "https://ccm.inf.h-brs.de", name: "file_upload" }, "1517228670954X509252249813553" ],
       //   "//cdn.mozilla.net/pdfjs/tracemonkey.pdf",
+      onchange: function ( self, page ) { console.log( self, page )  },
       pdfJS: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.js" ],
       pdfJS_workerSrc: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.js" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
@@ -200,6 +201,8 @@
          * @param num Page number.
          */
         function renderPage( num ) {
+          self.onchange && self.onchange( self, num );
+
           pageRendering = true;
           // Using promise to fetch the page
           pdfDoc.getPage( num ).then( function( page ) {
@@ -295,7 +298,6 @@
             pageNumPending = num;
           } else {
             renderPage(num);
-
             //set width to display page number in the middle of pdf-file
             self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
           }
