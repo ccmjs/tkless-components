@@ -90,7 +90,7 @@
 
         if ( self.data ){
           data= await $.dataset( self.data );
-          editor.root.innerHTML = $.isObject( data ) ? data.inner : data;
+          editor.root.innerHTML = ( $.isObject( data ) ? data.inner : data ) || '';
         }
 
         if ( self.onchange )
