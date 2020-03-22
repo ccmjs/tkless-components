@@ -169,10 +169,10 @@
         }
       };
 
-      this.get = () => editor;
+      this.get = () => quill;
 
       this.getValue = () => {
-        return { "inner": editor.root.innerHTML };
+        return { "inner": quill.root.innerHTML };
       };
 
     }
