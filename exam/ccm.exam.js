@@ -20,7 +20,7 @@
         {  "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" },
         "resources/default.css"
       ],
-      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-7.3.3.js", {
+      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-8.0.0.js", {
         "data": {
           "store": [
             "ccm.store"
@@ -204,7 +204,6 @@
                 "url": "https://ccmjs.github.io/akless-components/libs/weblysleekui/font.css"
               }
             ],
-
             "feedback": true,
             "user": [
               "ccm.instance",
@@ -296,7 +295,8 @@
               edit_task: async () => {
                 await renderLivePollSettings( i );
               },
-              delete_task: async () => {
+              delete_task: async ( event ) => {
+                event.stopPropagation();
                 await self.modal.start( {
                   modal_title: data.tasks[ i ].title,
                   modal_content: "Are you sure you want to delete this Task?",
@@ -316,7 +316,10 @@
               select_item: function ( ) {
                 selectQA( this, list_item );
                 },
-              livepoll: async () => { await handOverLivePoll( data.tasks[ i ] ); }
+              livepoll: async ( event ) => {
+                event.stopPropagation();
+                await handOverLivePoll( data.tasks[ i ] );
+              }
             } );
             main_elem.querySelector( '.list-group' ).appendChild( list_item );
           }
