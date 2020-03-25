@@ -69,7 +69,7 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper );
 
-        if ( hljs ) hljs.initHighlightingOnLoad();
+        if ( window.hljs ) hljs.initHighlightingOnLoad();
       };
 
       this.start = async () => {
@@ -79,7 +79,7 @@
 
         quill = new Quill( div, self.settings );
 
-        if ( hljs && this.settings.modules.syntax ) {
+        if ( window.hljs && this.settings.modules.syntax ) {
           const code_block = self.element.querySelector( '.ql-code-block' );
           code_block.addEventListener( 'click', () => {
             hljs.highlightBlock( self.element.querySelector( 'div[contenteditable=true] > pre' ) );
