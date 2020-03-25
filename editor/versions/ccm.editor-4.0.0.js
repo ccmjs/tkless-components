@@ -53,7 +53,7 @@
         placeholder: 'Write here...',
         theme: 'snow'
       },
-      shadow: 'open',
+      //shadow: 'open',
       helper: [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ],
       icon: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css",
         { "context": "head", "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" } ]
@@ -160,12 +160,6 @@
           self.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
             self.onchange.call( self );
           } );
-
-          if(quill.getFormat().custom) {
-            customButton.classList.add('ql-active');
-          } else {
-            customButton.classList.remove('ql-active');
-          }
         }
       };
 
