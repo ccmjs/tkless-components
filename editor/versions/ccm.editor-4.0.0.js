@@ -152,8 +152,8 @@
         });
 
         if ( self.data ){
-          const data= await $.dataset( self.data );
-          quill.root.innerHTML =  data.inner;
+          data= await $.dataset( self.data );
+          editor.root.innerHTML = ( $.isObject( data ) ? data.inner : data ) || '';
         }
 
         if ( self.onchange ) {
