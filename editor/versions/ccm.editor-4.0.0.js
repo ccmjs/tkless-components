@@ -63,6 +63,7 @@
       let quill;
       let self = this;
       let $;
+      let data;
 
       this.ready = async () => {
         // set shortcut to help functions
