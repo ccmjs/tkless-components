@@ -234,8 +234,8 @@
       } ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ],
       "data": {
-        "store": [ "ccm.store", { "name": "exam_data", "url": "https://ccm2.inf.h-brs.de" } ],
-        "key": "demo_exam"
+        "store": [ "ccm.store", { "name": "qa_pool_data", "url": "https://ccm2.inf.h-brs.de" } ],
+        "key": "demo_qa_pool"
       },
       "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ],
       "live_poll": {
