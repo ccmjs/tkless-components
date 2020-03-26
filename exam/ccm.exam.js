@@ -240,10 +240,10 @@
       "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ],
       "live_poll": {
         "url": "https://ccmjs.github.io/akless-components/live_poll/versions/ccm.live_poll-2.3.2.js",
-        "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "exam_live_poll" } ],
+        "store": [ "ccm.store", { "url": "wss://ccm2.inf.h-brs.de", "name": "exam_live_poll" } ],
       },
       "quiz": {
-        "url": "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.0.3.js",
+        "url": "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.0.js",
         "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "exam_quiz" } ],
       },
       "handover_app": [ "ccm.component", "https://ccmjs.github.io/akless-components/handover_app/versions/ccm.handover_app-2.0.0.js" ],
@@ -423,7 +423,9 @@
           // get selected questions
           let questions = [];
           [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].forEach( checkbox => {
-            questions.push( data.tasks[ checkbox.id.split('_')[1] ] );
+            const task = data.tasks[ checkbox.id.split('_')[1] ];
+            task.id = checkbox.id.split('_')[1];
+            questions.push( task );
           }  );
 
           // render quiz settings
@@ -450,7 +452,10 @@
                         css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
                         user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
                         questions: $.clone( sorted_questions.length ? sorted_questions : questions ),
-                        shuffle: submit_inst.getValue().radio === 'shuffle' && 'shuffle'
+                        shuffle: submit_inst.getValue().radio === 'shuffle' && 'shuffle',
+                        navigation: true,
+                        feedback: true,
+                        'placeholder.submit': 'Check'
                       }
                     } ],
                     key: 'app'
@@ -507,7 +512,7 @@
           for( let entry in questions ) {
             let elem = $.html( self.html.questions, {
               nr: Number( entry)  + 1,
-              data: entry,
+              data: questions[ entry ].id,
               quiz_title: questions[ entry ].title
             } );
             questions_elem.appendChild( elem );
