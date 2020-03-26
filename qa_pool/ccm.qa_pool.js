@@ -248,9 +248,10 @@
       },
       "handover_app": [ "ccm.component", "https://ccmjs.github.io/akless-components/handover_app/versions/ccm.handover_app-2.0.0.js" ],
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.3.0.js", {
-        "logged_in": true
+        "realm": "guest",
+        "guest": true
       } ],
-      "swap": [ 'ccm.load', "http://SortableJS.github.io/Sortable/Sortable.js" ]
+      "swap": [ 'ccm.load', "https://SortableJS.github.io/Sortable/Sortable.js" ]
     },
 
     Instance: function () {
