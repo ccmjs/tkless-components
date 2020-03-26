@@ -8,7 +8,7 @@
 
   const component = {
 
-    name: 'exam',
+    name: 'qa_pool',
 
     ccm: 'https://ccmjs.github.io/ccm/ccm.js',
 
