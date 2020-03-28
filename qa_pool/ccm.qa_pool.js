@@ -20,7 +20,7 @@
         {  "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" },
         "resources/default.css"
       ],
-      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-8.0.0.js", {
+      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-8.0.2.js", {
         "data": {
           "store": [
             "ccm.store"
@@ -60,7 +60,8 @@
             "label": "Question",
             "name": "text",
             "type": "text",
-            "info": "Enter the text of the question here. Add or remove questions with the plus and minus buttons."
+            "info": "Enter the text of the question here. Add or remove questions with the plus and minus buttons.",
+            "required": true
           },
           {
             "label": "Type",
@@ -99,7 +100,8 @@
                 "label": "Answer",
                 "name": "text",
                 "type": "text",
-                "info": "Enter the text of the answer here. Add or remove answers with the plus and minus buttons."
+                "info": "Enter the text of the answer here. Add or remove answers with the plus and minus buttons.",
+                "required": true
               },
               {
                 "label": "Correct",
@@ -347,7 +349,24 @@
           if ( qa_data !== undefined ) {
             submit_inst = await self.submit.start({
               root: main_elem,
-              data: data.tasks[ qa_data ]
+              data: data.tasks[ qa_data ],
+              onfinish: async ()=> {
+                const result = submit_inst.getValue();
+                const new_data =  {
+                  "type": "quiz",
+                  "title": result.title,
+                  "text": result.text,
+                  "description": result.description,
+                  "input": result.input,
+                  "random": result.random,
+                  "answers": result.answers
+                };
+                qa_data !== undefined ? data.tasks[ qa_data ] = new_data : data.tasks.push( new_data );
+
+                // update dataset for rendering
+                await self.data.store.set( data );
+                await self.start()
+              }
             });
           }
           else
@@ -356,26 +375,9 @@
             } );
 
           const buttons = $.html( self.html.submit_buttons, {
-            action_1: async ()=> {
-              const result = submit_inst.getValue();
-              const new_data =  {
-                "type": "quiz",
-                "title": result.title,
-                "text": result.text,
-                "description": result.description,
-                "input": result.input,
-                "random": result.random,
-                "answers": result.answers
-              };
-              qa_data !== undefined ? data.tasks[ qa_data ] = new_data : data.tasks.push( new_data );
-
-              // update dataset for rendering
-              await self.data.store.set( data );
-              await self.start()
-            },
             label_1: "Save and Back to List",
-            action_2: async () => { await self.start(); },
-            label_2: "Don't Save and Back to List"
+            label_2: "Don't Save and Back to List",
+            back_to_list: async () => { await self.start(); },
           } );
           submit_inst.element.appendChild( buttons );
         }
@@ -430,11 +432,49 @@
 
           // get template for buttons and initialize click events
           const buttons = $.html( self.html.submit_buttons, {
-            action_1: async () => {
+            label_1: "Handover Quiz",
+            label_2: "Back to List",
+            back_to_list: async ()=> { await self.start(); }
+          } );
+
+          const submit_inst = await self.submit.start({
+            root: main_elem,
+            entries: [
+              {
+                "name": "css",
+                "type": "hidden"
+              },
+              "<div class=\"page-header\"><h2 class='mb-4'>Settings <small class=\"text-primary\">Quiz</small></h2></div>",
+              {
+                "label": "Shuffle Questions",
+                "name": "radio",
+                "type": "radio",
+                "info": "When enabled, the questions are shuffled so that their order is random at each startup.",
+                "items": [
+                  {
+                    "label": "Automatically",
+                    "value": "shuffle",
+                    "checked": true
+                  },
+                  {
+                    "label": "Manually",
+                    "value": "manually"
+                  }
+                ]
+              }
+            ],
+            onchange: () => {
+              if ( submit_inst.getValue().radio === 'manually' ){
+                renderQuestionList( questions, submit_inst );
+              } else
+                submit_inst.element.querySelector( '#questions' ) && submit_inst.element.querySelector( '#questions' ).remove();
+
+            },
+            onfinish: async () => {
               const sorted_questions = [];
 
               if ( submit_inst.getValue().radio === 'manually' ) {
-                const elem = self.element.querySelector( '#questions' );
+                const elem = submit_inst.element.querySelector( '#questions' );
                 elem.querySelectorAll( '[ data-i ]' ).forEach( list_item => {
                   sorted_questions.push( data.tasks[ list_item.getAttribute( 'data-i' ) ] );
                 } );
@@ -468,45 +508,6 @@
                   "style": "warning",
                   "onclick": function () { this.close(); }
                 } ] } );
-            },
-            label_1: "Handover Quiz",
-            action_2: async ()=> {
-              await self.start();
-            },
-            label_2: "Back to List",
-          } );
-
-          const submit_inst = await self.submit.start({
-            root: main_elem,
-            entries: [
-              {
-                "name": "css",
-                "type": "hidden"
-              },
-              "<div class=\"page-header\"><h2 class='mb-4'>Settings <small class=\"text-primary\">Quiz</small></h2></div>",
-              {
-                "label": "Shuffle Questions",
-                "name": "radio",
-                "type": "radio",
-                "info": "When enabled, the questions are shuffled so that their order is random at each startup.",
-                "items": [
-                  {
-                    "label": "Automatically",
-                    "value": "shuffle",
-                    "checked": true
-                  },
-                  {
-                    "label": "Manually",
-                    "value": "manually"
-                  }
-                ]
-              }
-            ],
-            onchange: function () {
-              if ( submit_inst.getValue().radio === 'manually' ){
-                renderQuestionList( questions, submit_inst );
-              } else
-                self.element.querySelector( '#questions' ) && $.setContent( self.element.querySelector( '#questions' ), '' );
             }
           });
 
