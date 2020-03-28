@@ -22,10 +22,9 @@
       </div>
     </small>
   </div>
-
 </ccm-template>
 
-<ccm-template key="buttons">
+<ccm-template key="footer">
     <div class="container pt-4 pb-4">
         <div class="d-flex justify-content-between">
           <button type="button" id="new-item" class="btn btn-outline-secondary btn" onclick="%new_task_item%"><i id="add" class="material-icons">add</i> Question-Answer</button>
@@ -36,22 +35,25 @@
     </div>
 </ccm-template>
 
-<ccm-template key="item_settings">
-  <div id="settings"></div>
-  <div id="buttons">
-    <button id="submit" type="button" class="new-item btn btn-outline-info btn mt-4 w-100" onclick="%save_task%">Save and back to List</button>
-    <button type="button" class="back-to btn btn-outline-danger btn mt-4 w-100" onclick="%back_to%">Don't Save and back to List</button>
-  </div>
-</ccm-template>
-
-<ccm-template key="quiz_settings">
-    <div class="submit"></div>
-    <ul id="questions" class="list-group m-4">
-  </ul>
-    <button type="button" class="new-item btn btn-outline-info btn mt-4 w-100" onclick="%handover_quiz%">Handover Quiz</button>
-    <button type="button" class="back-to btn btn-outline-danger btn mt-4 w-100" onclick="%back_to%">Back to List</button>
+<ccm-template key="question_list">
+    <ul id="questions" class="list-group"></ul>
 </ccm-template>
 
 <ccm-template key="questions">
   <li class="list-group-item" data-i="%data%"><span class="badge badge-pill badge-info">%nr%</span> <a> %quiz_title%</a></li>
 </ccm-template>
+
+<ccm-template key="submit_buttons">
+  <div id="buttons" class="mt-4">
+    <button id="submit" type="button" class="new-item btn btn-info btn mt-4 w-100" onclick="%action_1%"> %label_1% </button>
+    <button type="button" class="back-to btn btn-outline-danger btn mt-4 w-100" onclick="%action_2%"> %label_2% </button>
+  </div>
+</ccm-template>
+
+<!--<ccm-template key="item_settings">
+  <div id="settings"></div>
+  <div id="buttons">
+    <button id="submit" type="button" class="new-item btn btn-outline-info btn mt-4 w-100" onclick="%save_task%">Save and back to List</button>
+    <button type="button" class="back-to btn btn-outline-danger btn mt-4 w-100" onclick="%back_to%">Don't Save and back to List</button>
+  </div>
+</ccm-template>-->

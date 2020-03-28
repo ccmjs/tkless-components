@@ -35,7 +35,6 @@ footer {
   position: sticky;
   bottom: 0;
   background-color: white;
-  box-shadow: 0 0 5px gray;
 }
 
 .list-group-item.active {

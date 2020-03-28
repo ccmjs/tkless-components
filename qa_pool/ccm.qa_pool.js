@@ -47,7 +47,7 @@
             "name": "user",
             "type": "hidden"
           },
-          "<div class=\"page-header\"><h2>Settings <small class=\"text-primary\">New QA Task</small></h2></div>",
+          "<div class=\"page-header mb-4\"><h2>Settings <small class=\"text-primary\">New QA Task</small></h2></div>",
           {
             "label": "Title",
             "name": "title",
@@ -230,7 +230,8 @@
               "store": true
             }
           }
-        }
+        },
+        "style": [ "ccm.load", "resources/submit.css" ]
       } ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ],
       "data": {
@@ -277,7 +278,7 @@
 
         let main_elem = $.html( self.html.main );
         renderTasks();
-        addNewTask();
+        renderFooter();
         $.setContent( self.element, main_elem );
 
         function renderTasks() {
@@ -294,7 +295,7 @@
                 list_item.querySelector( 'input[type=checkbox]' ).dispatchEvent( change_event );
               },
               edit_task: async () => {
-                await renderLivePollSettings( i );
+                await renderQASettings( i );
               },
               delete_task: async ( event ) => {
                 event.stopPropagation();
@@ -326,40 +327,36 @@
           }
         }
 
-        function selectQA( element, list_item ) {
-          element.checked === true ? ( list_item.querySelector( '.hook' ).style.display = 'block'): ( list_item.querySelector( '.hook' ).style.display = 'none');
-        }
-
-        //TODO muss umbennant werden
-        function addNewTask() {
-          const buttons = $.html ( self.html.buttons,  {
-            new_task_item: async function () { await renderLivePollSettings(); },
+        function renderFooter() {
+          const footer_buttons = $.html ( self.html.footer,  {
+            new_task_item: async function () { await renderQASettings(); },
             quiz: async function () {
               if ( [...self.element.querySelectorAll( '[type=checkbox]:checked' ) ].length === 0 )
                 return alert( "Please select questions!" );
               await renderQuizSettings();
             }
           } );
-          main_elem.querySelector( 'footer' ).appendChild( buttons );
+          main_elem.querySelector( 'footer' ).appendChild( footer_buttons );
+
+          data.tasks.length === 0  && main_elem.querySelector( '#quiz' ).remove();
         }
 
-        async function renderLivePollSettings( submit_data ) {
+        async function renderQASettings( qa_data ) {
           let submit_inst;
 
-          if ( submit_data !== undefined ) {
+          if ( qa_data !== undefined ) {
             submit_inst = await self.submit.start({
               root: main_elem,
-              data: data.tasks[ submit_data ]
+              data: data.tasks[ qa_data ]
             });
           }
           else
-            submit_inst = await self.submit.start();
+            submit_inst = await self.submit.start( {
+              root: main_elem
+            } );
 
-          const item_settings = $.html( self.html.item_settings, {
-            back_to: async () => {
-              await self.start();
-            },
-            save_task: async ()=> {
+          const buttons = $.html( self.html.submit_buttons, {
+            action_1: async ()=> {
               const result = submit_inst.getValue();
               const new_data =  {
                 "type": "quiz",
@@ -370,15 +367,17 @@
                 "random": result.random,
                 "answers": result.answers
               };
-              submit_data !== undefined ? data.tasks[ submit_data ] = new_data : data.tasks.push( new_data );
+              qa_data !== undefined ? data.tasks[ qa_data ] = new_data : data.tasks.push( new_data );
 
               // update dataset for rendering
               await self.data.store.set( data );
               await self.start()
-            }
+            },
+            label_1: "Save and Back to List",
+            action_2: async () => { await self.start(); },
+            label_2: "Don't Save and Back to List"
           } );
-          item_settings.querySelector( '#settings' ).appendChild( submit_inst.root );
-          $.setContent( main_elem, item_settings );
+          submit_inst.element.appendChild( buttons );
         }
 
         /*
@@ -429,9 +428,9 @@
             questions.push( task );
           }  );
 
-          // render quiz settings
-          const elem = $.html( self.html.quiz_settings, {
-            handover_quiz: async () => {
+          // get template for buttons and initialize click events
+          const buttons = $.html( self.html.submit_buttons, {
+            action_1: async () => {
               const sorted_questions = [];
 
               if ( submit_inst.getValue().radio === 'manually' ) {
@@ -450,7 +449,9 @@
                     store: [ "ccm.store", {
                       app: {
                         key: 'app',
-                        css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" ],
+                        css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css",
+                          { "context": "head", "url": "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" }
+                        ],
                         user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
                         questions: $.clone( sorted_questions.length ? sorted_questions : questions ),
                         shuffle: submit_inst.getValue().radio === 'shuffle' && 'shuffle',
@@ -467,17 +468,22 @@
                   "style": "warning",
                   "onclick": function () { this.close(); }
                 } ] } );
-              },
-            back_to: async () => { await self.start(); }
+            },
+            label_1: "Handover Quiz",
+            action_2: async ()=> {
+              await self.start();
+            },
+            label_2: "Back to List",
           } );
+
           const submit_inst = await self.submit.start({
-            root: elem.querySelector( '.submit' ),
+            root: main_elem,
             entries: [
               {
                 "name": "css",
                 "type": "hidden"
               },
-              "<div class=\"page-header\"><h2>Settings <small class=\"text-primary\">Quiz</small></h2></div>",
+              "<div class=\"page-header\"><h2 class='mb-4'>Settings <small class=\"text-primary\">Quiz</small></h2></div>",
               {
                 "label": "Shuffle Questions",
                 "name": "radio",
@@ -498,17 +504,19 @@
             ],
             onchange: function () {
               if ( submit_inst.getValue().radio === 'manually' ){
-                renderQuestionList( questions );
+                renderQuestionList( questions, submit_inst );
               } else
                 self.element.querySelector( '#questions' ) && $.setContent( self.element.querySelector( '#questions' ), '' );
             }
           });
-          $.setContent( main_elem, elem );
+
+          submit_inst.element.appendChild( buttons );
+
         }
 
-        function renderQuestionList( questions ) {
-          $.setContent( self.element.querySelector( '#questions' ), '' );
-          const questions_elem = self.element.querySelector( '#questions' );
+        function renderQuestionList( questions, submit_inst ) {
+
+          const questions_elem = $.html( self.html.question_list );
 
           for( let entry in questions ) {
             let elem = $.html( self.html.questions, {
@@ -519,8 +527,12 @@
             questions_elem.appendChild( elem );
           }
 
+          submit_inst.element.insertBefore( questions_elem, submit_inst.element.querySelector( '#buttons' ) );
+
           const h5 =  $.html( '<small id="h5"  class="badge badge-info mt-4">Drag and drop the element in the desired order.</small>' );
-          questions_elem.insertBefore( h5,  self.element.querySelector( '#questions > li' ) );
+
+          questions_elem.insertBefore( h5,  submit_inst.element.querySelector( '#questions > li' ) );
+
 
           Sortable.create( questions_elem, {
             animation: 100,
@@ -531,6 +543,10 @@
             filter: '.sortable-disabled',
             chosenClass: 'active' }
             );
+        }
+
+        function selectQA( element, list_item ) {
+          element.checked === true ? ( list_item.querySelector( '.hook' ).style.display = 'block'): ( list_item.querySelector( '.hook' ).style.display = 'none');
         }
 
         function handleDragDrop() {
