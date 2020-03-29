@@ -136,7 +136,9 @@
       "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ],
       "live_poll": {
         "url": "https://ccmjs.github.io/akless-components/live_poll/versions/ccm.live_poll-2.4.0.js",
-        "store": [ "ccm.store", { "url": "wss://ccm2.inf.h-brs.de", "name": "exam_live_poll" } ],
+        "store": [ "ccm.store", { "url": "wss://ccm2.inf.h-brs.de", "name": "qa_marko_winzker_live_poll" } ],
+        "results": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "qa_marko_winzker_live_poll_results" } ],
+        "password": "weD5mwz"
       },
       "quiz": {
         "url": "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.0.js",
@@ -271,11 +273,26 @@
         * param qa => question-answer-item
         */
         async function handOverLivePoll( qa ) {
-          const key = $.generateKey();
-          await self.live_poll.store.set( {
-            key: key,
+          const cfg_key = '1585515839867X2872294076508515';
+          const key = await self.live_poll.store.set( {
             answers: qa.answers.map( answer => typeof answer === 'string' ? answer : answer.text ),
             question: qa.text
+          } );
+          await self.live_poll.store.set( {
+            key: cfg_key,
+            user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
+            data: {
+              key: key,
+              store: [ "ccm.store", self.live_poll.store.source() ]
+            },
+            editable: false,
+            password: self.live_poll.password,
+            lock: false,
+            onfinish: {
+              store: {
+                settings: [ "ccm.store", self.live_poll.results.source() ]
+              }
+            }
           } );
 
           await self.modal.start( {
@@ -283,20 +300,8 @@
             modal_content: ( await self.handover_app.start( {
               component_url: self.live_poll.url,
               data: {
-                store: [ "ccm.store", {
-                  app: {
-                    key: 'app',
-                    user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
-                    data: {
-                      store: [ "ccm.store", self.live_poll.store.source() ],
-                      key: key
-                    },
-                    editable: false,
-                    password: "aw5mwz",
-                    lock: false
-                  }
-                } ],
-                key: 'app'
+                key: cfg_key,
+                store: [ "ccm.store", self.live_poll.store.source() ]
               },
               qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
             } ) ).root,
