@@ -52,7 +52,7 @@
             "label": "Title",
             "name": "title",
             "type": "text",
-            "info": "Title of your Task.",
+            "info": "Title of your Task. ",
             "required": true
           },
           "<br><br>",
@@ -60,14 +60,15 @@
             "label": "Question",
             "name": "text",
             "type": "text",
-            "info": "Enter the text of the question here. Add or remove questions with the plus and minus buttons.",
+            "info": "Enter the text of the question here. This title is displayed in the overview list and is used to help you find a question quickly.",
             "required": true
           },
           {
             "label": "Type",
             "name": "input",
             "type": "radio",
-            "info": "Select single choice if only one answer or multiple choice if multiple answers can be selected.",
+            "info": "Select single choice if only one answer is correct and only one answer can be selected." +
+              "Select multiple choice if more than one answer could be correct and selected.",
             "items": [
               {
                 "label": "Single Choice",
@@ -242,7 +243,7 @@
       },
       "modal": [ "ccm.component", "https://ccmjs.github.io/tkless-components/modal/versions/ccm.modal-2.0.0.js" ],
       "live_poll": {
-        "url": "https://ccmjs.github.io/akless-components/live_poll/versions/ccm.live_poll-2.3.2.js",
+        "url": "https://ccmjs.github.io/akless-components/live_poll/versions/ccm.live_poll-2.4.0.js",
         "store": [ "ccm.store", { "url": "wss://ccm2.inf.h-brs.de", "name": "exam_live_poll" } ],
       },
       "quiz": {
@@ -346,10 +347,10 @@
         async function renderQASettings( qa_data ) {
           let submit_inst;
 
-          if ( qa_data !== undefined ) {
+
             submit_inst = await self.submit.start({
               root: main_elem,
-              data: data.tasks[ qa_data ],
+              data: qa_data && data.tasks[ qa_data ],
               onfinish: async ()=> {
                 const result = submit_inst.getValue();
                 const new_data =  {
@@ -361,18 +362,13 @@
                   "random": result.random,
                   "answers": result.answers
                 };
-                qa_data !== undefined ? data.tasks[ qa_data ] = new_data : data.tasks.push( new_data );
+                qa_data ? data.tasks[ qa_data ] = new_data : data.tasks.push( new_data );
 
                 // update dataset for rendering
                 await self.data.store.set( data );
                 await self.start()
               }
             });
-          }
-          else
-            submit_inst = await self.submit.start( {
-              root: main_elem
-            } );
 
           const buttons = $.html( self.html.submit_buttons, {
             label_1: "Save and Back to List",
@@ -405,7 +401,10 @@
                     data: {
                       store: [ "ccm.store", self.live_poll.store.source() ],
                       key: key
-                    }
+                    },
+                    editable: false,
+                    password: "aw5mwz",
+                    lock: false
                   }
                 } ],
                 key: 'app'
