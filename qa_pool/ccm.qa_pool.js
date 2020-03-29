@@ -122,116 +122,8 @@
         ],
         "ignore": {
           "defaults": {
-            "html": {
-              "start": {
-                "id": "start",
-                "inner": {
-                  "tag": "button",
-                  "inner": "Start",
-                  "onclick": "%%"
-                }
-              },
-              "question": {
-                "id": "%id%",
-                "class": "question",
-                "inner": [
-                  {
-                    "class": "title",
-                    "inner": [
-                      {
-                        "inner": "Question"
-                      },
-                      {
-                        "inner": "%nr%/%count%"
-                      },
-                      {
-                        "inner": "%text%"
-                      }
-                    ]
-                  },
-                  {
-                    "class": "description",
-                    "inner": "%description%"
-                  },
-                  {
-                    "class": "answers"
-                  }
-                ]
-              },
-              "answer": {
-                "id": "%id%",
-                "class": "answer %class%",
-                "inner": {
-                  "class": "entry",
-                  "inner": [
-                    {
-                      "class": "text",
-                      "inner": {
-                        "tag": "label",
-                        "inner": "%text%",
-                        "for": "%id%-input"
-                      }
-                    },
-                    {
-                      "class": "comment"
-                    }
-                  ]
-                }
-              },
-              "comment": {
-                "class": "tooltip",
-                "onclick": "%click%",
-                "inner": [
-                  "i",
-                  {
-                    "tag": "div",
-                    "class": "tooltiptext",
-                    "inner": {
-                      "inner": {
-                        "inner": "%comment%"
-                      }
-                    }
-                  }
-                ]
-              },
-              "timer": {
-                "tag": "span",
-                "inner": "%%"
-              }
-            },
-            "css": [
-              "ccm.load",
-              "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css",
-              {
-                "context": "head",
-                "url": "https://ccmjs.github.io/akless-components/libs/weblysleekui/font.css"
-              }
-            ],
-            "feedback": true,
-            "user": [
-              "ccm.instance",
-              "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.0.0.js",
-              {
-                "realm": "guest",
-                "title": "Guest Mode: Please enter any username"
-              }
-            ],
-            "data": {
-              "login": true,
-              "store": [
-                "ccm.store",
-                {
-                  "name": "ws_result_data",
-                  "url": "https://ccm2.inf.h-brs.de"
-                }
-              ],
-              "user": true
-            },
-            "onfinish": {
-              "alert": "Saved!",
-              "login": true,
-              "store": true
-            }
+            "input": "radio",
+            "random": true
           }
         },
         "style": [ "ccm.load", "resources/submit.css" ]
@@ -248,7 +140,7 @@
       },
       "quiz": {
         "url": "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.0.js",
-        "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "exam_quiz" } ],
+        "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "qa_marko_winzker_quiz" } ]
       },
       "handover_app": [ "ccm.component", "https://ccmjs.github.io/akless-components/handover_app/versions/ccm.handover_app-2.0.0.js" ],
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.3.0.js", {
@@ -345,10 +237,7 @@
         }
 
         async function renderQASettings( qa_data ) {
-          let submit_inst;
-
-
-            submit_inst = await self.submit.start({
+          const submit_inst = await self.submit.start({
               root: main_elem,
               data: qa_data && data.tasks[ qa_data ],
               onfinish: async ()=> {
@@ -479,28 +368,29 @@
                 } );
               }
 
+              //save config to datastore
+              const key = await self.quiz.store.set( {
+                css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css",
+                  { "context": "head", "url": "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" }
+                ],
+                //user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
+                questions: $.clone( sorted_questions.length ? sorted_questions : questions ),
+                shuffle: submit_inst.getValue().radio === 'shuffle' && 'shuffle',
+                navigation: true,
+                feedback: true,
+                'placeholder.submit': 'Check'
+              } );
+
               //TODO set onfinish by quiz
               await self.modal.start( {
                 modal_title: "Handover Quiz",
                 modal_content: ( await self.handover_app.start( {
                   component_url: self.quiz.url,
                   data: {
-                    store: [ "ccm.store", {
-                      app: {
-                        key: 'app',
-                        css: [ "ccm.load", "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css",
-                          { "context": "head", "url": "https://ccmjs.github.io/akless-components/quiz/resources/weblysleek.css" }
-                        ],
-                        user: [ 'ccm.instance', self.user.component.url, JSON.parse( self.user.config ) ],
-                        questions: $.clone( sorted_questions.length ? sorted_questions : questions ),
-                        shuffle: submit_inst.getValue().radio === 'shuffle' && 'shuffle',
-                        navigation: true,
-                        feedback: true,
-                        'placeholder.submit': 'Check'
-                      }
-                    } ],
-                    key: 'app'
-                  }
+                    key: key,
+                    store: [ "ccm.store", self.quiz.store.source() ]
+                  },
+                  qr_code: [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/qrcode-generator/qrcode.min.js" ]
                 } ) ).root,
                 footer: [ {
                   "caption": "Close",
