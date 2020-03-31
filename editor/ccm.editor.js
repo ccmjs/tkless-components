@@ -53,22 +53,20 @@
         placeholder: 'Write here...',
         theme: 'snow'
       },
-      shadow: 'open',
+      embed_content: true,
       helper: [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ],
       icon: [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css",
         { "context": "head", "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" } ]
     },
 
     Instance: function () {
-      let quill;
-      let self = this;
-      let $;
+      let $, quill, data;
 
       this.ready = async () => {
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper );
 
-        if ( hljs ) hljs.initHighlightingOnLoad();
+        if ( window.hljs ) hljs.initHighlightingOnLoad();
       };
 
       this.start = async () => {
@@ -76,96 +74,92 @@
         let div = $.html( {} );
         $.setContent( this.element, div );
 
-        quill = new Quill( div, self.settings );
+        quill = new Quill( div, this.settings );
 
-        if ( hljs && this.settings.modules.syntax ) {
-          const code_block = self.element.querySelector( '.ql-code-block' );
+        if ( window.hljs && this.settings.modules.syntax ) {
+          const code_block = this.element.querySelector( '.ql-code-block' );
           code_block.addEventListener( 'click', () => {
-            hljs.highlightBlock( self.element.querySelector( 'div[contenteditable=true] > pre' ) );
+            window.hljs.highlightBlock( this.element.querySelector( 'div[contenteditable=true] > pre' ) );
           });
         }
 
-        this.element.querySelector('.ql-toolbar').appendChild(  $.html(
-          {
-            "tag": "span",
-            "class": "ql-formats",
-            "inner":
-              {
-                "tag": "button",
-                "id": "custom-button",
-                "inner": "<i class ='far fa-file-code' style='font-size: 1rem;'></i>"
-              }
+        if ( this.embed_content ) {
+          this.element.querySelector('.ql-toolbar').appendChild(  $.html(
+            {
+              "tag": "span",
+              "class": "ql-formats",
+              "inner":
+                {
+                  "tag": "button",
+                  "id": "custom-button",
+                  "inner": "<i class ='far fa-file-code' style='font-size: 1rem;'></i>"
+                }
+            }
+          ) );
+
+          // Import the BlockEmbed blot.
+          let BlockEmbed = Quill.import('blots/block/embed');
+
+          // Create a new format based off the BlockEmbed.
+          class EmbedContent extends BlockEmbed {
+
+            static create(value) {
+
+              // Create the node using the BlockEmbed's create method.
+              let node = super.create(value);
+
+              // Set the srcdoc attribute to equal the value which will be your html.
+              node.setAttribute('srcdoc', value);
+
+              // Add a few other iframe fixes.
+              node.setAttribute('frameborder', '0');
+              node.setAttribute('allowfullscreen', true);
+              node.setAttribute('width', '100%');
+              return node;
+            }
+
+            // return the srcdoc attribute to represent the EmbedContent's value in quill.
+            static value(node) {
+              return node.getAttribute('srcdoc');
+            }
+
           }
 
-        ) );
+          // Give our new Footer format a name to use in the toolbar.
+          EmbedContent.blotName = 'embed-content';
 
-        // Import the BlockEmbed blot.
-        let BlockEmbed = Quill.import('blots/block/embed');
+          // Give it a class name to edit the css.
+          EmbedContent.className = 'ql-embed-content';
 
-        // Create a new format based off the BlockEmbed.
-        class EmbedContent extends BlockEmbed {
+          // Give it a tagName of iframe to tell quill what kind of element to create.
+          EmbedContent.tagName = 'iframe';
 
-          static create(value) {
+          // Lastly, register the new EmbedContent format so we can use it in our editor.
+          Quill.register(EmbedContent, true);
 
-            // Create the node using the BlockEmbed's create method.
-            let node = super.create(value);
+          let customButton = this.element.querySelector('#custom-button');
+          customButton.addEventListener('click', function() {
+            const embed_code = prompt( 'Please enter your Embed Code below' );
+            if( embed_code !== '' ) {
+              let selection = quill.getSelection( true ).index;
 
-            // Set the srcdoc attribute to equal the value which will be your html.
-            node.setAttribute('srcdoc', value);
+              // Insert the EmbedContent with the footerHTML.
+              quill.insertEmbed( selection, 'embed-content', embed_code);
+            }
 
-            // Add a few other iframe fixes.
-            node.setAttribute('frameborder', '0');
-            node.setAttribute('allowfullscreen', true);
-            node.setAttribute('width', '100%');
-            return node;
-          }
-
-          // return the srcdoc attribute to represent the EmbedContent's value in quill.
-          static value(node) {
-            return node.getAttribute('srcdoc');
-          }
+          });
 
         }
 
-        // Give our new Footer format a name to use in the toolbar.
-        EmbedContent.blotName = 'embed-content';
-
-        // Give it a class name to edit the css.
-        EmbedContent.className = 'ql-embed-content';
-
-        // Give it a tagName of iframe to tell quill what kind of element to create.
-        EmbedContent.tagName = 'iframe';
-
-        // Lastly, register the new EmbedContent format so we can use it in our editor.
-        Quill.register(EmbedContent, true);
-
-        let customButton = this.element.querySelector('#custom-button');
-        customButton.addEventListener('click', function() {
-          const embed_code = prompt( 'Please enter your Embed Code below' );
-          if( embed_code !== '' ) {
-            let selection = quill.getSelection( true ).index;
-
-            // Insert the EmbedContent with the footerHTML.
-            quill.insertEmbed( selection, 'embed-content', embed_code);
-          }
-
-        });
-
-        if ( self.data ){
-          const data= await $.dataset( self.data );
-          quill.root.innerHTML =  data.inner;
+        if ( this.data ){
+          data= await $.dataset( this.data );
+          quill.root.innerHTML = ( $.isObject( data ) ? data.inner : data ) || '';
         }
 
-        if ( self.onchange ) {
-          self.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
-            self.onchange.call( self );
+        if ( this.onchange ) {
+          this.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
+            this.onchange.call( this );
           } );
-
-          if(quill.getFormat().custom) {
-            customButton.classList.add('ql-active');
-          } else {
-            customButton.classList.remove('ql-active');
-          }
         }
       };
 
