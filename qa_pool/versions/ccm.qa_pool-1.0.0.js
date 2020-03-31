@@ -20,7 +20,7 @@
         {  "url": "https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp", "type": "css", "context": "head" },
         "https://ccmjs.github.io/tkless-components/qa_pool/resources/default.css"
       ],
-      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-8.0.2.js", {
+      "submit": [ "ccm.component", "https://ccmjs.github.io/akless-components/submit/versions/ccm.submit-8.1.0.js", {
         "entries": [
           {
             "name": "css",
@@ -42,12 +42,12 @@
             "name": "user",
             "type": "hidden"
           },
-          "<div class=\"page-header mb-4\"><h2>Settings <small class=\"text-primary\">New QA Task</small></h2></div>",
+          "<legend><h2>Settings <small class=\"text-primary\">New QA Task</small></h2></legend>",
           {
             "label": "Title",
             "name": "title",
             "type": "text",
-            "info": "Title of your Task. ",
+            "info": "Title of your Task. This title is displayed in the overview list and is used to help you find a question quickly.",
             "required": true
           },
           "<br><br>",
@@ -55,7 +55,7 @@
             "label": "Question",
             "name": "text",
             "type": "text",
-            "info": "Enter the text of the question here. This title is displayed in the overview list and is used to help you find a question quickly.",
+            "info": "Enter the text of the question here.",
             "required": true
           },
           {
@@ -332,7 +332,7 @@
                 "name": "css",
                 "type": "hidden"
               },
-              "<div class=\"page-header\"><h2 class='mb-4'>Settings <small class=\"text-primary\">Quiz</small></h2></div>",
+              "<legend><h2>Settings <small class=\"text-primary\">Quiz</small></h2></legend>",
               {
                 "label": "Shuffle Questions",
                 "name": "radio",
