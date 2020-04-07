@@ -24,13 +24,13 @@
      * unique component name
      * @type {string}
      */
-    name: 'pdf_viewer',
+    name: 'pdf_viewer', version: [ 6, 0, 0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.3.0.js',
 
     /**
      * default instance configuration
@@ -103,7 +103,7 @@
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         {  context:'head', url: 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        "resources/player.css"
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/player.css"
       ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ]
     },
