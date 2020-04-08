@@ -223,7 +223,7 @@
         if ( self.routing && self.routing.get() )
           pageNum = self.routing.get().split( '-' )[ 1 ];
         else
-          !self.routing && renderPage( pageNum );
+          renderPage( pageNum );
 
         touchEventHandling();
 
