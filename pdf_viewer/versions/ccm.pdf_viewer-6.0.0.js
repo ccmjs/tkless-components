@@ -125,7 +125,7 @@
         pageNumPending,
         ctx;
 
-      let file;
+      let file, canvas, page_elem;
 
       this.init = async () => {
 
@@ -167,7 +167,6 @@
         // if pdf not defined, no file will be displayed
         if ( !self.pdf ) return $.setContent( self.element, 'No File to Display' );
 
-
         // render input elements
         $.setContent( self.element, $.html( self.html.main, {
           prev: () => {
@@ -189,35 +188,14 @@
           }
         } ) );
 
-        function checkButtons() {
-          if ( pageNum == 1 ) {
-            self.element.querySelector( '.prev' ).classList.add ('disabled' );
-            self.element.querySelector( '.first' ).classList.add ('disabled' );
-            self.element.querySelector( '.next' ).classList.remove( 'disabled' );
-            self.element.querySelector( '.last' ).classList.remove( 'disabled' );
-          }
-          else if ( pageNum == pdfDoc.numPages ) {
-            self.element.querySelector( '.next' ).classList.add( 'disabled' );
-            self.element.querySelector( '.last' ).classList.add( 'disabled' );
-            self.element.querySelector( '.prev' ).classList.remove ('disabled' );
-            self.element.querySelector( '.first' ).classList.remove ('disabled' );
-          }
-          else {
-            self.element.querySelector( '.next' ).classList.remove( 'disabled' );
-            self.element.querySelector( '.last' ).classList.remove( 'disabled' );
-            self.element.querySelector( '.prev' ).classList.remove ('disabled' );
-            self.element.querySelector( '.first' ).classList.remove ('disabled' );
-          }
-        }
-
         // set canvas
-        const canvas = self.element.querySelector( 'canvas' );
+        canvas = self.element.querySelector( 'canvas' );
         // disable to downloading the files from canvas element
         canvas.addEventListener('contextmenu', event => {
           event.preventDefault();
         });
         ctx = canvas.getContext('2d');
-        let page_elem = self.element.querySelector( '#pdf-view' );
+        page_elem = self.element.querySelector( '#pdf-view' );
 
         // Initial/first page rendering
         if ( self.routing && self.routing.get() )
@@ -230,151 +208,173 @@
         // define and check routes
         self.routing && self.routing.define( { page: number => renderPage( number ) } );
 
-
-        /**
-         * Get page info from document, resize canvas accordingly, and render page.
-         * @param num Page number.
-         */
-        function renderPage( num ) {
-          num = parseInt( num );
-          self.routing && self.routing.set( 'page-' + num );
-          self.onchange && self.onchange( self, num );
-
-          pageRendering = true;
-          // Using promise to fetch the page
-          pdfDoc.getPage( num ).then( function( page ) {
-
-            let viewport = page.getViewport({ scale: 1} );
-            let scale = page_elem.clientWidth / viewport.width;
-            viewport = page.getViewport( { scale: scale } );
-
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            // Render PDF page into canvas context
-            let renderContext = {
-              canvasContext: ctx,
-              viewport: viewport
-            };
-            let renderTask = page.render( renderContext );
-
-            // Wait for rendering to finish
-            renderTask.promise.then( function() {
-              pageRendering = false;
-              if (pageNumPending !== null) {
-                // New page rendering is pending
-                renderPage(pageNumPending);
-                pageNumPending = null;
-              }
-
-              if ( pdfDoc.numPages > 1 ) {
-                //set width to display page number in the middle of pdf-file
-                self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
-                // Update page counters
-                self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
-              }
-              else
-                self.element.querySelector( '#nav' ).remove();
-            });
-          }, function ( err ) {
-            console.log( err )
-          });
-
-          checkButtons();
-
-        }
-
-        function touchEventHandling() {
-          let reachedEdge = false;
-          let touchStart = null;
-          let touchDown = false;
-
-          page_elem.addEventListener( 'touchstart', function( ) {
-            touchDown = true;
-          });
-
-          page_elem.addEventListener( 'touchmove', function( event ) {
-            if ( page_elem.scrollLeft === 0 ||
-              page_elem.scrollLeft === page_elem.scrollWidth - page_elem.clientWidth ) {
-              reachedEdge = true;
-            } else {
-              reachedEdge = false;
-              touchStart = null;
-            }
-
-            if ( reachedEdge && touchDown ) {
-              if (touchStart === null) {
-                touchStart = event.changedTouches[0].clientX;
-              } else {
-                let distance = event.changedTouches[0].clientX - touchStart;
-                if (distance < -100) {
-                  touchStart = null;
-                  reachedEdge = false;
-                  touchDown = false;
-                  onNextPage();
-                } else if ( distance > 100 ) {
-                  touchStart = null;
-                  reachedEdge = false;
-                  touchDown = false;
-                  onPrevPage();
-                }
-              }
-            }
-          });
-
-          page_elem.addEventListener( 'touchend', function() {
-            touchStart = null;
-            touchDown = false;
-          });
-        }
-
-        /**
-         * If another page rendering in progress, waits until the rendering is
-         * finised. Otherwise, executes rendering immediately.
-         */
-        function queueRenderPage( num ) {
-          if (pageRendering) {
-            pageNumPending = num;
-          } else {
-            renderPage(num);
-            //set width to display page number in the middle of pdf-file
-            self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
-          }
-        }
-
-        function goTo( page ) {
-          if ( page > pdfDoc.numPages || page < 1 )
-            return;
-          pageNum = page;
-          queueRenderPage( parseInt( pageNum ) );
-          if ( self.logger ) self.logger.log( 'goto', parseInt( page ) );
-        }
-
-        /**
-         * Displays previous page.
-         */
-        function onPrevPage() {
-          if (pageNum <= 1) {
-            return;
-          }
-          pageNum--;
-          queueRenderPage(pageNum);
-          if ( self.logger ) self.logger.log( 'prev', pageNum );
-        }
-
-        /**
-         * Displays next page.
-         */
-        function onNextPage() {
-          if (pageNum >= pdfDoc.numPages) {
-            return;
-          }
-          pageNum++;
-          queueRenderPage(pageNum);
-          if ( self.logger ) self.logger.log( 'next', pageNum );
-        }
-
       };
+
+      /**
+       * Get page info from document, resize canvas accordingly, and render page.
+       * @param num Page number.
+       */
+      function renderPage( num ) {
+        num = parseInt( num );
+        self.routing && self.routing.set( 'page-' + num );
+        self.onchange && self.onchange( self, num );
+
+        pageRendering = true;
+        // Using promise to fetch the page
+        pdfDoc.getPage( num ).then( function( page ) {
+
+          let viewport = page.getViewport({ scale: 1} );
+          let scale = page_elem.clientWidth / viewport.width;
+          viewport = page.getViewport( { scale: scale } );
+
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          // Render PDF page into canvas context
+          let renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+          };
+          let renderTask = page.render( renderContext );
+
+          // Wait for rendering to finish
+          renderTask.promise.then( function() {
+            pageRendering = false;
+            if (pageNumPending !== null) {
+              // New page rendering is pending
+              renderPage(pageNumPending);
+              pageNumPending = null;
+            }
+
+            if ( pdfDoc.numPages > 1 ) {
+              //set width to display page number in the middle of pdf-file
+              self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+              // Update page counters
+              self.element.querySelector( '#page-num' ).placeholder = num + " / "+ pdfDoc.numPages;
+            }
+            else
+              self.element.querySelector( '#nav' ).remove();
+          });
+        }, function ( err ) {
+          console.log( err )
+        });
+
+        checkButtons();
+
+      }
+
+      this.onbreakpoint = () => { renderPage( pageNum ); }
+
+      function touchEventHandling() {
+        let reachedEdge = false;
+        let touchStart = null;
+        let touchDown = false;
+
+        page_elem.addEventListener( 'touchstart', function( ) {
+          touchDown = true;
+        });
+
+        page_elem.addEventListener( 'touchmove', function( event ) {
+          if ( page_elem.scrollLeft === 0 ||
+            page_elem.scrollLeft === page_elem.scrollWidth - page_elem.clientWidth ) {
+            reachedEdge = true;
+          } else {
+            reachedEdge = false;
+            touchStart = null;
+          }
+
+          if ( reachedEdge && touchDown ) {
+            if (touchStart === null) {
+              touchStart = event.changedTouches[0].clientX;
+            } else {
+              let distance = event.changedTouches[0].clientX - touchStart;
+              if (distance < -100) {
+                touchStart = null;
+                reachedEdge = false;
+                touchDown = false;
+                onNextPage();
+              } else if ( distance > 100 ) {
+                touchStart = null;
+                reachedEdge = false;
+                touchDown = false;
+                onPrevPage();
+              }
+            }
+          }
+        });
+
+        page_elem.addEventListener( 'touchend', function() {
+          touchStart = null;
+          touchDown = false;
+        });
+      }
+
+      /**
+       * If another page rendering in progress, waits until the rendering is
+       * finised. Otherwise, executes rendering immediately.
+       */
+      function queueRenderPage( num ) {
+        if (pageRendering) {
+          pageNumPending = num;
+        } else {
+          renderPage(num);
+          //set width to display page number in the middle of pdf-file
+          self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+        }
+      }
+
+      function goTo( page ) {
+        if ( page > pdfDoc.numPages || page < 1 )
+          return;
+        pageNum = page;
+        queueRenderPage( parseInt( pageNum ) );
+        if ( self.logger ) self.logger.log( 'goto', parseInt( page ) );
+      }
+
+      /**
+       * Displays previous page.
+       */
+      function onPrevPage() {
+        if (pageNum <= 1) {
+          return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
+        if ( self.logger ) self.logger.log( 'prev', pageNum );
+      }
+
+      /**
+       * Displays next page.
+       */
+      function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) {
+          return;
+        }
+        pageNum++;
+        queueRenderPage(pageNum);
+        if ( self.logger ) self.logger.log( 'next', pageNum );
+      }
+
+      function checkButtons() {
+        if ( pageNum == 1 ) {
+          self.element.querySelector( '.prev' ).classList.add ('disabled' );
+          self.element.querySelector( '.first' ).classList.add ('disabled' );
+          self.element.querySelector( '.next' ).classList.remove( 'disabled' );
+          self.element.querySelector( '.last' ).classList.remove( 'disabled' );
+        }
+        else if ( pageNum == pdfDoc.numPages ) {
+          self.element.querySelector( '.next' ).classList.add( 'disabled' );
+          self.element.querySelector( '.last' ).classList.add( 'disabled' );
+          self.element.querySelector( '.prev' ).classList.remove ('disabled' );
+          self.element.querySelector( '.first' ).classList.remove ('disabled' );
+        }
+        else {
+          self.element.querySelector( '.next' ).classList.remove( 'disabled' );
+          self.element.querySelector( '.last' ).classList.remove( 'disabled' );
+          self.element.querySelector( '.prev' ).classList.remove ('disabled' );
+          self.element.querySelector( '.first' ).classList.remove ('disabled' );
+        }
+      }
 
     }
 
