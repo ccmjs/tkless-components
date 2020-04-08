@@ -219,16 +219,17 @@
         ctx = canvas.getContext('2d');
         let page_elem = self.element.querySelector( '#pdf-view' );
 
+        // define and check routes
+        self.routing && self.routing.define( { page: number => renderPage( number ) } );
+
         // Initial/first page rendering
         if ( self.routing && self.routing.get() )
           pageNum = self.routing.get().split( '-' )[ 1 ];
         else
-          renderPage( pageNum );
+          !self.routing && renderPage( pageNum );
 
         touchEventHandling();
 
-        // define and check routes
-        self.routing && self.routing.define( { page: number => renderPage( number ) } );
 
         /**
          * Get page info from document, resize canvas accordingly, and render page.
