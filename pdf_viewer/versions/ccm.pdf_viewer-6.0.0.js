@@ -30,7 +30,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.4.0.js',
 
     /**
      * default instance configuration
