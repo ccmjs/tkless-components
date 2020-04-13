@@ -329,7 +329,7 @@
                 self.element.querySelector( '.article' ).lastChild.scrollIntoView( { block: 'end',  behavior: 'smooth' } );
               }
             } );
-            self.element.appendChild( more );
+            $.setContent( self.element.querySelector( '#scroll-down' ), more );
           }
         }
 
