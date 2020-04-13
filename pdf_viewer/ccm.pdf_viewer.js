@@ -198,8 +198,9 @@
         page_elem = self.element.querySelector( '#pdf-view' );
 
         // Initial/first page rendering
-        if ( self.routing && self.routing.get() )
+        if ( self.routing && self.routing.get() ) {
           pageNum = self.routing.get().split( '-' )[ 1 ];
+        }
         else
           renderPage( pageNum );
 
@@ -216,8 +217,6 @@
        */
       function renderPage( num ) {
         num = parseInt( num );
-        self.routing && self.routing.set( 'page-' + num );
-        self.onchange && self.onchange( self, num );
 
         pageRendering = true;
         // Using promise to fetch the page
@@ -263,7 +262,7 @@
 
       }
 
-      this.onbreakpoint = () => { renderPage( pageNum ); }
+      this.onbreakpoint = () => { renderPage( pageNum ); };
 
       function touchEventHandling() {
         let reachedEdge = false;
@@ -320,6 +319,8 @@
           renderPage(num);
           //set width to display page number in the middle of pdf-file
           self.element.querySelector( '#nav' ).style.width = self.element.querySelector( '#canvas' ).offsetWidth + "px";
+          self.onchange && self.onchange( self, num );
+          self.routing && self.routing.set( 'page-' + num );
         }
       }
 
