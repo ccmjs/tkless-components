@@ -14,7 +14,8 @@
   font-size: 18px;
 }
 
-#logged_in .btn {
+#logged_in .btn,
+#logged_out .btn {
   color: #007bff;
   background-color: transparent;
   background-image: none;
@@ -35,7 +36,8 @@
   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-#logged_in .btn:hover {
+#logged_in .btn:hover,
+#logged_out .btn:hover {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;

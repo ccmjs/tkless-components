@@ -1,6 +1,6 @@
 /**
  * @overview ccm component of app collection
- * @author Tea Kless <tea.kless@web.de> 2019
+ * @author Tea Kless <tea.kless@web.de> 2020
  * @license The MIT License (MIT)
  */
 
@@ -16,7 +16,7 @@
     config: {
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/templates.html" ],
       "title": "My Apps",
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.2.0.js", {
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.4.1.js", {
         "key": [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js" ],
         "logged_in": true,
         "style": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/user.css" ]
