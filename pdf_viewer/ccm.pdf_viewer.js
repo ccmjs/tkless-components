@@ -147,7 +147,7 @@
         let pdfjsLib = window['pdfjs-dist/build/pdf'];
 
         // specify PDF.js workerSrc property
-        pdfjsLib.GlobalWorkerOptions.workerSrc = self.pdfJS_workerSrc;
+        if ( !pdfjsLib.GlobalWorkerOptions.workerSrc ) pdfjsLib.GlobalWorkerOptions.workerSrc = self.pdfJS_workerSrc;
 
         if ( $.isObject( self.pdf ) && self.pdf.slides ) self.pdf = self.pdf.slides[ 0 ].data;
 
