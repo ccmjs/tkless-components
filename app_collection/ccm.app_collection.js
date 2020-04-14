@@ -268,10 +268,6 @@
         async function renderFooter() {
           for( const i in self.footer ) {
             const entry = self.footer[ i ];
-            if( entry.user && self.user.data().user !== entry.user ) {
-              self.routing && self.routing.set( 'home' );
-              return;
-            }
             const footer_entry = $.html( self.html.footer_entry, {
               id: entry.title.toLocaleLowerCase(),
               icon: entry.icon,
