@@ -101,7 +101,7 @@
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.4.js", { "app": "pdf_viewer" } ],
       "css": [ "ccm.load", {  "context":"head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css',
-        "resources/player.css"
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/player.css"
       ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-5.0.0.mjs" ]
     },
@@ -200,6 +200,7 @@
         // Initial/first page rendering
         if ( self.routing && self.routing.get() ) {
           pageNum = self.routing.get().split( '-' )[ 1 ];
+          self.onchange && self.onchange( self, pageNum );
         }
         else
           renderPage( pageNum );

@@ -200,6 +200,7 @@
         // Initial/first page rendering
         if ( self.routing && self.routing.get() ) {
           pageNum = self.routing.get().split( '-' )[ 1 ];
+          self.onchange && self.onchange( self, pageNum );
         }
         else
           renderPage( pageNum );
