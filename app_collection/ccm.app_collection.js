@@ -268,6 +268,9 @@
         async function renderFooter() {
           for( const i in self.footer ) {
             const entry = self.footer[ i ];
+
+            if( entry.user && self.user.data().user !== entry.user ) return;  // content only for admin user
+
             const footer_entry = $.html( self.html.footer_entry, {
               id: entry.title.toLocaleLowerCase(),
               icon: entry.icon,
