@@ -157,7 +157,7 @@
         }
 
         if ( this.onchange ) {
-          this.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async function () {
+          this.element.querySelector( '.ql-editor' ).addEventListener( 'blur', async () => {
             this.onchange.call( this );
           } );
         }
