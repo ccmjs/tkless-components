@@ -4,7 +4,7 @@
  * @license The MIT License (MIT)
  * @version 4.0.0
  * @changes
- * version 4.0.0 (19.04.2020)
+ * version 4.0.0 (23.04.2020)
  * - refactoring
  * - switched to ccm v25
  */
@@ -55,7 +55,6 @@
           ]
         }
       },
-//    "hide_login": true,
       "icon_dislikes": "fa fa-lg fa-chevron-circle-down",
       "icon_likes": "fa fa-lg fa-chevron-circle-up",
 //    "data": { "store": [ "ccm.store", {} ], "key": "demo" },
@@ -111,7 +110,7 @@
         } );
 
         // render login/logout area
-        if ( this.user && !this.hide_login ) { $.append( main_elem.querySelector( '#top' ), this.user.root ); this.user.start(); }
+        if ( this.user ) { $.append( main_elem.querySelector( '#top' ), this.user.root ); this.user.start(); }
 
         setIconAvailability();
 
@@ -123,7 +122,7 @@
 
         if ( !this.user || !this.user.isLoggedIn() ) return;
 
-        let user = this.user.data().user;
+        let user = this.user.getValue().key;
 
         if ( dataset.likes[ user ] ) main_elem.querySelector( '#likes' ).classList.add( 'disabled' );
 
@@ -134,9 +133,9 @@
      const doVoting = async ( vote ) => {
         if ( !this.user ) return;
 
-        await this.user.login( this.start );
+        await this.user.login( true );
 
-        let user = this.user.data().user;
+        let user = this.user.getValue().key;
         let not_vote;
 
         if( this.onvote && !this.onvote( { user: user } ) ) return;
