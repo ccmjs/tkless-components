@@ -1,0 +1,55 @@
+#element {
+  margin: 0.7em;
+}
+
+.edit .btn{
+  font-size: .8rem;
+}
+
+.fade-comment {
+  width:  100%;
+  height: 100%;
+  -webkit-animation: fadeinout 2s ease-in forwards;
+  animation: fadeinout 2s linear forwards;
+  opacity: 0;
+}
+
+.comment-overview {
+  margin: 0.1em;
+  padding: 4px;
+}
+
+.comment-overview > span {
+  color: #999;
+}
+
+.comment-author {
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.time {
+  font-size: 12px;
+  margin-top: .5rem;
+}
+
+#add-comment {
+  margin-left: 13px;
+}
+
+/* expanded comment layout*/
+.panel {
+  box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+  border: 1px solid #dddddd;
+}
+
+.comment-heading {
+  font-family: verdana !important;
+  padding: 15px;
+}
+
+.avatar {
+  width: 45px;
+  display: block;
+  margin-right: 15px;
+}
