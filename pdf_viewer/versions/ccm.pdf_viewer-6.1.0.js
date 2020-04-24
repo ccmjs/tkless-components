@@ -3,9 +3,9 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de>, 2020
  * @license The MIT License (MIT)
- * @version 6.0.1
+ * @version 6.1.0
  * @changes
- * version 6.1.0 (24.04.2020)
+ * version 6.1.0 (07.04.2020)
  * - refactoring
  * - instance property getPage
  * version 6.0.0 (07.04.2020)
@@ -27,13 +27,13 @@
      * unique component name
      * @type {string}
      */
-    name: 'pdf_viewer',
+    name: 'pdf_viewer', version: [ 6, 1, 0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.4.0.js',
 
     /**
      * default instance configuration
