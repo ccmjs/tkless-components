@@ -4,7 +4,7 @@
  * @license The MIT License (MIT)
  * @version 1.0.0
  * @changes
- * version 1.0.0 (24.04.2020)
+ * version 1.0.0 (26.04.2020)
  */
 
 ( function () {
@@ -27,17 +27,15 @@
           "store": [ "ccm.store", { "name": "qa_slidecast", "url": "https://ccm2.inf.h-brs.de" } ],
           "key": "demo"
         },
-        "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.4.1.js",
-          [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ]
       } ],
       "pdf_viewer": [ "ccm.component", "../pdf_viewer/ccm.pdf_viewer.js" ],
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.4.1.js",
+      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.5.0.js",
         [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
       "css": [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
         { "url": "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", "context": "head" },
         "resources/default.css"
       ],
-      "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.4.js" ],
+      "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.5.js" ],
       "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-5.0.0.mjs" } ]
     },
 
@@ -45,6 +43,12 @@
       let $, main_elem, inst;
 
       this.init = async () => {
+
+        if ( Array.isArray( this.audio ) ) {
+          const audio = {};
+          this.audio.forEach( entry => audio[ entry.slide_nr ] = entry.audio_src );
+          this.audio = audio;
+        }
 
         if ( this.user ) this.user.onchange = login => {
           if ( login ) return;
@@ -96,7 +100,8 @@
       const renderComment = async ( page = 1, element ) => {
         const inst = await this.comment.start( {
           root: main_elem.querySelector( '#comments' ),
-          'data.key': this.comment.config.data.key + '-' + page
+          'data.key': this.comment.config.data.key + '-' + page,
+          user: [ 'ccm.instance', this.user.component.url, $.parse( this.user.config ) ]
         } );
         inst.element.querySelector( '.container-fluid' ).classList.remove( 'container-fluid' );
       };
