@@ -4,11 +4,12 @@
  * @license The MIT License (MIT)
  * @version 6.0.0
  * @changes
- * version 6.0.0 (23.04.2020)
+ * version 6.0.0 (27.04.2020)
  * - chat is no longer supported
  * - sorting_by_voting no longer supported
  * - voting no longer requires user dependency
- * - uses ccm v25.4.0
+ * - uses ccm v25.4.0,
+ * - font family now set via CSS, no more bootstrap loading in the head
  * version 5.2.0 (18.01.2020)
  * - render modal dialog when deleting the message
  * version 5.1.0 (16.12.2019)
@@ -141,7 +142,6 @@
       ],
       "libs": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js",
         "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        { "url": "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", "context": "head" },
         {  "context":"head", "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" },
         "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
        "https://ccmjs.github.io/tkless-components/comment/resources/comment.css",

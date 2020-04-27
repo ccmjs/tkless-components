@@ -33,7 +33,7 @@ ccm.files[ "configs.js" ] = {
       [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ]
   },
 
-  "demo_comment_v4": {
+  "demo_comment_v6": {
     "key": "demo_comment",
     "editable": true,
     "data": {
