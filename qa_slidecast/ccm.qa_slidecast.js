@@ -85,6 +85,7 @@
 
         inst = await this.pdf_viewer.start( {
           root: main_elem.querySelector( '#slides' ),
+          breakpoints: false,
           pdf: this.slides,
           description: this.description && this.description,
           onchange: ( inst, page ) => {
