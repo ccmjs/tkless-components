@@ -32,7 +32,6 @@
       "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.4.1.js",
         [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
       "css": [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        { "url": "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", "context": "head" },
         "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/default.css"
       ],
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.5.js" ],
@@ -71,7 +70,6 @@
       };
 
       this.start = async () => {
-
         // login user, if not logged in
         this.user && await this.user.login();
 
@@ -103,6 +101,7 @@
           'data.key': this.comment.config.data.key + '-' + page,
           user: [ 'ccm.instance', this.user.component.url, $.parse( this.user.config ) ]
         } );
+        $.prepend( inst.element.querySelector( '.container-fluid' ), $.html( '<h4 class="text-success ml-2"> Comments: </h4> ') );
         inst.element.querySelector( '.container-fluid' ).classList.remove( 'container-fluid' );
       };
 
