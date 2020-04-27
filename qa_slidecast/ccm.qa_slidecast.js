@@ -78,7 +78,7 @@
         $.setContent( this.element, main_elem );
         await renderSlides();
         await renderComment();
-        renderAudio( inst.getPage );
+        renderAudio( inst.getPage() );
       };
 
       const renderSlides = async () => {
@@ -89,7 +89,6 @@
           description: this.description && this.description,
           onchange: ( inst, page ) => {
             renderComment( page );
-            renderAudio( page );
             renderAudio( page );
           }
         } );
