@@ -1,6 +1,6 @@
 /**
- * @overview  <i>ccm</i> component for rating
- * @author Tea Kless <tea.kless@web.de> 2018
+ * @overview  <i>ccm</i> component for thumb rating
+ * @author Tea Kless <tea.kless@web.de> 2020
  * @license The MIT License (MIT)
  * @version 4.0.0
  * @changes
@@ -19,13 +19,13 @@
      * unique component name
      * @type {string}
      */
-    name: 'thumb_rating',
+    name: 'thumb_rating', version: [ 4, 0, 0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.4.0.js',
 
     /**
      * default instance configuration
@@ -95,15 +95,13 @@
       "libs": [ "ccm.load", "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        "../thumb_rating/resources/default.css"
+        "https://ccmjs.github.io/tkless-components/thumb_rating/resources/thumb.css"
       ],
       "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-5.0.0.mjs" } ]
     },
 
     Instance: function () {
-      let $, dataset, main_elem;
-
-      let total = 0;
+      let $, dataset, main_elem, total = 0;
 
       this.init = async () => {
         if ( this.user ) this.user.onchange = this.start;       // listen to login/logout events => restart
@@ -155,7 +153,7 @@
         $.setContent( main_elem.querySelector( '#rating-section'), rating_elem );
       };
 
-      const setIconAvailability = async elem=> {
+      const setIconAvailability = async elem => {
         /**
          * website area for likes and dislikes
          * @type {{likes: ccm.types.element, dislikes: ccm.types.element}}
