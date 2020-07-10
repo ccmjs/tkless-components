@@ -76,7 +76,7 @@
         main_elem = $.html( this.html.main );
         $.setContent( this.element, main_elem );
         await renderSlides();
-        await renderComment();
+        this.user && await renderComment();
         renderAudio( inst.getPage() );
       };
 
@@ -88,7 +88,7 @@
           pdf: this.slides,
           description: this.description && this.description,
           onchange: ( inst, page ) => {
-            renderComment( page );
+            this.user && renderComment( page );
             renderAudio( page );
           }
         } );
