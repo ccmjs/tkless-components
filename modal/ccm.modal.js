@@ -56,9 +56,6 @@
         // render main HTML template
         $.setContent( this.element, $.html( this.html.main, this.title ) );
 
-        // initially closed? => close modal dialog
-        this.closed && this.close();
-
         // modal dialog can be optionally closed by click on the backdrop area
         if ( this.backdrop_close ) this.element.querySelector( '#backdrop' ).dataset.close = '';
 
@@ -79,6 +76,9 @@
           this.parent.element.parentNode.appendChild( this.root );
           this.root.setAttribute( 'style', 'position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 995;' );
         }
+
+        // initially closed? => close modal dialog
+        this.closed && this.close();
 
       };
 
