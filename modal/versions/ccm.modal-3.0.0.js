@@ -54,11 +54,11 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        // initially closed? => close modal dialog
-        this.closed && this.close();
-
         // render main HTML template
         $.setContent( this.element, $.html( this.html.main, this.title ) );
+
+        // initially closed? => close modal dialog
+        this.closed && this.close();
 
         // modal dialog can be optionally closed by click on the backdrop area
         if ( this.backdrop_close ) this.element.querySelector( '#backdrop' ).dataset.close = '';
