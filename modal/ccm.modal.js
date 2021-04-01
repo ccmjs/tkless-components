@@ -10,7 +10,7 @@
 
     name: 'modal',
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-21.1.0.js',
 
     config: {
       html: {
