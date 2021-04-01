@@ -2,7 +2,7 @@
  * @overview ccmjs-based web component for a modal dialog
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version latest (3.0.0)
+ * @version 3.0.0
  * @changes
  * version 3.0.0 (01.04.2021)
  * - uses ccmjs v26.2.1 as default
@@ -23,6 +23,7 @@
 ( () => {
   const component = {
     name: 'modal',
+    version: [ 3, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.2.1.js',
     config: {
 //    "backdrop_close": true,
