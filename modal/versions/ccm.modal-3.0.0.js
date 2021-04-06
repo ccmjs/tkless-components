@@ -38,7 +38,7 @@
       "css": [ "ccm.load",
         [  // serial
           "https://ccmjs.github.io/akless-components/libs/bootstrap-4/css/bootstrap.min.css",
-          "https://ccmjs.github.io/tkless-components/modal/resources/default-2.css"
+          "./../../tkless-components/modal/resources/default-2.css"
         ]
       ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.1.0.mjs" ],
@@ -74,8 +74,10 @@
 
         // is not standalone?
         if ( this.parent ) {
-          this.parent.element.parentNode.appendChild( this.root );
-          this.root.setAttribute( 'style', 'position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 995;' );
+          const root = this.ccm.context.root( this );
+          root.element.parentNode.appendChild( this.root );
+          root.root.style.position = 'relative';
+          this.root.setAttribute( 'style', 'position: absolute; width: 100%; height: 100%; top: 0; left: 0' );
         }
 
         // initially closed? => close modal dialog
@@ -85,7 +87,7 @@
 
       /** opens the modal dialog */
       this.open = () => {
-        if ( this.parent ) document.body.style.overflowY = 'hidden';
+//      if ( this.parent ) document.body.style.overflowY = 'hidden';
         this.root.style.display = 'block';
         this.element.querySelector( '#dialog' ).classList.add( 'show' );
         this.ccm.context.root( this ).element.scrollIntoView( true );
@@ -93,7 +95,7 @@
 
       /** closes the modal dialog */
       this.close = () => {
-        if ( this.parent ) document.body.style.overflowY = 'unset';
+//      if ( this.parent ) document.body.style.overflowY = 'unset';
         this.element.querySelector( '#dialog' ).classList.remove( 'show' );
         this.root.style.display = 'none';
       };

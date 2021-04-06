@@ -15,6 +15,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: 995;
 }
 
 #backdrop {
@@ -48,6 +49,10 @@
   margin: 1.75rem auto;
 }
 
+#element.LG #dialog {
+  max-width: 725px;
+}
+
 #content {
   position: relative;
   display: flex;
@@ -59,6 +64,7 @@
   border: 1px solid rgba(0,0,0,.2);
   border-radius: .3rem;
   outline: 0;
+  overflow-x: auto;
 }
 
 header {
