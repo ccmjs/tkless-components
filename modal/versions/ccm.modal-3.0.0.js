@@ -38,7 +38,7 @@
       "css": [ "ccm.load",
         [  // serial
           "https://ccmjs.github.io/akless-components/libs/bootstrap-4/css/bootstrap.min.css",
-          "./../../tkless-components/modal/resources/default-2.css"
+          "https://ccmjs.github.io/tkless-components/modal/resources/default-2.css"
         ]
       ],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.1.0.mjs" ],
