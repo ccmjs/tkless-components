@@ -53,6 +53,10 @@
   max-width: 725px;
 }
 
+#element.XL #dialog {
+  max-width: 900px;
+}
+
 #content {
   position: relative;
   display: flex;
