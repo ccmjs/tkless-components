@@ -29,8 +29,8 @@
 
 #dialog {
   position: relative;
-  width: auto;
-  margin: .5rem;
+  width: fit-content;
+  margin: .5rem auto;
   pointer-events: none;
   z-index: 999;
 }
@@ -46,7 +46,6 @@
 
 #element.MD #dialog {
   max-width: 500px;
-  margin: 1.75rem auto;
 }
 
 #element.LG #dialog {
