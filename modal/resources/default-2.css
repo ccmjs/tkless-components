@@ -117,3 +117,11 @@ footer {
 footer > button {
   margin-left: 0.5rem;
 }
+
+*[data-hidden] {
+  display: none !important;
+}
+
+*[data-invisible] {
+  visibility: hidden;
+}
