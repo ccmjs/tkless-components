@@ -29,7 +29,7 @@
 
 #dialog {
   position: relative;
-  width: fit-content;
+  width: max-content;
   padding: 0.5rem;
   margin: 0 auto;
   pointer-events: none;
