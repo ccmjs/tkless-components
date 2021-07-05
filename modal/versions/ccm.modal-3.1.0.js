@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version latest (3.1.0)
+ * @version 3.1.0
  * @changes
  * version 3.1.0 (05.07.2021)
  * - added optional onclose callback
@@ -28,6 +28,7 @@
 ( () => {
   const component = {
     name: 'modal',
+    version: [ 3, 1, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.4.0.js',
     config: {
 //    "backdrop_close": true,

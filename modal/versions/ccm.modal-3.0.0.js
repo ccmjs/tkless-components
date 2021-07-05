@@ -1,5 +1,6 @@
 /**
  * @overview ccmjs-based web component for a modal dialog
+ * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
  * @version 3.0.0
