@@ -21,8 +21,10 @@
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/slides.pdf",
-      "pdfjs": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.js" ],
-      "pdfjs_worker": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.js" ],
+      "libs": [ "ccm.load",
+        "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js",
+        "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js"
+      ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.js", { "app": "pdf_viewer" } ],
       "touchable": true
     },
@@ -60,7 +62,7 @@
 
         // load PDF
         this.pdfjs = window[ 'pdfjs-dist/build/pdf' ];
-        if ( !this.pdfjs.GlobalWorkerOptions.workerSrc ) this.pdfjs.GlobalWorkerOptions.workerSrc = this.pdfjs_worker;
+        if ( !this.pdfjs.GlobalWorkerOptions.workerSrc ) this.pdfjs.GlobalWorkerOptions.workerSrc = this.libs[ 1 ];
         file = await this.pdfjs.getDocument( this.pdf ).promise;
 
       };
