@@ -20,7 +20,7 @@
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
-      "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/pdf_viewer/resources/slides.pdf",
+      "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/slides.pdf",
       "pdfjs": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.js" ],
       "pdfjs_worker": [ "ccm.load", "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.worker.js" ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.js", { "app": "pdf_viewer" } ],
