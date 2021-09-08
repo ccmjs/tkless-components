@@ -21,8 +21,8 @@
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/slides.pdf",
-      "libs": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js",
+      "libs": [
+        [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
         "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js"
       ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.js", { "app": "pdf_viewer" } ],
