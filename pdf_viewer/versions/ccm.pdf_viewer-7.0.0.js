@@ -30,11 +30,11 @@
       "text": {
         "denied": "Access Denied",
         "download": "Download PDF",
-        "first": "First Slide",
-        "jump": "Jump to specific Slide",
-        "last": "Last Slide",
-        "next": "Next Slide",
-        "prev": "Previous Slide",
+        "first": "First Page",
+        "jump": "Jump to specific Page",
+        "last": "Last Page",
+        "next": "Next Page",
+        "prev": "Previous Page",
         "protected": "This PDF is password protected. Password:",
       },
       "touchable": true
