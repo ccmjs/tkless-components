@@ -27,6 +27,16 @@
         "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js"
       ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.js", { "app": "pdf_viewer" } ],
+      "text": {
+        "denied": "Access Denied",
+        "download": "Download PDF",
+        "first": "First Slide",
+        "jump": "Jump to specific Slide",
+        "last": "Last Slide",
+        "next": "Next Slide",
+        "prev": "Previous Slide",
+        "protected": "This PDF is password protected. Password:",
+      },
       "touchable": true
     },
     Instance: function () {
@@ -50,29 +60,41 @@
       let page_nr = 1;
 
       /**
-       * when all dependencies are solved after creation and before the app starts
+       * when the instance is created, when all dependencies have been resolved and before the dependent sub-instances are initialized and ready
        * @returns {Promise<void>}
        */
-      this.ready = async () => {
+      this.init = async () => {
 
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        // logging of 'ready' event
-        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
-
-        // load PDF
-        this.pdfjs = window[ 'pdfjs-dist/build/pdf' ];
-        if ( !this.pdfjs.GlobalWorkerOptions.workerSrc ) this.pdfjs.GlobalWorkerOptions.workerSrc = this.libs[ 1 ];
-        file = await this.pdfjs.getDocument( this.pdf ).promise;
+        // setup libraries
+        this.libs[ 0 ] = window[ 'pdfjs-dist/build/pdf' ]; delete window[ 'pdfjs-dist/build/pdf' ];
+        if ( !this.libs[ 0 ].GlobalWorkerOptions.workerSrc ) this.libs[ 0 ].GlobalWorkerOptions.workerSrc = this.libs[ 1 ];
 
       };
+
+      /**
+       * when all dependencies are solved after creation and before the app starts
+       * @returns {Promise<void>}
+       */
+      this.ready = async () => this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
 
       /**
        * starts the app
        * @returns {Promise<void>}
        */
       this.start = async () => {
+
+        // load PDF
+        try {
+          file = await this.libs[ 0 ].getDocument( this.pdf ).promise;
+        }
+        catch ( exception ) {
+          if ( exception.name !== 'PasswordException' ) return;
+          try { file = await this.libs[ 0 ].getDocument( { url: this.pdf, password: prompt( this.text.protected ) } ).promise; } catch ( e ) {}
+          if ( !file ) return $.setContent( this.element, this.text.denied );
+        }
 
         // logging of 'start' event
         this.logger && this.logger.log( 'start' );
@@ -137,10 +159,7 @@
         }
 
         // define and check routes
-        this.routing && this.routing.define( { page: number => {
-          page_nr = number;
-          renderPage();
-        } } );
+        this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );
 
       };
 
@@ -150,10 +169,10 @@
        * @returns {Promise<void>}
        */
       this.goTo = async page => {
-        if ( page < 1 || page > file.numPages ) return;  // invalid page number? => abort
-        page_nr = page;                                      // update current page number
-        await renderPage();                                  // render page
-        this.logger && this.logger.log( 'goto', page_nr );   // logging of 'goto' event
+        if ( page < 1 || page > file.numPages ) return;     // invalid page number? => abort
+        page_nr = page;                                     // update current page number
+        await renderPage();                                 // render page
+        this.logger && this.logger.log( 'goto', page_nr );  // logging of 'goto' event
       };
 
       /**
