@@ -35,7 +35,7 @@
         "last": "Last Page",
         "next": "Next Page",
         "prev": "Previous Page",
-        "protected": "This PDF is password-protected. Password:",
+        "protected": "This document is password protected. Enter a password.",
       },
       "touchable": true
     },
