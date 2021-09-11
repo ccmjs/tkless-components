@@ -1,6 +1,8 @@
+/*----------------------------------------------------- DEPRECATED ---------------------------------------------------*/
+
 /**
  * @overview datasets of ccm component for pdf-viewer
- * @author André Kless <tea.kless@web.de> 2018
+ * @author Tea Kless <tea.kless@web.de> 2018
  * @license The MIT License (MIT)
  */
 

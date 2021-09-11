@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2019
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version latest (4.0.0)
+ * @version 4.0.0
  * @changes
  * version 4.0.0 (11.09.2021): reimplementation by akless
  */
@@ -11,6 +11,7 @@
 ( () => {
   const component = {
     name: 'pdf_viewer_builder',
+    version: [ 4, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.4.4.js',
     config: {
       "css": [ "ccm.load",
