@@ -16,7 +16,7 @@
     config: {
       "css": [ "ccm.load",
         [  // serial
-          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
+          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.css",
           "https://ccmjs.github.io/tkless-components/comment/resources/styles.css"
         ],
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.css",
