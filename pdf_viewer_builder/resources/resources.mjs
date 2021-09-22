@@ -9,7 +9,12 @@
  * @type {Object}
  */
 export const local = {
-  "css.1.1": "./../pdf_viewer_builder/resources/styles.css",
+  "css": [ "ccm.load",
+    [  // serial
+      "./../libs/bootstrap-5/css/bootstrap.css",
+      "./../pdf_viewer_builder/resources/styles.css"
+    ]
+  ],
   "html.1": "./../pdf_viewer_builder/resources/templates.mjs",
-  "tool.1": "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.js"
+  "tool.1": "./../pdf_viewer/ccm.pdf_viewer.js"
 };
