@@ -216,7 +216,7 @@
           try {
 
             // create new comment in datastore (on error: abort without updated frontend)
-            await this.data.store.set( comment );
+            await save( comment );
 
             // add initial rating data to new comment
             comment.rating = { like: {}, dislike: {}, heart: {}, report: {} };
@@ -251,7 +251,7 @@
           const comment = data.comments[ key ] || data.answers[ key ];
 
           // check condition for editable comment
-          const is_creator = comment._ && user === comment._.creator;
+          const is_creator = comment._ && user.key === comment._.creator;
           if ( !is_creator ) return;
 
           // remove 'Edit' button
@@ -260,9 +260,11 @@
           // make comment text editable
           const textarea = $.html( {
             tag: 'textarea', class: 'form-control', rows: 2,
-            onchange: async event => {
-              comment.text = event.target.value;
-              try { await this.data.store.set( comment ); render(); } catch ( e ) {}
+            onfocusout: async event => {
+              const value = event.target.value.trim();
+              if ( value === comment.text ) return render();
+              comment.text = value;
+              try { await save( comment ); render(); } catch ( e ) {}
             }
           } );
           textarea.value = comment.text;
@@ -292,7 +294,7 @@
           comment.deleted = true;
 
           // update comment in datastore (on error: abort without updated frontend)
-          try { await this.data.store.set( comment ); render(); } catch ( e ) {}
+          try { await save( comment ); render(); } catch ( e ) {}
 
         },
 
@@ -317,7 +319,7 @@
           comment.deleted = false;
 
           // update comment in datastore (on error: abort without updated frontend)
-          try { await this.data.store.set( comment ); render(); } catch ( e ) {}
+          try { await save( comment ); render(); } catch ( e ) {}
 
         },
 
@@ -401,9 +403,9 @@
         if ( !this.controls[ type ] || is_creator ) return;
 
         // get rating data (or use initial rating data if not exists)
-        const rating = data.ratings[ this.app + ',' + user ] || {
-          key: [ this.app, user ],
-          app: this.app,
+        const rating = data.ratings[ this.data.key.app + ',' + user ] || {
+          key: [ this.data.key.app, user ],
+          app: this.data.key.app,
           user: user,
           comments: {},
           _: {
@@ -415,11 +417,12 @@
 
         // update rating data
         if ( !rating.comments[ key ] ) rating.comments[ key ] = {};
+        const ratings = rating.comments[ key ];
         switch ( type ) {
-          case 0: rating.comments.like = rating.comments.like ? null : true; break;
-          case 1: rating.comments.like = rating.comments.like === false ? null : false; break;
-          case 2: rating.comments.heart = !rating.comments.heart; break;
-          case 3: rating.comments.report = !rating.comments.report; break;
+          case 'like': ratings.like = ratings.like ? null : true; break;
+          case 'dislike': ratings.like = ratings.like === false ? null : false; break;
+          case 'heart': ratings.heart = !ratings.heart; break;
+          case 'report': ratings.report = !ratings.report; break;
         }
 
         try {
@@ -440,6 +443,24 @@
           render();
 
         } catch ( e ) {}
+
+      };
+
+      /**
+       * updates a comment in datastore
+       * @param {Object} comment - comment dataset
+       * @returns {Promise<*>}
+       */
+      const save = async comment => {
+
+        // remove only local needed properties
+        comment = $.clone( comment );
+        delete comment.rating;
+        delete comment.answer_input;
+        delete comment.open_thread;
+
+        // update comment in datastore
+        return this.data.store.set( comment );
 
       };
 
