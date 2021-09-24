@@ -19,7 +19,7 @@ export const local = {
   ],
   "data": {
     "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
-    "key": { "app": "test" }
+    "key": "test"
   },
   "html.1": "./../comment/resources/templates.mjs",
   "libs": [ "ccm.load",
@@ -38,7 +38,7 @@ export const local = {
 export const demo = {
   "data": {
     "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
-    "key": { "app": "demo" }
+    "key": "demo"
   }
 };
 

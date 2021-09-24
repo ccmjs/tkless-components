@@ -88,14 +88,17 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        // add plugin to dayjs library
-        dayjs.extend( window.dayjs_plugin_relativeTime );
-
         // listen to login/logout events => update content
         this.user && ( this.user.onchange = render );
 
         // listen to datastore changes => update content
         this.data.store.onchange = async comment => render( data[ comment.key ] = comment );
+
+        // add plugin to dayjs library
+        dayjs.extend( window.dayjs_plugin_relativeTime );
+
+        // convert unique key for app state data to query
+        if ( !$.isObject( this.data.key ) ) this.data.key = { app: this.data.key };
 
       };
 
