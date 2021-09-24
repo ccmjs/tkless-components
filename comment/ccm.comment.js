@@ -21,7 +21,7 @@
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
       ],
-      "data": { "store": [ "ccm.store" ], "key": {} },
+      "data": { "store": [ "ccm.store" ] },
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.6.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/templates.mjs" ],
       "libs": [ "ccm.load",
@@ -97,7 +97,7 @@
         dayjs.extend( window.dayjs_plugin_relativeTime );
 
         // convert unique key for app state data to query
-        if ( !$.isObject( this.data.key ) ) this.data.key = { app: this.data.key };
+        if ( !$.isObject( this.data.key ) ) this.data.key = this.data.key ? { app: this.data.key } : {};
 
       };
 
