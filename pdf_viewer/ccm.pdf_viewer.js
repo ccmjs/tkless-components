@@ -12,7 +12,7 @@
 ( () => {
   const component = {
     name: 'pdf_viewer',
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.4.4.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.0.0.js',
     config: {
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles.css" ],
       "downloadable": true,
