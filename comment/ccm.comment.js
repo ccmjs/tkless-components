@@ -11,7 +11,7 @@
 ( () => {
   const component = {
     name: 'comment',
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.4.4.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.0.0.js',
     config: {
       "css": [ "ccm.load",
         [  // serial
