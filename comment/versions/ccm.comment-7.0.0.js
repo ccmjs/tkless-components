@@ -12,15 +12,15 @@
   const component = {
     name: 'comment',
     version: [ 7, 0, 0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.0.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.0.0.min.js',
     config: {
       "css": [ "ccm.load",
         [  // serial
-          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.css",
-          "https://ccmjs.github.io/tkless-components/comment/resources/styles.css"
+          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
+          "https://ccmjs.github.io/tkless-components/comment/resources/styles.min.css"
         ],
-        "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.css",
-        { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
+        { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "data": { "store": [ "ccm.store" ] },
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.6.0.mjs" ],
@@ -29,7 +29,7 @@
         "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
         "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
       ],
-//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
+//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       "picture": "https://ccmjs.github.io/tkless-components/comment/resources/user.svg",
       "controls": {
         "answer": true,
@@ -63,7 +63,7 @@
         "write_answer": "Write an answer...",
         "write_comment": "Write a comment..."
       },
-      "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js" ]
+      "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
     },
     Instance: function () {
 
