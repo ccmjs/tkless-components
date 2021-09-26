@@ -5,44 +5,6 @@
  */
 
 /**
- * test configuration (relative paths)
- * @type {Object}
- */
-export const local = {
-  "css": [ "ccm.load",
-    [  // serial
-      "./../libs/bootstrap-5/css/bootstrap.css",
-      "./../comment/resources/styles.css"
-    ],
-    "./../libs/bootstrap-5/css/bootstrap-icons.css",
-    { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
-  ],
-  "data": {
-    "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
-    "key": "test"
-  },
-  "html.1": "./../comment/resources/templates.mjs",
-  "libs": [ "ccm.load",
-    "./../libs/dayjs/dayjs.min.js",
-    "./../libs/dayjs/relativeTime.min.js"
-  ],
-  "picture": "./../comment/resources/user.svg",
-  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
-  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.js", "cloud" ] ]
-};
-
-/**
- * demo configuration (absolute paths)
- * @type {Object}
- */
-export const demo = {
-  "data": {
-    "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
-    "key": "demo"
-  }
-};
-
-/**
  * example for app state data
  * @type {Object}
  */
@@ -117,5 +79,43 @@ export const data = {
       }
     },
     "_": { "creator": "mkless", "realm": "cloud" }
+  }
+};
+
+/**
+ * test configuration (relative paths)
+ * @type {Object}
+ */
+export const local = {
+  "css": [ "ccm.load",
+    [  // serial
+      "./../libs/bootstrap-5/css/bootstrap.css",
+      "./../comment/resources/styles.css"
+    ],
+    "./../libs/bootstrap-5/css/bootstrap-icons.css",
+    { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
+  ],
+  "data": {
+    "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
+    "key": "test"
+  },
+  "html.1": "./../comment/resources/templates.mjs",
+  "libs": [ "ccm.load",
+    "./../libs/dayjs/dayjs.min.js",
+    "./../libs/dayjs/relativeTime.min.js"
+  ],
+  "picture": "./../comment/resources/user.svg",
+  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "cloud" ] ]
+};
+
+/**
+ * demo configuration (absolute paths)
+ * @type {Object}
+ */
+export const demo = {
+  "data": {
+    "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
+    "key": "demo"
   }
 };
