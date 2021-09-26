@@ -16,8 +16,8 @@
     config: {
       "css": [ "ccm.load",
         [  // serial
-          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.css",
-          "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/styles.css"
+          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
+          "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/styles.min.css"
         ]
       ],
 //    "data": { "store": [ "ccm.store" ] },
@@ -25,7 +25,7 @@
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.5.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/templates.mjs" ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/akless-components/libs/bootstrap-5/js/bootstrap.bundle.min.js" ],
-//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
+//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       "onfinish": { "log": true },
       "shadow": "none",
       "text": {
@@ -57,7 +57,7 @@
         "user": "Required Account",
         "user_info": "Here you can set whether the PDF should only be displayed for people who log in with a specific account.<ul class=\"m-0 pl-4\"><li><b>Digital Makerspace Account:</b> The user must log in with a Digital Makerspace account.</li><li><b>H-BRS FB02 Account:</b> The user has to authenticate with an account from the Department of Computer Sciences at Hochschule Bonn-Rhein-Sieg University of Applied Sciences.</li></ul>"
       },
-      "tool": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.js" ]
+      "tool": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ]
     },
     Instance: function () {
 
