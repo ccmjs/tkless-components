@@ -216,10 +216,6 @@
          */
         const canvas = this.element.querySelector( 'canvas' );
 
-        // reset canvas size
-        canvas.removeAttribute( 'width' );
-        canvas.removeAttribute( 'height' );
-
         /**
          * current page
          * @type {Object}
