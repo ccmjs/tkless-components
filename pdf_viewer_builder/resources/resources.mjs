@@ -15,6 +15,7 @@ export const local = {
       "./../pdf_viewer_builder/resources/styles.css"
     ]
   ],
+  "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer_builder/resources/templates.mjs",
   "tool.1": "./../pdf_viewer/ccm.pdf_viewer.js"
 };
