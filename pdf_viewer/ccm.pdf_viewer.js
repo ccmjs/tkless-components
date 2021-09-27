@@ -12,20 +12,20 @@
 ( () => {
   const component = {
     name: 'pdf_viewer',
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.0.0.js',
+    ccm: './../libs/ccm/ccm.js',
     config: {
-      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles.css" ],
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles.min.css" ],
       "downloadable": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.5.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
-//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
+//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/slides.pdf",
       "libs": [
         [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
         "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js"
       ],
-//    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.js", { "app": "pdf_viewer" } ],
+//    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js", { "app": "pdf_viewer" } ],
       "text": {
         "denied": "Access Denied",
         "download": "Download PDF",
@@ -57,6 +57,12 @@
        * @type {number}
        */
       let page_nr = 1;
+
+      /**
+       * rendering of a PDF page is not finished
+       * @type {boolean}
+       */
+      let rendering = false;
 
       /**
        * when the instance is created, when all dependencies have been resolved and before the dependent sub-instances are initialized and ready
@@ -198,6 +204,9 @@
        */
       const renderPage = async () => {
 
+        if ( rendering ) return;  // rendering of an other PDF page is not finished? => abort
+        rendering = true;         // start rendering PDF page
+
         /**
          * canvas element
          * @type {Element}
@@ -224,9 +233,9 @@
           viewport: viewport
         } ).promise;
 
-        // trigger 'onchange' callback and update route
-        this.onchange && this.onchange( this, page_nr );
-        this.routing && this.routing.set( 'page-' + page_nr );
+        rendering = false;                                      // rendering of PDF page is finished
+        this.onchange && this.onchange( this, page_nr );        // trigger 'onchange' callback
+        this.routing && this.routing.set( 'page-' + page_nr );  // update route
 
       };
 
