@@ -99,6 +99,7 @@ export const local = {
     "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
     "key": "test"
   },
+  "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../comment/resources/templates.mjs",
   "libs": [ "ccm.load",
     "./../libs/dayjs/dayjs.min.js",
