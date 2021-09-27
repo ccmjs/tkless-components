@@ -118,5 +118,6 @@ export const demo = {
   "data": {
     "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
     "key": "demo"
-  }
+  },
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "cloud" ] ]
 };
