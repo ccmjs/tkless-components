@@ -39,16 +39,6 @@
       },
       "touchable": true
     },
-
-    /**
-     * when the registration of the components is complete
-     * @returns {Promise<void>}
-     */
-    ready: async function () {
-
-
-    },
-
     Instance: function () {
 
       /**
