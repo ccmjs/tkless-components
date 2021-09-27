@@ -12,7 +12,7 @@
   const component = {
     name: 'pdf_viewer_builder',
     version: [ 4, 0, 0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.4.4.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.0.min.js',
     config: {
       "css": [ "ccm.load",
         [  // serial
