@@ -21,10 +21,11 @@
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/slides.pdf",
-      "libs": [
-        [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
-        "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js"
-      ],
+      "pdfjs": {
+        "url": "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js",
+        "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js",
+        "namespace": "pdfjs-dist/build/pdf"
+      },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js", { "app": "pdf_viewer" } ],
       "text": {
         "denied": "Access Denied",
@@ -38,6 +39,16 @@
       },
       "touchable": true
     },
+
+    /**
+     * when the registration of the components is complete
+     * @returns {Promise<void>}
+     */
+    ready: async function () {
+
+
+    },
+
     Instance: function () {
 
       /**
@@ -73,9 +84,11 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        // setup libraries
-        this.libs[ 0 ] = window[ 'pdfjs-dist/build/pdf' ]; delete window[ 'pdfjs-dist/build/pdf' ];
-        if ( !this.libs[ 0 ].GlobalWorkerOptions.workerSrc ) this.libs[ 0 ].GlobalWorkerOptions.workerSrc = this.libs[ 1 ];
+        // setup PDF.js library
+        if ( !window[ this.pdfjs.namespace ] ) await this.ccm.load( this.pdfjs.url );
+        const pdfjs = window[ this.pdfjs.namespace ];
+        if ( !pdfjs.GlobalWorkerOptions.workerSrc ) pdfjs.GlobalWorkerOptions.workerSrc = this.pdfjs.worker;
+        this.pdfjs = pdfjs;
 
       };
 
@@ -93,11 +106,11 @@
 
         // load PDF
         try {
-          file = await this.libs[ 0 ].getDocument( this.pdf ).promise;
+          file = await this.pdfjs.getDocument( this.pdf ).promise;
         }
         catch ( exception ) {
           if ( exception.name !== 'PasswordException' ) return;
-          try { file = await this.libs[ 0 ].getDocument( { url: this.pdf, password: prompt( this.text.protected ) } ).promise; } catch ( e ) {}
+          try { file = await this.pdfjs.getDocument( { url: this.pdf, password: prompt( this.text.protected ) } ).promise; } catch ( e ) {}
           if ( !file ) return $.setContent( this.element, this.text.denied );
         }
 
