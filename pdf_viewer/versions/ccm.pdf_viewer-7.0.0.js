@@ -23,7 +23,7 @@
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/slides.pdf",
       "pdfjs": {
-        "url": "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js",
+        "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
         "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js",
         "namespace": "pdfjs-dist/build/pdf"
       },
@@ -76,7 +76,6 @@
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
         // setup PDF.js library
-        if ( !window[ this.pdfjs.namespace ] ) await this.ccm.load( this.pdfjs.url );
         const pdfjs = window[ this.pdfjs.namespace ];
         if ( !pdfjs.GlobalWorkerOptions.workerSrc ) pdfjs.GlobalWorkerOptions.workerSrc = this.pdfjs.worker;
         this.pdfjs = pdfjs;
@@ -195,9 +194,6 @@
        * @returns {number}
        */
       this.getPages = () => file.numPages;
-
-      /** when an observed responsive breakpoint triggers */
-      this.onbreakpoint = () => renderPage();
 
       /** updates main HTML template */
       const render = () => this.html.render( this.html.main( this, events, page_nr, file.numPages ), this.element );
