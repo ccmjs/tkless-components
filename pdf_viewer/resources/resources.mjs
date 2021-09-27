@@ -12,7 +12,7 @@ export const local = {
   "css.1": "./../pdf_viewer/resources/styles.css",
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
+  "pdf": "./../pdf_viewer/resources/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs/pdf.min.js",
-  "pdfjs.worker": "./../libs/pdfjs/pdf.worker.min.js",
-  "pdf": "./../pdf_viewer/resources/slides.pdf"
+  "pdfjs.worker": "./../libs/pdfjs/pdf.worker.min.js"
 };
