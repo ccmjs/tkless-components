@@ -194,6 +194,9 @@
        */
       this.getPages = () => file.numPages;
 
+      /** when an observed responsive breakpoint triggers */
+      this.onbreakpoint = () => renderPage();
+
       /** updates main HTML template */
       const render = () => this.html.render( this.html.main( this, events, page_nr, file.numPages ), this.element );
 
@@ -211,6 +214,10 @@
          * @type {Element}
          */
         const canvas = this.element.querySelector( 'canvas' );
+
+        // reset canvas size
+        canvas.removeAttribute( 'width' );
+        canvas.removeAttribute( 'height' );
 
         /**
          * current page
