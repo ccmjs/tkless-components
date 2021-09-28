@@ -1,0 +1,65 @@
+/**
+ * @overview default layout of ccmjs-based web component for slidecast with commentary
+ * @author André Kless <andre.kless@web.de.de> 2021
+ * @license The MIT License (MIT)
+ */
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+main > div {
+  width: 100%;
+  max-width: 940px;
+}
+
+#extra {
+  margin: -0.5em 1em 0;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #888888;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+audio {
+  flex: 1;
+  margin: 0.2em;
+}
+
+#extra > div {
+  padding: 0.5em 1em;
+}
+
+#description,
+#comments {
+  border: 1px solid #ddd;
+  margin: 1em;
+}
+
+#description article {
+  background-color: #ddd;
+  padding: 0.5em;
+}
+
+i {
+  font-size: xx-large;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+*[disabled] {
+  color: gray;
+  cursor: not-allowed;
+}
+
+*[data-invisible] {
+  visibility: hidden;
+}
+
+*[data-hidden] {
+  display: none;
+}

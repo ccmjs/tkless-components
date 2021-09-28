@@ -1,123 +1,154 @@
 /**
- * @overview ccm component of slidecast with comment
+ * @overview ccmjs-based web component for slidecast with commentary
  * @author Tea Kless <tea.kless@web.de> 2020
+ * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version 1.0.0
+ * @version 2.0.0
  * @changes
- * version 1.0.0 (26.04.2020)
+ * version 2.0.0 (25.09.2021): reimplementation by akless
  */
 
-( function () {
-
+( () => {
   const component = {
-
-    name: 'qa_slidecast', version: [ 1, 0, 0 ],
-
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.4.0.js',
-
+    name: 'qa_slidecast',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.0.min.js',
     config: {
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.html" ],
-      "audio": {
-        "1": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/work&study-jingle.mp3",
-      },
-      "slides": "https://ccmjs.github.io/work-and-study/learningapp-marketplace/resources/GameChanger.pdf",
-      "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-6.0.0.js", {
-        "editable": true,
-        "data": {
-          "store": [ "ccm.store", { "name": "qa_slidecast", "url": "https://ccm2.inf.h-brs.de" } ],
-          "key": "demo"
-        },
-      } ],
-      "pdf_viewer": [ "ccm.component", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-6.1.0.js" ],
-      "user": [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.4.1.js",
-        [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "compact" ] ],
-      "css": [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/default.css"
-      ],
-      "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.5.js" ],
-      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-5.0.0.mjs" } ]
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles.min.css" ],
+      "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.6.0.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
+      "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
+      "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
+      "slides": [],
+      "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
     },
-
     Instance: function () {
-      let $, main_elem, inst;
 
+      /**
+       * shortcut to help functions
+       * @type {Object.<string,Function>}
+       */
+      let $;
+
+      /**
+       * current slide number
+       * @type {number}
+       */
+      let slide_nr = 1;
+
+      /**
+       * when the instance is created, when all dependencies have been resolved and before the dependent sub-instances are initialized and ready
+       * @returns {Promise<void>}
+       */
       this.init = async () => {
 
-        if ( Array.isArray( this.audio ) ) {
-          const audio = {};
-          this.audio.forEach( entry => audio[ entry.slide_nr ] = entry.audio_src );
-          this.audio = audio;
-        }
+        // set shortcut to help functions
+        $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        if ( this.user ) this.user.onchange = login => {
-          if ( login ) return;
+        // each slide needs an unique key
+        this.slides.forEach( slide => !slide.key && ( slide.key = $.generateKey() ) );
 
-          // clear content
-          $.setContent( this.element, '' );
+        // set unique key for app state data of commentary
+        if ( !this.comment.config.data.key ) this.comment.config.data.key = $.generateKey();
 
-          // restart app
-          this.start();
-        }
+        // set same user dependency for commentary
+        this.comment.config.user = JSON.parse( this.config ).user;
+
       };
 
+      /**
+       * when all dependencies are solved after creation and before the app starts
+       * @returns {Promise<void>}
+       */
       this.ready = async () => {
 
-        // set shortcut to help functions
-        $ = Object.assign( {}, this.ccm.helper, this.helper );
-
-        if ( this.logger ) this.logger.log( 'ready', $.clone ( this ) );
+        // logging of 'ready' event
+        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
 
       };
 
+      /**
+       * starts the app
+       * @returns {Promise<void>}
+       */
       this.start = async () => {
-        // login user, if not logged in
-        this.user && await this.user.login();
 
-        main_elem = $.html( this.html.main );
-        $.setContent( this.element, main_elem );
-        await renderSlides();
-        this.user && await renderComment();
-        renderAudio( inst.getPage() );
-      };
+        // logging of 'start' event
+        this.logger && this.logger.log( 'start', this.getValue() );
 
-      const renderSlides = async () => {
-
-        inst = await this.pdf_viewer.start( {
-          root: main_elem.querySelector( '#slides' ),
-          breakpoints: false,
-          pdf: this.slides,
-          description: this.description && this.description,
-          onchange: ( inst, page ) => {
-            this.user && renderComment( page );
-            renderAudio( page );
-          }
-        } );
+        // render first slide
+        await this.render();
 
       };
 
-      const renderComment = async ( page = 1, element ) => {
-        const inst = await this.comment.start( {
-          root: main_elem.querySelector( '#comments' ),
-          'data.key': this.comment.config.data.key + '-' + page,
-          user: [ 'ccm.instance', this.user.component.url, $.parse( this.user.config ) ]
-        } );
-        $.prepend( inst.element.querySelector( '.container-fluid' ), $.html( '<h4 class="text-success ml-2"> Comments: </h4> ') );
-        inst.element.querySelector( '.container-fluid' ).classList.remove( 'container-fluid' );
+      /**
+       * renders a slide in webpage area
+       * @returns {Promise<void>}
+       */
+      this.render = async () => {
+
+        /**
+         * slide data
+         * @type {Object}
+         */
+        const slide_data = this.slides[ slide_nr - 1 ];
+
+        // render main HTML template
+        this.html.render( this.html.main( this, slide_nr ), this.element );
+
+        // render slide
+        const slide_element = this.element.querySelector( '#slide' );
+        switch ( typeof slide_data.content ) {
+          case 'number':
+            this.pdf_viewer.goTo( slide_nr );
+            $.setContent( slide_element, this.pdf_viewer.root );
+            break;
+          case 'string':
+            const ends_with = slide_data.content.split( '.' ).pop();
+            switch ( ends_with ) {
+              case 'apng':
+              case 'gif':
+              case 'jpg':
+              case 'jpeg':
+              case 'jfif':
+              case 'pjpeg':
+              case 'pjp':
+              case 'png':
+              case 'svg':
+                this.html.render( this.html.image( slide_data.image ), slide_element );
+                break;
+              case 'mp4':
+              case 'ogg':
+              case 'webm':
+                this.html.render( this.html.audio( slide_data.video ), slide_element );
+                break;
+            }
+            break;
+          case 'object':
+            if ( !$.isInstance( slide_data.content ) )
+              slide_data.content = await $.solveDependency( slide_data.content );
+            $.setContent( slide_element, slide_data.content.root );
+            break;
+          default:
+            $.setContent( slide_element, '' );
+        }
+
+        // render comments
+        if ( this.comment && slide_data.commentary !== false ) {
+          if ( !slide_data.comments )
+            slide_data.comments = await this.comment.start( { 'data.key': this.comment.config.data.key + '-' + slide_data.key } );
+          $.setContent( this.element.querySelector( '#comments' ), slide_data.comments.root );
+        }
+
       };
 
-      const renderAudio = ( page ) => {
-        if ( !this.audio[ page ] ) return $.setContent( main_elem.querySelector( '#audio' ), '');
-
-        const audio_elem = $.html( this.html.audio, {
-          audio_src: this.audio[ Number( page ) ]
-        } );
-
-        $.setContent( main_elem.querySelector( '#audio' ), audio_elem );
-      }
+      /**
+       * returns app state data
+       * @returns {{slide_nr: number, slides: Object[]}}
+       */
+      this.getValue = () => { return { slide_nr: slide_nr, slides: $.clone( this.slides ) } };
 
     }
-
   };
-
-  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||["latest"])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
+  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||[""])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){(c="latest"?window.ccm:window.ccm[c]).component(component);document.head.removeChild(a)};a.src=component.ccm.url}
 } )();
