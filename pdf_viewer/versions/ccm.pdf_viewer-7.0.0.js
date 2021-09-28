@@ -209,6 +209,7 @@
 
         if ( rendering ) return;  // rendering of an other PDF page is not finished? => abort
         rendering = true;         // start rendering PDF page
+        await $.sleep( 1 );       // give canvas element a moment to resize
 
         /**
          * canvas element
