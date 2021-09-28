@@ -5,6 +5,7 @@
  */
 
 main {
+  margin-bottom: 3em;
   padding: 0 0.5em;
   max-width: 768px;
 }
