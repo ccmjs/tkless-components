@@ -5,9 +5,16 @@
  */
 
 main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > div {
   margin-bottom: 3em;
-  padding: 0 0.5em;
-  max-width: 768px;
+  width: 100%;
+  max-width: 940px;
+  padding: 0 1em;
 }
 
 header {

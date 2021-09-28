@@ -54,30 +54,31 @@ export function main( app, events ) {
 
   return html`
     <main>
-      <header>
+      <div>
+        <header>
+          <section>
+            
+            <!-- Number of Comments -->
+            <span>${ app.text.comments.replace( '%d', comments.length + answers.length ) }</span>
+            
+            <!-- Sorting of Comments -->
+            <button type="button" class="btn btn-sm btn-light" @click=${ events.onSort } ?data-hidden=${ !app.controls.sort || comments.length < 2 }>
+              <i class="bi bi-filter-left"></i>
+              <span>${ app.text[ 'sort_by_' + ( app.sort ? 'date' : 'rating' ) ] }</span>
+            </button>
+            
+          </section>
+          <section></section>
+        </header>
+        
+        <!-- Add Comment -->
+        ${ addCommentTemplate() }
+        
+        <!-- Comments -->
         <section>
-          
-          <!-- Number of Comments -->
-          <span>${ app.text.comments.replace( '%d', comments.length + answers.length ) }</span>
-          
-          <!-- Sorting of Comments -->
-          <button type="button" class="btn btn-sm btn-light" @click=${ events.onSort } ?data-hidden=${ !app.controls.sort }>
-            <i class="bi bi-filter-left"></i>
-            <span>${ app.text[ 'sort_by_' + ( app.sort ? 'date' : 'rating' ) ] }</span>
-          </button>
-          
+          ${ repeat( comments, comment => comment.key, commentTemplate ) }
         </section>
-        <section></section>
-      </header>
-      
-      <!-- Add Comment -->
-      ${ addCommentTemplate() }
-      
-      <!-- Comments -->
-      <section>
-        ${ repeat( comments, comment => comment.key, commentTemplate ) }
-      </section>
-      
+      </div>
     </main>
   `;
 
