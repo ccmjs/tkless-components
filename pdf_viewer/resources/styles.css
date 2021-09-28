@@ -15,6 +15,7 @@ canvas {
   border: 1px solid #ddd;
   width: 100%;
   max-width: 940px;
+  max-height: 80vh;
 }
 
 main > div {
