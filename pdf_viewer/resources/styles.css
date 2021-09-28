@@ -30,6 +30,7 @@ main > div {
 nav {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 nav > div {
