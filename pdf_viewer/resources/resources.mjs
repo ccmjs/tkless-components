@@ -9,7 +9,11 @@
  * @type {Object}
  */
 export const local = {
-  "css.1": "./../pdf_viewer/resources/styles.css",
+  "css": [ "ccm.load",
+    "./../pdf_viewer/resources/styles.css",
+    "./../libs/bootstrap-5/css/bootstrap-icons.css",
+    { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
+  ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
   "pdf": "./../pdf_viewer/resources/slides.pdf",

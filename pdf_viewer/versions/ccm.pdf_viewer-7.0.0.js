@@ -6,7 +6,7 @@
  * @license The MIT License (MIT)
  * @version 7.0.0
  * @changes
- * version 7.0.0 (08.09.2021): reimplementation by akless
+ * version 7.0.0 (29.09.2021): reimplementation by akless
  */
 
 ( () => {
@@ -15,7 +15,11 @@
     version: [ 7, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.1.min.js',
     config: {
-      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles.min.css" ],
+      "css": [ "ccm.load",
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles.min.css",
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
+        { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
+      ],
       "downloadable": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.5.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
