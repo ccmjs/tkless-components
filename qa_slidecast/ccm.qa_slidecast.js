@@ -62,7 +62,6 @@
 
         this.pdf_viewer.onchange = async event => {
           if ( !event.before ) return;
-          console.log( event );
           let slide;
           switch ( event.name ) {
             case 'first': slide = 1;                         break;
@@ -135,7 +134,8 @@
         this.html.render( this.html.main( this, slide_nr, events ), this.element );
 
         // render PDF Viewer
-        $.setContent( this.element.querySelector( '#viewer' ), this.pdf_viewer.root );
+        const viewer_element = this.element.querySelector( '#viewer' );
+        !viewer_element.innerHTML && $.setContent( viewer_element, this.pdf_viewer.root );
 
         /**
          * slide element
@@ -188,11 +188,11 @@
 
         // update PDF viewer
         const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
-        update( '#first svg', slide_nr <= 1 );
-        update( '#prev svg', slide_nr <= 1 );
+        update( '#first > *', slide_nr <= 1 );
+        update( '#prev > *', slide_nr <= 1 );
         this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', slide_nr + ' / ' + this.ignore.slides.length );
-        update( '#next svg', slide_nr >= this.ignore.slides.length );
-        update( '#last svg', slide_nr >= this.ignore.slides.length );
+        update( '#next > *', slide_nr >= this.ignore.slides.length );
+        update( '#last > *', slide_nr >= this.ignore.slides.length );
 
         // render advanced description (description is another app)
         const description_element = this.element.querySelector( '#description' );
