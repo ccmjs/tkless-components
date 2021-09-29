@@ -11,13 +11,6 @@ main {
   align-items: center;
 }
 
-canvas {
-  border: 1px solid #ddd;
-  width: 100%;
-  max-width: 940px;
-  max-height: 92vh;
-}
-
 main > div {
   margin-top: 1em;
   border-radius: 5px;
@@ -25,6 +18,15 @@ main > div {
   width: 100%;
   max-width: 940px;
   display: flex;
+}
+
+#page {
+  border: 1px solid #ddd;
+  max-height: 92vh;
+}
+
+#page > * {
+  width: 100%;
 }
 
 nav {
@@ -52,7 +54,7 @@ svg {
   padding: 0 0.5em;
 }
 
-svg:not([data-disabled]) {
+svg:not([disabled]) {
   cursor: pointer;
 }
 
@@ -73,8 +75,9 @@ input {
   padding: 0 3px;
 }
 
-*[data-disabled] {
+*[disabled] {
   color: lightgray;
+  cursor: not-allowed;
 }
 
 *[data-hidden] {

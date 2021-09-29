@@ -120,10 +120,8 @@
         !this.downloadable && canvas.addEventListener( 'contextmenu', event => event.preventDefault() );
 
         // render page
-        if ( this.routing && this.routing.get() ) {
+        if ( this.routing && this.routing.get() )
           page_nr = this.routing.get().split( '-' )[ 1 ];
-          this.onchange && this.onchange( this, page_nr );
-        }
         else
           await renderPage();
 
@@ -209,7 +207,7 @@
 
         if ( rendering ) return;  // rendering of an other PDF page is not finished? => abort
         rendering = true;         // start rendering PDF page
-        await $.sleep( 30 );       // give canvas element a moment to resize
+        await $.sleep( 30 );      // give canvas element a moment to resize
 
         /**
          * canvas element
@@ -238,7 +236,6 @@
         } ).promise;
 
         rendering = false;                                      // rendering of PDF page is finished
-        this.onchange && this.onchange( this, page_nr );        // trigger 'onchange' callback
         this.routing && this.routing.set( 'page-' + page_nr );  // update route
 
       };
@@ -249,27 +246,63 @@
        */
       const events = {
 
-        /** when 'first page' button is clicked */
-        onFirst: () => this.goTo( page_nr = 1 ),
+        /**
+         * when 'first page' button is clicked
+         * @returns {Promise<void>}
+         */
+        onFirst: async () => {
+          if ( this.onchange && await this.onchange( { name: 'first', page: page_nr, instance: this, before: true } ) ) return;
+          if ( page_nr <= 1 ) return;
+          await this.goTo( page_nr = 1 );
+          this.onchange && this.onchange( { name: 'first', page: page_nr, instance: this } );
+        },
 
-        /** when 'previous page' button is clicked */
-        onPrev: () => page_nr > 1 && this.goTo( --page_nr ),
+        /**
+         * when 'previous page' button is clicked
+         * @returns {Promise<void>}
+         */
+        onPrev: async () => {
+          if ( this.onchange && await this.onchange( { name: 'prev', page: page_nr, instance: this, before: true } ) ) return;
+          if ( page_nr <= 1 ) return;
+          await this.goTo( --page_nr );
+          this.onchange && this.onchange( { name: 'prev', page: page_nr, instance: this } );
+        },
 
         /**
          * when a page number has been entered
-         * @param {Object} event - object of the change event of the input field
+         * @param {Object} event - event data from 'onchange' event of input field, which is used to jump directly to a specific page
+         * @returns {Promise<void>}
          */
-        onJump: event => {
+        onJump: async event => {
           const page = parseInt( event.target.value );
           event.target.value = '';
-          page && this.goTo( page );
+          if ( this.onchange && await this.onchange( { name: 'jump', page: page, instance: this, before: true } ) ) return;
+          if ( !page || page < 1 || page > file.numPages || page === page_nr ) return;
+          await this.goTo( page );
+          this.onchange && this.onchange( { name: 'jump', page: page, instance: this } );
         },
 
-        /** when 'next page' button is clicked */
-        onNext: () => page_nr < file.numPages && this.goTo( ++page_nr ),
+        /**
+         * when 'next page' button is clicked
+         * @returns {Promise<void>}
+         */
+        onNext: async () => {
+          if ( this.onchange && await this.onchange( { name: 'next', page: page_nr, instance: this, before: true } ) ) return;
+          if ( page_nr >= file.numPages ) return;
+          await this.goTo( ++page_nr );
+          this.onchange && this.onchange( { name: 'next', page: page_nr, instance: this } );
+        },
 
-        /** when 'last page' button is clicked */
-        onLast: () => this.goTo( page_nr = file.numPages )
+        /**
+         * when 'last page' button is clicked
+         * @returns {Promise<void>}
+         */
+        onLast: async () => {
+          if ( this.onchange && await this.onchange( { name: 'last', page: page_nr, instance: this, before: true } ) ) return;
+          if ( page_nr >= file.numPages ) return;
+          await this.goTo( page_nr = file.numPages );
+          this.onchange && this.onchange( { name: 'last', page: page_nr, instance: this } );
+        }
 
       };
 

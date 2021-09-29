@@ -17,29 +17,31 @@ export { render };
 export function main( instance, events, page_nr, pages ) {
   return html`
     <main>
-      <canvas></canvas>
+      <div id="page">
+        <canvas></canvas>
+      </div>
       <div>
         <nav id="controls" ?data-hidden=${ pages <= 1 }>
-          <div title="${ instance.text.first }" @click=${ events.onFirst }>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?data-disabled=${ page_nr === 1 }>
+          <div id="first" title="${ instance.text.first }" @click=${ events.onFirst }>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?disabled=${ page_nr === 1 }>
               <path d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L5 8.752V12a.5.5 0 0 1-1 0V4zm7.5.633L5.696 8l5.804 3.367V4.633z"/>
             </svg>
           </div>
-          <div title="${ instance.text.prev }" @click=${ events.onPrev }>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?data-disabled=${ page_nr === 1 }>
+          <div id="prev" title="${ instance.text.prev }" @click=${ events.onPrev }>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?disabled=${ page_nr === 1 }>
               <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
             </svg>
           </div>
-          <div>
+          <div id="jump">
             <input type="text" size="${ pages.toString().length }" title="${ instance.text.jump }" placeholder="${ page_nr } / ${ pages }" @change=${ events.onJump }>
           </div>
-          <div title="${ instance.text.next }" @click=${ events.onNext }>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?data-disabled=${ page_nr === pages }>
+          <div id="next" title="${ instance.text.next }" @click=${ events.onNext }>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?disabled=${ page_nr === pages }>
               <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
             </svg>
           </div>
-          <div title="${ instance.text.last }" @click=${ events.onLast }>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?data-disabled=${ page_nr === pages }>
+          <div id="last" title="${ instance.text.last }" @click=${ events.onLast }>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" ?disabled=${ page_nr === pages }>
               <path d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.713 3.31 4 3.655 4 4.308v7.384c0 .653.713.998 1.233.696L11.5 8.752V12a.5.5 0 0 0 1 0V4zM5 4.633 10.804 8 5 11.367V4.633z"/>
             </svg>
           </div>
