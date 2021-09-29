@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version latest (2.0.0)
  * @changes
- * version 2.0.0 (25.09.2021): reimplementation by akless
+ * version 2.0.0 (29.09.2021): reimplementation by akless
  */
 
 ( () => {
