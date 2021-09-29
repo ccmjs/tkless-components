@@ -3,14 +3,15 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version latest (2.0.0)
+ * @version 2.0.0
  * @changes
- * version 2.0.0 (25.09.2021): reimplementation by akless
+ * version 2.0.0 (29.09.2021): reimplementation by akless
  */
 
 ( () => {
   const component = {
     name: 'qa_slidecast',
+    version: [ 1, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.1.min.js',
     config: {
       "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js" ],

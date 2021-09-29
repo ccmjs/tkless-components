@@ -11,27 +11,26 @@
 export const slides = [
   {
     "content": 1,
-    "audio": "./../qa_slidecast/resources/slide1.mp3",
-    "description": "Hello World! This is the first slide of my presentation."
-  },
-  {
-    "content": "./../qa_slidecast/resources/slide4.jpg",
-    "audio": "./../qa_slidecast/resources/slide2.mp3"
-  },
-  {
-    "content": 2,
-    "audio": "./../qa_slidecast/resources/slide3.mp3",
+    "audio": "./../qa_slidecast/resources/audio.mp3",
     "description": "Welcome! The teacher can add a specific description to a slide."
   },
   {
-    "content": "./../qa_slidecast/resources/video.mp4"
+    "content": "./../qa_slidecast/resources/image.jpg"
   },
   {
-    "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js" ]
+    "content": "./../qa_slidecast/resources/logo.jpg"
   },
   {
-    "content": 3,
+    "content": "./../qa_slidecast/resources/video.mp4",
+    "description": "Commenting is disabled for this slide.",
     "commentary": false
+  },
+  {
+    "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js" ],
+    "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js" ]
+  },
+  {
+    "content": 3
   }
 ];
 
