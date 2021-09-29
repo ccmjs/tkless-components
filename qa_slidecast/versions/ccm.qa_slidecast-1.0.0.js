@@ -11,7 +11,7 @@
 ( () => {
   const component = {
     name: 'qa_slidecast',
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.0.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.1.min.js',
     config: {
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles.min.css" ],
       "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js" ],
