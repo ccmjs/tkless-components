@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version latest (2.0.0)
+ * @version 2.0.0
  * @changes
  * version 2.0.0 (30.09.2021): reimplementation by akless
  */
@@ -61,6 +61,7 @@
         // each slide needs an unique key
         this.ignore.slides.forEach( slide => !slide.key && ( slide.key = $.generateKey() ) );
 
+        // recalibrate controls of PDF viewer
         this.pdf_viewer.onchange = async event => {
           if ( !event.before ) return;
           let slide;
@@ -77,6 +78,7 @@
           return true;
         };
 
+        // no commentary? => abort
         if ( !this.comment ) return;
 
         // set unique key for app state data of commentary
@@ -187,7 +189,7 @@
         }
         slide_data.element && $.setContent( slide_element, slide_data.element );
 
-        // update PDF viewer
+        // update controls of PDF viewer
         const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
         update( '#first > *', slide_nr <= 1 );
         update( '#prev > *', slide_nr <= 1 );
