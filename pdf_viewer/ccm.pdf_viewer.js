@@ -6,7 +6,7 @@
  * @license The MIT License (MIT)
  * @version latest (7.0.0)
  * @changes
- * version 7.0.0 (29.09.2021): reimplementation by akless
+ * version 7.0.0 (30.09.2021): reimplementation by akless
  */
 
 ( () => {
@@ -20,7 +20,7 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "downloadable": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.5.0.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.7.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },

@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version latest (4.0.0)
  * @changes
- * version 4.0.0 (11.09.2021): reimplementation by akless
+ * version 4.0.0 (30.09.2021): reimplementation by akless
  */
 
 ( () => {
@@ -21,7 +21,7 @@
       ],
 //    "data": { "store": [ "ccm.store" ] },
       "defaults": {},
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.5.0.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.7.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer_builder/resources/templates.mjs" ],
       "libs": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/js/bootstrap.bundle.min.js" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
