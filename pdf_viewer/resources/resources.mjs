@@ -20,3 +20,20 @@ export const local = {
   "pdfjs.lib.1": "./../libs/pdfjs/pdf.min.js",
   "pdfjs.worker": "./../libs/pdfjs/pdf.worker.min.js"
 };
+
+/**
+ * demo configuration (absolute paths)
+ * @type {Object}
+ */
+export const demo = {
+  "text": {
+    "denied": "Zugriff verweigert",
+    "download": "PDF herunterladen",
+    "first": "Erste Seite",
+    "jump": "Zu einer bestimmten Seite springen",
+    "last": "Letzte Seite",
+    "next": "Nächste Seite",
+    "prev": "Vorherige Seite",
+    "protected": "Dieses Dokument ist passwortgeschützt. Geben Sie ein Passwort ein.",
+  },
+};
