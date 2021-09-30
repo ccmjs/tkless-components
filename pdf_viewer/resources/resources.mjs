@@ -16,7 +16,7 @@ export const local = {
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
-  "pdf": "./../pdf_viewer/resources/en/slides.pdf",
+  "pdf": "./../pdf_viewer/resources/demo/en/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs/pdf.min.js",
   "pdfjs.worker": "./../libs/pdfjs/pdf.worker.min.js"
 };
@@ -26,7 +26,7 @@ export const local = {
  * @type {Object}
  */
 export const demo = {
-  "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/de/slides.pdf",
+  "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
   "text": {
     "denied": "Zugriff verweigert",
     "download": "PDF herunterladen",
