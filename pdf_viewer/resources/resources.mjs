@@ -36,5 +36,5 @@ export const demo = {
     "next": "Nächste Seite",
     "prev": "Vorherige Seite",
     "protected": "Dieses Dokument ist passwortgeschützt. Geben Sie ein Passwort ein.",
-  },
+  }
 };
