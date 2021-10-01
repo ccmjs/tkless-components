@@ -12,7 +12,7 @@ export const local = {
   "css": [ "ccm.load",
     "./../pdf_viewer/resources/styles.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
-    { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
+    { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" }
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
@@ -35,6 +35,6 @@ export const demo = {
     "last": "Letzte Seite",
     "next": "Nächste Seite",
     "prev": "Vorherige Seite",
-    "protected": "Dieses Dokument ist passwortgeschützt. Geben Sie ein Passwort ein.",
+    "protected": "Dieses Dokument ist passwortgeschützt. Geben Sie ein Passwort ein."
   }
 };
