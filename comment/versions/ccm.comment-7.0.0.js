@@ -30,7 +30,7 @@
         "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
       ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
-      "picture": "https://ccmjs.github.io/tkless-components/comment/resources/user.svg",
+      "picture": "https://ccmjs.github.io/tkless-components/comment/resources/portraits/default.svg",
       "controls": {
         "answer": true,
         "delete": true,

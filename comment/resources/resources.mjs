@@ -8,77 +8,63 @@
  * example for app state data
  * @type {Object}
  */
-export const data = {
-  "test,comment1": {
-    "key": [ "test", "comment1" ],
-    "app": "test",
+export const example = {
+  "demo,comment1": {
+    "key": [ "demo", "comment1" ],
+    "app": "demo",
     "comment": "comment1",
-    "picture": "https://akless.github.io/akless/resources/images/akless.jpg",
-    "user": "André Kless",
-    "text": "Hi",
-    "created_at": "2021-09-14T18:09:42+01:00",
-    "updated_at": "2021-09-14T18:09:42+01:00",
-    "_": { "creator": "akless", "realm": "cloud" }
+    "picture": "https://ccmjs.github.io/tkless-components/comment/resources/portraits/joki.svg",
+    "user": "Joki",
+    "text": "Was genau wird denn hier kommentiert?",
+    "created_at": "2021-10-01T19:00:00+01:00",
+    "updated_at": "2021-10-01T19:00:00+01:00",
+    "_": { "creator": "joki", "realm": "guest" }
   },
-  "test,comment1,answer1": {
-    "key": [ "test", "comment1", "answer1" ],
-    "app": "test",
+  "demo,comment1,answer1": {
+    "key": [ "demo", "comment1", "answer1" ],
+    "app": "demo",
     "comment": "comment1",
     "answer": "answer1",
-//  "picture": "user.svg",
-    "user": "Tea Kless",
-    "text": "Re: Hi",
-    "created_at": "2021-09-14T18:10:42+01:00",
-    "updated_at": "2021-09-14T18:10:42+01:00",
-    "_": { "creator": "tkless", "realm": "cloud" },
+    "picture": "https://ccmjs.github.io/tkless-components/comment/resources/portraits/twonky.svg",
+    "user": "Twonky",
+    "text": "Das ist flexibel. Je nachdem wo die Kommentierung platziert wird.",
+    "created_at": "2021-10-01T19:12:00+01:00",
+    "updated_at": "2021-10-01T19:12:00+01:00",
+    "_": { "creator": "twonky", "realm": "guest" },
   },
-  "test,comment1,answer2": {
-    "key": [ "test", "comment1", "answer2" ],
-    "app": "test",
+  "demo,comment1,answer2": {
+    "key": [ "demo", "comment1", "answer2" ],
+    "app": "demo",
     "comment": "comment1",
     "answer": "answer2",
-    "picture": "https://akless.github.io/akless/resources/images/akless.jpg",
-    "user": "André Kless",
-    "text": "Re: Re: Hi",
-    "created_at": "2021-09-14T18:11:42+01:00",
-    "updated_at": "2021-09-14T18:11:42+01:00",
-    "_": { "creator": "akless", "realm": "cloud" },
+    "picture": "https://ccmjs.github.io/tkless-components/comment/resources/portraits/joki.svg",
+    "user": "Joki",
+    "text": "@Twonky: Danke für die schnelle Rückmeldung.",
+    "created_at": "2021-10-01T19:22:00+01:00",
+    "updated_at": "2021-10-01T19:22:00+01:00",
+    "_": { "creator": "twonky", "realm": "guest" },
   },
-  "test,comment2": {
-    "key": [ "test", "comment2" ],
-    "app": "test",
-    "comment": "comment2",
-//  "picture": "user.svg",
-    "user": "Tea Kless",
-    "text": "Huhu",
-    "created_at": "2021-09-15T07:12:42+01:00",
-    "updated_at": "2021-09-15T07:13:42+01:00",
-    "_": { "creator": "tkless", "realm": "cloud" }
-  },
-  "test,akless": {
-    "key": [ "test", "akless" ],
-    "app": "test",
-    "user": "akless",
+  "demo,joki": {
+    "key": [ "demo", "joki" ],
+    "app": "demo",
+    "user": "joki",
     "comments": {
-      "test,comment2": {
-        "like": true,
-        "heart": true
+      "demo,comment1,answer1": {
+        "like": true
       }
     },
-    "_": { "creator": "akless", "realm": "cloud" }
+    "_": { "creator": "joki", "realm": "guest" }
   },
-  "test,mkless": {
-    "key": [ "test", "mkless" ],
-    "app": "test",
-    "user": "mkless",
+  "demo,twonky": {
+    "key": [ "demo", "twonky" ],
+    "app": "demo",
+    "user": "twonky",
     "comments": {
-      "test,comment2": {
-        "like": false,
-        "heart": true,
-        "report": true
+      "demo,comment1,answer2": {
+        "like": true
       }
     },
-    "_": { "creator": "mkless", "realm": "cloud" }
+    "_": { "creator": "twonky", "realm": "guest" }
   }
 };
 
@@ -105,7 +91,7 @@ export const local = {
     "./../libs/dayjs/dayjs.min.js",
     "./../libs/dayjs/relativeTime.min.js"
   ],
-  "picture": "./../comment/resources/user.svg",
+  "picture": "./../comment/resources/portraits/default.svg",
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "cloud" ] ]
 };
@@ -116,8 +102,28 @@ export const local = {
  */
 export const demo = {
   "data": {
-    "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
+    "store": [ "ccm.store", example ],
     "key": "demo"
   },
-  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "cloud" ] ]
+  "text": {
+    "answer": "ANTWORTEN",
+    "answers": "Zeige %d Antworten",
+    "comments": "%d Kommentare",
+    "delete": "Kommentar löschen",
+    "deleted": "(gelöscht)",
+    "dislike": "Ich mag diesen Kommentar nicht",
+    "edit": "Kommentar editieren",
+    "heart": "Ich liebe diesen Kommentar",
+    "like": "Ich mag diesen Kommentar",
+    "picture": "Profilbild des Benutzers",
+    "recycle": "Löschen des Kommentars rückgängig machen",
+    "report": "Diese Kommentar als unangemessen melden",
+    "sort_by_date": "Sortierung nach Datum",
+    "sort_by_rating": "Sortierung nach Bewertung",
+    "submit": "Abschicken",
+    "updated": "(bearbeitet)",
+    "write_answer": "Schreibe eine Antwort...",
+    "write_comment": "Schreibe einen Kommentar..."
+  },
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "guest" ] ]
 };
