@@ -16,6 +16,7 @@ export const local = {
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
+  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/en/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs/pdf.min.js",
   "pdfjs.worker": "./../libs/pdfjs/pdf.worker.min.js"
