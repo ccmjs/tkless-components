@@ -4,7 +4,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version 7.0.0
+ * @version latest (7.0.0)
  * @changes
  * version 7.0.0 (30.09.2021): reimplementation by akless
  */
@@ -12,7 +12,6 @@
 ( () => {
   const component = {
     name: 'pdf_viewer',
-    version: [ 7, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.1.min.js',
     config: {
       "css": [ "ccm.load",
@@ -27,8 +26,8 @@
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/en/slides.pdf",
       "pdfjs": {
-        "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
-        "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js",
+        "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.min.js" ],
+        "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.worker.min.js",
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js", { "app": "pdf_viewer" } ],

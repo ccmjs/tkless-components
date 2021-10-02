@@ -26,8 +26,8 @@
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/en/slides.pdf",
       "pdfjs": {
-        "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.min.js" ],
-        "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs/pdf.worker.min.js",
+        "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.min.js" ],
+        "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.worker.min.js",
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js", { "app": "pdf_viewer" } ],
