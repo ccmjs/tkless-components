@@ -141,6 +141,8 @@
 
         if ( self.logger ) self.logger.log( 'ready', my );
 
+        const PDFJS = window[ 'pdfjs-dist/build/pdf' ];
+
         // specify PDF.js workerSrc property
         PDFJS.workerSrc = my.pdfJS_workerSrc;
 
