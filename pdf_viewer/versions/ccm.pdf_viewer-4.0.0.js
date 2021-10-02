@@ -152,7 +152,7 @@
 
         if ( my.pdf )
           // Asynchronously downloads PDF.
-          pdfDoc = await PDFJS.getDocument( my.pdf );
+          pdfDoc = await PDFJS.getDocument( my.pdf ).promise;
 
       };
 
