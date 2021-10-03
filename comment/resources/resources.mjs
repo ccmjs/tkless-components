@@ -82,6 +82,9 @@ export const example = {
     "app": "demo",
     "user": "twonky",
     "comments": {
+      "demo,comment1": {
+        "like": true
+      },
       "demo,comment1,answer2": {
         "like": true
       }
