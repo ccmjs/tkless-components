@@ -142,7 +142,7 @@ export const demo = {
     "like": "Ich mag diesen Kommentar",
     "picture": "Profilbild des Benutzers",
     "recycle": "Löschen des Kommentars rückgängig machen",
-    "report": "Diese Kommentar als unangemessen melden",
+    "report": "Diesen Kommentar als unangemessen markieren",
     "sort_by_date": "Sortierung nach Datum",
     "sort_by_rating": "Sortierung nach Bewertung",
     "submit": "Abschicken",
