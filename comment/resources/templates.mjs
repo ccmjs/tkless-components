@@ -125,7 +125,7 @@ export function main( app, events ) {
 
           <!-- Controls -->
           <div class="d-flex" ?data-hidden=${ comment.deleted }>
-            <div class="me-3">
+            <div class="me-2">
 
               <!-- Likes -->
               <button type="button" class="btn btn-sm btn-light" title="${ app.text.like }" @click=${ events.onLike } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.like }>
