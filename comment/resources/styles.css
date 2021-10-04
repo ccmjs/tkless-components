@@ -34,6 +34,10 @@ header > section:first-child > span {
   padding-right: 1em;
 }
 
+header > section:last-child {
+  padding-left: 1em;
+}
+
 header + article {
   margin-bottom: 2em;
 }
