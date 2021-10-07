@@ -8,7 +8,7 @@
  * german texts and labels for PDF viewer
  * @type {Object}
  */
-const de = {
+export const de = {
   "denied": "Zugriff verweigert",
   "download": "PDF herunterladen",
   "first": "Erste Seite",
