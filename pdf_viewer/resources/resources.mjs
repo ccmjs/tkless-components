@@ -5,6 +5,21 @@
  */
 
 /**
+ * german texts and labels for PDF viewer
+ * @type {Object}
+ */
+const de = {
+  "denied": "Zugriff verweigert",
+  "download": "PDF herunterladen",
+  "first": "Erste Seite",
+  "jump": "Zu einer bestimmten Seite springen",
+  "last": "Letzte Seite",
+  "next": "Nächste Seite",
+  "prev": "Vorherige Seite",
+  "protected": "Dieses Dokument ist passwortgeschützt. Geben Sie ein Passwort ein."
+};
+
+/**
  * test configuration (relative paths)
  * @type {Object}
  */
@@ -28,14 +43,5 @@ export const local = {
  */
 export const demo = {
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
-  "text": {
-    "denied": "Zugriff verweigert",
-    "download": "PDF herunterladen",
-    "first": "Erste Seite",
-    "jump": "Zu einer bestimmten Seite springen",
-    "last": "Letzte Seite",
-    "next": "Nächste Seite",
-    "prev": "Vorherige Seite",
-    "protected": "Dieses Dokument ist passwortgeschützt. Geben Sie ein Passwort ein."
-  }
+  "text": de
 };
