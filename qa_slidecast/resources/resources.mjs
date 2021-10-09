@@ -29,7 +29,7 @@ export const quiz = {
  * test configuration (relative paths)
  * @type {Object}
  */
-export const local = {
+export const test = {
   "comment": [ "ccm.component", "./../comment/ccm.comment.js", [ "ccm.load", "./../comment/resources/resources.mjs#local" ] ],
   "css": [ "ccm.load",
     "./../qa_slidecast/resources/styles.css",
