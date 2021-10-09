@@ -20,10 +20,25 @@ export const de = {
 };
 
 /**
+ * english texts and labels for PDF viewer
+ * @type {Object}
+ */
+export const en = {
+  "denied": "Access Denied",
+  "download": "Download PDF",
+  "first": "First Page",
+  "jump": "Jump to specific Page",
+  "last": "Last Page",
+  "next": "Next Page",
+  "prev": "Previous Page",
+  "protected": "This document is password protected. Enter a password.",
+};
+
+/**
  * test configuration (relative paths)
  * @type {Object}
  */
-export const local = {
+export const test = {
   "css": [ "ccm.load",
     "./../pdf_viewer/resources/styles.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
@@ -34,7 +49,8 @@ export const local = {
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/en/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.min.js",
-  "pdfjs.worker": "./../libs/pdfjs-2/pdf.worker.min.js"
+  "pdfjs.worker": "./../libs/pdfjs-2/pdf.worker.min.js",
+  "text": [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#en" ]
 };
 
 /**
