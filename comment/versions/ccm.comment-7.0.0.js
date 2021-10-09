@@ -43,26 +43,7 @@
         "sort": true
       },
       "sort": true,  // true: sort by date, false: sort by rating
-      "text": {
-        "answer": "ANSWER",
-        "answers": "Show %d Answers",
-        "comments": "%d Comments",
-        "delete": "Delete this comment",
-        "deleted": "(deleted)",
-        "dislike": "I don't like this comment",
-        "edit": "Edit this comment",
-        "heart": "I really love this comment",
-        "like": "I like this comment",
-        "picture": "User Picture",
-        "recycle": "Undo the deletion of the comment",
-        "report": "Report this comment as inappropriate",
-        "sort_by_date": "Sort by Date",
-        "sort_by_rating": "Sort by Rating",
-        "submit": "Submit",
-        "updated": "(updated)",
-        "write_answer": "Write an answer...",
-        "write_comment": "Write a comment..."
-      },
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#en" ],
       "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
     },
     Instance: function () {

@@ -94,6 +94,56 @@ export const example = {
 };
 
 /**
+ * german texts and labels for PDF viewer
+ * @type {Object}
+ */
+export const de = {
+  "answer": "ANTWORTEN",
+  "answers": "Zeige %d Antworten",
+  "comments": "%d Kommentare",
+  "delete": "Kommentar löschen",
+  "deleted": "(gelöscht)",
+  "dislike": "Ich mag diesen Kommentar nicht",
+  "edit": "Kommentar editieren",
+  "heart": "Ich liebe diesen Kommentar",
+  "like": "Ich mag diesen Kommentar",
+  "picture": "Profilbild des Benutzers",
+  "recycle": "Löschen des Kommentars rückgängig machen",
+  "report": "Diesen Kommentar als unangemessen markieren",
+  "sort_by_date": "Sortierung nach Datum",
+  "sort_by_rating": "Sortierung nach Bewertung",
+  "submit": "Abschicken",
+  "updated": "(bearbeitet)",
+  "write_answer": "Schreibe eine Antwort...",
+  "write_comment": "Schreibe einen Kommentar..."
+};
+
+/**
+ * english texts and labels for PDF viewer
+ * @type {Object}
+ */
+export const en = {
+  "answer": "ANSWER",
+  "answers": "Show %d Answers",
+  "comments": "%d Comments",
+  "delete": "Delete this comment",
+  "deleted": "(deleted)",
+  "dislike": "I don't like this comment",
+  "edit": "Edit this comment",
+  "heart": "I really love this comment",
+  "like": "I like this comment",
+  "picture": "User Picture",
+  "recycle": "Undo the deletion of the comment",
+  "report": "Report this comment as inappropriate",
+  "sort_by_date": "Sort by Date",
+  "sort_by_rating": "Sort by Rating",
+  "submit": "Submit",
+  "updated": "(updated)",
+  "write_answer": "Write an answer...",
+  "write_comment": "Write a comment..."
+};
+
+/**
  * test configuration (relative paths)
  * @type {Object}
  */
@@ -118,6 +168,7 @@ export const local = {
   ],
   "picture": "./../comment/resources/portraits/default.svg",
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+  "text": [ "ccm.load", "./../comment/resources/resources.mjs#en" ],
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "cloud" ] ]
 };
 
@@ -130,25 +181,6 @@ export const demo = {
     "store": [ "ccm.store", example ],
     "key": "demo"
   },
-  "text": {
-    "answer": "ANTWORTEN",
-    "answers": "Zeige %d Antworten",
-    "comments": "%d Kommentare",
-    "delete": "Kommentar löschen",
-    "deleted": "(gelöscht)",
-    "dislike": "Ich mag diesen Kommentar nicht",
-    "edit": "Kommentar editieren",
-    "heart": "Ich liebe diesen Kommentar",
-    "like": "Ich mag diesen Kommentar",
-    "picture": "Profilbild des Benutzers",
-    "recycle": "Löschen des Kommentars rückgängig machen",
-    "report": "Diesen Kommentar als unangemessen markieren",
-    "sort_by_date": "Sortierung nach Datum",
-    "sort_by_rating": "Sortierung nach Bewertung",
-    "submit": "Abschicken",
-    "updated": "(bearbeitet)",
-    "write_answer": "Schreibe eine Antwort...",
-    "write_comment": "Schreibe einen Kommentar..."
-  },
+  "text": de,
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "guest" ] ]
 };
