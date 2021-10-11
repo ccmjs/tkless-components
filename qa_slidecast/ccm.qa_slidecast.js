@@ -122,7 +122,7 @@
          * slide data
          * @type {Object}
          */
-        const slide_data = this.ignore.slides[ slide_nr - 1 ];
+        const slide_data = this.ignore.slides[ slide_nr - 1 ] || {};
 
         // render main HTML template
         this.html.render( this.html.main( this, slide_nr, events ), this.element );
