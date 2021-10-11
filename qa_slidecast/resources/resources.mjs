@@ -26,11 +26,32 @@ export const quiz = {
 };
 
 /**
+ * german texts and labels for Q&A Slidecast
+ * @type {Object}
+ */
+export const de = {
+  "comments": "Ein-/Ausblenden der Folienkommentare",
+  "description": "Ein-/Ausblenden der Foliebeschreibung"
+};
+
+/**
+ * english texts and labels for Q&A Slidecast
+ * @type {Object}
+ */
+export const en = {
+  "comments": "Shows/Hides Slide Comments",
+  "description": "Shows/Hides Slide Description"
+};
+
+/**
  * test configuration (relative paths)
  * @type {Object}
  */
 export const test = {
-  "comment": [ "ccm.component", "./../comment/ccm.comment.js", [ "ccm.load", "./../comment/resources/resources.mjs#local" ] ],
+  "comment": [ "ccm.component", "./../comment/ccm.comment.js", {
+    "src": [ "ccm.load", "./../comment/resources/resources.mjs#local" ],
+    "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
+  } ],
   "css": [ "ccm.load",
     "./../qa_slidecast/resources/styles.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
@@ -73,8 +94,8 @@ export const test = {
       }
     ]
   },
-  "open": "comments",
-  "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ]
+  "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
+  "text.1": "./../qa_slidecast/resources/resources.mjs#en"
 };
 
 /**
@@ -84,7 +105,8 @@ export const test = {
 export const demo = {
   "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js", {
     "data": { "store": [ "ccm.store" ] },
-    "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ]
+    "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ],
+    "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
   } ],
   "ignore": {
     "slides": [
@@ -121,10 +143,6 @@ export const demo = {
       }
     ]
   },
-  "open": "comments",
   "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ],
-  "text": {
-    "comments": "Zeigt die Kommentare zu dieser Folie an.",
-    "description": "Zeigt die Beschreibung zu dieser Folie an."
-  }
+  "text": de
 };

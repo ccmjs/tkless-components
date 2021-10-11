@@ -27,15 +27,15 @@ export function main( instance, slide_nr, events ) {
         <section id="viewer"></section>
         <section id="control">
           <div title="${ instance.text.description }" ?data-hidden=${ !instance.description }>
-            <i class="bi bi-sticky${ instance.open === 'description' ? '-fill' : '' }" ?disabled=${ !slide_data.description } @click=${ events.onDescription }></i>
+            <i class="bi bi-sticky${ instance.open === 'description' || instance.open === 'both' ? '-fill' : '' }" ?disabled=${ !slide_data.description } @click=${ events.onDescription }></i>
           </div>
           <audio src="${ slide_data.audio || '' }" controls ?data-invisible=${ !slide_data.audio }></audio>
           <div title="${ instance.text.comments }" ?data-hidden=${ !instance.comment }>
-            <i class="bi bi-chat-square-text${ instance.open === 'comments' ? '-fill' : '' }" ?disabled=${ slide_data.commentary === false } @click=${ events.onComments }></i>
+            <i class="bi bi-chat-square-text${ instance.open === 'comments' || instance.open === 'both' ? '-fill' : '' }" ?disabled=${ slide_data.commentary === false } @click=${ events.onComments }></i>
           </div>
         </section>
-        <section id="description" ?data-hidden=${ !instance.description || !slide_data.description || instance.open !== 'description' }></section>
-        <section id="comments" ?data-hidden=${ !instance.comment || slide_data.commentary === false || instance.open !== 'comments' }></section>
+        <section id="description" ?data-hidden=${ !instance.description || !slide_data.description || instance.open !== 'description' && instance.open !== 'both' }></section>
+        <section id="comments" ?data-hidden=${ !instance.comment || slide_data.commentary === false || instance.open !== 'comments' && instance.open !== 'both' }></section>
       </div>
     </main>
   `;

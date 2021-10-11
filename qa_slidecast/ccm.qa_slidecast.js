@@ -13,7 +13,9 @@
     name: 'qa_slidecast',
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.1.min.js',
     config: {
-      "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js" ],
+      "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js", {
+        "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
+      } ],
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
@@ -22,17 +24,13 @@
       "description": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.7.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
-//    "open": "comments",
+      "open": "both",
       "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
       "ignore": {
         "slides": []
       },
-      "text": {
-        "comments": "Shows the Comments of this Slide",
-        "description": "Shows the Description of this Slide"
-      },
-      "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#en" ]
     },
     Instance: function () {
 
@@ -77,14 +75,8 @@
           return true;
         };
 
-        // no commentary? => abort
-        if ( !this.comment ) return;
-
         // set unique key for app state data of commentary
-        if ( !this.comment.config.data.key ) this.comment.config.data.key = $.generateKey();
-
-        // set same user dependency for commentary
-        this.comment.config.user = JSON.parse( this.config ).user;
+        if ( this.comment && !this.comment.config.data.key ) this.comment.config.data.key = $.generateKey();
 
       };
 
@@ -230,7 +222,12 @@
         onDescription: () => {
           const slide_data = this.ignore.slides[ slide_nr - 1 ];
           if ( !slide_data.description ) return;
-          this.open = this.open === 'description' ? '' : 'description';
+          switch ( this.open ) {
+            case '': this.open = 'description'; break;
+            case 'description': this.open = ''; break;
+            case 'comments': this.open = 'both'; break;
+            case 'both': this.open = 'comments'; break;
+          }
           render( true );
         },
 
@@ -238,7 +235,12 @@
         onComments: () => {
           const slide_data = this.ignore.slides[ slide_nr - 1 ];
           if ( !this.comment || slide_data.commentary === false ) return;
-          this.open = this.open === 'comments' ? '' : 'comments';
+          switch ( this.open ) {
+            case '': this.open = 'comments'; break;
+            case 'description': this.open = 'both'; break;
+            case 'comments': this.open = ''; break;
+            case 'both': this.open = 'description'; break;
+          }
           render( true );
         }
 
