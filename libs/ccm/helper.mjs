@@ -3,8 +3,12 @@
  * ES6 module that exports useful help functions for <i>ccmjs</i> component developers.
  * @author André Kless <andre.kless@web.de> 2019-2021
  * @license The MIT License (MIT)
- * @version latest (7.6.0)
+ * @version latest (7.8.0)
  * @changes
+ * version 7.8.0 (08.10.2021):
+ * - added assign(target,source):target - copies all properties from a source object to a target object with supports of dot notation
+ * version 7.7.0 (30.09.2021):
+ * - updated onfinish(settings,results,user):void - added user parameter
  * version 7.6.0 (17.09.2021):
  * - updated arrToObj(arr):obj - an array of datasets is converted to an associative array
  * version 7.5.0 (25.08.2021):
@@ -400,6 +404,22 @@ export const filterProperties = ( obj, ...keys ) => {
 };
 
 /**
+ * copies all properties from a source object to a target object with support of dot notation
+ * @function
+ * @param {Object} [target = {}]
+ * @param {Object} [source = {}]
+ * @returns {Object} modified target object
+ * @example assign( { a: 'x', b: {}, c: [ 'm' ] }, { a: 'n', 'b.d': 'y', 'c.1': 'z' } )  // => { a: 'n', b: { d: 'y' }, c: [ 'm', 'z' ] }
+ * @memberOf ModuleHelper.DataHandling
+ */
+export const assign = ( target = {}, source = {} ) => {
+  source = ccm.helper.toDotNotation( source );
+  for ( let key in source )
+    ccm.helper.deepValue( target, key, source[ key ] );
+  return target;
+};
+
+/**
  * renames the property name of an object
  * @function
  * @param {Object} obj - the object that contains the property
@@ -598,6 +618,7 @@ export const dataset = async ( settings = {} ) => {
  * @async
  * @param {Object|Function} settings - declarative settings for usual finish actions (or 'onfinish' callback or finished instance)
  * @param {Object} [results] - result data of the finished instance
+ * @param {Object} [user] - user instance for authentication and user data
  * @param {string} [settings.confirm] - show confirm box (no finish actions will be performed if user chooses abort)
  * @param {Function} [settings.condition] - no finish actions will be performed if this function returns a falsy value (result data and possibly the instance is passed as parameters)
  * @param {boolean} [settings.login] - user will be logged in if not already logged in (only works if an instance for user authentication could be determined)
@@ -678,8 +699,8 @@ export const dataset = async ( settings = {} ) => {
  * onFinish( instance );
  * @memberOf ModuleHelper.DataWorkflow
  */
-export const onFinish = async ( settings, results ) => {
-  let instance, user;
+export const onFinish = async ( settings, results, user ) => {
+  let instance;
 
   // no manipulation of original passed parameters (avoids unwanted side effects)
   settings = ccm.helper.clone( settings );
@@ -690,7 +711,7 @@ export const onFinish = async ( settings, results ) => {
     instance = settings;
     if ( !results && settings.getValue ) results = settings.getValue();  // determine result data
     settings = settings.onfinish;                                        // determine finish actions
-    user = ccm.context.find( instance, 'user' );                         // determine nearest user instance in the ccm context of the instance
+    if ( !user ) user = ccm.context.find( instance, 'user' );            // determine nearest user instance in the ccm context of the instance
   }
 
   if ( !settings ) return;                                                     // no finish actions? => abort
