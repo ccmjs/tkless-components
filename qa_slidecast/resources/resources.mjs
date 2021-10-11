@@ -29,7 +29,7 @@ export const quiz = {
  * german texts and labels for Q&A Slidecast
  * @type {Object}
  */
-export const de = {
+export const text_de = {
   "comments": "Ein-/Ausblenden der Folienkommentare",
   "description": "Ein-/Ausblenden der Foliebeschreibung"
 };
@@ -38,10 +38,86 @@ export const de = {
  * english texts and labels for Q&A Slidecast
  * @type {Object}
  */
-export const en = {
+export const text_en = {
   "comments": "Shows/Hides Slide Comments",
   "description": "Shows/Hides Slide Description"
 };
+
+/**
+ * german demo slides for Q&A Slidecast
+ * @type {Object}
+ */
+export const slides_de = [
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide1.m4a",
+    "content": 1,
+    "description": "Willkommen! Der Lehrende kann für eine Folie eine optionale Beschreibung hinterlegen."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide2.m4a",
+    "content": 2,
+    "description": "Die Beschreibung zu einer Folie kann auch eine separate App sein (siehe nächste Folie)."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/extra.m4a",
+    "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/extra.jpg",
+    "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/video.m4a",
+    "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/video.mp4",
+    "description": "Zwischen zwei Folien kann auch ein kleines Video platziert werden."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/app.m4a",
+    "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
+    "description": "Auch eine separate App kann zwischen Folien platziert werden."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide3.m4a",
+    "content": 3,
+    "description": "Für diese Folie ist die Kommentierung ausgeschaltet.",
+    "commentary": false
+  }
+];
+
+/**
+ * english demo slides for Q&A Slidecast
+ * @type {Object}
+ */
+export const slides_en = [
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/slide1.m4a",
+    "content": 1,
+    "description": "Welcome! The teacher can add an optional description to a slide."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/slide2.m4a",
+    "content": 2,
+    "description": "The description of a slide can also be a separate app (see next slide)."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/extra.m4a",
+    "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/extra.jpg",
+    "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/video.m4a",
+    "content": "https://ccmjs.github.io/tkless-components./../qa_slidecast/resources/demo/video.mp4",
+    "description": "A little video can be placed instead of a slide."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/app.m4a",
+    "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
+    "description": "A separate app can also be placed instead of a slide."
+  },
+  {
+    "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/slide3.m4a",
+    "content": 3,
+    "description": "Commenting is disabled for this slide.",
+    "commentary": false
+  }
+];
 
 /**
  * test configuration (relative paths)
@@ -60,42 +136,10 @@ export const test = {
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../qa_slidecast/resources/templates.mjs",
   "ignore": {
-    "slides": [
-      {
-        "audio": "./../qa_slidecast/resources/demo/en/slide1.m4a",
-        "content": 1,
-        "description": "Welcome! The teacher can add an optional description to a slide."
-      },
-      {
-        "audio": "./../qa_slidecast/resources/demo/en/slide2.m4a",
-        "content": 2,
-        "description": "The description of a slide can also be a separate app (see next slide)."
-      },
-      {
-        "audio": "./../qa_slidecast/resources/demo/en/extra.m4a",
-        "content": "./../qa_slidecast/resources/demo/en/extra.jpg",
-        "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
-      },
-      {
-        "audio": "./../qa_slidecast/resources/demo/en/video.m4a",
-        "content": "./../qa_slidecast/resources/demo/video.mp4",
-        "description": "A little video can be placed instead of a slide."
-      },
-      {
-        "audio": "./../qa_slidecast/resources/demo/en/app.m4a",
-        "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
-        "description": "A separate app can also be placed instead of a slide."
-      },
-      {
-        "audio": "./../qa_slidecast/resources/demo/en/slide3.m4a",
-        "content": 3,
-        "description": "Commenting is disabled for this slide.",
-        "commentary": false
-      }
-    ]
+    "slides": slides_en
   },
   "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
-  "text.1": "./../qa_slidecast/resources/resources.mjs#en"
+  "text": text_en
 };
 
 /**
@@ -109,40 +153,8 @@ export const demo = {
     "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
   } ],
   "ignore": {
-    "slides": [
-      {
-        "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide1.m4a",
-        "content": 1,
-        "description": "Willkommen! Der Lehrende kann für eine Folie eine optionale Beschreibung hinterlegen."
-      },
-      {
-        "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide2.m4a",
-        "content": 2,
-        "description": "Die Beschreibung zu einer Folie kann auch eine separate App sein (siehe nächste Folie)."
-      },
-      {
-        "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/extra.m4a",
-        "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/extra.jpg",
-        "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
-      },
-      {
-        "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/video.m4a",
-        "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/video.mp4",
-        "description": "Zwischen zwei Folien kann auch ein kleines Video platziert werden."
-      },
-      {
-        "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/app.m4a",
-        "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
-        "description": "Auch eine separate App kann zwischen Folien platziert werden."
-      },
-      {
-        "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide3.m4a",
-        "content": 3,
-        "description": "Für diese Folie ist die Kommentierung ausgeschaltet.",
-        "commentary": false
-      }
-    ]
+    "slides": slides_de
   },
   "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ],
-  "text": de
+  "text": text_de
 };
