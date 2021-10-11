@@ -19,7 +19,7 @@ export function main( instance, slide_nr, events ) {
    * slide data
    * @type {Object}
    */
-  const slide_data = instance.ignore.slides[ slide_nr - 1 ];
+  const slide_data = instance.ignore.slides[ slide_nr - 1 ] || {};
 
   return html`
     <main>
