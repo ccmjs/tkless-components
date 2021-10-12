@@ -41,6 +41,7 @@ nav > div {
 
 #controls {
   width: 100%;
+  line-height: normal;
 }
 
 #extra {
