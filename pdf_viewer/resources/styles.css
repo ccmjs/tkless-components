@@ -12,7 +12,6 @@ main {
 }
 
 main > div {
-  border-radius: 5px;
   box-shadow: 0 0 5px #888888;
   width: 100%;
   max-width: 940px;
@@ -40,6 +39,7 @@ nav > div {
 }
 
 #controls {
+  border-radius: 5px;
   width: 100%;
   line-height: normal;
 }
