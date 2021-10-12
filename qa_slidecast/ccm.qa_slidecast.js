@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version latest (2.0.0)
  * @changes
- * version 2.0.0 (30.09.2021): reimplementation by akless
+ * version 2.0.0 (12.10.2021): reimplementation by akless
  */
 
 ( () => {
@@ -24,9 +24,12 @@
       "description": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.7.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
+//    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
+//    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
       "open": "both",
       "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
+      "slide_nr": 1,
       "ignore": {},
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#text_en" ]
     },
@@ -37,12 +40,6 @@
        * @type {Object.<string,Function>}
        */
       let $;
-
-      /**
-       * current slide number
-       * @type {number}
-       */
-      let slide_nr = 1;
 
       /**
        * when the instance is created, when all dependencies have been resolved and before the dependent sub-instances are initialized and ready
@@ -76,18 +73,21 @@
 
         // recalibrate controls of PDF viewer
         this.pdf_viewer.onchange = async event => {
-          if ( !event.before ) return;
-          let slide;
-          switch ( event.name ) {
-            case 'first': slide = 1;                         break;
-            case 'prev':  slide = slide_nr - 1;              break;
-            case 'jump':  slide = event.page;                break;
-            case 'next':  slide = slide_nr + 1;              break;
-            case 'last':  slide = this.ignore.slides.length; break;
+          if ( this.onchange && await this.onchange( { name: event.name, instance: this, before: true } ) ) return;
+          if ( event.before ) {
+            let slide;
+            switch ( event.name ) {
+              case 'first': slide = 1;                         break;
+              case 'prev':  slide = this.slide_nr - 1;         break;
+              case 'jump':  slide = event.page;                break;
+              case 'next':  slide = this.slide_nr + 1;         break;
+              case 'last':  slide = this.ignore.slides.length; break;
+            }
+            if ( !( slide >= 1 && slide <= this.ignore.slides.length && slide !== this.slide_nr ) ) return;
+            this.slide_nr = slide;
+            await render();
           }
-          if ( !( slide >= 1 && slide <= this.ignore.slides.length && slide !== slide_nr ) ) return;
-          slide_nr = slide;
-          await render();
+          if ( this.onchange && await this.onchange( { name: event.name, instance: this } ) ) return;
           return true;
         };
 
@@ -108,13 +108,16 @@
         // render first slide
         await render();
 
+        // trigger 'onstart' callback
+        this.onstart && await this.onstart( this );
+
       };
 
       /**
        * returns app state data
-       * @returns {{slide_nr: number, slides: Object[]}}
+       * @returns {Object}
        */
-      this.getValue = () => { return { slide_nr: slide_nr, slides: $.clone( this.ignore.slides ) } };
+      this.getValue = () => { return { slide_nr: this.slide_nr, slides: $.clone( this.ignore.slides ) } };
 
       /**
        * renders/updates content
@@ -127,10 +130,10 @@
          * slide data
          * @type {Object}
          */
-        const slide_data = this.ignore.slides[ slide_nr - 1 ] || {};
+        const slide_data = this.ignore.slides[ this.slide_nr - 1 ] || {};
 
         // render main HTML template
-        this.html.render( this.html.main( this, slide_nr, events ), this.element );
+        this.html.render( this.html.main( this, events ), this.element );
 
         // render PDF Viewer
         const viewer_element = this.element.querySelector( '#viewer' );
@@ -187,11 +190,11 @@
 
         // update controls of PDF viewer
         const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
-        update( '#first > *', slide_nr <= 1 );
-        update( '#prev > *', slide_nr <= 1 );
-        this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', slide_nr + ' / ' + this.ignore.slides.length );
-        update( '#next > *', slide_nr >= this.ignore.slides.length );
-        update( '#last > *', slide_nr >= this.ignore.slides.length );
+        update( '#first > *', this.slide_nr <= 1 );
+        update( '#prev > *', this.slide_nr <= 1 );
+        this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', this.slide_nr + ' / ' + this.ignore.slides.length );
+        update( '#next > *', this.slide_nr >= this.ignore.slides.length );
+        update( '#last > *', this.slide_nr >= this.ignore.slides.length );
 
         // render advanced description (description is another app)
         const description_element = this.element.querySelector( '#description' );
@@ -225,7 +228,7 @@
 
         /** when the button to display the description of a slide is clicked */
         onDescription: () => {
-          const slide_data = this.ignore.slides[ slide_nr - 1 ];
+          const slide_data = this.ignore.slides[ this.slide_nr - 1 ];
           if ( !slide_data.description ) return;
           switch ( this.open ) {
             case '': this.open = 'description'; break;
@@ -238,7 +241,7 @@
 
         /** when the button to display the comments of a slide is clicked */
         onComments: () => {
-          const slide_data = this.ignore.slides[ slide_nr - 1 ];
+          const slide_data = this.ignore.slides[ this.slide_nr - 1 ];
           if ( !this.comment || slide_data.commentary === false ) return;
           switch ( this.open ) {
             case '': this.open = 'comments'; break;

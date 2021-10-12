@@ -9,17 +9,16 @@ export { render };
 /**
  * returns the main HTML template
  * @param {Object} instance - ccmjs-based instance for slidecast with commentary
- * @param {number} [slide_nr = 1] - slide number
  * @param {Object.<string,Function>} events - contains all event handlers
  * @returns {TemplateResult} main HTML template
  */
-export function main( instance, slide_nr, events ) {
+export function main( instance, events ) {
 
   /**
    * slide data
    * @type {Object}
    */
-  const slide_data = instance.ignore.slides[ slide_nr - 1 ] || {};
+  const slide_data = instance.ignore.slides[ instance.slide_nr - 1 ] || {};
 
   return html`
     <main>

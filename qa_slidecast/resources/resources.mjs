@@ -103,7 +103,7 @@ export const slides_en = [
   },
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/video.m4a",
-    "content": "https://ccmjs.github.io/tkless-components./../qa_slidecast/resources/demo/video.mp4",
+    "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/video.mp4",
     "description": "A little video can be placed instead of a slide."
   },
   {
@@ -138,6 +138,8 @@ export const test = {
   "ignore": {
     "slides": slides_en
   },
+  "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
+  "onstart": instance => { console.log( 'start', instance.slide_nr ) },
   "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
   "text": text_en
 };
