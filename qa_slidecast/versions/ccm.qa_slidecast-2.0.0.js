@@ -54,6 +54,17 @@
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
+        // set unique key for app state data of commentary
+        if ( this.comment && !this.comment.config.data.key ) this.comment.config.data.key = $.generateKey();
+
+      };
+
+      /**
+       * when all dependencies are solved after creation and before the app starts
+       * @returns {Promise<void>}
+       */
+      this.ready = async () => {
+
         // set default slides data
         if ( !this.ignore.slides ) {
           this.ignore.slides = [];
@@ -80,17 +91,6 @@
           await render();
           return true;
         };
-
-        // set unique key for app state data of commentary
-        if ( this.comment && !this.comment.config.data.key ) this.comment.config.data.key = $.generateKey();
-
-      };
-
-      /**
-       * when all dependencies are solved after creation and before the app starts
-       * @returns {Promise<void>}
-       */
-      this.ready = async () => {
 
         // logging of 'ready' event
         this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
