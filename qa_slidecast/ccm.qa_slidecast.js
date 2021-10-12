@@ -27,9 +27,7 @@
       "open": "both",
       "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
-      "ignore": {
-        "slides": []
-      },
+      "ignore": {},
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#text_en" ]
     },
     Instance: function () {
@@ -54,6 +52,13 @@
 
         // set shortcut to help functions
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
+
+        // set default slides data
+        if ( !this.ignore.slides ) {
+          this.ignore.slides = [];
+          for ( let page = 1; page <= this.pdf_viewer.getPages(); page++ )
+            this.ignore.slides.push( { content: page } );
+        }
 
         // each slide needs an unique key
         this.ignore.slides.forEach( slide => !slide.key && ( slide.key = $.generateKey() ) );
