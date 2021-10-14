@@ -32,7 +32,8 @@
       "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
       "slide_nr": 1,
       "ignore": {},
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#text_en" ]
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#text_en" ],
+      "youtube": [ "ccm.component", "https://ccmjs.github.io/akless-components/youtube/versions/ccm.youtube-2.1.1.js" ]
     },
     Instance: function () {
 
@@ -173,6 +174,25 @@
               case 'ogg':
               case 'webm':
                 if ( !slide_data.element ) slide_data.element = $.html( this.html.video, slide_data.content );
+                break;
+              default:
+                if ( slide_data.content.includes( 'youtu' ) ) {
+                  if ( !slide_data.element ) {
+                    const video = slide_data.content.split( '/' ).pop().split( '?v=' ).pop().split( '&' ).shift();
+                    const app = await this.youtube.start( { video: video } );
+                    slide_data.element = app.root;
+                  }
+                }
+                else if ( slide_data.content.includes( '<ccm-' ) ) {
+                  if ( !slide_data.element ) {
+                    const { component, config } = $.decomposeEmbedCode( slide_data.content );
+                    const { store, key } = config;
+                    const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
+                    slide_data.element = app.root;
+                  }
+                }
+                else
+                  $.setContent( slide_element, '' );
                 break;
             }
             break;

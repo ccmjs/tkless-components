@@ -74,6 +74,10 @@ export const slides_de = [
     "description": "Auch eine separate App kann zwischen Folien platziert werden."
   },
   {
+    "content": "https://youtu.be/aqz-KE-bpKQ",
+    "description": "Auch  ein YouTube-Video kann zwischen Folien platziert werden."
+  },
+  {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide3.m4a",
     "content": 3,
     "description": "Für diese Folie ist die Kommentierung ausgeschaltet.",
@@ -112,11 +116,17 @@ export const slides_en = [
     "description": "A separate app can also be placed instead of a slide."
   },
   {
+    "content": "https://youtu.be/aqz-KE-bpKQ",
+    "description": "A YouTube video can also be placed between slides."
+  },
+  {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/slide3.m4a",
     "content": 3,
     "description": "Commenting is disabled for this slide.",
     "commentary": false
-  }
+  },
+  { "content": "https://www.youtube.com/watch?v=aqz-KE-bpKQ" },
+  { "content": "<script src='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-8.0.1.js'></script><ccm-cloze-8-0-1 key='[\"ccm.get\",{\"name\":\"dms-configs\",\"url\":\"https://ccm2.inf.h-brs.de\"},\"1581497368813X17209956326291276\"]'></ccm-cloze-8-0-1>" }
 ];
 
 /**
