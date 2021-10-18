@@ -228,6 +228,13 @@
             }
             $.setContent( description_element, slide_data.description );
           }
+          else if ( slide_data.content.includes( '<ccm-' ) ) {
+            const { component, config } = $.decomposeEmbedCode( slide_data.description );
+            const { store, key } = config;
+            const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
+            slide_data.description = app.root;
+            $.setContent( description_element, slide_data.description );
+          }
           else
             $.setContent( description_element, $.html( '<article>%%</article>', slide_data.description ) );
         }
