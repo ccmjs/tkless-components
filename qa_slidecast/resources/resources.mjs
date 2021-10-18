@@ -124,9 +124,7 @@ export const slides_en = [
     "content": 3,
     "description": "Commenting is disabled for this slide.",
     "commentary": false
-  },
-  { "content": "https://www.youtube.com/watch?v=aqz-KE-bpKQ" },
-  { "content": "<script src='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-8.0.1.js'></script><ccm-cloze-8-0-1 key='[\"ccm.get\",{\"name\":\"dms-configs\",\"url\":\"https://ccm2.inf.h-brs.de\"},\"1581497368813X17209956326291276\"]'></ccm-cloze-8-0-1>" }
+  }
 ];
 
 /**

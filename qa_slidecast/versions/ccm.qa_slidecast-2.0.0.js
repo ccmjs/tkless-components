@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (12.10.2021): reimplementation by akless
+ * version 2.0.0 (18.10.2021): reimplementation by akless
  */
 
 ( () => {
@@ -23,7 +23,7 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "description": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.7.0.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.8.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
 //    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
@@ -141,14 +141,14 @@
         const viewer_element = this.element.querySelector( '#viewer' );
         !viewer_element.innerHTML && $.setContent( viewer_element, this.pdf_viewer.root );
 
+        // rendering of inner apps can be skipped
+        if ( skip ) return;
+
         /**
          * slide element
          * @type {Element}
          */
         const slide_element = this.pdf_viewer.element.querySelector( '#page' );
-
-        // rendering of inner apps can be skipped
-        if ( skip ) return;
 
         // render slide
         switch ( typeof slide_data.content ) {
@@ -202,7 +202,6 @@
               await app.start();
               slide_data.element = app.root;
             }
-            $.setContent( slide_element, slide_data.element );
             break;
           default:
             $.setContent( slide_element, '' );
