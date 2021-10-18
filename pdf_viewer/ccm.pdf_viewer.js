@@ -93,7 +93,7 @@
           file = await this.pdfjs.getDocument( this.pdf ).promise;
         }
         catch ( exception ) {
-          if ( exception.name !== 'PasswordException' ) return;
+          if ( exception.name !== 'PasswordException' ) return $.setContent( this.element, '' );
           try { file = await this.pdfjs.getDocument( { url: this.pdf, password: prompt( this.text.protected ) } ).promise; } catch ( e ) {}
           if ( !file ) return $.setContent( this.element, this.text.denied );
         }
