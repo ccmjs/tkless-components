@@ -23,7 +23,7 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "data": { "store": [ "ccm.store" ] },
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.7.0.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.8.0.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/templates.mjs" ],
       "libs": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
