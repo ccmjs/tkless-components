@@ -103,7 +103,7 @@ export const slides_en = [
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/extra.m4a",
     "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/extra.jpg",
-    "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
+    "description": [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
   },
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/video.m4a",
@@ -112,7 +112,7 @@ export const slides_en = [
   },
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/en/app.m4a",
-    "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
+    "content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
     "description": "A separate app can also be placed instead of a slide."
   },
   {
