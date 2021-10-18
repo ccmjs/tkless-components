@@ -228,7 +228,7 @@
             }
             $.setContent( description_element, slide_data.description );
           }
-          else if ( slide_data.content.includes( '<ccm-' ) ) {
+          else if ( slide_data.description.includes( '<ccm-' ) ) {
             const { component, config } = $.decomposeEmbedCode( slide_data.description );
             const { store, key } = config;
             const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
