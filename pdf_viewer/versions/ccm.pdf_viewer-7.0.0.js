@@ -32,16 +32,7 @@
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js", { "app": "pdf_viewer" } ],
-      "text": {
-        "denied": "Access Denied",
-        "download": "Download PDF",
-        "first": "First Page",
-        "jump": "Jump to specific Page",
-        "last": "Last Page",
-        "next": "Next Page",
-        "prev": "Previous Page",
-        "protected": "This document is password protected. Enter a password.",
-      },
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ],
       "touchable": true
     },
     Instance: function () {
@@ -217,7 +208,7 @@
          * canvas element
          * @type {Element}
          */
-        const canvas = this.element.querySelector( 'canvas' );
+        const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) return;
 
         /**
          * current page
