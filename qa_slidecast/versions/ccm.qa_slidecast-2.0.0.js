@@ -156,6 +156,7 @@
           case 'number':
             $.setContent( slide_element, '<canvas>' );
             await this.pdf_viewer.goTo( slide_data.content );
+            delete slide_data._content;
             break;
           case 'string':
             const ends_with = slide_data.content.split( '.' ).pop();
@@ -169,45 +170,48 @@
               case 'pjp':
               case 'png':
               case 'svg':
-                if ( !slide_data.element ) slide_data.element = $.html( this.html.image, slide_data.content );
+                if ( !slide_data._content ) slide_data._content = $.html( this.html.image, slide_data.content );
                 break;
               case 'mp4':
               case 'ogg':
               case 'webm':
-                if ( !slide_data.element ) slide_data.element = $.html( this.html.video, slide_data.content );
+                if ( !slide_data._content ) slide_data._content = $.html( this.html.video, slide_data.content );
                 break;
               default:
                 if ( slide_data.content.includes( 'youtu' ) ) {
-                  if ( !slide_data.element ) {
+                  if ( !slide_data._content ) {
                     const video = slide_data.content.split( '/' ).pop().split( '?v=' ).pop().split( '&' ).shift();
                     const app = await this.youtube.start( { video: video } );
-                    slide_data.element = app.root;
+                    slide_data._content = app.root;
                   }
                 }
                 else if ( slide_data.content.includes( '<ccm-' ) ) {
-                  if ( !slide_data.element ) {
+                  if ( !slide_data._content ) {
                     const { component, config } = $.decomposeEmbedCode( slide_data.content );
                     const { store, key } = config;
                     const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
-                    slide_data.element = app.root;
+                    slide_data._content = app.root;
                   }
                 }
-                else
-                  $.setContent( slide_element, '' );
+                else {
+                  $.setContent( slide_element, slide_data.content );
+                  delete slide_data._content;
+                }
                 break;
             }
             break;
-          case 'object':
-            if ( !slide_data.element ) {
+          default:
+            if ( $.isDependency( slide_data.contentn ) ) {
               const app = await $.solveDependency( slide_data.content );
               await app.start();
-              slide_data.element = app.root;
+              slide_data._content = app.root;
             }
-            break;
-          default:
-            $.setContent( slide_element, '' );
+            else {
+              $.setContent( slide_element, slide_data.content );
+              delete slide_data._content;
+            }
         }
-        slide_data.element && $.setContent( slide_element, slide_data.element );
+        slide_data._content && $.setContent( slide_element, slide_data._content );
 
         // update controls of PDF viewer
         const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
@@ -220,23 +224,24 @@
         // render advanced description (description is another app)
         const description_element = this.element.querySelector( '#description' );
         if ( slide_data.description ) {
-          if ( typeof slide_data.description !== 'string' ) {
-            if ( $.isDependency( slide_data.description ) ) {
-              const app = await $.solveDependency( slide_data.description );
-              await app.start();
-              slide_data.description = app.root;
-            }
-            $.setContent( description_element, slide_data.description );
+          if ( $.isDependency( slide_data.description ) ) {
+            const app = await $.solveDependency( slide_data.description );
+            await app.start();
+            slide_data._description = app.root;
+          }
+          else if ( typeof slide_data.description !== 'string' ) {
+            $.setContent( slide_element, slide_data.description );
+            delete slide_data._description;
           }
           else if ( slide_data.description.includes( '<ccm-' ) ) {
             const { component, config } = $.decomposeEmbedCode( slide_data.description );
             const { store, key } = config;
             const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
-            slide_data.description = app.root;
-            $.setContent( description_element, slide_data.description );
+            slide_data._description = app.root;
           }
           else
             $.setContent( description_element, $.html( '<article>%%</article>', slide_data.description ) );
+          slide_data._description && $.setContent( description_element, slide_data._description );
         }
 
         // render comments
