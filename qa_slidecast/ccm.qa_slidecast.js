@@ -209,7 +209,7 @@
               delete slide_data._content;
             }
         }
-        slide_data._content && $.setContent( slide_element, slide_data._content );
+        slide_data._content && $.setContent( slide_element, slide_data._content.cloneNode( true ) );
 
         // update controls of PDF viewer
         const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
