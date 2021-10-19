@@ -208,7 +208,7 @@
          * canvas element
          * @type {Element}
          */
-        const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) return;
+        const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
 
         /**
          * current page
