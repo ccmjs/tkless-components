@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (18.10.2021): reimplementation by akless
+ * version 2.0.0 (19.10.2021): reimplementation by akless
  */
 
 ( () => {
@@ -201,7 +201,7 @@
             }
             break;
           default:
-            if ( $.isDependency( slide_data.contentn ) ) {
+            if ( $.isDependency( slide_data.content ) ) {
               const app = await $.solveDependency( slide_data.content );
               await app.start();
               slide_data._content = app.root;
