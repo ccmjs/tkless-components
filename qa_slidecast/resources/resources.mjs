@@ -61,7 +61,7 @@ export const slides_de = [
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/extra.m4a",
     "content": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/extra.jpg",
-    "description": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
+    "description": [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ]
   },
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/video.m4a",
@@ -70,7 +70,7 @@ export const slides_de = [
   },
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/app.m4a",
-    "content": [ "ccm.proxy", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
+    "content": [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-4.1.2.js", quiz ],
     "description": "Auch eine separate App kann zwischen Folien platziert werden."
   },
   {

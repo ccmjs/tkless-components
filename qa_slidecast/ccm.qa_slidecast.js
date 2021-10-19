@@ -69,9 +69,8 @@
           for ( let page = 1; page <= this.pdf_viewer.getPages(); page++ )
             this.ignore.slides.push( { content: page } );
         }
-
-        // each slide needs an unique key
-        this.ignore.slides.forEach( slide => !slide.key && ( slide.key = $.generateKey() ) );
+        else
+          this.ignore.slides = $.clone( this.ignore.slides );
 
         // recalibrate controls of PDF viewer
         this.pdf_viewer.onchange = async event => {
