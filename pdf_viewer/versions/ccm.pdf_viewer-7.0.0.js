@@ -189,7 +189,7 @@
       this.getPages = () => file.numPages;
 
       /** when an observed responsive breakpoint triggers */
-      this.onbreakpoint = () => renderPage();
+      this.onbreakpoint = this.refresh = () => renderPage();
 
       /** updates main HTML template */
       const render = () => this.html.render( this.html.main( this, events, page_nr, file.numPages ), this.element );
@@ -200,15 +200,17 @@
        */
       const renderPage = async () => {
 
-        if ( rendering ) return;  // rendering of an other PDF page is not finished? => abort
-        rendering = true;         // start rendering PDF page
-        await $.sleep( 30 );      // give canvas element a moment to resize
+        // rendering of an other PDF page is not finished? => abort
+        if ( rendering ) return;  rendering = true;
 
         /**
          * canvas element
          * @type {Element}
          */
         const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
+
+        if ( !canvas ) return;  // no canvas element? => abort
+        await $.sleep( 30 );    // give canvas element a moment to resize
 
         /**
          * current page
