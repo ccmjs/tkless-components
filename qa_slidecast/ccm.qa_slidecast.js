@@ -26,7 +26,7 @@
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
 //    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
       "open": "both",
-      "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
+      "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
       "slide_nr": 1,
       "ignore": {},
@@ -103,6 +103,9 @@
 
         // logging of 'start' event
         this.logger && this.logger.log( 'start', this.getValue() );
+
+        // start PDF viewer
+        await this.pdf_viewer.start();
 
         // render first slide
         await render();
