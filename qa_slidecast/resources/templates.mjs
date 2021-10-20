@@ -25,11 +25,11 @@ export function main( instance, events ) {
       <div>
         <section id="viewer"></section>
         <section id="control">
-          <div title="${ instance.text.description }" ?data-hidden=${ !instance.description }>
+          <div title="${ instance.text.description || '' }" ?data-hidden=${ !instance.description }>
             <i class="bi bi-sticky${ instance.open === 'description' || instance.open === 'both' ? '-fill' : '' }" ?disabled=${ !slide_data.description } @click=${ events.onDescription }></i>
           </div>
           <audio src="${ slide_data.audio || '' }" controls ?data-invisible=${ !slide_data.audio }></audio>
-          <div title="${ instance.text.comments }" ?data-hidden=${ !instance.comment }>
+          <div title="${ instance.text.comments || '' }" ?data-hidden=${ !instance.comment }>
             <i class="bi bi-chat-square-text${ instance.open === 'comments' || instance.open === 'both' ? '-fill' : '' }" ?disabled=${ slide_data.commentary === false } @click=${ events.onComments }></i>
           </div>
         </section>
