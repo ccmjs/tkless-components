@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version latest (2.0.0)
  * @changes
- * version 2.0.0 (19.10.2021): reimplementation by akless
+ * version 2.0.0 (20.10.2021): reimplementation by akless
  */
 
 ( () => {
@@ -210,7 +210,7 @@
               delete slide_data._content;
             }
         }
-        slide_data._content && $.setContent( slide_element, slide_data._content.cloneNode( true ) );
+        slide_data._content && $.setContent( slide_element, slide_data._content );
 
         // update controls of PDF viewer
         const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
