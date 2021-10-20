@@ -62,15 +62,6 @@
        */
       this.ready = async () => {
 
-        // set default slides data
-        if ( !this.ignore.slides ) {
-          this.ignore.slides = [];
-          for ( let page = 1; page <= this.pdf_viewer.getPages(); page++ )
-            this.ignore.slides.push( { content: page } );
-        }
-        else
-          this.ignore.slides = $.clone( this.ignore.slides );
-
         // recalibrate controls of PDF viewer
         this.pdf_viewer.onchange = async event => {
           if ( this.onchange && await this.onchange( { name: event.name, instance: this, before: true } ) ) return;
@@ -107,6 +98,13 @@
 
         // start PDF viewer
         await this.pdf_viewer.start();
+
+        // set default slides data
+        if ( !this.ignore.slides ) {
+          this.ignore.slides = [];
+          for ( let page = 1; page <= this.pdf_viewer.getPages(); page++ )
+            this.ignore.slides.push( { content: page } );
+        }
 
         // render first slide
         await render();
