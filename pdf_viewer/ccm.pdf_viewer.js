@@ -111,7 +111,7 @@
         const canvas = this.element.querySelector( 'canvas' );
 
         // disable to downloading the files from canvas element
-        !this.downloadable && canvas.addEventListener( 'contextmenu', event => event.preventDefault() );
+        !this.downloadable && canvas && canvas.addEventListener( 'contextmenu', event => event.preventDefault() );
 
         // render page
         if ( this.routing && this.routing.get() )
@@ -120,7 +120,7 @@
           await renderPage();
 
         // setup touch control
-        if ( this.touchable ) {
+        if ( this.touchable && canvas ) {
           let reachedEdge = false;
           let touchStart = null;
           let touchDown = false;
@@ -208,8 +208,8 @@
          */
         const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
 
-        if ( !canvas ) return;  // no canvas element? => abort
-        await $.sleep( 30 );    // give canvas element a moment to resize
+        // give canvas element a moment to resize
+        await $.sleep( 30 );
 
         /**
          * current page
