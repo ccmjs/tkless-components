@@ -6,7 +6,7 @@
  * @license The MIT License (MIT)
  * @version latest (7.0.0)
  * @changes
- * version 7.0.0 (30.09.2021): reimplementation by akless
+ * version 7.0.0 (22.10.2021): reimplementation by akless
  */
 
 ( () => {
@@ -30,7 +30,7 @@
         "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.worker.min.js",
         "namespace": "pdfjs-dist/build/pdf"
       },
-//    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js", { "app": "pdf_viewer" } ],
+//    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ],
       "touchable": true
     },
@@ -80,7 +80,15 @@
        * when all dependencies are solved after creation and before the app starts
        * @returns {Promise<void>}
        */
-      this.ready = async () => this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
+      this.ready = async () => {
+
+        // define and check routes
+        this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );
+
+        // logging of 'ready' event
+        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
+
+      }
 
       /**
        * starts the app
@@ -115,7 +123,7 @@
 
         // render page
         if ( this.routing && this.routing.get() )
-          page_nr = this.routing.get().split( '-' )[ 1 ];
+          await this.routing.refresh();
         else
           await renderPage();
 
@@ -157,9 +165,6 @@
             touchDown = false;
           } );
         }
-
-        // define and check routes
-        this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );
 
       };
 

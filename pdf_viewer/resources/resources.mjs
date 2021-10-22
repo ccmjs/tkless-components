@@ -46,10 +46,11 @@ export const test = {
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
-  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/en/slides.pdf",
-  "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.min.js",
-  "pdfjs.worker": "./../libs/pdfjs-2/pdf.worker.min.js",
+  "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
+  "pdfjs.worker": "./../libs/pdfjs-2/pdf.worker.js",
+  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.js" ],
   "text": [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#en" ]
 };
 
@@ -59,5 +60,6 @@ export const test = {
  */
 export const demo = {
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
+  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
   "text": de
 };
