@@ -82,13 +82,8 @@
        * @returns {Promise<void>}
        */
       this.ready = async () => {
-
-        // define and check routes
-        this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );
-
-        // logging of 'ready' event
-        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
-
+        this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );  // define routes
+        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );                            // logging of 'ready' event
       }
 
       /**
