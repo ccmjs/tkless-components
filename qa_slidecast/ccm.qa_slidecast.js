@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version latest (2.0.0)
  * @changes
- * version 2.0.0 (20.10.2021): reimplementation by akless
+ * version 2.0.0 (23.10.2021): reimplementation by akless
  */
 
 ( () => {
@@ -27,7 +27,7 @@
 //    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
       "open": "both",
       "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js" ],
-//    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-2.0.7.min.js" ],
+//    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "slide_nr": 1,
       "ignore": {},
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#text_en" ],
@@ -52,6 +52,9 @@
 
         // set unique key for app state data of commentary
         if ( this.comment && !this.comment.config.data.key ) this.comment.config.data.key = $.generateKey();
+
+        // disable routing of PDF viewer
+        delete this.pdf_viewer.routing;
 
       };
 
@@ -81,7 +84,8 @@
           return true;
         };
 
-        // logging of 'ready' event
+        // define routes and log 'ready' event
+        this.routing && this.routing.define( { slide: number => { this.slide_nr = number; render(); } } );
         this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
 
       };
@@ -92,11 +96,8 @@
        */
       this.start = async () => {
 
-        // logging of 'start' event
-        this.logger && this.logger.log( 'start', this.getValue() );
-
-        // start PDF viewer
-        await this.pdf_viewer.start();
+        this.logger && this.logger.log( 'start', this.getValue() );  // logging of 'start' event
+        await this.pdf_viewer.start();                               // start PDF viewer
 
         // set default slides data
         if ( !this.ignore.slides ) {
@@ -105,8 +106,11 @@
             this.ignore.slides.push( { content: page } );
         }
 
-        // render first slide
-        await render();
+        // render slide
+        if ( this.routing && this.routing.get() )
+          await this.routing.refresh();
+        else
+          await render();
 
         // trigger 'onstart' callback
         this.onstart && await this.onstart( this );
@@ -138,6 +142,9 @@
         // render PDF Viewer
         const viewer_element = this.element.querySelector( '#viewer' );
         !viewer_element.innerHTML && $.setContent( viewer_element, this.pdf_viewer.root );
+
+        // update route
+        this.routing && this.routing.set( 'slide-' + this.slide_nr );
 
         // rendering of inner apps can be skipped
         if ( skip ) return;
@@ -199,9 +206,11 @@
             break;
           default:
             if ( $.isDependency( slide_data.content ) ) {
-              const app = await $.solveDependency( slide_data.content );
-              await app.start();
-              slide_data._content = app.root;
+              if ( !slide_data._content ) {
+                const app = await $.solveDependency( slide_data.content );
+                await app.start();
+                slide_data._content = app.root;
+              }
             }
             else {
               $.setContent( slide_element, slide_data.content );
@@ -218,9 +227,9 @@
         update( '#next > *', this.slide_nr >= this.ignore.slides.length );
         update( '#last > *', this.slide_nr >= this.ignore.slides.length );
 
-        // render advanced description (description is another app)
+        // render description
         const description_element = this.element.querySelector( '#description' );
-        if ( slide_data.description ) {
+        if ( slide_data.description && !slide_data._description ) {
           if ( $.isDependency( slide_data.description ) ) {
             const app = await $.solveDependency( slide_data.description );
             await app.start();
@@ -240,8 +249,8 @@
           }
           else
             $.setContent( description_element, $.html( '<article>%%</article>', slide_data.description ) );
-          slide_data._description && $.setContent( description_element, slide_data._description );
         }
+        slide_data._description && $.setContent( description_element, slide_data._description );
 
         // render comments
         if ( this.comment && slide_data.commentary !== false ) {

@@ -149,6 +149,7 @@ export const test = {
   "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
   "onstart": instance => { console.log( 'start', instance.slide_nr ) },
   "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
+  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.js" ],
   "text": text_en
 };
 
@@ -166,5 +167,6 @@ export const demo = {
     "slides": slides_de
   },
   "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ],
+  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
   "text": text_de
 };
