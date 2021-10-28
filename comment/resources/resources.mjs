@@ -64,7 +64,7 @@ export const example = {
     "text": "Bei dieser Demo sind nur für unsere Kommentare beispielhaft Portraits hinterlegt, alle anderen haben ein Standard-Portrait.",
     "created_at": "2021-10-01T20:14:00",
     "updated_at": "2021-10-01T20:14:00",
-    "_": { "creator": "twonky", "realm": "guest" },
+    "_": { "creator": "twonky", "realm": "guest" }
   },
   "demo,joki": {
     "key": [ "demo", "joki" ],
