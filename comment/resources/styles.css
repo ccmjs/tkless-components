@@ -11,7 +11,7 @@ main {
 }
 
 main > div {
-  margin-bottom: 3em;
+  margin-bottom: 1em;
   width: 100%;
   max-width: 940px;
   padding: 0 1em;
