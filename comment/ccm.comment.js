@@ -181,7 +181,7 @@
 
           // define initial data of new comment
           const comment = {
-            key: [ this.data.key.app, comment_key ],
+            key: [].concat( this.data.key.app ).concat( comment_key ),
             app: this.data.key.app,
             comment: comment_key,
             picture: user.picture,
