@@ -98,6 +98,7 @@ export const example = {
  * @type {Object}
  */
 export const de = {
+  "key": "de",
   "answer": "ANTWORTEN",
   "answers": "Zeige %d Antworten",
   "comments": "%d Kommentare",
@@ -123,6 +124,7 @@ export const de = {
  * @type {Object}
  */
 export const en = {
+  "key": "en",
   "answer": "ANSWER",
   "answers": "Show %d Answers",
   "comments": "%d Comments",
@@ -181,5 +183,12 @@ export const demo = {
     "store": [ "ccm.store", example ],
     "key": "demo"
   },
+  "libs": [ "ccm.load", [
+    [
+      "https://ccmjs.github.io/tkless-components/libs/dayjs/libs/dayjs/dayjs.min.js",
+      "https://ccmjs.github.io/tkless-components/libs/dayjs/libs/dayjs/relativeTime.min.js"
+    ],
+    "https://ccmjs.github.io/tkless-components/libs/dayjs/libs/dayjs/de.min.js"
+  ] ],
   "text": de
 };

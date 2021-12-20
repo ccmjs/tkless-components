@@ -76,6 +76,7 @@
 
         // add plugin to dayjs library
         dayjs.extend( window.dayjs_plugin_relativeTime );
+        dayjs.locale( this.text.key );
 
         // convert unique key for app state data to query
         if ( !$.isObject( this.data.key ) ) this.data.key = this.data.key ? { app: this.data.key } : {};
