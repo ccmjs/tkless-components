@@ -185,10 +185,10 @@ export const demo = {
   },
   "libs": [ "ccm.load", [
     [
-      "https://ccmjs.github.io/tkless-components/libs/dayjs/libs/dayjs/dayjs.min.js",
-      "https://ccmjs.github.io/tkless-components/libs/dayjs/libs/dayjs/relativeTime.min.js"
+      "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
+      "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
     ],
-    "https://ccmjs.github.io/tkless-components/libs/dayjs/libs/dayjs/de.min.js"
+    "https://ccmjs.github.io/tkless-components/libs/dayjs/de.min.js"
   ] ],
   "text": de
 };
