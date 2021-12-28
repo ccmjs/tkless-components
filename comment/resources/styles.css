@@ -13,7 +13,6 @@ main {
 main > div {
   margin-bottom: 1em;
   width: 100%;
-  max-width: 940px;
   padding: 0 1em;
 }
 
@@ -34,7 +33,8 @@ header > section:first-child > span {
   padding-right: 1em;
 }
 
-header > section:last-child {
+header > section:last-child,
+header > section:last-child > * {
   padding-left: 1em;
 }
 

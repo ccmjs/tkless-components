@@ -100,8 +100,8 @@ export const example = {
 export const de = {
   "key": "de",
   "answer": "ANTWORTEN",
-  "answers": "Zeige %d Antworten",
-  "comments": "%d Kommentare",
+  "answers": "Zeige %% Antworten",
+  "comments": "%% Kommentare",
   "delete": "Kommentar löschen",
   "deleted": "(gelöscht)",
   "dislike": "Ich mag diesen Kommentar nicht",
@@ -126,8 +126,8 @@ export const de = {
 export const en = {
   "key": "en",
   "answer": "ANSWER",
-  "answers": "Show %d Answers",
-  "comments": "%d Comments",
+  "answers": "Show %% Answers",
+  "comments": "%% Comments",
   "delete": "Delete this comment",
   "deleted": "(deleted)",
   "dislike": "I don't like this comment",
@@ -164,14 +164,17 @@ export const test = {
   },
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../comment/resources/templates.mjs",
+  "lang.2.active": "en",
+  "lang.2.translations": { "de": de, "en": en },
   "libs": [ "ccm.load",
     "./../libs/dayjs/dayjs.min.js",
-    "./../libs/dayjs/relativeTime.min.js"
+    "./../libs/dayjs/relativeTime.min.js",
+    "./../libs/dayjs/de.min.js"
   ],
   "picture": "./../comment/resources/portraits/default.svg",
-  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "text": [ "ccm.load", "./../comment/resources/resources.mjs#en" ],
-  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.min.js", "cloud" ] ]
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.js", "cloud" ] ]
 };
 
 /**
@@ -183,6 +186,7 @@ export const demo = {
     "store": [ "ccm.store", example ],
     "key": "demo"
   },
+  "lang.2.active": "de",
   "libs": [ "ccm.load", [
     [
       "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",

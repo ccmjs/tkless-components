@@ -59,16 +59,16 @@ export function main( app, events ) {
           <section>
             
             <!-- Number of Comments -->
-            <span>${ app.text.comments.replace( '%d', comments.length + answers.length ) }</span>
+            <span data-lang="comments--${ comments.length + answers.length }">${ app.text.comments.replace( '%%', comments.length + answers.length ) }</span>
             
             <!-- Sorting of Comments -->
             <button type="button" class="btn btn-sm btn-light" @click=${ events.onSort } ?data-hidden=${ !app.controls.sort || comments.length < 2 }>
               <i class="bi bi-filter-left"></i>
-              <span>${ app.text[ 'sort_by_' + ( app.sort ? 'date' : 'rating' ) ] }</span>
+              <span data-lang="sort_by_${ app.sort ? 'date' : 'rating' }">${ app.text[ 'sort_by_' + ( app.sort ? 'date' : 'rating' ) ] }</span>
             </button>
             
           </section>
-          <section></section>
+          <section class="d-flex align-items-center"></section>
         </header>
         
         <!-- Add Comment -->
@@ -95,7 +95,7 @@ export function main( app, events ) {
 
         <!-- User Picture -->
         <div class="picture" ?data-hidden=${ !app.picture }>
-          <img src="${ comment.picture || app.picture }" alt="${ app.text.picture }">
+          <img src="${ comment.picture || app.picture }" alt="${ app.text.picture }" data-lang="picture-alt">
         </div>
 
         <div>
@@ -106,19 +106,19 @@ export function main( app, events ) {
             <small>
               <span title="${ dayjs( comment.created_at ).format() }">${ dayjs( comment.created_at ).fromNow() }</span>
               <span>
-                <i class="bi bi-recycle" title="${ app.text.recycle }" @click=${ events.onRecycle } ?data-hidden=${ !app.controls.recycle || !comment.deleted || !is_creator }></i>
+                <i class="bi bi-recycle" title="${ app.text.recycle }" data-lang="recycle-title" @click=${ events.onRecycle } ?data-hidden=${ !app.controls.recycle || !comment.deleted || !is_creator }></i>
               </span>
             </small>
           </div>
 
           <!-- Comment Text -->
           <div ?data-report=${ Object.values( comment.rating.report ).find( report => report ) }>
-            <span class="text">${ comment.deleted ? app.text.deleted : comment.text }</span>
+            <span class="text" data-lang="${ comment.deleted && 'deleted' || '' }">${ comment.deleted ? app.text.deleted : comment.text }</span>
             <small ?data-hidden=${ comment.deleted }>
-              <span title="${ dayjs( comment.updated_at ).format() }" ?data-hidden=${ comment.created_at === comment.updated_at }>${ app.text.updated }</span>
+              <span title="${ dayjs( comment.updated_at ).format() }" data-lang="updated" ?data-hidden=${ comment.created_at === comment.updated_at }>${ app.text.updated }</span>
               <span>
-                <i class="bi bi-pencil" title="${ app.text.edit }" @click=${ events.onEdit } ?data-hidden=${ !app.controls.edit || !is_creator }></i>
-                <i class="bi bi-trash" title="${ app.text.delete }" @click=${ events.onDelete } ?data-hidden=${ !app.controls.delete || comment.deleted || !is_creator }></i>
+                <i class="bi bi-pencil" title="${ app.text.edit }" data-lang="edit-title" @click=${ events.onEdit } ?data-hidden=${ !app.controls.edit || !is_creator }></i>
+                <i class="bi bi-trash" title="${ app.text.delete }" data-lang="delete-title" @click=${ events.onDelete } ?data-hidden=${ !app.controls.delete || comment.deleted || !is_creator }></i>
               </span>
             </small>
           </div>
@@ -128,25 +128,25 @@ export function main( app, events ) {
             <div class="me-2">
 
               <!-- Likes -->
-              <button type="button" class="btn btn-sm btn-light" title="${ app.text.like }" @click=${ events.onLike } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.like }>
+              <button type="button" class="btn btn-sm btn-light" title="${ app.text.like }" data-lang="like-title" @click=${ events.onLike } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.like }>
                 <i class="bi bi-hand-thumbs-up${ comment.rating.like[ user.key ] ? '-fill' : '' }"></i>
                 ${ Object.keys( comment.rating.like ).length }
               </button>
 
               <!-- Dislikes -->
-              <button type="button" class="btn btn-sm btn-light" title="${ app.text.dislike }" @click=${ events.onDislike } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.dislike }>
+              <button type="button" class="btn btn-sm btn-light" title="${ app.text.dislike }" data-lang="dislike-title" @click=${ events.onDislike } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.dislike }>
                 <i class="bi bi-hand-thumbs-down${ comment.rating.dislike[ user.key ] ? '-fill' : '' }"></i>
                 ${ Object.keys( comment.rating.dislike ).length }
               </button>
 
               <!-- Hearts -->
-              <button type="button" class="btn btn-sm btn-light" title="${ app.text.heart }" @click=${ events.onHeart } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.heart }>
+              <button type="button" class="btn btn-sm btn-light" title="${ app.text.heart }" data-lang="heart-title" @click=${ events.onHeart } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.heart }>
                 <i class="bi bi-heart${ comment.rating.heart[ user.key ] ? '-fill' : '' }"></i>
                 ${ Object.keys( comment.rating.heart ).length }
               </button>
 
               <!-- Reports -->
-              <button type="button" class="btn btn-sm btn-light" title="${ app.text.report }" @click=${ events.onReport } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.report }>
+              <button type="button" class="btn btn-sm btn-light" title="${ app.text.report }" data-lang="report-title" @click=${ events.onReport } ?disabled=${ is_creator } ?data-hidden=${ !app.controls.report }>
                 <i class="bi bi-flag${ comment.rating.report[ user.key ] ? '-fill' : '' }"></i>
                 ${ Object.keys( comment.rating.report ).length }
               </button>
@@ -155,7 +155,7 @@ export function main( app, events ) {
             <div>
 
               <!-- ANSWER -->
-              <a class="btn btn-sm btn-light" role="button" @click=${ events.onAnswerButton } ?data-hidden=${ !app.controls.answer || !app.user }>${ app.text.answer }</a>
+              <a class="btn btn-sm btn-light" role="button" data-lang="answer" @click=${ events.onAnswerButton } ?data-hidden=${ !app.controls.answer || !app.user }>${ app.text.answer }</a>
               
             </div>
           </div>
@@ -167,7 +167,7 @@ export function main( app, events ) {
           <div ?data-hidden=${ !app.controls.answer || !comment_answers.length }>
             <button type="button" class="btn btn-sm btn-link" @click=${ events.onThread }>
               <i class="bi bi-caret-${ comment.open_thread ? 'down' : 'up' }-fill"></i>
-              &nbsp;${ app.text.answers.replace( '%d', comment_answers.length ) }
+              &nbsp;<span data-lang="answers--${ comment_answers.length }">${ app.text.answers.replace( '%%', comment_answers.length ) }</span>
             </button>
             <div ?data-hidden=${ !comment.open_thread }>
               ${ repeat( comment_answers, answer => answer.key, commentTemplate ) }
@@ -188,12 +188,12 @@ export function main( app, events ) {
     return html`
       <article ?data-hidden=${ !app.user }>
         <div class="picture" ?data-hidden=${ !app.picture }>
-          <img src="${ user.picture }" alt="${ app.text.picture }">
+          <img src="${ user.picture }" alt="${ app.text.picture }" data-lang="picture-alt">
         </div>
         <div>
-          <textarea class="form-control" rows="2" placeholder="${ app.text[ 'write_' + ( comment ? 'answer' : 'comment' ) ] }" @change=${ events.onAnswerInputChange }>${ comment && ( comment.answer_input || comment.answer && ( '@' + comment.user + ': ' ) ) }</textarea>
+          <textarea class="form-control" rows="2" placeholder="${ app.text[ 'write_' + ( comment ? 'answer' : 'comment' ) ] }" data-lang="${ 'write_' + ( comment ? 'answer' : 'comment' ) }-placeholder" @change=${ events.onAnswerInputChange }>${ comment && ( comment.answer_input || comment.answer && ( '@' + comment.user + ': ' ) ) }</textarea>
           <div>
-            <button type="button" class="btn btn-sm btn-primary" @click=${ events.onAddComment }>${ app.text.submit }</button>
+            <button type="button" class="btn btn-sm btn-primary" data-lang="submit" @click=${ events.onAddComment }>${ app.text.submit }</button>
           </div>
         </div>
       </article>
