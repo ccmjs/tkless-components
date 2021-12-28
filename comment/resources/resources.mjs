@@ -167,8 +167,10 @@ export const test = {
   "lang.2.active": "en",
   "lang.2.translations": { "de": de, "en": en },
   "libs": [ "ccm.load",
-    "./../libs/dayjs/dayjs.min.js",
-    "./../libs/dayjs/relativeTime.min.js",
+    [
+      "./../libs/dayjs/dayjs.min.js",
+      "./../libs/dayjs/relativeTime.min.js"
+    ],
     "./../libs/dayjs/de.min.js"
   ],
   "picture": "./../comment/resources/portraits/default.svg",
