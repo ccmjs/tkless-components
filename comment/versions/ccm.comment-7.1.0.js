@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version 7.1.0
  * @changes
- * version 7.1.0 (28.12.2021): added multilingualism
+ * version 7.1.0 (29.12.2021): added multilingualism
  * version 7.0.0 (30.09.2021): reimplementation by akless
  */
 
@@ -26,12 +26,7 @@
       "data": { "store": [ "ccm.store" ] },
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.8.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/templates.mjs" ],
-      "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
-        "translations": {
-          "de": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#de" ],
-          "en": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#en" ]
-        }
-      } ],
+//    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
       "libs": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
         "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
@@ -101,10 +96,7 @@
         dayjs.locale( this.text.key );
 
         // listen to language change event => translate timestamps
-        this.lang && this.lang.observe( lang => {
-          dayjs.locale( lang );
-          render();
-        } );
+        this.lang && this.lang.observe( lang => { dayjs.locale( lang ); render(); } );
 
       };
 
@@ -164,7 +156,7 @@
        */
       const render = () => {
         this.html.render( this.html.main( this, events ), this.element );
-        this.lang.translate();
+        this.lang && this.lang.translate();
       }
 
       /**

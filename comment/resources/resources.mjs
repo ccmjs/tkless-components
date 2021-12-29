@@ -164,8 +164,10 @@ export const test = {
   },
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../comment/resources/templates.mjs",
-  "lang.2.active": "en",
-  "lang.2.translations": { "de": de, "en": en },
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
+    "active": "en",
+    "translations": { "de": de, "en": en }
+  } ],
   "libs": [ "ccm.load",
     [
       "./../libs/dayjs/dayjs.min.js",
@@ -188,7 +190,10 @@ export const demo = {
     "store": [ "ccm.store", example ],
     "key": "demo"
   },
-  "lang.2.active": "de",
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
+    "active": "de",
+    "translations": { "de": de, "en": en }
+  } ],
   "libs": [ "ccm.load", [
     [
       "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
