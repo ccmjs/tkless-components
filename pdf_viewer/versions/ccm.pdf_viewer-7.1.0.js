@@ -10,12 +10,10 @@
  * - uses ccmjs v27.1.2 as default
  * - set start page via config
  * - bugfix for optional routing
+ * - added optional multilingualism
  * version 7.0.0 (22.10.2021): reimplementation by akless
- * TODO: multilingualism
  * TODO: keyboard control
  * TODO: touch control
- * TODO: start page
- * TODO: first flag
  */
 
 ( () => {
@@ -32,6 +30,7 @@
       "downloadable": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.8.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
+//    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "page": 1,
@@ -117,6 +116,16 @@
 
         // render main HTML structure
         render();
+
+        // render language selection
+        this.lang && !this.lang.getContext() && $.append( this.element.querySelector( 'header' ), this.lang.root );
+
+        // render language selection and user login/logout
+        const header = this.element.querySelector( 'header' );
+        if ( header ) {
+          header && this.lang && !this.lang.getContext() && $.append( header, this.lang.root );
+          header && this.user && $.append( header, this.user.root );
+        }
 
         /**
          * canvas element
@@ -204,7 +213,10 @@
       this.onbreakpoint = this.refresh = () => renderPage();
 
       /** updates main HTML template */
-      const render = () => this.html.render( this.html.main( this, events, page_nr, file.numPages ), this.element );
+      const render = () => {
+        this.html.render( this.html.main( this, events, page_nr, file.numPages ), this.element );
+        this.lang && this.lang.translate();
+      }
 
       /**
        * renders current page

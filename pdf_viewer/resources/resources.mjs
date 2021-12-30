@@ -46,6 +46,10 @@ export const test = {
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.js", {
+    "active": "en",
+    "translations": { "de": de, "en": en }
+  } ],
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/en/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
@@ -59,6 +63,10 @@ export const test = {
  * @type {Object}
  */
 export const demo = {
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
+    "active": "de",
+    "translations": { "de": de, "en": en }
+  } ],
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
   "text": de
