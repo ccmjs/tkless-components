@@ -11,8 +11,8 @@
  * - set start page via config
  * - bugfix for optional routing
  * - added optional multilingualism
+ * - added keyboard controls
  * version 7.0.0 (22.10.2021): reimplementation by akless
- * TODO: keyboard control
  * TODO: touch control
  */
 
@@ -91,8 +91,20 @@
        * @returns {Promise<void>}
        */
       this.ready = async () => {
+
         this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );  // define routes
         this.logger && this.logger.log( 'ready', $.privatize( this, true ) );                            // logging of 'ready' event
+
+        // add keyboard controls
+        this.element.addEventListener( 'keydown', event => {
+          switch ( event.key ) {
+            case 'ArrowLeft': events.onPrev(); break;
+            case 'ArrowRight': events.onNext(); break;
+            case 'ArrowUp': events.onFirst(); break;
+            case 'ArrowDown': events.onLast(); break;
+          }
+        } );
+
       }
 
       /**
