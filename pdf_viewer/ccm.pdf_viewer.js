@@ -127,6 +127,7 @@
         !this.downloadable && canvas && canvas.addEventListener( 'contextmenu', event => event.preventDefault() );
 
         // render page
+        page_nr = this.page;
         if ( this.routing && this.routing.get() )
           await this.routing.refresh();
         else
