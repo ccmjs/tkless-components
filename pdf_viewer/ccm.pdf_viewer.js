@@ -27,7 +27,7 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "downloadable": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.8.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.9.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
@@ -85,52 +85,6 @@
       };
 
       /**
-       * adds touch control to an element
-       * @param {Element} elem
-       * @param {Function} onLeft - when swiping to the left
-       * @param {Function} onRight - when swiping to the right
-       */
-      const touchControl = ( elem, { onLeft, onRight } ) => {
-
-        let reachedEdge = false;
-        let touchStart = null;
-        let touchDown = false;
-        elem.addEventListener( 'touchstart', () => touchDown = true );
-        elem.addEventListener( 'touchmove', event => {
-          if ( elem.scrollLeft === 0 || elem.scrollLeft === elem.scrollWidth - elem.clientWidth )
-            reachedEdge = true;
-          else {
-            reachedEdge = false;
-            touchStart = null;
-          }
-          if ( reachedEdge && touchDown ) {
-            if ( touchStart === null )
-              touchStart = event.changedTouches[ 0 ].clientX;
-            else {
-              let distance = event.changedTouches[ 0 ].clientX - touchStart;
-              if ( distance > 100 ) {
-                touchStart = null;
-                reachedEdge = false;
-                touchDown = false;
-                onLeft();
-              }
-              else if ( distance < -100 ) {
-                touchStart = null;
-                reachedEdge = false;
-                touchDown = false;
-                onRight();
-              }
-            }
-          }
-        } );
-        elem.addEventListener( 'touchend', () => {
-          touchStart = null;
-          touchDown = false;
-        } );
-
-      };
-
-      /**
        * when all dependencies are solved after creation and before the app starts
        * @returns {Promise<void>}
        */
@@ -150,7 +104,7 @@
         } );
 
         // add touch control
-        touchControl( this.element, { onLeft: events.onPrev, onRight: events.onNext } );
+        $.touchControl( this.element, { onLeft: events.onPrev, onRight: events.onNext } );
 
       }
 
