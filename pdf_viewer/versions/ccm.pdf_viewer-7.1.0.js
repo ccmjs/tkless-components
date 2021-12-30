@@ -8,6 +8,7 @@
  * @changes
  * version 7.1.0 (30.12.2021):
  * - uses ccmjs v27.1.2 as default
+ * - uses helper.mjs v7.9.0 as default
  * - set start page via config
  * - bugfix for optional routing
  * - added optional multilingualism

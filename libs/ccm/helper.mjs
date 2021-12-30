@@ -3,8 +3,10 @@
  * ES6 module that exports useful help functions for <i>ccmjs</i> component developers.
  * @author André Kless <andre.kless@web.de> 2019-2021
  * @license The MIT License (MIT)
- * @version latest (7.8.0)
+ * @version latest (7.9.0)
  * @changes
+ * version 7.9.0 (30.12.2021):
+ * - added touchControl(elem,{onLeft,onRight}):void - adds touch control to an element
  * version 7.8.0 (08.10.2021):
  * - added assign(target,source):target - copies all properties from a source object to a target object with supports of dot notation
  * version 7.7.0 (30.09.2021):
@@ -1508,6 +1510,52 @@ export const progressBar = ( elem, actual = 0, total = 100 ) => {
     let width = 1;
     let id = setInterval( () => width >= goal ? clearInterval( id ) : progress.style.width = ++width + 'px', 8 );
   }, 8 );
+
+};
+
+/**
+ * adds touch control to an element
+ * @param {Element} elem - element
+ * @param {Function} onLeft - when swiping to the left
+ * @param {Function} onRight - when swiping to the right
+ */
+export const touchControl = ( elem, { onLeft, onRight } ) => {
+
+  let reachedEdge = false;
+  let touchStart = null;
+  let touchDown = false;
+  elem.addEventListener( 'touchstart', () => touchDown = true );
+  elem.addEventListener( 'touchmove', event => {
+    if ( elem.scrollLeft === 0 || elem.scrollLeft === elem.scrollWidth - elem.clientWidth )
+      reachedEdge = true;
+    else {
+      reachedEdge = false;
+      touchStart = null;
+    }
+    if ( reachedEdge && touchDown ) {
+      if ( touchStart === null )
+        touchStart = event.changedTouches[ 0 ].clientX;
+      else {
+        let distance = event.changedTouches[ 0 ].clientX - touchStart;
+        if ( distance > 100 ) {
+          touchStart = null;
+          reachedEdge = false;
+          touchDown = false;
+          onLeft();
+        }
+        else if ( distance < -100 ) {
+          touchStart = null;
+          reachedEdge = false;
+          touchDown = false;
+          onRight();
+        }
+      }
+    }
+  } );
+  elem.addEventListener( 'touchend', () => {
+    touchStart = null;
+    touchDown = false;
+  } );
 
 };
 
