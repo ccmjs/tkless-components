@@ -11,9 +11,9 @@
  * - set start page via config
  * - bugfix for optional routing
  * - added optional multilingualism
- * - added keyboard controls
+ * - added keyboard control
+ * - updated touch control
  * version 7.0.0 (22.10.2021): reimplementation by akless
- * TODO: touch control
  */
 
 ( () => {
@@ -40,8 +40,7 @@
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ],
-      "touchable": true
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ]
     },
     Instance: function () {
 
@@ -86,6 +85,52 @@
       };
 
       /**
+       * adds touch control to an element
+       * @param {Element} elem
+       * @param {Function} onLeft - when swiping to the left
+       * @param {Function} onRight - when swiping to the right
+       */
+      const touchControl = ( elem, { onLeft, onRight } ) => {
+
+        let reachedEdge = false;
+        let touchStart = null;
+        let touchDown = false;
+        elem.addEventListener( 'touchstart', () => touchDown = true );
+        elem.addEventListener( 'touchmove', event => {
+          if ( elem.scrollLeft === 0 || elem.scrollLeft === elem.scrollWidth - elem.clientWidth )
+            reachedEdge = true;
+          else {
+            reachedEdge = false;
+            touchStart = null;
+          }
+          if ( reachedEdge && touchDown ) {
+            if ( touchStart === null )
+              touchStart = event.changedTouches[ 0 ].clientX;
+            else {
+              let distance = event.changedTouches[ 0 ].clientX - touchStart;
+              if ( distance > 100 ) {
+                touchStart = null;
+                reachedEdge = false;
+                touchDown = false;
+                onLeft();
+              }
+              else if ( distance < -100 ) {
+                touchStart = null;
+                reachedEdge = false;
+                touchDown = false;
+                onRight();
+              }
+            }
+          }
+        } );
+        elem.addEventListener( 'touchend', () => {
+          touchStart = null;
+          touchDown = false;
+        } );
+
+      };
+
+      /**
        * when all dependencies are solved after creation and before the app starts
        * @returns {Promise<void>}
        */
@@ -94,15 +139,18 @@
         this.routing && this.routing.define( { page: number => { page_nr = number; renderPage(); } } );  // define routes
         this.logger && this.logger.log( 'ready', $.privatize( this, true ) );                            // logging of 'ready' event
 
-        // add keyboard controls
+        // add keyboard control
         this.element.addEventListener( 'keydown', event => {
           switch ( event.key ) {
-            case 'ArrowLeft': events.onPrev(); break;
-            case 'ArrowRight': events.onNext(); break;
-            case 'ArrowUp': events.onFirst(); break;
-            case 'ArrowDown': events.onLast(); break;
+            case 'ArrowLeft':  events.onPrev();  break;
+            case 'ArrowRight': events.onNext();  break;
+            case 'ArrowUp':    events.onFirst(); break;
+            case 'ArrowDown':  events.onLast();  break;
           }
         } );
+
+        // add touch control
+        touchControl( this.element, { onLeft: events.onPrev, onRight: events.onNext } );
 
       }
 
@@ -153,45 +201,6 @@
           await this.routing.refresh();
         else
           await renderPage();
-
-        // setup touch control
-        if ( this.touchable && canvas ) {
-          let reachedEdge = false;
-          let touchStart = null;
-          let touchDown = false;
-          canvas.addEventListener( 'touchstart', () => touchDown = true );
-          canvas.addEventListener( 'touchmove', event => {
-            if ( canvas.scrollLeft === 0 || canvas.scrollLeft === canvas.scrollWidth - canvas.clientWidth )
-              reachedEdge = true;
-            else {
-              reachedEdge = false;
-              touchStart = null;
-            }
-            if ( reachedEdge && touchDown ) {
-              if ( touchStart === null )
-                touchStart = event.changedTouches[ 0 ].clientX;
-              else {
-                let distance = event.changedTouches[ 0 ].clientX - touchStart;
-                if ( distance < -100 ) {
-                  touchStart = null;
-                  reachedEdge = false;
-                  touchDown = false;
-                  events.onNext();
-                }
-                else if ( distance > 100 ) {
-                  touchStart = null;
-                  reachedEdge = false;
-                  touchDown = false;
-                  events.onPrev();
-                }
-              }
-            }
-          } );
-          canvas.addEventListener( 'touchend', () => {
-            touchStart = null;
-            touchDown = false;
-          } );
-        }
 
       };
 
