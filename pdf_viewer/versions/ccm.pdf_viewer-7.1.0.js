@@ -4,7 +4,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
- * @version latest (7.1.0)
+ * @version 7.1.0
  * @changes
  * version 7.1.0 (30.12.2021):
  * - uses ccmjs v27.1.2 as default
@@ -21,6 +21,7 @@
 ( () => {
   const component = {
     name: 'pdf_viewer',
+    version: [ 7, 1, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.2.min.js',
     config: {
       "css": [ "ccm.load",
