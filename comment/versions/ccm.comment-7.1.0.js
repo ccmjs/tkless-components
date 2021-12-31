@@ -5,7 +5,10 @@
  * @license The MIT License (MIT)
  * @version 7.1.0
  * @changes
- * version 7.1.0 (29.12.2021): added multilingualism
+ * version 7.1.0 (31.12.2021):
+ * - added multilingualism
+ * - uses ccmjs v27.1.2 as default
+ * - uses helper.mjs v7.9.0 as default
  * version 7.0.0 (30.09.2021): reimplementation by akless
  */
 
@@ -24,7 +27,7 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "data": { "store": [ "ccm.store" ] },
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.8.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.9.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/templates.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
       "libs": [ "ccm.load",
