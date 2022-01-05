@@ -18,7 +18,7 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-20.0.0.js',
 
     /**
      * default instance configuration
@@ -278,7 +278,7 @@
       target: [ "ccm.component", "../exercise/ccm.exercise.js", { "submit_button": "Save" } ],
       //submit_button: "Submit",
       //preview: true,
-      editor: [ "ccm.component", "https://ccmjs.github.io/tkless-components/editor/versions/ccm.editor-3.0.0.js", {
+      editor: [ "ccm.component", "../editor/ccm.editor.js", {
         "settings.modules.toolbar": [
           [ { 'header': [ 1, 2, 3, 4, 5, 6, false ] } ],
           [ "bold", "italic", "underline" ],
