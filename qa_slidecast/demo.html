@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Slidecast Demo</title>
+
+<body></body>
+
+<script src="https://ccmjs.github.io/ccm/versions/ccm-25.4.0.js"></script>
+
+<script>
+  window.ccm.start( "https://ccmjs.github.io/tkless-components/qa_slidecast/versions/ccm.qa_slidecast-1.0.0.js", {
+    root: document.body,
+    slides: "https://ccmjs.github.io/work-and-study/learningapp-marketplace/resources/GameChanger.pdf",
+    audio: {
+      "1": "https://ccmjs.github.io/tkless-components/slidecast/resources/slides/learningApps/work&study-jingle.mp3",
+    },
+    'comment.data': {
+      "store": [ "ccm.store", { "name": "wheiden2m_slidecast", "url": "https://ccm2.inf.h-brs.de" } ],
+      "key": "fach_sose_2020"
+    },
+    user: [ "ccm.instance", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.5.0.js",
+      [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/configs.js", "hbrsinfkaul" ] ],
+  } );
+</script>
