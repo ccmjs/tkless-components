@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for table generating
- * @author Tea Kless <tea.kless@web.de>, 2018-2019
+ * @author Tea Kless <tea.kless@web.de>, 2018-2020
  * @license The MIT License (MIT)
  * @changes
  *  @version 4.0.0
