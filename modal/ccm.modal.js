@@ -1,183 +1,115 @@
 /**
- * @overview ccm component for modal dilaog
- * @author Tea Kless <tea.kless@web.de>, 2019
+ * @overview ccmjs-based web component for a modal dialog
+ * @author Tea Kless <tea.kless@web.de>, 2018-2019
+ * @author André Kless <andre.kless@web.de> 2021
  * @license The MIT License (MIT)
+ * @version latest (3.1.0)
+ * @changes
+ * version 3.1.0 (05.07.2021)
+ * - added optional onclose callback
+ * - uses ccmjs v26.4.0 as default
+ * - uses helper.mjs v7.4.0 as default
+ * version 3.0.0 (01.04.2021)
+ * - uses ccmjs v26.2.1 as default
+ * - uses helper.mjs v7.1.0 as default
+ * - HTML templates moved to a template file
+ * - changed config properties
+ * - removed support for multilingualism
+ * - removed logging support
+ * - modal dialog can be opened, closed and removed via method
+ * - optional click on backdrop closes the modal dialog
+ * - modal dialog is opened after start as default
+ * - footer buttons are more customizable
+ * - modal dialog can be used standalone
+ * - 'data-close' attribute marks buttons that closes the modal dialog
+ * (for older version changes see ccm.modal-2.0.0.js)
  */
 
-( function () {
-
+( () => {
   const component = {
-
     name: 'modal',
-
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
-
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-26.4.0.js',
     config: {
-      html: {
-        main: {
-          "id": "modal",
-          "inner": [
-            {
-              "id": "modal-backdrop",
-              "onclick": "%modal_close%",
-            },
-            {
-              "id": "modal-body",
-              "inner": {
-                "id": "modal-content",
-                "inner": [
-                  {
-                    "tag": "header",
-                    "inner": [
-                      {
-                        "tag": "h4",
-                        "id": "modal-title",
-                        "inner": "%modal_title%"
-                      },
-                      {
-                        "tag": "button",
-                        "type": "button",
-                        "class": "close",
-                        "onclick": "%modal_close%",
-                        "inner": "×"
-                      }
-                    ]
-                  },
-                  {
-                    "tag": "article"
-                  },
-                  {
-                    "tag": "footer"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        button: {
-          "tag": "button",
-          "type": "button"
-        },
-      },
-      modal_title: "", //"My Modal",
-      modal_content: [ "ccm.instance", "https://ccmjs.github.io/akless-components/quiz/versions/ccm.quiz-3.0.1.js",
-        [ "ccm.get","https://ccmjs.github.io/akless-components/quiz/resources/configs.js","demo" ] ],
-      footer: [
-        { "caption": "Save", "style": "success", "onclick": function ( event ){ console.log( 'Save', event, this ); } },
-        { "caption": "Close", "style": "danger", "onclick": () => { console.log( 'Close' ); } }
+//    "backdrop_close": true,
+      "buttons": [
+        {
+          "html": "<button class='btn btn-secondary' data-close onclick='%%'>Close</button>",
+          "onclick": () => {}
+        }
       ],
-      libs: [ "ccm.load", "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css",
-        "https://ccmjs.github.io/tkless-components/modal/resources/default.css"
-      ]
-//    lang: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/lang/versions/ccm.lang-1.0.0.js" ]
+//    "closed": true,
+      "content": "My Content",
+      "css": [ "ccm.load",
+        [  // serial
+          "https://ccmjs.github.io/akless-components/libs/bootstrap-4/css/bootstrap.min.css",
+          "https://ccmjs.github.io/tkless-components/modal/resources/default-2.css"
+        ]
+      ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.4.0.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/modal/resources/templates.mjs" ],
+//    "onclose": instance => {},
+      "title": "My Header"
     },
-
     Instance: function () {
-      /**
-       * own reference for inner functions
-       * @type {Instance}
-       */
-      const self = this;
 
-      /**
-       * privatized instance members
-       * @type {object}
-       */
-      let my;
-
-      /**
-       * shortcut to help functions
-       * @type {Object.<string,function>}
-       */
       let $;
-
-      this.init = async () => {
-        // set shortcut to help functions
-        $ = self.ccm.helper;
-      };
-
-      this.ready = async () => {
-
-        // privatize all possible instance members
-        my = $.privatize( self );
-
-        if ( self.logger ) self.logger.log( 'ready',$.clone( my ) );
-      };
 
       this.start = async () => {
 
-        const main = $.html( my.html.main, {
-          modal_title: $.html( my.modal_title ),
-          modal_close: () => {
-            document.body.style.overflowY = 'unset';
-            $.removeElement( self.root );
-          }
-        } );
+        // set shortcut to help functions
+        $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        if( my.footer ){
-          renderFooter();
+        // render main HTML template
+        $.setContent( this.element, $.html( this.html.main, this.title ) );
+
+        // modal dialog can be optionally closed by click on the backdrop area
+        if ( this.backdrop_close ) this.element.querySelector( '#backdrop' ).dataset.close = '';
+
+        // render content
+        $.setContent( this.element.querySelector( 'main' ), $.isInstance( this.content ) ? this.content.root : $.html( this.content ) );
+
+        // render footer buttons or remove footer
+        if ( this.buttons )
+          this.buttons.forEach( button => $.append( this.element.querySelector( 'footer' ), $.html( button.html, button.onclick ) ) );
+        else
+          $.remove( this.element.querySelector( 'footer' ) );
+
+        // each button with a 'data-dismiss' attribute closes the modal dialog when clicked
+        this.element.querySelectorAll( '[data-close]' ).forEach( button => button.addEventListener( 'click', this.close ) );
+
+        // is not standalone?
+        if ( this.parent ) {
+          const root = this.ccm.context.root( this );
+          root.element.parentNode.appendChild( this.root );
+          root.root.style.position = 'relative';
+          this.root.setAttribute( 'style', 'position: absolute; width: 100%; height: 100%; top: 0; left: 0' );
         }
 
-        if( self.modal_content || my.modal_content ){
-          await renderContent();
-        }
-
-        $.setContent( self.element, main );
-        self.ccm.context.root( self ).element.scrollIntoView(true);
-        document.body.style.overflowY = 'hidden';
-
-        $.append( self.parent.element.parentNode, self.root );
-        self.root.setAttribute( "style", "position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 100;" );
-
-        // translate content
-        const lang_elem = this.element.querySelector( '#lang' );
-        if ( self.lang ) {
-          await self.lang.start();
-          lang_elem && $.setContent( lang_elem, self.lang.root );
-          self.lang.translate();
-        }
-        else if ( lang_elem ) $.removeElement( lang_elem );
-
-        async function renderContent() {
-          if( $.isInstance( self.modal_content ) ) {
-            await self.modal_content.start();
-            $.setContent( main.querySelector( 'article' ), self.modal_content.root );
-          }
-          else
-            main.querySelector( 'article' ).appendChild( $.html( my.modal_content ) );
-        }
-
-        function renderFooter() {
-          for ( let i = 0; i < my.footer.length; i++ ){
-            let button = my.html.button;
-            for( let prop in my.footer[ i ] ){
-              switch ( prop ) {
-                case 'caption':
-                  button.inner = my.footer[ i ][ prop ];
-                  break;
-                case 'style':
-                  button.class = "btn btn-"+ my.footer[ i ][ prop ];
-                  break;
-                case 'onclick':
-                  button.onclick = event => my.footer[ i ].onclick.call( self, event );
-                  break;
-                default:
-                  button[ prop ] = my.footer[ i ][ prop ];
-                  break;
-              }
-            }
-            main.querySelector( "footer" ).appendChild( $.html( button ) );
-          }
-        }
+        // initially closed? => close modal dialog
+        this.closed && this.close();
 
       };
 
+      /** opens the modal dialog */
+      this.open = () => {
+        if ( this.parent ) document.body.style.overflowY = 'hidden';
+        this.root.style.display = 'block';
+        this.element.querySelector( '#dialog' ).classList.add( 'show' );
+        this.ccm.context.root( this ).element.scrollIntoView( true );
+      };
+
+      /** closes the modal dialog */
       this.close = () => {
-        document.body.style.overflowY = 'unset';
-        $.removeElement( self.root );
+        if ( this.parent ) document.body.style.overflowY = 'unset';
+        this.element.querySelector( '#dialog' ).classList.remove( 'show' );
+        this.root.style.display = 'none';
+        this.onclose && this.onclose( this );
       };
+
+      /** removes the modal dialog */
+      this.remove = () => { this.close(); $.remove( this.root ); };
+
     }
   };
-
-  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||["latest"])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
+  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||[""])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){(c="latest"?window.ccm:window.ccm[c]).component(component);document.head.removeChild(a)};a.src=component.ccm.url}
 } )();

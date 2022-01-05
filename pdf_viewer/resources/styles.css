@@ -1,0 +1,93 @@
+/**
+ * @overview default layout of ccmjs-based web component for PDF viewer
+ * @author André Kless <andre.kless@web.de.de> 2021
+ * @license The MIT License (MIT)
+ */
+
+header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+header > * {
+  padding: 0.5em 1em 0 1em;
+}
+
+main {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > div {
+  box-shadow: 0 0 5px #888888;
+  width: 100%;
+  max-width: 940px;
+  display: flex;
+}
+
+#page {
+  margin-bottom: 0.5em;
+  border: 1px solid #ddd;
+}
+
+#page > * {
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+nav > div {
+  display: flex;
+  align-items: center;
+}
+
+#controls {
+  border-radius: 5px;
+  width: 100%;
+  line-height: normal;
+}
+
+#extra {
+  border-left: 1px solid #ddd;
+}
+
+i {
+  font-size: 30px;
+  padding: 0 0.5em;
+}
+
+i:not([disabled]) {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+
+a i {
+  font-size: 25px;
+}
+
+input {
+  min-width: 50px;
+  text-align: center;
+  padding: 1px 3px;
+}
+
+*[disabled] {
+  color: lightgray;
+  cursor: not-allowed;
+}
+
+*[data-hidden] {
+  display: none;
+}

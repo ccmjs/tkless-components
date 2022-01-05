@@ -1,6 +1,6 @@
 /**
  * @overview ccm component for modal dilaog
- * @author Tea Kless <tea.kless@web.de>, 2019
+ * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @license The MIT License (MIT)
  * @version 2.0.0
  * start modal dialog automatically, no open needed
