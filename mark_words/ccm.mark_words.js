@@ -120,7 +120,8 @@
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         '../mark_words/resources/default.css'
-      ]
+      ],
+      helper: [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-4.0.1.mjs" ]
     },
 
     Instance: function () {
@@ -147,9 +148,10 @@
       this.init = async () => {
 
         // set shortcut to help functions
-        $ = self.ccm.helper;
+        $ = Object.assign( {}, this.ccm.helper, this.helper );
+
         // text is given as HTML Element Node? => use innerHTML
-        if ( $.isElementNode( self.text ) ) self.text = self.inner.innerHTML;
+        if ( $.isElement( self.text ) ) self.text = self.inner.innerHTML;
       };
 
       this.ready = async () => {
