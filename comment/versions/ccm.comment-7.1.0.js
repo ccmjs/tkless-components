@@ -115,7 +115,7 @@
         // separate commentary data in comments, answers and ratings
         const result = { comments: {}, answers: {}, ratings: {} };
         data.forEach( dataset => {
-          if ( !dataset.comments )  // is comment or answer data? => set initial ratings
+          if ( !dataset.comments )  // is no ratings data? => set initial ratings
             dataset.rating = { like: {}, dislike: {}, heart: {}, report: {} };
           result[ dataset.comments ? 'ratings' : ( dataset.answer ? 'answers' : 'comments' ) ][ dataset.key ] = dataset;
         } );
@@ -124,7 +124,7 @@
         // transfer rating data to comments and answers
         Object.values( data.ratings ).forEach( user => {
           Object.keys( user.comments ).forEach( key => {
-            const comment = data[ key.split( ',' ).length === 2 ? 'comments' : 'answers' ][ key ];
+            const comment = data.comments[ key ] || data.answers[ key ];
             const rating = user.comments[ key ];
             if ( rating.like === true ) comment.rating.like[ user.user ] = true;
             if ( rating.like === false ) comment.rating.dislike[ user.user ] = true;
@@ -193,7 +193,7 @@
           const user = await this.user.login();
 
           // define unique key of new comment
-          const comment_key = key && key.split( ',' )[ key.length - 1 ] || $.generateKey();
+          const comment_key = key && key.split( ',' ).pop() || $.generateKey();
 
           // define initial data of new comment
           const comment = {
