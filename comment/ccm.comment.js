@@ -192,7 +192,7 @@
           const user = await this.user.login();
 
           // define unique key of new comment
-          const comment_key = key && key.split( ',' )[ 1 ] || $.generateKey();
+          const comment_key = key && key.split( ',' )[ key.length - 1 ] || $.generateKey();
 
           // define initial data of new comment
           const comment = {
