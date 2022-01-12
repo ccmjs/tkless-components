@@ -193,7 +193,7 @@
 
           // define unique key of new comment
           const is_comment = key && data.comments[ key ];
-          const split = key.split( ',' );
+          const split = key && key.split( ',' );
           const comment_key = key && split[ split.length - ( is_comment ? 1 : 2 ) ] || $.generateKey();
 
           // define initial data of new comment
