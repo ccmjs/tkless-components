@@ -406,7 +406,7 @@
 
         // get rating data (or use initial rating data if not exists)
         const rating = data.ratings[ this.data.key.app + ',' + user ] || {
-          key: [ this.data.key.app, user ],
+          key: [].concat( this.data.key.app ).concat( user ),
           app: this.data.key.app,
           user: user,
           comments: {},
