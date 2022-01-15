@@ -94,7 +94,7 @@ export const example = {
 };
 
 /**
- * german texts and labels for PDF viewer
+ * german texts and labels
  * @type {Object}
  */
 export const de = {
@@ -120,7 +120,7 @@ export const de = {
 };
 
 /**
- * english texts and labels for PDF viewer
+ * english texts and labels
  * @type {Object}
  */
 export const en = {
