@@ -95,7 +95,7 @@
 
         // add plugin to dayjs library
         dayjs.extend( window.dayjs_plugin_relativeTime );
-        dayjs.locale( this.text.key );
+        dayjs.locale( this.text.locale );
 
         // listen to language change event => translate timestamps
         this.lang && this.lang.observe( lang => { dayjs.locale( lang ); render(); } );
