@@ -4,6 +4,10 @@
  * @license The MIT License (MIT)
  */
 
+#element {
+  width: 100%;
+}
+
 header {
   display: flex;
   justify-content: end;
