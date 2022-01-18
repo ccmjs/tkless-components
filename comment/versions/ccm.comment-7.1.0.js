@@ -96,7 +96,7 @@
 
         // add plugin to dayjs library
         dayjs.extend( window.dayjs_plugin_relativeTime );
-        dayjs.locale( this.text.key );
+        dayjs.locale( this.text.locale );
 
         // listen to language change event => translate timestamps
         this.lang && this.lang.observe( lang => { dayjs.locale( lang ); render(); } );
@@ -115,7 +115,7 @@
         // separate commentary data in comments, answers and ratings
         const result = { comments: {}, answers: {}, ratings: {} };
         data.forEach( dataset => {
-          if ( !dataset.comments )  // is comment or answer data? => set initial ratings
+          if ( !dataset.comments )  // is no ratings data? => set initial ratings
             dataset.rating = { like: {}, dislike: {}, heart: {}, report: {} };
           result[ dataset.comments ? 'ratings' : ( dataset.answer ? 'answers' : 'comments' ) ][ dataset.key ] = dataset;
         } );
@@ -124,7 +124,7 @@
         // transfer rating data to comments and answers
         Object.values( data.ratings ).forEach( user => {
           Object.keys( user.comments ).forEach( key => {
-            const comment = data[ key.split( ',' ).length === 2 ? 'comments' : 'answers' ][ key ];
+            const comment = data.comments[ key ] || data.answers[ key ];
             const rating = user.comments[ key ];
             if ( rating.like === true ) comment.rating.like[ user.user ] = true;
             if ( rating.like === false ) comment.rating.dislike[ user.user ] = true;
@@ -193,7 +193,9 @@
           const user = await this.user.login();
 
           // define unique key of new comment
-          const comment_key = key && key.split( ',' )[ 1 ] || $.generateKey();
+          const is_comment = key && data.comments[ key ];
+          const split = key && key.split( ',' );
+          const comment_key = key && split[ split.length - ( is_comment ? 1 : 2 ) ] || $.generateKey();
 
           // define initial data of new comment
           const comment = {
@@ -404,7 +406,7 @@
 
         // get rating data (or use initial rating data if not exists)
         const rating = data.ratings[ this.data.key.app + ',' + user ] || {
-          key: [ this.data.key.app, user ],
+          key: [].concat( this.data.key.app ).concat( user ),
           app: this.data.key.app,
           user: user,
           comments: {},

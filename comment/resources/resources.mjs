@@ -94,11 +94,10 @@ export const example = {
 };
 
 /**
- * german texts and labels for PDF viewer
+ * german texts and labels
  * @type {Object}
  */
 export const de = {
-  "key": "de",
   "answer": "ANTWORTEN",
   "answers": "Zeige %% Antworten",
   "comments": "%% Kommentare",
@@ -108,6 +107,7 @@ export const de = {
   "edit": "Kommentar editieren",
   "heart": "Ich liebe diesen Kommentar",
   "like": "Ich mag diesen Kommentar",
+  "locale": "de",
   "picture": "Profilbild des Benutzers",
   "recycle": "Löschen des Kommentars rückgängig machen",
   "report": "Diesen Kommentar als unangemessen markieren",
@@ -120,11 +120,10 @@ export const de = {
 };
 
 /**
- * english texts and labels for PDF viewer
+ * english texts and labels
  * @type {Object}
  */
 export const en = {
-  "key": "en",
   "answer": "ANSWER",
   "answers": "Show %% Answers",
   "comments": "%% Comments",
@@ -134,6 +133,7 @@ export const en = {
   "edit": "Edit this comment",
   "heart": "I really love this comment",
   "like": "I like this comment",
+  "locale": "en",
   "picture": "User Picture",
   "recycle": "Undo the deletion of the comment",
   "report": "Report this comment as inappropriate",
