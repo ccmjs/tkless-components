@@ -34,6 +34,7 @@
      * @type {string}
      */
     name: 'mark_words',
+    version: [ 4,1,0 ],
 
     /**
      * recommended used framework version
