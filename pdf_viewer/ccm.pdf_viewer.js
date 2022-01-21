@@ -209,7 +209,7 @@
         const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
 
         // give canvas element a moment to resize
-        await $.sleep( 30 );
+        await $.sleep( 100 );
 
         /**
          * current page

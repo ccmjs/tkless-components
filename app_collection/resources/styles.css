@@ -1,0 +1,115 @@
+/**
+ * @overview default layout of ccmjs-based web component for an app collection
+ * @author André Kless <andre.kless@web.de.de> 2022
+ * @license The MIT License (MIT)
+ */
+
+/* Light mode */
+#element {
+  --bg: white;
+  --color: black;
+  --section-bg: #009EE0;
+  --section-color: white;
+  --hover-bg: #DDD;
+  --hover-color: var( --color );
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  #element {
+    --bg: black;
+    --color: white;
+    --section-bg: deepskyblue;
+    --section-color: black;
+    --hover-bg: darkblue;
+    --hover-color: var( --color );
+  }
+}
+
+#element {
+  background-color: var( --bg );
+  color: var( --color );
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+  border-bottom: 1px solid var( --section-bg );
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+}
+
+header > div > * {
+  padding: 0.5em;
+}
+
+header svg {
+  width: 32px;
+  height: 32px;
+}
+
+main .title {
+  background-color: var( --section-bg );
+  color: var( --section-color );
+  padding: 0.5em 0.8em;
+  font-size: large;
+  font-weight: bold;
+}
+
+main .entry {
+  padding: 0.5em 0.8em;
+  display: flex;
+  align-items: center;
+}
+
+main img {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.3em;
+}
+
+footer {
+  border-top: 1px solid var( --section-bg );
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+footer .entry {
+  flex-grow: 1;
+  text-align: center;
+  padding: 0.5em;
+}
+
+footer img {
+  width: 32px;
+  height: 32px;
+}
+
+.entry {
+  cursor: pointer;
+  font-size: medium;
+}
+
+.entry:hover {
+  background-color: var( --hover-bg );
+  color: var( --hover-color );
+}
+
+[data-invisible] {
+  visibility: hidden;
+}
+
+[data-hidden] {
+  display: none;
+}
