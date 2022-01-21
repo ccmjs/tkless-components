@@ -28,6 +28,7 @@ export const test = {
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../app_collection/resources/templates.mjs",
+  "icon": [ "ccm.load", "./../app_collection/resources/app.svg" ],
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "sections": [
