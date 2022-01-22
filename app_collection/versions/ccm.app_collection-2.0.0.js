@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (21.01.2022): reimplementation by akless
+ * version 2.0.0 (23.01.2022): reimplementation by akless
  */
 
 ( () => {
@@ -107,14 +107,17 @@
        */
       const render = async ( i, j ) => {
         let element = this.element.querySelector( 'main' );
+        this.html.render( this.html.headline( this.title, i && ( this[ j ? 'sections' : 'footer' ][ i - 1 ].title ), j && this.sections[ i - 1 ].entries[ j - 1 ].title ), this.element.querySelector( '#headline' ) );
         if ( !i ) {
           $.replace( element, element = element.cloneNode() );            // resets lit-html template
           this.html.render( this.html.home( this, onClick ), element );
           return;
         }
         const entry = !j ? this.footer[ i - 1 ] : this.sections[ i - 1 ].entries[ j - 1 ];
-        if ( entry.ignore )
+        if ( entry.ignore ) {
+          entry.ignore[ 2 ] = { parent: this, src: entry.ignore[ 2 ] };
           entry.content = await $.solveDependency( entry.ignore );
+        }
         $.setContent( element, $.isInstance( entry.content ) ? entry.content.root : $.html( entry.content ) );
       };
 
