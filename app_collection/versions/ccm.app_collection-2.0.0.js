@@ -107,6 +107,7 @@
        */
       const render = async ( i, j ) => {
         let element = this.element.querySelector( 'main' );
+        $.setContent( element, $.loading() );
         const updateHeadline = () => this.html.render( this.html.headline( this.title, i && ( this[ j ? 'sections' : 'footer' ][ i - 1 ].title ), j && this.sections[ i - 1 ].entries[ j - 1 ].title ), this.element.querySelector( '#headline' ) );
         if ( !i ) {
           $.replace( element, element = element.cloneNode() );            // resets lit-html template
