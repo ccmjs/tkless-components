@@ -1,11 +1,33 @@
 /**
  * @overview default layout of ccmjs-based web component for PDF viewer
- * @author André Kless <andre.kless@web.de.de> 2021
+ * @author André Kless <andre.kless@web.de.de> 2021-2022
  * @license The MIT License (MIT)
  */
 
+/* Light mode */
+#element {
+  --bg: white;
+  --color: black;
+  --border: lightgray;
+  --shadow: dimgray;
+  --disabled: lightgray;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  #element {
+    --bg: black;
+    --color: white;
+    --border: lightgray;
+    --shadow: lightgray;
+    --disabled: dimgray;
+  }
+}
+
 #element {
   width: 100%;
+  background-color: var( --bg );
+  color: var( --color );
 }
 
 header {
@@ -26,7 +48,7 @@ main {
 }
 
 main > div {
-  box-shadow: 0 0 5px #888888;
+  box-shadow: 0 0 5px var( --shadow );
   width: 100%;
   max-width: 940px;
   display: flex;
@@ -34,7 +56,7 @@ main > div {
 
 #page {
   margin-bottom: 0.5em;
-  border: 1px solid #ddd;
+  border: 1px solid var( --border );
 }
 
 #page > * {
@@ -59,7 +81,7 @@ nav > div {
 }
 
 #extra {
-  border-left: 1px solid #ddd;
+  border-left: 1px solid var( --border );
 }
 
 i {
@@ -88,7 +110,7 @@ input {
 }
 
 *[disabled] {
-  color: lightgray;
+  color: var( --disabled );
   cursor: not-allowed;
 }
 

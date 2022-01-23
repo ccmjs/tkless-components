@@ -2,13 +2,13 @@
  * @overview ccmjs-based web component for PDF viewer
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de> 2020
- * @author André Kless <andre.kless@web.de> 2021
+ * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
  * @version 7.1.0
  * @changes
- * version 7.1.0 (30.12.2021):
- * - uses ccmjs v27.1.2 as default
- * - uses helper.mjs v7.9.0 as default
+ * version 7.1.0 (23.01.2021):
+ * - uses ccmjs v27.2.0 as default
+ * - uses helper.mjs v8.0.0 as default
  * - set start page via config
  * - bugfix for optional routing
  * - added optional multilingualism
@@ -21,7 +21,7 @@
   const component = {
     name: 'pdf_viewer',
     version: [ 7, 1, 0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.2.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles.min.css",
@@ -29,20 +29,20 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "downloadable": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.9.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
 //    "onchange": ( instance, page ) => { console.log( instance, page ) },
       "page": 1,
-      "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/en/slides.pdf",
+      "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
       "pdfjs": {
         "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.min.js" ],
         "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.worker.min.js",
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ]
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#de" ]
     },
     Instance: function () {
 
