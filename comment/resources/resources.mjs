@@ -1,6 +1,6 @@
 /**
  * @overview data-based resources of ccmjs-based web component for commentary
- * @author André Kless <andre.kless@web.de> 2021
+ * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
  */
 
@@ -165,19 +165,18 @@ export const test = {
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../comment/resources/templates.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
-    "active": "en",
     "translations": { "de": de, "en": en }
   } ],
-  "libs": [ "ccm.load",
+  "libs": [ "ccm.load", [
+    "./../libs/dayjs/dayjs.min.js",
     [
-      "./../libs/dayjs/dayjs.min.js",
-      "./../libs/dayjs/relativeTime.min.js"
-    ],
-    "./../libs/dayjs/de.min.js"
-  ],
+      "./../libs/dayjs/relativeTime.min.js",
+      "./../libs/dayjs/de.min.js",
+    ]
+  ] ],
   "picture": "./../comment/resources/portraits/default.svg",
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
-  "text": [ "ccm.load", "./../comment/resources/resources.mjs#en" ],
+  "text": [ "ccm.load", "./../comment/resources/resources.mjs#de" ],
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.js", "cloud" ] ]
 };
 
@@ -191,15 +190,14 @@ export const demo = {
     "key": "demo"
   },
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
-    "active": "de",
     "translations": { "de": de, "en": en }
   } ],
   "libs": [ "ccm.load", [
+    "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
     [
-      "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
-      "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
-    ],
-    "https://ccmjs.github.io/tkless-components/libs/dayjs/de.min.js"
+      "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js",
+      "https://ccmjs.github.io/tkless-components/libs/dayjs/de.min.js"
+    ]
   ] ],
   "text": de
 };

@@ -1,21 +1,21 @@
 /**
  * @overview ccmjs-based web component for commentary
  * @author Tea Kless <tea.kless@web.de> 2020
- * @author André Kless <andre.kless@web.de> 2021
+ * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
  * @version latest (7.1.0)
  * @changes
- * version 7.1.0 (31.12.2021):
+ * version 7.1.0 (23.01.2022):
  * - added multilingualism
- * - uses ccmjs v27.1.2 as default
- * - uses helper.mjs v7.9.0 as default
+ * - uses ccmjs v27.2.0 as default
+ * - uses helper.mjs v8.0.0 as default
  * version 7.0.0 (30.09.2021): reimplementation by akless
  */
 
 ( () => {
   const component = {
     name: 'comment',
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.1.2.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
       "css": [ "ccm.load",
         [  // serial
@@ -26,13 +26,13 @@
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "data": { "store": [ "ccm.store" ] },
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-7.9.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/templates.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
-      "libs": [ "ccm.load",
+      "libs": [ "ccm.load", [
         "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
         "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
-      ],
+      ] ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       "picture": "https://ccmjs.github.io/tkless-components/comment/resources/portraits/default.svg",
       "controls": {
