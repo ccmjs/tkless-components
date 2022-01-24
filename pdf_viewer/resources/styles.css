@@ -29,16 +29,6 @@
   color: var( --color );
 }
 
-header {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-header > * {
-  padding: 0.5em 1em 0 1em;
-}
-
 main {
   padding: 1em;
   display: flex;
@@ -46,11 +36,20 @@ main {
   align-items: center;
 }
 
-main > div {
-  box-shadow: 0 0 5px var( --shadow );
+main > * {
   width: 100%;
   max-width: 940px;
   display: flex;
+}
+
+header {
+  border: 0;
+  justify-content: end;
+  align-items: center;
+}
+
+header > * {
+  padding-bottom: 0.5em;
 }
 
 #page {
@@ -60,6 +59,11 @@ main > div {
 
 #page > * {
   width: 100%;
+}
+
+main > div:last-child {
+  border: 1px solid var( --border );
+  border-radius: 5px;
 }
 
 nav {
@@ -74,7 +78,6 @@ nav > div {
 }
 
 #controls {
-  border-radius: 5px;
   width: 100%;
   line-height: normal;
 }

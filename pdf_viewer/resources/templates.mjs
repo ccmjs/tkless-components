@@ -16,8 +16,8 @@ export { render };
  */
 export function main( instance, events, page_nr, pages ) {
   return html`
-    <header></header>
     <main>
+      <header></header>
       <div id="page">
         <canvas></canvas>
       </div>
