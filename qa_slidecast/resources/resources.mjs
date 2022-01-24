@@ -1,6 +1,6 @@
 /**
  * @overview data-based resources of ccmjs-based web component for slidecast with commentary
- * @author André Kless <andre.kless@web.de> 2021
+ * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
  */
 
@@ -75,7 +75,7 @@ export const slides_de = [
   },
   {
     "content": "https://youtu.be/aqz-KE-bpKQ",
-    "description": "Auch  ein YouTube-Video kann zwischen Folien platziert werden."
+    "description": "Auch ein YouTube-Video kann zwischen Folien platziert werden."
   },
   {
     "audio": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/demo/de/slide3.m4a",
@@ -133,8 +133,8 @@ export const slides_en = [
  */
 export const test = {
   "comment": [ "ccm.component", "./../comment/ccm.comment.js", {
-    "src": [ "ccm.load", "./../comment/resources/resources.mjs#local" ],
-    "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
+    "data": { "store": [ "ccm.store" ] },
+    "src": [ "ccm.load", "./../comment/resources/resources.mjs#test" ]
   } ],
   "css": [ "ccm.load",
     "./../qa_slidecast/resources/styles.css",
@@ -144,13 +144,17 @@ export const test = {
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../qa_slidecast/resources/templates.mjs",
   "ignore": {
-    "slides": slides_en
+    "slides": slides_de
   },
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
+    "translations": { "de": text_de, "en": text_en }
+  } ],
   "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
   "onstart": instance => { console.log( 'start', instance.slide_nr ) },
-  "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
+  "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#test" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.js" ],
-  "text": text_en
+  "text": text_de,
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ]
 };
 
 /**
@@ -160,13 +164,16 @@ export const test = {
 export const demo = {
   "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js", {
     "data": { "store": [ "ccm.store" ] },
-    "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ],
-    "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
+    "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ]
   } ],
   "ignore": {
     "slides": slides_de
   },
-  "pdf_viewer": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.0.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ],
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
+    "translations": { "de": text_de, "en": text_en }
+  } ],
+  "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.1.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-  "text": text_de
+  "text": text_de,
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
 };
