@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version 2.0.0
  * @changes
- * version 2.0.0 (23.01.2022): reimplementation by akless
+ * version 2.0.0 (24.01.2022): reimplementation by akless
  */
 
 ( () => {
@@ -119,6 +119,7 @@
         if ( entry.ignore ) {
           entry.ignore[ 2 ] = { parent: this, src: entry.ignore[ 2 ] };
           entry.content = await $.solveDependency( entry.ignore );
+          delete entry.ignore;
         }
         $.setContent( element, $.isInstance( entry.content ) ? entry.content.root : $.html( entry.content ) );
         updateHeadline();
