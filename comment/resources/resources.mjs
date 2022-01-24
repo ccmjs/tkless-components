@@ -158,10 +158,7 @@ export const test = {
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
   ],
-  "data": {
-    "store": [ "ccm.store", { "url": "https://ccm2.inf.h-brs.de", "name": "comment-data" } ],
-    "key": "test"
-  },
+  "store": [ "ccm.store", example ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../comment/resources/templates.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
@@ -177,7 +174,7 @@ export const test = {
   "picture": "./../comment/resources/portraits/default.svg",
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "text": [ "ccm.load", "./../comment/resources/resources.mjs#de" ],
-  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/user/resources/resources.js", "cloud" ] ]
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ]
 };
 
 /**
@@ -199,5 +196,6 @@ export const demo = {
       "https://ccmjs.github.io/tkless-components/libs/dayjs/de.min.js"
     ]
   ] ],
-  "text": de
+  "text": de,
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
 };
