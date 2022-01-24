@@ -8,6 +8,7 @@
 #element {
   --bg: white;
   --color: black;
+  --header-bg: rgba( 248, 249, 250, 1 );
   --section-bg: #009EE0;
   --section-color: white;
   --hover-bg: #DDD;
@@ -19,6 +20,7 @@
   #element {
     --bg: black;
     --color: white;
+    --header-bg: #3b3b3b;
     --section-bg: deepskyblue;
     --section-color: black;
     --hover-bg: darkblue;
@@ -41,7 +43,7 @@ header {
   position: sticky;
   top: 0;
   border-bottom: 1px solid var( --section-bg );
-  background-color: var( --bg );
+  background-color: var( --header-bg );
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -104,7 +106,7 @@ footer {
   position: sticky;
   bottom: 0;
   border-top: 1px solid var( --section-bg );
-  background-color: var( --bg );
+  background-color: var( --header-bg );
   display: flex;
   justify-content: space-evenly;
   align-items: center;
