@@ -66,9 +66,7 @@ const example_footer = [
  * @type {Object}
  */
 export const test = {
-  "css": [ "ccm.load",
-    "./../app_collection/resources/styles.css"
-  ],
+  "css": [ "ccm.load", "./../app_collection/resources/styles.css" ],
   "footer": example_footer,
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../app_collection/resources/templates.mjs",

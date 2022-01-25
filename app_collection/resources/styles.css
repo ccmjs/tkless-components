@@ -9,6 +9,7 @@
   --bg: white;
   --color: black;
   --header-bg: rgba( 248, 249, 250, 1 );
+  --border: #dee2e6;
   --section-bg: #009EE0;
   --section-color: white;
   --hover-bg: #DDD;
@@ -19,10 +20,11 @@
 @media (prefers-color-scheme: dark) {
   #element {
     --bg: black;
-    --color: white;
+    --color: #fafafa;
+    --border: #515151;
     --header-bg: #3b3b3b;
     --section-bg: deepskyblue;
-    --section-color: black;
+    --section-color: #111;
     --hover-bg: darkblue;
     --hover-color: var( --color );
   }
@@ -42,7 +44,7 @@
 header {
   position: sticky;
   top: 0;
-  border-bottom: 1px solid var( --section-bg );
+  border-bottom: 1px solid var( --border );
   background-color: var( --header-bg );
   display: flex;
   justify-content: space-between;
@@ -105,7 +107,7 @@ main img {
 footer {
   position: sticky;
   bottom: 0;
-  border-top: 1px solid var( --section-bg );
+  border-top: 1px solid var( --border );
   background-color: var( --header-bg );
   display: flex;
   justify-content: space-evenly;
