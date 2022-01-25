@@ -20,6 +20,7 @@
       "css": [ "ccm.load",
         [  // serial
           "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
+          "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-dark.min.css",
           "https://ccmjs.github.io/tkless-components/comment/resources/styles.min.css"
         ],
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
