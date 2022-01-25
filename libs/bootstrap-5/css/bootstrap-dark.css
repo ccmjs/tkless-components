@@ -110,6 +110,33 @@
     box-shadow: 0 0 0 0.25rem rgba( 57, 175, 194, 0.5 );
   }
 
+  .btn-light {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+  }
+
+  .btn-light:hover {
+    background-color: #323232;
+    border-color: #2f2f2f;
+  }
+
+  .btn-light:active {
+    background-color: #2f2f2f;
+    border-color: #2c2c2c;
+  }
+
+  .btn-light:focus {
+    background-color: #323232;
+    border-color: #2f2f2f;
+    box-shadow: 0 0 0 0.25rem rgba( 88, 88, 88, 0.5 );
+  }
+
+  .btn-light:disabled {
+    background-color: #3b3b3b;
+    border-color: #3b3b3b;
+  }
+
   /* Modal */
 
   .modal-content {
