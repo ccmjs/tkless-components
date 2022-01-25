@@ -1,34 +1,13 @@
 /**
  * @overview
  * ES6 module that exports useful help functions for <i>ccmjs</i> component developers.
- * @author André Kless <andre.kless@web.de> 2019-2021
+ * @author André Kless <andre.kless@web.de> 2019-2022
  * @license The MIT License (MIT)
- * @version latest (7.9.0)
+ * @version latest (8.0.0)
  * @changes
- * version 7.9.0 (30.12.2021):
- * - added touchControl(elem,{onLeft,onRight}):void - adds touch control to an element
- * version 7.8.0 (08.10.2021):
- * - added assign(target,source):target - copies all properties from a source object to a target object with supports of dot notation
- * version 7.7.0 (30.09.2021):
- * - updated onfinish(settings,results,user):void - added user parameter
- * version 7.6.0 (17.09.2021):
- * - updated arrToObj(arr):obj - an array of datasets is converted to an associative array
- * version 7.5.0 (25.08.2021):
- * - updated onfinish(settings,results):void - 'app' and 'user' property for user specific result data
- * version 7.4.1 (05.08.2021):
- * - bugfix dataset(settings):obj - returns an object in any case
- * version 7.4.0 (01.07.2021):
- * - added toKey(string):string
- * version 7.3.0 (29.06.2021):
- * - added toKey(string):string
- * version 7.2.0 (14.04.2021):
- * - added triggerEvent(instance,event,data):void
- * version 7.1.0 (24.03.2021):
- * - shuffleArray(array) returns the array after in-place shuffle
- * version 7.0.0 (23.02.2021):
- * - removed render(TemplateResult,element):void
- * - removed lit-html import
- * (for older version changes see helper-6.0.1.mjs)
+ * version 8.0.0 (07.01.2022):
+ * - updated help functions for app handover
+ * (for older version changes see helper-7.10.0.mjs)
  */
 
 /**
@@ -277,6 +256,22 @@ export const arrToObj = arr => {
 };
 
 /**
+ * copies all properties from a source object to a target object with support of dot notation
+ * @function
+ * @param {Object} [target = {}]
+ * @param {Object} [source = {}]
+ * @returns {Object} modified target object
+ * @example assign( { a: 'x', b: {}, c: [ 'm' ] }, { a: 'n', 'b.d': 'y', 'c.1': 'z' } )  // => { a: 'n', b: { d: 'y' }, c: [ 'm', 'z' ] }
+ * @memberOf ModuleHelper.DataHandling
+ */
+export const assign = ( target = {}, source = {} ) => {
+  source = ccm.helper.toDotNotation( source );
+  for ( let key in source )
+    ccm.helper.deepValue( target, key, source[ key ] );
+  return target;
+};
+
+/**
  * cleans a string from HTML tags
  * @param string
  * @returns {string}
@@ -406,20 +401,29 @@ export const filterProperties = ( obj, ...keys ) => {
 };
 
 /**
- * copies all properties from a source object to a target object with support of dot notation
+ * sets and/or deletes parameters in the URL and returns all parameter values in the URL
  * @function
- * @param {Object} [target = {}]
- * @param {Object} [source = {}]
- * @returns {Object} modified target object
- * @example assign( { a: 'x', b: {}, c: [ 'm' ] }, { a: 'n', 'b.d': 'y', 'c.1': 'z' } )  // => { a: 'n', b: { d: 'y' }, c: [ 'm', 'z' ] }
+ * @param {Object} [values] - key/values that are to be set and/or deleted in the URL
+ * @param {boolean} [push] - push or replace the state in the browser history
+ * @param {boolean} [reset] - discards all previously existing parameters
+ * @returns {Object} key/values of all parameters in the URL
+ * @example
+ * // URL: http://www.example.de?abc=xyz&name=john
+ * params( { abc: '', name: 'jane', foo: 'bar' } )
+ * // => { name: 'jane', foo: 'bar' }
+ * // URL: http://www.example.de?name=jane&foo=bar
  * @memberOf ModuleHelper.DataHandling
  */
-export const assign = ( target = {}, source = {} ) => {
-  source = ccm.helper.toDotNotation( source );
-  for ( let key in source )
-    ccm.helper.deepValue( target, key, source[ key ] );
-  return target;
-};
+export const params = ( values = {}, push, reset ) => {
+  const searchParams = new URLSearchParams( reset ? '' : window.location.search );
+  for ( const key in values )
+    values[ key ] ? searchParams.set( key, values[ key ] ) : searchParams.delete( key );
+  Object.keys( values ).length && window.history[ ( push ? 'push' : 'replace' ) + 'State' ]( '', '', '?' + searchParams.toString().replaceAll( '+', '%20' ) );
+  return window.location.search.slice( 1 ).split( '&' ).reduce( ( acc, s ) => {
+    const [ k, v ] = s.split( '=' );
+    return Object.assign( acc, { [ k ]: decodeURIComponent( v ) } );
+  }, {} );
+}
 
 /**
  * renames the property name of an object
@@ -460,8 +464,10 @@ export const shuffleArray = array => {
 
 /**
  * converts a string to a valid dataset key
+ * @function
  * @param {string} str - string
  * @returns {string} valid dataset key
+ * @memberOf ModuleHelper.DataHandling
  */
 export const toKey = str => str.trim().replace( /\W/g, '' );
 
@@ -1113,199 +1119,115 @@ export const formData = ( elem, settings = {} ) => {
   return ccm.helper.solveDotNotation( data );
 };
 
-/*--------------------------------------------------- Handover App ---------------------------------------------------*/
+/*--------------------------------------------------- App Handover ---------------------------------------------------*/
 
 /**
- * helper functions for handover of an app
- * @namespace ModuleHelper.HandoverApp
+ * helper functions for an app handover
+ * @namespace ModuleHelper.AppHandover
  */
 
 /**
  * @summary returns the URL of a <i>ccmjs</i>-based app
- * @description
- * The entire instance configuration is included in the app URL.<br>
- * If the instance configuration is in a datastore, it can also be linked via a data dependency instead.<br>
- * For this purpose, an object with the datastore accessor configuration and the dataset key must be passed instead of the instance configuration.<br>
- * Instead of a datastore accessor configuration an already created datastore accessor could also be passed.
  * @function
+ * @param {string} url - URL of the webpage which shows the app
  * @param {string} component - URL of the component on which the app is based.
- * @param {Object} [config={}] - configuration for the instance that is created from the component to build the app.
- * @param {string} [url="https://ccmjs.github.io/digital-maker-space/app.html"] - URL of the webpage which shows the app
- * @example // with default configuration
- * appURL( 'https://ccmjs.github.io/akless-components/blank/ccm.blank.js' )
- * // https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/blank/ccm.blank.js&config={}
- * @example // with individual configuration
- * appURL( 'https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js', { times: 5 } )
- * // https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js&config={"times":5}
- * @example // with individual configuration that is stored in a datastore
- * appURL( 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', { store: 'https://ccmjs.github.io/akless-components/cloze/resources/configs.js', key: 'demo' } )
- * // https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js&config={"store":"https://ccmjs.github.io/akless-components/cloze/resources/configs.js","key":"demo"}
- * @example // pass an already created datastore instead of a datastore accessor configuration
- * appURL( 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', { store: await ccm.store( { name: 'cloze', url: 'https://ccm2.inf.h-brs.de' } ), key: 'demo' } )
- * // https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js&config={"store":{"name":"cloze","url":"https://ccm2.inf.h-brs.de"},"key":"demo"}
+ * @param {Object} [config={}] - app configuration (or dependency)
  * @returns {string}
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
  */
-export const appURL = ( component, config = {}, url = 'https://ccmjs.github.io/digital-maker-space/app.html' ) => {
-  if ( ccm.helper.isDatastore( config.store ) ) config.store = config.store.source();
-  return `${url}#component=${encodeURIComponent(component)}&config=${encodeURIComponent(ccm.helper.stringify(config))}`;
+export const appURL = ( url, component, config = {} ) => {
+  if ( config.store && config.key ) config = [ 'ccm.get', ccm.helper.isDatastore( config.store ) ? config.store.source() : config.store, config.key ];
+  if ( config.includes && config.includes( '.mjs#' ) ) config = [ 'ccm.load', config ];
+  return `${ url }?component=${ encodeURIComponent( component ) }&config=${ encodeURIComponent( ccm.helper.stringify( config ) ) }`;
 };
 
 /**
- * decomposes a given app URL of a <i>ccmjs</i>-based app into component URL and instance configuration
+ * returns the script for a bookmarklet that adds an <i>ccmjs</i>-based app in the website
+ * @param {string} component - URL of the component on which the app is based.
+ * @param {Object} [config={}] - app configuration (or dependency)
+ * @returns {string} bookmarklet
+ */
+export const bookmarklet = ( component, config = {} ) => {
+  if ( config.store && config.key ) config = [ 'ccm.get', ccm.helper.isDatastore( config.store ) ? config.store.source() : config.store, config.key ];
+  if ( config.includes && config.includes( '.mjs#' ) ) config = [ 'ccm.load', config ];
+  component = encodeURI( component );
+  const index = encodeURI( ccm.helper.convertComponentURL( component ).index );
+  config = encodeURI( ccm.helper.stringify( config ) );
+  return `javascript:(function()%7Bvar%20u%3D%22${component}%22%2Ci%3D%22${index}%22%2Cc%3D'${config}'%2Ce%3Ddocument.createElement(%22script%22)%3Be.setAttribute(%22src%22%2Cu)%2Cdocument.head.appendChild(e)%2C(e%3Ddocument.createElement(%22ccm-%22%2Bi)).setAttribute(%22src%22%2Cc)%2Cdocument.body.appendChild(e)%7D)()`;
+}
+
+/**
+ * decomposes a given app URL of a <i>ccmjs</i>-based app
  * @function
  * @param {string} app_url - URL of the app
  * @returns {{component:string,config:Object}}
- * @example
- * decomposeAppURL( 'https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/blank/ccm.blank.js&config={}' )
- * // { component: 'https://ccmjs.github.io/akless-components/blank/ccm.blank.js' }
- * @example
- * decomposeAppURL( 'https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js&config={"times":5}' )
- * // { component: 'https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js', config: { times: 5 } }
- * @example
- * decomposeAppURL( 'https://ccmjs.github.io/digital-maker-space/app.html#component=https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js&config={"store":"https://ccmjs.github.io/akless-components/cloze/resources/configs.js","key":"demo"}' )
- * // { component: 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', config: { store: 'https://ccmjs.github.io/akless-components/cloze/resources/configs.js', key: 'demo' } }
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
  */
 export const decomposeAppURL = app_url => {
-
-  // decompose app URL
   const result = {};
   try { app_url = decodeURIComponent( app_url ); } catch ( e ) {}
-  app_url.substr( app_url.indexOf( '#' ) + 1 ).split( '&' ).forEach( part => {
+  app_url.substr( app_url.indexOf( '?' ) + 1 ).split( '&' ).forEach( part => {
     part = part.split( '=' );
     result[ part[ 0 ] ] = part[ 1 ];
   } );
-
-  // adjust config
   if ( result.config )
     if ( result.config === '{}' ) delete result.config;
     else result.config = JSON.parse( result.config );
-
   return result;
 };
 
 /**
- * decomposes a given embed code of a <i>ccmjs</i>-based app into component URL and instance configuration
+ * decomposes a given embed code of a <i>ccmjs</i>-based app
  * @function
  * @param {string} embed_code - embed code of the app
  * @returns {{component:string,config:Object}}
- * @example
- * decomposeEmbedCode( `<script src='https://ccmjs.github.io/akless-components/blank/ccm.blank.js'></script><ccm-blank key='{}'></ccm-blank>` )
- * // { component: 'https://ccmjs.github.io/akless-components/blank/ccm.blank.js' }
- * @example
- * decomposeEmbedCode( `<script src='https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js'></script><ccm-multi_blank key='{"times":5}'></ccm-multi_blank>` )
- * // { component: 'https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js', config: { times: 5 } }
- * @example
- * decomposeEmbedCode( `<script src='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js'></script><ccm-cloze-6-0-3 key='["ccm.get","https://ccmjs.github.io/akless-components/cloze/resources/configs.js","demo"]'></ccm-cloze-6-0-3>` )
- * // { component: 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', config: { store: 'https://ccmjs.github.io/akless-components/cloze/resources/configs.js', key: 'demo' } }
- * @example
- * decomposeEmbedCode( `<ccm-app component='https://ccmjs.github.io/akless-components/blank/ccm.blank.js' key='{}'></ccm-app>` )
- * // { component: 'https://ccmjs.github.io/akless-components/blank/ccm.blank.js' }
- * @example
- * decomposeEmbedCode( `<ccm-app component='https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js' key='{"times":5}'></ccm-app>` )
- * // { component: 'https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js', config: { times: 5 } }
- * @example
- * decomposeEmbedCode( `<ccm-app component='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js' key='["ccm.get","https://ccmjs.github.io/akless-components/cloze/resources/configs.js","demo"]'></ccm-app>` )
- * // { component: 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', config: { store: 'https://ccmjs.github.io/akless-components/cloze/resources/configs.js', key: 'demo' } }
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
  */
 export const decomposeEmbedCode = embed_code => {
-
-  // decompose embed code
   embed_code = ccm.helper.html( `<div>${embed_code}</div>`, undefined, { no_evaluation: true } );
   const result = {
     component: embed_code.firstChild.getAttribute( 'src' ) || embed_code.firstChild.getAttribute( 'component' ),
-    config: embed_code.lastChild.getAttribute( 'key' )
+    config: embed_code.lastChild.getAttribute( 'src' )
   };
-
-  // adjust config
   if ( result.config )
     if ( result.config === '{}' ) delete result.config;
     else result.config = JSON.parse( result.config );
-
-  // config is a data dependency? => use object with store and key for config
-  if ( Array.isArray( result.config ) )
-    result.config = { store: result.config[ 1 ], key: result.config[ 2 ] };
-
   return result;
 };
 
 /**
- * provides a download of a <i>ccmja</i>-based app as HTML file
+ * provides a download of a <i>ccmjs</i>-based app as HTML file
  * @function
  * @param {string} embed_code - embed code (with included script tag) of the app
  * @param {string} [filename='app'] - filename without file extension
  * @param {string} [title='App'] - title of the webpage
  * @param {string} [template='https://ccmjs.github.io/akless-components/resources/templates/app.html'] - URL of the HTML template file
  * @returns {Promise<void>}
- * @example
- * const embed_code = "<script src='https://ccmjs.github.io/akless-components/blank/ccm.blank.js'></sc"+"ript><ccm-blank key='{}'></ccm-blank>";
- * downloadApp( embed_code, 'blank', 'Blank App' );
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
  */
 export const downloadApp = async ( embed_code, filename = 'app', title = 'App', template = 'https://ccmjs.github.io/akless-components/resources/templates/app.html' ) => {
-
-  template = await fetch( template ).then( response => response.text() );                 // load content of HTML template file
-  template = template.replace( '__TITLE__', title ).replace( '__EMBED__', embed_code );   // integrate title and embed code
-  download( `${filename}.html`, template );                                               // provide download of HTML file
-
+  template = await fetch( template ).then( response => response.text() );
+  template = template.replace( '__TITLE__', title ).replace( '__EMBED__', embed_code );
+  download( `${ filename }.html`, template );
 };
 
 /**
  * @summary generates the HTML embed code of a <i>ccmjs</i>-based app
- * @description
- * The entire instance configuration is included in the embed code.<br>
- * If the instance configuration is in a datastore, it can also be linked via a data dependency instead.<br>
- * For this purpose, an object with the datastore accessor configuration and the dataset key must be passed instead of the instance configuration.<br>
- * Instead of a datastore accessor configuration an already created datastore accessor could also be passed.<br>
- * If the embed code does not contain a script tag, it will only work if a <i>ccmjs</i> version is already present in the webpage.
  * @function
  * @param {string} component - URL of the component on which the app is based.
- * @param {Object} [config={}] - configuration for the instance that is created from the component to build the app.
+ * @param {Object} [config={}] - app configuration (or dependency)
  * @param {boolean} [noscript] - embed code does not contain a script tag
  * @returns {string} generated embed code
- * @example // with default configuration
- * embedCode( 'https://ccmjs.github.io/akless-components/blank/ccm.blank.js' )
- * // <script src='https://ccmjs.github.io/akless-components/blank/ccm.blank.js'></script><ccm-blank key='{}'></ccm-blank>
- * @example // with individual configuration
- * embedCode( 'https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js', { times: 5 } )
- * // <script src='https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js'></script><ccm-multi_blank key='{"times":5}'></ccm-multi_blank>
- * @example // with individual configuration that is stored in a datastore
- * embedCode( embedCode( 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', { store: 'https://ccmjs.github.io/akless-components/cloze/resources/configs.js', key: 'demo' } ) )
- * // <script src='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js'></script><ccm-cloze-6-0-3 key='["ccm.get","https://ccmjs.github.io/akless-components/cloze/resources/configs.js","demo"]'></ccm-cloze-6-0-3>
- * @example // pass an already created datastore accessor instead of a datastore accessor configuration
- * embedCode( 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', { store: await ccm.store( { name: 'cloze', url: 'https://ccm2.inf.h-brs.de' } ), key: 'demo' } )
- * // <script src='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js'></script><ccm-cloze-6-0-3 key='["ccm.get",{"name":"cloze","url":"https://ccm2.inf.h-brs.de"},"demo"]'></ccm-cloze-6-0-3>
- * @example // with no script tag and default configuration
- * embedCode( 'https://ccmjs.github.io/akless-components/blank/ccm.blank.js', undefined, true )
- * // <ccm-app component='https://ccmjs.github.io/akless-components/blank/ccm.blank.js' key='{}'></ccm-app>
- * @example // with no script tag and individual configuration
- * embedCode( 'https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js', { times: 5 }, true )
- * // <ccm-app component='https://ccmjs.github.io/akless-components/multi_blank/ccm.multi_blank.js' key='{"times":5}'></ccm-app>
- * @example // with no script tag and individual configuration that is stored in a datastore
- * embedCode( 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', { store: 'https://ccmjs.github.io/akless-components/cloze/resources/configs.js', key: 'demo' }, true )
- * // <ccm-app component='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js' key='["ccm.get","https://ccmjs.github.io/akless-components/cloze/resources/configs.js","demo"]'></ccm-app>
- * @example // with no script tag and an already created datastore accessor is passed instead of a datastore accessor configuration
- * embedCode( 'https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js', { store: await ccm.store( { name: 'cloze', url: 'https://ccm2.inf.h-brs.de' } ), key: 'demo' }, true )
- * // <ccm-app component='https://ccmjs.github.io/akless-components/cloze/versions/ccm.cloze-6.0.3.js' key='["ccm.get",{"name":"cloze","url":"https://ccm2.inf.h-brs.de"},"demo"]'></ccm-app>
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
 */
 export const embedCode = ( component, config = {}, noscript ) => {
-
-  /**
-   * index of the component
-   * @type {string}
-   */
   const index = ccm.helper.convertComponentURL( component ).index;
-
-  // instance configuration comes from a datastore? => use data dependency
   if ( config.store && config.key ) config = [ 'ccm.get', ccm.helper.isDatastore( config.store ) ? config.store.source() : config.store, config.key ];
-
+  if ( config.includes( '.mjs#' ) ) config = [ 'ccm.load', config ];
   if ( noscript )
-    return `<ccm-app component='${component}' key='${ccm.helper.stringify(config)}'></ccm-app>`;
+    return `<ccm-app component='${component}' src='${ccm.helper.stringify(config)}'></ccm-app>`;
   else
-    return `<script src='${component}'></script><ccm-${index} key='${ccm.helper.stringify(config)}'></ccm-${index}>`;
+    return `<script src='${component}'></script><ccm-${index} src='${ccm.helper.stringify(config)}'></ccm-${index}>`;
 };
 
 /**
@@ -1320,10 +1242,7 @@ export const embedCode = ( component, config = {}, noscript ) => {
  * @param {string} [info_file='https://ccmjs.github.io/akless-components/resources/templates/ibook_widget/Info.plist'] - URL of the info file
  * @param {string} [image_file='https://ccmjs.github.io/akless-components/resources/templates/ibook_widget/Default.png'] - URL of the image file
  * @returns {Promise<void>}
- * @example
- * const embed_code = "<script src='https://ccmjs.github.io/akless-components/blank/ccm.blank.js'></sc"+"ript><ccm-blank key='{}'></ccm-blank>";
- * iBookWidget( embed_code, 'blank', 'Blank App', 'blank_app' );
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
  */
 export const iBookWidget = async ( embed_code, filename = 'app', title = 'App', folder='app',
                                    template = 'https://ccmjs.github.io/akless-components/resources/templates/app.html',
@@ -1362,10 +1281,7 @@ export const iBookWidget = async ( embed_code, filename = 'app', title = 'App', 
  * @param {string} [manifest_template='https://ccmjs.github.io/akless-components/resources/templates/scorm/imsmanifest.xml'] - URL of manifest template
  * @param {string} [api_file='https://ccmjs.github.io/akless-components/resources/templates/scorm/SCORM_API_wrapper.js'] - URL of SCORM API file
  * @returns {Promise<void>}
- * @example
- * const embed_code = "<script src='https://ccmjs.github.io/akless-components/blank/ccm.blank.js'></sc"+"ript><ccm-blank key='{}'></ccm-blank>";
- * scorm( embed_code, 'blank', 'Blank App', 'blank_app' );
- * @memberOf ModuleHelper.HandoverApp
+ * @memberOf ModuleHelper.AppHandover
  */
 export const scorm = async ( embed_code, filename = 'app', title = 'App', identifier = 'App',
                              html_template = 'https://ccmjs.github.io/akless-components/resources/templates/scorm/index.html',
@@ -1373,6 +1289,7 @@ export const scorm = async ( embed_code, filename = 'app', title = 'App', identi
                              api_file = 'https://ccmjs.github.io/akless-components/resources/templates/scorm/SCORM_API_wrapper.js'
 ) => {
 
+  // load templates
   html_template = await fetch( html_template ).then( response => response.text() );                 // load content of HTML template file
   html_template = html_template.replace( '__TITLE__', title ).replace( '__EMBED__', embed_code );   // integrate title and embed code in HTML template
   manifest_template = await fetch( manifest_template ).then( response => response.text() );         // load content of manifest template file
@@ -1425,7 +1342,6 @@ export const copyToClipboard = elem => {
  * @memberOf ModuleHelper.Others
  */
 export const download = ( filename, content, mime = 'text/html;charset=utf-8' ) => {
-
   const element = document.createElement( 'a' );
   element.setAttribute( 'href', `data:${mime},${encodeURIComponent(content)}` );
   element.setAttribute( 'download', filename );
@@ -1433,7 +1349,6 @@ export const download = ( filename, content, mime = 'text/html;charset=utf-8' ) 
   document.body.appendChild( element );
   element.click();
   document.body.removeChild( element );
-
 };
 
 /**
@@ -1515,9 +1430,11 @@ export const progressBar = ( elem, actual = 0, total = 100 ) => {
 
 /**
  * adds touch control to an element
+ * @function
  * @param {Element} elem - element
  * @param {Function} onLeft - when swiping to the left
  * @param {Function} onRight - when swiping to the right
+ * @memberOf ModuleHelper.Others
  */
 export const touchControl = ( elem, { onLeft, onRight } ) => {
 
