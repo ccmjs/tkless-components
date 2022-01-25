@@ -153,12 +153,13 @@ export const test = {
   "css": [ "ccm.load",
     [  // serial
       "./../libs/bootstrap-5/css/bootstrap.css",
+      "./../libs/bootstrap-5/css/bootstrap-dark.css",
       "./../comment/resources/styles.css"
     ],
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
   ],
-  "store": [ "ccm.store", example ],
+  "data": { "store": [ "ccm.store", example ] },
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../comment/resources/templates.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
@@ -182,10 +183,7 @@ export const test = {
  * @type {Object}
  */
 export const demo = {
-  "data": {
-    "store": [ "ccm.store", example ],
-    "key": "demo"
-  },
+  "data": { "store": [ "ccm.store", example ] },
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
     "translations": { "de": de, "en": en }
   } ],
