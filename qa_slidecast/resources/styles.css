@@ -9,8 +9,8 @@
   --bg: white;
   --color: black;
   --border: lightgray;
-  --shadow: dimgray;
   --disabled: lightgray;
+  --icons: var( --color );
 }
 
 /* Dark mode */
@@ -18,9 +18,9 @@
   #element {
     --bg: black;
     --color: white;
-    --border: lightgray;
-    --shadow: lightgray;
-    --disabled: dimgray;
+    --border: #515151;
+    --disabled: #212529;
+    --icons: #b1b1b1;
   }
 }
 
@@ -51,6 +51,7 @@ header > * {
 }
 
 #control {
+  color: var( --icons );
   margin: -0.5em 1em 1em;
   border-radius: 5px;
   border: 1px solid var( --border );

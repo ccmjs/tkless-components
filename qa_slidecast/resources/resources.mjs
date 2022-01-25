@@ -152,7 +152,7 @@ export const test = {
   "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
   "onstart": instance => { console.log( 'start', instance.slide_nr ) },
   "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#test" ] ],
-  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.js" ],
+  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": text_de,
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ]
 };
@@ -162,7 +162,7 @@ export const test = {
  * @type {Object}
  */
 export const demo = {
-  "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.0.0.min.js", {
+  "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.1.0.min.js", {
     "data": { "store": [ "ccm.store" ] },
     "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ]
   } ],
