@@ -15,13 +15,21 @@
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
+
   #element {
     --bg: black;
-    --color: white;
-    --border: lightgray;
-    --shadow: lightgray;
-    --disabled: dimgray;
+    --color: #b1b1b1;
+    --border: #515151;
+    --shadow: #212529;
+    --disabled: #212529;
   }
+
+  input {
+    color: var( --color );
+    background-color: #222;
+    border: 1px solid var( --border );
+  }
+
 }
 
 #element {
