@@ -4,9 +4,9 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
- * @version 7.1.0
+ * @version latest (7.1.0)
  * @changes
- * version 7.1.0 (23.01.2021):
+ * version 7.1.0 (26.01.2021):
  * - uses ccmjs v27.2.0 as default
  * - uses helper.mjs v8.0.0 as default
  * - set start page via config
@@ -14,13 +14,13 @@
  * - added optional multilingualism
  * - added keyboard control
  * - updated touch control
+ * - bugfix for correct initial scaling
  * version 7.0.0 (22.10.2021): reimplementation by akless
  */
 
 ( () => {
   const component = {
     name: 'pdf_viewer',
-    version: [ 7, 1, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
       "css": [ "ccm.load",
@@ -196,9 +196,10 @@
 
       /**
        * renders current page
+       * @param {boolean} [no_refresh] - skip refresh
        * @returns {Promise<void>}
        */
-      const renderPage = async () => {
+      const renderPage = async no_refresh => {
 
         // rendering of an other PDF page is not finished? => abort
         if ( rendering ) return;  rendering = true;
@@ -217,8 +218,6 @@
 
         // scale page
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
-        console.log( 'viewport height:', viewport.height );
-        //if ( !viewport.height ) { rendering = false; return; }
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
@@ -234,8 +233,8 @@
         // rendering of PDF page is finished
         rendering = false;
 
-        console.log( 'canvas height:', canvas.height );
-        if ( !canvas.height ) await this.refresh();
+        // refresh with correct canvas height
+        !no_refresh && $.sleep().then( () => this.refresh( true ) );
 
       };
 
