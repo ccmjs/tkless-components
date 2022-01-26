@@ -215,16 +215,10 @@
          */
         const page = await file.getPage( page_nr );
 
-        /**
-         * canvas has no height
-         * @type {boolean}
-         */
-        let no_height;
-
         // scale page
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
         console.log( 'height:', viewport.height );
-        if ( !viewport.height ) { rendering = false; return; }
+        //if ( !viewport.height ) { rendering = false; return; }
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
