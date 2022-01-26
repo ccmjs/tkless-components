@@ -238,7 +238,10 @@
         } ).promise;
 
         // render page again with correct height
-        if ( no_height ) return renderPage();
+        if ( no_height ) {
+          await $.sleep( 300 );
+          return renderPage();
+        }
 
         // rendering of PDF page is finished
         rendering = false;
