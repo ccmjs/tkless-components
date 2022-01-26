@@ -227,7 +227,10 @@
         canvas.width = viewport.width;
 
         // render page again with correct height
-        if ( !canvas.height ) no_height = true;
+        if ( !canvas.height ) {
+          no_height = true;
+          console.log( 'before', canvas.height );
+        }
 
         // update main HTML template
         await render();
@@ -240,7 +243,9 @@
 
         // render page again with correct height
         if ( no_height ) {
+          console.log( 'middle', canvas.height );
           await $.sleep( 300 );
+          console.log( 'after', canvas.height );
           return renderPage();
         }
 
