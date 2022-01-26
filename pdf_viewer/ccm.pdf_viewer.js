@@ -208,9 +208,6 @@
          */
         const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
 
-        // give canvas element a moment to resize
-        await $.sleep( 100 );
-
         /**
          * current page
          * @type {Object}
@@ -221,6 +218,9 @@
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
         canvas.height = viewport.height;
         canvas.width = viewport.width;
+
+        // render page again with correct height
+        if ( !canvas.height ) return renderPage();
 
         // update main HTML template
         await render();
