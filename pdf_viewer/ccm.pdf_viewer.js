@@ -216,7 +216,7 @@
 
         // scale page
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
-        console.log( 'height:', viewport.height );
+        console.log( 'viewport height:', viewport.height );
         //if ( !viewport.height ) { rendering = false; return; }
         canvas.height = viewport.height;
         canvas.width = viewport.width;
@@ -232,6 +232,9 @@
 
         // rendering of PDF page is finished
         rendering = false;
+
+        console.log( 'canvas height:', canvas.height );
+        if ( !canvas.height ) await this.refresh();
 
       };
 
