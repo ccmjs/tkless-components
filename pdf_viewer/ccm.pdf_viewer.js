@@ -214,13 +214,19 @@
          */
         const page = await file.getPage( page_nr );
 
+        /**
+         * canvas has no height
+         * @type {boolean}
+         */
+        let no_height;
+
         // scale page
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
         // render page again with correct height
-        if ( !canvas.height ) return renderPage();
+        if ( !canvas.height ) no_height = true;
 
         // update main HTML template
         await render();
@@ -230,6 +236,9 @@
           canvasContext: canvas.getContext( '2d' ),
           viewport: viewport
         } ).promise;
+
+        // render page again with correct height
+        if ( no_height ) return renderPage();
 
         // rendering of PDF page is finished
         rendering = false;
