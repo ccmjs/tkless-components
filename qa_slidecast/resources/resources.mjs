@@ -141,6 +141,7 @@ export const test = {
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
   ],
+  "description": true,
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../qa_slidecast/resources/templates.mjs",
   "ignore": {
@@ -166,6 +167,7 @@ export const demo = {
     "data": { "store": [ "ccm.store" ] },
     "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ]
   } ],
+  "description": true,
   "ignore": {
     "slides": slides_de
   },

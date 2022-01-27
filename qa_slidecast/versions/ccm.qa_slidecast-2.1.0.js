@@ -24,7 +24,7 @@
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
-      "description": true,
+//    "description": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
 //    "ignore": { "slides": [] },
