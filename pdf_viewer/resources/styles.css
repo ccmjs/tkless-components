@@ -30,6 +30,10 @@
     border: 1px solid var( --border );
   }
 
+  #page {
+    opacity: 0.5;
+  }
+
 }
 
 #element {
