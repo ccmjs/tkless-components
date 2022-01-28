@@ -149,8 +149,9 @@
          */
         const slide_data = this.ignore.slides[ this.slide_nr - 1 ] || {};
 
-        // render main HTML template
+        // render main HTML template and translate content
         this.html.render( this.html.main( this, events ), this.element );
+        this.lang && this.lang.translate();
 
         // render PDF Viewer
         const viewer_element = this.element.querySelector( '#viewer' );
