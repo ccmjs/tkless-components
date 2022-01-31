@@ -38,7 +38,7 @@
       "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
       "pdfjs": {
         "lib": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.min.js" ],
-        "worker": "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.worker.min.js",
+        "worker": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/pdf.worker.min.js" ],
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],

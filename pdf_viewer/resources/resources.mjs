@@ -52,7 +52,7 @@ export const test = {
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
-  "pdfjs.worker": "./../libs/pdfjs-2/pdf.worker.js",
+  "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.js" ],
   "text": de
 };
