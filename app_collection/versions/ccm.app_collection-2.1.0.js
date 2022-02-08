@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
- * @version latest (2.1.0)
+ * @version 2.1.0
  * @changes
  * version 2.1.0 (08.02.2022): content of clicked entry can contain multiple apps
  * version 2.0.0 (24.01.2022): reimplementation by akless
@@ -12,6 +12,7 @@
 ( () => {
   const component = {
     name: 'app_collection',
+    version: [ 2, 1, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/styles.min.css" ],
