@@ -4,6 +4,11 @@
  * @license The MIT License (MIT)
  */
 
+#element {
+  background-color: white;
+  color: black;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -141,14 +146,32 @@ input[type="checkbox"]:not(:checked) + label + div {
   display: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Dark Mode */
 
-  small {
+#element.dark_mode {
+  background-color: black;
+  color: white;
+}
+
+#element.dark_mode small {
+  color: #b1b1b1;
+}
+
+#element.dark_mode .btn-link {
+  color: #0d6efd !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #element.dark_auto {
+    background-color: black;
+    color: white;
+  }
+
+  #element.dark_auto small {
     color: #b1b1b1;
   }
 
-  .btn-link {
+  #element.dark_auto .btn-link {
     color: #0d6efd !important;
   }
-
 }
