@@ -19,7 +19,7 @@
     name: 'qa_slidecast',
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
-//    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.1.0.min.js" ],
+//    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
@@ -34,7 +34,7 @@
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
 //    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
       "open": "both",
-      "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.1.0.min.js" ],
+      "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.2.0.min.js" ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "slide_nr": 1,
       "ignore": {},
