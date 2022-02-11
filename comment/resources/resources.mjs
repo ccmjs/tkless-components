@@ -184,7 +184,7 @@ export const test = {
  */
 export const demo = {
   "data": { "store": [ "ccm.store", example ] },
-  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
     "translations": { "de": de, "en": en }
   } ],
   "libs": [ "ccm.load", [

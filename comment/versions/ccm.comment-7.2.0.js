@@ -33,7 +33,7 @@
       "data": { "store": [ "ccm.store" ] },
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/templates.mjs" ],
-//    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
+//    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
       "libs": [ "ccm.load", [
         "https://ccmjs.github.io/tkless-components/libs/dayjs/dayjs.min.js",
         "https://ccmjs.github.io/tkless-components/libs/dayjs/relativeTime.min.js"
