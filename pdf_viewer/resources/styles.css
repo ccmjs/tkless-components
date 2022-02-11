@@ -4,39 +4,12 @@
  * @license The MIT License (MIT)
  */
 
-/* Light mode */
 #element {
   --bg: white;
   --color: black;
   --border: lightgray;
   --shadow: dimgray;
   --disabled: lightgray;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-
-  #element {
-    --bg: black;
-    --color: #b1b1b1;
-    --border: #515151;
-    --shadow: #212529;
-    --disabled: #212529;
-  }
-
-  input {
-    color: var( --color );
-    background-color: #222;
-    border: 1px solid var( --border );
-  }
-
-  #page {
-    opacity: 0.8;
-  }
-
-}
-
-#element {
   background-color: var( --bg );
   color: var( --color );
 }
@@ -130,4 +103,44 @@ input {
 
 *[data-hidden] {
   display: none;
+}
+
+/* Dark Mode */
+
+#element.dark_mode {
+  --bg: black;
+  --color: #b1b1b1;
+  --border: #515151;
+  --shadow: #212529;
+  --disabled: #212529;
+}
+
+#element.dark_mode input {
+  color: var( --color );
+  background-color: #222;
+  border: 1px solid var( --border );
+}
+
+#element.dark_mode #page {
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  #element.dark_auto {
+    --bg: black;
+    --color: #b1b1b1;
+    --border: #515151;
+    --shadow: #212529;
+    --disabled: #212529;
+  }
+
+  #element.dark_auto input {
+    color: var( --color );
+    background-color: #222;
+    border: 1px solid var( --border );
+  }
+
+  #element.dark_auto #page {
+    opacity: 0.8;
+  }
 }
