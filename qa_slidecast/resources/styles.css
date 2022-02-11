@@ -4,27 +4,12 @@
  * @license The MIT License (MIT)
  */
 
-/* Light mode */
 #element {
   --bg: white;
   --color: black;
   --border: lightgray;
   --disabled: lightgray;
   --icons: var( --color );
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  #element {
-    --bg: black;
-    --color: white;
-    --border: #515151;
-    --disabled: #212529;
-    --icons: #b1b1b1;
-  }
-}
-
-#element {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,4 +81,16 @@ i {
 
 *[data-hidden] {
   display: none;
+}
+
+/* Dark Mode */
+
+@media (prefers-color-scheme: dark) {
+  #element.dark_auto {
+    --bg: black;
+    --color: white;
+    --border: #515151;
+    --disabled: #212529;
+    --icons: #b1b1b1;
+  }
 }
