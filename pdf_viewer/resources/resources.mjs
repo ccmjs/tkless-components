@@ -46,14 +46,14 @@ export const test = {
   ],
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates.mjs",
-  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.js", {
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": de, "en": en }
   } ],
-  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
+  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
   "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",
-  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.js" ],
+  "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": de
 };
 
@@ -62,7 +62,7 @@ export const test = {
  * @type {Object}
  */
 export const demo = {
-  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js", {
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
     "translations": { "de": de, "en": en }
   } ],
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",

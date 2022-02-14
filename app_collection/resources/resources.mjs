@@ -21,12 +21,12 @@ const example_sections = [
       {
         "title": "PDF-Viewer",
         "icon": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/icon.svg",
-        "ignore": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.1.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ]
+        "ignore": [ "ccm.start", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.2.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ]
       },
       {
         "title": "Kommentierung",
         "icon": "https://ccmjs.github.io/tkless-components/comment/resources/comment.svg",
-        "ignore": [ "ccm.start", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.1.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ] ]
+        "ignore": [ "ccm.start", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ] ]
       }
     ]
   },
@@ -36,7 +36,7 @@ const example_sections = [
       {
         "title": "Slidecast",
         "icon": "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/icon.svg",
-        "ignore": [ "ccm.start", "https://ccmjs.github.io/tkless-components/qa_slidecast/versions/ccm.qa_slidecast-2.0.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#demo" ] ]
+        "ignore": [ "ccm.start", "https://ccmjs.github.io/tkless-components/qa_slidecast/versions/ccm.qa_slidecast-2.2.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#demo" ] ]
       }
     ]
   }
@@ -86,7 +86,7 @@ export const test = {
 export const demo = {
   "footer": example_footer,
   "icon": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/app.svg" ],
-  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.0.0.min.js" ],
+  "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
   "sections": example_sections,
   "title": example_title,

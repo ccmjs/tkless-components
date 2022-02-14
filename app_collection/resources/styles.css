@@ -4,7 +4,6 @@
  * @license The MIT License (MIT)
  */
 
-/* Light mode */
 #element {
   --bg: white;
   --color: black;
@@ -16,9 +15,19 @@
   --hover-color: var( --color );
 }
 
-/* Dark mode */
+/* Dark Mode */
+#element.dark_mode {
+  --bg: black;
+  --color: #fafafa;
+  --border: #515151;
+  --header-bg: #3b3b3b;
+  --section-bg: deepskyblue;
+  --section-color: #111;
+  --hover-bg: darkblue;
+  --hover-color: var( --color );
+}
 @media (prefers-color-scheme: dark) {
-  #element {
+  #element.dark_auto {
     --bg: black;
     --color: #fafafa;
     --border: #515151;
