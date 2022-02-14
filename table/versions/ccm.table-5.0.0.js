@@ -40,8 +40,8 @@
      * @type {object}
      */
     config: {
-      "templates": [ "ccm.load", "resources/templates.html" ],
-      "html": {
+      templates: [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.html" ],
+      html: {
         "table": {
           "inner": {
             "tag": "form",
@@ -119,12 +119,10 @@
       //cell_onrender: function ( event ) { console.log( this, event ); }
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //filter_values
-      "css": [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
-        "resources/default.css"
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
+        { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" }
       ],
-      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
+      helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
     },
 
     Instance: function () {
