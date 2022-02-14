@@ -28,6 +28,7 @@
      * @type {string}
      */
     name: 'table',
+    version: [ 5,0,0 ],
 
     /**
      * recommended used framework version
