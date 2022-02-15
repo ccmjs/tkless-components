@@ -3,12 +3,11 @@
  * @author Tea Kless <tea.kless@web.de>, 2019-2022
  * @license The MIT License (MIT)
  * @changes
- *
- * version 5.0.0 (15.02.2022)
+ *  version 5.0.0 (15.02.2022)
  * - support of instance inner for marking
  * - ccm v27.3.0
  *
- * version 4.0.0 (30.04.2019)
+ *  version 4.0.0 (30.04.2019)
  * - used self.data instead of my.data
  * - support properties for analytics
  *
@@ -38,6 +37,7 @@
      * @type {string}
      */
     name: 'mark_words',
+    version: [ 5, 0,0 ],
 
     /**
      * recommended used framework version
@@ -237,7 +237,7 @@
                   dataset.marked.push( span.id );
                   dataset.solutions.push( span.innerHTML );
                 }
-            } );
+              } );
 
               // set onChange behavior
               self.onchange && self.onchange( { instance: self, element: span } );
@@ -253,7 +253,7 @@
 
 
 
-            $.setContent( main_elem.querySelector( '#text' ), div );
+          $.setContent( main_elem.querySelector( '#text' ), div );
 
           function renderButtons() {
             if ( self.check ) {
