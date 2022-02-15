@@ -2069,8 +2069,11 @@
         // no HTML? => abort
         if ( !html ) return html;
 
-        // is already a HTML element and no placeholders have to be replaced? => nothing to do
+        // is already an HTML element and no placeholders have to be replaced? => nothing to do
         if ( ccm.helper.isElement( html ) && !values.length ) return html;
+
+        // is an instance? => don't change anything
+        if ( ccm.helper.isInstance( html ) ) return html;
 
         // is function that returns a lit-html template result?
         if ( typeof html === 'function' ) return html.apply( this, values );
