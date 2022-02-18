@@ -380,7 +380,7 @@
               class: 'btn btn-primary btn-lg retry-btn',
               label: 'Retry',
               glyphicon: 'glyphicon glyphicon-repeat',
-              click: self.start
+              click: self.start()
             } ) );
           }
         }
