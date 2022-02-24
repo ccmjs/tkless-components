@@ -23,7 +23,8 @@ export const demo = {
     "show_solution": true,
     "check": true,
     "keywords": [ 'John', 'Nurse'],
-    "data": { solutions: [ 'mark-word-19' ], marked: [ 'mark-word-15' ] },
+    "progressbar_with_points": true,
+    //"data": { solutions: [ 'PM', 'Doe' ], marked: [ 'mark-word-15' ] },
     //"show_results": true,
     //"onfinish": { "log": true }
 };
