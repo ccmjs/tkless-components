@@ -44,6 +44,7 @@
   background-color: var( --bg );
   color: var( --color );
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: normal;
   white-space: nowrap;
   overflow-x: auto;
 }
