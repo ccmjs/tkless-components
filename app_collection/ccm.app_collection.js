@@ -121,7 +121,7 @@
         else {
           const entry = !j ? this.footer[ i - 1 ] : this.sections[ i - 1 ].entries[ j - 1 ];
           if ( !Array.isArray( entry.ignore ) || $.isDependency( entry.ignore ) ) entry.ignore = [ entry.ignore ];
-          entry.ignore = await Promise.all( entry.ignore.map( app => $.appDependency( app ).then( app => $.solveDependency( app, this ) ) ) );
+          entry.ignore = await Promise.all( entry.ignore.map( app => $.isInstance( app ) ? app : $.appDependency( app ).then( app => $.solveDependency( app, this ) ) ) );
           element.innerHTML = '';
           entry.ignore.forEach( content => $.append( element, $.isInstance( content ) ? content.root : $.html( content ) ) );
         }

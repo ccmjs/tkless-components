@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
- * @version latest (2.3.0)
+ * @version 2.3.0
  * @changes
  * version 2.3.0 (25.02.2022):
  * - uses ccmjs v27.3.1 as default
@@ -122,7 +122,7 @@
         else {
           const entry = !j ? this.footer[ i - 1 ] : this.sections[ i - 1 ].entries[ j - 1 ];
           if ( !Array.isArray( entry.ignore ) || $.isDependency( entry.ignore ) ) entry.ignore = [ entry.ignore ];
-          entry.ignore = await Promise.all( entry.ignore.map( app => $.appDependency( app ).then( app => $.solveDependency( app, this ) ) ) );
+          entry.ignore = await Promise.all( entry.ignore.map( app => $.isInstance( app ) ? app : $.appDependency( app ).then( app => $.solveDependency( app, this ) ) ) );
           element.innerHTML = '';
           entry.ignore.forEach( content => $.append( element, $.isInstance( content ) ? content.root : $.html( content ) ) );
         }
