@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de>, 2019-2022
  * @license The MIT License (MIT)
  * @changes
- * version 6.0.0 (15.02.2022)
+ * version 6.0.0 (25.02.2022)
  * - progressbar with points
  * - progressbar colors( red/green )
  *
@@ -186,7 +186,7 @@
         $.setContent( self.element, main_elem );
 
         function prepareTextForMarking() {
-          const div = $.html( self.inner );
+          const div = $.html( self.inner, {}, { no_evaluation: true } );
 
           const text_nodes = collectTextNodes( div );
 
@@ -326,7 +326,7 @@
           });
 
           dataset.correct = correct.length;
-          dataset.total = self.keywords.length;
+          dataset.total = self.keywords? self.keywords.length : undefined;
 
           if ( self.logger ) self.logger.log( 'check', {
             marked: self.getValue(),
@@ -341,7 +341,7 @@
           function renderProgressBar() {
             const correct = dataset.correct === dataset.total && dataset.correct === dataset.solutions.length;
             if ( !self.progressbar_with_points )
-              $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), color: undefined && 'red' } );
+              $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), color: correct? undefined : 'red' } );
             else
               $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), actual: dataset.correct, total: dataset.total } );
 
