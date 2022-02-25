@@ -40,9 +40,7 @@
 }
 
 #element {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  border: 1px solid var( --border );
   background-color: var( --bg );
   color: var( --color );
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -51,8 +49,6 @@
 }
 
 header {
-  position: sticky;
-  top: 0;
   border-bottom: 1px solid var( --border );
   background-color: var( --header-bg );
   display: flex;
@@ -89,10 +85,6 @@ header #headline > div > div:last-child {
   font-size: smaller;
 }
 
-main {
-  height: 100%;
-}
-
 main .title {
   background-color: var( --section-bg );
   color: var( --section-color );
@@ -114,8 +106,6 @@ main img {
 }
 
 footer {
-  position: sticky;
-  bottom: 0;
   border-top: 1px solid var( --border );
   background-color: var( --header-bg );
   display: flex;
