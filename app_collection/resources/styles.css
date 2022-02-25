@@ -77,6 +77,10 @@ header svg {
   height: 32px;
 }
 
+header #headline {
+  overflow: hidden;
+}
+
 header #headline > div > div:first-child {
   font-size: x-small;
 }
