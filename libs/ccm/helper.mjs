@@ -3,8 +3,10 @@
  * ES6 module that exports useful help functions for <i>ccmjs</i> component developers.
  * @author André Kless <andre.kless@web.de> 2019-2022
  * @license The MIT License (MIT)
- * @version latest (8.0.0)
+ * @version latest (8.1.0)
  * @changes
+ * version 8.1.0 (23.02.2022):
+ * - added appDependency(string):Array - converts the URL or the HTML embed code of an app to an app dependency
  * version 8.0.0 (07.01.2022):
  * - updated help functions for app handover
  * (for older version changes see helper-7.10.0.mjs)
@@ -1127,11 +1129,69 @@ export const formData = ( elem, settings = {} ) => {
  */
 
 /**
+ * converts the URL or the HTML embed code of an app to an <i>ccmjs</i>-based app dependency
+ * @function
+ * @param {string} app - URL or HTML embed code of an app
+ * @returns {Promise<Array>} <i>ccmjs</i>-based app dependency
+ * @memberOf ModuleHelper.AppHandover
+ */
+export const appDependency = async app => {
+  if ( ccm.helper.isDependency( app ) ) { app[ 0 ] = 'ccm.start'; return app; }
+  if ( typeof app !== 'string' ) return null;
+
+  // URL
+  if ( app.startsWith( 'http' ) ) {
+
+    // get parameters from URL
+    const char = app.includes( '?' ) ? '?' : '#';
+    const params = app.substr( app.indexOf( char ) + 1 ).split( '&' ).reduce( ( acc, str ) => {
+      const [ key, value ] = str.split( '=' );
+      return Object.assign( acc, { [ key ]: decodeURIComponent( value ) } );
+    }, {} );
+
+    // DMS v5
+    if ( params.app ) {
+      params.app = params.app.split( ',' );
+      const component = await ccm.get( { name: 'dms2-components', url: 'https://ccm2.inf.h-brs.de' }, params.app[ 0 ] );
+      return [ 'ccm.start', component.path, [ 'ccm.get', { name: 'dms2-configs', url: 'https://ccm2.inf.h-brs.de' }, params.app ] ];
+    }
+
+    // DMS Bootstrap 2020
+    if ( params.id ) {
+      const app_meta = await ccm.get( { name: 'dms-apps', url: 'https://ccm2.inf.h-brs.de' }, params.id );
+      return [ 'ccm.start', app_meta.path, [ 'ccm.get', app_meta.source[ 0 ], app_meta.source[ 1 ] ] ];
+    }
+
+    // LearningApps Marketplace
+    if ( params.key ) return [ 'ccm.start', params.component, [ 'ccm.get', { name: params.name, url: params.url }, params.key ] ];
+
+    // DMS v4
+    if ( params.component ) {
+      const { store, key } = JSON.parse( params.config );
+      return [ 'ccm.start', params.component, [ 'ccm.get', store, key ] ];
+    }
+
+  }
+
+  // HTML embed code
+  if ( app.startsWith( '<' ) ) {
+    const html = ccm.helper.html( `<div>${ app }</div>`, undefined, { no_evaluation: true } );
+    const component = html.firstChild.getAttribute( 'src' ) || html.firstChild.getAttribute( 'component' );
+    const config = html.lastChild.getAttribute( 'src' ) || html.lastChild.getAttribute( 'key' );
+    const result = [ 'ccm.start', component ];
+    result.push( JSON.parse( config ) );
+    return result;
+  }
+
+  return null;
+};
+
+/**
  * @summary returns the URL of a <i>ccmjs</i>-based app
  * @function
  * @param {string} url - URL of the webpage which shows the app
  * @param {string} component - URL of the component on which the app is based.
- * @param {Object} [config={}] - app configuration (or dependency)
+ * @param {Object|Array} [config={}] - app configuration (or dependency)
  * @returns {string}
  * @memberOf ModuleHelper.AppHandover
  */
@@ -1404,16 +1464,10 @@ export const loadScript = async url => new Promise( ( resolve, reject ) => {
  * @example progressBar( document.body, 40, 120 )
  * @memberOf ModuleHelper.Others
  */
-export const progressBar = ( { elem, actual, total = 100, color = '#4CAF50' } ) => {
+export const progressBar = ( elem, actual = 0, total = 100 ) => {
+
   const main = document.createElement( 'div' );
-
-  if ( actual !== undefined ) {
-    main.innerHTML = `<div>${actual}/${total}</div><div><div></div></div>`;
-  }
-  else {
-    main.innerHTML = `<div></div><div><div></div></div>`;
-  }
-
+  main.innerHTML = `<div>${actual}/${total}</div><div><div></div></div>`;
   main.setAttribute( 'style', 'min-width: 200px; max-width: 90%; margin: 1em 5%; padding: 0.5em 1em; display: flex; align-items: center; border: 1px solid lightgray; border-radius: 20px;' );
   elem.appendChild( main );
 
@@ -1424,7 +1478,7 @@ export const progressBar = ( { elem, actual, total = 100, color = '#4CAF50' } ) 
   progress_bar.setAttribute( 'style', 'width: 100%; height: 20px; background-color: #ddd; border-radius: 10px; overflow: hidden; position: relative;' );
 
   const progress = progress_bar.querySelector( 'div' );
-  progress.setAttribute( 'style', 'width: 0%; height: 20px; background-color:' + color + '; position: absolute;' );
+  progress.setAttribute( 'style', 'width: 0%; height: 20px; background-color: #4CAF50; position: absolute;' );
 
   setTimeout( () => {
     const goal = actual * progress_bar.offsetWidth / total;
