@@ -1,17 +1,13 @@
 /**
- * @overview ccm component for marking the words in a Text
+ * @overview ccm component for marking thew words in Text
  * @author Tea Kless <tea.kless@web.de>, 2019-2022
  * @license The MIT License (MIT)
  * @changes
- * version 6.0.0 (15.02.2022)
- * - progressbar with points
- * - progressbar colors( red/green )
- *
- * version 5.0.0 (15.02.2022)
+ *  version 5.0.0 (15.02.2022)
  * - support of instance inner for marking
  * - ccm v27.3.0
  *
- * version 4.0.0 (30.04.2019)
+ *  version 4.0.0 (30.04.2019)
  * - used self.data instead of my.data
  * - support properties for analytics
  *
@@ -41,6 +37,7 @@
      * @type {string}
      */
     name: 'mark_words',
+    version: [ 5, 0,0 ],
 
     /**
      * recommended used framework version
@@ -95,14 +92,28 @@
             },
             "%label%"
           ]
+        },
+
+        "feedback": {
+          "inner": [
+            {
+              "id": "points",
+              "inner": "%points%"
+            },
+            {
+              "id": "feedback",
+              "inner": {
+                "id": "progress-bar"
+              }
+            }
+          ]
         }
       },
-      // inner: "some html text for marking",
+      // text: "some html text for marking",
       // submit: true,
       // submit_button_label: "Save",
       // retry: true,
       // show_solution: true,
-      // progressbar_with_points: true,
       // check: true,
       // keywords: [ 'Manchmal', 'Typoblindtexte', 'Zahlen',  'Satzteile'],
       // data: { solutions: [], marked [] },
@@ -111,7 +122,7 @@
       // onchange,
       // marked: [],
       // show_results: true,
-      helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
+      helper: [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs" ],
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/bootstrap.css",
         { "context": "head", "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap/css/font-face.css" },
         'https://ccmjs.github.io/tkless-components/mark_words/resources/default.css'
@@ -176,9 +187,10 @@
         if( !dataset.sections ) dataset.sections = [];
 
         const main_elem = $.html( self.html.text );
-
-        if ( $.isInstance( self.inner ) )
-          self.inner = self.inner.element.innerHTML;
+        if ( $.isInstance( self.inner ) ){
+          root = self.inner.root;
+          self.inner = self.inner.element;
+        }
 
         prepareTextForMarking();
 
@@ -206,6 +218,7 @@
               }
             } );
           }
+
 
           if( !self.show_results ) {
             div.querySelectorAll( '.mark-word' ).forEach( span => {
@@ -238,6 +251,8 @@
             self.show_solution && showSolution();
           }
 
+
+
           $.setContent( main_elem.querySelector( '#text' ), div );
 
           function renderButtons() {
@@ -246,7 +261,9 @@
                 class: 'btn btn-success btn-lg check-btn',
                 label: 'Check',
                 click: () => {
+                  if ( dataset.solutions.length === 0 ) return alert( 'No solution to check !!!');
                   verify();
+                  renderProgressBar( correct.length );
                   if ( self.show_solution ) {
                     // render solution button
                     $.setContent( main_elem. querySelector( '#solution' ), $.html( self.html.button, {
@@ -300,7 +317,7 @@
 
         function verify() {
 
-          dataset.solutions.forEach( solution => {
+          dataset.solutions.map( solution => {
             const entry = {};
             if ( keywords.includes( solution) ) {
               entry.correct = true;
@@ -315,7 +332,7 @@
             dataset.sections.push( entry );
           } );
 
-          main_elem.querySelectorAll( 'span.selected' ).forEach( span => {
+          [ ...main_elem.querySelectorAll( 'span.selected' ) ].map( span => {
 
             if ( correct.includes( span.innerHTML ) ) {
               span.classList.add( 'correct' );
@@ -334,28 +351,38 @@
             points: correct.length,
             amount: self.keywords.length
           });
+        }
 
-          renderProgressBar();
+        function renderProgressBar() {
+          const elem = $.html( self.html.feedback, {
+            points: correct.length + '/' + self.keywords.length
+          } );
+          $.setContent( main_elem. querySelector( '#conclusion' ), elem );
 
-          function renderProgressBar() {
-            const correct = dataset.correct === dataset.total && dataset.correct === dataset.solutions.length;
-            if ( !self.progressbar_with_points )
-              $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), color: undefined && 'red' } );
-            else
-              $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), actual: dataset.correct, total: dataset.total } );
 
-            main_elem.querySelector( '.check-btn' ).remove();
+          const goal = correct.length * self.element.querySelector( '#feedback' ).offsetWidth / self.keywords.length; //parseInt( self.element.querySelector( '#progress-bar' ).style.width, 10);
+          let width = 1;
+          let id = setInterval(frame, 8);
 
-            if ( self.retry ) {
-              $.setContent( main_elem. querySelector( '#retry' ), $.html( self.html.button, {
-                class: 'btn btn-primary btn-lg retry-btn',
-                label: 'Retry',
-                glyphicon: 'glyphicon glyphicon-repeat',
-                click: self.start
-              } ) );
+          function frame() {
+            if ( width >= goal ) {
+              clearInterval( id );
+            } else {
+              width++;
+              self.element.querySelector( '#progress-bar' ).style.width = width + 'px';
             }
           }
 
+          main_elem.querySelector( '.check-btn' ).remove();
+
+          if ( self.retry ) {
+            $.setContent( main_elem. querySelector( '#retry' ), $.html( self.html.button, {
+              class: 'btn btn-primary btn-lg retry-btn',
+              label: 'Retry',
+              glyphicon: 'glyphicon glyphicon-repeat',
+              click: self.start
+            } ) );
+          }
         }
       };
 

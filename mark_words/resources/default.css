@@ -28,7 +28,7 @@ text {
 
 #conclusion > div {
   width: 25rem;
-  margin: 2em 0;
+  margin: 2em 0 !important;
   padding: 0.5em 1em;
   display: flex;
   align-items: center;
