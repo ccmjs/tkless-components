@@ -17,6 +17,7 @@
 ( () => {
   const component = {
     name: 'app_collection',
+    version: [ 2, 3, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
     config: {
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/styles.min.css" ],
