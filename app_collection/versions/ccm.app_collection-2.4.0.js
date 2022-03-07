@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
- * @version latest (2.4.0)
+ * @version 2.4.0
  * @changes
  * version 2.4.0 (07.03.2022):
  * - individual section color
@@ -19,6 +19,7 @@
 ( () => {
   const component = {
     name: 'app_collection',
+    version: [ 2, 4, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
     config: {
       "color": "limegreen",
