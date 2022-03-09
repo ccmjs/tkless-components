@@ -1457,17 +1457,22 @@ export const loadScript = async url => new Promise( ( resolve, reject ) => {
 /**
  * appends a progress bar to a DOM element
  * @function
- * @param {Element} elem - progress bar will be appended to this element
- * @param {number} [actual = 0] - actual points
- * @param {number} [total = 100] - maximum points
- * @example progressBar( document.body, 60 )
- * @example progressBar( document.body, 40, 120 )
+ * @param {Element} obj.elem - progress bar will be appended to this element
+ * @param {number} [obj.actual = 0] - actual points
+ * @param {number} [obj.total = 100] - maximum points
+ * @param {number} [obj.color = '#4CAF50'] - progressbar success color
  * @memberOf ModuleHelper.Others
  */
-export const progressBar = ( elem, actual = 0, total = 100 ) => {
-
+export const progressBar = ( { elem, actual, total = 100, color = '#4CAF50' } ) => {
   const main = document.createElement( 'div' );
-  main.innerHTML = `<div>${actual}/${total}</div><div><div></div></div>`;
+
+  if ( actual !== undefined ) {
+    main.innerHTML = `<div>${actual}/${total}</div><div><div></div></div>`;
+  }
+  else {
+    main.innerHTML = `<div></div><div><div></div></div>`;
+  }
+
   main.setAttribute( 'style', 'min-width: 200px; max-width: 90%; margin: 1em 5%; padding: 0.5em 1em; display: flex; align-items: center; border: 1px solid lightgray; border-radius: 20px;' );
   elem.appendChild( main );
 
@@ -1478,7 +1483,7 @@ export const progressBar = ( elem, actual = 0, total = 100 ) => {
   progress_bar.setAttribute( 'style', 'width: 100%; height: 20px; background-color: #ddd; border-radius: 10px; overflow: hidden; position: relative;' );
 
   const progress = progress_bar.querySelector( 'div' );
-  progress.setAttribute( 'style', 'width: 0%; height: 20px; background-color: #4CAF50; position: absolute;' );
+  progress.setAttribute( 'style', 'width: 0%; height: 20px; background-color:' + color + '; position: absolute;' );
 
   setTimeout( () => {
     const goal = actual * progress_bar.offsetWidth / total;
