@@ -3,20 +3,25 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2022
  * @license The MIT License (MIT)
  * @changes
+ *  @version 5.1.0
+ * -(10.03.2022)
+ *   possibility to set default values over col settings
+ *   as cell inner text and not as a value of a disabled input field
+ *   updated on newest ccm version ccm v27.3.1
  *  @version 5.0.0
  * -(14.02.2022)
  *   updated on newest ccm version ccm v27.2.0
  *  @version 4.0.0
  * -(21.05.2019)
- *    onrender event for table cells
- *    self.data(ccm v20.7.0) instead of my.data
+ *   onrender event for table cells
+ *   self.data(ccm v20.7.0) instead of my.data
  * @version 3.0.0
- * -(29.04.2019) onclick event for table cells
+ *  (29.04.2019) onclick event for table cells
  *  @version 2.2.0
- * -(29.04.2019) contains changes from vimp
+ *  (29.04.2019) contains changes from vimp
  * @version 2.1.0
- * - selectable input field
- * - uses ccm v20.0.0
+ *  selectable input field
+ *  uses ccm v20.0.0
  */
 
 ( function () {
@@ -33,15 +38,15 @@
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
 
     /**
      * default instance configuration
      * @type {object}
      */
     config: {
-      "templates": [ "ccm.load", "resources/templates.html" ],
-      "html": {
+      templates: [ "ccm.load", "resources/templates.html" ],
+      html: {
         "table": {
           "inner": {
             "tag": "form",
@@ -119,12 +124,12 @@
       //cell_onrender: function ( event ) { console.log( this, event ); }
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //filter_values
-      "css": [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
+      css: [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
         "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
         { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "resources/default.css"
       ],
-      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
+      helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
     },
 
     Instance: function () {
@@ -227,7 +232,7 @@
             col = j;
             const table_cell = $.html ( self.html.table_cell );
 
-            if ( !self.col_settings && values )
+            if ( !self.col_settings && values  || self.col_settings[ j ].type === 'none')
               $.setContent( table_cell, i < values.length && values[ i ][ j ] !== undefined ? values[ i ][ j ] : '' );
             else {
               let input;
@@ -239,13 +244,15 @@
                   case 'select':
                     input = $.clone( self.html[ 'select' ] );
                     break;
+                  case 'none':
+                    break;
                   default:
                     input = $.clone( self.html[ 'input' ] );
                     break;
                 }
               }
               //const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
-              input.name = ( i + 1 ) + '-' + ( j + 1 );
+              else input.name = ( i + 1 ) + '-' + ( j + 1 );
 
               // consider column properties
               self.col_settings && considerColSettings( j, input );
