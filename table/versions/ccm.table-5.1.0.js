@@ -253,7 +253,7 @@
                 }
               }
               //const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
-              else input.name = ( i + 1 ) + '-' + ( j + 1 );
+              input.name = ( i + 1 ) + '-' + ( j + 1 );
 
               // consider column properties
               self.col_settings && considerColSettings( j, input );
