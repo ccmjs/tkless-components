@@ -77,22 +77,32 @@
         } );
 
         this.element.querySelector( '#fill-in-task-retry' ).addEventListener( 'click', () => {
-         this.start();
+          this.start();
         } );
 
         function compare ( data_1, data_2 ) {
           for( let key in data_1 ) {
             let elem = self.element.querySelector( '[name="'+ key +'"]' );
             if ( data_2[key] !== data_1[key] || data_2[key] === undefined ) {
-              elem.style.color = "brown";
-              elem.style[ 'background-color' ] = "rgba(255, 0, 0, 0.27)";
+              highlight ( elem, '#FF00005E' );
               incorrect++;
             }
             else {
-              elem.style.borderColor = 'green';
-              elem.style.color = 'green';
+              highlight ( elem, '#28A7458C' );
               correct++
             }
+          }
+        }
+
+        function highlight ( elem, color ) {
+          if ( elem.type === "checkbox" ) {
+            elem.style[ 'background-color' ] = color;
+            elem.style[ 'box-shadow' ] = '0px 0px 0px 3px '+color+'';
+            elem.style[ 'border-radius' ] = '3px';
+          }
+          else {
+            elem.style.color = color;
+            elem.style['background-color'] = color;
           }
         }
       };
