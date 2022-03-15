@@ -3,22 +3,20 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
- * @version 2.2.0
+ * @version 3.0.0
  * @changes
- * version 2.2.0 (11.02.2022):
- * - controllable dark mode
- * version 2.1.0 (24.01.2022):
- * - uses ccmjs v27.2.0 as default
- * - uses helper.mjs v8.0.0 as default
- * - added optional multilingualism
- * version 2.0.0 (23.10.2021): reimplementation by akless
+ * version 3.0.0 (15.02.2022):
+ * - uses ccmjs v27.3.1 as default
+ * - uses helper.mjs v8.1.0 as default
+ * - support for app URL's and embed code of all DMS versions
+ * (for older version changes see ccm.qa_slidecast-2.2.0.js)
  */
 
 ( () => {
   const component = {
     name: 'qa_slidecast',
-    version: [ 2, 2, 0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
+    version: [ 3, 0, 0 ],
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],
       "css": [ "ccm.load",
@@ -28,7 +26,7 @@
       ],
       "dark": "auto",
 //    "description": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.1.0.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
 //    "ignore": { "slides": [] },
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
@@ -175,14 +173,15 @@
         const slide_element = this.pdf_viewer.element.querySelector( '#page' );
 
         // render slide
-        switch ( typeof slide_data.content ) {
+        const content = await $.appDependency( slide_data.content ) || slide_data.content;
+        switch ( typeof content ) {
           case 'number':
             $.setContent( slide_element, '<canvas>' );
-            await this.pdf_viewer.goTo( slide_data.content );
+            await this.pdf_viewer.goTo( content );
             delete slide_data._content;
             break;
           case 'string':
-            const ends_with = slide_data.content.split( '.' ).pop();
+            const ends_with = content.split( '.' ).pop();
             switch ( ends_with ) {
               case 'apng':
               case 'gif':
@@ -193,46 +192,42 @@
               case 'pjp':
               case 'png':
               case 'svg':
-                if ( !slide_data._content ) slide_data._content = $.html( this.html.image, slide_data.content );
+                if ( !slide_data._content ) slide_data._content = $.html( this.html.image, content );
                 break;
               case 'mp4':
               case 'ogg':
               case 'webm':
-                if ( !slide_data._content ) slide_data._content = $.html( this.html.video, slide_data.content );
+                if ( !slide_data._content ) slide_data._content = $.html( this.html.video, content );
                 break;
               default:
-                if ( slide_data.content.includes( 'youtu' ) ) {
+                if ( content.includes( 'youtu' ) ) {
                   if ( !slide_data._content ) {
-                    const video = slide_data.content.split( '/' ).pop().split( '?v=' ).pop().split( '&' ).shift();
+                    const video = content.split( '/' ).pop().split( '?v=' ).pop().split( '&' ).shift();
                     const app = await this.youtube.start( { video: video } );
                     slide_data._content = app.root;
                   }
                 }
-                else if ( slide_data.content.includes( '<ccm-' ) ) {
+                else if ( content.includes( '<ccm-' ) ) {
                   if ( !slide_data._content ) {
-                    const { component, config } = $.decomposeEmbedCode( slide_data.content );
+                    const { component, config } = $.decomposeEmbedCode( content );
                     const { store, key } = config;
                     const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
                     slide_data._content = app.root;
                   }
                 }
                 else {
-                  $.setContent( slide_element, slide_data.content );
+                  $.setContent( slide_element, content );
                   delete slide_data._content;
                 }
-                break;
             }
             break;
           default:
-            if ( $.isDependency( slide_data.content ) ) {
-              if ( !slide_data._content ) {
-                const app = await $.solveDependency( slide_data.content );
-                await app.start();
-                slide_data._content = app.root;
-              }
+            if ( $.isDependency( content ) ) {
+              if ( !slide_data._content )
+                slide_data._content = ( await $.solveDependency( content ) ).root;
             }
             else {
-              $.setContent( slide_element, slide_data.content );
+              $.setContent( slide_element, content );
               delete slide_data._content;
             }
         }
