@@ -196,7 +196,7 @@
       this.getPages = () => file.numPages;
 
       /** when an observed responsive breakpoint triggers */
-      this.onbreakpoint = this.refresh = () => renderPage();
+      this.refresh = () => renderPage();
 
       /** updates main HTML template */
       const render = () => {
