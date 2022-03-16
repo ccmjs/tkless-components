@@ -196,7 +196,7 @@
       this.getPages = () => file.numPages;
 
       /** when an observed responsive breakpoint triggers */
-      this.refresh = () => renderPage( true );
+      this.onbreakpoint = this.refresh = () => renderPage();
 
       /** updates main HTML template */
       const render = () => {
@@ -244,7 +244,7 @@
         rendering = false;
 
         // refresh with correct canvas height
-        !no_refresh && $.sleep().then( this.refresh );
+        !no_refresh && $.sleep().then( () => this.refresh( true ) );
 
       };
 
