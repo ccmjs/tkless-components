@@ -9,6 +9,7 @@
  * - uses ccmjs v27.3.1 as default
  * - uses helper.mjs v8.1.0 as default
  * - support for app URL's and embed code of all DMS versions
+ * - pass setting for dark mode to child instances
  * (for older version changes see ccm.qa_slidecast-2.2.0.js)
  */
 
@@ -61,6 +62,10 @@
 
         // disable routing of PDF viewer
         delete this.pdf_viewer.routing;
+
+        // pass setting for dark mode to child instances
+        if ( this.lang ) this.lang.dark = this.dark;
+        this.pdf_viewer.dark = this.dark;
 
       };
 
@@ -202,7 +207,7 @@
                 if ( content.includes( 'youtu' ) ) {
                   if ( !slide_data._content ) {
                     const video = content.split( '/' ).pop().split( '?v=' ).pop().split( '&' ).shift();
-                    const app = await this.youtube.start( { video: video } );
+                    const app = await this.youtube.start( { video: video, dark: this.dark } );
                     slide_data._content = app.root;
                   }
                 }
@@ -268,7 +273,10 @@
         // render comments
         if ( this.comment && slide_data.commentary !== false ) {
           if ( !slide_data.comments )
-            slide_data.comments = await this.comment.start( { 'data.key': this.comment.config.data.key + '-' + slide_data.key } );
+            slide_data.comments = await this.comment.start( {
+              dark: this.dark,
+              'data.key': this.comment.config.data.key + '-' + slide_data.key
+            } );
           $.setContent( this.element.querySelector( '#comments' ), slide_data.comments.root );
         }
 
