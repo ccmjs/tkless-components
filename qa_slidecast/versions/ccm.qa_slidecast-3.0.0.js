@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
- * @version 3.0.0
+ * @version latest (3.0.0)
  * @changes
  * version 3.0.0 (15.02.2022):
  * - uses ccmjs v27.3.1 as default
@@ -16,7 +16,6 @@
 ( () => {
   const component = {
     name: 'qa_slidecast',
-    version: [ 3, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],
@@ -212,14 +211,6 @@
                     slide_data._content = app.root;
                   }
                 }
-                else if ( content.includes( '<ccm-' ) ) {
-                  if ( !slide_data._content ) {
-                    const { component, config } = $.decomposeEmbedCode( content );
-                    const { store, key } = config;
-                    const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
-                    slide_data._content = app.root;
-                  }
-                }
                 else {
                   $.setContent( slide_element, content );
                   delete slide_data._content;
@@ -249,22 +240,12 @@
         // render description
         const description_element = this.element.querySelector( '#description' );
         if ( slide_data.description && !slide_data._description ) {
-          if ( $.isDependency( slide_data.description ) ) {
-            const app = await $.solveDependency( slide_data.description );
-            await app.start();
-            slide_data._description = app.root;
-          }
+          const description = await $.appDependency( slide_data.description ) || slide_data.description;
+          if ( $.isDependency( description ) )
+            slide_data._description = ( await $.solveDependency( description ) ).root;
           else if ( typeof slide_data.description !== 'string' ) {
             $.setContent( slide_element, slide_data.description );
             delete slide_data._description;
-          }
-          else if ( slide_data.description.includes( '<ccm-' ) ) {
-            if ( !slide_data._description ) {
-              const { component, config } = $.decomposeEmbedCode( slide_data.description );
-              const { store, key } = config;
-              const app = await this.ccm.start( component, [ 'ccm.get', store, key ] );
-              slide_data._description = app.root;
-            }
           }
           else
             $.setContent( description_element, $.html( '<article>%%</article>', slide_data.description ) );
