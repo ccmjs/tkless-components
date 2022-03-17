@@ -242,8 +242,9 @@
         const description_element = this.element.querySelector( '#description' );
         if ( slide_data.description && !slide_data._description ) {
           const description = await $.appDependency( slide_data.description ) || slide_data.description;
-          if ( $.isDependency( description ) )
+          if ( $.isDependency( description ) ) {
             slide_data._description = ( await $.solveDependency( description ) ).root;
+          }
           else if ( typeof slide_data.description !== 'string' ) {
             $.setContent( slide_element, slide_data.description );
             delete slide_data._description;
