@@ -73,7 +73,8 @@
 
         this.element.querySelector( '#fill-in-task-compare' ).addEventListener( 'click', ( event) => {
           if ( $.isInstance( this.solution ) ) {
-           $.append( this.element, this.solution.root );
+            $.append( this.element, $.html( { 'tag': 'legend', "inner": "Solution", "class": "mt-5" } ));
+            $.append( this.element, this.solution.root );
           }
           else {
             let form_data = $.formData( this.element );
