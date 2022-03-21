@@ -24,7 +24,7 @@ export function main( instance, events ) {
     <main>
       <header></header>
       <section id="viewer"></section>
-      <section id="control">
+      <section id="control" ?data-hidden=${ !instance.description && !slide_data.audio && !instance.comment }>
         <div title="${ instance.text.description || '' }" data-lang="description-title" ?data-hidden=${ !instance.description }>
           <i class="bi bi-sticky${ instance.open === 'description' || instance.open === 'both' ? '-fill' : '' }" ?disabled=${ !slide_data.description } @click=${ events.onDescription }></i>
         </div>

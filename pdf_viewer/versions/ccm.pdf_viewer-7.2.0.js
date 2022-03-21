@@ -245,7 +245,7 @@
         rendering = false;
 
         // refresh with correct canvas height
-        !no_refresh && $.sleep().then( () => this.refresh( true ) );
+        !no_refresh && $.sleep( 300 ).then( () => renderPage( true ) );
 
       };
 

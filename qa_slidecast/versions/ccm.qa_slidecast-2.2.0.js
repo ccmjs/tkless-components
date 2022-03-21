@@ -5,7 +5,7 @@
  * @license The MIT License (MIT)
  * @version 2.2.0
  * @changes
- * version 2.2.0 (11.14.2022):
+ * version 2.2.0 (11.02.2022):
  * - controllable dark mode
  * version 2.1.0 (24.01.2022):
  * - uses ccmjs v27.2.0 as default

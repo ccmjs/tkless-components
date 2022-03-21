@@ -80,7 +80,7 @@ i {
 }
 
 *[data-hidden] {
-  display: none;
+  display: none !important;
 }
 
 /* Dark Mode */
