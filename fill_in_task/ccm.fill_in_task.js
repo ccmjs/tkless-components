@@ -20,6 +20,9 @@
         "3-4": "4",
         "3-5": "60,6"
       },*/
+     /* solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
+        "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
+      ] ],*/
       css: [ "ccm.load", "resources/default.css" ]
     },
 
@@ -69,10 +72,15 @@
 
 
         this.element.querySelector( '#fill-in-task-compare' ).addEventListener( 'click', ( event) => {
-          let form_data = $.formData( this.element );
-          compare( this.solution, form_data,  );
-          $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct? undefined : 'red' } );
-          event.target.disabled = true;
+          if ( $.isInstance( this.solution ) ) {
+           $.append( this.element, this.solution.root );
+          }
+          else {
+            let form_data = $.formData( this.element );
+            compare( this.solution, form_data,  );
+            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct? undefined : 'red' } );
+          }
+         event.target.disabled = true;
         } );
 
         this.element.querySelector( '#fill-in-task-retry' ).addEventListener( 'click', () => {
