@@ -98,9 +98,8 @@
           "inner": [
             {
               "tag": "span",
-              "class": "fa fa-plus"
-            },
-            " Row"
+              "inner": "&#43; Row"
+            }
           ]
         },
         "submit": {
@@ -126,8 +125,6 @@
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //filter_values
       css: [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css",
-        { "context": "head", "url": "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" },
         "https://ccmjs.github.io/tkless-components/table/resources/default.css"
       ],
       helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
