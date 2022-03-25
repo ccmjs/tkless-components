@@ -201,12 +201,15 @@
         } );
         self.table_head && $.setContent( table.querySelector( 'thead' ), addTableHead() );
 
-        if ( !self.table_col && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) )
+        if ( !self.table_col && data.values && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) )
           self.table_col = data.values[ 0 ].length;
+        else
+          self.table_col = self.table_head.length;
 
-        row = data.values.length;
+        row = data.values ? data.values.length: 1;
+
         for ( let i = 0 ; i < row; i++ )
-          addTableRow( i, col,data && data.values );
+          addTableRow( i, col, data.values );
 
 
         return table;
@@ -232,7 +235,7 @@
             col = j;
             const table_cell = $.html ( self.html.table_cell );
 
-            if ( !self.col_settings && values  || self.col_settings[ j ].type === 'none')
+            if ( !self.col_settings && values )
               $.setContent( table_cell, i < values.length && values[ i ][ j ] !== undefined ? values[ i ][ j ] : '' );
             else {
               let input;
@@ -245,6 +248,8 @@
                     input = $.clone( self.html[ 'select' ] );
                     break;
                   case 'none':
+                    input = undefined;
+                    values && $.setContent( table_cell, i < values.length && values[ i ][ j ] !== undefined ? values[ i ][ j ] : '' );
                     break;
                   default:
                     input = $.clone( self.html[ 'input' ] );
@@ -252,17 +257,19 @@
                 }
               }
               //const input = $.clone( my.html[ my.col_settings && my.col_settings[ j ] && my.col_settings[ j ].type === 'textarea' ? 'textarea' : 'input' ] );
-              input.name = ( i + 1 ) + '-' + ( j + 1 );
+              if ( input !== undefined ) {
+                input.name = ( i + 1 ) + '-' + ( j + 1 );
 
-              // consider column properties
-              self.col_settings && considerColSettings( j, input );
+                // consider column properties
+                self.col_settings && considerColSettings( j, input );
 
-              table_cell.appendChild( $.html( input, {
-                // onchange event for input fields
-                change: function () {
-                  self.onchange && self.onchange( self, self.value, self );
-                }
-              } ) );
+                table_cell.appendChild( $.html( input, {
+                  // onchange event for input fields
+                  change: function () {
+                    self.onchange && self.onchange( self, self.value, self );
+                  }
+                } ) );
+              }
 
             }
 
@@ -303,7 +310,6 @@
               input[ key ] =  self.col_settings[ col ][ key ];
               break;
           }
-
         }
       }
 
