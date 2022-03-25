@@ -203,8 +203,6 @@
 
         if ( !self.table_col && data.values && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) )
           self.table_col = data.values[ 0 ].length;
-        else
-          self.table_col = self.table_head.length;
 
         row = data.values ? data.values.length: 1;
 
