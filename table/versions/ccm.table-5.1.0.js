@@ -199,8 +199,12 @@
         } );
         self.table_head && $.setContent( table.querySelector( 'thead' ), addTableHead() );
 
-        if ( !self.table_col && data.values && data.values.length > 0 && Array.isArray( data.values[ 0 ] ) )
-          self.table_col = data.values[ 0 ].length;
+        if ( !self.table_col ) {
+          if ( Array.isArray( $.deepValue( data, 'values.0' ) ) )
+            self.table_col = data.values[ 0 ].length;
+          else if ( !data.values )
+            self.table_head ? self.table_col = self.table_head.length : self.table_col = self.col_settings.length;
+        }
 
         row = data.values ? data.values.length: 1;
 
