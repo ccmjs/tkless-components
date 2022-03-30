@@ -1,5 +1,5 @@
 export const demo = {
-  content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", {
+  "content": [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", {
     "filter_values": true,
     //"add_row": true,
     //"table_col": 6,
