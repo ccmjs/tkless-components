@@ -75,9 +75,11 @@
 
 
         this.element.querySelector( '#fill-in-task-compare' ).addEventListener( 'click', ( event) => {
-          let form_data = $.formData( this.element );
-          compare( this.solution, form_data,  );
-          $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct? undefined : 'red' } );
+          if ( this.solution ) {
+            let form_data = $.formData( this.element );
+            compare( this.solution, form_data,  );
+            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct? undefined : 'red' } );
+          }
 
           if ( this.sample_solution && $.isInstance( this.sample_solution ) ) {
             this.element.querySelector( '#fill-in-task-solution' ).classList.remove( 'hidden' );
@@ -95,8 +97,6 @@
             elem.style[ 'background-color' ] = 'grey'
           }
         } );
-
-
 
         this.element.querySelector( '#fill-in-task-retry' ).addEventListener( 'click', () => {
           this.start();
