@@ -120,9 +120,7 @@
             elem.style[ 'box-shadow' ] = '0px 0px 0px 3px'+color;
             elem.style[ 'border-radius' ] = '3px';
           }
-         else {
-            elem.style['background-color'] = color;
-          }
+         else elem.style['background-color'] = color;
         }
       };
 
