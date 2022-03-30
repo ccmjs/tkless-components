@@ -66,10 +66,10 @@
         const instance = await this.content.start( { shadow: 'none' } );
 
         $.setContent( this.element,  instance.root );
+        $.append( this.element, $.html( {'tag': 'div', 'id': 'fill-in-task-progress-bar' } ) );
         $.append( this.element, $.html( {'tag': 'button', 'inner': 'Check', 'id': 'fill-in-task-compare', 'class': 'fill-in-task-btn' } ) );
         $.append( this.element, $.html( {'tag': 'button', 'inner': 'Retry', 'id': 'fill-in-task-retry', 'class': 'fill-in-task-btn' } ) );
         $.append( this.element, $.html( {'tag': 'button', 'inner': 'Solution', 'id': 'fill-in-task-solution', 'class': 'fill-in-task-btn hidden' } ) );
-        $.append( this.element, $.html( {'tag': 'div', 'id': 'fill-in-task-progress-bar' } ) );
 
 
         this.element.querySelector( '#fill-in-task-compare' ).addEventListener( 'click', ( event) => {
