@@ -2,7 +2,7 @@
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-  margin: 0.3em;
+  margin-top: 2em;
 }
 #fill-in-task-compare[disabled] {
   background-color: grey;
@@ -13,7 +13,20 @@
   color: #fff;
   background-color: #28a745;
   border-color: #28a745;
+  margin: 2em 0  0 0.3em;
 }
+
+#fill-in-task-solution {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: rgba(0, 158, 224, 0.55);
+  margin: 2em 0  0 0.3em;
+}
+
+#fill-in-task-solution.hidden {
+  display: none;
+}
+
 .fill-in-task-btn {
   display: inline-block;
   font-weight: 400;

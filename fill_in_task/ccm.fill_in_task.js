@@ -20,7 +20,7 @@
         "3-4": "4",
         "3-5": "60,6"
       },*/
-     /* solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
+      /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
       ] ],*/
       css: [ "ccm.load", "resources/default.css" ]
@@ -68,28 +68,40 @@
         $.setContent( this.element,  instance.root );
         $.append( this.element, $.html( {'tag': 'button', 'inner': 'Check', 'id': 'fill-in-task-compare', 'class': 'fill-in-task-btn' } ) );
         $.append( this.element, $.html( {'tag': 'button', 'inner': 'Retry', 'id': 'fill-in-task-retry', 'class': 'fill-in-task-btn' } ) );
-        $.append( this.element, $.html( {'tag': 'div', 'id': 'fill-in-task-progress-bar', } ) );
+        $.append( this.element, $.html( {'tag': 'button', 'inner': 'Solution', 'id': 'fill-in-task-solution', 'class': 'fill-in-task-btn hidden' } ) );
+        $.append( this.element, $.html( {'tag': 'div', 'id': 'fill-in-task-progress-bar' } ) );
 
 
         this.element.querySelector( '#fill-in-task-compare' ).addEventListener( 'click', ( event) => {
-          if ( $.isInstance( this.solution ) ) {
-            $.append( this.element, $.html( { 'tag': 'legend', "inner": "Solution", "class": "mt-5" } ));
-            $.append( this.element, this.solution.root );
+          let form_data = $.formData( this.element );
+          compare( this.solution, form_data,  );
+          $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct? undefined : 'red' } );
+
+          if ( this.sample_solution && $.isInstance( this.sample_solution ) ) {
+            this.element.querySelector( '#fill-in-task-solution' ).classList.remove( 'hidden' );
+            this.element.querySelector( '#fill-in-task-solution' ).addEventListener( 'click', ( event) => {
+              $.append( this.element, $.html( { 'tag': 'legend', "inner": "Solution", "class": "mt-5" } ));
+              $.append( this.element, this.sample_solution.root );
+              disabledButton( event.target );
+            });
           }
-          else {
-            let form_data = $.formData( this.element );
-            compare( this.solution, form_data,  );
-            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct? undefined : 'red' } );
+
+          disabledButton(  event.target );
+
+          function disabledButton ( elem ) {
+            elem.disabled = true;
+            elem.style[ 'background-color' ] = 'grey'
           }
-         event.target.disabled = true;
         } );
+
+
 
         this.element.querySelector( '#fill-in-task-retry' ).addEventListener( 'click', () => {
          this.start();
         } );
 
         function compare ( data_1, data_2 ) {
-          for( let key in data_1 ) {
+          for( let key in data_2 ) {
             let elem = self.element.querySelector( '[name="'+ key +'"]' );
             if ( data_2[key] !== data_1[key] || data_2[key] === undefined ) {
               highlight ( elem, '#FF00005E' );
