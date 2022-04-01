@@ -92,7 +92,7 @@
         this.show_solution && this.element.querySelector( '#fill-in-task-solution' ).addEventListener( 'click', ( event) => {
           if ( this.sample_solution && $.isInstance( this.sample_solution ) ) {
             $.append( this.element, $.html( { 'tag': 'fieldset', 'inner': {'tag': 'legend', "inner": "Solution", "class": "mt-5" } } ));
-            $.append( this.element.querySelector( 'legend' ), this.sample_solution.root );
+            $.append( this.element.querySelector( 'fieldset' ), this.sample_solution.root );
             disabledButton( event.target );
           }
         } );
