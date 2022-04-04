@@ -8,8 +8,8 @@ export const demo = {
       { "type": "none" },
       { "type": "none" },
       { "type": "none" },
-      { "type": "text" },
-      { "type": "text" },
+      { "type": "text", "required": true },
+      { "type": "text", "required": true },
       { "type": "checkbox" }
     ],
     "data": {
