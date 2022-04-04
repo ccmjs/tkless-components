@@ -132,7 +132,7 @@
         if ( $.isComponent( this.content ) ) {
           const instance = await this.content.start( { shadow: 'none', root: $app } );
           let div = document.createElement( 'div' );
-          !instance.element.querySelector( 'form' ) && div.appendChild( instance.element.querySelector( 'form > div' ) );
+          !!instance.element.querySelector( 'form' ) && div.appendChild( instance.element.querySelector( 'form > div' ) );
           $.replace( instance.element.querySelector( 'form' ), div  );
         }
         else
