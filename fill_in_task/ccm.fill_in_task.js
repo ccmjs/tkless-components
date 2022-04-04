@@ -130,9 +130,11 @@
         const $app = $main.querySelector( '#app' );
         if ( $.isComponent( this.content ) ) {
           const instance = await this.content.start( { shadow: 'none', root: $app } );
-          let div = document.createElement( 'div' );
-          !!instance.element.querySelector( 'form' ) && div.appendChild( instance.element.querySelector( 'form > div' ) );
-          $.replace( instance.element.querySelector( 'form' ), div  );
+          if ( !!instance.element.querySelector( 'form' ) ) {
+            let div = document.createElement( 'div' );
+            div.appendChild( instance.element.querySelector( 'form > div' ) );
+            $.replace( instance.element.querySelector( 'form' ), div  );
+          }
         }
         else
           $.setContent( $app, $.html( this.content ) );
