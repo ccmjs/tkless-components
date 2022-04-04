@@ -11,7 +11,7 @@
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
 
     config: {
-//    content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
+      //content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
       //check: true,
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/fill_in_task/resources/default.css" ],
       helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
@@ -60,7 +60,7 @@
           ]
         }
       },
-//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+      //"logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       //retry: true,
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
@@ -196,6 +196,7 @@
         // set status for buttons
         setHidden( 'fill-in-task-compare', !this.check );
         setHidden( 'fill-in-task-solution', !this.show_solution );
+        setHidden( 'fill-in-task-retry', !this.check );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
         setDisabled( 'fill-in-task-solution', this.check && !has_feedback );

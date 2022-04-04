@@ -195,6 +195,7 @@
         // set status for buttons
         setHidden( 'fill-in-task-compare', !this.check );
         setHidden( 'fill-in-task-solution', !this.show_solution );
+        setHidden( 'fill-in-task-retry', !this.check );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
         setDisabled( 'fill-in-task-solution', this.check && !has_feedback );
