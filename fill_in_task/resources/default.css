@@ -12,6 +12,12 @@
   margin: 2em 0  0 0.3em;
 }
 
+#fill-in-task-onfinish {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  margin: 2em 0  0 0.3em;
+}
+
 #fill-in-task-solution {
   color: #fff;
   background-color: #17a2b8;

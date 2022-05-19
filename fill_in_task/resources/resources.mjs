@@ -31,6 +31,7 @@ export const demo = {
     "3-5": "60,6",
     "3-6": false
   },
+  onfinish: function ( data ) { console.log( data );  },
   "sample_solution": [ "ccm.start", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
       ] ]

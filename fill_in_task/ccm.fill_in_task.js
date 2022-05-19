@@ -13,6 +13,7 @@
 //    content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
       check: true,
       css: [ "ccm.load", "./resources/default.css" ],
+//      onfinish: function ( data ) { console.log( data );  },
       helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
       html: {
         main: {
@@ -44,6 +45,14 @@
                       "class": "fill-in-task-btn",
                       "id": "fill-in-task-retry",
                       "onclick": "%onRetry%"
+                    },
+                    {
+                      "tag": "button",
+                      "type": "button",
+                      "inner": "finish",
+                      "class": "fill-in-task-btn",
+                      "id": "fill-in-task-onfinish",
+                      "onclick": "%onFinish%"
                     },
                     {
                       "tag": "input",
@@ -121,7 +130,8 @@
             else if ( this.show_solution )
               events.onSolution();
           },
-          onRetry: events.onRetry
+          onRetry: events.onRetry,
+          onFinish: events.onFinish
         } ) );
 
         updateButtons();
@@ -140,6 +150,10 @@
           $.setContent( $app, $.html( this.content ) );
 
       };
+
+      this.getValue = () => {
+        return $.formData( this.element );
+      }
 
       /**
        * contains all event handlers
@@ -165,7 +179,8 @@
             $.append( $main.querySelector( 'fieldset' ), this.sample_solution.root );
             setDisabled('fill-in-task-solution', true );
           }
-        }
+        },
+        onFinish: () => {  $.onFinish( this );  }
       };
 
       const compare = ( data_1, data_2 ) => {
@@ -198,6 +213,8 @@
         setHidden( 'fill-in-task-compare', !this.check );
         setHidden( 'fill-in-task-solution', !this.show_solution );
         setHidden( 'fill-in-task-retry', !this.check );
+        setHidden( 'fill-in-task-onfinish', !this.onfinish );
+        setDisabled( 'fill-in-task-onfinish', this.check && !has_feedback );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
         setDisabled( 'fill-in-task-solution', this.check && !has_feedback );

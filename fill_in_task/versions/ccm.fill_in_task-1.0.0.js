@@ -61,6 +61,7 @@
         }
       },
       //"logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+     // onfinish: function ( data ) { console.log( data );  },
       //retry: true,
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
@@ -122,7 +123,8 @@
             else if ( this.show_solution )
               events.onSolution();
           },
-          onRetry: events.onRetry
+          onRetry: events.onRetry,
+          onFinish: events.onFinish
         } ) );
 
         updateButtons();
@@ -141,6 +143,10 @@
           $.setContent( $app, $.html( this.content ) );
 
       };
+
+      this.getValue = () => {
+        return $.formData( this.element );
+      }
 
       /**
        * contains all event handlers
@@ -166,7 +172,8 @@
             $.append( $main.querySelector( 'fieldset' ), this.sample_solution.root );
             setDisabled('fill-in-task-solution', true );
           }
-        }
+        },
+        onFinish: () => {  $.onFinish( this );  }
       };
 
       const compare = ( data_1, data_2 ) => {
@@ -199,6 +206,8 @@
         setHidden( 'fill-in-task-compare', !this.check );
         setHidden( 'fill-in-task-solution', !this.show_solution );
         setHidden( 'fill-in-task-retry', !this.check );
+        setHidden( 'fill-in-task-onfinish', !this.onfinish );
+        setDisabled( 'fill-in-task-onfinish', this.check && !has_feedback );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
         setDisabled( 'fill-in-task-solution', this.check && !has_feedback );
