@@ -11,9 +11,9 @@
 
     config: {
 //    content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
-      check: true,
+//    check: true,
       css: [ "ccm.load", "./resources/default.css" ],
-//      onfinish: function ( data ) { console.log( data );  },
+//    onfinish: function ( data ) { console.log( data );  },
       helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
       html: {
         main: {
@@ -69,7 +69,7 @@
         }
       },
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
-      retry: true,
+//     retry: true,
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
       ] ],*/

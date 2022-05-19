@@ -47,6 +47,14 @@
                       "onclick": "%onRetry%"
                     },
                     {
+                      "tag": "button",
+                      "type": "button",
+                      "inner": "finish",
+                      "class": "fill-in-task-btn",
+                      "id": "fill-in-task-onfinish",
+                      "onclick": "%onFinish%"
+                    },
+                    {
                       "tag": "input",
                       "type": "submit",
                       "value": "Solution",
