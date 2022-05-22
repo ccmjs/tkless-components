@@ -152,7 +152,7 @@
       };
 
       this.getValue = () => {
-        return $.formData( this.element );
+        return this;
       }
 
       /**
