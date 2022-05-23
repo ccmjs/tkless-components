@@ -48,7 +48,7 @@
                     },
                     {
                       "tag": "button",
-                      "type": "button",
+                      "type": "submit",
                       "inner": "finish",
                       "class": "fill-in-task-btn",
                       "id": "fill-in-task-onfinish",
@@ -180,7 +180,10 @@
             setDisabled('fill-in-task-solution', true );
           }
         },
-        onFinish: () => { $.onFinish( this );  }
+        onFinish: () => {
+
+          $.onFinish( this );
+        }
       };
 
       const compare = ( data_1, data_2 ) => {
@@ -217,7 +220,7 @@
         setDisabled( 'fill-in-task-onfinish', this.check && !has_feedback );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
-        setDisabled( 'fill-in-task-solution', this.check && !has_feedback );
+        setDisabled( 'fill-in-task-solution', this.check && !has_feedback || !this.check );
 
       };
 

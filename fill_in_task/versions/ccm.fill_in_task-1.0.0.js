@@ -48,7 +48,7 @@
                     },
                     {
                       "tag": "button",
-                      "type": "button",
+                      "type": "submit",
                       "inner": "finish",
                       "class": "fill-in-task-btn",
                       "id": "fill-in-task-onfinish",
