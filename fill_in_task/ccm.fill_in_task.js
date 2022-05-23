@@ -152,7 +152,7 @@
       };
 
       this.getValue = () => {
-        return this;
+        return $.formData( this.element );
       }
 
       /**
@@ -180,7 +180,7 @@
             setDisabled('fill-in-task-solution', true );
           }
         },
-        onFinish: () => {  $.onFinish( this );  }
+        onFinish: () => { $.onFinish( this );  }
       };
 
       const compare = ( data_1, data_2 ) => {
