@@ -13,6 +13,7 @@
 //    content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
 //    check: true,
       css: [ "ccm.load", "./resources/default.css" ],
+//    onstart: event => console.log( event ),
 //    onfinish: function ( data ) { console.log( data );  },
       helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
       html: {
@@ -26,7 +27,7 @@
                   "id": "app"
                 },
                 {
-                  "id": "buttons",
+                  "id": "fill-in-task-buttons",
                   "inner": [
                     {
                       "id": "fill-in-task-progress-bar"
@@ -48,8 +49,8 @@
                     },
                     {
                       "tag": "button",
-                      "type": "submit",
-                      "inner": "finish",
+                      "type": "button",
+                      "inner": "Generate Chart",
                       "class": "fill-in-task-btn",
                       "id": "fill-in-task-onfinish",
                       "onclick": "%onFinish%"
@@ -149,6 +150,8 @@
         else
           $.setContent( $app, $.html( this.content ) );
 
+        if ( this.onstart ) this.onstart( { instance: this } );
+
       };
 
       this.getValue = () => {
@@ -180,10 +183,7 @@
             setDisabled('fill-in-task-solution', true );
           }
         },
-        onFinish: () => {
-
-          $.onFinish( this );
-        }
+        onFinish: () => {  $.onFinish( this );  }
       };
 
       const compare = ( data_1, data_2 ) => {
@@ -220,7 +220,7 @@
         setDisabled( 'fill-in-task-onfinish', this.check && !has_feedback );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
-        setDisabled( 'fill-in-task-solution', this.check && !has_feedback || !this.check );
+        setDisabled( 'fill-in-task-solution', this.check && !has_feedback );
 
       };
 

@@ -26,7 +26,7 @@
                   "id": "app"
                 },
                 {
-                  "id": "buttons",
+                  "id": "fill-in-task-buttons",
                   "inner": [
                     {
                       "id": "fill-in-task-progress-bar"
@@ -48,8 +48,8 @@
                     },
                     {
                       "tag": "button",
-                      "type": "submit",
-                      "inner": "finish",
+                      "type": "button",
+                      "inner": "Generate Chart",
                       "class": "fill-in-task-btn",
                       "id": "fill-in-task-onfinish",
                       "onclick": "%onFinish%"
@@ -69,7 +69,8 @@
         }
       },
       //"logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
-     // onfinish: function ( data ) { console.log( data );  },
+      //onstart: event => console.log( event ),
+      //onfinish: function ( data ) { console.log( data );  },
       //retry: true,
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
@@ -149,6 +150,8 @@
         }
         else
           $.setContent( $app, $.html( this.content ) );
+
+        if ( this.onstart ) this.onstart( { instance: this } );
 
       };
 
