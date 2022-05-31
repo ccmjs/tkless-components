@@ -26,7 +26,7 @@ export const demo = {
   //"cell_onrender": function ( event ) { console.log( this, event ); },
   "filter_values": true,
   "submit": true,
-  "onchange": ( { instance } ) => { console.log( 'onchange', instance  ); },
+  "onchange": ( { instance, target } ) => { console.log( 'onchange', instance, target  ); },
   "onfinish": {
     alert: 'Saved',
     log: true

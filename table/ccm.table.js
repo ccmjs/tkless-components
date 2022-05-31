@@ -264,8 +264,9 @@
 
                 table_cell.appendChild( $.html( input, {
                   // onchange event for input fields
-                  change: () => {
-                    self.onchange && self.onchange( { instance: self } );
+                  change: ( event ) => {
+                    const target = event.target;
+                    self.onchange && self.onchange( { instance: self, target: target } );
                   }
                 } ) );
               }
