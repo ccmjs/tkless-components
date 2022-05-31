@@ -3,6 +3,9 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2022
  * @license The MIT License (MIT)
  * @changes
+ *  @version 5.2.0
+ * -(31.05.2022)
+ *   onchnage event returns event object
  *  @version 5.1.0
  * -(10.03.2022)
  *   possibility to set default values over col settings
@@ -33,6 +36,7 @@
      * @type {string}
      */
     name: 'table',
+    version: [ 5,1,0 ],
 
     /**
      * recommended used framework version
@@ -45,7 +49,7 @@
      * @type {object}
      */
     config: {
-      templates: [ "ccm.load", "resources/templates.html" ],
+      templates: [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.html" ],
       html: {
         "table": {
           "inner": {
@@ -124,7 +128,7 @@
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //filter_values
       css: [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/table/resources/default.css"
       ],
       helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
     },
