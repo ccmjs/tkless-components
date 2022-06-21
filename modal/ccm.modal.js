@@ -75,7 +75,7 @@
           $.remove( this.element.querySelector( 'footer' ) );
 
         // each button with a 'data-dismiss' attribute closes the modal dialog when clicked
-        this.element.querySelectorAll( '[data-close]' ).forEach( button => button.addEventListener( 'click', this.close ) );
+        this.element.querySelectorAll( '[data-close]' ).forEach( button => button.addEventListener( 'click', () => this.close() ) );
 
         // is not standalone?
         if ( this.parent ) {
