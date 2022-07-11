@@ -75,7 +75,7 @@
           $.remove( this.element.querySelector( 'footer' ) );
 
         // each button with a 'data-dismiss' attribute closes the modal dialog when clicked
-        this.element.querySelectorAll( '[data-close]' ).forEach( button => button.addEventListener( 'click', this.close ) );
+        this.element.querySelectorAll( '[data-close]' ).forEach( button => button.addEventListener( 'click', () => this.close() ) );
 
         // is not standalone?
         if ( this.parent ) {
@@ -86,7 +86,7 @@
         }
 
         // initially closed? => close modal dialog
-        this.closed && this.close();
+        this.closed && this.close( true );
 
       };
 
@@ -98,12 +98,15 @@
         this.ccm.context.root( this ).element.scrollIntoView( true );
       };
 
-      /** closes the modal dialog */
-      this.close = () => {
+      /**
+       * closes the modal dialog
+       * @param {boolean} [init] - when it's the initial close
+       */
+      this.close = init => {
         if ( this.parent ) document.body.style.overflowY = 'unset';
         this.element.querySelector( '#dialog' ).classList.remove( 'show' );
         this.root.style.display = 'none';
-        this.onclose && this.onclose( this );
+        this.onclose && !init && this.onclose( this );
       };
 
       /** removes the modal dialog */
