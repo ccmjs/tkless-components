@@ -167,7 +167,7 @@
           if ( this.solution ) {
             let form_data = $.formData( this.element );
             compare( this.solution, form_data );
-            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct ? undefined : 'red', actual: false } );
+            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: correct ? undefined : 'red' } );
             has_feedback = true;
             updateButtons();
           }
