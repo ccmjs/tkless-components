@@ -94,7 +94,7 @@
        */
       let $;
 
-      let correct, incorrect, has_feedback = false, $main;
+      let correct = 0, incorrect = 0, has_feedback = false, $main;
 
       /**
        * when all dependencies are solved after creation and before the app starts
