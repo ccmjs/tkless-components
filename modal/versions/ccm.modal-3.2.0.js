@@ -5,7 +5,7 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2019
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
- * @version latest (3.2.0)
+ * @version 3.2.0
  * @changes
  * version 3.2.0 (20.07.2022)
  * - uses ccmjs v27.4.0 as default
@@ -34,6 +34,7 @@
 ( () => {
   const component = {
     name: 'modal',
+    version: [ 3, 2, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.0.min.js',
     config: {
 //    "backdrop_close": true,
