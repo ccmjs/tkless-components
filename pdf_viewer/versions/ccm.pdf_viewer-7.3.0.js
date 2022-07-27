@@ -26,6 +26,7 @@
 ( () => {
   const component = {
     name: 'pdf_viewer',
+    version: [ 7, 3, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
       "css": [ "ccm.load",
