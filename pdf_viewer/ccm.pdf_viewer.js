@@ -251,8 +251,6 @@
           text_layer.innerHTML = '';
 
           //set offset of absolute text-layer
-          text_layer.style.left = canvas.offsetLeft+'px';
-          text_layer.style.top = canvas.offsetTop+'px';
           text_layer.style.width = canvas.clientWidth+'px';
           text_layer.style.height = canvas.clientHeight+'px';
 
