@@ -83,9 +83,9 @@
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
         // setup PDF.js library
-        let pdfjsLib = window[ 'pdfjs-dist/build/pdf' ];
-        if ( !pdfjsLib.GlobalWorkerOptions.workerSrc ) pdfjsLib.GlobalWorkerOptions.workerSrc = self.pdfJS_workerSrc;
-        this.pdfjs = pdfjsLib;
+        const pdfjs = window[ this.pdfjs.namespace ];
+        if ( !pdfjs.GlobalWorkerOptions.workerSrc ) pdfjs.GlobalWorkerOptions.workerSrc = this.pdfjs.worker;
+        this.pdfjs = pdfjs;
 
       };
 
@@ -196,7 +196,7 @@
       this.getPages = () => file.numPages;
 
       /** when an observed responsive breakpoint triggers */
-      this.onbreakpoint = this.refresh = () => renderPage();
+//    this.onbreakpoint = this.refresh = () => renderPage();
 
       /** updates main HTML template */
       const render = () => {
@@ -252,16 +252,13 @@
           viewport: viewport
         } ).promise;
 
-        console.log('#6',no_refresh,rendering);
-
         // rendering of PDF page is finished
         rendering = false;
 
+        console.log('#6',no_refresh,rendering);
+
         // refresh with correct canvas height
-        !no_refresh && $.sleep( 300 ).then( () => {
-          console.log('#7',no_refresh,rendering);
-          renderPage( true ).then( () => console.log('#8',no_refresh,rendering) );
-        } );
+//      !no_refresh && $.sleep( 300 ).then( () => renderPage( true ) );
 
       };
 
