@@ -83,9 +83,9 @@
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
         // setup PDF.js library
-        const pdfjs = window[ this.pdfjs.namespace ];
-        if ( !pdfjs.GlobalWorkerOptions.workerSrc ) pdfjs.GlobalWorkerOptions.workerSrc = this.pdfjs.worker;
-        this.pdfjs = pdfjs;
+        let pdfjsLib = window[ 'pdfjs-dist/build/pdf' ];
+        if ( !pdfjsLib.GlobalWorkerOptions.workerSrc ) pdfjsLib.GlobalWorkerOptions.workerSrc = self.pdfJS_workerSrc;
+        this.pdfjs = pdfjsLib;
 
       };
 
@@ -211,8 +211,14 @@
        */
       const renderPage = async no_refresh => {
 
-        // rendering of an other PDF page is not finished? => abort
-        if ( rendering ) return;  rendering = true;
+        console.log('#v1');
+
+        console.log('#1',no_refresh,rendering);
+
+        // rendering of another PDF page is not finished? => abort
+        if ( rendering ) return; rendering = true;
+
+        console.log('#2',no_refresh,rendering);
 
         /**
          * canvas element
@@ -220,11 +226,15 @@
          */
         const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
 
+        console.log('#3',no_refresh,rendering);
+
         /**
          * current page
          * @type {Object}
          */
         const page = await file.getPage( page_nr );
+
+        console.log('#4',no_refresh,rendering);
 
         // scale page
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
@@ -234,17 +244,24 @@
         // update main HTML template
         await render();
 
+        console.log('#5',no_refresh,rendering);
+
         // render page
         await page.render( {
           canvasContext: canvas.getContext( '2d' ),
           viewport: viewport
         } ).promise;
 
+        console.log('#6',no_refresh,rendering);
+
         // rendering of PDF page is finished
         rendering = false;
 
         // refresh with correct canvas height
-        !no_refresh && $.sleep( 300 ).then( () => renderPage( true ) );
+        !no_refresh && $.sleep( 300 ).then( () => {
+          console.log('#7',no_refresh,rendering);
+          renderPage( true ).then( () => console.log('#8',no_refresh,rendering) );
+        } );
 
       };
 
