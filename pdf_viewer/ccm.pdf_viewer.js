@@ -196,7 +196,7 @@
       this.getPages = () => file.numPages;
 
       /** when an observed responsive breakpoint triggers */
-//    this.onbreakpoint = this.refresh = () => renderPage();
+      this.onbreakpoint = this.refresh = () => renderPage();
 
       /** updates main HTML template */
       const render = () => {
@@ -211,14 +211,8 @@
        */
       const renderPage = async no_refresh => {
 
-        console.log('#v1');
-
-        console.log('#1',no_refresh,rendering);
-
         // rendering of another PDF page is not finished? => abort
         if ( rendering ) return; rendering = true;
-
-        console.log('#2',no_refresh,rendering);
 
         /**
          * canvas element
@@ -226,15 +220,11 @@
          */
         const canvas = this.element.querySelector( 'canvas' ); if ( !canvas ) { rendering = false; return; }
 
-        console.log('#3',no_refresh,rendering);
-
         /**
          * current page
          * @type {Object}
          */
         const page = await file.getPage( page_nr );
-
-        console.log('#4',no_refresh,rendering);
 
         // scale page
         const viewport = page.getViewport( { scale: canvas.clientWidth / page.getViewport( { scale: 1 } ).width } );
@@ -243,8 +233,6 @@
 
         // update main HTML template
         await render();
-
-        console.log('#5',no_refresh,rendering);
 
         // render page
         await page.render( {
@@ -255,10 +243,8 @@
         // rendering of PDF page is finished
         rendering = false;
 
-        console.log('#6',no_refresh,rendering);
-
         // refresh with correct canvas height
-//      !no_refresh && $.sleep( 300 ).then( () => renderPage( true ) );
+        !no_refresh && $.sleep( 300 ).then( () => renderPage( true ) );
 
       };
 
