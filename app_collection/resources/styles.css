@@ -43,7 +43,7 @@
   border: 1px solid var( --border );
   background-color: var( --bg );
   color: var( --color );
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: normal;
   white-space: nowrap;
   overflow-x: auto;
