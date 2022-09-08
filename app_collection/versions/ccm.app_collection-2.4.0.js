@@ -22,7 +22,7 @@
     version: [ 2, 4, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
     config: {
-      "color": "limegreen",
+//    "color": "limegreen",
       "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/styles.min.css" ],
       "dark": "auto",
       "footer": [],
