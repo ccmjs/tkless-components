@@ -107,7 +107,8 @@
        */
       const onClick = async ( i, j ) => {
         const entry = i && ( !j ? this.footer[ i - 1 ] : this.sections[ i - 1 ].entries[ j - 1 ] );
-        if ( entry && entry.ignore && typeof entry.ignore === 'string' && entry.ignore.startsWith( 'http' ) && !( await $.appDependency( entry.ignore ) ) )
+        if ( entry && !entry.ignore ) return;
+        if ( entry && typeof entry.ignore === 'string' && entry.ignore.startsWith( 'http' ) && !( await $.appDependency( entry.ignore ) ) )
           window.open( entry.ignore );
         else {
           this.routing && this.routing.set( 'home' + ( i ? '-' + i + ( j ? '-' + j : '' ) : '' ) );
