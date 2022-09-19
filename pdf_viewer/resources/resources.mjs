@@ -56,7 +56,8 @@ export const test = {
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
   "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
-  "text": de
+  "text": de,
+  "textLayer": true
 };
 
 /**
@@ -69,5 +70,6 @@ export const demo = {
   } ],
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-  "text": de
+  "text": de,
+  "textLayer": true
 };

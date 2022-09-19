@@ -26,6 +26,7 @@
 ( () => {
   const component = {
     name: 'pdf_viewer',
+    version: [ 7, 3, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.2.0.min.js',
     config: {
       "css": [ "ccm.load",
@@ -215,8 +216,8 @@
        */
       const renderPage = async no_refresh => {
 
-        // rendering of another PDF page is not finished? => abort
-        if ( rendering ) return; rendering = true;
+        // rendering of an other PDF page is not finished? => abort
+        if ( rendering ) return;  rendering = true;
 
         /**
          * canvas element

@@ -40,6 +40,7 @@ header > * {
 #page {
   margin-bottom: 0.5em;
   border: 1px solid var( --border );
+  position: relative;
 }
 
 #page > * {
@@ -103,6 +104,29 @@ input {
 
 *[data-hidden] {
   display: none;
+}
+
+#text-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0.2;
+  line-height: 1.0;
+}
+
+#text-layer > span {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+#text-layer ::selection {
+  background-color: #0BA1E2;
 }
 
 /* Dark Mode */
