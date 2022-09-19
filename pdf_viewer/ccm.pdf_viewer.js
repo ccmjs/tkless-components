@@ -49,7 +49,7 @@
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ],
-      "textLayer": false
+      "textLayer": true
     },
     Instance: function () {
 
@@ -244,21 +244,23 @@
           viewport: viewport
         } ).promise;
 
-        if(this.textLayer){
+        // set text layer
+        if( this.textLayer ) {
           const text_layer = this.element.querySelector( '#text-layer' );
 
-          //clear text-layer (for changing page etc.)
+          // clear text-layer (for changing page etc.)
           text_layer.innerHTML = '';
 
-          //set offset of absolute text-layer
-          text_layer.style.width = canvas.clientWidth+'px';
-          text_layer.style.height = canvas.clientHeight+'px';
+          // set offset of absolute text-layer
+          text_layer.style.width = canvas.clientWidth + 'px';
+          text_layer.style.height = canvas.clientHeight + 'px';
 
-          this.pdfjs.renderTextLayer({
+          // render text layer
+          this.pdfjs.renderTextLayer( {
             textContent: await page.getTextContent(),
             container: text_layer,
             viewport: viewport
-          });
+          } );
         }
 
         // rendering of PDF page is finished

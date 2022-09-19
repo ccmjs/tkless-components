@@ -5,7 +5,7 @@
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text-layer feature)
  * @license The MIT License (MIT)
- * @version latest (7.3.0)
+ * @version 7.3.0
  * @changes
  * version 7.3.0 (27.07.2022):
  * - added support for rendering the text-layer
@@ -50,7 +50,7 @@
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ],
-      "textLayer": false
+      "textLayer": true
     },
     Instance: function () {
 
@@ -216,8 +216,8 @@
        */
       const renderPage = async no_refresh => {
 
-        // rendering of an other PDF page is not finished? => abort
-        if ( rendering ) return;  rendering = true;
+        // rendering of another PDF page is not finished? => abort
+        if ( rendering ) return; rendering = true;
 
         /**
          * canvas element
@@ -245,21 +245,23 @@
           viewport: viewport
         } ).promise;
 
-        if(this.textLayer){
+        // set text layer
+        if( this.textLayer ) {
           const text_layer = this.element.querySelector( '#text-layer' );
 
-          //clear text-layer (for changing page etc.)
+          // clear text-layer (for changing page etc.)
           text_layer.innerHTML = '';
 
-          //set offset of absolute text-layer
-          text_layer.style.width = canvas.clientWidth+'px';
-          text_layer.style.height = canvas.clientHeight+'px';
+          // set offset of absolute text-layer
+          text_layer.style.width = canvas.clientWidth + 'px';
+          text_layer.style.height = canvas.clientHeight + 'px';
 
-          this.pdfjs.renderTextLayer({
+          // render text layer
+          this.pdfjs.renderTextLayer( {
             textContent: await page.getTextContent(),
             container: text_layer,
             viewport: viewport
-          });
+          } );
         }
 
         // rendering of PDF page is finished
