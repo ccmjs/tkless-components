@@ -78,16 +78,16 @@ header svg {
   height: 32px;
 }
 
-header #headline {
-  overflow: hidden;
-}
-
 header #headline > div > div:first-child {
   font-size: x-small;
 }
 
 header #headline > div > div:last-child {
   font-size: smaller;
+}
+
+header #headline + div {
+  overflow: auto;
 }
 
 main .title {
