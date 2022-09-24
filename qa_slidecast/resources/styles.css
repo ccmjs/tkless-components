@@ -36,6 +36,7 @@ header > * {
 }
 
 #control {
+  background-color: white;
   color: var( --icons );
   margin: -0.5em 1em 1em;
   border-radius: 5px;
