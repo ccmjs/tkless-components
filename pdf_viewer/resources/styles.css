@@ -47,6 +47,10 @@ header > * {
   width: 100%;
 }
 
+#page + div {
+  background-color: white;
+}
+
 main > div:last-child {
   border: 1px solid var( --border );
   border-radius: 5px;
