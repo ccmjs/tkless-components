@@ -5,8 +5,9 @@
  * @license The MIT License (MIT)
  * @version latest (2.5.0)
  * @changes
- * version 2.5.0 (18.09.2022):
+ * version 2.5.0 (26.09.2022):
  * - an entry in the app collection can lead to an external URL
+ * - an entry in the app collection can initiate writing to an email address
  * - disabled dark mode as default
  * version 2.4.0 (07.03.2022):
  * - individual section color
@@ -110,6 +111,8 @@
         if ( entry && !entry.ignore ) return;
         if ( entry && typeof entry.ignore === 'string' && entry.ignore.startsWith( 'http' ) && !( await $.appDependency( entry.ignore ) ) )
           window.open( entry.ignore );
+        else if ( entry && typeof entry.ignore === 'string' && entry.ignore.startsWith( 'mailto' ) )
+          window.location.href = entry.ignore;
         else {
           this.routing && this.routing.set( 'home' + ( i ? '-' + i + ( j ? '-' + j : '' ) : '' ) );
           await render( i, j );
