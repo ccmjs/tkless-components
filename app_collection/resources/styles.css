@@ -50,6 +50,7 @@
 }
 
 header {
+  overflow-x: auto;
   border-bottom: 1px solid var( --border );
   background-color: var( --header-bg );
   display: flex;
@@ -84,10 +85,6 @@ header #headline > div > div:first-child {
 
 header #headline > div > div:last-child {
   font-size: smaller;
-}
-
-header #headline + div {
-  overflow: auto;
 }
 
 main .title {
