@@ -60,3 +60,23 @@
   background-color: grey !important;
   border-color: grey !important;
 }
+
+.fill-in-task-correct {
+  background-color: #28A7458C !important;
+}
+
+.fill-in-task-incorrect {
+  background-color: #FF00005E !important;
+}
+
+input[type ="checkbox"].fill-in-task-correct {
+  box-shadow: 0px 0px 0px 3px #28A7458C !important;
+}
+
+input[type ="checkbox"].fill-in-task-incorrect {
+  box-shadow: 0px 0px 0px 3px #FF00005E !important;
+}
+
+input[type ="checkbox"] {
+  border-radius: 3px;
+}
