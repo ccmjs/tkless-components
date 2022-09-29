@@ -50,6 +50,7 @@
 }
 
 header {
+  overflow-x: auto;
   border-bottom: 1px solid var( --border );
   background-color: var( --header-bg );
   display: flex;
@@ -76,10 +77,6 @@ header .entry {
 header svg {
   width: 32px;
   height: 32px;
-}
-
-header #headline {
-  overflow: hidden;
 }
 
 header #headline > div > div:first-child {

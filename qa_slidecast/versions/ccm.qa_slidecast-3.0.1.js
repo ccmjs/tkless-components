@@ -4,7 +4,7 @@
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text-layer feature)
  * @license The MIT License (MIT)
- * @version latest (3.0.1)
+ * @version 3.0.1
  * @changes
  * version 3.0.1 (27.07.2022):
  * - added support for rendering the text-layer of pdf slides
@@ -19,6 +19,7 @@
 ( () => {
   const component = {
     name: 'qa_slidecast',
+    version: [ 3, 0 ,1 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],

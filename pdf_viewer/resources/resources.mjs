@@ -51,12 +51,12 @@ export const test = {
     "translations": { "de": de, "en": en }
   } ],
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
-  "pdf": "https://kaul.inf.h-brs.de/ccm/vimp/mct/ex_03_study_plan/03_study_plan.pdf",
-//"pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
+  "pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
   "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
-  "text": de
+  "text": de,
+  "textLayer": true
 };
 
 /**
@@ -69,5 +69,6 @@ export const demo = {
   } ],
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-  "text": de
+  "text": de,
+  "textLayer": true
 };
