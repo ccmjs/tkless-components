@@ -1,5 +1,5 @@
 export const demo = {
-  "content": [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", {
+  content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", {
     "filter_values": true,
     //"add_row": true,
     //"table_col": 6,
@@ -8,8 +8,8 @@ export const demo = {
       { "type": "none" },
       { "type": "none" },
       { "type": "none" },
-      { "type": "text", "required": true },
-      { "type": "text", "required": true },
+      { "type": "text", "required": true, "autocomplete": "off" },
+      { "type": "text", "required": true, "autocomplete": "off" },
       { "type": "checkbox" }
     ],
     "data": {
@@ -20,7 +20,9 @@ export const demo = {
       ]
     }
   } ],
-  "solution": {
+  check: true,
+  retry: true,
+  solution: {
     "1-4": "4",
     "1-5": "7,00",
     "1-6": true,
@@ -31,8 +33,8 @@ export const demo = {
     "3-5": "60,6",
     "3-6": false
   },
-  onfinish: function ( data ) { console.log( data );  },
-  "sample_solution": [ "ccm.start", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
-        "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
-      ] ]
+  onfinish: data => { console.log( data );  },
+  // "sample_solution": [ "ccm.start", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
+  //       "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
+  //     ] ]
 }

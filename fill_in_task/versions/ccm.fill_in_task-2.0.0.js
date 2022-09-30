@@ -1,35 +1,22 @@
 /**
- * @overview ccmjs-based web component for a fill in  task
+ * @overview ccmjs-based web component for a fill in task
  * @author Tea Kless <tea.kless@web.de> 2022
  * @license The MIT License (MIT)
+ *
+ * @version 2.0.0
+ * -added configurable oncheck property
  */
 
 ( () => {
   const component = {
     name: 'fill_in_task',
+    version: [ 2,0,0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
 
     config: {
-//    content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
-//    check: true,
-      css: [ "ccm.load", "./resources/default.css" ],
-//    onstart: event => console.log( event ),
-//    onfinish: data => { console.log( data );  },
-      oncheck: ( input, solution, highlight, thisElement ) => {
-        let correct = 0; const total = Object.keys( solution ).length;
-        for ( let key in input ) {
-          let elem = thisElement.querySelector( '[name="'+ key +'"]' );
-          if ( input[ key ] !== solution[ key ] || input[ key ] === undefined ) {
-            highlight ( elem, false );
-          }
-          else {
-            highlight ( elem, true );
-            correct++
-          }
-        }
-
-        return { correct, total }
-      },
+      //content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
+      //check: true,
+      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/fill_in_task/resources/default.css" ],
       helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
       html: {
         main: {
@@ -84,12 +71,29 @@
           ]
         }
       },
-//    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
-//     retry: true,
+      //"logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
+      //onstart: event => console.log( event ),
+      //onfinish: function ( data ) { console.log( data );  },
+      oncheck: ( input, solution, highlight, thisElement ) => {
+        let correct = 0; const total = Object.keys( solution ).length;
+        for ( let key in input ) {
+          let elem = thisElement.querySelector( '[name="'+ key +'"]' );
+          if ( input[ key ] !== solution[ key ] || input[ key ] === undefined ) {
+            highlight ( elem, false );
+          }
+          else {
+            highlight ( elem, true );
+            correct++
+          }
+        }
+
+        return { correct, total }
+      },
+      //retry: true,
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
       ] ],*/
-      show_solution: true,
+      //show_solution: true,
       /*solution: {
         "1-4": "4",
         "1-5": "7,00",
@@ -224,12 +228,13 @@
       };
 
       const setDisabled = ( id, disabled ) =>
-        this.element.querySelector( '#' + id )[ ( disabled ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
+          this.element.querySelector( '#' + id )[ ( disabled ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
 
       const setHidden = ( id, hidden ) =>
-        this.element.querySelector( '#' + id ).classList[ hidden ? 'add' : 'remove' ]( 'hidden' );
+          this.element.querySelector( '#' + id ).classList[ hidden ? 'add' : 'remove' ]( 'hidden' );
 
     }
+
   };
   let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||[""])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){(c="latest"?window.ccm:window.ccm[c]).component(component);document.head.removeChild(a)};a.src=component.ccm.url}
 } )();
