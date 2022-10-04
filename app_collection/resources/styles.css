@@ -9,7 +9,7 @@
   --color: black;
   --header-bg: rgba( 248, 249, 250, 1 );
   --border: #dee2e6;
-  --section-bg: deepskyblue;
+  --section-bg: #24aded;
   --section-color: white;
   --hover-bg: #DDD;
   --hover-color: var( --color );
@@ -21,7 +21,7 @@
   --color: #fafafa;
   --border: #515151;
   --header-bg: #3b3b3b;
-  --section-bg: deepskyblue;
+  --section-bg: #24aded;
   --section-color: #111;
   --hover-bg: darkblue;
   --hover-color: var( --color );
@@ -32,7 +32,7 @@
     --color: #fafafa;
     --border: #515151;
     --header-bg: #3b3b3b;
-    --section-bg: deepskyblue;
+    --section-bg: #24aded;
     --section-color: #111;
     --hover-bg: darkblue;
     --hover-color: var( --color );
@@ -130,6 +130,11 @@ footer img {
 .entry {
   cursor: pointer;
   font-size: medium;
+}
+
+a.entry {
+  text-decoration: none;
+  color: var( --color );
 }
 
 .entry:hover {

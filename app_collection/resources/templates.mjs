@@ -3,7 +3,7 @@
  * @author André Kless <andre.kless@web.de> 2022
  */
 
-import { html, render } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
+import { html, render } from './../../lit/lit.js';
 export { render };
 
 /**
@@ -47,7 +47,12 @@ export function home( app, onClick ) {
       <div class="section">
         <div class="title">${ section.title }</div>
         <div>
-          ${ section.entries.map( ( entry, j ) => html`
+          ${ section.entries.map( ( entry, j ) => app.routing ? html`
+            <a class="entry" href="?ccm-${ app.routing.app }=home-${ i + 1 }-${ j + 1 }" @click=${ event => { event.preventDefault(); onClick( i + 1, j + 1 ); } }>
+              <img src="${ entry.icon || app.icon || '' }" ?data-invisible=${ !entry.icon && !app.icon }>
+              <span>${ entry.title }</span>
+            </a>
+          ` : html`
             <div class="entry" @click=${ () => onClick( i + 1, j + 1 ) }>
               <img src="${ entry.icon || app.icon || '' }" ?data-invisible=${ !entry.icon && !app.icon }>
               <span>${ entry.title }</span>
