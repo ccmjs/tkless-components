@@ -184,7 +184,7 @@
 
             const result = this.oncheck( form_data, this.solution, highlight, this.element );
 
-            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: ( result.correct - result.total ) === 0 ? undefined : 'red', actual: true } );
+            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: result.correct === result.total ? undefined : 'red', actual: true } );
             has_feedback = true;
             updateButtons();
           }
