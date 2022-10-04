@@ -89,7 +89,7 @@
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
       ] ],*/
-      show_solution: true,
+      //show_solution: true,
       /*solution: {
         "1-4": "4",
         "1-5": "7,00",
