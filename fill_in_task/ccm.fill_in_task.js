@@ -89,7 +89,7 @@
       /*sample_solution: [ "ccm.instance", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js", [
         "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.mjs#demo"
       ] ],*/
-      show_solution: true,
+      //show_solution: true,
       /*solution: {
         "1-4": "4",
         "1-5": "7,00",
@@ -108,7 +108,7 @@
        */
       let $;
 
-      let correct = 0, incorrect = 0, has_feedback = false, $main;
+      let has_feedback = false, $main;
 
       /**
        * when all dependencies are solved after creation and before the app starts
@@ -184,7 +184,7 @@
 
             const result = this.oncheck( form_data, this.solution, highlight, this.element );
 
-            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: ( result.correct - result.total ) === 0 ? undefined : 'red', actual: true } );
+            $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: result.correct === result.total ? undefined : 'red', actual: true } );
             has_feedback = true;
             updateButtons();
           }
