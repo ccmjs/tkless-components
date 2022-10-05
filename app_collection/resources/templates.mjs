@@ -3,7 +3,7 @@
  * @author André Kless <andre.kless@web.de> 2022
  */
 
-import { html, render } from './../../lit/lit.js';
+import { html, render } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
 export { render };
 
 /**
