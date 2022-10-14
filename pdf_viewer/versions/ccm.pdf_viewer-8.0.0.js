@@ -7,7 +7,7 @@
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text-layer feature)
  * @license The MIT License (MIT)
- * @version latest (8.0.0)
+ * @version 8.0.0
  * @changes
  * version 8.0.0 (14.10.2022):
  * - Uses ccmjs v27.4.0 from libs folder.
@@ -43,6 +43,7 @@
    */
   const component = {
     name: 'pdf_viewer',
+    version: [ 8, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.0.min.js',
     config: {
       "css": [ "ccm.load",
