@@ -333,7 +333,7 @@
           page.render( renderContext ).promise.then( async () => {
 
             // Render text layer on top of PDF page.
-            if ( this.textLayer ) {
+            if ( this.text_layer ) {
               const text_layer = this.element.querySelector( '#text-layer' );
               text_layer.innerHTML = '';
               text_layer.style.width = canvas.clientWidth + 'px';
