@@ -52,11 +52,11 @@
   max-width: calc(min(100%,350px)) !important;
 }
 
-.hidden {
+.fill-in-task-btn.hidden {
   display: none;
 }
 
-[disabled] {
+.fill-in-task-btn[disabled] {
   background-color: grey !important;
   border-color: grey !important;
 }
