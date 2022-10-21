@@ -1,0 +1,173 @@
+/**
+ * @overview Default layout of <i>ccmjs</i>-based web component for PDF viewer.
+ * @author André Kless <andre.kless@web.de> 2021-2022
+ * @license The MIT License (MIT)
+ */
+
+#element {
+  --bg: white;
+  --color: black;
+  --border: lightgray;
+  --shadow: dimgray;
+  --disabled: lightgray;
+  background-color: var( --bg );
+  color: var( --color );
+  min-width: 350px;
+  max-width: 940px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  border: 0;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+header > * {
+  padding-bottom: 0.5em;
+}
+
+main {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+#page {
+  position: relative;
+  border: 1px solid var( --border );
+  width: 100%;
+}
+
+#page > * {
+  width: 100%;
+}
+
+footer {
+  border: 1px solid var( --border );
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+nav > div {
+  display: flex;
+  align-items: center;
+}
+
+#controls {
+  width: 100%;
+  line-height: normal;
+}
+
+#extra {
+  border-left: 1px solid var( --border );
+}
+
+i {
+  font-size: 30px;
+  padding: 0 0.5em;
+}
+
+i:not([disabled]) {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+
+a i {
+  font-size: 25px;
+}
+
+input {
+  min-width: 50px;
+  text-align: center;
+  padding: 1px 3px;
+}
+
+*[disabled] {
+  color: var( --disabled );
+  cursor: not-allowed;
+}
+
+*[data-hidden] {
+  display: none;
+}
+
+#text-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  opacity: 0.2;
+  line-height: 1.0;
+}
+
+#text-layer > span {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+#text-layer ::selection {
+  background-color: #0BA1E2;
+}
+
+/* Dark Mode */
+
+#element.dark_mode {
+  --bg: black;
+  --color: #b1b1b1;
+  --border: #515151;
+  --shadow: #212529;
+  --disabled: #212529;
+}
+
+#element.dark_mode input {
+  color: var( --color );
+  background-color: #222;
+  border: 1px solid var( --border );
+}
+
+#element.dark_mode #page {
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  #element.dark_auto {
+    --bg: black;
+    --color: #b1b1b1;
+    --border: #515151;
+    --shadow: #212529;
+    --disabled: #212529;
+  }
+
+  #element.dark_auto input {
+    color: var( --color );
+    background-color: #222;
+    border: 1px solid var( --border );
+  }
+
+  #element.dark_auto #page {
+    opacity: 0.8;
+  }
+}

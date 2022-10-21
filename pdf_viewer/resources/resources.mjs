@@ -1,12 +1,17 @@
 /**
- * @overview data-based resources of ccmjs-based web component for PDF viewer
+ * @overview Data-based resources of <i>ccmjs</i>-based web component for PDF viewer.
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
  */
 
 /**
- * german texts and labels for PDF viewer
- * @type {Object}
+ * Data-based resources of <i>ccmjs</i>-based web component for PDF viewer.
+ * @module DataResources
+ */
+
+/**
+ * German translations.
+ * @type {Object.<string,string>}
  */
 export const de = {
   "denied": "Zugriff verweigert",
@@ -20,8 +25,8 @@ export const de = {
 };
 
 /**
- * english texts and labels for PDF viewer
- * @type {Object}
+ * English translations.
+ * @type {Object.<string,string>}
  */
 export const en = {
   "denied": "Access Denied",
@@ -40,23 +45,21 @@ export const en = {
  */
 export const test = {
   "css": [ "ccm.load",
-    "./../pdf_viewer/resources/styles.css",
+    "./../pdf_viewer/resources/styles-v2.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" }
   ],
-  "dark": false,
+  "dark": "auto",
   "helper.1": "./../libs/ccm/helper.mjs",
-  "html.1": "./../pdf_viewer/resources/templates.mjs",
+  "html.1": "./../pdf_viewer/resources/templates-v2.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": de, "en": en }
   } ],
-  "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],
   "pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
   "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
-  "text": de,
-  "textLayer": true
+  "text": de
 };
 
 /**
@@ -64,11 +67,11 @@ export const test = {
  * @type {Object}
  */
 export const demo = {
+  "dark": "auto",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
     "translations": { "de": de, "en": en }
   } ],
   "pdf": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/demo/de/slides.pdf",
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-  "text": de,
-  "textLayer": true
+  "text": de
 };
