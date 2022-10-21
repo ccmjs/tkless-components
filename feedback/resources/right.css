@@ -42,3 +42,9 @@
       opacity: 0;
   }
 }
+
+textarea {
+  resize: none !important;
+  width: unset;
+  height: unset;
+}

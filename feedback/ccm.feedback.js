@@ -19,7 +19,7 @@
 
     name: 'feedback',
 
-    ccm: 'https://ccmjs.github.io/ccm/ccm.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-25.0.0.js',
 
     config: {
       "html": {

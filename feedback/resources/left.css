@@ -53,3 +53,9 @@
       opacity: 0;
   }
 }
+
+textarea {
+  resize: none;
+  width: unset;
+  height: unset;
+}
