@@ -1,7 +1,7 @@
 /**
  * @overview HTML templates of <i>ccmjs</i>-based web component for PDF viewer.
  * @author André Kless <andre.kless@web.de> 2021-2022
- * @version 2
+ * @version latest (2)
  */
 
 import { html, render } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
@@ -29,10 +29,10 @@ export function main( app, page_nr, pages ) {
         <div id="text-layer"></div>
       </div>
     </main>
-    <footer>
+    <footer ?data-hidden=${ pages <= 1 && !app.downloadable }>
       ${ controls( app, page_nr, pages ) }
-      <nav id="extra">
-        <a href="${ app.pdf }" download target="_blank" title="${ app.text.download || '' }" data-lang="download-title" ?data-hidden=${ !app.downloadable }>
+      <nav id="extra" ?data-hidden=${ !app.downloadable }>
+        <a href="${ app.pdf }" download target="_blank" title="${ app.text.download || '' }" data-lang="download-title">
           <i class="bi bi-cloud-download"></i>
         </a>
       </nav>
@@ -50,7 +50,7 @@ export function main( app, page_nr, pages ) {
  */
 export function controls( app, page_nr, pages ) {
   return html`
-    <nav id="controls" ?data-hidden=${ pages <= 1 }>
+    <nav id="controls" ?data-invisible=${ pages <= 1 }>
       <div id="first" title="${ app.text.first }" data-lang="first-title" @click=${ app.events.onFirst }>
         <i class="bi bi-skip-start" ?disabled=${ page_nr === 1 }></i>
       </div>

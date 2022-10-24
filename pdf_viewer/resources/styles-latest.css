@@ -1,9 +1,8 @@
-/*----------------------------------------------------- DEPRECATED ---------------------------------------------------*/
-
 /**
- * @overview default layout of ccmjs-based web component for PDF viewer
- * @author André Kless <andre.kless@web.de.de> 2021-2022
+ * @overview Default layout of <i>ccmjs</i>-based web component for PDF viewer.
+ * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
+ * @version latest (2)
  */
 
 #element {
@@ -14,24 +13,18 @@
   --disabled: lightgray;
   background-color: var( --bg );
   color: var( --color );
-}
-
-main {
   min-width: 350px;
+  max-width: 940px;
   padding: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-main > * {
-  width: 100%;
-  max-width: 940px;
-  display: flex;
-}
-
 header {
   border: 0;
+  width: 100%;
+  display: flex;
   justify-content: end;
   align-items: center;
 }
@@ -40,23 +33,27 @@ header > * {
   padding-bottom: 0.5em;
 }
 
-#page {
+main {
   margin-bottom: 0.5em;
-  border: 1px solid var( --border );
+  width: 100%;
+}
+
+#page {
   position: relative;
+  border: 1px solid var( --border );
+  width: 100%;
 }
 
 #page > * {
   width: 100%;
 }
 
-#page + div {
-  background-color: white;
-}
-
-main > div:last-child {
+footer {
   border: 1px solid var( --border );
   border-radius: 5px;
+  width: 100%;
+  background-color: var( --bg );
+  display: flex;
 }
 
 nav {
@@ -99,14 +96,23 @@ a i {
 }
 
 input {
+  color: var( --color );
   min-width: 50px;
   text-align: center;
   padding: 1px 3px;
+  border-color: var( --color );
+  border-style: solid;
+  border-radius: 3px;
+  background-color: var( --bg );
 }
 
 *[disabled] {
   color: var( --disabled );
   cursor: not-allowed;
+}
+
+*[data-invisible] {
+  visibility: hidden;
 }
 
 *[data-hidden] {
@@ -147,9 +153,7 @@ input {
 }
 
 #element.dark_mode input {
-  color: var( --color );
   background-color: #222;
-  border: 1px solid var( --border );
 }
 
 #element.dark_mode #page {
@@ -166,9 +170,7 @@ input {
   }
 
   #element.dark_auto input {
-    color: var( --color );
     background-color: #222;
-    border: 1px solid var( --border );
   }
 
   #element.dark_auto #page {

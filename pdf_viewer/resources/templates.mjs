@@ -1,3 +1,5 @@
+/*----------------------------------------------------- DEPRECATED ---------------------------------------------------*/
+
 /**
  * @overview HTML templates of ccmjs-based web component for PDF viewer
  * @author André Kless <andre.kless@web.de> 2021
