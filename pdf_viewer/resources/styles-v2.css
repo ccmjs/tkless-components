@@ -15,7 +15,7 @@
   color: var( --color );
   min-width: 350px;
   max-width: 940px;
-  padding: 1em;
+  /*padding: 1em;*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +78,7 @@ nav > div {
 
 i {
   font-size: 30px;
-  padding: 0 0.5em;
+  /*padding: 0 0.5em;*/
 }
 
 i:not([disabled]) {
@@ -93,6 +93,7 @@ a {
 
 a i {
   font-size: 25px;
+  padding: 0 0.4rem;
 }
 
 input {
