@@ -185,8 +185,9 @@
         onCheck: () => {
           if ( this.solution ) {
             let form_data = $.formData( this.element );
-            //disable all input fields
-            this.element.querySelectorAll( 'input' ). forEach( input =>  { input.disabled = true; } );
+            //disable all input/select fields
+            this.element.querySelector( 'input' ) && this.element.querySelectorAll( 'input' ). forEach( input =>  { input.disabled = true; } );
+            this.element.querySelector( 'select' ) && this.element.querySelectorAll( 'select' ). forEach( select =>  { select.disabled = true; } );
 
             const result = this.oncheck( { inputs: form_data, highlight: highlight, instance: this } );
 
