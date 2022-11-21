@@ -1564,7 +1564,6 @@ export const loadScript = async url => new Promise( ( resolve, reject ) => {
  */
 export const progressBar = ( { elem, actual, total = 100, color = '#4CAF50', speed = 10 } ) => {
   const main = document.createElement( 'div' );
-  console.log( total );
   main.innerHTML = `
     <div>${ Number.isInteger( actual ) ? actual + ( total ? '/' + total : '' ) : '' }</div>
     <div>
