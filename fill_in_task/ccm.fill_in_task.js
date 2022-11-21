@@ -109,6 +109,7 @@
        * @type {Object.<string,Function>}
        */
       let $;
+      let data = {};
 
       let has_feedback = false, $main;
 
@@ -131,7 +132,6 @@
        * @returns {Promise<void>}
        */
       this.start = async () => {
-        let data = {};
 
         // logging of 'start' event
         this.logger && this.logger.log( 'start' );
@@ -151,7 +151,7 @@
             event.preventDefault();
             if ( this.check ) {
               if ( !has_feedback )
-                events.onCheck( data.attempts );
+                events.onCheck();
               else if ( this.show_solution )
                 events.onSolution();
             }
@@ -182,7 +182,7 @@
       };
 
       this.getValue = () => {
-        return $.formData( this.element );
+        return $.clone( data );
       }
 
       /**
@@ -190,14 +190,14 @@
        * @type {Object.<string,Function>}
        */
       const events = {
-        onCheck: ( attempts ) => {
+        onCheck: ( ) => {
           if ( this.solution ) {
             let form_data = $.formData( this.element );
             //disable all input/select fields
             this.element.querySelector( 'input' ) && this.element.querySelectorAll( 'input' ). forEach( input =>  { input.disabled = true; } );
             this.element.querySelector( 'select' ) && this.element.querySelectorAll( 'select' ). forEach( select =>  { select.disabled = true; } );
 
-            const result = this.oncheck( { inputs: form_data, highlight: highlight, attempts: attempts, instance: this } );
+            const result = this.oncheck( { inputs: form_data, highlight: highlight, instance: this } );
 
             $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: result.correct === result.total ? undefined : 'red', actual: true } );
             has_feedback = true;
