@@ -138,7 +138,7 @@
 
         if (  this.user && !this.user.isLoggedIn() ) this.user.login();
 
-        const key = this.user ? [ this.data.key, this.user.getValue().key ] : this.data.key;
+        const key = this.user && this.data ? [ this.data.key, this.user.getValue().key ] : this.data.key;
         if ( this.data ) data = await this.data.store.get( key );
 
         if ( !data.attempts ) data.attempts = 0;
