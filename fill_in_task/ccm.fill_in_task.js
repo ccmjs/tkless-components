@@ -15,11 +15,11 @@
       css: [ "ccm.load", "./resources/default.css" ],
 //    onstart: event => console.log( event ),
 //    onfinish: data => { console.log( data );  },
-      oncheck: ( { input, highlight,  instance } ) => {
+      oncheck: ( { inputs, highlight,  instance } ) => {
         let correct = 0; const total = Object.keys( instance.solution ).length;
-        for ( let key in input ) {
+        for ( let key in inputs ) {
           let elem = instance.element.querySelector( '[name="'+ key +'"]' );
-          if ( input[ key ] !== instance.solution[ key ] || input[ key ] === undefined ) {
+          if ( inputs[ key ] !== instance.solution[ key ] || inputs[ key ] === undefined ) {
             highlight ( elem, false );
           }
           else {
@@ -186,7 +186,7 @@
             //disable all input fields
             this.element.querySelectorAll( 'input' ). forEach( input =>  { input.disabled = true; } );
 
-            const result = this.oncheck( { input: form_data, highlight: highlight, instance: this } );
+            const result = this.oncheck( { inputs: form_data, highlight: highlight, instance: this } );
 
             $.progressBar( { elem: this.element.querySelector( '#fill-in-task-progress-bar' ), color: result.correct === result.total ? undefined : 'red', actual: true } );
             has_feedback = true;
