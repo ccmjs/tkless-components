@@ -143,7 +143,7 @@
           data = await this.data.store.get( key );
         }
 
-        if ( !data.attempts ) data.attempts = 0;
+        if ( !data || !data.attempts ) data = { attempts: 0 };
 
         // render main HTML
         $.setContent( this.element, $main = $.html( this.html.main, {
