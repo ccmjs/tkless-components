@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @overview <i>ccmjs</i>-based web component for PDF viewer
@@ -9,10 +9,10 @@
  * @license The MIT License (MIT)
  * @version 8.0.0
  * @changes
- * version 8.0.0 (14.10.2022):
- * - Uses ccmjs v27.4.0 from libs folder.
+ * version 8.0.0 (23.11.2022):
+ * - Uses ccmjs v27.4.2 as default.
  * - Dark mode not set by default.
- * - Uses helper.mjs v8.4.0 from libs folder.
+ * - Uses helper.mjs v8.4.0 as default.
  * - No logger support. Use the callbacks instead.
  * - Changed parameters of the onchange callback.
  * - Added onready and onstart callback.
@@ -44,7 +44,7 @@
   const component = {
     name: 'pdf_viewer',
     version: [ 8, 0, 0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.0.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-v2.min.css",
@@ -322,7 +322,7 @@
           canvas.width = Math.floor( scaledViewport.width * outputScale );
           canvas.height = Math.floor( scaledViewport.height * outputScale );
           canvas.style.width = Math.floor( scaledViewport.width ) + 'px';
-          canvas.style.height =  Math.floor( scaledViewport.height ) + 'px';
+          canvas.style.height = canvas.parentElement.style.height = Math.floor( scaledViewport.height ) + 'px';
 
           // Render page in <canvas> element.
           const transform = outputScale !== 1 ? [ outputScale, 0, 0, outputScale, 0, 0 ] : null;
