@@ -22,6 +22,7 @@ export const demo = {
   } ],
   check: true,
   retry: true,
+  correction: true,
   solution: {
     "1-4": "4",
     "1-5": "7,00",

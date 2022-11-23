@@ -9,20 +9,28 @@
   color: #fff;
   background-color: #28a745;
   border-color: #28a745;
-  margin: 2em 0  0 0.3em;
+  margin: 2em 0 0 0.3em;
+}
+
+#fill-in-task-correction {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  margin: 2em 0 0 0.3em;
 }
 
 #fill-in-task-onfinish {
+  color: #fff;
   background-color: #ffc107;
   border-color: #ffc107;
-  margin: 2em 0  0 0.3em;
+  margin: 2em 0 0 0.3em;
 }
 
 #fill-in-task-solution {
   color: #fff;
   background-color: #17a2b8;
   border-color: rgba(0, 158, 224, 0.55);
-  margin: 2em 0  0 0.3em;
+  margin: 2em 0 0 0.3em;
 }
 
 #fill-in-task-fieldset {
@@ -57,6 +65,7 @@
 }
 
 .fill-in-task-btn[disabled] {
+  color: rgba(0, 0, 0, 0.53) !important;
   background-color: grey !important;
   border-color: grey !important;
 }

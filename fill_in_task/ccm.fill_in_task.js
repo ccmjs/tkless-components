@@ -65,6 +65,14 @@
                     {
                       "tag": "button",
                       "type": "button",
+                      "inner": "Correction",
+                      "class": "fill-in-task-btn",
+                      "id": "fill-in-task-correction",
+                      "onclick": "%onCorrection%"
+                    },
+                    {
+                      "tag": "button",
+                      "type": "button",
                       "inner": "Generate Chart",
                       "class": "fill-in-task-btn",
                       "id": "fill-in-task-onfinish",
@@ -159,7 +167,8 @@
               events.onSolution();
           },
           onRetry: events.onRetry,
-          onFinish: events.onFinish
+          onFinish: events.onFinish,
+          onCorrection: events.onCorrection
         } ) );
 
         updateButtons();
@@ -190,7 +199,7 @@
        * @type {Object.<string,Function>}
        */
       const events = {
-        onCheck: ( ) => {
+        onCheck: () => {
           if ( this.solution ) {
             let form_data = $.formData( this.element );
             //disable all input/select fields
@@ -207,6 +216,12 @@
         onRetry: () => {
           has_feedback = false;
           this.start();
+        },
+        onCorrection: async () => {
+          has_feedback = false;
+          const result = $.formData( this.element );
+          await this.start();
+          $.fillForm( this.element, result );
         },
         onSolution: () => {
           if ( this.sample_solution && $.isInstance( this.sample_solution ) ) {
@@ -229,11 +244,13 @@
         // set status for buttons
         setHidden( 'fill-in-task-compare', !this.check );
         setHidden( 'fill-in-task-solution', !this.show_solution );
-        setHidden( 'fill-in-task-retry', !this.check );
+        setHidden( 'fill-in-task-retry', !this.check || this.correction );
+        setHidden( 'fill-in-task-correction', !this.check || !this.correction );
         setHidden( 'fill-in-task-onfinish', !this.onfinish );
         setDisabled( 'fill-in-task-onfinish', this.check && !has_feedback );
         setDisabled( 'fill-in-task-compare', has_feedback );
         setDisabled( 'fill-in-task-retry', !has_feedback );
+        setDisabled( 'fill-in-task-correction', !has_feedback );
         setDisabled( 'fill-in-task-solution', this.check && !has_feedback );
 
       };
