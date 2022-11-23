@@ -3,8 +3,10 @@
  * ES6 module that exports useful help functions for <i>ccmjs</i> component developers.
  * @author André Kless <andre.kless@web.de> 2019-2022
  * @license The MIT License (MIT)
- * @version latest (8.4.0)
+ * @version latest (8.4.1)
  * @changes
+ * version 8.4.1 (23.11.2022):
+ * - bugfix for fillForm(elem,obj):void - correct changed checkbox state
  * version 8.4.0 (18.07.2022):
  * - updated progressBar(obj):void
  * version 8.3.0 (25.06.2022):
@@ -1089,7 +1091,7 @@ export const fillForm = ( elem, data ) => {
         else if ( input.value && typeof data[ key ] === 'string' && data[ key ].charAt( 0 ) === '[' )
           decodeJSON( data[ key ], ccm ).forEach( value => { if ( value === input.value ) input.checked = true; } );
         else
-          input.checked = true;
+          input.checked = !!data[ key ];
       }
       else if ( input.type === 'radio' ) {
         if ( data[ key ] === input.value )
@@ -1377,7 +1379,7 @@ export const downloadApp = async ( embed_code, filename = 'app', title = 'App', 
  * @param {boolean} [noscript] - embed code does not contain a script tag
  * @returns {string} generated embed code
  * @memberOf ModuleHelper.AppHandover
-*/
+ */
 export const embedCode = ( component, config = {}, noscript ) => {
   const index = ccm.helper.convertComponentURL( component ).index;
   if ( config.store && config.key ) config = [ 'ccm.get', ccm.helper.isDatastore( config.store ) ? config.store.source() : config.store, config.key ];
@@ -1564,6 +1566,7 @@ export const loadScript = async url => new Promise( ( resolve, reject ) => {
  */
 export const progressBar = ( { elem, actual, total = 100, color = '#4CAF50', speed = 10 } ) => {
   const main = document.createElement( 'div' );
+  console.log( total );
   main.innerHTML = `
     <div>${ Number.isInteger( actual ) ? actual + ( total ? '/' + total : '' ) : '' }</div>
     <div>
