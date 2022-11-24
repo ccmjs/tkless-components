@@ -45,13 +45,13 @@ export const en = {
  */
 export const test = {
   "css": [ "ccm.load",
-    "./../pdf_viewer/resources/styles-v2.css",
+    "./../pdf_viewer/resources/styles-latest.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" }
   ],
   "dark": "auto",
   "helper.1": "./../libs/ccm/helper.mjs",
-  "html.1": "./../pdf_viewer/resources/templates-v2.mjs",
+  "html.1": "./../pdf_viewer/resources/templates-latest.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": de, "en": en }
   } ],
