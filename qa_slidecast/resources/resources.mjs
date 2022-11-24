@@ -152,10 +152,11 @@ export const test = {
   } ],
   "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
   "onstart": instance => { console.log( 'start', instance.slide_nr ) },
-  "pdf_viewer": [ "ccm.start", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#test" ] ],
+  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#test" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": text_de,
-  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ]
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ],
+  "youtube": [ "ccm.component", "https://ccmjs.github.io/akless-components/youtube/versions/ccm.youtube-2.1.1.js" ]
 };
 
 /**

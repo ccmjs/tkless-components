@@ -4,7 +4,7 @@
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text-layer feature)
  * @license The MIT License (MIT)
- * @version latest (4.0.0)
+ * @version 4.0.0
  * @changes
  * version 4.0.0 (24.11.2022):
  * - Uses ccmjs v27.4.2 as default.
@@ -19,6 +19,7 @@
 ( () => {
   const component = {
     name: 'qa_slidecast',
+    version: [ 4, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],

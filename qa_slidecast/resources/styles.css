@@ -24,7 +24,7 @@ main {
 }
 
 header {
-  padding: 0 1em;
+  padding: 0 0.5em;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -38,7 +38,7 @@ header > * {
 #control {
   background-color: white;
   color: var( --icons );
-  margin: -0.5em 1em 1em;
+  margin: 0 0.5em 0.5em;
   border-radius: 5px;
   border: 1px solid var( --border );
   display: flex;
@@ -58,7 +58,7 @@ audio {
 #description,
 #comments {
   border: 1px solid var( --border );
-  margin: 1em;
+  margin: 0.5em;
 }
 
 #description article {
