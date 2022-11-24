@@ -40,8 +40,8 @@ export const en = {
 };
 
 /**
- * test configuration (relative paths)
- * @type {Object}
+ * Local configuration (relative paths)
+ * @type {object}
  */
 export const test = {
   "css": [ "ccm.load",
@@ -63,8 +63,8 @@ export const test = {
 };
 
 /**
- * demo configuration (absolute paths)
- * @type {Object}
+ * Demo configuration (absolute paths)
+ * @type {object}
  */
 export const demo = {
   "dark": "auto",

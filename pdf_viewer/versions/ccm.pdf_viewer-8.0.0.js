@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @overview <i>ccmjs</i>-based web component for PDF viewer
