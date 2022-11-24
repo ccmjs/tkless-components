@@ -12,7 +12,7 @@
  * version 8.0.0 (23.11.2022):
  * - Uses ccmjs v27.4.2 as default.
  * - Dark mode not set by default.
- * - Uses helper.mjs v8.4.0 as default.
+ * - Uses helper.mjs v8.4.1 as default.
  * - No logger support. Use the callbacks instead.
  * - Changed parameters of the onchange callback.
  * - Added onready and onstart callback.
@@ -52,7 +52,7 @@
       ],
 //    "dark": "auto",
       "downloadable": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-latest.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
 //      "translations": {
