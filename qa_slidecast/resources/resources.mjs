@@ -128,22 +128,22 @@ export const slides_en = [
 ];
 
 /**
- * test configuration (relative paths)
+ * local configuration (relative paths)
  * @type {Object}
  */
-export const test = {
+export const local = {
   "comment": [ "ccm.component", "./../comment/ccm.comment.js", {
     "data": { "store": [ "ccm.store" ] },
     "src": [ "ccm.load", "./../comment/resources/resources.mjs#test" ]
   } ],
   "css": [ "ccm.load",
-    "./../qa_slidecast/resources/styles.css",
+    "./../qa_slidecast/resources/styles-latest.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
   ],
   "description": true,
   "helper.1": "./../libs/ccm/helper.mjs",
-  "html.1": "./../qa_slidecast/resources/templates.mjs",
+  "html.1": "./../qa_slidecast/resources/templates-latest.mjs",
   "ignore": {
     "slides": slides_de
   },
@@ -152,7 +152,7 @@ export const test = {
   } ],
   "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
   "onstart": instance => { console.log( 'start', instance.slide_nr ) },
-  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#test" ] ],
+  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.min.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": text_de,
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ],

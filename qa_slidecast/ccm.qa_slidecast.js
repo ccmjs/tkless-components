@@ -23,14 +23,14 @@
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],
       "css": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles.min.css",
+        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles-latest.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "dark": false,
 //    "description": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates-latest.mjs" ],
 //    "ignore": { "slides": [] },
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
@@ -100,6 +100,14 @@
             this.slide_nr = slide;
             this.routing && this.routing.set( 'slide-' + slide );  // update route
             await render();
+          }
+          else {
+            const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
+            update( '#first > *', this.slide_nr <= 1 );
+            update( '#prev > *', this.slide_nr <= 1 );
+            this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', this.slide_nr + ' / ' + this.ignore.slides.length );
+            update( '#next > *', this.slide_nr >= this.ignore.slides.length );
+            update( '#last > *', this.slide_nr >= this.ignore.slides.length );
           }
           if ( this.onchange && await this.onchange( { name: event.name, instance: this } ) ) return;
           return true;
@@ -192,7 +200,7 @@
         switch ( typeof content ) {
           case 'number':
             $.setContent( main_element, page_element );
-            await this.pdf_viewer.goTo( content );
+            this.pdf_viewer.goTo( content );
             break;
           case 'string':
             const ends_with = content.split( '.' ).pop();
@@ -238,14 +246,6 @@
             }
         }
         slide_data._content && $.setContent( main_element, slide_data._content );
-
-        // update controls of PDF viewer
-        const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
-        update( '#first > *', this.slide_nr <= 1 );
-        update( '#prev > *', this.slide_nr <= 1 );
-        this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', this.slide_nr + ' / ' + this.ignore.slides.length );
-        update( '#next > *', this.slide_nr >= this.ignore.slides.length );
-        update( '#last > *', this.slide_nr >= this.ignore.slides.length );
 
         // render description
         const description_element = this.element.querySelector( '#description' );
