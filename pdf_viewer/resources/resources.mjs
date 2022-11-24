@@ -43,7 +43,7 @@ export const en = {
  * Local configuration (relative paths)
  * @type {object}
  */
-export const test = {
+export const local = {
   "css": [ "ccm.load",
     "./../pdf_viewer/resources/styles-latest.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
