@@ -151,9 +151,9 @@ export const local = {
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": text_de, "en": text_en }
   } ],
-  "onchange": event => console.log( 'onchange', event ),
-  "onready": event => console.log( 'onready', event ),
-  "onstart": event => console.log( 'onstart', event ),
+//"onchange": event => console.log( 'onchange', event ),
+//"onready": event => console.log( 'onready', event ),
+//"onstart": event => console.log( 'onstart', event ),
   "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": text_de,
