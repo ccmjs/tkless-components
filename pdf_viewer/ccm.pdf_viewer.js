@@ -102,6 +102,12 @@
       let page_nr;
 
       /**
+       * last performed event
+       * @type {string}
+       */
+      let last_event;
+
+      /**
        * Indicates whether a PDF page has not yet been fully rendered.
        * @type {boolean}
        */
@@ -190,6 +196,9 @@
         // Prevent the PDF from being downloadable by right-clicking on the canvas element.
         !this.downloadable && this.element.querySelector( 'canvas' ).addEventListener( 'contextmenu', event => event.preventDefault() );
 
+        // Trigger 'start' event.
+        this.onstart && await this.onstart( { instance: this } );
+
         // Render current PDF page.
         if ( !this.page ) return;
         page_nr = this.page;
@@ -197,9 +206,6 @@
           await this.routing.refresh();
         else
           renderPage();
-
-        // Trigger 'start' event.
-        this.onstart && await this.onstart( { instance: this } );
 
       };
 
@@ -213,15 +219,15 @@
 
         /** When 'first page' button is clicked. */
         onFirst: () => {
-          if ( this.onchange && this.onchange( { name: 'first', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr <= 1 ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'first', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page_nr = 1 );
         },
 
         /** When 'previous page' button is clicked. */
         onPrev: () => {
-          if ( this.onchange && this.onchange( { name: 'prev', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr <= 1 ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'prev', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( --page_nr );
         },
 
@@ -232,24 +238,27 @@
         onJump: event => {
           const page = parseInt( event.target.value );
           event.target.value = '';
-          if ( this.onchange && this.onchange( { name: 'jump', page: page, instance: this, before: true } ) ) return;
           if ( !page || page < 1 || page > file.numPages || page === page_nr ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'jump', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page );
         },
 
         /** When 'next page' button is clicked. */
         onNext: () => {
-          if ( this.onchange && this.onchange( { name: 'next', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr >= file.numPages ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'next', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( ++page_nr );
         },
 
         /** When 'last page' button is clicked. */
         onLast: () => {
-          if ( this.onchange && this.onchange( { name: 'last', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr >= file.numPages ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'last', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page_nr = file.numPages );
-        }
+        },
+
+        /** When 'download' button is clicked. */
+        onDownload: () => this.onchange && this.onchange( { name: 'download', instance: this } )
 
       };
 
@@ -291,6 +300,15 @@
       /** Renders current PDF page. */
       const renderPage = () => {
 
+        /**
+         * HTML element of the PDF page.
+         * @type {Element}
+         */
+        const page_elem = this.element.querySelector( '#page' );
+
+        // No page element? => abort
+        if ( !page_elem ) return;
+
         // Workaround: Wait until the CSS is active in the DOM so that the available width can be determined correctly.
         if ( getComputedStyle( this.element ).display !== 'flex' ) return setTimeout( renderPage, 100 );
 
@@ -298,7 +316,7 @@
         if ( rendering ) return pending = true; rendering = true;
 
         // Get the available width for the PDF page.
-        const desiredWidth = this.element.querySelector( '#page' ).clientWidth;
+        const desiredWidth = page_elem.clientWidth;
 
         file.getPage( page_nr ).then( page => {       // Get current PDF page.
           render( 'controls' );                       // Update slide controls.
@@ -344,7 +362,7 @@
             rendering = false;
 
             // Current page has already changed? => Update PDF page.
-            if ( pending ) { pending = false; renderPage(); } else this.onchange && this.onchange( { page: page_nr, instance: this } );
+            if ( pending ) { pending = false; renderPage(); } else this.onchange && this.onchange( { name: 'goto', page: page_nr, instance: this } );
 
           } );
         } );

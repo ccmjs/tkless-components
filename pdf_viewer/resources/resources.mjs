@@ -55,6 +55,9 @@ export const local = {
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": de, "en": en }
   } ],
+//"onchange": event => console.log( 'onchange', event ),
+//"onready": event => console.log( 'onready', event ),
+//"onstart": event => console.log( 'onstart', event ),
   "pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
   "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",

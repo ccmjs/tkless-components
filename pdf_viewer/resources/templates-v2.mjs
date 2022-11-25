@@ -32,7 +32,7 @@ export function main( app, page_nr, pages ) {
     <footer>
       ${ controls( app, page_nr, pages ) }
       <nav id="extra">
-        <a href="${ app.pdf }" download target="_blank" title="${ app.text.download || '' }" data-lang="download-title" ?data-hidden=${ !app.downloadable }>
+        <a href="${ app.pdf }" download target="_blank" title="${ app.text.download || '' }" data-lang="download-title" ?data-hidden=${ !app.downloadable } @click=${ app.events.onDownload }>
           <i class="bi bi-cloud-download"></i>
         </a>
       </nav>

@@ -151,10 +151,6 @@ input {
   border: 1px solid var( --border );
 }
 
-#element.dark_mode #page {
-  opacity: 0.8;
-}
-
 @media (prefers-color-scheme: dark) {
   #element.dark_auto {
     --bg: black;
@@ -168,9 +164,5 @@ input {
     color: var( --color );
     background-color: var( --bg );
     border: 1px solid var( --border );
-  }
-
-  #element.dark_auto #page {
-    opacity: 0.8;
   }
 }
