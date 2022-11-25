@@ -141,6 +141,7 @@ export const local = {
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" },
   ],
+  "dark": "auto",
   "description": true,
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../qa_slidecast/resources/templates-latest.mjs",
@@ -150,9 +151,10 @@ export const local = {
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": text_de, "en": text_en }
   } ],
-  "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
-  "onstart": instance => { console.log( 'start', instance.slide_nr ) },
-  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.min.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
+  "onchange": event => console.log( 'onchange', event ),
+  "onready": event => console.log( 'onready', event ),
+  "onstart": event => console.log( 'onstart', event ),
+  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": text_de,
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ],

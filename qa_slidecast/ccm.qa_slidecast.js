@@ -34,6 +34,7 @@
 //    "ignore": { "slides": [] },
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
+//    "onready": event => console.log( event ),
 //    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
       "open": "both",
       "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-8.0.0.min.js" ],
@@ -85,31 +86,27 @@
       this.ready = async () => {
 
         // recalibrate controls of PDF viewer
-        this.pdf_viewer.onchange = async event => {
-          if ( this.onchange && await this.onchange( { name: event.name, instance: this, before: true } ) ) return;
+        this.pdf_viewer.onchange = event => {
           if ( event.before ) {
+            if ( this.onchange && this.onchange( { name: event.name, instance: this, before: true } ) ) return;
             let slide;
             switch ( event.name ) {
+              case 'jump':
+              case 'goto':  slide = event.page;                break;
               case 'first': slide = 1;                         break;
               case 'prev':  slide = this.slide_nr - 1;         break;
-              case 'jump':  slide = event.page;                break;
               case 'next':  slide = this.slide_nr + 1;         break;
               case 'last':  slide = this.ignore.slides.length; break;
             }
             if ( !( slide >= 1 && slide <= this.ignore.slides.length && slide !== this.slide_nr ) ) return;
             this.slide_nr = slide;
             this.routing && this.routing.set( 'slide-' + slide );  // update route
-            await render();
+            render();
           }
           else {
-            const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
-            update( '#first > *', this.slide_nr <= 1 );
-            update( '#prev > *', this.slide_nr <= 1 );
-            this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', this.slide_nr + ' / ' + this.ignore.slides.length );
-            update( '#next > *', this.slide_nr >= this.ignore.slides.length );
-            update( '#last > *', this.slide_nr >= this.ignore.slides.length );
+            updateControls();
+            event.page && this.onchange && this.onchange( { instance: this } );
           }
-          if ( this.onchange && await this.onchange( { name: event.name, instance: this } ) ) return;
           return true;
         };
 
@@ -119,6 +116,9 @@
         // setup dark mode
         this.dark === 'auto' && this.element.classList.add( 'dark_auto' );
         this.dark === true && this.element.classList.add( 'dark_mode' );
+
+        // trigger 'onready' callback
+        this.onready && await this.onready( { instance: this } );
 
       };
 
@@ -155,7 +155,7 @@
         }
 
         // trigger 'onstart' callback
-        this.onstart && await this.onstart( this );
+        this.onstart && await this.onstart( { instance: this } );
 
       };
 
@@ -247,6 +247,9 @@
         }
         slide_data._content && $.setContent( main_element, slide_data._content );
 
+        // update controls of PDF viewer
+        typeof content !== 'number' && updateControls();
+
         // render description
         const description_element = this.element.querySelector( '#description' );
         if ( slide_data.description && !slide_data._description ) {
@@ -273,7 +276,20 @@
           $.setContent( this.element.querySelector( '#comments' ), slide_data.comments.root );
         }
 
+        // trigger 'onchange' callback
+        typeof content !== 'number' && this.onchange && this.onchange( { instance: this } );
+
       };
+
+      /** updates controls of PDF viewer */
+      const updateControls = () => {
+        const update = ( selector, condition ) => this.pdf_viewer.element.querySelector( selector )[ ( condition ? 'set' : 'remove' ) + 'Attribute' ]( 'disabled', true );
+        update( '#first > *', this.slide_nr <= 1 );
+        update( '#prev > *', this.slide_nr <= 1 );
+        this.pdf_viewer.element.querySelector( '#jump input' ).setAttribute( 'placeholder', this.slide_nr + ' / ' + this.ignore.slides.length );
+        update( '#next > *', this.slide_nr >= this.ignore.slides.length );
+        update( '#last > *', this.slide_nr >= this.ignore.slides.length );
+      }
 
       /**
        * contains all event handlers
