@@ -257,6 +257,8 @@
                       click: showSolution
                     } ) );
                   }
+                  main_elem.querySelector( '.check-btn' ).remove();
+                  self.oncheck && self.oncheck( self );
                 }
               } ) );
             }
@@ -339,13 +341,13 @@
           renderProgressBar();
 
           function renderProgressBar() {
+            $.setContent( main_elem.querySelector( '#conclusion' ), '' );
+
             const correct = dataset.correct === dataset.total && dataset.correct === dataset.solutions.length;
             if ( !self.progressbar_with_points )
               $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), color: correct? undefined : 'red' } );
             else
               $.progressBar( { elem: main_elem.querySelector( '#conclusion' ), actual: dataset.correct, total: dataset.total } );
-
-            main_elem.querySelector( '.check-btn' ).remove();
 
             if ( self.retry ) {
               $.setContent( main_elem. querySelector( '#retry' ), $.html( self.html.button, {

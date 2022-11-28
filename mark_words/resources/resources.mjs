@@ -24,6 +24,7 @@ export const demo = {
     "check": true,
     "keywords": [ 'John', 'Nurse'],
     "progressbar_with_points": true,
+    "oncheck": ( instance ) => ( console.log( instance.getValue() ) ),
     //"data": { solutions: [ 'PM', 'Doe' ], marked: [ 'mark-word-15' ] },
     //"show_results": true,
     //"onfinish": { "log": true }
