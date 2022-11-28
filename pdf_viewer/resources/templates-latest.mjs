@@ -29,10 +29,10 @@ export function main( app, page_nr, pages ) {
         <div id="text-layer"></div>
       </div>
     </main>
-    <footer ?data-hidden=${ pages <= 1 && !app.downloadable }>
+    <footer>
       ${ controls( app, page_nr, pages ) }
-      <nav id="extra" ?data-hidden=${ !app.downloadable }>
-        <a href="${ app.pdf }" download target="_blank" title="${ app.text.download || '' }" data-lang="download-title">
+      <nav id="extra">
+        <a href="${ app.pdf }" download target="_blank" title="${ app.text.download || '' }" data-lang="download-title" ?data-hidden=${ !app.downloadable } @click=${ app.events.onDownload }>
           <i class="bi bi-cloud-download"></i>
         </a>
       </nav>
@@ -50,7 +50,7 @@ export function main( app, page_nr, pages ) {
  */
 export function controls( app, page_nr, pages ) {
   return html`
-    <nav id="controls" ?data-invisible=${ pages <= 1 }>
+    <nav id="controls" ?data-hidden=${ pages <= 1 }>
       <div id="first" title="${ app.text.first }" data-lang="first-title" @click=${ app.events.onFirst }>
         <i class="bi bi-skip-start" ?disabled=${ page_nr === 1 }></i>
       </div>

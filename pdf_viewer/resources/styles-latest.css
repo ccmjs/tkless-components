@@ -2,7 +2,7 @@
  * @overview Default layout of <i>ccmjs</i>-based web component for PDF viewer.
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
- * @version latest (2)
+ * @version 2
  */
 
 #element {
@@ -15,7 +15,7 @@
   color: var( --color );
   min-width: 350px;
   max-width: 940px;
-  padding: 1em;
+  padding: 0.5em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,7 @@ main {
   width: 100%;
 }
 
-#page {
+main > * {
   position: relative;
   border: 1px solid var( --border );
   width: 100%;
@@ -96,23 +96,16 @@ a i {
 }
 
 input {
-  color: var( --color );
   min-width: 50px;
   text-align: center;
   padding: 1px 3px;
-  border-color: var( --color );
-  border-style: solid;
-  border-radius: 3px;
-  background-color: var( --bg );
+  border: 1px solid var( --border );
+  border-radius: 5px;
 }
 
 *[disabled] {
   color: var( --disabled );
   cursor: not-allowed;
-}
-
-*[data-invisible] {
-  visibility: hidden;
 }
 
 *[data-hidden] {
@@ -135,7 +128,7 @@ input {
   position: absolute;
   white-space: pre;
   cursor: text;
-  transform-origin: 0% 0%;
+  transform-origin: 0 0;
 }
 
 #text-layer ::selection {
@@ -153,11 +146,9 @@ input {
 }
 
 #element.dark_mode input {
-  background-color: #222;
-}
-
-#element.dark_mode #page {
-  opacity: 0.8;
+  color: var( --color );
+  background-color: var( --bg );
+  border: 1px solid var( --border );
 }
 
 @media (prefers-color-scheme: dark) {
@@ -170,10 +161,8 @@ input {
   }
 
   #element.dark_auto input {
-    background-color: #222;
-  }
-
-  #element.dark_auto #page {
-    opacity: 0.8;
+    color: var( --color );
+    background-color: var( --bg );
+    border: 1px solid var( --border );
   }
 }

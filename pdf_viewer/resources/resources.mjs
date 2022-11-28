@@ -40,21 +40,24 @@ export const en = {
 };
 
 /**
- * test configuration (relative paths)
- * @type {Object}
+ * Local configuration (relative paths)
+ * @type {object}
  */
-export const test = {
+export const local = {
   "css": [ "ccm.load",
-    "./../pdf_viewer/resources/styles-v2.css",
+    "./../pdf_viewer/resources/styles-latest.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" }
   ],
   "dark": "auto",
   "helper.1": "./../libs/ccm/helper.mjs",
-  "html.1": "./../pdf_viewer/resources/templates-v2.mjs",
+  "html.1": "./../pdf_viewer/resources/templates-latest.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {
     "translations": { "de": de, "en": en }
   } ],
+//"onchange": event => console.log( 'onchange', event ),
+//"onready": event => console.log( 'onready', event ),
+//"onstart": event => console.log( 'onstart', event ),
   "pdf": "./../pdf_viewer/resources/demo/de/slides.pdf",
   "pdfjs.lib.1": "./../libs/pdfjs-2/pdf.js",
   "pdfjs.worker.1": "./../libs/pdfjs-2/pdf.worker.js",
@@ -63,8 +66,8 @@ export const test = {
 };
 
 /**
- * demo configuration (absolute paths)
- * @type {Object}
+ * Demo configuration (absolute paths)
+ * @type {object}
  */
 export const demo = {
   "dark": "auto",

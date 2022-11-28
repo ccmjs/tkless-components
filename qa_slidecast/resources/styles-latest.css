@@ -1,9 +1,8 @@
-/*----------------------------------------------------- DEPRECATED ---------------------------------------------------*/
-
 /**
  * @overview default layout of ccmjs-based web component for slidecast with commentary
  * @author André Kless <andre.kless@web.de.de> 2021-2022
  * @license The MIT License (MIT)
+ * @version latest (v1)
  */
 
 #element {
@@ -38,7 +37,6 @@ header > * {
 }
 
 #control {
-  background-color: white;
   color: var( --icons );
   margin: 0 0.5em 0.5em;
   border-radius: 5px;
@@ -88,6 +86,18 @@ i {
 
 /* Dark Mode */
 
+#element.dark_mode {
+  --bg: black;
+  --color: white;
+  --border: #515151;
+  --disabled: #212529;
+  --icons: #b1b1b1;
+}
+
+#element.dark_mode audio {
+  opacity: 0.4;
+}
+
 @media (prefers-color-scheme: dark) {
   #element.dark_auto {
     --bg: black;
@@ -95,5 +105,9 @@ i {
     --border: #515151;
     --disabled: #212529;
     --icons: #b1b1b1;
+  }
+
+  #element.dark_auto audio {
+    opacity: 0.4;
   }
 }

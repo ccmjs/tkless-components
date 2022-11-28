@@ -9,10 +9,10 @@
  * @license The MIT License (MIT)
  * @version 8.0.0
  * @changes
- * version 8.0.0 (14.10.2022):
- * - Uses ccmjs v27.4.0 from libs folder.
+ * version 8.0.0 (24.11.2022):
+ * - Uses ccmjs v27.4.2 as default.
  * - Dark mode not set by default.
- * - Uses helper.mjs v8.4.0 from libs folder.
+ * - Uses helper.mjs v8.4.1 as default.
  * - No logger support. Use the callbacks instead.
  * - Changed parameters of the onchange callback.
  * - Added onready and onstart callback.
@@ -44,7 +44,7 @@
   const component = {
     name: 'pdf_viewer',
     version: [ 8, 0, 0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.0.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-v2.min.css",
@@ -53,7 +53,7 @@
       ],
 //    "dark": "auto",
       "downloadable": true,
-      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.0.min.mjs" ],
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-v2.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
 //      "translations": {
@@ -101,6 +101,12 @@
        * @type {number}
        */
       let page_nr;
+
+      /**
+       * last performed event
+       * @type {string}
+       */
+      let last_event;
 
       /**
        * Indicates whether a PDF page has not yet been fully rendered.
@@ -191,6 +197,9 @@
         // Prevent the PDF from being downloadable by right-clicking on the canvas element.
         !this.downloadable && this.element.querySelector( 'canvas' ).addEventListener( 'contextmenu', event => event.preventDefault() );
 
+        // Trigger 'start' event.
+        this.onstart && await this.onstart( { instance: this } );
+
         // Render current PDF page.
         if ( !this.page ) return;
         page_nr = this.page;
@@ -198,9 +207,6 @@
           await this.routing.refresh();
         else
           renderPage();
-
-        // Trigger 'start' event.
-        this.onstart && await this.onstart( { instance: this } );
 
       };
 
@@ -214,18 +220,16 @@
 
         /** When 'first page' button is clicked. */
         onFirst: () => {
-          if ( this.onchange && this.onchange( { name: 'first', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr <= 1 ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'first', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page_nr = 1 );
-          this.onchange && this.onchange( { name: 'first', page: page_nr, instance: this } );
         },
 
         /** When 'previous page' button is clicked. */
         onPrev: () => {
-          if ( this.onchange && this.onchange( { name: 'prev', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr <= 1 ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'prev', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( --page_nr );
-          this.onchange && this.onchange( { name: 'prev', page: page_nr, instance: this } );
         },
 
         /**
@@ -235,27 +239,27 @@
         onJump: event => {
           const page = parseInt( event.target.value );
           event.target.value = '';
-          if ( this.onchange && this.onchange( { name: 'jump', page: page, instance: this, before: true } ) ) return;
           if ( !page || page < 1 || page > file.numPages || page === page_nr ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'jump', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page );
-          this.onchange && this.onchange( { name: 'jump', page: page, instance: this } );
         },
 
         /** When 'next page' button is clicked. */
         onNext: () => {
-          if ( this.onchange && this.onchange( { name: 'next', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr >= file.numPages ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'next', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( ++page_nr );
-          this.onchange && this.onchange( { name: 'next', page: page_nr, instance: this } );
         },
 
         /** When 'last page' button is clicked. */
         onLast: () => {
-          if ( this.onchange && this.onchange( { name: 'last', page: page_nr, instance: this, before: true } ) ) return;
           if ( page_nr >= file.numPages ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'last', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page_nr = file.numPages );
-          this.onchange && this.onchange( { name: 'last', page: page_nr, instance: this } );
-        }
+        },
+
+        /** When 'download' button is clicked. */
+        onDownload: () => this.onchange && this.onchange( { name: 'download', instance: this } )
 
       };
 
@@ -297,6 +301,15 @@
       /** Renders current PDF page. */
       const renderPage = () => {
 
+        /**
+         * HTML element of the PDF page.
+         * @type {Element}
+         */
+        const page_elem = this.element.querySelector( '#page' );
+
+        // No page element? => abort
+        if ( !page_elem ) return;
+
         // Workaround: Wait until the CSS is active in the DOM so that the available width can be determined correctly.
         if ( getComputedStyle( this.element ).display !== 'flex' ) return setTimeout( renderPage, 100 );
 
@@ -304,7 +317,7 @@
         if ( rendering ) return pending = true; rendering = true;
 
         // Get the available width for the PDF page.
-        const desiredWidth = this.element.querySelector( '#page' ).clientWidth;
+        const desiredWidth = page_elem.clientWidth;
 
         file.getPage( page_nr ).then( page => {       // Get current PDF page.
           render( 'controls' );                       // Update slide controls.
@@ -322,7 +335,7 @@
           canvas.width = Math.floor( scaledViewport.width * outputScale );
           canvas.height = Math.floor( scaledViewport.height * outputScale );
           canvas.style.width = Math.floor( scaledViewport.width ) + 'px';
-          canvas.style.height =  Math.floor( scaledViewport.height ) + 'px';
+          canvas.style.height = canvas.parentElement.style.height = Math.floor( scaledViewport.height ) + 'px';
 
           // Render page in <canvas> element.
           const transform = outputScale !== 1 ? [ outputScale, 0, 0, outputScale, 0, 0 ] : null;
@@ -350,7 +363,7 @@
             rendering = false;
 
             // Current page has already changed? => Update PDF page.
-            if ( pending ) { pending = false; renderPage(); }
+            if ( pending ) { pending = false; renderPage(); } else this.onchange && this.onchange( { name: 'goto', page: page_nr, instance: this } );
 
           } );
         } );

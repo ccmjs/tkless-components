@@ -1,8 +1,7 @@
-/*----------------------------------------------------- DEPRECATED ---------------------------------------------------*/
-
 /**
  * @overview HTML templates of ccmjs-based web component for slidecast with commentary
  * @author André Kless <andre.kless@web.de> 2021-2022
+ * @version latest (v1)
  */
 
 import { html, render } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
