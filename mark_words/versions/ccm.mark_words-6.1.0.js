@@ -160,12 +160,17 @@
 
         if ( self.logger ) self.logger.log( 'start' );
 
+        if ( self.user && !self.user.isLoggedIn() ) self.user.login();
+
+        if ( self.data ) {
+          const key = self.user ? [ self.data.key, this.user.getValue().key ] : this.data.key;
+          dataset = await self.data.store.get( key );
+        }
+
         if ( !self.inner ) {
           $.setContent( self.element, 'Nothing to display!' );
           return;
         }
-
-        dataset = await $.dataset( self.data );
 
         const keywords = $.clone( self.keywords );
 
