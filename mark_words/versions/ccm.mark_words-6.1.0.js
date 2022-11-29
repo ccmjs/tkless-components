@@ -249,7 +249,7 @@
                 label: 'Check',
                 click: () => {
                   verify();
-                  !self.onfinish || !self.submit && ( dataset.atempts = ++dataset.atempts );
+                  ( !self.onfinish || !self.submit ) && ( dataset.atempts = ++dataset.atempts );
                   if ( self.show_solution ) {
                     // render solution button
                     $.setContent( main_elem. querySelector( '#solution' ), $.html( self.html.button, {
