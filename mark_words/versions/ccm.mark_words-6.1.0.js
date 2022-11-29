@@ -254,7 +254,6 @@
                 label: 'Check',
                 click: () => {
                   verify();
-                  ( !self.onfinish || !self.submit ) && ( dataset.attempts = ++dataset.attempts );
                   if ( self.show_solution ) {
                     // render solution button
                     $.setContent( main_elem. querySelector( '#solution' ), $.html( self.html.button, {
@@ -278,7 +277,6 @@
                 click: () => {
                   verify();
                   $.onFinish( self );
-                  dataset.attempts = ++dataset.attempts;
                   main_elem.querySelector( ".save-btn" ).disabled = true;
                   if( self.logger ) self.logger.log( 'onfinish', self );
                 }
