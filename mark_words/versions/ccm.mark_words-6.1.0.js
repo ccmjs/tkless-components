@@ -164,7 +164,7 @@
 
         if ( self.data ) {
           const key = self.user ? [ self.data.key, this.user.getValue().key ] : this.data.key;
-          dataset = await self.data.store.get( key );
+          dataset = await $.dataset( key );
         }
 
         if ( !self.inner ) {
