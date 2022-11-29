@@ -175,7 +175,7 @@
         if( !dataset.solution ) dataset.solution = [];
         if( !dataset.marked ) dataset.marked = [];
         if( !dataset.sections ) dataset.sections = [];
-        if( !dataset.atempts ) dataset.atempts = 0;
+        if( !dataset.attempts ) dataset.attempts = 0;
 
         const main_elem = $.html( self.html.text );
 
@@ -249,7 +249,7 @@
                 label: 'Check',
                 click: () => {
                   verify();
-                  ( !self.onfinish || !self.submit ) && ( dataset.atempts = ++dataset.atempts );
+                  ( !self.onfinish || !self.submit ) && ( dataset.attempts = ++dataset.attempts );
                   if ( self.show_solution ) {
                     // render solution button
                     $.setContent( main_elem. querySelector( '#solution' ), $.html( self.html.button, {
@@ -273,7 +273,7 @@
                 click: () => {
                   verify();
                   $.onFinish( self );
-                  dataset.atempts = ++dataset.atempts;
+                  dataset.attempts = ++dataset.attempts;
                   main_elem.querySelector( ".save-btn" ).disabled = true;
                   if( self.logger ) self.logger.log( 'onfinish', self );
                 }
