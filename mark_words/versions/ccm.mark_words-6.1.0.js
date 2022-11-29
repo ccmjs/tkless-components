@@ -177,10 +177,10 @@
         const correct = [];
         const incorrect = [];
 
-        if( !dataset.solution ) dataset.solution = [];
-        if( !dataset.marked ) dataset.marked = [];
-        if( !dataset.sections ) dataset.sections = [];
-        if( !dataset.attempts ) dataset.attempts = 0;
+        if( !dataset || !dataset.attempts ) dataset = { attempts: 0 };
+        if( !dataset || !dataset.solution ) dataset.solution = [];
+        if( !dataset || !dataset.marked ) dataset.marked = [];
+        if( !dataset || !dataset.sections ) dataset.sections = [];
 
         const main_elem = $.html( self.html.text );
 
