@@ -132,7 +132,7 @@
        */
       let $;
 
-      let dataset;
+      let dataset = {};
 
       this.init = async () => {
 
