@@ -41,12 +41,13 @@
      * @type {string}
      */
     name: 'mark_words',
+    version: [ 6, 1, 0 ],
 
     /**
      * recommended used framework version
      * @type {string}
      */
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.0.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.1.js',
 
     /**
      * default instance configuration
@@ -109,7 +110,6 @@
       // onfinish: { log: true },
       // "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-3.0.0.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
       // onchange,
-      // oncheck,
       // marked: [],
       // show_results: true,
       helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
