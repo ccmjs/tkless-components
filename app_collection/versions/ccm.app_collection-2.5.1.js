@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
- * @version latest (2.5.0)
+ * @version 2.5.0
  * @changes
  * version 2.5.0 (26.09.2022):
  * - an entry in the app collection can lead to an external URL
@@ -23,6 +23,7 @@
 ( () => {
   const component = {
     name: 'app_collection',
+    version: [ 2, 5, 1 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
 //    "color": "limegreen",
