@@ -11,13 +11,13 @@
   const component = {
     name: 'fill_in_task',
     version: [ 3,0,0 ],
-    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.3.1.min.js',
+    ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
 
     config: {
       //content: [ "ccm.component", "https://ccmjs.github.io/tkless-components/table/versions/ccm.table-5.1.0.js" ],
       //check: true,
       css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/fill_in_task/resources/default.css" ],
-      helper: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/ccm/helper.mjs" ],
+      helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" } ],
       html: {
         main: {
           "inner": [
