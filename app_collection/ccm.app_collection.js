@@ -3,8 +3,11 @@
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
- * @version latest (2.5.0)
+ * @version latest (2.5.1)
  * @changes
+ * version 2.5.1 (30.11.2022):
+ * - uses ccmjs v27.4.2 as default
+ * - uses helper.mjs v8.4.2 as default
  * version 2.5.0 (26.09.2022):
  * - an entry in the app collection can lead to an external URL
  * - an entry in the app collection can initiate writing to an email address
