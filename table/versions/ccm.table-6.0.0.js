@@ -149,9 +149,10 @@
         $ = self.ccm.helper;
 
         // set shortcut to help functions
-        $ = Object.assign( {}, this.ccm.helper, this.helper );
+        $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
-        if ( self.logger ) self.logger.log( 'ready', $.clone( self ) );
+        // logging of 'ready' event
+        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );
       };
 
       /**
