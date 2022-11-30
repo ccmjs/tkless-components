@@ -6,6 +6,9 @@
  *  @version 6.0.0
  * -(30.11.2022)
  *   updated on newest ccm version ccm v27.4.2
+ *  @version 5.2.0
+ * -(31.05.2022)
+ *   onchnage event returns event object
  *  @version 5.1.0
  * -(10.03.2022)
  *   possibility to set default values over col settings
@@ -36,6 +39,7 @@
      * @type {string}
      */
     name: 'table',
+    version: [ 6,0,0 ],
 
     /**
      * recommended used framework version
@@ -48,7 +52,7 @@
      * @type {object}
      */
     config: {
-      templates: [ "ccm.load", "resources/templates.html" ],
+      templates: [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.html" ],
       html: {
         "table": {
           "inner": {
@@ -127,7 +131,7 @@
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //filter_values
       css: [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
-        "resources/default.css"
+        "https://ccmjs.github.io/tkless-components/table/resources/default.css"
       ],
       helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.0.0.mjs" } ]
     },
@@ -145,10 +149,10 @@
         $ = self.ccm.helper;
 
         // set shortcut to help functions
-        $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
+        $ = Object.assign( {}, this.ccm.helper, this.helper );
 
-        // logging of 'ready' event
-        this.logger && this.logger.log( 'ready', $.privatize( this, true ) );      };
+        if ( self.logger ) self.logger.log( 'ready', $.clone( self ) );
+      };
 
       /**
        * starts the instance
