@@ -21,7 +21,7 @@ export function main( app ) {
           <table class="table table-striped">
             <thead ?data-hidden=${ !app.table_head }>
               <tr>
-                ${ app.table_head.map( title => html`<th scope="col">${ title }</th>` ) }
+                ${ app.table_head?.map( title => html`<th scope="col">${ title }</th>` ) }
                 ${ app.deletable ? html`<th scope="col"></th>` : '' }
               </tr>
             </thead>

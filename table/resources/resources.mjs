@@ -1,5 +1,10 @@
-export const demo = {
-  "add_row": true,
+
+/**
+ * Local configuration with relative paths
+ * @type {object}
+ */
+export const local = {
+  "html.1": "./resources/templates.mjs",
   "table_head": [ "Checkbox", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
   "col_settings": [
     { "type": "none" },
@@ -13,6 +18,7 @@ export const demo = {
         "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. " },
     { "type": "textarea", "disabled": "true", "placeholder": "Hier kannst du nichts schreiben." }
   ],
+  "addable": true,
   "deletable": true,
   "movable": true,
   "data": {
@@ -27,10 +33,14 @@ export const demo = {
   //"cell_onclick": function ( target, value, self  ){ console.log( target, value, self ); },
   //"cell_onrender": function ( event ) { console.log( this, event ); },
   "filter_values": true,
-  "submit": true,
-  "onchange": ( { instance, target } ) => { console.log( 'onchange', instance, target  ); },
   "onfinish": {
     alert: 'Saved',
     log: true
   }
 }
+
+/**
+ * Demo configuration
+ * @type {object}
+ */
+export const demo = {}

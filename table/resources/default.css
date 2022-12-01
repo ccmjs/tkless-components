@@ -4,3 +4,7 @@
   "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",
   "Noto Color Emoji"
 }
+
+[data-hidden] {
+  display: none;
+}

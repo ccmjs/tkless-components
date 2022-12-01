@@ -1,65 +1,49 @@
+"use strict";
+
 /**
- * @overview ccm component for table generating
+ * @overview ccmjs-based web component for tables
  * @author Tea Kless <tea.kless@web.de>, 2018-2022
  * @license The MIT License (MIT)
+ * @version latest (6.0.0)
  * @changes
- *  @version 5.1.0
- * -(10.03.2022)
- *   possibility to set default values over col settings
- *   as cell inner text and not as a value of a disabled input field
- *   updated on newest ccm version ccm v27.3.1
- *  @version 5.0.0
- * -(14.02.2022)
- *   updated on newest ccm version ccm v27.2.0
- *  @version 4.0.0
- * -(21.05.2019)
- *   onrender event for table cells
- *   self.data(ccm v20.7.0) instead of my.data
- * @version 3.0.0
- *  (29.04.2019) onclick event for table cells
- *  @version 2.2.0
- *  (29.04.2019) contains changes from vimp
- * @version 2.1.0
- *  selectable input field
- *  uses ccm v20.0.0
+ * version 6.0.0 (02.12.2022)
+ * - ...
+ * (for older version changes see ccm.table-5.2.0.js)
  */
 
-( function () {
+( () => {
 
-  const self = {
-
-    /**
-     * unique self name
-     * @type {string}
-     */
+  /**
+   * <i>ccmjs</i>-based web component for tables.
+   * @namespace WebComponent
+   * @type {object}
+   * @property {string} name - Unique identifier of the component.
+   * @property {number[]} [version] - Version of the component according to Semantic Versioning 2.0 (default: latest version).
+   * @property {string} ccm - URL of the (interchangeable) ccmjs version used at the time of publication.
+   * @property {app_config} config - Default app configuration.
+   * @property {Class} Instance - Class from which app instances are created.
+   */
+  const component = {
     name: 'table',
-
-    /**
-     * recommended used framework version
-     * @type {string}
-     */
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
-
-    /**
-     * default instance configuration
-     * @type {object}
-     */
     config: {
-      html: [ "ccm.load", "./resources/templates.mjs" ],
-      //table_head: [ "header-1", "header-2", "header-3" ],
-      //onfinish: { "restart": true },
-
-      //add_row: true,
-      //table_col: 3,
       //col_settings: [
       //  { "type": "number", "placeholder": "Tel: 049..." },
       //  { "disabled": "true", "inner": "max.musterman@mail.com" },
       //  { "type": "date", "foo": "bar" }
       //],
-      //data: [ "ccm.get", "resources/configs.js", "demo" ],
-      //submit: true,
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.mjs" ],
+      //table_head: [ "header-1", "header-2", "header-3" ],
+      //onfinish: { "restart": true },
 
-      //onchange
+      //add_row: true,
+      //table_col: 3,
+      //data: [ "ccm.get", "resources/configs.js", "demo" ],
+
+      //"onchange": event => console.log( event ),
+      //"onfinish": event => console.log( event ),
+      //"onready": event => console.log( event ),
+      //"onstart": event => console.log( event ),
       //cell_onrender: function ( event ) { console.log( this, event ); }
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //filter_values
@@ -69,47 +53,92 @@
       ],
       helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" } ]
     },
-
+    /**
+     * @class
+     * @memberOf WebComponent
+     */
     Instance: function () {
 
       /**
-       * shortcut to help functions
+       * Shortcut to helper functions
+       * @private
        * @type {Object.<string,function>}
        */
       let $;
 
       /**
-       * table values
-       * @type {number[][]}
+       * App state data (table values)
+       * @private
+       * @type {app_state}
        */
       let data;
 
+      /**
+       * When the instance is created, when all dependencies have been resolved and before the dependent sub-instances are initialized and ready. Allows dynamic post-configuration of the instance.
+       * @async
+       * @readonly
+       * @function
+       */
       this.init = async () => {
 
-        // set shortcut to help functions
+        // Merge all helper functions and offer them via a single variable.
         $ = Object.assign( {}, this.ccm.helper, this.helper ); $.use( this.ccm );
 
       };
 
       /**
-       * starts the instance
+       * When the instance is created and after all dependent sub-instances are initialized and ready.
+       * Allows the first official actions of the instance that should only happen once.
+       * @async
+       * @readonly
+       * @function
        */
-      this.start = async () => {
-        data = await $.dataset( this.data );
-        render();
+      this.ready = async () => {
+
+        // Trigger 'ready' event.
+        this.onready && await this.onready( { instance: this } );
+
       };
 
       /**
-       * returns table values
-       * @returns {{values:number[][]}}
+       * Starts the app. The current app state is visualized in the webpage area.
+       * @async
+       * @readonly
+       * @function
+       */
+      this.start = async () => {
+
+        // Load app state data from source.
+        data = await $.dataset( this.data );
+
+        render();
+
+        // Trigger 'start' event.
+        this.onstart && await this.onstart( { instance: this } );
+
+      };
+
+      /**
+       * Returns the current app state.
+       * @readonly
+       * @function
+       * @returns {app_state} A deep copy of the app state data.
        */
       this.getValue = () => $.clone( data );
 
       /**
        * Contains all event handlers.
+       * @namespace AppEvents
+       * @readonly
        * @type {Object.<string,function>}
        */
       this.events = {
+
+        /**
+         * When a table value has changed.
+         * @function
+         * @memberOf AppEvents
+         */
         onChange: event => {
           const [ row, col ] = event.target.name.split( '-' );
           data.values[ row-1 ][ col-1 ] = event.target.value;
@@ -125,11 +154,37 @@
         }
       };
 
+      /**
+       * Updates the webpage area with the current app state data.
+       * @private
+       * @function
+       */
       const render = () => this.html.render( this.html.main( this ), this.element );
 
     }
-
   };
-
-  let b="ccm."+self.name+(self.version?"-"+self.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=self;(b=window.ccm&&window.ccm.components[self.name])&&b.ccm&&(self.ccm=b.ccm);"string"===typeof self.ccm&&(self.ccm={url:self.ccm});let c=(self.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||[""])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(self);else{var a=document.createElement("script");document.head.appendChild(a);self.ccm.integrity&&a.setAttribute("integrity",self.ccm.integrity);self.ccm.crossorigin&&a.setAttribute("crossorigin",self.ccm.crossorigin);a.onload=function(){(c="latest"?window.ccm:window.ccm[c]).component(self);document.head.removeChild(a)};a.src=self.ccm.url}
+  let b="ccm."+component.name+(component.version?"-"+component.version.join("."):"")+".js";if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);"string"===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||[""])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement("script");document.head.appendChild(a);component.ccm.integrity&&a.setAttribute("integrity",component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute("crossorigin",component.ccm.crossorigin);a.onload=function(){(c="latest"?window.ccm:window.ccm[c]).component(component);document.head.removeChild(a)};a.src=component.ccm.url}
 } )();
+
+/**
+ * App configuration.
+ * @typedef {object} app_config
+ * @prop {array} css - CSS dependencies.
+ * @prop {object} [data] - Source of app state data.
+ * @prop {array} helper - Dependency on helper functions.
+ * @prop {array} html - HTML template dependencies.
+ * @prop {function} [onchange] - When a table value changes.
+ * @prop {function|object} [onfinish] - When the finish button is clicked. Sets the finish actions.
+ * @prop {function} [onready] - Is called once before the first start of the app.
+ * @prop {function} [onstart] - When the app has finished starting.
+ */
+
+/**
+ * App state data.
+ * @typedef {object} app_state
+ * @prop {number[][]} values - Table values
+ * @example
+ * {
+ *   "values": [ [ "A", 1, false ], [ "B", 2, true ] ]
+ * }
+ */
