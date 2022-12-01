@@ -3,7 +3,7 @@ export const demo = {
   "table_head": [ "Checkbox", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
   "col_settings": [
     { "type": "none" },
-    { "type": "select", "options": [ "a", "b", "c" ] },
+    { "type": "select", "options": [ "", "a", "b", "c" ] },
     { "type": "tel", "placeholder": "Tel: 049...", "required": true },
     { "type": "mail", "placeholder": "Hier steht Email" },
     { "type": "date", "bar": "baz" },
@@ -13,6 +13,8 @@ export const demo = {
         "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. " },
     { "type": "textarea", "disabled": "true", "placeholder": "Hier kannst du nichts schreiben." }
   ],
+  "deletable": true,
+  "movable": true,
   "data": {
     "values": [
       [ "text", "a", "0045/ 12344567", "max.mustermann@mail.com", "2017-01-03",  "", "textarea 2"],
