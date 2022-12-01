@@ -21,6 +21,7 @@
 }
 
 #element > * {
+  width: 100%;
   min-width: 350px;
   max-width: 940px;
 }
