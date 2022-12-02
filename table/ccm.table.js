@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * @overview ccmjs-based web component for tables
+ * @overview <i>ccmjs</i>-based web component for a table.
  * @author Tea Kless <tea.kless@web.de>, 2018-2022
  * @license The MIT License (MIT)
  * @version latest (6.0.0)
@@ -14,7 +14,7 @@
 ( () => {
 
   /**
-   * <i>ccmjs</i>-based web component for tables.
+   * <i>ccmjs</i>-based web component for a table.
    * @namespace WebComponent
    * @type {object}
    * @property {string} name - Unique identifier of the component.
@@ -27,31 +27,33 @@
     name: 'table',
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.mjs" ],
+      "css": [ "ccm.load",
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.css",
+        "https://ccmjs.github.io/tkless-components/table/resources/default.css"
+      ],
+      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" } ],
+      //data: [ "ccm.get", "resources/configs.js", "demo" ],
+
+      //cols: 3,
+      //col_heads: [ "header-1", "header-2", "header-3" ],
       //col_settings: [
       //  { "type": "number", "placeholder": "Tel: 049..." },
       //  { "disabled": "true", "inner": "max.musterman@mail.com" },
       //  { "type": "date", "foo": "bar" }
       //],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.mjs" ],
-      //table_head: [ "header-1", "header-2", "header-3" ],
-      //onfinish: { "restart": true },
 
-      //add_row: true,
-      //table_col: 3,
-      //data: [ "ccm.get", "resources/configs.js", "demo" ],
+      //"addable": true,
+      //"deletable": true,
+      //"movable": true,
 
+      //"onstart": event => console.log( event )
+      //"onready": event => console.log( event ),
+      //cell_onrender: function ( event ) { console.log( this, event ); },
+      //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
       //"onchange": event => console.log( event ),
       //"onfinish": event => console.log( event ),
-      //"onready": event => console.log( event ),
-      //"onstart": event => console.log( event ),
-      //cell_onrender: function ( event ) { console.log( this, event ); }
-      //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
-      //filter_values
-      //delete_row: true,
-      css: [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.css",
-        "resources/default.css"
-      ],
-      helper: [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" } ]
+
     },
     /**
      * @class
@@ -111,6 +113,13 @@
         // Load app state data from source.
         data = await $.dataset( this.data );
 
+        // Set initial app state data.
+        if ( !data.values ) data.values = [];
+
+        // Add ID's for table rows.
+        data.values.forEach( ( row, i ) => row.unshift( i + 1 ) );
+
+        // Update webpage area.
         render();
 
         // Trigger 'start' event.
@@ -124,7 +133,11 @@
        * @function
        * @returns {app_state} A deep copy of the app state data.
        */
-      this.getValue = () => $.clone( data );
+      this.getValue = () => {
+        const result = $.clone( data );
+        result.values.forEach( row => row.splice( 0, 1 ) );
+        return result;
+      }
 
       /**
        * Contains all event handlers.
@@ -137,21 +150,37 @@
         /**
          * When a table value has changed.
          * @function
+         * @param {Event} e - Event object
          * @memberOf AppEvents
          */
-        onChange: event => {
-          const [ row, col ] = event.target.name.split( '-' );
-          data.values[ row-1 ][ col-1 ] = event.target.value;
+        onChange: e => {
+          const [ row, col ] = e.target.name.split( '-' );
+          data.values[ row-1 ][ col-1 ] = e.target.value;
           render();
         },
+
+        /**
+         * When the button to delete a table row is clicked.
+         * @function
+         * @param {number} i - Row index
+         * @memberOf AppEvents
+         */
         onDeleteRow: i => {
           data.values.splice( i, 1 );
           render();
         },
-        onSubmit: event => {
-          event.preventDefault();
+
+        /**
+         * When the button to submit the table values is clicked.
+         * @function
+         * @param {Event} e - Event object
+         * @memberOf AppEvents
+         */
+        onSubmit: e => {
+          e.preventDefault();
           $.onFinish( this );
         }
+
       };
 
       /**
