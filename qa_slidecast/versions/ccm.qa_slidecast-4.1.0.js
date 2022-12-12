@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * @overview ccmjs-based web component for slidecast with commentary
  * @author Tea Kless <tea.kless@web.de> 2020
@@ -26,14 +28,14 @@
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],
       "css": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles-latest.min.css",
+        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles-v1.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "dark": false,
 //    "description": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates-latest.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates-v1.mjs" ],
 //    "ignore": { "slides": [] },
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
