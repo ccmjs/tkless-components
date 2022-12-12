@@ -49,7 +49,7 @@
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
       "css": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-latest.min.css",
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-v3.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
