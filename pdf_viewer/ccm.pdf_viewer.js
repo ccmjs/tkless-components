@@ -56,8 +56,8 @@
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-latest.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
 //      "translations": {
-//        "de": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#de" ],
-//        "en": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ]
+//        "de": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-latest.mjs#de" ],
+//        "en": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-latest.mjs#en" ]
 //      }
 //    } ],
 //    "onchange": event => console.log( event ),
