@@ -1,5 +1,3 @@
-/*----------------------------------------------------- DEPRECATED ---------------------------------------------------*/
-
 /**
  * @overview Data-based resources of <i>ccmjs</i>-based web component for PDF viewer.
  * @author André Kless <andre.kless@web.de> 2021-2022
@@ -46,6 +44,7 @@ export const en = {
  * @type {object}
  */
 export const local = {
+  "annotation_layer": [ "ccm.load", "./../libs/pdfjs-2/PDFLinkService.js" ],
   "css": [ "ccm.load",
     "./../pdf_viewer/resources/styles-latest.css",
     "./../libs/bootstrap-5/css/bootstrap-icons.css",
