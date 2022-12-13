@@ -144,6 +144,7 @@ input {
   right: 0;
   bottom: 0;
   font-family: sans-serif;
+  pointer-events: none;
 }
 
 #annotation-layer * {
