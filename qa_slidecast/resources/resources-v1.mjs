@@ -170,6 +170,7 @@ export const demo = {
     "data": { "store": [ "ccm.store" ] },
     "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ]
   } ],
+  "dark": "auto",
   "description": true,
   "ignore": {
     "slides": slides_de
