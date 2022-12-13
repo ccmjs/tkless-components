@@ -392,6 +392,7 @@
                 page: page,
                 linkService: this.linkService
               } );
+              this.element.querySelectorAll( '#annotation-layer img[src="annotation-noicon.svg"]' ).forEach( elem => elem.remove() );
             } );
 
             // Rendering of PDF page is finished.
