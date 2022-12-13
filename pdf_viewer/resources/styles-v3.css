@@ -137,6 +137,15 @@ input {
   background-color: #0BA1E2;
 }
 
+#annotation-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-family: sans-serif;
+}
+
 #annotation-layer * {
   margin: 0;
   padding: 0;
