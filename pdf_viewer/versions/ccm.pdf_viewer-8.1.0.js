@@ -285,6 +285,10 @@
         renderPage();                                           // Render PDF page.
       };
 
+      /**
+       * When a link within a PDF is called.
+       * @param {number} page - PDF page number
+       */
       this.pdfGoTo = page => {
         if ( this.onchange && this.onchange( { name: last_event = 'pdfjump', page: page, instance: this, before: true } ) ) return;
         this.goTo( page );
@@ -410,6 +414,7 @@
 /**
  * App configuration.
  * @typedef {object} app_config
+ * @prop {array} [annotation_layer] - Links on a PDF page can be opened. Dependency to the PDFLinkService.
  * @prop {array} css - CSS dependencies
  * @prop {boolean|string} [dark] - Dark mode (true, false or "auto")
  * @prop {boolean} [downloadable=true] - Downloadable slides
