@@ -250,7 +250,7 @@
         onJump: event => {
           const page = parseInt( event.target.value );
           event.target.value = '';
-          if ( this.onchange && this.onchange( { name: last_event = 'jump', page: page_nr, instance: this, before: true } ) ) return;
+          if ( this.onchange && this.onchange( { name: last_event = 'jump', page: page, instance: this, before: true } ) ) return;
           if ( !page || page < 1 || page > file.numPages || page === page_nr ) return;
           this.goTo( page );
         },
