@@ -152,7 +152,7 @@
      * @param {number} value
      */
     set page(value) {
-      this.ccmInstance?.events.jump({target:{value}});
+      this.ccmInstance?.events.onJump({target:{value}});
     }
 
     /**
@@ -211,7 +211,7 @@
         return;
       }
 
-      this.ccmInstance?.events.jump({target:{value:pageNumber}});
+      this.ccmInstance?.events.onJump({target:{value:pageNumber}});
     }
 
     /**
@@ -262,7 +262,7 @@
         return;
       }
 
-      this.ccmInstance?.events.jump({target:{value:pageNumber}});
+      this.ccmInstance?.events.onJump({target:{value:pageNumber}});
     }
 
     /**
@@ -382,7 +382,7 @@
           }
         }
         if (dest) {
-          this.ccmInstance.events.jump({target:{value:pageNumber||this.page}});
+          this.ccmInstance.events.onJump({target:{value:pageNumber||this.page}});
         } else if (pageNumber) {
           this.page = pageNumber; // simple page
         }
@@ -440,11 +440,11 @@
           break;
 
         case "NextPage":
-          this.ccmInstance?.events.jump({target:{value:this.ccmInstance.getPage() + 1}});
+          this.ccmInstance?.events.onJump({target:{value:this.ccmInstance.getPage() + 1}});
           break;
 
         case "PrevPage":
-          this.ccmInstance?.events.jump({target:{value:this.ccmInstance.getPage() - 1}});
+          this.ccmInstance?.events.onJump({target:{value:this.ccmInstance.getPage() - 1}});
           break;
 
         case "LastPage":
