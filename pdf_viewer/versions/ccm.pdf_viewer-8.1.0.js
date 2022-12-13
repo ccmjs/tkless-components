@@ -48,6 +48,7 @@
     version: [ 8, 1, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
+      "annotation_layer": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/PDFLinkService.min.js" ],
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-v3.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
@@ -55,6 +56,7 @@
       ],
 //    "dark": "auto",
       "downloadable": true,
+      "force_target_blank": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-v3.min.mjs" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
@@ -75,9 +77,7 @@
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-v3.min.mjs#de" ],
-      "text_layer": true,
-      "annotation_layer": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/PDFLinkService.min.js" ],
-      "force_target_blank": true
+      "text_layer": true
     },
     /**
      * @class
