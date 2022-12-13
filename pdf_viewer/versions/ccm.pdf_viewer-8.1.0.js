@@ -194,7 +194,7 @@
 
         // Initialize PDFLinkService.
         if ( this.annotation_layer && file ) {
-          this.linkService = new PDFLinkService();
+          this.linkService = new this.annotation_layer();
           this.linkService.setDocument( file, null );
           this.linkService.setCcmInstance( this );
         }

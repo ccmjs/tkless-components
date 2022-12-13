@@ -100,7 +100,7 @@
     link.rel = typeof rel === "string" ? rel : DEFAULT_LINK_REL;
   };
 
-  class PDFLinkService {
+  ccm.files[ "PDFLinkService.js" ] = class PDFLinkService {
     #pagesRefCache = new Map();
 
     /**
@@ -186,7 +186,7 @@
                 this.cachePageRef(pageIndex + 1, destRef);
                 this.#goToDestinationHelper(rawDest, namedDest, explicitDest);
               })
-              .catch((e) => {
+              .catch( () => {
                 console.error(
                     `PDFLinkService.#goToDestinationHelper: "${destRef}" is not ` +
                     `a valid page reference, for dest="${rawDest}".`
@@ -562,5 +562,5 @@
       }
       return true;
     }
-  }
+  };
 } )();
