@@ -10,7 +10,7 @@
  * @version 8.1.0
  * @changes
  * version 8.1.0 (12.12.2022):
- * - added support for the annotation-layer (annotations & links)
+ * - added support for the annotation-layer (annotations & links, implemented by Luca Ringhausen)
  * version 8.0.0 (24.11.2022):
  * - Uses ccmjs v27.4.2 as default.
  * - Dark mode not set by default.
