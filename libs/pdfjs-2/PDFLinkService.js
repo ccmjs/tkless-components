@@ -152,7 +152,7 @@
      * @param {number} value
      */
     set page(value) {
-      this.ccmInstance?.pdfGoTo(value);
+      this.ccmInstance?.events.jump({target:{value}});
     }
 
     /**
@@ -211,7 +211,7 @@
         return;
       }
 
-      this.ccmInstance?.pdfGoTo(pageNumber);
+      this.ccmInstance?.events.jump({target:{value:pageNumber}});
     }
 
     /**
@@ -262,7 +262,7 @@
         return;
       }
 
-      this.ccmInstance?.pdfGoTo(pageNumber);
+      this.ccmInstance?.events.jump({target:{value:pageNumber}});
     }
 
     /**
@@ -382,7 +382,7 @@
           }
         }
         if (dest) {
-          this.ccmInstance.pdfGoTo(pageNumber||this.page)
+          this.ccmInstance.events.jump({target:{value:pageNumber||this.page}});
         } else if (pageNumber) {
           this.page = pageNumber; // simple page
         }
@@ -440,11 +440,11 @@
           break;
 
         case "NextPage":
-          this.ccmInstance?.pdfGoTo(this.ccmInstance.getPage() + 1);
+          this.ccmInstance?.events.jump({target:{value:this.ccmInstance.getPage() + 1}});
           break;
 
         case "PrevPage":
-          this.ccmInstance?.pdfGoTo(this.ccmInstance.getPage() - 1);
+          this.ccmInstance?.events.jump({target:{value:this.ccmInstance.getPage() - 1}});
           break;
 
         case "LastPage":

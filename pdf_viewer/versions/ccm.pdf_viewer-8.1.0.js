@@ -286,15 +286,6 @@
       };
 
       /**
-       * When a link within a PDF is called.
-       * @param {number} page - PDF page number
-       */
-      this.pdfGoTo = page => {
-        if ( this.onchange && this.onchange( { name: last_event = 'pdfjump', page: page, instance: this, before: true } ) ) return;
-        this.goTo( page );
-      };
-
-      /**
        * Returns current page number.
        * @returns {number}
        */
