@@ -137,16 +137,7 @@ input {
   background-color: #0BA1E2;
 }
 
-#annotation-layer {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  font-family: sans-serif;
-}
-
-#annotation-layer *{
+#annotation-layer * {
   margin: 0;
   padding: 0;
 }
@@ -165,13 +156,12 @@ input {
   box-sizing: border-box;
   cursor: pointer;
   transform-origin: 0 0;
+  pointer-events: auto;
 }
 
 #annotation-layer .popupContent {
   border-top: 1px solid rgba(51, 51, 51, 1);
   border-top-color: rgb(51, 51, 51);
-  border-top-style: solid;
-  border-top-width: 1px;
   margin-top: 3px;
   padding-top: 3px;
 }
