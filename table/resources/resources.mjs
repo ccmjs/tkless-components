@@ -43,7 +43,10 @@ export const local = {
           "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog." },
     { "type": "textarea", "disabled": true, "placeholder": "Hier kannst du nichts schreiben." }
   ],
-  "css.1": "./../libs/bootstrap-5/css/bootstrap.css",
+  "css": [ "ccm.load",
+    "./../libs/bootstrap-5/css/bootstrap.min.css",
+    "./../table/resources/styles.min.css"
+  ],
   "data": data,
   "deletable": true,
   "helper.1": "./../libs/ccm/helper.mjs",

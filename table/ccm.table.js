@@ -29,7 +29,10 @@
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
       // "addable": true,
-      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css" ],
+      "css": [ "ccm.load",
+        "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
+        "https://ccmjs.github.io/tkless-components/table/resources/styles.min.css"
+      ],
       "col_heads": [ "header-1", "header-2", "header-3" ],
       "col_settings": [
         { "type": "text", "placeholder": "Type in here..." },
@@ -187,6 +190,30 @@
           data.values.splice( i, 1 );
           render();
           this.onchange && this.onchange( { instance: this, name: 'delete', row: i } );
+        },
+
+        /**
+         * When the button is clicked to move a table row down one.
+         * @function
+         * @param {number} i - Row index
+         * @memberOf AppEvents
+         */
+        onMoveDown: i => {
+          [ data.values[ i ], data.values[ i+1 ] ] = [ data.values[ i+1 ], data.values[ i ] ];
+          render();
+          this.onchange && this.onchange( { instance: this, name: 'move', row: i, dir: false } );
+        },
+
+        /**
+         * When the button is clicked to move a table row up one.
+         * @function
+         * @param {number} i - Row index
+         * @memberOf AppEvents
+         */
+        onMoveUp: i => {
+          [ data.values[ i-1 ], data.values[ i ] ] = [ data.values[ i ], data.values[ i-1 ] ];
+          render();
+          this.onchange && this.onchange( { instance: this, name: 'move', row: i, dir: true } );
         },
 
         /**
