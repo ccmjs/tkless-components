@@ -1,7 +1,7 @@
 /**
  * @overview HTML templates of ccmjs-based web component for table
  * @author André Kless <andre.kless@web.de> 2022
- * @version latest (v1)
+ * @version 1
  */
 
 import { html, render, repeat } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
