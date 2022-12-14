@@ -1,6 +1,6 @@
 /**
  * @overview HTML templates of ccmjs-based web component for table
- * @author Tea Kless <tea.kless@web.de> 2022
+ * @author André Kless <andre.kless@web.de> 2022
  */
 
 import { html, render, repeat } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
@@ -8,11 +8,12 @@ export { render };
 
 /**
  * Returns the main HTML template.
- * @param {Object} app - ccmjs-based app instance for table.
+ * @param {object} app - ccmjs-based app instance for table.
+ * @param {(string|number|boolean)[][]} values - Table values
  * @returns {TemplateResult} Main HTML template
  */
-export function main( app ) {
-  const values = app.getValue()?.values;
+export function main( app, values ) {
+  values.forEach( ( row, i ) => row.unshift( i + 1 ) );
   return html`
     <form @submit=${ app.events.onSubmit }>
       <div class="table-responsive">
@@ -26,13 +27,18 @@ export function main( app ) {
           <tbody ?data-hidden=${ !values }>
             ${ repeat( values, row => row[ 0 ], ( row, i ) => html`
               <tr>
-                ${ row.map( ( cell, j ) => html`<td>${ ( () => {
+                ${ row.slice( 1 ).map( ( cell, j ) => html`<td @click=${ () => app.events.onClick( i, j ) }>${ ( () => {
                   const col = app.col_settings[ j ];
-                  const value = values[ i ][ j ] || '';
+                  const value = values[ i ][ j+1 ] || '';
                   switch ( col.type || 'none' ) {
+                    case 'checkbox':
+                    case 'radio':
+                      return html`<input type="${ col.type }" name="${ i+1 }-${ j+1 }" .checked=${ value } @change=${ app.events.onChange }>`
+                    case 'none':
+                      return cell;
                     case 'select':
                       return html`
-                        <select name="${ i+1 }-${ j+1 }" ?disabled=${ col.disabled } @change=${ app.events.onChange }>
+                        <select name="${ i+1 }-${ j+1 }" @change=${ app.events.onChange }>
                           ${ col.options.map( option => html`
                             <option .selected=${ value === option }>
                               ${ option }
@@ -42,12 +48,10 @@ export function main( app ) {
                       `;
                     case 'textarea':
                       return html`
-                        <textarea name="${ i+1 }-${ j+1 }" placeholder="${ col.placeholder || '' }" ?disabled=${ col.disabled } @change=${ app.events.onChange }>${ value }</textarea>
+                        <textarea name="${ i+1 }-${ j+1 }" @change=${ app.events.onChange }>${ value }</textarea>
                       `;
-                    case 'none':
-                      return cell;
                     default:
-                      return html`<input type="${ col.type }" name="${ i+1 }-${ j+1 }" value="${ value }" placeholder="${ col.placeholder || '' }" ?disabled=${ col.disabled } @change=${ app.events.onChange }>`
+                      return html`<input type="${ col.type }" name="${ i+1 }-${ j+1 }" value="${ value }" @change=${ app.events.onChange }>`
                   }
                 } )() }</td>` ) }
                 ${ app.deletable ? html`
@@ -63,6 +67,7 @@ export function main( app ) {
           </tbody>
         </table>
       </div>
+      <button type="submit" class="btn btn-primary mx-3">${ app.submit }</button>
     </form>
  `;
 }

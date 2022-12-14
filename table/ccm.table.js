@@ -3,11 +3,12 @@
 /**
  * @overview <i>ccmjs</i>-based web component for a table.
  * @author Tea Kless <tea.kless@web.de>, 2018-2022
+ * @author André Kless <andre.kless@h-brs.de>, 2022
  * @license The MIT License (MIT)
  * @version latest (6.0.0)
  * @changes
- * version 6.0.0 (02.12.2022)
- * - ...
+ * version 6.0.0 (14.12.2022)
+ * - reimplementation by akless
  * (for older version changes see ccm.table-5.2.0.js)
  */
 
@@ -27,33 +28,33 @@
     name: 'table',
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.mjs" ],
-      "css": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.css",
-        "https://ccmjs.github.io/tkless-components/table/resources/default.css"
+      // "addable": true,
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css" ],
+      "col_heads": [ "header-1", "header-2", "header-3" ],
+      "col_settings": [
+        { "type": "text", "placeholder": "Type in here..." },
+        { "type": "number", "placeholder": "Your Rating...", "min": 1, "max": 5 },
+        { "type": "checkbox", "disabled": true }
       ],
-      "helper": [ "ccm.load", { "url": "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" } ],
-      //data: [ "ccm.get", "resources/configs.js", "demo" ],
-
-      //cols: 3,
-      //col_heads: [ "header-1", "header-2", "header-3" ],
-      //col_settings: [
-      //  { "type": "number", "placeholder": "Tel: 049..." },
-      //  { "disabled": "true", "inner": "max.musterman@mail.com" },
-      //  { "type": "date", "foo": "bar" }
-      //],
-
-      //"addable": true,
-      //"deletable": true,
-      //"movable": true,
-
-      //"onstart": event => console.log( event )
-      //"onready": event => console.log( event ),
-      //cell_onrender: function ( event ) { console.log( this, event ); },
-      //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
-      //"onchange": event => console.log( event ),
-      //"onfinish": event => console.log( event ),
-
+      "data": { "values": [ [ "A", 1, false ], [ "B", 2, true ] ] },
+      // "deletable": true,
+      "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.min.mjs" ],
+      // "movable": true,
+      // "onchange": event => console.log( event ),
+      // "onclick":  event => console.log( event ),
+      // "onfinish": event => console.log( event ),
+      // "onready":  event => console.log( event ),
+      // "onrender": event => {
+      //   if ( event.before ) {
+      //     const values = event.instance.getValue().values;
+      //     values[ 0 ][ 0 ] += '!';
+      //     return values;
+      //   }
+      //   console.log( event )
+      // },
+      // "onstart":  event => console.log( event ),
+      "submit": "Submit"
     },
     /**
      * @class
@@ -113,11 +114,8 @@
         // Load app state data from source.
         data = await $.dataset( this.data );
 
-        // Set initial app state data.
+        // Set default app state data.
         if ( !data.values ) data.values = [];
-
-        // Add ID's for table rows.
-        data.values.forEach( ( row, i ) => row.unshift( i + 1 ) );
 
         // Update webpage area.
         render();
@@ -133,11 +131,7 @@
        * @function
        * @returns {app_state} A deep copy of the app state data.
        */
-      this.getValue = () => {
-        const result = $.clone( data );
-        result.values.forEach( row => row.splice( 0, 1 ) );
-        return result;
-      }
+      this.getValue = () => $.clone( data );
 
       /**
        * Contains all event handlers.
@@ -157,7 +151,17 @@
           const [ row, col ] = e.target.name.split( '-' );
           data.values[ row-1 ][ col-1 ] = e.target.value;
           render();
+          this.onchange && this.onchange( { instance: this, name: 'update', row: row-1, col: col-1, value: e.target.value } );
         },
+
+        /**
+         * When a table cell is clicked.
+         * @function
+         * @param {number} row - Table row index
+         * @param {number} col - Table column index
+         * @memberOf AppEvents
+         */
+        onClick: ( row, col ) => this.onclick && this.onclick( { instance: this, row, col } ),
 
         /**
          * When the button to delete a table row is clicked.
@@ -168,6 +172,7 @@
         onDeleteRow: i => {
           data.values.splice( i, 1 );
           render();
+          this.onchange && this.onchange( { instance: this, name: 'delete', row: i } );
         },
 
         /**
@@ -188,7 +193,17 @@
        * @private
        * @function
        */
-      const render = () => this.html.render( this.html.main( this ), this.element );
+      const render = () => {
+        const values = this.onrender && this.onrender( { instance: this, before: true } ) || $.clone( data.values );
+        this.html.render( this.html.main( this, values ), this.element );
+        this.element.querySelectorAll( '[name]' ).forEach( input => {
+          const [ _, col ] = input.name.split( '-' );
+          const col_settings = this.col_settings[ Number.parseInt( col ) - 1 ];
+          delete col_settings.type; delete col_settings.options;
+          Object.keys( col_settings ).forEach( key => input.setAttribute( key, col_settings[ key ] ) );
+        } );
+        this.onrender && this.onrender( { instance: this } );
+      }
 
     }
   };
@@ -211,7 +226,7 @@
 /**
  * App state data.
  * @typedef {object} app_state
- * @prop {number[][]} values - Table values
+ * @prop {(string|number|boolean)[][]} values - Table values
  * @example
  * {
  *   "values": [ [ "A", 1, false ], [ "B", 2, true ] ]

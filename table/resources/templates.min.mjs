@@ -1,4 +1,4 @@
-import{html,render,repeat}from"https://ccmjs.github.io/tkless-components/libs/lit/lit.js";export{render};export function main(app){const values=app.getValue()?.values;return html`
+import{html,render,repeat}from"https://ccmjs.github.io/tkless-components/libs/lit/lit.js";export{render};export function main(app,values){values.forEach(((row,i)=>row.unshift(i+1)));return html`
     <form @submit=${app.events.onSubmit}>
       <div class="table-responsive">
         <table class="table table-striped">
@@ -11,8 +11,8 @@ import{html,render,repeat}from"https://ccmjs.github.io/tkless-components/libs/li
           <tbody ?data-hidden=${!values}>
             ${repeat(values,(row=>row[0]),((row,i)=>html`
               <tr>
-                ${row.map(((cell,j)=>html`<td>${(()=>{const col=app.col_settings[j];const value=values[i][j]||"";switch(col.type||"none"){case"select":return html`
-                        <select name="${i+1}-${j+1}" ?disabled=${col.disabled} @change=${app.events.onChange}>
+                ${row.slice(1).map(((cell,j)=>html`<td @click=${()=>app.events.onClick(i,j)}>${(()=>{const col=app.col_settings[j];const value=values[i][j+1]||"";switch(col.type||"none"){case"checkbox":case"radio":return html`<input type="${col.type}" name="${i+1}-${j+1}" .checked=${value} @change=${app.events.onChange}>`;case"none":return cell;case"select":return html`
+                        <select name="${i+1}-${j+1}" @change=${app.events.onChange}>
                           ${col.options.map((option=>html`
                             <option .selected=${value===option}>
                               ${option}
@@ -20,8 +20,8 @@ import{html,render,repeat}from"https://ccmjs.github.io/tkless-components/libs/li
                           `))}
                         </select>
                       `;case"textarea":return html`
-                        <textarea name="${i+1}-${j+1}" placeholder="${col.placeholder||""}" ?disabled=${col.disabled} @change=${app.events.onChange}>${value}</textarea>
-                      `;case"none":return cell;default:return html`<input type="${col.type}" name="${i+1}-${j+1}" value="${value}" placeholder="${col.placeholder||""}" ?disabled=${col.disabled} @change=${app.events.onChange}>`}})()}</td>`))}
+                        <textarea name="${i+1}-${j+1}" @change=${app.events.onChange}>${value}</textarea>
+                      `;default:return html`<input type="${col.type}" name="${i+1}-${j+1}" value="${value}" @change=${app.events.onChange}>`}})()}</td>`))}
                 ${app.deletable?html`
                   <td>
                     <svg width="16" height="16" fill="red" viewBox="0 0 16 16" role="button" @click=${()=>app.events.onDeleteRow(i)}>
@@ -35,6 +35,7 @@ import{html,render,repeat}from"https://ccmjs.github.io/tkless-components/libs/li
           </tbody>
         </table>
       </div>
+      <button type="submit" class="btn btn-primary mx-3">${app.submit}</button>
     </form>
  `}
 //# sourceMappingURL=templates.min.mjs.map

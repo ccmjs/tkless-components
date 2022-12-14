@@ -1,26 +1,36 @@
 /**
- * @overview App configurations of ccmjs-based web component for a table.
+ * @overview Data-based resources of ccmjs-based web component for a table.
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
+ * @version latest (v1)
  */
 
 /**
- * Local configuration with relative paths
- * @type {object}
+ * Data-based resources of <i>ccmjs</i>-based web component for a table.
+ * @module DataResources
+ */
+
+/**
+ * Example app state data.
+ * @type {app_state}
+ */
+export const data = {
+  "values": [
+    [ "text", "a", "0045/ 12344567", "max.mustermann@mail.com"  , "2017-01-03", "", "textarea 2" ],
+    [ ""    , "b", ""              , ""                         , "2017-08-03", "", ""           ],
+    [ "bla" , "c", ""              , "erika.mustermann@mail.com", "2017-04-03", "", ""           ],
+    [ ""    , "" , ""              , "markus.möglich@mail.com"  , "2018-01-03", "", ""           ],
+    [ "text", "" , ""              , "jane.doe@mail.com"        , "2016-12-28", "", ""           ]
+  ]
+};
+
+/**
+ * Local configuration (relative paths)
+ * @type {app_config}
  */
 export const local = {
-  "html.1": "./resources/templates.mjs",
-  "data": {
-    "values": [
-      [ "text", "a", "0045/ 12344567", "max.mustermann@mail.com", "2017-01-03",  "", "textarea 2"],
-      [ "", "b", "", "", "2017-08-03", "", ""],
-      [ "bla", "c", "", "erika.mustermann@mail.com", "2017-04-03", "", ""],
-      [ "", "", "", "markus.möglich@mail.com", "2018-01-03", "", ""],
-      [ "text", "", "", "jane.doe@mail.com", "2016-12-28", "", ""]
-    ]
-  },
-
-  "col_heads": [ "Checkbox", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
+  "addable": true,
+  "col_heads": [ "None", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
   "col_settings": [
     { "type": "none" },
     { "type": "select", "options": [ "", "a", "b", "c" ] },
@@ -28,21 +38,26 @@ export const local = {
     { "type": "mail", "placeholder": "Hier steht Email" },
     { "type": "date", "bar": "baz" },
     { "type": "textarea", "placeholder": "Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da " +
-        "sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um " +
-        "Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze " +
-        "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. " },
-    { "type": "textarea", "disabled": "true", "placeholder": "Hier kannst du nichts schreiben." }
+          "sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um " +
+          "Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze " +
+          "»Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog." },
+    { "type": "textarea", "disabled": true, "placeholder": "Hier kannst du nichts schreiben." }
   ],
-
-  "addable": true,
+  "css.1": "./../libs/bootstrap-5/css/bootstrap.css",
+  "data": data,
   "deletable": true,
-  "movable": true,
-
-  "onfinish": { "log": true }
-}
+  "helper.1": "./../libs/ccm/helper.mjs",
+  "html.1": "./../table/resources/templates.mjs",
+  "movable": true
+};
 
 /**
- * Demo configuration
- * @type {object}
+ * Demo configuration (absolute paths)
+ * @type {app_config}
  */
-export const demo = {}
+export const demo = {
+  "addable": true,
+  "data": data,
+  "deletable": true,
+  "movable": true
+};
