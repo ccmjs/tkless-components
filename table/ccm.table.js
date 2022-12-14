@@ -57,10 +57,7 @@
       //   console.log( event )
       // },
       // "onstart":  event => console.log( event ),
-      "text": {
-        "add": "+ Add Row",
-        "submit": "Submit"
-      }
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.min.mjs#en" ]
     },
     /**
      * @class
