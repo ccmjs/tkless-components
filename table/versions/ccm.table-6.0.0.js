@@ -58,7 +58,7 @@
       //   console.log( event )
       // },
       // "onstart":  event => console.log( event ),
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/resources/resources.min.mjs#en" ]
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/resources/resources-v1.min.mjs#en" ]
     },
     /**
      * @class
