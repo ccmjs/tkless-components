@@ -51,6 +51,7 @@ export const local = {
     { "url": "./../libs/bootstrap-5/css/bootstrap-fonts.css", "context": "head" }
   ],
   "dark": "auto",
+  "icon_path": "./../pdf_viewer/resources/",
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../pdf_viewer/resources/templates-latest.mjs",
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js", {

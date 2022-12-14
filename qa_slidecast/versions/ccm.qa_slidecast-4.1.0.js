@@ -8,8 +8,8 @@
  * @license The MIT License (MIT)
  * @version 4.1.0
  * @changes
- * version 4.1.0 (12.12.2022):
- * - uses ccm.pdf_viewer.js v8.1.0 as default
+ * version 4.1.0 (14.12.2022):
+ * - uses ccm.pdf_viewer.js v8.1.0 as default (support of annotation layer)
  * version 4.0.0 (24.11.2022):
  * - Uses ccmjs v27.4.2 as default.
  * - Uses helper.mjs v8.4.1 as default.
@@ -46,7 +46,7 @@
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "slide_nr": 1,
       "ignore": {},
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources.mjs#text_en" ],
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/resources-v1.min.mjs#text_en" ],
 //    "youtube": [ "ccm.component", "https://ccmjs.github.io/akless-components/youtube/versions/ccm.youtube-2.1.1.js" ]
     },
     Instance: function () {

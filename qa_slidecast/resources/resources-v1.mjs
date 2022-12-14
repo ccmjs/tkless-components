@@ -2,6 +2,7 @@
  * @overview data-based resources of ccmjs-based web component for slidecast with commentary
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
+ * @version 1
  */
 
 /**

@@ -1,7 +1,7 @@
 /**
  * @overview HTML templates of <i>ccmjs</i>-based web component for PDF viewer.
  * @author André Kless <andre.kless@web.de> 2021-2022
- * @version latest (2)
+ * @version latest (v3)
  */
 
 import { html, render } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';
@@ -27,6 +27,7 @@ export function main( app, page_nr, pages ) {
       <div id="page">
         <canvas></canvas>
         <div id="text-layer"></div>
+        <div id="annotation-layer"></div>
       </div>
     </main>
     <footer>

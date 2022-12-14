@@ -5,10 +5,12 @@
  * @see https://github.com/mozilla/pdf.js/
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021-2022
- * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text-layer feature)
+ * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text- & annotation-layer features)
  * @license The MIT License (MIT)
- * @version latest (8.0.0)
+ * @version latest (8.1.0)
  * @changes
+ * version 8.1.0 (14.12.2022):
+ * - added support for the annotation-layer (annotations & links, implemented by Luca Ringhausen)
  * version 8.0.0 (24.11.2022):
  * - Uses ccmjs v27.4.2 as default.
  * - Dark mode not set by default.
@@ -45,19 +47,22 @@
     name: 'pdf_viewer',
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
+      "annotation_layer": [ "ccm.load", "https://ccmjs.github.io/tkless-components/libs/pdfjs-2/PDFLinkService.min.js" ],
       "css": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-latest.min.css",
+        "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/styles-v3.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
 //    "dark": "auto",
       "downloadable": true,
+      "force_target_blank": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-latest.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-v3.min.mjs" ],
+      "icon_path": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/",
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
 //      "translations": {
-//        "de": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-latest.mjs#de" ],
-//        "en": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-latest.mjs#en" ]
+//        "de": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#de" ],
+//        "en": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#en" ]
 //      }
 //    } ],
 //    "onchange": event => console.log( event ),
@@ -71,7 +76,7 @@
         "namespace": "pdfjs-dist/build/pdf"
       },
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#de" ],
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-v3.min.mjs#de" ],
       "text_layer": true
     },
     /**
@@ -187,6 +192,13 @@
           if ( !file ) return $.setContent( this.element, this.text.denied );
         }
 
+        // Initialize PDFLinkService.
+        if ( this.annotation_layer && file ) {
+          this.linkService = new this.annotation_layer();
+          this.linkService.setDocument( file, null );
+          this.linkService.setCcmInstance( this );
+        }
+
         // Render main HTML structure.
         render();
 
@@ -238,8 +250,8 @@
         onJump: event => {
           const page = parseInt( event.target.value );
           event.target.value = '';
+          if ( this.onchange && this.onchange( { name: last_event = 'jump', page: page, instance: this, before: true } ) ) return;
           if ( !page || page < 1 || page > file.numPages || page === page_nr ) return;
-          if ( this.onchange && this.onchange( { name: last_event = 'jump', page: page_nr, instance: this, before: true } ) ) return;
           this.goTo( page );
         },
 
@@ -358,6 +370,22 @@
               } );
             }
 
+            // Render annotation layer on top of PDF page.
+            this.annotation_layer && page.getAnnotations().then( annotationData => {
+              const annotation_layer = this.element.querySelector( '#annotation-layer' );
+              annotation_layer.innerHTML = '';
+              annotation_layer.style.width = canvas.clientWidth + 'px';
+              annotation_layer.style.height = canvas.clientHeight + 'px';
+              this.pdfjs.AnnotationLayer.render( {
+                viewport: scaledViewport,
+                div: annotation_layer,
+                annotations: annotationData,
+                page: page,
+                linkService: this.linkService,
+                imageResourcesPath: this.icon_path
+              } );
+            } );
+
             // Rendering of PDF page is finished.
             rendering = false;
 
@@ -365,7 +393,9 @@
             if ( pending ) { pending = false; renderPage(); } else this.onchange && this.onchange( { name: 'goto', page: page_nr, instance: this } );
 
           } );
+
         } );
+
       };
 
     }
@@ -376,9 +406,11 @@
 /**
  * App configuration.
  * @typedef {object} app_config
+ * @prop {array} [annotation_layer] - Links on a PDF page can be opened. Dependency to the PDFLinkService.
  * @prop {array} css - CSS dependencies
  * @prop {boolean|string} [dark] - Dark mode (true, false or "auto")
  * @prop {boolean} [downloadable=true] - Downloadable slides
+ * @prop {string} icon_path - Path under which the "annotation-noicon.svg" can be found.
  * @prop {array} helper - Dependency on helper functions
  * @prop {array} html - HTML template dependencies
  * @prop {array} [lang] - Dependency on component for multilingualism

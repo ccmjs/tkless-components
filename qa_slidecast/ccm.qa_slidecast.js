@@ -1,11 +1,15 @@
+"use strict";
+
 /**
  * @overview ccmjs-based web component for slidecast with commentary
  * @author Tea Kless <tea.kless@web.de> 2020
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @author Luca Ringhausen <luca.ringhausen@h-brs.de> 2022 (text-layer feature)
  * @license The MIT License (MIT)
- * @version latest (4.0.0)
+ * @version latest (4.1.0)
  * @changes
+ * version 4.1.0 (14.12.2022):
+ * - uses ccm.pdf_viewer.js v8.1.0 as default (support of annotation layer)
  * version 4.0.0 (24.11.2022):
  * - Uses ccmjs v27.4.2 as default.
  * - Uses helper.mjs v8.4.1 as default.
@@ -23,21 +27,21 @@
     config: {
 //    "comment": [ "ccm.component", "https://ccmjs.github.io/tkless-components/comment/versions/ccm.comment-7.2.0.min.js" ],
       "css": [ "ccm.load",
-        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles-latest.min.css",
+        "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/styles-v1.min.css",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-icons.min.css",
         { "url": "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap-fonts.min.css", "context": "head" },
       ],
       "dark": false,
 //    "description": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates-latest.min.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/qa_slidecast/resources/templates-v1.min.mjs" ],
 //    "ignore": { "slides": [] },
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
 //    "onchange": ( { name, instance, before } ) => { console.log( name, instance.slide_nr, !!before ) },
 //    "onready": event => console.log( event ),
 //    "onstart": instance => { console.log( 'start', instance.slide_nr ) },
       "open": "both",
-      "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-8.0.0.min.js" ],
+      "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-8.1.0.min.js" ],
 //    "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
       "slide_nr": 1,
       "ignore": {},

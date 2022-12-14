@@ -2,6 +2,7 @@
  * @overview data-based resources of ccmjs-based web component for slidecast with commentary
  * @author André Kless <andre.kless@web.de> 2021-2022
  * @license The MIT License (MIT)
+ * @version latest (v1)
  */
 
 /**
@@ -154,11 +155,11 @@ export const local = {
 //"onchange": event => console.log( 'onchange', event ),
 //"onready": event => console.log( 'onready', event ),
 //"onstart": event => console.log( 'onstart', event ),
-  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources.mjs#local" ] ],
+  "pdf_viewer": [ "ccm.instance", "./../pdf_viewer/ccm.pdf_viewer.js", [ "ccm.load", "./../pdf_viewer/resources/resources-latest.mjs#local" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/ccm.routing.js" ],
   "text": text_de,
   "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/ccm.user.js" ],
-  "youtube": [ "ccm.component", "https://ccmjs.github.io/akless-components/youtube/versions/ccm.youtube-2.1.1.js" ]
+  "youtube": [ "ccm.component", "https://ccmjs.github.io/akless-components/youtube/ccm.youtube.js" ]
 };
 
 /**
@@ -170,6 +171,7 @@ export const demo = {
     "data": { "store": [ "ccm.store" ] },
     "src": [ "ccm.load", "https://ccmjs.github.io/tkless-components/comment/resources/resources.mjs#demo" ]
   } ],
+  "dark": "auto",
   "description": true,
   "ignore": {
     "slides": slides_de
@@ -177,8 +179,9 @@ export const demo = {
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
     "translations": { "de": text_de, "en": text_en }
   } ],
-  "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-7.3.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#demo" ] ],
+  "pdf_viewer": [ "ccm.instance", "https://ccmjs.github.io/tkless-components/pdf_viewer/versions/ccm.pdf_viewer-8.1.0.min.js", [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources-v3.min.mjs#demo" ] ],
   "routing": [ "ccm.instance", "https://ccmjs.github.io/akless-components/routing/versions/ccm.routing-3.0.0.min.js" ],
   "text": text_de,
-  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ]
+  "user": [ "ccm.start", "https://ccmjs.github.io/akless-components/user/versions/ccm.user-9.7.2.min.js" ],
+  "youtube": [ "ccm.component", "https://ccmjs.github.io/akless-components/youtube/versions/ccm.youtube-2.1.1.js" ]
 };

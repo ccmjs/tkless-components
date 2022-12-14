@@ -4,6 +4,7 @@ import{html,render}from"https://ccmjs.github.io/tkless-components/libs/lit/lit.j
       <div id="page">
         <canvas></canvas>
         <div id="text-layer"></div>
+        <div id="annotation-layer"></div>
       </div>
     </main>
     <footer>
