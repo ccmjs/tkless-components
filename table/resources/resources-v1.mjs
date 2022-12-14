@@ -79,7 +79,6 @@ export const local = {
  */
 export const demo = {
   "addable": true,
-  "data": data,
   "deletable": true,
   "movable": true,
   "text": de
