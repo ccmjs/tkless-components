@@ -1,6 +1,6 @@
 /**
  * @overview Data-based resources of ccmjs-based web component for a table.
- * @author André Kless <andre.kless@web.de> 2021-2022
+ * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
  * @version latest (v1)
  */

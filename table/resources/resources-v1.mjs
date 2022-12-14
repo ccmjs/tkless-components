@@ -1,6 +1,6 @@
 /**
  * @overview Data-based resources of ccmjs-based web component for a table.
- * @author André Kless <andre.kless@web.de> 2021-2022
+ * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
  * @version 1
  */
@@ -9,6 +9,24 @@
  * Data-based resources of <i>ccmjs</i>-based web component for a table.
  * @module DataResources
  */
+
+/**
+ * German translations.
+ * @type {Object.<string,string>}
+ */
+export const de = {
+  "add": "+ Zeile hinzufügen",
+  "submit": "Abschicken"
+};
+
+/**
+ * English translations.
+ * @type {Object.<string,string>}
+ */
+export const en = {
+  "add": "+ Add Row",
+  "submit": "Submit"
+};
 
 /**
  * Example app state data.
@@ -51,7 +69,8 @@ export const local = {
   "deletable": true,
   "helper.1": "./../libs/ccm/helper.mjs",
   "html.1": "./../table/resources/templates.mjs",
-  "movable": true
+  "movable": true,
+  "text": de
 };
 
 /**
@@ -62,5 +81,6 @@ export const demo = {
   "addable": true,
   "data": data,
   "deletable": true,
-  "movable": true
+  "movable": true,
+  "text": de
 };
