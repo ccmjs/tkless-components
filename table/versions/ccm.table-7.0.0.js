@@ -5,7 +5,7 @@
  * @author Tea Kless <tea.kless@web.de>, 2018-2022
  * @author André Kless <andre.kless@h-brs.de>, 2022
  * @license The MIT License (MIT)
- * @version latest (7.0.0)
+ * @version 7.0.0
  * @changes
  * version 7.0.0 (14.12.2022)
  * - reimplementation by akless
@@ -26,12 +26,13 @@
    */
   const component = {
     name: 'table',
+    version: [ 7, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
       // "addable": true,
       "css": [ "ccm.load",
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
-        "https://ccmjs.github.io/tkless-components/table/resources/styles.min.css"
+        "https://ccmjs.github.io/tkless-components/table/resources/styles-v1.min.css"
       ],
       "col_heads": [ "header-1", "header-2", "header-3" ],
       "col_settings": [
@@ -42,7 +43,7 @@
       "data": { "values": [ [ "A", 1, false ], [ "B", 2, true ] ] },
       // "deletable": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" ],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates.min.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates-v1.min.mjs" ],
       // "movable": true,
       // "onchange": event => console.log( event ),
       // "onclick":  event => console.log( event ),
@@ -57,7 +58,7 @@
       //   console.log( event )
       // },
       // "onstart":  event => console.log( event ),
-      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources.min.mjs#en" ]
+      "text": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/resources-v1.min.mjs#en" ]
     },
     /**
      * @class
