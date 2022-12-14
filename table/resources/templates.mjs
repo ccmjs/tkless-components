@@ -67,7 +67,10 @@ export function main( app, values ) {
           </tbody>
         </table>
       </div>
-      <button type="submit" class="btn btn-primary mx-3">${ app.submit }</button>
+      <div class="mx-3 d-flex justify-content-between align-items-start">
+        <button type="submit" class="btn btn-primary" ?hidden=${ !app.onfinish }>${ app.text.submit }</button>
+        <button type="button" class="btn btn-success btn-sm" @click=${ app.events.onAddRow }>${ app.text.add }</button>
+      </div>
     </form>
  `;
 }

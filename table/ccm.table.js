@@ -43,7 +43,7 @@
       // "movable": true,
       // "onchange": event => console.log( event ),
       // "onclick":  event => console.log( event ),
-      // "onfinish": event => console.log( event ),
+      "onfinish": { "log": true },
       // "onready":  event => console.log( event ),
       // "onrender": event => {
       //   if ( event.before ) {
@@ -54,7 +54,10 @@
       //   console.log( event )
       // },
       // "onstart":  event => console.log( event ),
-      "submit": "Submit"
+      "text": {
+        "add": "+ Add Row",
+        "submit": "Submit"
+      }
     },
     /**
      * @class
@@ -142,6 +145,17 @@
       this.events = {
 
         /**
+         * When the button to add a table row is clicked.
+         * @function
+         * @memberOf AppEvents
+         */
+        onAddRow: () => {
+          data.values.push( Array( this.col_settings.length ).fill( '' ) );
+          render();
+          this.onchange && this.onchange( { instance: this, name: 'create' } );
+        },
+
+        /**
          * When a table value has changed.
          * @function
          * @param {Event} e - Event object
@@ -196,14 +210,15 @@
       const render = () => {
         const values = this.onrender && this.onrender( { instance: this, before: true } ) || $.clone( data.values );
         this.html.render( this.html.main( this, values ), this.element );
+        const col_settings = $.clone( this.col_settings );
         this.element.querySelectorAll( '[name]' ).forEach( input => {
           const [ _, col ] = input.name.split( '-' );
-          const col_settings = this.col_settings[ Number.parseInt( col ) - 1 ];
-          delete col_settings.type; delete col_settings.options;
-          Object.keys( col_settings ).forEach( key => input.setAttribute( key, col_settings[ key ] ) );
+          const col_setting = col_settings[ Number.parseInt( col ) - 1 ];
+          delete col_setting.type; delete col_setting.options;
+          Object.keys( col_setting ).forEach( key => input.setAttribute( key, col_setting[ key ] ) );
         } );
         this.onrender && this.onrender( { instance: this } );
-      }
+      };
 
     }
   };
