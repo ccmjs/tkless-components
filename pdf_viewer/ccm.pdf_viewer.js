@@ -58,7 +58,7 @@
       "force_target_blank": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.1.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/templates-v3.min.mjs" ],
-      "icon_path": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/",
+      "images_path": "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/images/",
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js", {
 //      "translations": {
 //        "de": [ "ccm.load", "https://ccmjs.github.io/tkless-components/pdf_viewer/resources/resources.mjs#de" ],
@@ -382,7 +382,7 @@
                 annotations: annotationData,
                 page: page,
                 linkService: this.linkService,
-                imageResourcesPath: this.icon_path
+                imageResourcesPath: this.images_path
               } );
             } );
 
@@ -410,7 +410,7 @@
  * @prop {array} css - CSS dependencies
  * @prop {boolean|string} [dark] - Dark mode (true, false or "auto")
  * @prop {boolean} [downloadable=true] - Downloadable slides
- * @prop {string} icon_path - Path under which the "annotation-noicon.svg" can be found.
+ * @prop {string} images_path - Path under which the images can be found.
  * @prop {array} helper - Dependency on helper functions
  * @prop {array} html - HTML template dependencies
  * @prop {array} [lang] - Dependency on component for multilingualism
