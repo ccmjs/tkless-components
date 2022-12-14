@@ -410,7 +410,7 @@
  * @prop {array} css - CSS dependencies
  * @prop {boolean|string} [dark] - Dark mode (true, false or "auto")
  * @prop {boolean} [downloadable=true] - Downloadable slides
- * @prop {string} images_path - Path under which the images can be found.
+ * @prop {string} images_path - Path under which the annotation icons can be found.
  * @prop {array} helper - Dependency on helper functions
  * @prop {array} html - HTML template dependencies
  * @prop {array} [lang] - Dependency on component for multilingualism
