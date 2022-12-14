@@ -259,14 +259,22 @@
 /**
  * App configuration.
  * @typedef {object} app_config
- * @prop {array} css - CSS dependencies.
- * @prop {object} [data] - Source of app state data.
- * @prop {array} helper - Dependency on helper functions.
- * @prop {array} html - HTML template dependencies.
- * @prop {function} [onchange] - When a table value changes.
+ * @prop {boolean} addable - Indicates whether rows can be added.
+ * @prop {array} css - CSS dependencies
+ * @prop {string[]} col_heads - Labels for the table columns
+ * @prop {object[]} col_settings - Settings for the table columns
+ * @prop {object} [data] - Source of app state data (contains the table values).
+ * @prop {boolean} deletable - Indicates whether rows can be deleted.
+ * @prop {array} helper - Dependency on helper functions
+ * @prop {array} html - HTML template dependencies
+ * @prop {boolean} movable - Indicates whether rows can be moved.
+ * @prop {function} [onchange] - When a table value changes or when a row is moved, added or removed.
+ * @prop {function} [onclick] - When a table cell is clicked.
  * @prop {function|object} [onfinish] - When the finish button is clicked. Sets the finish actions.
  * @prop {function} [onready] - Is called once before the first start of the app.
+ * @prop {function} [onrender] - Before and after the table is rendered. The table values can be adjusted before they are displayed.
  * @prop {function} [onstart] - When the app has finished starting.
+ * @prop {Object.<string,string>} text - Button labels
  */
 
 /**
