@@ -153,6 +153,7 @@
          * @memberOf AppEvents
          */
         onAddRow: () => {
+          if ( !this.addable ) return;
           data.values.push( Array( this.col_settings.length ).fill( '' ) );
           render();
           this.onchange && this.onchange( { instance: this, name: 'create' } );
@@ -187,6 +188,7 @@
          * @memberOf AppEvents
          */
         onDeleteRow: i => {
+          if ( !this.deletable ) return;
           data.values.splice( i, 1 );
           render();
           this.onchange && this.onchange( { instance: this, name: 'delete', row: i } );
@@ -199,6 +201,7 @@
          * @memberOf AppEvents
          */
         onMoveDown: i => {
+          if ( !this.movable ) return;
           [ data.values[ i ], data.values[ i+1 ] ] = [ data.values[ i+1 ], data.values[ i ] ];
           render();
           this.onchange && this.onchange( { instance: this, name: 'move', row: i, dir: false } );
@@ -211,6 +214,7 @@
          * @memberOf AppEvents
          */
         onMoveUp: i => {
+          if ( !this.movable ) return;
           [ data.values[ i-1 ], data.values[ i ] ] = [ data.values[ i ], data.values[ i-1 ] ];
           render();
           this.onchange && this.onchange( { instance: this, name: 'move', row: i, dir: true } );

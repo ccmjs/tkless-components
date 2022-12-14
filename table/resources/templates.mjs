@@ -83,7 +83,7 @@ export function main( app, values ) {
       </div>
       <div class="mx-3 d-flex justify-content-between align-items-start">
         <button type="submit" class="btn btn-primary" ?data-invisible=${ !app.onfinish }>${ app.text.submit }</button>
-        <button type="button" class="btn btn-success btn-sm" @click=${ app.events.onAddRow }>${ app.text.add }</button>
+        <button type="button" class="btn btn-success btn-sm" ?data-invisible=${ !app.addable } @click=${ app.events.onAddRow }>${ app.text.add }</button>
       </div>
     </form>
  `;
