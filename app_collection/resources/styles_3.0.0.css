@@ -151,7 +151,7 @@ a.entry {
 }
 
 .topnav #myLinks.visible {
-  height: 85px;
+  height: 100%;
   visibility:visible;
   opacity:1;
 }
