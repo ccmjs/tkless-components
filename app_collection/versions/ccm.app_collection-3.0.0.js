@@ -29,6 +29,7 @@
 ( () => {
   const component = {
     name: 'app_collection',
+    version: [ 3, 0, 0 ],
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
 //    "color": "limegreen",
