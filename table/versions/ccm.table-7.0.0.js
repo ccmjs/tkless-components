@@ -34,7 +34,7 @@
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
         "https://ccmjs.github.io/tkless-components/table/resources/styles-v1.min.css"
       ],
-      "col_heads": [ "header-1", "header-2", "header-3" ],
+      "table_head": [ "header-1", "header-2", "header-3" ],
       "col_settings": [
         { "type": "text", "placeholder": "Type in here..." },
         { "type": "number", "placeholder": "Your Rating...", "min": 1, "max": 5 },
@@ -259,7 +259,7 @@
  * @typedef {object} app_config
  * @prop {boolean} addable - Indicates whether rows can be added.
  * @prop {array} css - CSS dependencies
- * @prop {string[]} col_heads - Labels for the table columns
+ * @prop {string[]} table_head - Labels for the table columns
  * @prop {object[]} col_settings - Settings for the table columns
  * @prop {object} [data] - Source of app state data (contains the table values).
  * @prop {boolean} deletable - Indicates whether rows can be deleted.

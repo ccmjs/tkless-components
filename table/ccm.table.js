@@ -33,7 +33,7 @@
         "https://ccmjs.github.io/tkless-components/libs/bootstrap-5/css/bootstrap.min.css",
         "https://ccmjs.github.io/tkless-components/table/resources/styles.min.css"
       ],
-      "col_heads": [ "header-1", "header-2", "header-3" ],
+      "table_head": [ "header-1", "header-2", "header-3" ],
       "col_settings": [
         { "type": "text", "placeholder": "Type in here..." },
         { "type": "number", "placeholder": "Your Rating...", "min": 1, "max": 5 },

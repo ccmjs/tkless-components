@@ -48,7 +48,7 @@ export const data = {
  */
 export const local = {
   "addable": true,
-  "col_heads": [ "None", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
+  "table_head": [ "None", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
   "col_settings": [
     { "type": "none" },
     { "type": "select", "options": [ "", "a", "b", "c" ] },
