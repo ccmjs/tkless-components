@@ -40,7 +40,7 @@
         { "type": "number", "placeholder": "Your Rating...", "min": 1, "max": 5 },
         { "type": "checkbox", "disabled": true }
       ],
-      "data": { "values": [ [ "A", 1, false ], [ "B", 2, true ] ] },
+      //"data": { "values": [ [ "A", 1, false ], [ "B", 2, true ] ] },
       // "deletable": true,
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" ],
       "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/table/resources/templates-v1.min.mjs" ],
