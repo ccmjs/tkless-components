@@ -34,11 +34,11 @@ export const en = {
  */
 export const data = {
   "values": [
-    [ "text", "a", "0045/ 12344567", "max.mustermann@mail.com"  , "2017-01-03", "", "textarea 2" ],
-    [ ""    , "b", ""              , ""                         , "2017-08-03", "", ""           ],
-    [ "bla" , "c", ""              , "erika.mustermann@mail.com", "2017-04-03", "", ""           ],
-    [ ""    , "" , ""              , "markus.möglich@mail.com"  , "2018-01-03", "", ""           ],
-    [ "text", "" , ""              , "jane.doe@mail.com"        , "2016-12-28", "", ""           ]
+    [ "input type text", "text", "a", "0045/ 12344567", "max.mustermann@mail.com"  , "2017-01-03", "", "textarea 2" ],
+    [ "", ""    , "b", ""              , ""                         , "2017-08-03", "", ""           ],
+    [ "", "bla" , "c", ""              , "erika.mustermann@mail.com", "2017-04-03", "", ""           ],
+    [ "", ""    , "" , ""              , "markus.möglich@mail.com"  , "2018-01-03", "", ""           ],
+    [ "", "text", "" , ""              , "jane.doe@mail.com"        , "2016-12-28", "", ""           ]
   ]
 };
 
@@ -48,8 +48,9 @@ export const data = {
  */
 export const local = {
   "addable": true,
-  "table_head": [ "None", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
+  "table_head": [ "Text", "None", "Selecter Box", "Telephone", "Email", "Date", "Textarea with Placeholder", "Disabled Textarea" ],
   "col_settings": [
+    { "type": "text" },
     { "type": "none" },
     { "type": "select", "options": [ "", "a", "b", "c" ] },
     { "type": "tel", "placeholder": "Tel: 049...", "required": true },
