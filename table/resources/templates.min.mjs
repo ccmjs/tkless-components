@@ -2,9 +2,9 @@ import{html,render,repeat}from"https://ccmjs.github.io/tkless-components/libs/li
     <form @submit=${app.events.onSubmit}>
       <div class="table-responsive">
         <table class="table table-striped">
-          <thead ?data-hidden=${!app.col_heads}>
+          <thead ?data-hidden=${!app.table_head}>
             <tr>
-              ${app.col_heads?.map((title=>html`<th scope="col">${title}</th>`))}
+              ${app.table_head?.map((title=>html`<th scope="col">${title}</th>`))}
               ${app.deletable?html`<th scope="col"></th>`:""}
             </tr>
           </thead>
