@@ -112,7 +112,7 @@
           "tag": "button",
           "class": "btn btn-primary pull-right",
           "typ": "submit",
-          "inner": "Submit"
+          "inner": "%submit_btn_lable%"
         }
       },
       //add_row: true,
@@ -129,7 +129,8 @@
       //onchange
       //cell_onrender: function ( event ) { console.log( this, event ); }
       //cell_onclick: function ( target, value, self  ){ console.log( target, value, self ); },
-      //filter_values
+      //filter_values,
+      //submit_btn_lable
       css: [ "ccm.load", "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css",
         "https://ccmjs.github.io/tkless-components/table/resources/default.css"
       ],
@@ -180,7 +181,9 @@
       };
 
       const renderSubmitButton = () => {
-        self.submit && self.col_settings && table.querySelector( '#buttons' ).appendChild( $.html ( self.html.submit ) );
+        self.submit && self.col_settings && table.querySelector( '#buttons' ).appendChild( $.html ( self.html.submit, {
+          submit_btn_lable: self.submit_btn_lable
+        } ) );
       };
 
       const renderAddRowButton = () => {
