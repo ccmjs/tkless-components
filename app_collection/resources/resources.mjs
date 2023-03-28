@@ -1,5 +1,6 @@
 /**
  * @overview data-based resources of ccmjs-based web component for an app collection
+ * @author Tea Kless <tea.kless@web.de> 2023
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
  */
@@ -66,8 +67,10 @@ const example_footer = [
  * @type {Object}
  */
 export const test = {
+  "css": [ "ccm.load", "./../app_collection/resources/styles-3.0.0.css" ],
   "footer": example_footer,
   "helper.1": "./../libs/ccm/helper.mjs",
+  "html": [ "ccm.load", "./../app_collection/resources/templates-3.0.0.mjs" ],
   "icon": [ "ccm.load", "./../app_collection/resources/app.svg" ],
   "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/ccm.lang.js" ],
   "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/ccm.log.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.js", "greedy" ] ],

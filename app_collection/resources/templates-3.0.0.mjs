@@ -1,7 +1,7 @@
 /**
  * @overview HTML templates of ccmjs-based web component for an app collection
+ * @author Tea Kless <tea.kless@web.de> 2023
  * @author André Kless <andre.kless@web.de> 2022
- * @author André Kless <tea.kless@web.de> 2023
  */
 
 import { html, render } from 'https://ccmjs.github.io/tkless-components/libs/lit/lit.js';

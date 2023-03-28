@@ -3,7 +3,7 @@
  * @author Tea Kless <tea.kless@web.de> 2023
  * @author André Kless <andre.kless@web.de> 2022
  * @license The MIT License (MIT)
- * @version latest (3.0.0)
+ * @version 3.0.0
  * @changes
  * version 3.0.0 (06.02.2023):
  * - added burger menu
@@ -33,11 +33,11 @@
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.2.min.js',
     config: {
 //    "color": "limegreen",
-      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/styles_3.0.0.min.css" ],
+      "css": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/styles-3.0.0.min.css" ],
 //    "dark": "auto",
       "footer": [],
       "helper": [ "ccm.load", "https://ccmjs.github.io/akless-components/modules/versions/helper-8.4.2.min.mjs" ],
-      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/templates_3.0.0.mjs" ],
+      "html": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/templates-3.0.0.min.mjs" ],
 //    "icon": [ "ccm.load", "https://ccmjs.github.io/tkless-components/app_collection/resources/app.svg" ],
 //    "lang": [ "ccm.start", "https://ccmjs.github.io/akless-components/lang/versions/ccm.lang-1.1.0.min.js" ],
 //    "logger": [ "ccm.instance", "https://ccmjs.github.io/akless-components/log/versions/ccm.log-5.0.1.min.js", [ "ccm.get", "https://ccmjs.github.io/akless-components/log/resources/configs.min.js", "greedy" ] ],
