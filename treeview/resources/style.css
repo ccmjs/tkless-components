@@ -1,0 +1,13 @@
+.indent {
+  padding-left: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+.title {
+  margin-left: .2rem;
+}
+.node .badge {
+  float: right;
+}
