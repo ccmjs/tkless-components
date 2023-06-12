@@ -50,6 +50,7 @@ const example_sections = [
 const example_footer = [
   {
     "title": "Entry 1",
+    //"admin": true,
     "ignore": [ "ccm.start", "https://ccmjs.github.io/akless-components/blank/ccm.blank.js" ]
   },
   {
@@ -67,6 +68,7 @@ const example_footer = [
  * @type {Object}
  */
 export const test = {
+  //"admin": ["msieb5m", "tkless"],
   "css": [ "ccm.load", "./../app_collection/resources/styles-3.0.0.css" ],
   "footer": example_footer,
   "helper.1": "./../libs/ccm/helper.mjs",
