@@ -39,13 +39,13 @@ export function main( app, onClick, navBars ) {
     <main></main>
     <footer ?data-hidden=${ !app.footer.length }>
       ${ app.footer.map( ( entry, i ) => html`
-        ${renderFooterEntry(app, entry, i)}
+        ${renderFooterEntry(app, entry, i, onClick)}
       ` ) }
     </footer>
   `;
 }
 
-function renderFooterEntry(app, entry, i) {
+export function renderFooterEntry(app, entry, i, onClick) {
   if(entry.admin && app.user && app.admin.includes(app.user.getValue().key) && app.admin[app.admin.indexOf(app.user.getValue().key)]===app.user.getValue().key) {
     return html`<div class="entry" @click=${ () => onClick( i + 1 ) }>
                 <img src="${ entry.icon || app.icon || '' }" ?data-hidden=${ !entry.icon && !app.icon }>
