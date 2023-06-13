@@ -46,7 +46,7 @@ export function main( app, onClick, navBars ) {
 }
 
 function renderFooterEntry(app, entry, i) {
-  if(entry.admin && app.user && app.admin[app.user.getValue().key] && app.admin[app.user.getValue().key]===app.user.getValue().key) {
+  if(entry.admin && app.user && app.admin.includes(app.user.getValue().key) && app.admin[app.admin.indexOf(app.user.getValue().key)]===app.user.getValue().key) {
     return html`<div class="entry" @click=${ () => onClick( i + 1 ) }>
                 <img src="${ entry.icon || app.icon || '' }" ?data-hidden=${ !entry.icon && !app.icon }>
                 <div>${ entry.title }</div>
