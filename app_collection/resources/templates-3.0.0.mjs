@@ -1,6 +1,5 @@
 /**
  * @overview HTML templates of ccmjs-based web component for an app collection
- * @author Tea Kless <tea.kless@web.de> 2023
  * @author André Kless <andre.kless@web.de> 2022
  */
 
@@ -13,6 +12,7 @@ export { render };
  * @param {Function} onClick - when an entry is clicked
  * @returns {TemplateResult} main HTML template
  */
+
 export function main( app, onClick, navBars ) {
   return html`
     <header class="topnav">
@@ -30,7 +30,7 @@ export function main( app, onClick, navBars ) {
         <div id="nav">
         </div>
       </div>
-      <a class="bars icon"  href="javascript:void(0);" @click=${ ( ) => navBars( ) }>
+      <a class="bars icon"  href="javascript:void(0);" @click=${() => navBars()}>
         <div class="bar1"></div>
         <div class="bar2"></div>
         <div class="bar3"></div>
@@ -39,13 +39,24 @@ export function main( app, onClick, navBars ) {
     <main></main>
     <footer ?data-hidden=${ !app.footer.length }>
       ${ app.footer.map( ( entry, i ) => html`
-        <div class="entry" @click=${ () => onClick( i + 1 ) }>
-          <img src="${ entry.icon || app.icon || '' }" ?data-hidden=${ !entry.icon && !app.icon }>
-          <div>${ entry.title }</div>
-        </div>
+        ${renderFooterEntry(app, entry, i, onClick)}
       ` ) }
     </footer>
   `;
+}
+
+export function renderFooterEntry(app, entry, i, onClick) {
+  if(entry.admin && app.user && app.admin.includes(app.user.getValue().key) && app.admin[app.admin.indexOf(app.user.getValue().key)]===app.user.getValue().key) {
+    return html`<div class="entry" @click=${ () => onClick( i + 1 ) }>
+                <img src="${ entry.icon || app.icon || '' }" ?data-hidden=${ !entry.icon && !app.icon }>
+                <div>${ entry.title }</div>
+              </div>`;
+  }
+  else if(!entry.admin)
+    return html`<div class="entry" @click=${ () => onClick( i + 1 ) }>
+                <img src="${ entry.icon || app.icon || '' }" ?data-hidden=${ !entry.icon && !app.icon }>
+                <div>${ entry.title }</div>
+              </div>`;
 }
 
 /**
