@@ -258,8 +258,8 @@
 
         /** When 'next page' button is clicked. */
         onNext: () => {
-          if ( page_nr >= file.numPages ) return;
           if ( this.onchange && this.onchange( { name: last_event = 'next', page: page_nr, instance: this, before: true } ) ) return;
+          if ( page_nr >= file.numPages ) return;
           this.goTo( ++page_nr );
         },
 
