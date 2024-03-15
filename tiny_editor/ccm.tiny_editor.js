@@ -17,7 +17,7 @@
             { tag: 'textarea'},
             {
               tag: 'button',
-              inner: '%button-label%',
+              inner: '%button_label%',
               onclick: '%button_click%'
             }
           ]
@@ -42,7 +42,7 @@
       },
       onstart: event => { console.log( event );  },
       text: {
-        button_label: "speichern",
+        button_label: "Speichern",
       },
       lib: [ "ccm.load",  { url: "https://ccmjs.github.io/tkless-components/libs/tinymce/tinymce.min.js", context:'head' } ],
     },
@@ -55,8 +55,8 @@
 
       this.start = async () => {
 
-        $.setContent(this.element, $.html(this.html.main, {
-          button_label: this.text.button_label,
+        $.setContent(this.element, $.html(this.html, {
+          button_label: this.text.button_label || "Speichern",
           button_click: () => {
             this.onfinish && $.onFinish( this );
           }
