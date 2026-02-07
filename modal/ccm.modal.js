@@ -37,6 +37,7 @@
     ccm: 'https://ccmjs.github.io/ccm/versions/ccm-27.4.0.min.js',
     config: {
 //    "backdrop_close": true,
+//    "position": true,        // relative to viewport (true) or root app (false, default)
       "buttons": [
         {
           "html": "<button class='btn btn-secondary' data-close onclick='%%'>Close</button>",
@@ -84,7 +85,10 @@
         // each button with a 'data-dismiss' attribute closes the modal dialog when clicked
         this.element.querySelectorAll( '[data-close]' ).forEach( button => button.addEventListener( 'click', () => this.close() ) );
 
-        // is not standalone?
+        // modal position relative to viewport or root app?
+        this.element.querySelector( '#modal' ).style.position = this.position ? 'fixed' : 'absolute';
+
+        // is not standalone and not fixed?
         if ( this.parent ) {
           const root = this.ccm.context.root( this );
           root.element.parentNode.appendChild( this.root );
@@ -102,7 +106,7 @@
         if ( this.parent ) document.body.style.overflowY = 'hidden';
         this.root.style.display = 'block';
         this.element.querySelector( '#dialog' ).classList.add( 'show' );
-        this.ccm.context.root( this ).element.scrollIntoView( true );
+        !this.position && this.ccm.context.root( this ).element.scrollIntoView( true );
         this.onopen && this.onopen( this );
       };
 
